@@ -1,0 +1,12 @@
+Couteau/150/100/150/Utile pour le corps à corps
+Batte de Baseball/140/85/180/Utile pour le corps
+Club de golf/140/90/170/aaaa
+Rouleau a patisserie/135/85/120/aaaa
+Pistolet/210/150/150/aaaa
+Fusil/300/30/200/aaaa
+Mitraillette/250/180/120/
+Grenade/400/10/100/aaaa
+C4/500/5/100/Explose sur les ennemis
+Pioche/130/80/160/Perce le corps de vos ennemis
+Pelle/120/70/130/Enfonce vos ennemis 6 pieds sous terre
+Masse/180/30/150/Écrase le crâne de vos ennemis
