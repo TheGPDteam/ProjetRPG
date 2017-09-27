@@ -22,11 +22,11 @@ int Sauvegarde::sauvegarderModele(Modele *modele)
     TiXmlElement *stats = new TiXmlElement("statistiques");
     elem->LinkEndChild(stats);
 
-    stats->SetAttribute("Niveau", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirNiveau()));
-    stats->SetAttribute("Vie", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVie()));
-    stats->SetAttribute("Force", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirForce()));
-    stats->SetAttribute("Intelligence", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirIntelligence()));
-    stats->SetAttribute("Vitesse", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVitesse()));
+    stats->SetAttribute("Niveau", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirNiveau().obtenirNiveauActuel()).c_str());
+    stats->SetAttribute("Vie", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur()).c_str());
+    stats->SetAttribute("Force", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirForce()->obtenirValeur()).c_str());
+    stats->SetAttribute("Intelligence", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirIntelligence()->obtenirValeur()).c_str());
+    stats->SetAttribute("Vitesse", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVitesse()).c_str());
 
     doc.SaveFile("save/save.xml");
 
