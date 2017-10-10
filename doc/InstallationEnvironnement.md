@@ -1,4 +1,4 @@
-# Comment contribuer au projet ?
+# Comment installer le projet et son environnement ?
 
 ## Sommaire
 
@@ -73,3 +73,5 @@ Cela va vous créer un nouveau dossier ProjetRPG/ dans le dossier courant. Il su
 ----------
 
 ## Sous Windows
+
+En cours
