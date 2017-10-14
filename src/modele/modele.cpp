@@ -74,6 +74,8 @@ bool Modele::testerDeplacement(Direction& dir){
     case Est:
         return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
         break;
+    default :
+        return false;
     }
 }
 
