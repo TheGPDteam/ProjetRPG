@@ -69,6 +69,21 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     ajouterObjets(20);
 }
 
+Zone::~Zone()
+{
+    // Libération du dictionnaire d'objets
+    for (auto &it : m_objets)
+        {
+            delete it.first;
+        }
+
+    // Libération des tuiles de la zone
+    for (auto &it : m_tuiles)
+        {
+            delete it.first;
+        }
+}
+
 Tuile* Zone::obtenirTuile(int valeurX, int valeurY) const
 {
     std::pair<int,int> position;
