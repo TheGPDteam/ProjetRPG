@@ -19,6 +19,7 @@ public:
     Vie* obtenirVie();
     virtual unsigned short obtenirVitesse()=0;
     virtual unsigned short obtenirDegats();
+    virtual std::vector<std::string> serialiser() const;
 };
 
 #endif
