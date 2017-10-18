@@ -74,14 +74,17 @@ bool Modele::testerDeplacement(Direction& dir){
     case Est:
         return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
         break;
+    default :
+        return false;
     }
 }
 
 
 void Modele::deplacement(Direction dir)
 {
-    //On test si le déplacement est possible
+    //On teste si le déplacement est possible
     if(testerDeplacement(dir)){
+        bool veutChanger = false;
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
         if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL)
@@ -95,54 +98,64 @@ void Modele::deplacement(Direction dir)
         {
             // On est dans le cas où on est à une extremité de la carte qui amène vers une autre carte, on change donc la zone active en fonction
             // des coordonnées
-            if (m_joueur.obtenirPosition().second==0)
+            // On vérifie que le joueur veuille clairement changer de zone en regardant sa direction
+            if (m_joueur.obtenirPosition().second==0 && dir == 0)
             {
+                veutChanger = true;
                 m_carte.changerZoneActive(Nord);
             }
-            if (m_joueur.obtenirPosition().second==64)
+            if (m_joueur.obtenirPosition().second==63 && dir == 1)
             {
+                veutChanger = true;
                 m_carte.changerZoneActive(Sud);
             }
-            if (m_joueur.obtenirPosition().first==0)
+            if (m_joueur.obtenirPosition().first==0 && dir == 3)
             {
+                veutChanger = true;
                 m_carte.changerZoneActive(Ouest);
             }
-            if (m_joueur.obtenirPosition().first==64)
+            if (m_joueur.obtenirPosition().first==63 && dir == 2)
             {
+                veutChanger = true;
                 m_carte.changerZoneActive(Est);
             }
 
+            if (veutChanger)
+            {
 
-            std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
-            switch (m_joueur.obtenirPosition().second) {
-            case 63:
-            {
-                nouvellePosition.second = 0;
-                break;
+                std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
+                switch (m_joueur.obtenirPosition().second) {
+                case 63:
+                {
+                    nouvellePosition.first = m_joueur.obtenirPosition().first;
+                    nouvellePosition.second = 0;
+                    break;
+                }
+                case 0:
+                {
+                    nouvellePosition.first = m_joueur.obtenirPosition().first;
+                    nouvellePosition.second = 63;
+                    break;
+                }
+                }
+                switch (m_joueur.obtenirPosition().first) {
+                case 0:
+                {
+                    nouvellePosition.second = m_joueur.obtenirPosition().second;
+                    nouvellePosition.first = 63;
+                    break;
+                }
+                case 63:
+                {
+                    nouvellePosition.second = m_joueur.obtenirPosition().second;
+                    nouvellePosition.first = 0;
+                    break;
+                }
+                default:
+                    break;
+                }
+                m_joueur.definirPosition(nouvellePosition);
             }
-            case 0:
-            {
-                nouvellePosition.second = 63;
-                break;
-            }
-            default:
-                break;
-            }
-            switch (m_joueur.obtenirPosition().first) {
-            case 0:
-            {
-                nouvellePosition.first = 63;
-                break;
-            }
-            case 63:
-            {
-                nouvellePosition.first = 0;
-                break;
-            }
-            default:
-                break;
-            }
-            m_joueur.definirPosition(nouvellePosition);
         }
     }
 }

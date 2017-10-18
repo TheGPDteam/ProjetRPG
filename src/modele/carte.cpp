@@ -16,7 +16,22 @@ Carte::Carte(){
             chargerZone(zone,i,j);
         }
     }
-    m_zoneActive = m_zones[1][1];
+    m_xZoneActive = m_yZoneActive = 1;
+    m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
+}
+
+//!
+//! \brief Destructeur de la carte
+//! \author nlesne
+//! \date 14/10/17
+//! \version 1.0
+//!
+
+Carte::~Carte()
+{
+    for (int x = 0; x < TAILLE_CARTE_X;x++)
+        for (int y = 0; y < TAILLE_CARTE_Y; y++)
+            delete m_zones[x][y];
 }
 
 //!
@@ -29,7 +44,7 @@ Carte::Carte(){
 
 Zone *Carte::obtenirZoneActive()
 {
-    return &m_zoneActive;
+    return m_zoneActive;
 }
 
 //!
@@ -56,22 +71,18 @@ void Carte::chargerZone(std::string nomFichierZone, short x, short y)
             std::getline(fichier,ligne);
         }
         fichier.close();
-        Zone zone = Zone(cases.size(),cases.size(),cases);
+        Zone* zone = new Zone(cases.size(),cases.size(),cases);
         /*m_zones.push_back(zone);
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = zone;
         m_zoneActive = m_zones[x][y];
-        m_xZoneActive = x;
-        m_yZoneActive = y;
     }
     else
     {
         /*m_zones.push_back(Zone(64,64));
         m_zoneActive = m_zones.front();*/
-        m_zones[x][y] = Zone(64,64);
+        m_zones[x][y] = new Zone(64,64);
         m_zoneActive = m_zones[x][y];
-        m_xZoneActive = x;
-        m_yZoneActive = y;
     }
 }
 

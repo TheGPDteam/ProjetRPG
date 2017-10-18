@@ -40,6 +40,7 @@ public:
     Zone()=default;
     Zone(int longueur, int largeur);
     Zone(int longueur, int largeur, std::vector<std::string> fichier);
+    ~Zone();
 
     Tuile* obtenirTuile(int valeurX, int valeurY) const;
     Tuile* obtenirTuile(std::pair <int,int> position) const;
