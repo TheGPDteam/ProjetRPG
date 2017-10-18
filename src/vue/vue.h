@@ -6,6 +6,7 @@
 #include "ecranequipe.h"
 #include "ecraninventaire.h"
 #include "controleur/controleur.h"
+#include "ecranquete.h"
 
 #include <iostream>
 
@@ -20,6 +21,7 @@ private:
     EcranJeuPrincipal* m_jeuPrincipal;
     EcranEquipe* m_ecranEquipe;
     EcranInventaire* m_ecranInventaire;
+    EcranQuete* m_ChoixQuete;
 
     Controleur* m_controleur;
 

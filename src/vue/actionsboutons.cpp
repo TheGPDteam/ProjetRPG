@@ -75,3 +75,8 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 {
     return Equipe;
 }
+
+TypeEcran ActionsBoutons::boutonQuete() const
+{
+    return ChoixQuete;
+}
