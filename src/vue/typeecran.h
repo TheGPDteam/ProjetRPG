@@ -6,7 +6,7 @@ const int HEIGHT_FENETRE_PRINCIPALE = 668;
 const int BPP = 32;
 
 //!
-//! Représente tout les type d'écran possible
+//! Représente tout les types d'écran possibles
 //! \author pgutierrez
 //! \date 11/11/16
 //! \version 0.1
@@ -14,7 +14,8 @@ const int BPP = 32;
 
 enum TypeEcran
 {
-    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixQuete
-};
 
+    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage,ChoixQuete
+
+};
 #endif // TYPEECRAN_H

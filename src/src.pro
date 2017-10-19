@@ -40,6 +40,7 @@ SOURCES += \
     vue/actionsboutons.cpp \
     vue/ecrangeneral.cpp \
     vue/ecranjeuprincipal.cpp \
+    vue/ecranquete.cpp \
     observateur.cpp \
     observable.cpp \
     vue/dictionnairedeboutons.cpp \
@@ -49,7 +50,8 @@ SOURCES += \
     ../ext/tinyxml/tinyxmlparser.cpp \
     ../ext/tinyxml/tinyxmlerror.cpp \
     vue/ecranequipe.cpp \
-    vue/ecraninventaire.cpp
+    vue/ecraninventaire.cpp \
+    vue/ecranchoixpersonnage.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -83,6 +85,7 @@ HEADERS += \
     vue/bouton.h \
     vue/chargementfeuilledesprite.h \
     vue/ecranmenuprincipal.h \
+    vue/ecranquete.h \
     vue/sprite.h \
     vue/textesdl.h \
     vue/typebouton.h \
@@ -99,4 +102,5 @@ HEADERS += \
     ../ext/tinyxml/tinyxml.h \
     vue/ecranequipe.h \
     vue/ecraninventaire.h \
-    vue/policetexte.h
+    vue/policetexte.h \
+    vue/ecranchoixpersonnage.h
