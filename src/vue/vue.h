@@ -4,6 +4,7 @@
 #include "ecranmenuprincipal.h"
 #include "ecranjeuprincipal.h"
 #include "ecranequipe.h"
+#include "ecranchoixpersonnage.h"
 #include "ecraninventaire.h"
 #include "controleur/controleur.h"
 
@@ -20,6 +21,7 @@ private:
     EcranJeuPrincipal* m_jeuPrincipal;
     EcranEquipe* m_ecranEquipe;
     EcranInventaire* m_ecranInventaire;
+    EcranChoixPersonnage* m_ecranChoixPersonnage;
 
     Controleur* m_controleur;
 

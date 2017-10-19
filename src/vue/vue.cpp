@@ -26,6 +26,7 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_jeuPrincipal = new EcranJeuPrincipal();
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
+    m_ecranChoixPersonnage = new EcranChoixPersonnage();
 }
 
 //!
@@ -48,6 +49,8 @@ void Vue::definirControleur(Controleur *controleur)
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
+
+    // m_ecranChoix ?
 }
 
 
@@ -75,6 +78,9 @@ void Vue::affichageVue()
         break;
     case Inventaire:
         afficherEcran(m_ecranInventaire);
+        break;
+    case ChoixPersonnage:
+         afficherEcran(m_ecranChoixPersonnage);
         break;
     case Quitter:
         m_quitterJeu = true;
