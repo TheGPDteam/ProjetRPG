@@ -109,6 +109,14 @@ Equipe* Campement::obtenirRecolte()
     return &m_equipeRecolte;
 }
 
+//!
+//! \brief Serialisation du campement
+//! \author nlesne
+//! \date 16/10/17
+//! \version 0.1
+//! \return les donnees du campement
+//!
+
 std::vector<std::string> Campement::serialiser() const
 {
     std::vector<std::string> donnees_campement {std::to_string(m_quantiteVivre)};

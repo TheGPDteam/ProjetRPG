@@ -116,6 +116,14 @@ Equipe* Equipe::genererEquipeZombie()
     return e;
 }
 
+//!
+//! \brief Serialisation des données de l'équipe
+//! \author nlesne
+//! \date 16/10/17
+//! \version 0.1
+//! \return données de l'equipe sérialisées
+//!
+
 std::vector<std::string> Equipe::serialiser() const
 {
     std::vector<std::string> donnees_equipe;

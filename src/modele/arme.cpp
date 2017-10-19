@@ -187,6 +187,14 @@ unsigned short Arme::obtenirVitesse()
     return m_vitesse;
 }
 
+//!
+//! \brief Serialise les données des armes
+//! \author nlesne
+//! \date 16/10/17
+//! \version 1.0
+//! \return les données des armes
+//!
+
 std::vector<std::string> Arme::serialiser() const
 {
     std::vector<std::string> donnees {std::to_string(m_degats),m_description};
