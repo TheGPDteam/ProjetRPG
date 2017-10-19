@@ -82,6 +82,7 @@ void Vue::affichageVue()
         break;
     case ChoixPersonnage:
          afficherEcran(m_ecranChoixPersonnage);
+         break;
     case ChoixQuete:
         afficherEcran(m_ChoixQuete);
         break;
