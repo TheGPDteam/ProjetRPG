@@ -200,3 +200,16 @@ std::vector<std::string> Arme::serialiser() const
     std::vector<std::string> donnees {std::to_string(m_degats),m_description};
     return donnees;
 }
+
+//!
+//! \brief Charger les données des armes
+//! \author parMarius
+//! \date 16/10/17
+//! \version 1.0
+//! \return les données des armes
+//!
+
+void Arme::charger(std::vector<std::string> donnees){
+    m_degats = std::stoi(donnees[0]);
+    m_description = donnees[1];
+}
