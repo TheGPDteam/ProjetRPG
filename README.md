@@ -1,5 +1,7 @@
 # Le Grand Projet de Développement (ou GPD)
 
+Statut de la compilation : [![Build Status](https://travis-ci.org/TheGPDteam/ProjetRPG.svg?branch=dev)](https://travis-ci.org/TheGPDteam/ProjetRPG)
+
 Ce dépôt git traite du **Grand Projet de Développement** initié par des anciens membres de l'Association Bordelaise des étudiants en IUT Informatique (ABEII).
 Il va servir à ordonner les étapes d'avancement du projet décrit ci-dessous.
 

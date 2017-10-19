@@ -10,6 +10,8 @@ public:
 
     TypeEcran boutonJeuPrincipal() const;
 
+    TypeEcran boutonQuete() const;
+
     TypeEcran boutonQuitter() const;
 
     TypeEcran boutonChoixPersonnage() const;

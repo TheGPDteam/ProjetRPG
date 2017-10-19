@@ -95,3 +95,17 @@ void Vivre::affecterValeurs(string ligne)
     m_valeurNutritive=std::stoi(valeurNutritive);
     m_description=description;
 }
+
+//!
+//! \brief Sérialise les attributs de l'objet
+//! \return un vecteur des attributs
+//! \author nlesne
+//! \date 16/10/17
+//! \version 0.1
+//!
+
+std::vector<std::string> Vivre::serialiser() const
+{
+    std::vector<std::string> donnees_vivre {std::to_string(m_valeurNutritive)};
+    return donnees_vivre;
+}

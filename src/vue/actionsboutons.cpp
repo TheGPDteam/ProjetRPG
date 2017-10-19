@@ -77,6 +77,7 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 }
 
 
+
 //!
 //! \brief Méthode lançant l'affichage de l'ecran ChoixPersonnage
 //! @return TypeEcran retourne le nouveau type de l'écran
@@ -89,4 +90,8 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 TypeEcran ActionsBoutons::boutonChoixPersonnage() const
 {
     return ChoixPersonnage;
+}
+TypeEcran ActionsBoutons::boutonQuete() const
+{
+    return ChoixQuete;
 }

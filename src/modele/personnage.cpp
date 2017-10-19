@@ -86,3 +86,8 @@ unsigned short Personnage::obtenirDegats()
 {
     return m_force.obtenirValeur();
 }
+
+std::vector<std::string> Personnage::serialiser() const
+{
+    return {};
+}

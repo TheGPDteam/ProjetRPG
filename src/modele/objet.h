@@ -2,6 +2,8 @@
 #define objet_h
 
 #include <string>
+#include <vector>
+
 //!
 //! \brief Classe de gestion de l'Objet
 //! \date 03/11/2016
@@ -19,6 +21,7 @@ public:
     void definirNom(const std::string &nom);
     std::string obtenirDescription() const;
     void definirDescription(const std::string &description);
+    virtual std::vector<std::string> serialiser() const;
 };
 
 #endif

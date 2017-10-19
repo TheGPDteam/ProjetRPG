@@ -5,6 +5,7 @@
 #include "equipe.h"
 #include "vivre.h"
 #include <vector>
+#include <string>
 
 class Campement
 {
@@ -22,6 +23,7 @@ public:
     void consommerVivre(unsigned short nbVivresConsommes);
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();
+    std::vector<std::string> serialiser() const;
 };
 
 #endif
