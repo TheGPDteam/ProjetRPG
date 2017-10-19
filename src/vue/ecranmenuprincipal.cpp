@@ -17,6 +17,7 @@ EcranMenuPrincipal::EcranMenuPrincipal() : m_methodeVerificationCliqueSourisSurB
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonChoixPersonnage);
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonQuete);
 
     coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
     coordB.second = (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2) +100;

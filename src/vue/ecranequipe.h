@@ -21,7 +21,6 @@ private :
     // Champ à compléter + intégration
     // Taille équipe ?
     //
-
     TexteSDL* m_zoneNomPersonnage;
     TexteSDL* m_zoneNiveauPersonnage;
     TexteSDL* m_zoneViePersonnage;
