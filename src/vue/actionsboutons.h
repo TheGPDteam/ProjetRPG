@@ -14,6 +14,8 @@ public:
 
     TypeEcran boutonQuitter() const;
 
+    TypeEcran boutonChoixPersonnage() const;
+
     TypeEcran boutonEquipe() const;
 
     TypeEcran boutonInventaire() const;

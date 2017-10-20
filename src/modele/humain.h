@@ -20,7 +20,6 @@ protected:
     std::string m_nom;
     std::string m_prenom;
     Genre m_genre;
-
     Competence m_chasse;
     Competence m_recolte;
     unsigned short m_coutEntretien;

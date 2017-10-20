@@ -87,6 +87,14 @@ unsigned short Personnage::obtenirDegats()
     return m_force.obtenirValeur();
 }
 
+//!
+//! \brief Méthode virtuelle de serialisation des personnages
+//! \author nlesne
+//! \date 16/10/17
+//! \version 1.0
+//! \return Vecteur Vide
+//!
+
 std::vector<std::string> Personnage::serialiser() const
 {
     return {};
