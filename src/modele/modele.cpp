@@ -79,6 +79,14 @@ bool Modele::testerDeplacement(Direction& dir){
     }
 }
 
+//!
+//! \brief Permet de gérer le déplacement du personnage
+//! \author mleothaud
+//! \date 17/11/16
+//! \version 2.0
+//! @param dir : la direction du déplacement
+//! A noter : présente un bug dans le changement d'une carte à une autre
+//!
 
 void Modele::deplacement(Direction dir)
 {
