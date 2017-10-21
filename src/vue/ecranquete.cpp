@@ -1,20 +1,31 @@
 #include "ecranquete.h"
 #include "constantesbouton.h"
+#include "bouton.h"
+#include <utility>
 
-EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+    m_nomFenetre("Repartition des Quetes", SDL_Color{255,255,255}, POLICE_COLLEGED, 20,
+                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
-    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/4)-(WIDTH_BOUTON_NORMAL/4), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonJeuPrincipal);
 
-    coordB.first = (WIDTH_FENETRE_PRINCIPALE/4)-(WIDTH_BOUTON_NORMAL/4)+WIDTH_BOUTON_NORMAL+100;
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 30, coordB, tailleB), &ActionsBoutons::boutonQuitter);
+    m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
+    m_fondRecolte = {20,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
+    m_fondChasse = {WIDTH_FENETRE_PRINCIPALE/2+20-10,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
+    m_fondDescription = {m_fondPerso.x + 10, m_fondPerso.y + 10, WIDTH_FENETRE_PRINCIPALE - m_fondPerso.x * 3, 40};
 
-    int Distance_Fond_Perso = 20;
+    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 10, m_fondDescription.y + 10));
+    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 90, m_fondDescription.y + 10));
+    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 210, m_fondDescription.y + 10));           // position imprécise **
+    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 290, m_fondDescription.y + 10));
+    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 510, m_fondDescription.y + 10));
+    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 640, m_fondDescription.y + 10));
 
-    m_fondPerso = {Distance_Fond_Perso,Distance_Fond_Perso,WIDTH_FENETRE_PRINCIPALE-Distance_Fond_Perso*2,HEIGHT_FENETRE_PRINCIPALE/2-Distance_Fond_Perso*2};
+
 }
 EcranQuete::~EcranQuete(){}
 
@@ -25,6 +36,19 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
     SDL_FillRect(fenetre_affichage, &m_fondPerso, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
+    SDL_FillRect(fenetre_affichage, &m_fondRecolte, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
+    SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
+    SDL_FillRect(fenetre_affichage, &m_fondDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
+
+
+    m_nomFenetre.afficherTexte(fenetre_affichage);
+    m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
+    m_zoneNiveauPersonnage->afficherTexte(fenetre_affichage);
+    m_zoneViePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneIntelligencePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneForcePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
+
 
     afficherBoutons(coord_souris, fenetre_affichage);
 }

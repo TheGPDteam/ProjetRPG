@@ -11,10 +11,18 @@ private:
     SDL_Rect m_fondChasse;
     SDL_Rect m_fondRecolte;
     SDL_Rect m_fondPerso;
+    SDL_Rect m_fondDescription;
+
+    TexteSDL m_nomFenetre;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
-    TexteSDL* m_zonePerso;
+    TexteSDL* m_zoneNomPersonnage;
+    TexteSDL* m_zoneNiveauPersonnage;
+    TexteSDL* m_zoneViePersonnage;
+    TexteSDL* m_zoneIntelligencePersonnage;
+    TexteSDL* m_zoneForcePersonnage;
+    TexteSDL* m_zoneVitessePersonnage;
 
 public:
     EcranQuete();
