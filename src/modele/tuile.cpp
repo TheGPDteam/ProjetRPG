@@ -38,6 +38,14 @@ bool Tuile::obtenirPeutApparaitre() const
     return obtenirEstMarchable();
 }
 
+//!
+//! \brief Accesseur en lecture de l'attribut m_type
+//! \return le type de la tuile
+//! \author mleothaud
+//! \date 16/11/2016
+//! \version 1.0
+//!
+
 TypeTuile Tuile::obtenirType() const{
     return m_type;
 }

@@ -124,3 +124,23 @@ void Vie::augmenter(int valeur)
     else
         this->definirValeur(this->obtenirValeur() + valeur);
 }
+
+//! \brief serialise les attributs de la classe Vie
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+std::vector<std::string> Vie::serialiser() const{
+    std::vector<std::string> donnees = {std::to_string(m_valeur)};
+    return donnees;
+}
+//! \brief charge les attributs de la classe Vie
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+void Vie::charger(std::vector<std::string> donnees){
+    m_valeur = std::stoi(donnees[0]);
+}

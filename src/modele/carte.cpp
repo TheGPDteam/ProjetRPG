@@ -16,7 +16,8 @@ Carte::Carte(){
             chargerZone(zone,i,j);
         }
     }
-    m_zoneActive = m_zones[1][1];
+    m_xZoneActive = m_yZoneActive = 1;
+    m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
 }
 
 //!
@@ -75,8 +76,6 @@ void Carte::chargerZone(std::string nomFichierZone, short x, short y)
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = zone;
         m_zoneActive = m_zones[x][y];
-        m_xZoneActive = x;
-        m_yZoneActive = y;
     }
     else
     {
@@ -84,8 +83,6 @@ void Carte::chargerZone(std::string nomFichierZone, short x, short y)
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = new Zone(64,64);
         m_zoneActive = m_zones[x][y];
-        m_xZoneActive = x;
-        m_yZoneActive = y;
     }
 }
 

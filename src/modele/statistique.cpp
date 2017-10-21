@@ -81,3 +81,25 @@ void Statistique::augmenter(int valeur)
     else if (valeur>0)
         m_statActuelle=20;
 }
+
+//! \brief serialise les attributs de la classe Statistique
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+
+std::vector<std::string> Statistique::serialiser() const{
+    std::vector<std::string> donnees = {std::to_string(m_statActuelle)};
+    return donnees;
+}
+
+//! \brief charge les attribut de la classe Statistique
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+void Statistique::charger(std::vector<std::string> donnees){
+    m_statActuelle = std::stoi(donnees[0]);
+}

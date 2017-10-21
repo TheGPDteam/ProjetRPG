@@ -125,3 +125,7 @@ std::vector<std::string> Campement::serialiser() const
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_recolte.begin(),donnees_equipe_recolte.end());
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_chasse.begin(),donnees_equipe_chasse.end());
 }
+
+void Campement::charger(std::vector<std::string> donnees){
+    //Todo
+}
