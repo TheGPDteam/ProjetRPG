@@ -16,7 +16,7 @@ protected:
     std::string m_description; /// Description de l'Objet
 public:
     Objet(std::string nom, std::string description);
-    ~Objet();
+    virtual ~Objet();
     std::string obtenirNom() const;
     void definirNom(const std::string &nom);
     std::string obtenirDescription() const;

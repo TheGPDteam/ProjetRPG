@@ -20,7 +20,7 @@ std::pair<int, int> const tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 EcranJeuPrincipal::EcranJeuPrincipal()
     : m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,0,63,63}}},
-      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)}
+      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)}
 {
 
     //* AJOUT DES BOUTONS *//
@@ -31,7 +31,7 @@ EcranJeuPrincipal::EcranJeuPrincipal()
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
         for(int j = 0;j< 12;j++)
-            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{i*63,j*63,0,0}, SDL_Rect{0,128,64,64}};
+            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{short(i*63),short(j*63),0,0}, SDL_Rect{0,128,64,64}};
 }
 
 

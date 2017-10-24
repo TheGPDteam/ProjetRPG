@@ -105,7 +105,7 @@ void Arme::affecterValeurs(std::string ligne)
     bool separateurVitessePasse=false;
     bool separateurChancePasse=false;
 
-    for (int i=0;i<ligne.size();++i)
+    for (unsigned int i=0;i+1<=ligne.size();++i)
     {
         if (!separateurNomPasse)
         {

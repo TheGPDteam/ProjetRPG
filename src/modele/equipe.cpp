@@ -126,4 +126,5 @@ std::vector<std::string> Equipe::serialiser() const
         donnees_personnages.insert(donnees_personnages.end(),buffer.begin(),buffer.end());
     }
     donnees_equipe.insert(donnees_equipe.end(),donnees_personnages.begin(),donnees_personnages.end());
+    return donnees_equipe;
 }
