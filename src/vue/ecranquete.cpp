@@ -4,7 +4,7 @@
 #include <utility>
 
 EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-    m_nomFenetre("Repartition des Quetes", SDL_Color{255,255,255}, POLICE_COLLEGED, 20,
+    m_nomFenetre("Repartition des Quetes", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
@@ -20,14 +20,17 @@ EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&Dictionna
     m_fondDescriptionChasse = {m_fondChasse.x + 10, m_fondChasse.y + 10, m_fondChasse.w -20, 40};
     m_fondDescriptionRecolte = {m_fondRecolte.x + 10, m_fondRecolte.y + 10, m_fondRecolte.w -20, 40};
 
-    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 10));
-    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 90, m_fondDescriptionPerso.y + 10));
-    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 210, m_fondDescriptionPerso.y + 10));           // position imprécise **
-    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 290, m_fondDescriptionPerso.y + 10));
-    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 510, m_fondDescriptionPerso.y + 10));
-    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 640, m_fondDescriptionPerso.y + 10));
-    m_zoneChasse = new TexteSDL ("Chasse",SDL_Color{255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionChasse.x+m_fondDescriptionChasse.w/2-40,m_fondDescriptionChasse.y+10));
-    m_zoneRecolte = new TexteSDL ("Recolte",SDL_Color{255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionRecolte.x+m_fondDescriptionRecolte.w/2-60,m_fondDescriptionRecolte.y+10));
+
+    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 10));
+    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 90, m_fondDescriptionPerso.y + 10));
+    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 210, m_fondDescriptionPerso.y + 10));           // position imprécise **
+    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 290, m_fondDescriptionPerso.y + 10));
+    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 510, m_fondDescriptionPerso.y + 10));
+    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 640, m_fondDescriptionPerso.y + 10));
+    m_zoneChasse = new TexteSDL ("Chasse",SDL_Color{255,255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionChasse.x+m_fondDescriptionChasse.w/2-40,m_fondDescriptionChasse.y+10));
+    m_zoneRecolte = new TexteSDL ("Recolte",SDL_Color{255,255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionRecolte.x+m_fondDescriptionRecolte.w/2-60,m_fondDescriptionRecolte.y+10));
+
+
 
 
 }

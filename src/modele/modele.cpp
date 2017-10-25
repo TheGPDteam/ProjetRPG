@@ -17,8 +17,8 @@ using namespace std;
 //!
 
 Modele::Modele()
-    :m_deplacementDepuisDernierCombat{0},
-      m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}}
+    : m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}},
+      m_deplacementDepuisDernierCombat{0}
 {
 }
 

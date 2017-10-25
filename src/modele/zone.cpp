@@ -38,11 +38,11 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     : m_largeur{largeur},
       m_hauteur{longueur}
 {
-    for (int i=0; i<fichier.size();++i)
+    for (unsigned int i=0; i+1<=fichier.size();++i)
     {
         std::vector<int> valeursTuiles;
         ligne2Tuile(fichier,valeursTuiles,i);
-        for (int j=0; j<valeursTuiles.size();++j)
+        for (unsigned int j=0; j+1<=valeursTuiles.size();++j)
         {
             if ((valeursTuiles[j]/6) == 0)
             {
@@ -92,6 +92,7 @@ Tuile* Zone::obtenirTuile(int valeurX, int valeurY) const
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
 }
 
 Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
@@ -99,6 +100,7 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
 }
 
 Objet* Zone::obtenirObjet(std::pair <int,int> position) const
@@ -106,7 +108,7 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const
     for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
         if (it->second == position)
             return it->first;
-    return NULL;
+    return nullptr;
 }
 
 bool Zone::objetPresent(std::pair<int, int> position) const

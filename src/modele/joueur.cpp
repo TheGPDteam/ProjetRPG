@@ -14,13 +14,9 @@
 //! Contient l'initialisation des attributs de joueur
 //!
 
-Joueur::Joueur()
+Joueur::Joueur() :
+    m_position{std::make_pair<int, int>(25, 25)}, m_nom{"Ali Baba"}, m_camp{new Campement()}, m_equipe{new Equipe()}, m_personnageJoueur{}, m_queteJoueur{}, m_inventaireJoueur{nullptr}
 {
-    m_position.first=25;
-    m_position.second=25;
-    m_nom = "Ali Baba";
-    m_camp = new Campement();
-    m_equipe = new Equipe();
 }
 
 //!
@@ -33,14 +29,8 @@ Joueur::Joueur()
 //!
 
 Joueur::Joueur(Quete quete) :
-    m_queteJoueur{quete}
+    Joueur{quete, "Ali Baba"}
 {
-    m_position.first=5;
-    m_position.second=5;
-    m_nom = "Ali Baba";
-    m_camp = new Campement();
-    m_equipe = new Equipe();
-    m_inventaireJoueur = new Inventaire();
 }
 
 //!
@@ -54,13 +44,8 @@ Joueur::Joueur(Quete quete) :
 //!
 
 Joueur::Joueur(Quete quete, std::string nom) :
-    m_queteJoueur{quete}, m_nom{nom}
+   m_position{std::make_pair<int, int>(5,5)}, m_nom{nom}, m_camp{new Campement()}, m_equipe{new Equipe()}, m_personnageJoueur{}, m_queteJoueur{quete}, m_inventaireJoueur{new Inventaire{}}
 {
-    m_position.first=5;
-    m_position.second=5;
-    m_camp = new Campement();
-    m_equipe = new Equipe();
-    m_inventaireJoueur = new Inventaire();
 }
 
 //!
