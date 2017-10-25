@@ -6,6 +6,9 @@
 //! \date 03/11/2016
 //!
 
+#include <vector>
+#include <string>
+
 class Vie
 {
 private:
@@ -20,6 +23,8 @@ public:
     void definirValeurMax(int nouvelleValeurMax);
     void diminuer(int valeur);
     void augmenter(int valeur);
+    std::vector<std::string> serialiser()const;
+    void charger(std::vector<std::string> donnees);
 };
 
 #endif

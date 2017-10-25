@@ -24,6 +24,7 @@ public:
     unsigned short obtenirVitesse();
     unsigned short obtenirChance();
     std::vector<std::string> serialiser() const;
+    void charger(std::vector<std::string> donnees);
 };
 
 #endif

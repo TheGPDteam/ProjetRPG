@@ -75,3 +75,23 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 {
     return Equipe;
 }
+
+
+
+//!
+//! \brief Méthode lançant l'affichage de l'ecran ChoixPersonnage
+//! @return TypeEcran retourne le nouveau type de l'écran
+//! \author pgutierrez
+//! \date 18/10/17
+//! \version 1.0
+//!
+//! Si un bouton "ChoixPersonnage" est cliqué alors on retourne le nouveau type de l'écran
+//!
+TypeEcran ActionsBoutons::boutonChoixPersonnage() const
+{
+    return ChoixPersonnage;
+}
+TypeEcran ActionsBoutons::boutonQuete() const
+{
+    return ChoixQuete;
+}

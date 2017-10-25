@@ -63,6 +63,8 @@ bool Modele::testerDeplacement(Direction& dir){
 
     switch(dir){
     case Nord:
+        if (posY==0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirExtremiteCarte())
+            return true;
         return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         break;
     case Sud:
@@ -79,6 +81,14 @@ bool Modele::testerDeplacement(Direction& dir){
     }
 }
 
+//!
+//! \brief Permet de gérer le déplacement du personnage
+//! \author mleothaud
+//! \date 17/11/16
+//! \version 2.0
+//! @param dir : la direction du déplacement
+//! A noter : présente un bug dans le changement d'une carte à une autre
+//!
 
 void Modele::deplacement(Direction dir)
 {
@@ -98,7 +108,7 @@ void Modele::deplacement(Direction dir)
         {
             // On est dans le cas où on est à une extremité de la carte qui amène vers une autre carte, on change donc la zone active en fonction
             // des coordonnées
-            // On vérifie que le joueur veuille clairement changer de zone en regardant sa direction
+            // On vérifie que le joueur veuille clairement changer de zone en regardant la direction dans laquelle il souhaite aller
             if (m_joueur.obtenirPosition().second==0 && dir == 0)
             {
                 veutChanger = true;

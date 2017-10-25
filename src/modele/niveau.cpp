@@ -120,3 +120,26 @@ void Niveau::niveauSuperieur()
     m_niveauActuel++;
     m_pointsExperiencePourNiveauSuivant=m_niveauActuel*100;
 }
+
+//! \brief serialise les attributs de la classe niveau
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+std::vector<std::string> Niveau::serialiser() const{
+    std::vector<std::string> donnees = {std::to_string(m_niveauActuel), std::to_string(m_pointsExperienceActuels), std::to_string(m_pointsExperiencePourNiveauSuivant)};
+        return donnees;
+}
+
+//! \brief charger les attributs de la classe Niveau
+//! \author parMarius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+void Niveau::charger(std::vector<std::string> donnees){
+    m_niveauActuel = std::stoi(donnees[0]);
+    m_pointsExperienceActuels = std::stoi(donnees[1]);
+    m_pointsExperiencePourNiveauSuivant = std::stoi(donnees[2]);
+}
