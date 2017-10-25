@@ -95,3 +95,7 @@ TypeEcran ActionsBoutons::boutonQuete() const
 {
     return ChoixQuete;
 }
+TypeEcran ActionsBoutons::boutonChoixJoueur() const
+{
+    return PopUpJoueur;
+}
