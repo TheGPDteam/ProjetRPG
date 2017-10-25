@@ -16,14 +16,18 @@ EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&Dictionna
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
     m_fondRecolte = {20,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondChasse = {WIDTH_FENETRE_PRINCIPALE/2+20-10,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
-    m_fondDescription = {m_fondPerso.x + 10, m_fondPerso.y + 10, WIDTH_FENETRE_PRINCIPALE - m_fondPerso.x * 3, 40};
+    m_fondDescriptionPerso = {m_fondPerso.x + 10, m_fondPerso.y + 10, WIDTH_FENETRE_PRINCIPALE - m_fondPerso.x * 3, 40};
+    m_fondDescriptionChasse = {m_fondChasse.x + 10, m_fondChasse.y + 10, m_fondChasse.w -20, 40};
+    m_fondDescriptionRecolte = {m_fondRecolte.x + 10, m_fondRecolte.y + 10, m_fondRecolte.w -20, 40};
 
-    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 10, m_fondDescription.y + 10));
-    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 90, m_fondDescription.y + 10));
-    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 210, m_fondDescription.y + 10));           // position imprécise **
-    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 290, m_fondDescription.y + 10));
-    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 510, m_fondDescription.y + 10));
-    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescription.x + 640, m_fondDescription.y + 10));
+    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 10));
+    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 90, m_fondDescriptionPerso.y + 10));
+    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 210, m_fondDescriptionPerso.y + 10));           // position imprécise **
+    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 290, m_fondDescriptionPerso.y + 10));
+    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 510, m_fondDescriptionPerso.y + 10));
+    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 640, m_fondDescriptionPerso.y + 10));
+    m_zoneChasse = new TexteSDL ("Chasse",SDL_Color{255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionChasse.x+m_fondDescriptionChasse.w/2-40,m_fondDescriptionChasse.y+10));
+    m_zoneRecolte = new TexteSDL ("Recolte",SDL_Color{255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionRecolte.x+m_fondDescriptionRecolte.w/2-60,m_fondDescriptionRecolte.y+10));
 
 
 }
@@ -38,7 +42,9 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondPerso, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondRecolte, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
-    SDL_FillRect(fenetre_affichage, &m_fondDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
+    SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
+    SDL_FillRect(fenetre_affichage, &m_fondDescriptionChasse, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
+    SDL_FillRect(fenetre_affichage, &m_fondDescriptionRecolte, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
 
     m_nomFenetre.afficherTexte(fenetre_affichage);
@@ -48,6 +54,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_zoneIntelligencePersonnage->afficherTexte(fenetre_affichage);
     m_zoneForcePersonnage->afficherTexte(fenetre_affichage);
     m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneChasse->afficherTexte(fenetre_affichage);
+    m_zoneRecolte->afficherTexte(fenetre_affichage);
 
 
     afficherBoutons(coord_souris, fenetre_affichage);
