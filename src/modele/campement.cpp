@@ -126,6 +126,13 @@ std::vector<std::string> Campement::serialiser() const
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_chasse.begin(),donnees_equipe_chasse.end());
 }
 
-void Campement::charger(std::vector<std::string> donnees){
-    //Todo
+//!
+//! \brief Chargement des attrubuts du campement
+//! \author mpardo
+//! \date 24/10/17
+//! \version 1.0
+//!
+
+void Campement::charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte){
+    //todo
 }

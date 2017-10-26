@@ -7,6 +7,7 @@
 class Personnage
 {
 protected:
+    static int const m_CHANCE_CC_BASE = 10;
     Statistique m_force;
     Statistique m_intelligence;
     Statistique m_vitesse;

@@ -82,9 +82,23 @@ Vie* Personnage::obtenirVie()
     return &m_vie;
 }
 
+//!
+//! \brief Accesseur en lecture des dégats + coups critiques
+//! \return la vie du personnage
+//! \author mleothaud, mpardo
+//! \date 17/11/2016
+//! \version 2.0
+//!
+
 unsigned short Personnage::obtenirDegats()
 {
-    return m_force.obtenirValeur();
+    bool coupCritique = (rand() % 101) < m_CHANCE_CC_BASE + (2) * m_intelligence.obtenirValeur(); // ([Chance CC de Base]​ + [Multiplicateur CC]​ * [Point d’intelligence])
+    if(coupCritique){
+        return m_force.obtenirValeur() + (m_force.obtenirValeur() / 2);
+    }
+    else{
+        return m_force.obtenirValeur();
+    }
 }
 
 //!

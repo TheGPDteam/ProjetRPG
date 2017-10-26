@@ -128,7 +128,7 @@ std::vector<std::string> Equipe::serialiser() const
 {
     std::vector<std::string> donnees_equipe;
     std::vector<std::string> donnees_personnages;
-    for (Personnage* p : m_personnages )
+    for (Personnage* p : m_personnages)
     {
         std::vector<std::string> buffer = p->serialiser();
         donnees_personnages.insert(donnees_personnages.end(),buffer.begin(),buffer.end());

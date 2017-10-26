@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include <random>
 #include "equipe.h"
 #include "personnage.h"
 #include "actioncombat.h"
