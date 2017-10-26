@@ -139,12 +139,15 @@ bool Inventaire::estPlein() const
 std::vector<std::string> Inventaire::serialiser() const
 {
     std::vector<std::string> donnees_inventaire;
+    std::vector<std::string> donnees_objets;
+    std::vector<std::string> donnees_objet;
 
     for (Objet* obj : m_objets)
     {
-        donnees_inventaire.push_back(obj->serialiser());
+        donnees_objet = obj->serialiser();
+        donnees_objets.insert(donnees_objets.end(),donnees_objet.begin(),donnees_objet.end());
     }
-
+    donnees_objets.insert(donnees_inventaire.end(),donnees_objets.begin(),donnees_objets.end());
     donnees_inventaire.push_back(std::to_string(m_tailleMaximum));
 
     return donnees_inventaire;
