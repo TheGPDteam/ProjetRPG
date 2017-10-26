@@ -20,6 +20,8 @@ public:
 
     TypeEcran boutonInventaire() const;
 
+    TypeEcran boutonChoixJoueur() const;
+
 };
 
 #endif // ACTIONSBOUTONS_H

@@ -62,7 +62,7 @@ void Vivre::affecterValeurs(string ligne)
     bool separateurNomPasse=false;
     bool separateurNutritivePasse=false;
 
-    for (int i=0;i<ligne.size();++i)
+    for (unsigned int i=0;i+1<=ligne.size();++i)
     {
         if (!separateurNomPasse)
         {

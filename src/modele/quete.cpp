@@ -19,8 +19,8 @@
 //!
 
 Quete::Quete(std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
-    :m_nom{nom}, m_description{description}, m_valeurActuelle{0}, m_valeurObjectif{valeurObjectif},
-      m_recompense{recompense}, m_recompenseExperience{recompenseExperience}
+    :m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
+      m_recompenseExperience{recompenseExperience}, m_recompense{recompense}
 {
 }
 

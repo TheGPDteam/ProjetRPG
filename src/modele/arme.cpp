@@ -105,7 +105,7 @@ void Arme::affecterValeurs(std::string ligne)
     bool separateurVitessePasse=false;
     bool separateurChancePasse=false;
 
-    for (int i=0;i<ligne.size();++i)
+    for (unsigned int i=0;i+1<=ligne.size();++i)
     {
         if (!separateurNomPasse)
         {
@@ -197,7 +197,7 @@ unsigned short Arme::obtenirVitesse()
 
 std::vector<std::string> Arme::serialiser() const
 {
-    std::vector<std::string> donnees {std::to_string(m_degats),m_description};
+    std::vector<std::string> donnees {std::to_string(m_degats),std::to_string(m_vitesse),std::to_string(m_chance),std::to_string(m_degats),m_description};
     return donnees;
 }
 

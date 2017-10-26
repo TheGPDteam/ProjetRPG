@@ -120,10 +120,18 @@ Equipe* Campement::obtenirRecolte()
 std::vector<std::string> Campement::serialiser() const
 {
     std::vector<std::string> donnees_campement {std::to_string(m_quantiteVivre)};
+
+    for (Vivre* v : m_stockVivre )
+    {
+        std::vector<std::string> buffer = v->serialiser();
+        donnees_campement.insert(donnees_campement.end(),buffer.begin(),buffer.end());
+    }
+
     std::vector<std::string> donnees_equipe_chasse {m_equipeChasse.serialiser()};
     std::vector<std::string> donnees_equipe_recolte {m_equipeRecolte.serialiser()};
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_recolte.begin(),donnees_equipe_recolte.end());
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_chasse.begin(),donnees_equipe_chasse.end());
+    return donnees_campement;
 }
 
 //!

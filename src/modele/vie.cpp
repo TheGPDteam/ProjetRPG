@@ -132,7 +132,7 @@ void Vie::augmenter(int valeur)
 //!
 
 std::vector<std::string> Vie::serialiser() const{
-    std::vector<std::string> donnees = {std::to_string(m_valeur)};
+    std::vector<std::string> donnees = {std::to_string(m_valeurMax)};
     return donnees;
 }
 //! \brief charge les attributs de la classe Vie
@@ -142,5 +142,5 @@ std::vector<std::string> Vie::serialiser() const{
 //!
 
 void Vie::charger(std::vector<std::string> donnees){
-    m_valeur = std::stoi(donnees[0]);
+    m_valeurMax = std::stoi(donnees[0]);
 }

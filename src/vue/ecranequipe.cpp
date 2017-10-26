@@ -3,27 +3,24 @@
 #include "constantesbouton.h"
 #include <utility>
 
+// a déclarer autre part
+const int COORD_X_RECTANGLE_HAUT = 20;
+const int COORD_Y_RECTANGLE_HAUT = 50;
 
 EcranEquipe::EcranEquipe() :
-    m_nomFenetre("Equipe", SDL_Color{255,255,255}, POLICE_COLLEGED, 20,
-                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
+    m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+    m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},
+//    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
+    m_rectangleBas {COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, (HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80},
+    m_rectangleDescription {COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3, 40},
+    m_zoneNomPersonnage {new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
+    m_zoneNiveauPersonnage {new TexteSDL("Niveau", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 90, m_rectangleDescription.y + 10))},
+    m_zoneViePersonnage {new TexteSDL("Vie", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 210, m_rectangleDescription.y + 10))},           // position imprécise **
+    m_zoneIntelligencePersonnage {new TexteSDL("Intelligence", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 290, m_rectangleDescription.y + 10))},
+    m_zoneForcePersonnage {new TexteSDL("Force", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 510, m_rectangleDescription.y + 10))},
+    m_zoneVitessePersonnage {new TexteSDL("Vitesse", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 630, m_rectangleDescription.y + 10))}
 {
-    int cood_x_rectangle_haut = 20;
-    int cood_y_rectangle_haut = 50;
-
-
-    m_rectangleHaut = {cood_x_rectangle_haut, cood_y_rectangle_haut, WIDTH_FENETRE_PRINCIPALE - cood_x_rectangle_haut * 2, HEIGHT_FENETRE_PRINCIPALE - 250};
-//    m_rectangleNomEquipe =  {cood_x_rectangle_haut, cood_y_rectangle_haut, WIDTH_FENETRE_PRINCIPALE - cood_x_rectangle_haut * 2, HEIGHT_FENETRE_PRINCIPALE - 250};
-    m_rectangleBas = {cood_x_rectangle_haut, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), WIDTH_FENETRE_PRINCIPALE - cood_x_rectangle_haut * 2, (HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80};
-    m_rectangleDescription = {cood_x_rectangle_haut + 10, cood_y_rectangle_haut + 10, WIDTH_FENETRE_PRINCIPALE - cood_x_rectangle_haut * 3, 40};
-
-    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10));
-    m_zoneNiveauPersonnage = new TexteSDL("Niveau", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 90, m_rectangleDescription.y + 10));
-    m_zoneViePersonnage = new TexteSDL("Vie", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 210, m_rectangleDescription.y + 10));           // position imprécise **
-    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 290, m_rectangleDescription.y + 10));
-    m_zoneForcePersonnage = new TexteSDL("Force", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 510, m_rectangleDescription.y + 10));
-    m_zoneVitessePersonnage = new TexteSDL("Vitesse", SDL_Color{255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 640, m_rectangleDescription.y + 10));
-
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonJeuPrincipal);
 }
 
