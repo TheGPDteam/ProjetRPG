@@ -243,3 +243,8 @@ Joueur::~Joueur()
 Quete* Joueur::obtenirQuete() {
     return &m_queteJoueur;
 }
+
+std::vector<std::vector<std::string>> serialiser() const
+{
+
+}
