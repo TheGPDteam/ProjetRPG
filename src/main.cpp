@@ -27,7 +27,7 @@ void mainloop_func(void* c){
 //!
 //! Contient la boucle de jeu et l'initialisation des classes principales
 //!
-int main (int argc, char * argv[]){
+int main (){
 
 
     Vue* vue = new Vue(); //On instancie la vue

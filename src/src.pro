@@ -51,7 +51,8 @@ SOURCES += \
     ../ext/tinyxml/tinyxmlerror.cpp \
     vue/ecranequipe.cpp \
     vue/ecraninventaire.cpp \
-    vue/ecranchoixpersonnage.cpp
+    vue/ecranchoixpersonnage.cpp \
+    vue/ecranquetejoueur.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -103,4 +104,7 @@ HEADERS += \
     vue/ecranequipe.h \
     vue/ecraninventaire.h \
     vue/policetexte.h \
-    vue/ecranchoixpersonnage.h
+    vue/ecranchoixpersonnage.h \
+    vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h

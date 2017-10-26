@@ -11,7 +11,9 @@ private:
     SDL_Rect m_fondChasse;
     SDL_Rect m_fondRecolte;
     SDL_Rect m_fondPerso;
-    SDL_Rect m_fondDescription;
+    SDL_Rect m_fondDescriptionPerso;
+    SDL_Rect m_fondDescriptionChasse;
+    SDL_Rect m_fondDescriptionRecolte;
 
     TexteSDL m_nomFenetre;
 

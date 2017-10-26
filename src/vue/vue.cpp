@@ -28,6 +28,7 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
     m_ChoixQuete = new EcranQuete();
+    m_QueteJoueur = new EcranQueteJoueur();
 }
 
 //!
@@ -85,6 +86,9 @@ void Vue::affichageVue()
          break;
     case ChoixQuete:
         afficherEcran(m_ChoixQuete);
+        break;
+    case PopUpJoueur:
+        afficherEcran(m_QueteJoueur);
         break;
     case Quitter:
         m_quitterJeu = true;

@@ -19,7 +19,7 @@ public:
     std::set<Personnage*> obtenirListePersonnage();
     void supprimerPersonnage(Personnage *personnage);
     void ajouterPersonnage(Personnage* personnage);
-    Equipe *genererEquipeZombie();
+    static Equipe *genererEquipeZombie();
 
     std::set<Personnage *>::iterator begin(){
         return m_personnages.begin();

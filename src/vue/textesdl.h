@@ -22,7 +22,7 @@ private:
     SDL_Rect m_positionTexte;
 
 public:
-    static constexpr SDL_Color COULEUR_BLANC{255,255,255};
+    static constexpr SDL_Color COULEUR_BLANC{255,255,255, 255};
 
     TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
              const std::pair<int, int> coord_rectangle, const std::pair<int, int> taille_rectangle);
