@@ -23,6 +23,7 @@ public:
     void ajouterObjet(Objet *objet);
     void supprimerObjet(Objet *objet);
     bool estPlein() const;
+    std::vector<std::string> serialiser() const;
 };
 
 #endif

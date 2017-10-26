@@ -135,3 +135,17 @@ bool Inventaire::estPlein() const
 {
     return (obtenirNombreObjet() == this->obtenirTailleMax());
 }
+
+std::vector<std::string> Inventaire::serialiser() const
+{
+    std::vector<std::string> donnees_inventaire;
+
+    for (Objet* obj : m_objets)
+    {
+        donnees_inventaire.push_back(obj->serialiser());
+    }
+
+    donnees_inventaire.push_back(std::to_string(m_tailleMaximum));
+
+    return donnees_inventaire;
+}
