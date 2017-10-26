@@ -197,7 +197,7 @@ unsigned short Arme::obtenirVitesse()
 
 std::vector<std::string> Arme::serialiser() const
 {
-    std::vector<std::string> donnees {std::to_string(m_degats),std::to_string(m_vitesse),std::to_string(m_chance),std::to_string(m_degats),m_description};
+    std::vector<std::string> donnees {std::to_string(m_degats),std::to_string(m_vitesse),std::to_string(m_chance),m_nom,m_description};
     return donnees;
 }
 

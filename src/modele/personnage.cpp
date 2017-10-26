@@ -86,7 +86,7 @@ Vie* Personnage::obtenirVie()
 //! \brief Accesseur en lecture des dégats + coups critiques
 //! \return la vie du personnage
 //! \author mleothaud, mpardo
-//! \date 17/11/2016
+//! \date 17/11/2016 - 26/10/2017
 //! \version 2.0
 //!
 

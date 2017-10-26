@@ -191,7 +191,7 @@ Niveau Humain::obtenirNiveau()
 //! \brief Accesseur en lecture des dégâts + coups critiques
 //! \return les dégâts de l'humain associés à la puissance de son arme + le coup critique
 //! \author mleothaud, mpardo
-//! \date 17/11/2016
+//! \date 17/11/2016 - 26/10/2017
 //! \version 2.0
 //!
 
