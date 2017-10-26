@@ -188,16 +188,22 @@ Niveau Humain::obtenirNiveau()
 }
 
 //!
-//! \brief Accesseur en lecture des dégâts
-//! \return les dégâts de l'humain associés à la puissance de son arme
-//! \author mleothaud
+//! \brief Accesseur en lecture des dégâts + coups critiques
+//! \return les dégâts de l'humain associés à la puissance de son arme + le coup critique
+//! \author mleothaud, mpardo
 //! \date 17/11/2016
-//! \version 1.0
+//! \version 2.0
 //!
 
 unsigned short Humain::obtenirDegats()
 {
-    return m_force.obtenirValeur() * m_arme->obtenirDegats();
+    bool coupCritique = (rand() % 101) < ((m_CHANCE_CC_BASE + (2) * (m_intelligence.obtenirValeur())) * m_arme->obtenirChance()); // ([Chance CC de Base]​ + [Multiplicateur CC]​ * [Point d’intelligence]) * CC Arme
+    if(coupCritique){
+        return m_force.obtenirValeur() + (m_force.obtenirValeur() / 2);
+    }
+    else{
+        return m_force.obtenirValeur();
+    }
 }
 
 
