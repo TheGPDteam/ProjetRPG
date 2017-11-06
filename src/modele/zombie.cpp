@@ -17,7 +17,7 @@ Zombie::Zombie(int niveau)
 //!
 //! \brief Accesseur en lecture de la vitesse
 //! \return la vitesse du zombie
-//! \author mleothaud, mpardo
+//! \author mleothaud, parMarius
 //! \date 17/11/2016 - 06/11/2017
 //! \version 1.0
 //!
