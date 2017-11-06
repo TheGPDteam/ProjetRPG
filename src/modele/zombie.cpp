@@ -15,6 +15,6 @@ Zombie::Zombie(int niveau)
 }
 
 unsigned short Zombie::obtenirVitesse() {
-    return m_vitesse.obtenirValeur()*100;
+    return m_vitesse.obtenirValeur()*m_MULTIPLICATEUR_VITESSE;
 }
 

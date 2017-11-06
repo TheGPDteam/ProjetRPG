@@ -197,9 +197,9 @@ Niveau Humain::obtenirNiveau()
 
 unsigned short Humain::obtenirDegats()
 {
-    bool coupCritique = (rand() % 101) < ((m_CHANCE_CC_BASE + (2) * (m_intelligence.obtenirValeur())) * m_arme->obtenirChance()); // ([Chance CC de Base]​ + [Multiplicateur CC]​ * [Point d’intelligence]) * CC Arme
+    bool coupCritique = (rand() % 100) < ((m_CHANCE_CC_BASE + (2) * (m_intelligence.obtenirValeur())) * m_arme->obtenirChance());
     if(coupCritique){
-        return m_force.obtenirValeur() + (m_force.obtenirValeur() / 2);
+        return m_force.obtenirValeur() * 1.5;
     }
     else{
         return m_force.obtenirValeur();

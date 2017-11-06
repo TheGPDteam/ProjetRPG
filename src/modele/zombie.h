@@ -5,6 +5,8 @@
 
 class Zombie : public Personnage
 {
+private:
+    const unsigned short m_MULTIPLICATEUR_VITESSE = 100;
 public:
     Zombie(int niveau);
     unsigned short obtenirVitesse() override;
