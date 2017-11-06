@@ -69,33 +69,56 @@ void Vue::affichageVue()
 {
     switch(m_typeEcran)
     {
-    case MenuPrincipal:
+    case MenuPrincipal:{
         afficherEcran(m_menuPrincipal);
         break;
-    case JeuPrincipal:
+    }
+    case ChasseJoueur:{
+        Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
+        Quete q("Chasse","Chasse les zombies",10,100,a);
+        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
-    case Equipe:
+    }
+    case RecolteJoueur:{
+        Vivre* v = new Vivre("steak","steak",15);
+        Quete q("Récolte","fais à manger!",10,100,v);
+        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+        afficherEcran(m_jeuPrincipal);
+        break;
+    }
+    case JeuPrincipal:{
+        afficherEcran(m_jeuPrincipal);
+        break;
+    }
+    case Equipe:{
         afficherEcran(m_ecranEquipe);
         break;
-    case Inventaire:
+    }
+    case Inventaire:{
         afficherEcran(m_ecranInventaire);
         break;
-    case ChoixPersonnage:
+    }
+    case ChoixPersonnage:{
          afficherEcran(m_ecranChoixPersonnage);
          break;
-    case ChoixQuete:
+    }
+    case ChoixQuete:{
         afficherEcran(m_ChoixQuete);
         break;
-    case PopUpJoueur:
+    }
+    case PopUpJoueur:{
         afficherEcran(m_QueteJoueur);
         break;
-    case Quitter:
+    }
+    case Quitter:{
         m_quitterJeu = true;
         break;
-    default:
+    }
+    default:{
         std::cout << "Erreur d'initialisation du type d'affichage !" << std::endl;
         break;
+    }
     }
 
     if(!m_quitterJeu) // Sans cette condition segfault à cause du SDL_Quit() de gestionEvenementJoueur

@@ -99,3 +99,11 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 {
     return PopUpJoueur;
 }
+TypeEcran ActionsBoutons::boutonChasseJoueur() const
+{
+    return ChasseJoueur;
+}
+TypeEcran ActionsBoutons::boutonRecolteJoueur() const
+{
+    return RecolteJoueur;
+}

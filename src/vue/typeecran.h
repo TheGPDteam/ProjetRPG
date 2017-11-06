@@ -15,7 +15,7 @@ const int BPP = 32;
 enum TypeEcran
 {
 
-    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage,ChoixQuete,PopUpJoueur
+    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage,ChoixQuete,PopUpJoueur,RecolteJoueur, ChasseJoueur
 
 };
 #endif // TYPEECRAN_H
