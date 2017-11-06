@@ -32,7 +32,7 @@ void Controleur::deroulementJournee(){
 }
 
 void Controleur::nouvellePartie(){
-
+    m_modele->premiereJournee();
 }
 
 Modele* Controleur::obtenirModele(){

@@ -121,7 +121,7 @@ std::vector<std::string> Campement::serialiser() const
 {
     std::vector<std::string> donnees_campement {std::to_string(m_quantiteVivre)};
 
-    for (Vivre* v : m_stockVivre )
+    for (Vivre* v : m_stockVivre)
     {
         std::vector<std::string> buffer = v->serialiser();
         donnees_campement.insert(donnees_campement.end(),buffer.begin(),buffer.end());
@@ -132,6 +132,18 @@ std::vector<std::string> Campement::serialiser() const
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_recolte.begin(),donnees_equipe_recolte.end());
     donnees_campement.insert(donnees_campement.end(),donnees_equipe_chasse.begin(),donnees_equipe_chasse.end());
     return donnees_campement;
+}
+
+//!
+//! \brief Accesseur en lecture / ecriture des personnages non attribués
+//! \author mleothaud, adeguilhem
+//! \date 06/11/17
+//! \version 1.0
+//!
+
+std::set <Personnage *> Campement::obtenirNonAttribuees()
+{
+    return m_personnesNonAttribuees;
 }
 
 //!

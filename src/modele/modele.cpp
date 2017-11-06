@@ -20,7 +20,6 @@ Modele::Modele()
     : m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}},
       m_deplacementDepuisDernierCombat{0}
 {
-    premiereJournee();
 }
 
 //!
@@ -184,7 +183,15 @@ void Modele::deplacement(Direction dir)
 void Modele::journeeSuivante()
 {
     //Un survivant arrive
+    Humain *h = new Humain();
 
+    //Choix d'accepter ou non le personnage
+    bool accepte;
+
+    //Ajout à l'équipe
+    if(accepte){
+        m_campement.obtenirNonAttribuees().insert(h);
+    }
 
     //On part en quête
     /*Code à faire*/
@@ -226,10 +233,12 @@ void Modele::lancerCombat()
 
 void Modele::premiereJournee()
 {
-    Equipe *e;
+
+    std::cout << "coucou" << std::endl;
+
     for(int i=0 ; i<7 ; i++) {
         Humain *h = new Humain();
-        e->ajouterPersonnage(h);
+        m_campement.obtenirNonAttribuees().insert(h);
     }
 }
 
