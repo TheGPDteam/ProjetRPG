@@ -20,6 +20,7 @@ Modele::Modele()
     : m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}},
       m_deplacementDepuisDernierCombat{0}
 {
+    premiereJournee();
 }
 
 //!
@@ -218,14 +219,18 @@ void Modele::lancerCombat()
 //! \brief Permet la gestion de la premiere journee, differente des autres
 //! \author mleothaud
 //! \date 17/11/16
-//! \version 0.0.1
+//! \version 0.1
 //!
-//! Doit permettre l'affichage d'un texte expliquant le scénario
+//! Création d'une équipe de sept personnages
 //!
 
 void Modele::premiereJournee()
 {
-    //TO-DO
+    Equipe *e;
+    for(int i=0 ; i<7 ; i++) {
+        Humain *h = new Humain();
+        e->ajouterPersonnage(h);
+    }
 }
 
 //!
