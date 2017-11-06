@@ -14,7 +14,15 @@ Zombie::Zombie(int niveau)
     m_vitesse.augmenter(niveau);
 }
 
+//!
+//! \brief Accesseur en lecture de la vitesse
+//! \return la vitesse du zombie
+//! \author mleothaud, mpardo
+//! \date 17/11/2016 - 06/11/2017
+//! \version 1.0
+//!
+
 unsigned short Zombie::obtenirVitesse() {
-    return m_vitesse.obtenirValeur()*m_MULTIPLICATEUR_VITESSE;
+    return m_vitesse.obtenirValeur() * m_MULTIPLICATEUR_VITESSE;
 }
 
