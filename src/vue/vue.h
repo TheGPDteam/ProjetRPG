@@ -24,8 +24,8 @@ private:
     EcranEquipe* m_ecranEquipe;
     EcranInventaire* m_ecranInventaire;
     EcranChoixPersonnage* m_ecranChoixPersonnage;
-    EcranQuete* m_ChoixQuete;
-    EcranQueteJoueur* m_QueteJoueur;
+    EcranQuete* m_ecranChoixQuete;
+    EcranQueteJoueur* m_ecranQueteJoueur;
 
     Controleur* m_controleur;
 

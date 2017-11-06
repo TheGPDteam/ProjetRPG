@@ -27,8 +27,8 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ChoixQuete = new EcranQuete();
-    m_QueteJoueur = new EcranQueteJoueur();
+    m_ecranChoixQuete = new EcranQuete();
+    m_ecranQueteJoueur = new EcranQueteJoueur();
 }
 
 //!
@@ -47,6 +47,10 @@ void Vue::definirControleur(Controleur *controleur)
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixQuete);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteJoueur);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
@@ -104,11 +108,11 @@ void Vue::affichageVue()
          break;
     }
     case ChoixQuete:{
-        afficherEcran(m_ChoixQuete);
+        afficherEcran(m_ecranChoixQuete);
         break;
     }
     case PopUpJoueur:{
-        afficherEcran(m_QueteJoueur);
+        afficherEcran(m_ecranQueteJoueur);
         break;
     }
     case Quitter:{

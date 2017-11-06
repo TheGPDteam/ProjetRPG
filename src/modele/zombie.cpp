@@ -23,6 +23,6 @@ Zombie::Zombie(int niveau)
 //!
 
 unsigned short Zombie::obtenirVitesse() {
-    return m_vitesse.obtenirValeur() * m_MULTIPLICATEUR_VITESSE;
+    return m_vitesse.obtenirValeur() * m_MULTIPLICATEUR_VITESSE_BASE_ARME;
 }
 
