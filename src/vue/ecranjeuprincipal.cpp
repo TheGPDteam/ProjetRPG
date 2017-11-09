@@ -18,12 +18,14 @@ std::pair<int, int> const tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 //! \version 1.0
 //!
 
-EcranJeuPrincipal::EcranJeuPrincipal()
+EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     : m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,0,63,63}}},
-      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)}
+      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)},
+      m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
+      m_controleur{controleur}
 {
-
     //* AJOUT DES BOUTONS *//
+
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB}, &ActionsBoutons::boutonEquipe);
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB},&ActionsBoutons::boutonInventaire);
 
@@ -55,6 +57,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
             x->afficherSprite(fenetre_affichage);
 
     m_spriteJoueur->afficherSprite(fenetre_affichage);
+    m_nomJoueur.afficherTexte(fenetre_affichage);
     m_texteObjectif.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }

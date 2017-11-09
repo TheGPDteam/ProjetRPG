@@ -23,7 +23,6 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
 
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
-    m_jeuPrincipal = new EcranJeuPrincipal();
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
@@ -44,6 +43,7 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
 void Vue::definirControleur(Controleur *controleur)
 {
     m_controleur=controleur;
+    m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
