@@ -6,6 +6,7 @@
 //! \version 0.0.1
 
 Temps::Temps()
+    : m_tempsDureePause(0)
 {
     m_tempsDebutjournee = time(nullptr);
     m_tempsPause = time(nullptr);
@@ -13,20 +14,25 @@ Temps::Temps()
 
 int Temps::obtenirTempsRestant() const
 {
-    return difftime(time(nullptr), m_tempsDebutjournee);
+    return DUREE_JOURNEE-difftime(time(nullptr), m_tempsDebutjournee+m_tempsDureePause);
 }
 
 void Temps::mettreEnPause()
 {
-
+    m_tempsPause = time(nullptr);
 }
 
 void Temps::reprendre()
 {
-
+    m_tempsDureePause += difftime(time(nullptr), m_tempsPause);
 }
 
 int Temps::dureeJournee()
 {
     return DUREE_JOURNEE;
+}
+
+void Temps::reinitialiserTemps(int temps=0)
+{
+    m_tempsDureePause = temps;
 }

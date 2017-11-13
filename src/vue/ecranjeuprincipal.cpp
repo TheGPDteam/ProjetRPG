@@ -56,10 +56,18 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         for(auto x : c)
             x->afficherSprite(fenetre_affichage);
 
+    Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0,0,127,63}, SDL_Rect{128,128,63,63}};
+
+    for(auto p : m_spriteObjets){
+        valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(p.first*63),(short int)(p.second*63),127,63}, SDL_Rect{128,129,63,63}};
+        valise.afficherSprite(fenetre_affichage);
+    }
+
     m_spriteJoueur->afficherSprite(fenetre_affichage);
     m_nomJoueur.afficherTexte(fenetre_affichage);
     m_texteObjectif.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
+
 }
 
 
@@ -139,6 +147,8 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     // Test si c'est un joueur
     Joueur* joueur = dynamic_cast<Joueur*>(&obj);
 
+    m_spriteObjets.clear();
+
     if(joueur!=nullptr){
         //recupère la position du joueur sur la carte
         int posX = joueur->obtenirPosition().first-5;
@@ -159,52 +169,32 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 {
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
-                    bool find = carte->objetPresent(temp);
+
                     switch(carte->obtenirTuile(i,j)->obtenirType()){
                     case TypeTuile::Eau:
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,0,64,64});
                         break;
                     case TypeTuile::Sable:
-                        if(!find)
-                        {
                             (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,64,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,64,127});
-                        }
                         break;
                     case TypeTuile::Herbe:
-                        if(!find)
-                        {
                             (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,128,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,128,64,191});
-                        }
                         break;
                     case TypeTuile::Beton:
-                        if(!find)
-                        {
                             (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,192,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,192, 255});
-                        }
                         break;
                     case TypeTuile::Terre:
-                        if(!find)
-                        {
                             (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,256,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,256, 319});
-                        }
                         break;
                     case TypeTuile::Arbre:
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{128,291,64,64});
                     default:
                         break;
                     }
+
+                    if(carte->objetPresent(temp))
+                        m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
+
                 }
             }
         }

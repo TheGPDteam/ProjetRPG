@@ -21,12 +21,14 @@ private:
     std::string m_nomPartie;
     int m_deplacementDepuisDernierCombat;
 
+    Humain* m_nouvelArrivant;
+
     bool testerDeplacement(Direction &dir);
 public:
     Modele();
     void premiereJournee();//TO-DO
     void journeeSuivante();//TO-DO
-    Humain* arriveeNouveauSurvivant();
+    void acceptationNouveauSurvivant();
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
