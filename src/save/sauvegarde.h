@@ -9,7 +9,6 @@
 #include "modele/modele.h"
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <chrono>
 
 const std::string EN_TETE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 

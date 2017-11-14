@@ -2,7 +2,6 @@
 
 void Sauvegarde::sauvegarderModele(Modele *modele)
 {
-    auto t_debut = std::chrono::system_clock::now();
     #ifdef __MINGW32__
     if (!mkdir("save"))
     #elif __linux__
@@ -22,10 +21,6 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
     }
     else
         std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
-    auto t_fin = std::chrono::system_clock::now();
-    std::chrono::duration<double> t = t_fin-t_debut;
-
-    std::cout << "Durée exec: " << t.count() << std::endl;
 }
 
 void Sauvegarde::chargerModele(Modele* modele,std::string chemin)
