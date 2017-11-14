@@ -195,10 +195,15 @@ unsigned short Arme::obtenirVitesse()
 //! \return les données des armes
 //!
 
-std::vector<std::string> Arme::serialiser() const
+std::string Arme::serialiser() const
 {
-    std::vector<std::string> donnees {std::to_string(m_degats),std::to_string(m_vitesse),std::to_string(m_chance),m_nom,m_description};
-    return donnees;
+    return "<Arme>\n"
+           "    <Nom>\n" + m_nom + "\n</Nom>\n"
+            "   <Description>\n" + m_description + "\n</Description>\n"
+            "   <Degats>\n" + std::to_string(m_degats) + "\n</Degats>\n"
+            "   <Vitesse>\n" + std::to_string(m_vitesse) + "\n</Vitesse>\n"
+            "   <Chance>\n" + std::to_string(m_chance) + "\n</Chance>\n"
+            "</Arme>\n";
 }
 
 //!

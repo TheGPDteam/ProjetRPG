@@ -28,7 +28,7 @@ public:
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();
 
-    std::vector<std::string> serialiser() const;
+    std::string serialiser() const;
     void charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte);
 };
 

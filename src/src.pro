@@ -45,10 +45,6 @@ SOURCES += \
     observable.cpp \
     vue/dictionnairedeboutons.cpp \
     save/sauvegarde.cpp \
-    ../ext/tinyxml/tinystr.cpp \
-    ../ext/tinyxml/tinyxml.cpp \
-    ../ext/tinyxml/tinyxmlparser.cpp \
-    ../ext/tinyxml/tinyxmlerror.cpp \
     vue/ecranequipe.cpp \
     vue/ecraninventaire.cpp \
     vue/ecranchoixpersonnage.cpp \
@@ -99,8 +95,6 @@ HEADERS += \
     observable.h \
     vue/dictionnairedeboutons.h \
     save/sauvegarde.h \
-    ../ext/tinyxml/tinystr.h \
-    ../ext/tinyxml/tinyxml.h \
     vue/ecranequipe.h \
     vue/ecraninventaire.h \
     vue/policetexte.h \

@@ -38,7 +38,7 @@ public:
     void nouvelleQuete(Quete quete);
     Inventaire* obtenirInventaireJoueur();
     Quete* obtenirQuete();
-    std::vector<std::string> serialiser() const;
+    std::string serialiser() const;
 };
 
 #endif

@@ -96,3 +96,11 @@ unsigned short Competence::obtenirValeurMax() const
 {
     return M_VALEUR_MAX;
 }
+
+std::string Competence::serialiser() const
+{
+    return "<Competence>\n"
+            "   <Valeur>\n" + std::to_string(m_valeur) + "\n</Valeur>\n"
+            "   <ValeurMaximum>\n" + std::to_string(M_VALEUR_MAX) + "\n</ValeurMaximum>\n"
+            "\n</Competence>\n";
+}

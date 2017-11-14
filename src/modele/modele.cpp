@@ -360,3 +360,21 @@ void Modele::definirJoueur(Joueur joueur)
 {
     m_joueur = joueur;
 }
+
+//!
+//! \brief Serialise les attributs du modèle
+//! \return Chaine contenant les attributs du modèle au format XML
+//! \author nlesne
+//! \date 12/11/17
+//! \version 0.1
+//!
+
+std::string Modele::serialiser() const
+{
+    return "<Modele>\n"
+            + m_campement.serialiser()
+            + m_joueur.serialiser()
+            +
+            "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n"
+            "</Modele>\n";
+}

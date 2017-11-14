@@ -98,14 +98,17 @@ void Vivre::affecterValeurs(string ligne)
 
 //!
 //! \brief Sérialise les attributs de l'objet
-//! \return un vecteur des attributs
+//! \return Une chaine contenant les données de la vivre au format XML
 //! \author nlesne
-//! \date 16/10/17
-//! \version 0.1
+//! \date 12/11/17
+//! \version 0.2
 //!
 
-std::vector<std::string> Vivre::serialiser() const
+std::string Vivre::serialiser() const
 {
-    std::vector<std::string> donnees_vivre {std::to_string(m_valeurNutritive)};
-    return donnees_vivre;
+    return "<Vivre>\n"
+            "   <Nom>\n" + m_nom + "\n</Nom>\n"
+            "   <Description>\n" + m_description + "\n</Description>\n"
+            "   <ValeurNutritive>\n" + std::to_string(m_valeurNutritive) + "\n</ValeurNutritive>\n"
+            "</Vivre>\n";
 }

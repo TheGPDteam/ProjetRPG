@@ -23,7 +23,7 @@ public:
     void definirValeurMax(int nouvelleValeurMax);
     void diminuer(int valeur);
     void augmenter(int valeur);
-    std::vector<std::string> serialiser()const;
+    std::string serialiser()const;
     void charger(std::vector<std::string> donnees);
 };
 

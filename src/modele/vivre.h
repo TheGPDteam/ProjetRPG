@@ -18,7 +18,7 @@ public:
     Vivre(std::string nom, std::string description, int valeurNutritive);
     int obtenirValeurNutritive() const;
     void definirValeurNutritive(const int &valeurNutritive);
-    std::vector<std::string> serialiser() const override;
+    std::string serialiser() const override;
 };
 
 #endif

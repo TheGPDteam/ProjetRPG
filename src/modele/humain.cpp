@@ -240,3 +240,55 @@ void Humain::augmenterExperience(int exp)
         this->m_vitesse.augmenter(1);
     }
 }
+
+//!
+//! \brief Serialise la classe Humain
+//! \return Chaine contenant les données de l'objet
+//! \author nlesne
+//! \date 13/11/17
+//! \version 0.2
+//!
+
+std::string Humain::serialiser() const
+{
+    std::string genre;
+    if (m_genre == Genre::Homme)
+        genre = "Homme";
+    else if (m_genre == Genre::Femme)
+        genre = "Femme";
+    else
+        genre = "Inconnu";
+
+    return "<Humain>\n"
+            "   <Nom>\n" + m_nom + "\n</Nom>\n"
+            "   <Prenom>\n" + m_prenom + "\n</Prenom>\n"
+            "   <Genre>\n" + genre + "\n</Genre>\n"
+            "   <Force>\n"
+            + m_force.serialiser()
+            +
+            "   </Force>\n"
+            "   <Intelligence>\n"
+            + m_intelligence.serialiser()
+            +
+            "   </Intelligence>\n"
+            "   <Vitesse>\n"
+            + m_vitesse.serialiser()
+            +
+            "   </Vitesse>\n"
+            + m_vie.serialiser()
+            +
+            "   <CompetenceChasse>\n"
+            + m_chasse.serialiser()
+            +
+            "  </CompetenceChasse>\n"
+            "   <CompetenceRecolte>\n"
+            + m_recolte.serialiser()
+            +
+            "   </CompetenceRecolte>\n"
+            "   <CoutEntretien>\n" + std::to_string(m_coutEntretien) + "\n</CoutEntretien>\n"
+            + m_niveau.serialiser()
+            + m_arme->serialiser()
+            +
+            "</Humain>\n";
+}
+

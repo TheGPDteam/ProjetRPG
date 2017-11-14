@@ -43,6 +43,7 @@ public:
     void definirCombat(Combat combat);
     Joueur *obtenirJoueur() ;
     void definirJoueur(Joueur joueur);
+    std::string serialiser() const;
 };
 
 #endif

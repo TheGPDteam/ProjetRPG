@@ -4,6 +4,7 @@
 #include "ecrangeneral.h"
 #include "modele/carte.h"
 #include "vue/bouton.h"
+#include "save/sauvegarde.h"
 
 
 class EcranJeuPrincipal : public EcranGeneral

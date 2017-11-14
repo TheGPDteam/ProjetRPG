@@ -117,20 +117,26 @@ Equipe* Campement::obtenirRecolte()
 //! \return les donnees du campement
 //!
 
-std::vector<std::string> Campement::serialiser() const
+std::string Campement::serialiser() const
 {
-    std::vector<std::string> donnees_campement {std::to_string(m_quantiteVivre)};
-
+    std::string donnees_campement = "<Campement>\n"
+            "   <QuantiteVivre>\n" + std::to_string(m_quantiteVivre) + "\n</QuantiteVivre>\n"
+            "   <StockVivre>\n";
     for (Vivre* v : m_stockVivre)
-    {
-        std::vector<std::string> buffer = v->serialiser();
-        donnees_campement.insert(donnees_campement.end(),buffer.begin(),buffer.end());
-    }
+        donnees_campement += v->serialiser();
+    donnees_campement += "\n</StockVivre>\n"
+            "   <EquipeRecolte>\n"
+            + m_equipeRecolte.serialiser()
+            + "\n</EquipeRecolte>\n"
+            "   <EquipeChasse>\n"
+            + m_equipeChasse.serialiser()
+            + " \n</EquipeChasse>\n"
+              " <PersonnesNonAttribuees>\n";
+    for (Personnage* p : m_personnesNonAttribuees)
+        donnees_campement += p->serialiser();
+    donnees_campement += "\n</PersonnesNonAttribuees>\n"
+            "   \n</Campement>\n";
 
-    std::vector<std::string> donnees_equipe_recolte {m_equipeRecolte.serialiser()};
-    std::vector<std::string> donnees_equipe_chasse {m_equipeChasse.serialiser()};
-    donnees_campement.insert(donnees_campement.end(),donnees_equipe_recolte.begin(),donnees_equipe_recolte.end());
-    donnees_campement.insert(donnees_campement.end(),donnees_equipe_chasse.begin(),donnees_equipe_chasse.end());
     return donnees_campement;
 }
 

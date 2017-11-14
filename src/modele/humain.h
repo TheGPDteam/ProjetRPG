@@ -39,6 +39,7 @@ public:
     unsigned short obtenirDegats() override;
     unsigned short obtenirVitesse() override;
     void augmenterExperience(int exp);
+    std::string serialiser() const override;
 };
 
 #endif

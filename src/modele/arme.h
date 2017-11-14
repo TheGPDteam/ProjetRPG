@@ -23,7 +23,7 @@ public:
     void definirDegats(const int &degats);
     unsigned short obtenirVitesse();
     unsigned short obtenirChance();
-    std::vector<std::string> serialiser() const;
+    std::string serialiser() const override;
     void charger(std::vector<std::string> donnees);
 };
 

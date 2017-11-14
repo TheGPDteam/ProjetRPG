@@ -103,6 +103,7 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
         switch(evenements.type)
         {
         case SDL_QUIT:
+            Sauvegarde::sauvegarderModele(m_controleur->obtenirModele());
             quitter_jeu = true;
             //SDL_Quit();
             break;
