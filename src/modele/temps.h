@@ -9,14 +9,17 @@ class Temps
 private:
     static const int DUREE_JOURNEE = 600;
     time_t m_tempsDebutjournee;
+    time_t m_tempsDureePause;
     time_t m_tempsPause;
+
 public:
 
     Temps();
     int obtenirTempsRestant() const;
-    void mettreEnPause();//TO-DO
-    void reprendre();//TO-DO
+    void mettreEnPause();
+    void reprendre();
 
+    void reinitialiserTemps();
     static int dureeJournee();
 };
 
