@@ -98,7 +98,7 @@ void Modele::deplacement(Direction dir)
         bool veutChanger = false;
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
-        if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL)
+        if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL && !obtenirJoueur()->obtenirInventaireJoueur()->estPlein())
         {
             m_joueur.obtenirInventaireJoueur()->ajouterObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
             m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
