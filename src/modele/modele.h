@@ -27,7 +27,7 @@ private:
 public:
     Modele();
     void premiereJournee();//TO-DO
-    void journeeSuivante();//TO-DO
+    Humain journeeSuivante();//TO-DO
     void acceptationNouveauSurvivant();
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);

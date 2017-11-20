@@ -17,10 +17,13 @@ using namespace std;
 //!
 
 Modele::Modele()
-    : m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}},
+    : m_joueur{Joueur{Quete("Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
+                            0, 50, new Vivre())}},
       m_deplacementDepuisDernierCombat{0},
       m_nouvelArrivant(nullptr)
 {
+    m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
+    //TODO Si la consommation est négative, prévoir un jour à l'avance
 }
 
 //!
@@ -181,11 +184,13 @@ void Modele::deplacement(Direction dir)
 //! on part ensuite en quete pendant 10 minutes
 //!
 
-void Modele::journeeSuivante()
+Humain Modele::journeeSuivante()
 {
     m_nouvelArrivant = new Humain();
 
     m_temps.reinitialiserTemps();
+
+    return *m_nouvelArrivant;
 }
 
 //!

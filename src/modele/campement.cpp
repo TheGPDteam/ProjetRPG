@@ -68,6 +68,32 @@ void Campement::consommerVivre(unsigned short nbVivresConsommes)
 }
 
 //!
+//! \brief Retourne la consommation totale de tous les humains du campement
+//! \return Consommation totale du campement
+//! \author adeguilhem
+//! \date 20/11/16
+//! \version 0.1
+//!
+int Campement::obtenirConsommation()
+{
+    int somme = 0;
+    for (Personnage *p : m_equipeChasse.obtenirListePersonnage()) {
+        Humain * h = (Humain *) p;
+        somme += h->obtenirConsommation();
+    }
+    for (Personnage *p : m_equipeRecolte.obtenirListePersonnage()) {
+        Humain * h = (Humain *) p;
+        somme += h->obtenirConsommation();
+    }
+    for (Personnage *p : m_personnesNonAttribuees)
+    {
+        Humain * h = (Humain *) p;
+        somme += h->obtenirConsommation();
+    }
+    return somme;
+}
+
+//!
 //! \brief Permet d'ajouter une personne au campement et de l'integrer a une equipe
 //! \author mleothaud
 //! \date 17/11/16
@@ -120,22 +146,22 @@ Equipe* Campement::obtenirRecolte()
 std::string Campement::serialiser() const
 {
     std::string donnees_campement = "<Campement>\n"
-            "   <QuantiteVivre>\n" + std::to_string(m_quantiteVivre) + "\n</QuantiteVivre>\n"
-            "   <StockVivre>\n";
+                                    "   <QuantiteVivre>\n" + std::to_string(m_quantiteVivre) + "\n</QuantiteVivre>\n"
+                                                                                               "   <StockVivre>\n";
     for (Vivre* v : m_stockVivre)
         donnees_campement += v->serialiser();
     donnees_campement += "\n</StockVivre>\n"
-            "   <EquipeRecolte>\n"
+                         "   <EquipeRecolte>\n"
             + m_equipeRecolte.serialiser()
             + "\n</EquipeRecolte>\n"
-            "   <EquipeChasse>\n"
+              "   <EquipeChasse>\n"
             + m_equipeChasse.serialiser()
             + " \n</EquipeChasse>\n"
               " <PersonnesNonAttribuees>\n";
     for (Personnage* p : m_personnesNonAttribuees)
         donnees_campement += p->serialiser();
     donnees_campement += "\n</PersonnesNonAttribuees>\n"
-            "   \n</Campement>\n";
+                         "   \n</Campement>\n";
 
     return donnees_campement;
 }

@@ -242,6 +242,18 @@ void Humain::augmenterExperience(int exp)
 }
 
 //!
+//! \brief Retourne la consommation d'un humain
+//! \return Consommation d'un humain
+//! \author adeguilhem
+//! \date 20/11/2017
+//! \version 1.0
+//!
+int Humain::obtenirConsommation() const
+{
+    return m_consommation;
+}
+
+//!
 //! \brief Serialise la classe Humain
 //! \return Chaine contenant les données de l'objet
 //! \author nlesne

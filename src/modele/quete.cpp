@@ -53,6 +53,19 @@ int Quete::obtenirRecompenseExp() const
 }
 
 //!
+//! \brief Putateur objectif
+//! \date 20/11/17
+//! \version 1.0
+//! \author adeguilhem
+//! \param Nouvelle valeur de l'objectif
+//!
+
+void Quete::definirValeurObjectif(int valeur)
+{
+    m_valeurObjectif = valeur;
+}
+
+//!
 //! \brief Mutateur récompense
 //! \date 10/11/16
 //! \version 1.0

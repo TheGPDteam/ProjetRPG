@@ -28,6 +28,7 @@ public:
     int obtenirValeurAvancement() const;
     int obtenirValeurObjectif() const;
     int obtenirRecompenseExp() const;
+    void definirValeurObjectif(int valeur);
     void definirRecompense(Objet obj);
     void definirRecompenseExp(int valeur);
     void demarrerTimer();

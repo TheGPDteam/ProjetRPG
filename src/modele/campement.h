@@ -4,6 +4,7 @@
 #include "personnage.h"
 #include "equipe.h"
 #include "vivre.h"
+#include "humain.h"
 #include <vector>
 #include <string>
 
@@ -22,6 +23,7 @@ public:
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
     void consommerVivre(unsigned short nbVivresConsommes);
+    int obtenirConsommation() ;
 
     std::set<Personnage*> obtenirNonAttribuees();
 
