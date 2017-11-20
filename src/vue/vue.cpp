@@ -10,8 +10,8 @@
 //! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
 //!
 
-Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
-{
+Vue::Vue()
+{    
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
         std::cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
@@ -21,6 +21,8 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", NULL);
 
+    m_typeEcran = EcranMenuPrincipal;
+
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
     m_jeuPrincipal = new EcranJeuPrincipal();
@@ -29,6 +31,11 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
     m_ChoixQuete = new EcranQuete();
     m_QueteJoueur = new EcranQueteJoueur();
+    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
+
+    m_cliqueSouris = false;
+    m_coordSouris = {0,0};
+    m_quitterJeu = false;
 }
 
 //!
@@ -47,6 +54,7 @@ void Vue::definirControleur(Controleur *controleur)
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
@@ -89,6 +97,9 @@ void Vue::affichageVue()
         break;
     case PopUpJoueur:
         afficherEcran(m_QueteJoueur);
+        break;
+    case RecapitulatifNuit:
+        afficherEcran(m_ecranRecapitulatifNuit);
         break;
     case Quitter:
         m_quitterJeu = true;
@@ -167,15 +178,24 @@ Vue::~Vue()
     {
         delete m_menuPrincipal;
     }
+
     if(m_jeuPrincipal != nullptr){
         delete m_jeuPrincipal;
     }
+
     if(m_ecranEquipe != nullptr){
         delete m_ecranEquipe;
     }
+
     if(m_ecranInventaire != nullptr){
         delete m_ecranInventaire;
     }
+
+    if (m_ecranRecapitulatifNuit)
+    {
+        delete m_ecranRecapitulatifNuit;
+    }
+
     SDL_FreeSurface(m_fenetrePrincipale);
     SDL_Quit();
 }
