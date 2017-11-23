@@ -63,8 +63,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         valise.afficherSprite(fenetre_affichage);
     }
 
-    m_tempsRestant.mettreAJourTexte("Temps restant: "+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()));
-
+    m_tempsRestant.mettreAJourTexte("Fin journee: "+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()%60));
     m_spriteJoueur->afficherSprite(fenetre_affichage);
     m_nomJoueur.afficherTexte(fenetre_affichage);
     m_texteObjectif.afficherTexte(fenetre_affichage);
