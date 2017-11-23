@@ -1,6 +1,8 @@
 #ifndef temps_h
 #define temps_h
 
+#include <string>
+
 #include <time.h>
 #include <ctime>
 

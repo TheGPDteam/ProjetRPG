@@ -26,7 +26,6 @@ void Controleur::deplacementJoueur(Direction dir)
 {
     m_modele->deplacement(dir);
 }
-
 void Controleur::deroulementJournee(){
     m_modele->obtenirTemps()->obtenirTempsRestant();
 }
