@@ -22,8 +22,11 @@ Modele::Modele()
       m_deplacementDepuisDernierCombat{0},
       m_nouvelArrivant(nullptr)
 {
-    m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
-    //TODO Si la consommation est négative, prévoir un jour à l'avance
+    // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
+    // le calcul se fait pour plusieurs jours à l'avance.
+    m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()
+                                                            *m_campement.obtenirNbVivres()/m_campement.obtenirConsommation()+1));
+    // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 
 //!
@@ -107,6 +110,12 @@ void Modele::deplacement(Direction dir)
             m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
             (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
 
+            Objet* obj = m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first;
+            Vivre* v = dynamic_cast<Vivre*>(obj);
+            m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+                                                           m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+                                                           v->obtenirValeurNutritive());
+            //Modification objectif (verifier quete recolte)
         }
         if (m_carte.obtenirZoneActive()->obtenirTuile(m_joueur.obtenirPosition().first,m_joueur.obtenirPosition().second)->obtenirExtremiteCarte())
         {
@@ -373,12 +382,4 @@ std::string Modele::serialiser() const
             +
             "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n"
             "</Modele>\n";
-}
-
-///
-/// \brief Fonction qui ajoute le nouveau survivant à la liste des équipiers
-///
-void Modele::acceptationNouveauSurvivant()
-{
-
 }

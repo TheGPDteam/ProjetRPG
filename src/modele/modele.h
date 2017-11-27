@@ -28,7 +28,6 @@ public:
     Modele();
     void premiereJournee();//TO-DO
     Humain journeeSuivante();//TO-DO
-    void acceptationNouveauSurvivant();
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
