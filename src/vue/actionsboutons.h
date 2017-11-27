@@ -22,6 +22,8 @@ public:
 
     TypeEcran boutonChoixJoueur() const;
 
+    TypeEcran boutonNouvellePartie() const;
+
 };
 
 #endif // ACTIONSBOUTONS_H

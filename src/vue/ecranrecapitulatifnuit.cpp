@@ -1,6 +1,8 @@
 #include "ecranrecapitulatifnuit.h"
 #include "constantesbouton.h"
 
+#include <fstream>
+
 //! TODO: Rajouter un bouton (croix ou "Suivant") pour passer l'écran.
 //! A lier avec le cycle jour nuit.
 

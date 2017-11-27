@@ -34,6 +34,7 @@ public:
     void mettreAJourTexte(std::string nouveauTexte);
 
     std::string getTexteStr() const;
+    int getHauteurFont() const;
 
     ~TexteSDL();
 };

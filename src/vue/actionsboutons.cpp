@@ -99,3 +99,17 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 {
     return PopUpJoueur;
 }
+
+//!
+//! \brief Méthode lançant l'affichage de l'écran de l'histoire
+//! @return TypeEcran retourne le nouveau type de l'écran
+//! \author pgutierrez
+//! \date 20/11/17
+//! \version 1.0
+//!
+//! Si un bouton "NouvellePartie" est cliqué alors on retourne le nouveau type de l'écran
+//!
+TypeEcran ActionsBoutons::boutonNouvellePartie() const
+{
+    return PremiereJournee;
+}

@@ -1,7 +1,6 @@
 #ifndef ECRANRECAPITULATIFNUIT_H
 #define ECRANRECAPITULATIFNUIT_H
 
-#include <fstream>
 #include "ecrangeneral.h"
 #include "textesdl.h"
 

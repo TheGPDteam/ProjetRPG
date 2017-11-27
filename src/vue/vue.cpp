@@ -21,7 +21,7 @@ Vue::Vue()
     m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", NULL);
 
-    m_typeEcran = EcranMenuPrincipal;
+    m_typeEcran = MenuPrincipal;
 
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
@@ -31,6 +31,7 @@ Vue::Vue()
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
     m_ChoixQuete = new EcranQuete();
     m_QueteJoueur = new EcranQueteJoueur();
+    m_ecranPremiereJournee = new EcranPremiereJournee();
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
 
     m_cliqueSouris = false;
@@ -55,6 +56,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
@@ -97,6 +99,9 @@ void Vue::affichageVue()
         break;
     case PopUpJoueur:
         afficherEcran(m_QueteJoueur);
+        break;
+    case PremiereJournee:
+        afficherEcran(m_ecranPremiereJournee);
         break;
     case RecapitulatifNuit:
         afficherEcran(m_ecranRecapitulatifNuit);
@@ -174,20 +179,24 @@ bool Vue::getFermerJeu()
 
 Vue::~Vue()
 {
+
     if(m_menuPrincipal != nullptr)
     {
         delete m_menuPrincipal;
     }
 
-    if(m_jeuPrincipal != nullptr){
+    if(m_jeuPrincipal != nullptr)
+    {
         delete m_jeuPrincipal;
     }
 
-    if(m_ecranEquipe != nullptr){
+    if(m_ecranEquipe != nullptr)
+    {
         delete m_ecranEquipe;
     }
 
-    if(m_ecranInventaire != nullptr){
+    if(m_ecranInventaire != nullptr)
+    {
         delete m_ecranInventaire;
     }
 
@@ -196,7 +205,13 @@ Vue::~Vue()
         delete m_ecranRecapitulatifNuit;
     }
 
+    if (m_ecranPremiereJournee != nullptr)
+    {
+        delete m_ecranPremiereJournee;
+    }
+
     SDL_FreeSurface(m_fenetrePrincipale);
+    TTF_Quit();
     SDL_Quit();
 }
 
