@@ -25,7 +25,7 @@ Modele::Modele()
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
     // le calcul se fait pour plusieurs jours à l'avance.
     m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()
-                                                            *m_campement.obtenirNbVivres()/m_campement.obtenirConsommation()+1));
+                                                            *m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation()+1)));
     // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 
