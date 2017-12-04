@@ -110,11 +110,14 @@ void Modele::deplacement(Direction dir)
             m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
             (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
 
-            Objet* obj = m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first;
-            Vivre* v = dynamic_cast<Vivre*>(obj);
-            m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
-                                                           m_joueur.obtenirQuete()->obtenirValeurAvancement()-
-                                                           v->obtenirValeurNutritive());
+            /*****************************************/
+           /*Partie a changer car segmentation fault*/
+          /*****************************************/
+            //Objet* obj = m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first;
+            //Vivre* v = dynamic_cast<Vivre*>(obj);
+            //m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+            //                                               m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+            //                                               v->obtenirValeurNutritive());
             //Modification objectif (verifier quete recolte)
         }
         if (m_carte.obtenirZoneActive()->obtenirTuile(m_joueur.obtenirPosition().first,m_joueur.obtenirPosition().second)->obtenirExtremiteCarte())
