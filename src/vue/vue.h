@@ -8,6 +8,8 @@
 #include "ecranquete.h"
 #include "ecraninventaire.h"
 #include "ecranquetejoueur.h"
+#include "ecranrecapitulatifnuit.h"
+#include "ecranpremierejournee.h"
 
 #include <iostream>
 
@@ -25,6 +27,8 @@ private:
     EcranChoixPersonnage* m_ecranChoixPersonnage;
     EcranQuete* m_ecranChoixQuete;
     EcranQueteJoueur* m_ecranQueteJoueur;
+    EcranPremiereJournee* m_ecranPremiereJournee;
+    EcranRecapitulatifNuit* m_ecranRecapitulatifNuit;
 
     Controleur* m_controleur;
 
