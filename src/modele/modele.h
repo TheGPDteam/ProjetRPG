@@ -21,10 +21,11 @@ private:
     std::string m_nomPartie;
     int m_deplacementDepuisDernierCombat;
 
-    Humain* m_nouvelArrivant;
 
     bool testerDeplacement(Direction &dir);
 public:
+    Humain* m_nouvelArrivant;
+
     Modele();
     void premiereJournee();//TO-DO
     Humain journeeSuivante();//TO-DO

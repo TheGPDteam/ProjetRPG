@@ -23,8 +23,6 @@ public :
 
     void deroulementJournee();
 
-    void miseAJourVue(); //TO-DO
-
     void chargerSauvegarde(std::string nomSauvegarde);
 
     void sauvegarderModele();
@@ -33,6 +31,8 @@ public :
     void deplacementJoueur(Direction dir);
 
     Modele* obtenirModele();
+
+    void choixNouvelArrivant(bool choix);
 };
 
 #endif

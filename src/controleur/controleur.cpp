@@ -17,11 +17,6 @@ void Controleur::definirVue(Vue *vue)
     m_vue = vue;
 }
 
-void Controleur::miseAJourVue()
-{
-    // TO-DO
-}
-
 void Controleur::deplacementJoueur(Direction dir)
 {
     m_modele->deplacement(dir);
@@ -36,4 +31,17 @@ void Controleur::nouvellePartie(){
 
 Modele* Controleur::obtenirModele(){
     return m_modele;
+}
+
+/**
+ * @brief Permet de reagir au chois de l'utilisateur à propos d'un nouvel arrivant
+ * @param choix Le choix de l'utilisateur à propos du nouvel arrivant ; True si acceptation ; False si non
+ */
+void Controleur::choixNouvelArrivant(bool choix)
+{
+    if(choix)
+    {
+        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->m_nouvelArrivant);
+        m_modele->m_nouvelArrivant = nullptr;
+    }
 }
