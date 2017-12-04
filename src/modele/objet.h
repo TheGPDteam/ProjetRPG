@@ -21,7 +21,7 @@ public:
     void definirNom(const std::string &nom);
     std::string obtenirDescription() const;
     void definirDescription(const std::string &description);
-    virtual std::vector<std::string> serialiser() const;
+    virtual std::string serialiser() const;
 };
 
 #endif

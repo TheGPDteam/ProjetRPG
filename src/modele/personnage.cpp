@@ -109,7 +109,7 @@ unsigned short Personnage::obtenirDegats()
 //! \return Vecteur Vide
 //!
 
-std::vector<std::string> Personnage::serialiser() const
+std::string Personnage::serialiser() const
 {
     return {};
 }

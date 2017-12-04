@@ -244,20 +244,25 @@ Quete* Joueur::obtenirQuete() {
     return &m_queteJoueur;
 }
 
-std::vector<std::string> Joueur::serialiser() const
+//!
+//! \brief Serialise les données de la classe Joueur
+//! \return Les données de la classe joueur au format XML
+//! \date 12/11/17
+//! \author nlesne
+//! \version 0.2
+//!
+
+std::string Joueur::serialiser() const
 {
-    std::string pos = m_position.first + ";" + m_position.second;
-    std::vector<std::string> donnees_joueur{pos,m_nom};
-
-    std::vector<std::string> donnees_campement {m_camp->serialiser()};
-    std::vector<std::string> donnees_equipe{m_equipe->serialiser()};
-    std::vector<std::string> donnees_personnage{m_personnageJoueur.serialiser()};
-    std::vector<std::string> donnees_inventaire{m_inventaireJoueur->serialiser()};
-
-    donnees_joueur.insert(donnees_campement.end(),donnees_campement.begin(),donnees_campement.end());
-    donnees_joueur.insert(donnees_joueur.end(),donnees_equipe.begin(),donnees_equipe.end());
-    donnees_joueur.insert(donnees_joueur.end(),donnees_personnage.begin(),donnees_personnage.end());
-    donnees_joueur.insert(donnees_joueur.end(),donnees_inventaire.begin(),donnees_inventaire.end());
-
-    return donnees_joueur;
+    return "<Joueur>\n"
+            "   <NomJoueur>\n" + m_nom + "\n</NomJoueur>\n"
+            + m_equipe->serialiser()
+            +
+            "   <PersonnageJoueur>\n"
+            + m_personnageJoueur.serialiser()
+            +
+            "   \n</PersonnageJoueur>\n"
+            + m_inventaireJoueur->serialiser()
+            +
+            "</Joueur>\n";
 }

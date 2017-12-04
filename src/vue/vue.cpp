@@ -10,8 +10,8 @@
 //! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
 //!
 
-Vue::Vue()
-{    
+Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
+{
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
         std::cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
@@ -21,16 +21,15 @@ Vue::Vue()
     m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", NULL);
 
-    m_typeEcran = MenuPrincipal;
+    m_typeEcran = TypeEcran::MenuPrincipal;
 
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
-    m_jeuPrincipal = new EcranJeuPrincipal();
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ChoixQuete = new EcranQuete();
-    m_QueteJoueur = new EcranQueteJoueur();
+    m_ecranChoixQuete = new EcranQuete();
+    m_ecranQueteJoueur = new EcranQueteJoueur();
     m_ecranPremiereJournee = new EcranPremiereJournee();
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
 
@@ -52,9 +51,14 @@ Vue::Vue()
 void Vue::definirControleur(Controleur *controleur)
 {
     m_controleur=controleur;
+    m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixQuete);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteJoueur);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
@@ -79,39 +83,67 @@ void Vue::affichageVue()
 {
     switch(m_typeEcran)
     {
-    case MenuPrincipal:
+    case TypeEcran::MenuPrincipal:{
         afficherEcran(m_menuPrincipal);
         break;
-    case JeuPrincipal:
+    }
+    case TypeEcran::ChasseJoueur:{
+        Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
+        Quete q("Chasse","Chasse les zombies",10,100,a);
+        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
-    case Equipe:
+    }
+    case TypeEcran::RecolteJoueur:{
+        Vivre* v = new Vivre("steak","steak",15);
+        Quete q("Récolte","fais à manger!",10,100,v);
+        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+        afficherEcran(m_jeuPrincipal);
+        break;
+    }
+    case TypeEcran::JeuPrincipal:{
+        afficherEcran(m_jeuPrincipal);
+        break;
+    }
+    case TypeEcran::Equipe:{
         afficherEcran(m_ecranEquipe);
         break;
-    case Inventaire:
+    }
+    case TypeEcran::Inventaire:{
         afficherEcran(m_ecranInventaire);
         break;
-    case ChoixPersonnage:
+    }
+    case TypeEcran::ChoixPersonnage:{
          afficherEcran(m_ecranChoixPersonnage);
          break;
-    case ChoixQuete:
-        afficherEcran(m_ChoixQuete);
+    }
+    case TypeEcran::ChoixQuete:{
+        afficherEcran(m_ecranChoixQuete);
         break;
-    case PopUpJoueur:
-        afficherEcran(m_QueteJoueur);
+    }
+    case TypeEcran::PopUpJoueur:{
+        afficherEcran(m_ecranQueteJoueur);
         break;
-    case PremiereJournee:
+    }
+      case TypeEcran::PremiereJournee:
+        {
         afficherEcran(m_ecranPremiereJournee);
         break;
-    case RecapitulatifNuit:
+        }
+      case TypeEcran::RecapitulatifNuit:
+        {
         afficherEcran(m_ecranRecapitulatifNuit);
         break;
-    case Quitter:
+    }
+    case  TypeEcran::Quitter:
+        {
         m_quitterJeu = true;
         break;
-    default:
+    }
+    default:{
         std::cout << "Erreur d'initialisation du type d'affichage !" << std::endl;
         break;
+    }
     }
 
     if(!m_quitterJeu) // Sans cette condition segfault à cause du SDL_Quit() de gestionEvenementJoueur

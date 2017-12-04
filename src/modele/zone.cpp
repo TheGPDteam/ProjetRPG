@@ -38,11 +38,11 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     : m_largeur{largeur},
       m_hauteur{longueur}
 {
-    for (int i=0; i<fichier.size();++i)
+    for (unsigned int i=0; i<fichier.size();++i)
     {
         std::vector<int> valeursTuiles;
         ligne2Tuile(fichier,valeursTuiles,i);
-        for (int j=0; j<valeursTuiles.size();++j)
+        for (unsigned int j=0; j<valeursTuiles.size();++j)
         {
             if ((valeursTuiles[j]/6) == 0)
             {
@@ -233,7 +233,6 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
 
 void Zone::ajouterObjets(int nbObjets)
 {
-    srand(time(NULL));
     for (int i=0;i<nbObjets;++i)
     {
         int posX = rand() % m_largeur;

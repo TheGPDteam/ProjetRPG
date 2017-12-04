@@ -27,7 +27,7 @@ public:
     std::set<Personnage *>::iterator end(){
         return m_personnages.end();
     }
-    std::vector<std::string> serialiser() const;
+    std::string serialiser() const;
 };
 
 #endif

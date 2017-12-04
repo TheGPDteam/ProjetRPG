@@ -4,6 +4,7 @@
 #include "personnage.h"
 #include "equipe.h"
 #include "vivre.h"
+#include "humain.h"
 #include <vector>
 #include <string>
 
@@ -17,13 +18,19 @@ private:
     Equipe m_equipeChasse;
 public:
     Campement();
+
     void ajouterPersonne(Personnage *perso, Equipe *equipe);
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
     void consommerVivre(unsigned short nbVivresConsommes);
+    int obtenirConsommation() ;
+
+    std::set<Personnage*> obtenirNonAttribuees();
+
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();
-    std::vector<std::string> serialiser() const;
+
+    std::string serialiser() const;
     void charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte);
 };
 

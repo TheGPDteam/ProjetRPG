@@ -26,13 +26,12 @@ void Controleur::deplacementJoueur(Direction dir)
 {
     m_modele->deplacement(dir);
 }
-
 void Controleur::deroulementJournee(){
     m_modele->obtenirTemps()->obtenirTempsRestant();
 }
 
 void Controleur::nouvellePartie(){
-
+    m_modele->premiereJournee();
 }
 
 Modele* Controleur::obtenirModele(){

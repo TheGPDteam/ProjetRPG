@@ -83,15 +83,17 @@ void Statistique::augmenter(int valeur)
 }
 
 //! \brief serialise les attributs de la classe Statistique
-//! \author parMarius
+//! \author parMarius,nlesne
 //! \date 19/10/17
-//! \version 1.0
+//! \version 0.2
 //!
 
 
-std::vector<std::string> Statistique::serialiser() const{
-    std::vector<std::string> donnees = {std::to_string(m_statActuelle)};
-    return donnees;
+std::string Statistique::serialiser() const{
+    return "<Statistique>\n"
+            "   <Actuelle>\n" + std::to_string(m_statActuelle) + "\n</Actuelle>\n"
+            "   <Maximum>\n" + std::to_string(m_STATMAX) + "\n</Maximum>\n"
+            "</Statistique>\n";
 }
 
 //! \brief charge les attribut de la classe Statistique

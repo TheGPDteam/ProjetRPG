@@ -122,14 +122,18 @@ void Niveau::niveauSuperieur()
 }
 
 //! \brief serialise les attributs de la classe niveau
-//! \author parMarius
+//! \author parMarius,nlesne
 //! \date 19/10/17
-//! \version 1.0
+//! \version 0.2
 //!
+std::string Niveau::serialiser() const{
+    return "<Niveau>\n"
+            "   <NiveauActuel>\n" + std::to_string(m_niveauActuel) + "\n</NiveauActuel>\n"
+            "   <NiveauMax>\n" + std::to_string(m_NIVEAUMAX) + "\n</NiveauMax>\n"
+            "   <ExperienceActuelle>\n" + std::to_string(m_pointsExperienceActuels) + "\n</ExperienceActuelle>\n"
+            "   <ExperiencePourNiveauSuivant>\n" + std::to_string(m_pointsExperiencePourNiveauSuivant) + "\n</ExperiencePourNiveauSuivant>\n"
+            "</Niveau>\n";
 
-std::vector<std::string> Niveau::serialiser() const{
-    std::vector<std::string> donnees = {std::to_string(m_niveauActuel), std::to_string(m_pointsExperienceActuels), std::to_string(m_pointsExperiencePourNiveauSuivant)};
-        return donnees;
 }
 
 //! \brief charger les attributs de la classe Niveau

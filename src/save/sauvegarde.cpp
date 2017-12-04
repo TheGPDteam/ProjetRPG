@@ -1,34 +1,35 @@
 #include "sauvegarde.h"
 
-int Sauvegarde::sauvegarderModele(Modele *modele)
+void Sauvegarde::sauvegarderModele(Modele *modele)
 {
     #ifdef __MINGW32__
     if (!mkdir("save"))
     #elif __linux__
-    if (!mkdir("save", 0777))
+    if (mkdir("save", 0777) == 0)
     #endif
     {
         std::cerr << "Dossier créé !" << std::endl;
     }
 
-    TiXmlDocument doc("save/save.xml");
-    TiXmlHandle manipulateur(&doc);
+    std::ofstream fichierSauvegarde("save/Modele.xml",std::ios::out | std::ios::trunc);
 
-    TiXmlElement *elem = new TiXmlElement("Sauvegarde");
-    doc.LinkEndChild(elem);
+    if (fichierSauvegarde.is_open())
+    {
+        fichierSauvegarde << EN_TETE_XML+"\n";
+        fichierSauvegarde << modele->serialiser();
+        fichierSauvegarde.close();
+    }
+    else
+        std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
+}
 
-    elem->SetAttribute("personnage", "statistiques");
+void Sauvegarde::chargerModele(Modele* modele,std::string chemin)
+{
+    std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
 
-    TiXmlElement *stats = new TiXmlElement("statistiques");
-    elem->LinkEndChild(stats);
+    if (fichierSauvegarde.is_open())
+    {
 
-    stats->SetAttribute("Niveau", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirNiveau().obtenirNiveauActuel()).c_str());
-    stats->SetAttribute("Vie", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur()).c_str());
-    stats->SetAttribute("Force", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirForce()->obtenirValeur()).c_str());
-    stats->SetAttribute("Intelligence", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirIntelligence()->obtenirValeur()).c_str());
-    stats->SetAttribute("Vitesse", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVitesse()).c_str());
+    }
 
-    doc.SaveFile("save/save.xml");
-
-    return 0;
 }

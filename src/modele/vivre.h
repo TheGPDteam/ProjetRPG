@@ -16,9 +16,10 @@ private:
 public:
     Vivre();
     Vivre(std::string nom, std::string description, int valeurNutritive);
+    ~Vivre() override = default;
     int obtenirValeurNutritive() const;
     void definirValeurNutritive(const int &valeurNutritive);
-    std::vector<std::string> serialiser() const override;
+    std::string serialiser() const override;
 };
 
 #endif

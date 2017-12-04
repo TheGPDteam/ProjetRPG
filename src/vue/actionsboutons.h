@@ -22,7 +22,12 @@ public:
 
     TypeEcran boutonChoixJoueur() const;
 
+    TypeEcran boutonRecolteJoueur() const;
+
+    TypeEcran boutonChasseJoueur() const;
+
     TypeEcran boutonNouvellePartie() const;
+
 
 };
 

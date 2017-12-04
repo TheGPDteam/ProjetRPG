@@ -25,6 +25,7 @@ protected:
     unsigned short m_coutEntretien;
     Niveau m_niveau;
     Arme* m_arme;
+    int m_consommation;
 public:
     Humain();
     Competence obtenirChasse() const;
@@ -39,6 +40,8 @@ public:
     unsigned short obtenirDegats() override;
     unsigned short obtenirVitesse() override;
     void augmenterExperience(int exp);
+    int obtenirConsommation() const;
+    std::string serialiser() const override;
 };
 
 #endif

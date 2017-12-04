@@ -4,23 +4,23 @@
 #include <utility>
 
 EcranQueteJoueur::EcranQueteJoueur() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-    m_nomFenetre("Que Voulez vous faire ?", SDL_Color{255,255,255}, POLICE_COLLEGED, 20,
+    m_nomFenetre("Que Voulez vous faire ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE-HEIGHT_BOUTON_NORMAL))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-15, (HEIGHT_FENETRE_PRINCIPALE/2));
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonJeuPrincipal);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonRecolteJoueur);
 
     coordB = {(WIDTH_FENETRE_PRINCIPALE/2)+15, (HEIGHT_FENETRE_PRINCIPALE/2)};
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonJeuPrincipal);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonChasseJoueur);
 
     int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
     int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
 
     m_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
-    m_bordure = {m_fond.x-2,m_fond.y-2,m_fond.w+4,m_fond.h+4};
+    m_bordure = {m_fond.x-2,m_fond.y-2  ,m_fond.w+4,m_fond.h+4};
 
 }
 

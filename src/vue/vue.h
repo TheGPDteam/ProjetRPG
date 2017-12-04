@@ -1,13 +1,12 @@
 #ifndef vue_h
 #define vue_h
-
+#include "controleur/controleur.h"
 #include "ecranmenuprincipal.h"
 #include "ecranjeuprincipal.h"
 #include "ecranequipe.h"
 #include "ecranchoixpersonnage.h"
-#include "ecraninventaire.h"
-#include "controleur/controleur.h"
 #include "ecranquete.h"
+#include "ecraninventaire.h"
 #include "ecranquetejoueur.h"
 #include "ecranrecapitulatifnuit.h"
 #include "ecranpremierejournee.h"
@@ -26,8 +25,8 @@ private:
     EcranEquipe* m_ecranEquipe;
     EcranInventaire* m_ecranInventaire;
     EcranChoixPersonnage* m_ecranChoixPersonnage;
-    EcranQuete* m_ChoixQuete;
-    EcranQueteJoueur* m_QueteJoueur;
+    EcranQuete* m_ecranChoixQuete;
+    EcranQueteJoueur* m_ecranQueteJoueur;
     EcranPremiereJournee* m_ecranPremiereJournee;
     EcranRecapitulatifNuit* m_ecranRecapitulatifNuit;
 

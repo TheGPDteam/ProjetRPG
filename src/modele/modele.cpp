@@ -17,9 +17,16 @@ using namespace std;
 //!
 
 Modele::Modele()
-    : m_joueur{Joueur{Quete("Un bouquet pour ma mère","Ramasser des fleurs", 10, 50, new Vivre())}},
-      m_deplacementDepuisDernierCombat{0}
+    : m_joueur{Joueur{Quete("Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
+                            0, 50, new Vivre())}},
+      m_deplacementDepuisDernierCombat{0},
+      m_nouvelArrivant(nullptr)
 {
+    // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
+    // le calcul se fait pour plusieurs jours à l'avance.
+    m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()
+                                                            *m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation()+1)));
+    // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 
 //!
@@ -97,12 +104,21 @@ void Modele::deplacement(Direction dir)
         bool veutChanger = false;
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
-        if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL)
+        if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL && !obtenirJoueur()->obtenirInventaireJoueur()->estPlein())
         {
             m_joueur.obtenirInventaireJoueur()->ajouterObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
             m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
             (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
 
+            /*****************************************/
+           /*Partie a changer car segmentation fault*/
+          /*****************************************/
+            //Objet* obj = m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first;
+            //Vivre* v = dynamic_cast<Vivre*>(obj);
+            //m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+            //                                               m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+            //                                               v->obtenirValeurNutritive());
+            //Modification objectif (verifier quete recolte)
         }
         if (m_carte.obtenirZoneActive()->obtenirTuile(m_joueur.obtenirPosition().first,m_joueur.obtenirPosition().second)->obtenirExtremiteCarte())
         {
@@ -180,13 +196,13 @@ void Modele::deplacement(Direction dir)
 //! on part ensuite en quete pendant 10 minutes
 //!
 
-void Modele::journeeSuivante()
+Humain Modele::journeeSuivante()
 {
-    //Un survivant arrive
+    m_nouvelArrivant = new Humain();
 
+    m_temps.reinitialiserTemps();
 
-    //On part en quête
-    /*Code à faire*/
+    return *m_nouvelArrivant;
 }
 
 //!
@@ -218,14 +234,20 @@ void Modele::lancerCombat()
 //! \brief Permet la gestion de la premiere journee, differente des autres
 //! \author mleothaud
 //! \date 17/11/16
-//! \version 0.0.1
+//! \version 0.1
 //!
-//! Doit permettre l'affichage d'un texte expliquant le scénario
+//! Création d'une équipe de sept personnages
 //!
 
 void Modele::premiereJournee()
 {
-    //TO-DO
+    for(int i=0 ; i<7 ; i++) {
+        Humain *h = new Humain();
+        m_campement.obtenirNonAttribuees().insert(h);
+    }
+
+
+    m_temps.reinitialiserTemps();
 }
 
 //!
@@ -345,4 +367,22 @@ Joueur* Modele::obtenirJoueur()
 void Modele::definirJoueur(Joueur joueur)
 {
     m_joueur = joueur;
+}
+
+//!
+//! \brief Serialise les attributs du modèle
+//! \return Chaine contenant les attributs du modèle au format XML
+//! \author nlesne
+//! \date 12/11/17
+//! \version 0.1
+//!
+
+std::string Modele::serialiser() const
+{
+    return "<Modele>\n"
+            + m_campement.serialiser()
+            + m_joueur.serialiser()
+            +
+            "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n"
+            "</Modele>\n";
 }

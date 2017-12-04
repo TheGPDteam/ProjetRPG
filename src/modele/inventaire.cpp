@@ -136,19 +136,22 @@ bool Inventaire::estPlein() const
     return (obtenirNombreObjet() == this->obtenirTailleMax());
 }
 
-std::vector<std::string> Inventaire::serialiser() const
+//!
+//! \brief Serialise les objets de l'inventaire
+//! \author nlesne
+//! \date 12/11/17
+//! \return Chaine contenant l'inventaire sous format XML
+//! \version 0.1
+//!
+//! Convertit les données des objets de l'inventaire au format XML
+//!
+
+std::string Inventaire::serialiser() const
 {
-    std::vector<std::string> donnees_inventaire;
-    std::vector<std::string> donnees_objets;
-    std::vector<std::string> donnees_objet;
-
+    std::string donnees_objets = "<Inventaire>\n";
     for (Objet* obj : m_objets)
-    {
-        donnees_objet = obj->serialiser();
-        donnees_objets.insert(donnees_objets.end(),donnees_objet.begin(),donnees_objet.end());
-    }
-    donnees_objets.insert(donnees_inventaire.end(),donnees_objets.begin(),donnees_objets.end());
-    donnees_inventaire.push_back(std::to_string(m_tailleMaximum));
+        donnees_objets += obj->serialiser();
+    donnees_objets += "\n</Inventaire>\n";
 
-    return donnees_inventaire;
+    return donnees_objets;
 }

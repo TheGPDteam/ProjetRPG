@@ -12,13 +12,12 @@ EcranQuete::EcranQuete() : m_methodeVerificationCliqueSourisSurBouton(&Dictionna
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonChoixJoueur);
 
-
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
     m_fondRecolte = {20,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondChasse = {WIDTH_FENETRE_PRINCIPALE/2+20-10,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
-    m_fondDescriptionPerso = {m_fondPerso.x + 10, m_fondPerso.y + 10, WIDTH_FENETRE_PRINCIPALE - m_fondPerso.x * 3, 40};
-    m_fondDescriptionChasse = {m_fondChasse.x + 10, m_fondChasse.y + 10, m_fondChasse.w -20, 40};
-    m_fondDescriptionRecolte = {m_fondRecolte.x + 10, m_fondRecolte.y + 10, m_fondRecolte.w -20, 40};
+    m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
+    m_fondDescriptionChasse = {WIDTH_FENETRE_PRINCIPALE/2+20, HEIGHT_FENETRE_PRINCIPALE/2+30, WIDTH_FENETRE_PRINCIPALE/2-20*2-10, 40};
+    m_fondDescriptionRecolte = {30, HEIGHT_FENETRE_PRINCIPALE/2+30, WIDTH_FENETRE_PRINCIPALE/2-20*2-10, 40};
 
 
     m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 10));

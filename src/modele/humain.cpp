@@ -13,7 +13,6 @@
 
 std::string donnerNom(std::string nomFichier)
 {
-    srand(time(NULL));
     std::vector<std::string> noms;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);
@@ -197,9 +196,9 @@ Niveau Humain::obtenirNiveau()
 
 unsigned short Humain::obtenirDegats()
 {
-    bool coupCritique = (rand() % 101) < ((m_CHANCE_CC_BASE + (2) * (m_intelligence.obtenirValeur())) * m_arme->obtenirChance()); // ([Chance CC de Base]​ + [Multiplicateur CC]​ * [Point d’intelligence]) * CC Arme
+    bool coupCritique = (rand() % 100) < ((m_CHANCE_CC_BASE + (2) * (m_intelligence.obtenirValeur())) * m_arme->obtenirChance());
     if(coupCritique){
-        return m_force.obtenirValeur() + (m_force.obtenirValeur() / 2);
+        return m_force.obtenirValeur() * 1.5;
     }
     else{
         return m_force.obtenirValeur();
@@ -240,3 +239,67 @@ void Humain::augmenterExperience(int exp)
         this->m_vitesse.augmenter(1);
     }
 }
+
+//!
+//! \brief Retourne la consommation d'un humain
+//! \return Consommation d'un humain
+//! \author adeguilhem
+//! \date 20/11/2017
+//! \version 1.0
+//!
+int Humain::obtenirConsommation() const
+{
+    return m_consommation;
+}
+
+//!
+//! \brief Serialise la classe Humain
+//! \return Chaine contenant les données de l'objet
+//! \author nlesne
+//! \date 13/11/17
+//! \version 0.2
+//!
+
+std::string Humain::serialiser() const
+{
+    std::string genre;
+    if (m_genre == Genre::Homme)
+        genre = "Homme";
+    else if (m_genre == Genre::Femme)
+        genre = "Femme";
+    else
+        genre = "Inconnu";
+
+    return "<Humain>\n"
+            "   <Nom>\n" + m_nom + "\n</Nom>\n"
+            "   <Prenom>\n" + m_prenom + "\n</Prenom>\n"
+            "   <Genre>\n" + genre + "\n</Genre>\n"
+            "   <Force>\n"
+            + m_force.serialiser()
+            +
+            "   </Force>\n"
+            "   <Intelligence>\n"
+            + m_intelligence.serialiser()
+            +
+            "   </Intelligence>\n"
+            "   <Vitesse>\n"
+            + m_vitesse.serialiser()
+            +
+            "   </Vitesse>\n"
+            + m_vie.serialiser()
+            +
+            "   <CompetenceChasse>\n"
+            + m_chasse.serialiser()
+            +
+            "  </CompetenceChasse>\n"
+            "   <CompetenceRecolte>\n"
+            + m_recolte.serialiser()
+            +
+            "   </CompetenceRecolte>\n"
+            "   <CoutEntretien>\n" + std::to_string(m_coutEntretien) + "\n</CoutEntretien>\n"
+            + m_niveau.serialiser()
+            + m_arme->serialiser()
+            +
+            "</Humain>\n";
+}
+

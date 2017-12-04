@@ -93,7 +93,11 @@ void Objet::definirNom(const std::string &nom)
     m_nom = nom;
 }
 
-std::vector<std::string> Objet::serialiser() const
+std::string Objet::serialiser() const
 {
-    return {};
+    return "<Objet>\n"
+            "   <Nom>\n" + m_nom + "\n</Nom>\n"
+            "   <Description>\n" + m_description + "\n</Description>\n"
+            "</Objet>\n";
+
 }

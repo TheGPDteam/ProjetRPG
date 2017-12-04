@@ -126,17 +126,18 @@ void Vie::augmenter(int valeur)
 }
 
 //! \brief serialise les attributs de la classe Vie
-//! \author parMarius
+//! \author Marius,nlesne
 //! \date 19/10/17
-//! \version 1.0
+//! \version 0.2
 //!
 
-std::vector<std::string> Vie::serialiser() const{
-    std::vector<std::string> donnees = {std::to_string(m_valeurMax)};
-    return donnees;
+std::string Vie::serialiser() const{
+    return "<Vie>\n"
+            "<Maximum>\n" + std::to_string(m_valeurMax) + "\n</Maximum>\n"
+            "</Vie>\n";
 }
 //! \brief charge les attributs de la classe Vie
-//! \author parMarius
+//! \author Marius
 //! \date 19/10/17
 //! \version 1.0
 //!

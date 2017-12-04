@@ -21,12 +21,13 @@ private:
     std::string m_nomPartie;
     int m_deplacementDepuisDernierCombat;
 
+    Humain* m_nouvelArrivant;
+
     bool testerDeplacement(Direction &dir);
 public:
     Modele();
     void premiereJournee();//TO-DO
-    void journeeSuivante();//TO-DO
-    Humain* arriveeNouveauSurvivant();
+    Humain journeeSuivante();//TO-DO
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
@@ -43,6 +44,7 @@ public:
     void definirCombat(Combat combat);
     Joueur *obtenirJoueur() ;
     void definirJoueur(Joueur joueur);
+    std::string serialiser() const;
 };
 
 #endif

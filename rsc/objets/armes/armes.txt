@@ -1,7 +1,7 @@
-Couteau/150/100/150/Utile pour le corps à corps
-Batte de Baseball/140/85/180/Utile pour le corps
-Club de golf/140/90/170/aaaa
-Rouleau a patisserie/135/85/120/aaaa
+Couteau/150/100/150/Arme de survie basique, simple à utiliser
+Batte de Baseball/140/85/180/aaaa
+Club de golf/140/90/170/Envoie vos ennemis dans le trou
+Rouleau a patisserie/135/85/120/Punissez vos ennemis pour avoir piqué dans la reserve
 Pistolet/210/150/150/aaaa
 Fusil/300/30/200/aaaa
 Mitraillette/250/180/120/
