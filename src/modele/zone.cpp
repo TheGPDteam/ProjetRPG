@@ -249,6 +249,19 @@ void Zone::ajouterObjets(int nbObjets)
         }
 
         //Ajouter l'objet sur la tuile /*A revoir pour un objet aléatoire*/
-        m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
+        int typeObj = rand()%3;
+        switch (typeObj) {
+        case 0:
+            m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+            break;
+        case 1:
+            m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+            break;
+        case 2:
+            m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
+            break;
+        default:
+            break;
+        }
     }
 }

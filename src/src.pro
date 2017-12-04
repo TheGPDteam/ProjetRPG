@@ -103,4 +103,5 @@ HEADERS += \
     observateur.h \
     observable.h \
     vue/ecranpremierejournee.h \
-    vue/ecranrecapitulatifnuit.h
+    vue/ecranrecapitulatifnuit.h \
+    modele/typeobjet.h

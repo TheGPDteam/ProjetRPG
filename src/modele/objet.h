@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "typeobjet.h"
 
 //!
 //! \brief Classe de gestion de l'Objet
@@ -22,6 +23,7 @@ public:
     std::string obtenirDescription() const;
     void definirDescription(const std::string &description);
     virtual std::string serialiser() const;
+    virtual TypeObjet obtenirType() const;
 };
 
 #endif

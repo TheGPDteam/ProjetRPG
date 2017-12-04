@@ -20,6 +20,7 @@ public:
     int obtenirValeurNutritive() const;
     void definirValeurNutritive(const int &valeurNutritive);
     std::string serialiser() const override;
+    TypeObjet obtenirType() const override;
 };
 
 #endif
