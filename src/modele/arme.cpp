@@ -35,7 +35,6 @@ Arme::Arme(unsigned short degats, std::string nom, std::string description)
 Arme::Arme()
     :Objet("","")
 {
-    srand(time(NULL));
     std::vector<std::string> lignesArmes;
 
     std::ifstream fichier("./../rsc/objets/armes/armes.txt", std::ifstream::in);

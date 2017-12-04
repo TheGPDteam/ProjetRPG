@@ -13,7 +13,6 @@
 
 std::string donnerNom(std::string nomFichier)
 {
-    srand(time(NULL));
     std::vector<std::string> noms;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);

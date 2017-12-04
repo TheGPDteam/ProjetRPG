@@ -33,7 +33,6 @@ void Vivre::definirValeurNutritive(const int &valeurNutritive)
 void Vivre::chargerVivre(std::string nomFichier)
 {
     //Lire dans le fichier vivre.txt
-    srand(time(NULL));
     std::vector<std::string> lignesAliments;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);

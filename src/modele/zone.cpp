@@ -233,7 +233,6 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
 
 void Zone::ajouterObjets(int nbObjets)
 {
-    srand(time(NULL));
     for (int i=0;i<nbObjets;++i)
     {
         int posX = rand() % m_largeur;

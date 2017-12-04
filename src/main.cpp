@@ -9,7 +9,6 @@
 #include "modele/modele.h"
 #include "controleur/controleur.h"
 
-
 void mainloop_func(void* c){
     Vue* vue= (Vue*) c;
     while (!vue->getFermerJeu())
@@ -28,8 +27,7 @@ void mainloop_func(void* c){
 //! Contient la boucle de jeu et l'initialisation des classes principales
 //!
 int main (){
-
-
+    srand(time(NULL));
     Vue* vue = new Vue(); //On instancie la vue
     Modele* modele= new Modele(); // On instancie le modele
     Controleur controleur{vue,modele}; // On instancie le controleur
