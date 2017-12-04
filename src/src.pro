@@ -8,6 +8,7 @@ INCLUDEPATH+=/usr/include/SDL/
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
 SOURCES += \
+    modele/equipe.cpp \
     vue/vue.cpp \
     controleur/controleur.cpp \
     modele/modele.cpp \
@@ -25,7 +26,6 @@ SOURCES += \
     modele/carte.cpp \
     modele/combat.cpp \
     modele/competence.cpp \
-    modele/equipe.cpp \
     modele/humain.cpp \
     modele/inventaire.cpp \
     modele/joueur.cpp \
@@ -54,8 +54,8 @@ include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    vue/vue.h \
     controleur/controleur.h \
+    modele/equipe.h \
     modele/modele.h \
     modele/statistique.h \
     modele/temps.h \
@@ -71,14 +71,14 @@ HEADERS += \
     modele/carte.h \
     modele/combat.h \
     modele/competence.h \
-    modele/equipe.h \
     modele/humain.h \
     modele/inventaire.h \
     modele/joueur.h \
     modele/actioncombat.h \
     modele/niveau.h \
-    direction.h \
     modele/zombie.h \
+    save/sauvegarde.h \
+    vue/vue.h \
     vue/bouton.h \
     vue/chargementfeuilledesprite.h \
     vue/ecranmenuprincipal.h \
@@ -91,14 +91,12 @@ HEADERS += \
     vue/constantesbouton.h \
     vue/ecrangeneral.h \
     vue/ecranjeuprincipal.h \
-    observateur.h \
-    observable.h \
     vue/dictionnairedeboutons.h \
-    save/sauvegarde.h \
     vue/ecranequipe.h \
     vue/ecraninventaire.h \
     vue/policetexte.h \
     vue/ecranchoixpersonnage.h \
     vue/ecranquetejoueur.h \
-    vue/ecranquetejoueur.h \
-    vue/ecranquetejoueur.h
+    direction.h \
+    observateur.h \
+    observable.h

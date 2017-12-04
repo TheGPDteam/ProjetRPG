@@ -10,7 +10,7 @@
 //! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
 //!
 
-Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
+Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
@@ -73,49 +73,49 @@ void Vue::affichageVue()
 {
     switch(m_typeEcran)
     {
-    case MenuPrincipal:{
+    case TypeEcran::MenuPrincipal:{
         afficherEcran(m_menuPrincipal);
         break;
     }
-    case ChasseJoueur:{
+    case TypeEcran::ChasseJoueur:{
         Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
         Quete q("Chasse","Chasse les zombies",10,100,a);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case RecolteJoueur:{
+    case TypeEcran::RecolteJoueur:{
         Vivre* v = new Vivre("steak","steak",15);
         Quete q("Récolte","fais à manger!",10,100,v);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case JeuPrincipal:{
+    case TypeEcran::JeuPrincipal:{
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case Equipe:{
+    case TypeEcran::Equipe:{
         afficherEcran(m_ecranEquipe);
         break;
     }
-    case Inventaire:{
+    case TypeEcran::Inventaire:{
         afficherEcran(m_ecranInventaire);
         break;
     }
-    case ChoixPersonnage:{
+    case TypeEcran::ChoixPersonnage:{
          afficherEcran(m_ecranChoixPersonnage);
          break;
     }
-    case ChoixQuete:{
+    case TypeEcran::ChoixQuete:{
         afficherEcran(m_ecranChoixQuete);
         break;
     }
-    case PopUpJoueur:{
+    case TypeEcran::PopUpJoueur:{
         afficherEcran(m_ecranQueteJoueur);
         break;
     }
-    case Quitter:{
+    case TypeEcran::Quitter:{
         m_quitterJeu = true;
         break;
     }

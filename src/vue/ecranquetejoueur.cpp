@@ -20,7 +20,7 @@ EcranQueteJoueur::EcranQueteJoueur() : m_methodeVerificationCliqueSourisSurBouto
     int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
 
     m_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
-    m_bordure = {m_fond.x-2,m_fond.y-2,m_fond.w+4,m_fond.h+4};
+    m_bordure = {m_fond.x-2,m_fond.y-2  ,m_fond.w+4,m_fond.h+4};
 
 }
 
