@@ -22,6 +22,7 @@ private:
     Carte* m_carte;
 
     TexteSDL m_texteObjectif;
+    TexteSDL m_objectif;
     TexteSDL m_nomJoueur;
     TexteSDL m_tempsRestant;
 
