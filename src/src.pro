@@ -48,7 +48,9 @@ SOURCES += \
     vue/ecranequipe.cpp \
     vue/ecraninventaire.cpp \
     vue/ecranchoixpersonnage.cpp \
-    vue/ecranquetejoueur.cpp
+    vue/ecranquetejoueur.cpp \
+    vue/ecranpremierejournee.cpp \
+    vue/ecranrecapitulatifnuit.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -99,4 +101,6 @@ HEADERS += \
     vue/ecranquetejoueur.h \
     direction.h \
     observateur.h \
-    observable.h
+    observable.h \
+    vue/ecranpremierejournee.h \
+    vue/ecranrecapitulatifnuit.h

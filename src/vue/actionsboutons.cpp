@@ -119,5 +119,5 @@ TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 //!
 TypeEcran ActionsBoutons::boutonNouvellePartie() const
 {
-    return PremiereJournee;
+    return TypeEcran::PremiereJournee;
 }

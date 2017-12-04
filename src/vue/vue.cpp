@@ -21,7 +21,7 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
     m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", NULL);
 
-    m_typeEcran = MenuPrincipal;
+    m_typeEcran = TypeEcran::MenuPrincipal;
 
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
