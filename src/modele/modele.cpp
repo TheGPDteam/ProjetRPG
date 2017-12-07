@@ -383,3 +383,8 @@ std::string Modele::serialiser() const
             "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n"
             "</Modele>\n";
 }
+
+void Modele::charger(std::string donnees)
+{
+
+}
