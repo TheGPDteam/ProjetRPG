@@ -13,18 +13,18 @@ private:
     unsigned short m_degats;
     unsigned short m_vitesse;
     unsigned short m_chance;
-	std::string m_nom;
-	std::string m_description;
     void affecterValeurs(std::string ligne);
 public:
     Arme();
     Arme(unsigned short degats, std::string nom, std::string description);
+    ~Arme() override = default;
     unsigned short obtenirDegats() const;
     void definirDegats(const int &degats);
     unsigned short obtenirVitesse();
     unsigned short obtenirChance();
     std::string serialiser() const override;
     void charger(std::vector<std::string> donnees);
+    TypeObjet obtenirType() const override;
 };
 
 #endif

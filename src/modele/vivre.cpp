@@ -33,7 +33,6 @@ void Vivre::definirValeurNutritive(const int &valeurNutritive)
 void Vivre::chargerVivre(std::string nomFichier)
 {
     //Lire dans le fichier vivre.txt
-    srand(time(NULL));
     std::vector<std::string> lignesAliments;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);
@@ -111,4 +110,8 @@ std::string Vivre::serialiser() const
             "   <Description>\n" + m_description + "\n</Description>\n"
             "   <ValeurNutritive>\n" + std::to_string(m_valeurNutritive) + "\n</ValeurNutritive>\n"
             "</Vivre>\n";
+}
+
+TypeObjet Vivre::obtenirType() const {
+    return TypeObjet::Vivre;
 }
