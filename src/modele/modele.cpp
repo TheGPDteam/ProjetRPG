@@ -115,14 +115,14 @@ void Modele::deplacement(Direction dir)
           /*****************************************/
 
             //std::cout << "obj is of type " << typeid(obj).name() << std::endl;
-            TypeObjet to = (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first)->obtenirType();
-            if (to == TypeObjet::Objet) {
+//            TypeObjet to = (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first)->obtenirType();
+//            if (to == TypeObjet::Objet) {
 
-            } else if (to == TypeObjet::Arme) {
+//            } else if (to == TypeObjet::Arme) {
 
-            } else if (to == TypeObjet::Vivre) {
+//            } else if (to == TypeObjet::Vivre) {
 
-            }
+//            }
 
 
             //obj->obtenirType();
