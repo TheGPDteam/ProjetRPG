@@ -218,6 +218,6 @@ void Arme::charger(std::vector<std::string> donnees){
     m_description = donnees[1];
 }
 
-TypeObjet Arme::obtenirType() const {
+TypeObjet Arme::obtenirType() {
     return TypeObjet::Arme;
 }

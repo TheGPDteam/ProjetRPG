@@ -24,7 +24,7 @@ public:
     unsigned short obtenirChance();
     std::string serialiser() const override;
     void charger(std::vector<std::string> donnees);
-    TypeObjet obtenirType() const override;
+    TypeObjet obtenirType() override;
 };
 
 #endif

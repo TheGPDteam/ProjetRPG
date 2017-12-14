@@ -23,7 +23,7 @@ public:
     std::string obtenirDescription() const;
     void definirDescription(const std::string &description);
     virtual std::string serialiser() const;
-    virtual TypeObjet obtenirType() const;
+    virtual TypeObjet obtenirType();
 };
 
 #endif

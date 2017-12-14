@@ -112,6 +112,6 @@ std::string Vivre::serialiser() const
             "</Vivre>\n";
 }
 
-TypeObjet Vivre::obtenirType() const {
+TypeObjet Vivre::obtenirType() {
     return TypeObjet::Vivre;
 }
