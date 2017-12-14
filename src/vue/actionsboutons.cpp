@@ -25,7 +25,7 @@ ActionsBoutons::ActionsBoutons()
 
 TypeEcran ActionsBoutons::boutonJeuPrincipal() const
 {
-    return JeuPrincipal;
+    return TypeEcran::JeuPrincipal;
 }
 
 
@@ -41,7 +41,7 @@ TypeEcran ActionsBoutons::boutonJeuPrincipal() const
 
 TypeEcran ActionsBoutons::boutonQuitter() const
 {
-    return Quitter;
+    return TypeEcran:: Quitter;
 }
 
 
@@ -57,7 +57,7 @@ TypeEcran ActionsBoutons::boutonQuitter() const
 
 TypeEcran ActionsBoutons::boutonInventaire() const
 {
-    return Inventaire;
+    return TypeEcran::Inventaire;
 }
 
 
@@ -73,7 +73,7 @@ TypeEcran ActionsBoutons::boutonInventaire() const
 
 TypeEcran ActionsBoutons::boutonEquipe() const
 {
-    return Equipe;
+    return TypeEcran::Equipe;
 }
 
 
@@ -89,25 +89,39 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 //!
 TypeEcran ActionsBoutons::boutonChoixPersonnage() const
 {
-    return ChoixPersonnage;
+    return TypeEcran::ChoixPersonnage;
 }
 TypeEcran ActionsBoutons::boutonQuete() const
 {
-    return ChoixQuete;
+    return TypeEcran::ChoixQuete;
 }
 TypeEcran ActionsBoutons::boutonChoixJoueur() const
 {
-    return PopUpJoueur;
+    return TypeEcran::PopUpJoueur;
 }
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
-    return ChasseJoueur;
+    return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
-    return RecolteJoueur;
+    return TypeEcran::RecolteJoueur;
+}
+
+//!
+//! \brief Méthode lançant l'affichage de l'écran de l'histoire
+//! @return TypeEcran retourne le nouveau type de l'écran
+//! \author pgutierrez
+//! \date 20/11/17
+//! \version 1.0
+//!
+//! Si un bouton "NouvellePartie" est cliqué alors on retourne le nouveau type de l'écran
+//!
+TypeEcran ActionsBoutons::boutonNouvellePartie() const
+{
+    return TypeEcran::PremiereJournee;
 }
 TypeEcran ActionsBoutons::boutonChoixNom() const
 {
-    return choixNom;
+    return TypeEcran::choixNom;
 }

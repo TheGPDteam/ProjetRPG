@@ -8,7 +8,8 @@
 #include "vue/vue.h"
 #include "modele/modele.h"
 #include "controleur/controleur.h"
-
+#include "modele/equipe.h"
+#include "modele/inventaire.h"
 
 void mainloop_func(void* c){
     Vue* vue= (Vue*) c;
@@ -29,6 +30,7 @@ void mainloop_func(void* c){
 //!
 int main (){
 
+    srand(time(NULL));
     Vue* vue = new Vue(); //On instancie la vue
     Modele* modele= new Modele(); // On instancie le modele
     Controleur controleur{vue,modele}; // On instancie le controleur

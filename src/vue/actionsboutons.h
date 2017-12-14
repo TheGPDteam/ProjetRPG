@@ -28,6 +28,8 @@ public:
 
     TypeEcran boutonChoixNom() const;
 
+    TypeEcran boutonNouvellePartie() const;
+
 };
 
 #endif // ACTIONSBOUTONS_H

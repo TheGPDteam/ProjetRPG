@@ -12,10 +12,8 @@ const int BPP = 32;
 //! \version 0.1
 //!
 
-enum TypeEcran
+enum class TypeEcran
 {
-
-    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage,ChoixQuete,PopUpJoueur,RecolteJoueur, ChasseJoueur , choixNom
-
+    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage, ChoixQuete, PopUpJoueur,RecolteJoueur, ChasseJoueur, RecapitulatifNuit, PremiereJournee,choixNom
 };
 #endif // TYPEECRAN_H

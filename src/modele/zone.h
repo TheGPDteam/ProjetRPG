@@ -6,6 +6,8 @@
 #include <utility>
 #include <string>
 #include "objet.h"
+#include "vivre.h"
+#include "arme.h"
 #include "tuile.h"
 #include "observable.h"
 

@@ -107,6 +107,16 @@ std::string TexteSDL::getTexteStr() const
     return m_texteStr;
 }
 
+int TexteSDL::getHauteurFont() const
+{
+    if (m_texte != nullptr)
+    {
+        return m_texte->h;
+    }
+
+    return 0;
+}
+
 
 //!
 //! \brief Destructeur d'un texte
@@ -123,6 +133,4 @@ TexteSDL::~TexteSDL()
     {
         SDL_FreeSurface(m_texte);
     }
-
-    TTF_Quit();
 }
