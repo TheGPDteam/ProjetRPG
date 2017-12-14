@@ -10,11 +10,11 @@ EcranQueteJoueur::EcranQueteJoueur() : m_methodeVerificationCliqueSourisSurBouto
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-15, (HEIGHT_FENETRE_PRINCIPALE/2));
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonRecolteJoueur);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first + 10, coordB.second + 10)), &ActionsBoutons::boutonRecolteJoueur);
 
     coordB = {(WIDTH_FENETRE_PRINCIPALE/2)+15, (HEIGHT_FENETRE_PRINCIPALE/2)};
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonChasseJoueur);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 10, coordB.second + 10)), &ActionsBoutons::boutonChasseJoueur);
 
     int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
     int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;

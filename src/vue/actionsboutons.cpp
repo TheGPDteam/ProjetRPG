@@ -107,3 +107,7 @@ TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
     return RecolteJoueur;
 }
+TypeEcran ActionsBoutons::boutonChoixNom() const
+{
+    return choixNom;
+}

@@ -27,8 +27,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 {
     //* AJOUT DES BOUTONS *//
 
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB}, &ActionsBoutons::boutonEquipe);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB},&ActionsBoutons::boutonInventaire);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10,coordB.second+10)}, &ActionsBoutons::boutonEquipe);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+10,coordB2.second+10)},&ActionsBoutons::boutonInventaire);
 
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//

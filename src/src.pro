@@ -48,7 +48,9 @@ SOURCES += \
     vue/ecranequipe.cpp \
     vue/ecraninventaire.cpp \
     vue/ecranchoixpersonnage.cpp \
-    vue/ecranquetejoueur.cpp
+    vue/ecranquetejoueur.cpp \
+    vue/ecrannom.cpp \
+    vue/saisir.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -101,4 +103,6 @@ HEADERS += \
     vue/ecranchoixpersonnage.h \
     vue/ecranquetejoueur.h \
     vue/ecranquetejoueur.h \
-    vue/ecranquetejoueur.h
+    vue/ecranquetejoueur.h \
+    vue/ecrannom.h \
+    vue/saisir.h

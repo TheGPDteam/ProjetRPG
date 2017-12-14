@@ -29,7 +29,6 @@ void mainloop_func(void* c){
 //!
 int main (){
 
-
     Vue* vue = new Vue(); //On instancie la vue
     Modele* modele= new Modele(); // On instancie le modele
     Controleur controleur{vue,modele}; // On instancie le controleur

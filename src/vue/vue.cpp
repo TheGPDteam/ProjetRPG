@@ -28,6 +28,7 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
     m_ecranChoixQuete = new EcranQuete();
     m_ecranQueteJoueur = new EcranQueteJoueur();
+    m_ecranNom = new EcranNom();
 }
 
 //!
@@ -113,6 +114,10 @@ void Vue::affichageVue()
     }
     case PopUpJoueur:{
         afficherEcran(m_ecranQueteJoueur);
+        break;
+    }
+    case choixNom:{
+        afficherEcran(m_ecranNom);
         break;
     }
     case Quitter:{
@@ -215,3 +220,7 @@ void Vue::changerEcran(TypeEcran nouvelEcran){
     m_typeEcran = nouvelEcran;
 }
 
+SDL_Surface* Vue::obtenirFenetrePrincipale(){
+    return m_fenetrePrincipale;
+
+}

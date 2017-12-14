@@ -26,6 +26,8 @@ public:
 
     TypeEcran boutonChasseJoueur() const;
 
+    TypeEcran boutonChoixNom() const;
+
 };
 
 #endif // ACTIONSBOUTONS_H
