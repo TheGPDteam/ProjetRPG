@@ -35,7 +35,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
         for(int j = 0;j< 12;j++)
-            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*63),static_cast<Sint16>(j*63),0,0}, SDL_Rect{0,128,64,64}};
+            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*63),static_cast<Sint16>(j*63),0,0}, SDL_Rect{832,0,64,64}};
 }
 
 //!
@@ -156,6 +156,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_spriteObjets.clear();
 
     if(joueur!=nullptr){
+        std::cerr << "MAJ données vue EcranJeuPrincipal carte" << std::endl;
         //recupère la position du joueur sur la carte
         int posX = joueur->obtenirPosition().first-5;
         int posY = joueur->obtenirPosition().second-5;
