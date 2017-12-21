@@ -36,7 +36,7 @@ private:
     void initZone();
     void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
-
+    void initialiserSousTypeTuile();
 public:
 
     Zone()=default;

@@ -6,10 +6,10 @@
 #include <string>
 #include <iostream>
 
-std::pair<int, int> const coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 
-std::pair<int, int> const coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
-std::pair<int, int> const tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
+const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
 //! \brief Constructeur écran jeu principal
@@ -175,28 +175,9 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 {
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
-
-                    switch(carte->obtenirTuile(i,j)->obtenirType()){
-                    case TypeTuile::Eau:
-                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{832,0,64,64});
-                        break;
-                    case TypeTuile::Sable:
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{704,0,64,64});
-                        break;
-                    case TypeTuile::Herbe:
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{768,0,64,64});
-                        break;
-                    case TypeTuile::Beton:
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{896,0,64,64});
-                        break;
-                    case TypeTuile::Terre:
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{704,64,64,64});
-                        break;
-                    case TypeTuile::Arbre:
-                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
-                    default:
-                        break;
-                    }
+                    Tuile * t = carte->obtenirTuile(i,j);
+                    SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
 
                     if(carte->objetPresent(temp))
                         m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
