@@ -2,6 +2,7 @@
 #define modele_h
 
 #include <string>
+#include <typeinfo>
 #include "../direction.h"
 #include "humain.h"
 #include "temps.h"

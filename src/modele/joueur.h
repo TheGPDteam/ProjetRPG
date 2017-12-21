@@ -15,11 +15,11 @@ class Joueur : public Observable
 {
 private:
     std::pair<int,int> m_position;
+    Quete m_queteJoueur;
     std::string m_nom;
     Campement* m_camp;
     Equipe* m_equipe;
     Humain m_personnageJoueur;
-    Quete m_queteJoueur;
     Inventaire* m_inventaireJoueur;
 public:
     Joueur();

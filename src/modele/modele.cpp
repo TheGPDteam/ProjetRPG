@@ -111,12 +111,27 @@ void Modele::deplacement(Direction dir)
             /*****************************************/
            /*Partie a changer car segmentation fault*/
           /*****************************************/
-            //Objet* obj = m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first;
-            //Vivre* v = dynamic_cast<Vivre*>(obj);
-            //m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
-            //                                               m_joueur.obtenirQuete()->obtenirValeurAvancement()-
-            //                                               v->obtenirValeurNutritive());
-            //Modification objectif (verifier quete recolte)
+
+//            std::cout << "obj is of type " << typeid(obj).name() << std::endl;
+//            TypeObjet to = (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first)->obtenirType();
+//            if (to == TypeObjet::Objet) {
+
+//            } else if (to == TypeObjet::Arme) {
+
+//            } else if (to == TypeObjet::Vivre) {
+
+//            }
+
+
+            Objet* obj=m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition());
+
+            Vivre* v = dynamic_cast<Vivre*>(obj);
+            if (v != nullptr) {
+            m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+                                                           m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+                                                           v->obtenirValeurNutritive());
+            //Moification objectif (verifier quete recolte)
+            }
         }
     }
 }

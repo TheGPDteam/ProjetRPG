@@ -10,7 +10,7 @@
 //! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
 //!
 
-Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
+Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
@@ -21,13 +21,21 @@ Vue::Vue() : m_typeEcran(MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,
     m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", NULL);
 
+    m_typeEcran = TypeEcran::MenuPrincipal;
+
     //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
     m_menuPrincipal = new EcranMenuPrincipal();
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ecranChoixQuete = new EcranQuete();
     m_ecranQueteJoueur = new EcranQueteJoueur();
+    m_ecranNom = new EcranNom();
+    m_ecranPremiereJournee = new EcranPremiereJournee();
+    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
+
+    m_cliqueSouris = false;
+    m_coordSouris = {0,0};
+    m_quitterJeu = false;
 }
 
 //!
@@ -44,6 +52,7 @@ void Vue::definirControleur(Controleur *controleur)
 {
     m_controleur=controleur;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
+    m_ecranChoixQuete = new EcranQuete(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
@@ -51,11 +60,15 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixQuete);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteJoueur);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
 
+    m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
+    m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
     // m_ecranChoix ?
 }
 
@@ -73,49 +86,65 @@ void Vue::affichageVue()
 {
     switch(m_typeEcran)
     {
-    case MenuPrincipal:{
+    case TypeEcran::MenuPrincipal:{
         afficherEcran(m_menuPrincipal);
         break;
     }
-    case ChasseJoueur:{
+    case TypeEcran::ChasseJoueur:{
         Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
         Quete q("Chasse","Chasse les zombies",10,100,a);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case RecolteJoueur:{
+    case TypeEcran::RecolteJoueur:{
         Vivre* v = new Vivre("steak","steak",15);
         Quete q("Récolte","fais à manger!",10,100,v);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case JeuPrincipal:{
+    case TypeEcran::JeuPrincipal:{
         afficherEcran(m_jeuPrincipal);
         break;
     }
-    case Equipe:{
+    case TypeEcran::Equipe:{
         afficherEcran(m_ecranEquipe);
         break;
     }
-    case Inventaire:{
+    case TypeEcran::Inventaire:{
         afficherEcran(m_ecranInventaire);
         break;
     }
-    case ChoixPersonnage:{
+    case TypeEcran::ChoixPersonnage:{
          afficherEcran(m_ecranChoixPersonnage);
          break;
     }
-    case ChoixQuete:{
+    case TypeEcran::ChoixQuete:{
         afficherEcran(m_ecranChoixQuete);
         break;
     }
-    case PopUpJoueur:{
+    case TypeEcran::PopUpJoueur:{
         afficherEcran(m_ecranQueteJoueur);
         break;
     }
-    case Quitter:{
+
+    case TypeEcran::choixNom:{
+        afficherEcran(m_ecranNom);
+        break;
+    }
+      case TypeEcran::PremiereJournee:
+        {
+        afficherEcran(m_ecranPremiereJournee);
+        break;
+        }
+      case TypeEcran::RecapitulatifNuit:
+        {
+        afficherEcran(m_ecranRecapitulatifNuit);
+        break;
+    }
+    case  TypeEcran::Quitter:
+        {
         m_quitterJeu = true;
         break;
     }
@@ -190,20 +219,39 @@ bool Vue::getFermerJeu()
 
 Vue::~Vue()
 {
+
     if(m_menuPrincipal != nullptr)
     {
         delete m_menuPrincipal;
     }
-    if(m_jeuPrincipal != nullptr){
+
+    if(m_jeuPrincipal != nullptr)
+    {
         delete m_jeuPrincipal;
     }
-    if(m_ecranEquipe != nullptr){
+
+    if(m_ecranEquipe != nullptr)
+    {
         delete m_ecranEquipe;
     }
-    if(m_ecranInventaire != nullptr){
+
+    if(m_ecranInventaire != nullptr)
+    {
         delete m_ecranInventaire;
     }
+
+    if (m_ecranRecapitulatifNuit)
+    {
+        delete m_ecranRecapitulatifNuit;
+    }
+
+    if (m_ecranPremiereJournee != nullptr)
+    {
+        delete m_ecranPremiereJournee;
+    }
+
     SDL_FreeSurface(m_fenetrePrincipale);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -215,3 +263,7 @@ void Vue::changerEcran(TypeEcran nouvelEcran){
     m_typeEcran = nouvelEcran;
 }
 
+SDL_Surface* Vue::obtenirFenetrePrincipale(){
+    return m_fenetrePrincipale;
+
+}
