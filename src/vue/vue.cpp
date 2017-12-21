@@ -28,7 +28,6 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ecranChoixQuete = new EcranQuete();
     m_ecranQueteJoueur = new EcranQueteJoueur();
     m_ecranPremiereJournee = new EcranPremiereJournee();
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
@@ -52,6 +51,7 @@ void Vue::definirControleur(Controleur *controleur)
 {
     m_controleur=controleur;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
+    m_ecranChoixQuete = new EcranQuete(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
