@@ -70,8 +70,6 @@ bool Modele::testerDeplacement(Direction& dir){
 
     switch(dir){
     case Nord:
-        if (posY==0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirExtremiteCarte())
-            return true;
         return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         break;
     case Sud:
@@ -99,9 +97,9 @@ bool Modele::testerDeplacement(Direction& dir){
 
 void Modele::deplacement(Direction dir)
 {
+
     //On teste si le déplacement est possible
     if(testerDeplacement(dir)){
-        bool veutChanger = false;
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
         if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL && !obtenirJoueur()->obtenirInventaireJoueur()->estPlein())
@@ -120,71 +118,60 @@ void Modele::deplacement(Direction dir)
             //                                               v->obtenirValeurNutritive());
             //Modification objectif (verifier quete recolte)
         }
-        if (m_carte.obtenirZoneActive()->obtenirTuile(m_joueur.obtenirPosition().first,m_joueur.obtenirPosition().second)->obtenirExtremiteCarte())
-        {
-            // On est dans le cas où on est à une extremité de la carte qui amène vers une autre carte, on change donc la zone active en fonction
-            // des coordonnées
-            // On vérifie que le joueur veuille clairement changer de zone en regardant la direction dans laquelle il souhaite aller
-            if (m_joueur.obtenirPosition().second==0 && dir == 0)
-            {
-                veutChanger = true;
-                m_carte.changerZoneActive(Nord);
-            }
-            if (m_joueur.obtenirPosition().second==63 && dir == 1)
-            {
-                veutChanger = true;
-                m_carte.changerZoneActive(Sud);
-            }
-            if (m_joueur.obtenirPosition().first==0 && dir == 3)
-            {
-                veutChanger = true;
-                m_carte.changerZoneActive(Ouest);
-            }
-            if (m_joueur.obtenirPosition().first==63 && dir == 2)
-            {
-                veutChanger = true;
-                m_carte.changerZoneActive(Est);
-            }
-
-            if (veutChanger)
-            {
-
-                std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
-                switch (m_joueur.obtenirPosition().second) {
-                case 63:
-                {
-                    nouvellePosition.first = m_joueur.obtenirPosition().first;
-                    nouvellePosition.second = 0;
-                    break;
-                }
-                case 0:
-                {
-                    nouvellePosition.first = m_joueur.obtenirPosition().first;
-                    nouvellePosition.second = 63;
-                    break;
-                }
-                }
-                switch (m_joueur.obtenirPosition().first) {
-                case 0:
-                {
-                    nouvellePosition.second = m_joueur.obtenirPosition().second;
-                    nouvellePosition.first = 63;
-                    break;
-                }
-                case 63:
-                {
-                    nouvellePosition.second = m_joueur.obtenirPosition().second;
-                    nouvellePosition.first = 0;
-                    break;
-                }
-                default:
-                    break;
-                }
-                m_joueur.definirPosition(nouvellePosition);
-            }
-        }
     }
 }
+
+//dans zone.cpp
+
+//!
+//! \brief Permet de gérer le cas d'un changement de carte lorsque l'on est sur une tuile de changement
+//! \author dolacoste
+//! \date 21/12/17
+//! \version 2.0
+//!
+bool Modele::testChangementDeCarte(){
+        std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
+        bool changementCarte=false;
+        // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
+
+        if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord)
+        {
+            nouvellePosition.first = m_joueur.obtenirPosition().first;
+            nouvellePosition.second = m_joueur.obtenirPosition().second+63;
+            m_carte.changerZoneActive(Nord);
+            changementCarte=true;
+        }
+        else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud)
+        {
+            nouvellePosition.first = m_joueur.obtenirPosition().first;
+            nouvellePosition.second = m_joueur.obtenirPosition().second-63;
+            m_carte.changerZoneActive(Sud);
+            changementCarte=true;
+        }
+        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest)
+        {
+            nouvellePosition.first = m_joueur.obtenirPosition().first+63;
+            nouvellePosition.second = m_joueur.obtenirPosition().second;
+            m_carte.changerZoneActive(Ouest);
+            changementCarte=true;
+        }
+        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est);
+        {
+            nouvellePosition.first = m_joueur.obtenirPosition().first-63;
+            nouvellePosition.second = m_joueur.obtenirPosition().second;
+            m_carte.changerZoneActive(Est);
+            changementCarte=true;
+        }
+
+            if(changementCarte)
+            m_joueur.definirPosition(nouvellePosition);
+
+            return changementCarte;
+        }
+
+
+
+
 
 //!
 //! \brief Permet d'avancer sur une journee, controle les etapes d'une journee
