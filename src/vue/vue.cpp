@@ -67,6 +67,8 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
 
+    m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
+    m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
     // m_ecranChoix ?
 }
 
