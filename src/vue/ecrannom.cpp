@@ -46,11 +46,13 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
             }
             break;
         case SDL_KEYDOWN:
-            estLettre(nullptr);
-            if(isalpha((int)*SDL_GetKeyName(evenements.key.keysym.sym))){ // Autre que les lettre de l'alpha ont même char acsii
-                std::cout << (int)*SDL_GetKeyName(evenements.key.keysym.sym) << std::endl;
-                s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
+
+            if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "backspace"){
+                s->enleverChar();
             }
+            else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){ // Autre que les lettre de l'alpha ont même char acsii
+                    s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
+                }
             break;
 
         default:
@@ -62,21 +64,12 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
     }
 }
 
-
 void EcranNom::obtenirChangement(Observable &obj){
 
 
 }
 
-bool EcranNom::estLettre(char* a){
-//    std::vector<char>tabLettre;
-//    for(int i=0;i<26;i++){
-//        tabLettre[i] = (char)(i+97);
-//    }
 
-//    for(int i=0;i<26;i++){
-//        std::cout << tabLettre[i] << std::endl;
-//    }
-    return false;
+EcranNom::~EcranNom(){
+    delete s;
 }
-
