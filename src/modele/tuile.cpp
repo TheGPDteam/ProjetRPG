@@ -7,7 +7,7 @@
 
 
 Tuile::Tuile(int val)
-    :m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType},m_extremiteCarte{false}
+    : m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType}, m_directionChangementZone{Aucune}
 {
 }
 
@@ -50,15 +50,13 @@ TypeTuile Tuile::obtenirType() const{
     return m_type;
 }
 
-
-void Tuile::definirExtremiteCarte(bool extremite)
+void Tuile::definirDirection(Direction dir)
 {
-    m_extremiteCarte = extremite;
+    m_directionChangementZone = dir;
 }
 
-bool Tuile::obtenirExtremiteCarte() const
-{
-    return m_extremiteCarte;
+Direction Tuile::obtenirDirection() const{
+    return m_directionChangementZone;
 }
 
 

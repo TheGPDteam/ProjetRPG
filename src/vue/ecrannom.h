@@ -13,16 +13,16 @@ private:
 
     TexteSDL m_label;
 
-    bool estLettre(char* a);
 public:
     EcranNom();
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;
 
-    virtual ~EcranNom() = default;
 
     void obtenirChangement(Observable &obj) override;
+
+    ~EcranNom();
 
 
 };

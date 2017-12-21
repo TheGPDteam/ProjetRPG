@@ -8,7 +8,10 @@
 //! \date 17/11/16
 //! \version 1.0
 
-
+const int CASE_DIRECTION_OUEST = 6;
+const int CASE_DIRECTION_SUD = 7;
+const int CASE_DIRECTION_EST = 8;
+const int CASE_DIRECTION_NORD = 9;
 
 
 Zone::Zone(int longueur, int largeur)
@@ -38,6 +41,13 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
 
 }
 
+//!
+//! \brief Zone::Zone
+//! \param longueur
+//! \param largeur
+//! \param fichier
+//! \author dolacoste
+//!
 Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     : m_largeur{largeur},
       m_hauteur{longueur}
@@ -48,26 +58,34 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
         ligne2Tuile(fichier,valeursTuiles,i);
         for (unsigned int j=0; j<valeursTuiles.size();++j)
         {
-            if ((valeursTuiles[j]/6) == 0)
+            if (valeursTuiles[j] < 6)
             {
                 Tuile * t = new Tuile((TypeTuile)valeursTuiles[j]);
                 m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
                 m_position_to_tuile[std::make_pair(j,i)] = t;
             }
-            else if ((valeursTuiles[j]/6) == 1)
-            {
-                std::cout << "J'ai une tuile extreme de niveau " << valeursTuiles[j] % 6 << std::endl;
-                Tuile * t = new Tuile((TypeTuile)valeursTuiles[j] % 6);
-                t->definirExtremiteCarte(true);
-                m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
-                m_position_to_tuile[std::make_pair(j,i)] = t;
-            }
             else
             {
-                Tuile * t = new Tuile((TypeTuile)2);
+                Tuile* t = new Tuile(Beton);
+                switch (valeursTuiles[i]) {
+                case CASE_DIRECTION_OUEST:
+                    t->definirDirection(Ouest);
+                    break;
+                case CASE_DIRECTION_SUD:
+                    t->definirDirection(Sud);
+                    break;
+                case CASE_DIRECTION_EST:
+                    t->definirDirection(Est);
+                    break;
+                case CASE_DIRECTION_NORD:
+                    t->definirDirection(Nord);
+                default:
+                    break;
+                }
                 m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
                 m_position_to_tuile[std::make_pair(j,i)] = t;
             }
+
         }
     }
     ajouterObjets(20);

@@ -16,7 +16,6 @@ class Saisir
 {
 private:
     std::string buffer;
-
     TexteSDL* m_bufferSDL;
     SDL_Rect rec;
 
@@ -31,7 +30,11 @@ public:
 
     void ajouterChar(char *c);
 
+    void enleverChar();
+
     void setbufferSDL();
+
+    ~Saisir();
 };
 
 #endif // SAISIR_H
