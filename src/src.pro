@@ -49,6 +49,8 @@ SOURCES += \
     vue/ecraninventaire.cpp \
     vue/ecranchoixpersonnage.cpp \
     vue/ecranquetejoueur.cpp \
+    vue/ecrannom.cpp \
+    vue/saisir.cpp \
     vue/ecranpremierejournee.cpp \
     vue/ecranrecapitulatifnuit.cpp
 
@@ -99,6 +101,10 @@ HEADERS += \
     vue/policetexte.h \
     vue/ecranchoixpersonnage.h \
     vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h \
+    vue/ecrannom.h \
+    vue/saisir.h \
     direction.h \
     observateur.h \
     observable.h \

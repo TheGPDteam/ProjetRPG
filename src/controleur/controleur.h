@@ -33,6 +33,7 @@ public :
     void deplacementJoueur(Direction dir);
 
     Modele* obtenirModele();
+    Vue* obtenirVue();
 };
 
 #endif

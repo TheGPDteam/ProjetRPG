@@ -17,12 +17,12 @@ private:
 
     bool m_boutonCliquable;
 
-    void initialisationAffichageBouton(const std::pair<int, int> coord_bouton);
+    void initialisationAffichageBouton(const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton);
     SDL_Rect initialisationRectangle(const int x, const int y, const int width, const int height);
 
 public:
     Bouton(const TypeBouton type_bouton, const bool bouton_cliquable, const std::string texte, const std::string chemin_police, const int taille_police,
-            const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton);
+            const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton, const std::pair<int, int> coord_texte);
 
     bool evenementSurBouton(std::pair<int, int> coord_souris);
     void afficherBouton(SDL_Surface *surface_affichage);

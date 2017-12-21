@@ -29,7 +29,6 @@ void mainloop_func(void* c){
 //! Contient la boucle de jeu et l'initialisation des classes principales
 //!
 int main (){
-    Equipe e;Inventaire i;
 
     srand(time(NULL));
     Vue* vue = new Vue(); //On instancie la vue

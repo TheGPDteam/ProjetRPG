@@ -37,3 +37,6 @@ void Controleur::nouvellePartie(){
 Modele* Controleur::obtenirModele(){
     return m_modele;
 }
+Vue* Controleur::obtenirVue(){
+     return m_vue ;
+ }

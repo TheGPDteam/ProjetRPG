@@ -28,14 +28,14 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 {
     //* AJOUT DES BOUTONS *//
 
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB}, &ActionsBoutons::boutonEquipe);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB},&ActionsBoutons::boutonInventaire);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10,coordB.second+10)}, &ActionsBoutons::boutonEquipe);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+10,coordB2.second+10)},&ActionsBoutons::boutonInventaire);
 
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
         for(int j = 0;j< 12;j++)
-            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*63),static_cast<Sint16>(j*63),0,0}, SDL_Rect{0,128,64,64}};
+            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*63),static_cast<Sint16>(j*63),0,0}, SDL_Rect{832,0,64,64}};
 }
 
 //!
@@ -156,6 +156,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_spriteObjets.clear();
 
     if(joueur!=nullptr){
+        std::cerr << "MAJ données vue EcranJeuPrincipal carte" << std::endl;
         //recupère la position du joueur sur la carte
         int posX = joueur->obtenirPosition().first-5;
         int posY = joueur->obtenirPosition().second-5;
