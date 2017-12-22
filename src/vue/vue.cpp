@@ -28,8 +28,8 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
     m_ecranEquipe = new EcranEquipe();
     m_ecranInventaire = new EcranInventaire();
     m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ecranChoixQuete = new EcranQuete();
     m_ecranQueteJoueur = new EcranQueteJoueur();
+    m_ecranNom = new EcranNom();
     m_ecranPremiereJournee = new EcranPremiereJournee();
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
 
@@ -52,6 +52,7 @@ void Vue::definirControleur(Controleur *controleur)
 {
     m_controleur=controleur;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
+    m_ecranChoixQuete = new EcranQuete(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
@@ -66,6 +67,8 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
 
+    m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
+    m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
     // m_ecranChoix ?
 }
 
@@ -123,6 +126,11 @@ void Vue::affichageVue()
     }
     case TypeEcran::PopUpJoueur:{
         afficherEcran(m_ecranQueteJoueur);
+        break;
+    }
+
+    case TypeEcran::choixNom:{
+        afficherEcran(m_ecranNom);
         break;
     }
       case TypeEcran::PremiereJournee:
@@ -255,3 +263,7 @@ void Vue::changerEcran(TypeEcran nouvelEcran){
     m_typeEcran = nouvelEcran;
 }
 
+SDL_Surface* Vue::obtenirFenetrePrincipale(){
+    return m_fenetrePrincipale;
+
+}

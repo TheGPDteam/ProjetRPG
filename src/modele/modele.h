@@ -2,6 +2,7 @@
 #define modele_h
 
 #include <string>
+#include <typeinfo>
 #include "../direction.h"
 #include "humain.h"
 #include "temps.h"
@@ -32,6 +33,7 @@ public:
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
+    bool testChangementDeCarte();
     void lancerCombat();//TO-DO
 
 

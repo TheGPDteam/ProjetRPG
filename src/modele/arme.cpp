@@ -217,3 +217,7 @@ void Arme::charger(std::vector<std::string> donnees){
     m_degats = std::stoi(donnees[0]);
     m_description = donnees[1];
 }
+
+TypeObjet Arme::obtenirType() {
+    return TypeObjet::Arme;
+}

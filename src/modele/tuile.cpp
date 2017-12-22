@@ -7,7 +7,7 @@
 
 
 Tuile::Tuile(int val)
-    :m_type{(TypeTuile)val}, m_extremiteCarte{false}
+    : m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType}, m_directionChangementZone{Aucune}
 {
 }
 
@@ -50,13 +50,46 @@ TypeTuile Tuile::obtenirType() const{
     return m_type;
 }
 
-
-void Tuile::definirExtremiteCarte(bool extremite)
+void Tuile::definirDirection(Direction dir)
 {
-    m_extremiteCarte = extremite;
+    m_directionChangementZone = dir;
 }
 
-bool Tuile::obtenirExtremiteCarte() const
+Direction Tuile::obtenirDirection() const{
+    return m_directionChangementZone;
+}
+
+
+//!
+//! \brief Accesseur en ecriture de l'attribut m_sous_type
+//! \return le sous type de la tuile
+//! \author rbourqui
+//! \date 15/12/2017
+//! \version 1.0
+//!
+void Tuile::definirHachageJonction(TypeTuile typeVoisin, TypeJonction positionVoisin)
 {
-    return m_extremiteCarte;
+    m_jonction = hacher(typeVoisin, positionVoisin);
+}
+
+//!
+//! \brief Accesseur en lecture de l'attribut m_sous_type
+//! \return le sous type de la tuile
+//! \author rbourqui
+//! \date 15/12/2017
+//! \version 1.0
+//!
+int Tuile::obtenirHachageJonction() const{
+    return m_jonction;
+}
+
+//!
+//! \brief Fonction de hachage du type et de la position de jonction
+//! \return le résultat du hachage
+//! \author rbourqui
+//! \date 20/12/2017
+//! \version 1.0
+//!
+int Tuile::hacher(TypeTuile typeVoisin, TypeJonction positionVoisin){
+    return typeVoisin * 100 + positionVoisin;
 }

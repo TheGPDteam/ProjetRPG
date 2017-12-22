@@ -121,3 +121,7 @@ TypeEcran ActionsBoutons::boutonNouvellePartie() const
 {
     return TypeEcran::PremiereJournee;
 }
+TypeEcran ActionsBoutons::boutonChoixNom() const
+{
+    return TypeEcran::choixNom;
+}

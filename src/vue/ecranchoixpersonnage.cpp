@@ -22,8 +22,8 @@ EcranChoixPersonnage::EcranChoixPersonnage():
     m_zoneStatistiquesPersonnage = new TexteSDL("Les Statistiques**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 230));
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonQuete);  // PRENDRE EN COMPTE LE CHOIX
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Non", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 60), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonQuete);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQuete);  // PRENDRE EN COMPTE LE CHOIX
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Non", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 60), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQuete);
 }
 
 void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){

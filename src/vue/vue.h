@@ -1,5 +1,6 @@
 #ifndef vue_h
 #define vue_h
+
 #include "controleur/controleur.h"
 #include "ecranmenuprincipal.h"
 #include "ecranjeuprincipal.h"
@@ -8,6 +9,7 @@
 #include "ecranquete.h"
 #include "ecraninventaire.h"
 #include "ecranquetejoueur.h"
+#include "ecrannom.h"
 #include "ecranrecapitulatifnuit.h"
 #include "ecranpremierejournee.h"
 
@@ -27,6 +29,7 @@ private:
     EcranChoixPersonnage* m_ecranChoixPersonnage;
     EcranQuete* m_ecranChoixQuete;
     EcranQueteJoueur* m_ecranQueteJoueur;
+    EcranNom* m_ecranNom;
     EcranPremiereJournee* m_ecranPremiereJournee;
     EcranRecapitulatifNuit* m_ecranRecapitulatifNuit;
 
@@ -45,6 +48,8 @@ public:
     void definirControleur(Controleur * controleur);
     void affichageVue();
     void gestionEvenementJoueur();
+
+    SDL_Surface* obtenirFenetrePrincipale();
 
     void changerEcran(TypeEcran nouvelEcran);
 

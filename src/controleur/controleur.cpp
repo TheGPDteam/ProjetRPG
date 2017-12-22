@@ -19,7 +19,10 @@ void Controleur::definirVue(Vue *vue)
 
 void Controleur::deplacementJoueur(Direction dir)
 {
-    m_modele->deplacement(dir);
+    //if(!m_modele->testChangementDeCarte())
+        m_modele->deplacement(dir);
+
+
 }
 void Controleur::deroulementJournee(){
     m_modele->obtenirTemps()->obtenirTempsRestant();
@@ -45,3 +48,7 @@ void Controleur::choixNouvelArrivant(bool choix)
         m_modele->m_nouvelArrivant = nullptr;
     }
 }
+
+Vue* Controleur::obtenirVue(){
+     return m_vue ;
+ }

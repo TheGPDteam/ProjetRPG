@@ -26,8 +26,19 @@ private:
     TexteSDL* m_zoneForcePersonnage;
     TexteSDL* m_zoneVitessePersonnage;
 
+    std::pair<int, int>m_CoordNom;
+    std::pair<int, int>m_CoordNiveau;
+    std::pair<int, int>m_CoordVie;
+    std::pair<int, int>m_CoordIntelligence;
+    std::pair<int, int>m_CoordForce;
+    std::pair<int, int>m_CoordVitesse;
+
+    std::vector<Humain*>m_equipe;
+
+    Controleur* m_controleur;
+
 public:
-    EcranQuete();
+    EcranQuete(Controleur *controleur);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

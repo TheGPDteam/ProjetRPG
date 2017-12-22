@@ -24,7 +24,11 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit()
     m_zoneNombreZombiesAttaquants = new TexteSDL(TEXTE_ZOMBIES_ATTAQUANT + "Inconnu", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 165));
     m_zoneNombreHumainsTues = new TexteSDL(TEXTE_HUMAINS_TUES + "Inconnu", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 315));
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20, std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonChoixPersonnage);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
+                                           std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 90)),
+                                &ActionsBoutons::boutonChoixPersonnage);
 
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();

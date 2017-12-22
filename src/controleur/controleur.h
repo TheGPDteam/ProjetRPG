@@ -31,8 +31,10 @@ public :
     void deplacementJoueur(Direction dir);
 
     Modele* obtenirModele();
-
+  
     void choixNouvelArrivant(bool choix);
+
+  Vue* obtenirVue();
 };
 
 #endif

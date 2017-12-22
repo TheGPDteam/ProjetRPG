@@ -111,3 +111,7 @@ std::string Vivre::serialiser() const
             "   <ValeurNutritive>\n" + std::to_string(m_valeurNutritive) + "\n</ValeurNutritive>\n"
             "</Vivre>\n";
 }
+
+TypeObjet Vivre::obtenirType() {
+    return TypeObjet::Vivre;
+}
