@@ -18,15 +18,11 @@ using namespace std;
 
 Modele::Modele()
     : m_joueur{Joueur{Quete("Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
-                            0, 50, new Vivre())}},
+                            50, 50, new Vivre())}},
       m_deplacementDepuisDernierCombat{0},
       m_nouvelArrivant(nullptr)
 {
-    // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
-    // le calcul se fait pour plusieurs jours à l'avance.
-    m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()
-                                                            *m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation()+1)));
-    // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
+    premiereJournee();
 }
 
 //!
@@ -70,6 +66,8 @@ bool Modele::testerDeplacement(Direction& dir){
 
     switch(dir){
     case Nord:
+        if (posY==0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirEstMarchable())
+            return true;
         return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         break;
     case Sud:
@@ -97,7 +95,6 @@ bool Modele::testerDeplacement(Direction& dir){
 
 void Modele::deplacement(Direction dir)
 {
-
     //On teste si le déplacement est possible
     if(testerDeplacement(dir)){
         m_deplacementDepuisDernierCombat++;
@@ -105,38 +102,26 @@ void Modele::deplacement(Direction dir)
         if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL && !obtenirJoueur()->obtenirInventaireJoueur()->estPlein())
         {
             m_joueur.obtenirInventaireJoueur()->ajouterObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
-            m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
-            (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
+            //(m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
+            TypeObjet to = m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())->obtenirType();
+            if(to == TypeObjet::Vivre){
+                Vivre* v = dynamic_cast<Vivre*>(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
+                m_joueur.obtenirQuete()->augmenterValeur(v->obtenirValeurNutritive());
 
-            /*****************************************/
-           /*Partie a changer car segmentation fault*/
-          /*****************************************/
-
-//            std::cout << "obj is of type " << typeid(obj).name() << std::endl;
-//            TypeObjet to = (m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()))->first)->obtenirType();
-//            if (to == TypeObjet::Objet) {
-
-//            } else if (to == TypeObjet::Arme) {
-
-//            } else if (to == TypeObjet::Vivre) {
-
-//            }
+                if (v != nullptr) {
+                m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+                                                               m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+                                                               v->obtenirValeurNutritive());
+                }
 
 
-            Objet* obj=m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition());
-
-            Vivre* v = dynamic_cast<Vivre*>(obj);
-            if (v != nullptr) {
-            m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
-                                                           m_joueur.obtenirQuete()->obtenirValeurAvancement()-
-                                                           v->obtenirValeurNutritive());
-            //Moification objectif (verifier quete recolte)
             }
+
+            m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
         }
     }
 }
 
-//dans zone.cpp
 
 //!
 //! \brief Permet de gérer le cas d'un changement de carte lorsque l'on est sur une tuile de changement
@@ -250,6 +235,11 @@ void Modele::premiereJournee()
 
 
     m_temps.reinitialiserTemps();
+    // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
+    // le calcul se fait pour plusieurs jours à l'avance.
+    m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()));
+                                                            //*m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation())+1));
+    // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 
 //!
@@ -384,7 +374,5 @@ std::string Modele::serialiser() const
     return "<Modele>\n"
             + m_campement.serialiser()
             + m_joueur.serialiser()
-            +
-            "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n"
-            "</Modele>\n";
+            + "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n</Modele>\n";
 }

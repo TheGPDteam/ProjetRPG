@@ -13,19 +13,20 @@ class Campement
 private:
     unsigned short m_quantiteVivre;
     std::set <Vivre*> m_stockVivre;
-    std::set <Personnage*> m_personnesNonAttribuees;
+    std::set <Humain*> m_personnesNonAttribuees;
     Equipe m_equipeRecolte;
     Equipe m_equipeChasse;
 public:
     Campement();
 
-    void ajouterPersonne(Personnage *perso, Equipe *equipe);
+    void ajouterPersonne(Humain *perso, Equipe *equipe);
+    void ajouterPersonne(Humain *humain);
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
     void consommerVivre(unsigned short nbVivresConsommes);
     int obtenirConsommation() ;
 
-    std::set<Personnage*> obtenirNonAttribuees();
+    std::set<Humain *> obtenirNonAttribuees();
 
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();

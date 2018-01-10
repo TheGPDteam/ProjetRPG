@@ -94,14 +94,14 @@ void Vue::affichageVue()
         Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
         Quete q("Chasse","Chasse les zombies",10,100,a);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
-        afficherEcran(m_jeuPrincipal);
+        changerEcran(TypeEcran::JeuPrincipal);
         break;
     }
     case TypeEcran::RecolteJoueur:{
         Vivre* v = new Vivre("steak","steak",15);
         Quete q("Récolte","fais à manger!",10,100,v);
         m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
-        afficherEcran(m_jeuPrincipal);
+        changerEcran(TypeEcran::JeuPrincipal);
         break;
     }
     case TypeEcran::JeuPrincipal:{
@@ -117,8 +117,8 @@ void Vue::affichageVue()
         break;
     }
     case TypeEcran::ChoixPersonnage:{
-         afficherEcran(m_ecranChoixPersonnage);
-         break;
+        afficherEcran(m_ecranChoixPersonnage);
+        break;
     }
     case TypeEcran::ChoixQuete:{
         afficherEcran(m_ecranChoixQuete);
@@ -128,23 +128,22 @@ void Vue::affichageVue()
         afficherEcran(m_ecranQueteJoueur);
         break;
     }
-
     case TypeEcran::choixNom:{
         afficherEcran(m_ecranNom);
         break;
     }
-      case TypeEcran::PremiereJournee:
-        {
+    case TypeEcran::PremiereJournee:
+    {
         afficherEcran(m_ecranPremiereJournee);
         break;
-        }
-      case TypeEcran::RecapitulatifNuit:
-        {
+    }
+    case TypeEcran::RecapitulatifNuit:
+    {
         afficherEcran(m_ecranRecapitulatifNuit);
         break;
     }
     case  TypeEcran::Quitter:
-        {
+    {
         m_quitterJeu = true;
         break;
     }
@@ -223,31 +222,61 @@ Vue::~Vue()
     if(m_menuPrincipal != nullptr)
     {
         delete m_menuPrincipal;
+        m_menuPrincipal = nullptr;
     }
 
     if(m_jeuPrincipal != nullptr)
     {
         delete m_jeuPrincipal;
+        m_jeuPrincipal = nullptr;
     }
 
     if(m_ecranEquipe != nullptr)
     {
         delete m_ecranEquipe;
+        m_ecranEquipe = nullptr;
     }
 
     if(m_ecranInventaire != nullptr)
     {
         delete m_ecranInventaire;
+        m_ecranInventaire = nullptr;
+    }
+
+    if(m_ecranChoixQuete != nullptr)
+    {
+        delete m_ecranChoixQuete;
+        m_ecranChoixQuete = nullptr;
+    }
+
+    if(m_ecranChoixPersonnage != nullptr)
+    {
+        delete m_ecranChoixPersonnage;
+        m_ecranChoixPersonnage = nullptr;
+    }
+
+    if(m_ecranNom != nullptr)
+    {
+        delete m_ecranNom;
+        m_ecranNom = nullptr;
+    }
+
+    if(m_ecranQueteJoueur)
+    {
+        delete m_ecranQueteJoueur;
+        m_ecranQueteJoueur = nullptr;
     }
 
     if (m_ecranRecapitulatifNuit)
     {
         delete m_ecranRecapitulatifNuit;
+        m_ecranRecapitulatifNuit = nullptr;
     }
 
     if (m_ecranPremiereJournee != nullptr)
     {
         delete m_ecranPremiereJournee;
+        m_ecranPremiereJournee = nullptr;
     }
 
     SDL_FreeSurface(m_fenetrePrincipale);

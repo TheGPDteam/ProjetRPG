@@ -186,3 +186,16 @@ int Quete::obtenirValeurAvancement() const {
 int Quete::obtenirValeurObjectif() const {
     return m_valeurObjectif;
 }
+
+//!
+//! \brief augmentValeur
+//! \date 19/01/17
+//! \version 1.0
+//! \author dberrouet
+//!
+//! Augmente la valeur de la progression de l'objectif
+//!
+
+void Quete::augmenterValeur(int valeur) {
+    m_valeurActuelle += valeur;
+}

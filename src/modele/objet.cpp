@@ -102,6 +102,6 @@ std::string Objet::serialiser() const
 
 }
 
-TypeObjet Objet::obtenirType() {
+TypeObjet Objet::obtenirType() const {
     return TypeObjet::Objet;
 }

@@ -104,9 +104,24 @@ int Campement::obtenirConsommation()
 //! Ajoute le personnage à l'equipe desiree
 //!
 
-void Campement::ajouterPersonne(Personnage* perso, Equipe *equipe)
+void Campement::ajouterPersonne(Humain *perso, Equipe *equipe)
 {
     equipe->ajouterPersonnage(perso);
+}
+
+//!
+//! \brief Permet d'ajouter une personne au campement et de l'integrer a une equipe
+//! \author mleothaud
+//! \date 11/12/17
+//! @param perso : Personnage à integrer
+//! \version 1.0
+//!
+//! Ajoute le personnage dans le campement
+//!
+
+void Campement::ajouterPersonne(Humain *humain)
+{
+    m_personnesNonAttribuees.insert(humain);
 }
 
 //!
@@ -173,7 +188,7 @@ std::string Campement::serialiser() const
 //! \version 1.0
 //!
 
-std::set <Personnage *> Campement::obtenirNonAttribuees()
+std::set <Humain *> Campement::obtenirNonAttribuees()
 {
     return m_personnesNonAttribuees;
 }

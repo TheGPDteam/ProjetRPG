@@ -40,7 +40,7 @@ std::string donnerNom(std::string nomFichier)
 
 Humain::Humain()
     :m_coutEntretien{0},
-      m_arme{new Arme()}
+      m_arme{new Arme()}, m_consommation{10}
 {
     m_chasse.definirValeur(rand()%m_chasse.obtenirValeurMax());
     m_recolte.definirValeur(rand()%m_recolte.obtenirValeurMax());

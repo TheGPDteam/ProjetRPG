@@ -37,6 +37,7 @@ public:
     bool queteTerminee();
     void miseEnPause();
     void reprise();
+    void augmenterValeur(int valeur);
 
 };
 
