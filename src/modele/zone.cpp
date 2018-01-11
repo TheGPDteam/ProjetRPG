@@ -67,7 +67,7 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
             else
             {
                 Tuile* t = new Tuile(Beton);
-                switch (valeursTuiles[i]) {
+                switch (valeursTuiles[j]) {
                 case CASE_DIRECTION_OUEST:
                     t->definirDirection(Ouest);
                     break;

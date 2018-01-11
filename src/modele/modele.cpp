@@ -155,7 +155,7 @@ bool Modele::testChangementDeCarte(){
             m_carte.changerZoneActive(Ouest);
             changementCarte=true;
         }
-        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est);
+        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est)
         {
             nouvellePosition.first = m_joueur.obtenirPosition().first-63;
             nouvellePosition.second = m_joueur.obtenirPosition().second;
