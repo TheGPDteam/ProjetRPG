@@ -9,7 +9,8 @@ const short COORD_X_RECTANGLE_HAUT = 20;
 const short COORD_Y_RECTANGLE_HAUT = 50;
 
 
-EcranInventaire::EcranInventaire() :
+EcranInventaire::EcranInventaire(Controleur* controleur) :
+    EcranGeneral{controleur},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
      m_compteurInventaire(-1),

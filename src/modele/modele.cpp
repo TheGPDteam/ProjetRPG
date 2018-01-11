@@ -17,8 +17,8 @@ using namespace std;
 //!
 
 Modele::Modele()
-    : m_joueur{Joueur{Quete("Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
-                            50, 50, new Vivre())}},
+    : m_joueur{Quete("Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
+                            50, 50, new Vivre())},
       m_deplacementDepuisDernierCombat{0},
       m_nouvelArrivant(nullptr)
 {
@@ -108,11 +108,11 @@ void Modele::deplacement(Direction dir)
                 Vivre* v = dynamic_cast<Vivre*>(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
                 m_joueur.obtenirQuete()->augmenterValeur(v->obtenirValeurNutritive());
 
-                if (v != nullptr) {
-                m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
-                                                               m_joueur.obtenirQuete()->obtenirValeurAvancement()-
-                                                               v->obtenirValeurNutritive());
-                }
+//                if (v != nullptr) {
+//                    m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
+//                                                                   m_joueur.obtenirQuete()->obtenirValeurAvancement()-
+//                                                                   v->obtenirValeurNutritive());
+//                }
 
 
             }
@@ -130,44 +130,44 @@ void Modele::deplacement(Direction dir)
 //! \version 2.0
 //!
 bool Modele::testChangementDeCarte(Direction directionDep){
-        std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
-        bool changementCarte=false;
-        // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
+    std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
+    bool changementCarte=false;
+    // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
 
-        if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord && directionDep==Nord)
-        {
-            nouvellePosition.first = m_joueur.obtenirPosition().first;
-            nouvellePosition.second = 63;
-            m_carte.changerZoneActive(Nord);
-            changementCarte=true;
-        }
-        else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud && directionDep==Sud)
-        {
-            nouvellePosition.first = m_joueur.obtenirPosition().first;
-            nouvellePosition.second = 0;
-            m_carte.changerZoneActive(Sud);
-            changementCarte=true;
-        }
-        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest && directionDep==Ouest)
-        {
-            nouvellePosition.first = 63;
-            nouvellePosition.second = m_joueur.obtenirPosition().second;
-            m_carte.changerZoneActive(Ouest);
-            changementCarte=true;
-        }
-        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est && directionDep==Est)
-        {
-            nouvellePosition.first = 0;
-            nouvellePosition.second = m_joueur.obtenirPosition().second;
-            m_carte.changerZoneActive(Est);
-            changementCarte=true;
-        }
+    if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord && directionDep==Nord)
+    {
+        nouvellePosition.first = m_joueur.obtenirPosition().first;
+        nouvellePosition.second = 63;
+        m_carte.changerZoneActive(Nord);
+        changementCarte=true;
+    }
+    else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud && directionDep==Sud)
+    {
+        nouvellePosition.first = m_joueur.obtenirPosition().first;
+        nouvellePosition.second = 0;
+        m_carte.changerZoneActive(Sud);
+        changementCarte=true;
+    }
+    else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest && directionDep==Ouest)
+    {
+        nouvellePosition.first = 63;
+        nouvellePosition.second = m_joueur.obtenirPosition().second;
+        m_carte.changerZoneActive(Ouest);
+        changementCarte=true;
+    }
+    else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est && directionDep==Est)
+    {
+        nouvellePosition.first = 0;
+        nouvellePosition.second = m_joueur.obtenirPosition().second;
+        m_carte.changerZoneActive(Est);
+        changementCarte=true;
+    }
 
-            if(changementCarte)
-            m_joueur.definirPosition(nouvellePosition);
+    if(changementCarte)
+        m_joueur.definirPosition(nouvellePosition);
 
-            return changementCarte;
-        }
+    return changementCarte;
+}
 
 
 
@@ -183,7 +183,7 @@ bool Modele::testChangementDeCarte(Direction directionDep){
 //! on part ensuite en quete pendant 10 minutes
 //!
 
-Humain Modele::journeeSuivante()
+const Humain & Modele::journeeSuivante() const
 {
     m_nouvelArrivant = new Humain();
 
@@ -237,8 +237,8 @@ void Modele::premiereJournee()
     m_temps.reinitialiserTemps();
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
     // le calcul se fait pour plusieurs jours à l'avance.
-    m_joueur.obtenirQuete()->definirValeurObjectif(std::abs(m_campement.obtenirNbVivres()-m_campement.obtenirConsommation()));
-                                                            //*m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation())+1));
+    m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
+    //*m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation())+1));
     // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 

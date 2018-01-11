@@ -1,6 +1,8 @@
 #include "ecrannom.h"
 
-EcranNom::EcranNom() : m_nom_fenetre("Selection d'un nom de personnage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+EcranNom::EcranNom(Controleur* controleur) :
+    EcranGeneral{controleur},
+    m_nom_fenetre("Selection d'un nom de personnage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                                         std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
                        m_label("Tapez votre nom : ", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                                              std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 300)),

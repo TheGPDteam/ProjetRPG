@@ -4,7 +4,8 @@
 #include "bouton.h"
 #include "constantesbouton.h"
 
-EcranChoixPersonnage::EcranChoixPersonnage():
+EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
+    EcranGeneral{controleur},
     m_nomFenetre("Arrivee d'un survivant", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
@@ -15,11 +16,14 @@ EcranChoixPersonnage::EcranChoixPersonnage():
     m_rectangleBas = {cood_x_rectangleFichePersonnage, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), WIDTH_FENETRE_PRINCIPALE - cood_x_rectangleFichePersonnage * 2, (HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80};
 
 
+    Humain* h = m_controleur->journeeSuivante();
+
     m_zoneImagePersonnage = new TexteSDL("La Photo**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
     m_zoneNomPersonnage = new TexteSDL("Le Nom**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 230));
     m_zoneNiveauPersonnage = new TexteSDL("Le Niveau**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 300, m_rectangleFichePersonnage.y + 70));
     m_zoneDescriptionPersonnage = new TexteSDL("La Description**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 70));
-    m_zoneStatistiquesPersonnage = new TexteSDL("Les Statistiques**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 230));
+    m_zoneStatistiquesPersonnage = new TexteSDL("Les Statistiques**",
+                                                SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 230));
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQuete);  // PRENDRE EN COMPTE LE CHOIX

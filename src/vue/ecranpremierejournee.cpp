@@ -3,7 +3,8 @@
 
 #include <list>
 
-EcranPremiereJournee::EcranPremiereJournee()
+EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
+    : EcranGeneral{controleur}
 {
     short unsigned int largeurFond, hauteurFond;
     largeurFond = WIDTH_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;

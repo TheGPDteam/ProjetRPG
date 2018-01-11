@@ -26,7 +26,7 @@ private:
     int m_idObjetSelectionne;
 
 public:
-    EcranInventaire();
+    EcranInventaire(Controleur *controleur);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

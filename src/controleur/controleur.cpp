@@ -52,3 +52,7 @@ void Controleur::choixNouvelArrivant(bool choix)
 Vue* Controleur::obtenirVue(){
      return m_vue ;
  }
+
+const Humain & Controleur::m_journeeSuivante() const {
+    return m_modele->journeeSuivante();
+}

@@ -3,10 +3,11 @@
 #include "bouton.h"
 #include <utility>
 
-EcranQuete::EcranQuete(Controleur *controleur) : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+EcranQuete::EcranQuete(Controleur *controleur) :
+    EcranGeneral{controleur},
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des Quetes", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
-                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_controleur {controleur}
+                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
@@ -36,7 +37,8 @@ EcranQuete::EcranQuete(Controleur *controleur) : m_methodeVerificationCliqueSour
     m_zoneChasse = new TexteSDL ("Chasse",SDL_Color{255,255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionChasse.x+m_fondDescriptionChasse.w/2-40,m_fondDescriptionChasse.y+10));
     m_zoneRecolte = new TexteSDL ("Recolte",SDL_Color{255,255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionRecolte.x+m_fondDescriptionRecolte.w/2-60,m_fondDescriptionRecolte.y+10));
 
-    Equipe* equipe = m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
+
+    Equipe* equipe = controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
 //    Humain* h = new Humain;
 //    h->definirNom("nn");
 //    equipe->ajouterPersonnage(h);

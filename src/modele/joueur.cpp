@@ -19,7 +19,7 @@ Joueur::Joueur()
     m_position.first=25;
     m_position.second=25;
     m_nom = "Ali Baba";
-    m_camp = new Campement();
+    //m_camp= new Campement();
     m_equipe = new Equipe();
 }
 
@@ -32,13 +32,13 @@ Joueur::Joueur()
 //! \version 1.0
 //!
 
-Joueur::Joueur(Quete quete) :
+Joueur::Joueur(const Quete &quete) :
     m_queteJoueur{quete}
 {
     m_position.first=5;
     m_position.second=5;
     m_nom = "Ali Baba";
-    m_camp = new Campement();
+    //m_camp = new Campement();
     m_equipe = new Equipe();
     m_inventaireJoueur = new Inventaire();
 }
@@ -58,8 +58,8 @@ Joueur::Joueur(Quete quete, std::string nom) :
 {
     m_position.first=5;
     m_position.second=5;
-    m_camp = new Campement();
-    m_equipe = new Equipe();
+    //m_camp = new Campement();
+    m_equipe = nullptr;//new Equipe();
     m_inventaireJoueur = new Inventaire();
 }
 
@@ -221,18 +221,18 @@ Inventaire* Joueur::obtenirInventaireJoueur()
 
 Joueur::~Joueur()
 {
-    if(m_equipe != nullptr)
-    {
-        delete m_equipe;
-    }
+//    if(m_equipe != nullptr)
+//    {
+//        delete m_equipe;
+//    }
     if(m_inventaireJoueur != nullptr)
     {
         delete m_inventaireJoueur;
     }
-    if(m_camp != nullptr)
-    {
-        delete m_camp;
-    }
+//    if(m_camp != nullptr)
+//    {
+//        delete m_camp;
+//    }
 }
 
 //!

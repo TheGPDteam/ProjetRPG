@@ -188,7 +188,7 @@ std::string Campement::serialiser() const
 //! \version 1.0
 //!
 
-std::set <Humain *> Campement::obtenirNonAttribuees()
+std::set<Humain *> &Campement::obtenirNonAttribuees()
 {
     return m_personnesNonAttribuees;
 }

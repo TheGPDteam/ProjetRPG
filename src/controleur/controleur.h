@@ -31,6 +31,8 @@ public :
     void deplacementJoueur(Direction dir);
 
     Modele* obtenirModele();
+
+    const Humain & m_journeeSuivante() const ;
   
     void choixNouvelArrivant(bool choix);
 

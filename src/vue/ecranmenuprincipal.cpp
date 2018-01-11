@@ -10,7 +10,9 @@
 //! Initialise tout le contenu de l'écran principal de jeu
 //!
 
-EcranMenuPrincipal::EcranMenuPrincipal() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
+    EcranGeneral{controleur},
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
     //! A EFFACER*
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2));

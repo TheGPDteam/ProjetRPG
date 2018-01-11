@@ -23,15 +23,15 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 
     m_typeEcran = TypeEcran::MenuPrincipal;
 
-    //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
-    m_menuPrincipal = new EcranMenuPrincipal();
-    m_ecranEquipe = new EcranEquipe();
-    m_ecranInventaire = new EcranInventaire();
-    m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    m_ecranQueteJoueur = new EcranQueteJoueur();
-    m_ecranNom = new EcranNom();
-    m_ecranPremiereJournee = new EcranPremiereJournee();
-    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
+//    //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
+//    m_menuPrincipal = new EcranMenuPrincipal();
+//    m_ecranEquipe = new EcranEquipe();
+//    m_ecranInventaire = new EcranInventaire();
+//    m_ecranChoixPersonnage = new EcranChoixPersonnage();
+//    m_ecranQueteJoueur = new EcranQueteJoueur();
+//    m_ecranNom = new EcranNom();
+//    m_ecranPremiereJournee = new EcranPremiereJournee();
+//    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
 
     m_cliqueSouris = false;
     m_coordSouris = {0,0};
@@ -53,6 +53,14 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur=controleur;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
     m_ecranChoixQuete = new EcranQuete(m_controleur);
+    m_menuPrincipal = new EcranMenuPrincipal(m_controleur);
+    m_ecranEquipe = new EcranEquipe(m_controleur);
+    m_ecranInventaire = new EcranInventaire(m_controleur);
+    m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur);
+    m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur);
+    m_ecranNom = new EcranNom(m_controleur);
+    m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
+    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
@@ -91,16 +99,16 @@ void Vue::affichageVue()
         break;
     }
     case TypeEcran::ChasseJoueur:{
-        Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
-        Quete q("Chasse","Chasse les zombies",10,100,a);
-        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+        //Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
+        //Quete q("Chasse","Chasse les zombies",10,100,a);
+        //m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         changerEcran(TypeEcran::JeuPrincipal);
         break;
     }
     case TypeEcran::RecolteJoueur:{
-        Vivre* v = new Vivre("steak","steak",15);
-        Quete q("Récolte","fais à manger!",10,100,v);
-        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+        //Vivre* v = new Vivre("steak","steak",15);
+//        Quete q("Récolte","fais à manger!",10,100,v);
+//        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         changerEcran(TypeEcran::JeuPrincipal);
         break;
     }

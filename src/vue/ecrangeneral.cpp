@@ -8,7 +8,8 @@
 //! \version 1.0
 //!
 
-EcranGeneral::EcranGeneral()
+EcranGeneral::EcranGeneral(Controleur *controleur) :
+    m_controleur{controleur}
 {
 }
 

@@ -26,7 +26,7 @@ public:
     void consommerVivre(unsigned short nbVivresConsommes);
     int obtenirConsommation() ;
 
-    std::set<Humain *> obtenirNonAttribuees();
+    std::set<Humain *>& obtenirNonAttribuees();
 
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();

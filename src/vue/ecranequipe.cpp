@@ -7,7 +7,8 @@
 const short COORD_X_RECTANGLE_HAUT = 20;
 const short COORD_Y_RECTANGLE_HAUT = 50;
 
-EcranEquipe::EcranEquipe() :
+EcranEquipe::EcranEquipe(Controleur* controleur) :
+    EcranGeneral{controleur},
     m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT,  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},

@@ -30,7 +30,7 @@ private:
 
 public:
 
-    EcranChoixPersonnage();
+    EcranChoixPersonnage(Controleur *controleur);
 
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
