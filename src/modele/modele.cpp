@@ -129,35 +129,35 @@ void Modele::deplacement(Direction dir)
 //! \date 21/12/17
 //! \version 2.0
 //!
-bool Modele::testChangementDeCarte(){
+bool Modele::testChangementDeCarte(Direction directionDep){
         std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
         bool changementCarte=false;
         // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
 
-        if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord)
+        if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord && directionDep==Nord)
         {
             nouvellePosition.first = m_joueur.obtenirPosition().first;
-            nouvellePosition.second = m_joueur.obtenirPosition().second+63;
+            nouvellePosition.second = 63;
             m_carte.changerZoneActive(Nord);
             changementCarte=true;
         }
-        else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud)
+        else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud && directionDep==Sud)
         {
             nouvellePosition.first = m_joueur.obtenirPosition().first;
-            nouvellePosition.second = m_joueur.obtenirPosition().second-63;
+            nouvellePosition.second = 0;
             m_carte.changerZoneActive(Sud);
             changementCarte=true;
         }
-        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest)
+        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest && directionDep==Ouest)
         {
-            nouvellePosition.first = m_joueur.obtenirPosition().first+63;
+            nouvellePosition.first = 63;
             nouvellePosition.second = m_joueur.obtenirPosition().second;
             m_carte.changerZoneActive(Ouest);
             changementCarte=true;
         }
-        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est);
+        else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est && directionDep==Est)
         {
-            nouvellePosition.first = m_joueur.obtenirPosition().first-63;
+            nouvellePosition.first = 0;
             nouvellePosition.second = m_joueur.obtenirPosition().second;
             m_carte.changerZoneActive(Est);
             changementCarte=true;
