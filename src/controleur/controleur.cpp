@@ -19,7 +19,7 @@ void Controleur::definirVue(Vue *vue)
 
 void Controleur::deplacementJoueur(Direction dir)
 {
-    if(!m_modele->testChangementDeCarte())
+    if(!m_modele->testChangementDeCarte(dir))
         m_modele->deplacement(dir);
 
 

@@ -33,7 +33,7 @@ public:
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
-    bool testChangementDeCarte();
+    bool testChangementDeCarte(Direction dir);
     void lancerCombat();//TO-DO
 
 
