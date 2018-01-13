@@ -16,13 +16,21 @@ private:
     SDL_Rect m_rectangleFichePersonnage;
     SDL_Rect m_rectangleBas;
 
+    TexteSDL* m_zonePrenomPersonnage;
     TexteSDL* m_zoneNomPersonnage;
 
-    TexteSDL* m_zoneDescriptionPersonnage;
+    TexteSDL* m_zoneForcePersonnage;
+    TexteSDL* m_zoneIntelligencePersonnage;
+    TexteSDL* m_zoneVitessePersonnage;
 
-    TexteSDL* m_zoneImagePersonnage;
-    TexteSDL* m_zoneStatistiquesPersonnage;
+    TexteSDL* m_zoneChassePersonnage;
+    TexteSDL* m_zoneRecoltePersonnage;
+
     TexteSDL* m_zoneNiveauPersonnage;
+
+    TexteSDL* m_zoneNomArmePersonnage;
+    TexteSDL* m_zoneDescArmePersonnage;
+    TexteSDL* m_zoneDegatsArmePersonnage;
 
     TexteSDL* m_zoneQuestion;
 

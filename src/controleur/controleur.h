@@ -32,7 +32,7 @@ public :
 
     Modele* obtenirModele();
 
-    const Humain & m_journeeSuivante() const ;
+    Humain * journeeSuivante() const ;
   
     void choixNouvelArrivant(bool choix);
 

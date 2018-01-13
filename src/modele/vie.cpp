@@ -14,7 +14,7 @@
 //!
 
 Vie::Vie()
-    :m_valeur{1},m_valeurMax{1}
+    :m_valeur{1},m_valeurMax{100}
 {}
 
 //!

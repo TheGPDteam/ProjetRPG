@@ -10,7 +10,7 @@
 //! Initialise la map de boutons d'un écran
 //!
 
-DictionnaireDeBoutons::DictionnaireDeBoutons() : m_actionsBoutons(new ActionsBoutons())
+DictionnaireDeBoutons::DictionnaireDeBoutons(Controleur * controleur) : m_actionsBoutons(new ActionsBoutons(controleur))
 {
 }
 

@@ -183,13 +183,13 @@ bool Modele::testChangementDeCarte(Direction directionDep){
 //! on part ensuite en quete pendant 10 minutes
 //!
 
-const Humain & Modele::journeeSuivante() const
+Humain* Modele::journeeSuivante()
 {
     m_nouvelArrivant = new Humain();
 
     m_temps.reinitialiserTemps();
 
-    return *m_nouvelArrivant;
+    return m_nouvelArrivant;
 }
 
 //!
@@ -230,8 +230,10 @@ void Modele::premiereJournee()
 {
     for(int i=0 ; i<7 ; i++) {
         Humain *h = new Humain();
-        m_campement.obtenirNonAttribuees().insert(h);
+        //m_campement.obtenirNonAttribuees().insert(h);//Ligne a remette
+        m_campement.ajouterPersonne(h, m_campement.obtenirRecolte());
     }
+    m_joueur.definirEquipe(m_campement.obtenirRecolte());
 
 
     m_temps.reinitialiserTemps();
@@ -375,4 +377,8 @@ std::string Modele::serialiser() const
             + m_campement.serialiser()
             + m_joueur.serialiser()
             + "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n</Modele>\n";
+}
+
+void Modele::reinitialiserTemps() {
+    m_temps.reinitialiserTemps();
 }

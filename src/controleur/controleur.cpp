@@ -44,7 +44,9 @@ void Controleur::choixNouvelArrivant(bool choix)
 {
     if(choix)
     {
-        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->m_nouvelArrivant);
+        //m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->m_nouvelArrivant);//Bonne ligne à décommenter quand on pourra gérer les équipes et les personnages attribués
+        m_modele->obtenirCampement()->obtenirRecolte()->ajouterPersonnage(m_modele->m_nouvelArrivant);
+        m_modele->obtenirJoueur()->definirEquipe(m_modele->obtenirCampement()->obtenirRecolte());
         m_modele->m_nouvelArrivant = nullptr;
     }
 }
@@ -53,6 +55,6 @@ Vue* Controleur::obtenirVue(){
      return m_vue ;
  }
 
-const Humain & Controleur::m_journeeSuivante() const {
+Humain * Controleur::journeeSuivante() const {
     return m_modele->journeeSuivante();
 }

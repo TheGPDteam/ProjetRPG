@@ -40,10 +40,14 @@ std::string donnerNom(std::string nomFichier)
 
 Humain::Humain()
     :m_coutEntretien{0},
-      m_arme{new Arme()}, m_consommation{10}
+      m_arme{new Arme()}, m_consommation{30}
 {
     m_chasse.definirValeur(rand()%m_chasse.obtenirValeurMax());
     m_recolte.definirValeur(rand()%m_recolte.obtenirValeurMax());
+    m_force.definirValeur(rand()%m_force.obtenirValeurMax());
+    m_intelligence.definirValeur(rand()%m_intelligence.obtenirValeurMax());
+    m_vitesse.definirValeur(rand()%m_vitesse.obtenirValeurMax());
+
     m_niveau.definirNiveauActuel(1);
     int genre=rand()%2;
 
@@ -100,6 +104,20 @@ Competence Humain::obtenirRecolte() const
 std::string Humain::obtenirNom() const
 {
     return m_nom;
+}
+
+//!
+//! \brief obtenir le prenom de l'humain
+//! \return le prenom
+//! \author mleothaud
+//! \date 13/01/2018
+//! \version 1.0
+//! Contient le return
+//!
+
+std::string Humain::obtenirPrenom() const
+{
+    return m_prenom;
 }
 
 //!

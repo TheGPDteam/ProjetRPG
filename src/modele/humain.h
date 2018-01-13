@@ -32,6 +32,7 @@ public:
     Competence obtenirRecolte() const;
     std::string obtenirNom() const;
     void definirNom(std::string nom);
+    std::string obtenirPrenom() const;
     Arme* obtenirArme() const;
     void definirArme(Arme *arme);
     unsigned short obtenirEntretien() const;

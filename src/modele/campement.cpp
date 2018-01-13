@@ -203,3 +203,14 @@ std::set<Humain *> &Campement::obtenirNonAttribuees()
 void Campement::charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte){
     //todo
 }
+
+void Campement::ajouterObjet(Objet *obj) {
+    if (obj->obtenirType()==TypeObjet::Vivre)
+    {
+        Vivre* v = dynamic_cast<Vivre *> (obj);
+        m_stockVivre.insert(v);
+    }
+    else {
+        m_objets.push_back(obj);
+    }
+}

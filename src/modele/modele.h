@@ -29,7 +29,7 @@ public:
 
     Modele();
     void premiereJournee();//TO-DO
-    journeeSuivante() const;//TO-DO
+    Humain *journeeSuivante();//TO-DO
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
@@ -48,6 +48,7 @@ public:
     Joueur *obtenirJoueur() ;
     void definirJoueur(Joueur joueur);
     std::string serialiser() const;
+    void reinitialiserTemps();
 };
 
 #endif

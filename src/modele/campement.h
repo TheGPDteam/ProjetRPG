@@ -16,6 +16,7 @@ private:
     std::set <Humain*> m_personnesNonAttribuees;
     Equipe m_equipeRecolte;
     Equipe m_equipeChasse;
+    std::vector <Objet *> m_objets;
 public:
     Campement();
 
@@ -33,6 +34,8 @@ public:
 
     std::string serialiser() const;
     void charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte);
+
+    void ajouterObjet(Objet* obj);
 };
 
 #endif

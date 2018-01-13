@@ -6,13 +6,13 @@
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-    m_nomFenetre("Repartition des Quetes", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+    m_nomFenetre("Repartition des membres de votre équipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10,coordB.second+10)), &ActionsBoutons::boutonChoixJoueur);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Votre quete", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10,coordB.second+10)), &ActionsBoutons::boutonChoixJoueur);
 
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
     m_fondRecolte = {20,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
@@ -38,15 +38,15 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_zoneRecolte = new TexteSDL ("Recolte",SDL_Color{255,255,255,255},POLICE_COLLEGED,20,std::make_pair(m_fondDescriptionRecolte.x+m_fondDescriptionRecolte.w/2-60,m_fondDescriptionRecolte.y+10));
 
 
-    Equipe* equipe = controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
+    //Equipe* equipe = controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
 //    Humain* h = new Humain;
 //    h->definirNom("nn");
 //    equipe->ajouterPersonnage(h);
 
-    for (auto p: equipe->obtenirListePersonnage())
-    {
-        m_equipe.push_back(dynamic_cast<Humain*>(p));
-    }
+ //   for (auto p: equipe->obtenirListePersonnage())
+  //  {
+    //    m_equipe.push_back(dynamic_cast<Humain*>(p));
+   // }
 
 }
 EcranQuete::~EcranQuete(){}
@@ -74,10 +74,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
     m_zoneChasse->afficherTexte(fenetre_affichage);
     m_zoneRecolte->afficherTexte(fenetre_affichage);
-    int i=0;
-    for (auto h : m_equipe)
+    //Fonction interessante mais probleme avec obtenirModele()
+   /* int i=0;
+    for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
     {
-        i=i+1;
+        ++i;
         //m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + m_fondDescriptionPerso.h*i));
         TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordNom.first,m_CoordNom.second+45*i));
         tempNomPersonnage.afficherTexte(fenetre_affichage);
@@ -91,7 +92,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tempForcePersonnage.afficherTexte(fenetre_affichage);
         TexteSDL tempVitessePersonnage(std::to_string(h->obtenirVitesse()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordVitesse.first,m_CoordVitesse.second+45*i));
         tempVitessePersonnage.afficherTexte(fenetre_affichage);
-    }
+    }*/
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 

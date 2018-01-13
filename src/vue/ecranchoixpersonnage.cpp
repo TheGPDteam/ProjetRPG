@@ -18,16 +18,26 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
 
     Humain* h = m_controleur->journeeSuivante();
 
-    m_zoneImagePersonnage = new TexteSDL("La Photo**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
-    m_zoneNomPersonnage = new TexteSDL("Le Nom**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 230));
-    m_zoneNiveauPersonnage = new TexteSDL("Le Niveau**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 300, m_rectangleFichePersonnage.y + 70));
-    m_zoneDescriptionPersonnage = new TexteSDL("La Description**", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 70));
-    m_zoneStatistiquesPersonnage = new TexteSDL("Les Statistiques**",
-                                                SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 600, m_rectangleFichePersonnage.y + 230));
+    m_zoneNomPersonnage = new TexteSDL("Nom : " + h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
+    m_zonePrenomPersonnage = new TexteSDL("Prenom : " + h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
+
+    m_zoneNiveauPersonnage = new TexteSDL("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
+
+    m_zoneForcePersonnage = new TexteSDL("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 100));
+    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 130));
+    m_zoneVitessePersonnage = new TexteSDL("Vitesse : " + std::to_string(h->obtenirVitesse()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 160));
+
+    m_zoneChassePersonnage = new TexteSDL("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 130));
+    m_zoneRecoltePersonnage = new TexteSDL("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
+
+    m_zoneNomArmePersonnage = new TexteSDL("Arme : " + h->obtenirArme()->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 210));
+    m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
+    m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
+
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQuete);  // PRENDRE EN COMPTE LE CHOIX
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Non", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 60), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQuete);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 20)), &ActionsBoutons::boutonQueteAcceptation);  // PRENDRE EN COMPTE LE CHOIX
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Non", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 60), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),std::make_pair(WIDTH_FENETRE_PRINCIPALE - 280, m_rectangleBas.y + 70)), &ActionsBoutons::boutonQueteRefus);
 }
 
 void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
@@ -40,10 +50,16 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 
     m_nomFenetre.afficherTexte(fenetre_affichage);
     m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneImagePersonnage->afficherTexte(fenetre_affichage);
+    m_zonePrenomPersonnage->afficherTexte(fenetre_affichage);
     m_zoneNiveauPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneDescriptionPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneStatistiquesPersonnage->afficherTexte(fenetre_affichage);
+    m_zoneForcePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneChassePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneRecoltePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneIntelligencePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneDescArmePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneNomArmePersonnage->afficherTexte(fenetre_affichage);
+    m_zoneDegatsArmePersonnage->afficherTexte(fenetre_affichage);
     m_zoneQuestion->afficherTexte(fenetre_affichage);
 
 
@@ -92,16 +108,28 @@ EcranChoixPersonnage::~EcranChoixPersonnage(){
 
     if(m_zoneNomPersonnage != nullptr)
         delete m_zoneNomPersonnage;
-
-    if(m_zoneDescriptionPersonnage != nullptr)
-        delete m_zoneDescriptionPersonnage;
+    if(m_zoneForcePersonnage != nullptr)
+        delete m_zoneForcePersonnage;
     if(m_zoneNomPersonnage != nullptr)
         delete m_zoneNomPersonnage;
-    if(m_zoneImagePersonnage != nullptr)
-        delete m_zoneImagePersonnage;
-    if(m_zoneDescriptionPersonnage != nullptr)
-        delete m_zoneDescriptionPersonnage;
-
+    if(m_zonePrenomPersonnage != nullptr)
+        delete m_zonePrenomPersonnage;
+    if(m_zoneForcePersonnage != nullptr)
+        delete m_zoneForcePersonnage;
+    if(m_zoneIntelligencePersonnage != nullptr)
+        delete m_zoneIntelligencePersonnage;
+    if(m_zoneVitessePersonnage != nullptr)
+        delete m_zoneVitessePersonnage;
+    if (m_zoneChassePersonnage != nullptr)
+        delete m_zoneChassePersonnage;
+    if (m_zoneRecoltePersonnage != nullptr)
+        delete m_zoneRecoltePersonnage;
+    if (m_zoneNomArmePersonnage != nullptr)
+        delete m_zoneNomArmePersonnage;
+    if (m_zoneDegatsArmePersonnage != nullptr)
+        delete m_zoneDegatsArmePersonnage;
+    if (m_zoneDescArmePersonnage != nullptr)
+        delete m_zoneDescArmePersonnage;
 
 
 }

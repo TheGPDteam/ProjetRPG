@@ -8,7 +8,7 @@ EcranNom::EcranNom(Controleur* controleur) :
                                              std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 300)),
                        s{new Saisir()}
 {
-     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Choix Quete", POLICE_COLLEGED, 20, std::make_pair(300,500), std::make_pair(200,50),std::make_pair(300 + 10, 500 + 10)), &ActionsBoutons::boutonQuete); // Pk taille = position texte sdl ?
+     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Commencer", POLICE_COLLEGED, 20, std::make_pair(390,500), std::make_pair(200,50),std::make_pair(390 + 25, 500 + 10)), &ActionsBoutons::boutonChoixPersonnage); // Pk taille = position texte sdl ?
 
 }
 
@@ -55,6 +55,7 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
             else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){ // Autre que les lettre de l'alpha ont même char acsii
                     s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
                 }
+            m_controleur->obtenirModele()->obtenirJoueur()->definirNom(s->obtenirBuffer());
             break;
 
         default:

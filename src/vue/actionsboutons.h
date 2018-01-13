@@ -2,15 +2,20 @@
 #define ACTIONSBOUTONS_H
 
 #include "typeecran.h"
+#include "controleur/controleur.h"
 
 class ActionsBoutons
 {
+private:
+    Controleur * m_controleur;
 public:
-    ActionsBoutons();
+    ActionsBoutons(Controleur * controleur);
 
     TypeEcran boutonJeuPrincipal() const;
 
     TypeEcran boutonQuete() const;
+    TypeEcran boutonQueteAcceptation();
+    TypeEcran boutonQueteRefus();
 
     TypeEcran boutonQuitter() const;
 
@@ -29,7 +34,7 @@ public:
     TypeEcran boutonChoixNom() const;
 
     TypeEcran boutonNouvellePartie() const;
-
+    TypeEcran boutonViderInventaire();
 };
 
 #endif // ACTIONSBOUTONS_H

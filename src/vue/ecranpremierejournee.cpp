@@ -18,7 +18,7 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 90)),
-                                &ActionsBoutons::boutonChoixPersonnage);
+                                &ActionsBoutons::boutonChoixNom);
 }
 
 

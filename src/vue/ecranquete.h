@@ -33,8 +33,6 @@ private:
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
 
-    std::vector<Humain*>m_equipe;
-
     Controleur* m_controleur;
 
 public:

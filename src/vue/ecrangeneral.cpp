@@ -9,7 +9,7 @@
 //!
 
 EcranGeneral::EcranGeneral(Controleur *controleur) :
-    m_controleur{controleur}
+    m_controleur{controleur}, DictionnaireDeBoutons(controleur)
 {
 }
 
