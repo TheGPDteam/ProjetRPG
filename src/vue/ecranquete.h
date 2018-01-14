@@ -20,20 +20,20 @@ private:
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
     TexteSDL* m_zoneNomPersonnage;
-    TexteSDL* m_zoneNiveauPersonnage;
-    TexteSDL* m_zoneViePersonnage;
-    TexteSDL* m_zoneIntelligencePersonnage;
+    TexteSDL* m_zonePrenomPersonnage;
+    TexteSDL* m_zoneChassePersonnage;
+    TexteSDL* m_zoneRecoltePersonnage;
     TexteSDL* m_zoneForcePersonnage;
     TexteSDL* m_zoneVitessePersonnage;
 
     std::pair<int, int>m_CoordNom;
-    std::pair<int, int>m_CoordNiveau;
-    std::pair<int, int>m_CoordVie;
-    std::pair<int, int>m_CoordIntelligence;
+    std::pair<int, int>m_CoordPrenom;
+    std::pair<int, int>m_CoordChasse;
+    std::pair<int, int>m_CoordRecolte;
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
 
-    Controleur* m_controleur;
+    //Controleur* m_controleur;
 
 public:
     EcranQuete(Controleur *controleur);

@@ -4,7 +4,7 @@ Club de golf/140/90/170/Envoie vos ennemis dans le trou
 Rouleau a patisserie/135/85/120/Punissez vos ennemis pour avoir piqué dans la reserve
 Pistolet/210/150/150/aaaa
 Fusil/300/30/200/aaaa
-Mitraillette/250/180/120/
+Mitraillette/250/180/120/aaaa
 Grenade/400/10/100/aaaa
 C4/500/5/100/Explose sur les ennemis
 Pioche/130/80/160/Perce le corps de vos ennemis

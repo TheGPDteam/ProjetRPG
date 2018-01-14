@@ -230,8 +230,8 @@ void Modele::premiereJournee()
 {
     for(int i=0 ; i<7 ; i++) {
         Humain *h = new Humain();
-        //m_campement.obtenirNonAttribuees().insert(h);//Ligne a remette
-        m_campement.ajouterPersonne(h, m_campement.obtenirRecolte());
+        m_campement.obtenirNonAttribuees().insert(h);
+        //m_campement.ajouterPersonne(h, m_campement.obtenirRecolte());
     }
     m_joueur.definirEquipe(m_campement.obtenirRecolte());
 
