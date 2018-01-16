@@ -2,20 +2,23 @@
 
 EcranNom::EcranNom(Controleur* controleur) :
     EcranGeneral{controleur},
-    m_nom_fenetre("Selection d'un nom de personnage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
-                                        std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-                       m_label("Tapez votre nom : ", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
-                                             std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 300)),
+    m_nom_fenetre("Selection d'un nom de personnage", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
+                                        std::make_pair(0,HEIGHT_FENETRE_PRINCIPALE/4), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 40)),
+                       m_label("Tapez votre nom : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
+                                             std::make_pair(0,(HEIGHT_FENETRE_PRINCIPALE/2) - 50), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 40)),
                        s{new Saisir()}
 {
-     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Commencer", POLICE_COLLEGED, 20, std::make_pair(390,500), std::make_pair(200,50),std::make_pair(390 + 25, 500 + 10)), &ActionsBoutons::boutonChoixPersonnage); // Pk taille = position texte sdl ?
-
+     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Commencer", POLICE_COLLEGED, 20, std::make_pair(390,3*(HEIGHT_FENETRE_PRINCIPALE/4) - 70), std::make_pair(200,50),std::make_pair(390 + 45, 3*(HEIGHT_FENETRE_PRINCIPALE/4) - 55)), &ActionsBoutons::boutonChoixPersonnage); // Pk taille = position texte sdl ?
 }
+
+const int CONTOUR_ARRIERE_PLAN = HEIGHT_FENETRE_PRINCIPALE/4;
 
 void EcranNom::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
 
-    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    afficherFondEcran(fenetre_affichage);
+
+    SDL_Rect zone = {CONTOUR_ARRIERE_PLAN,CONTOUR_ARRIERE_PLAN,WIDTH_FENETRE_PRINCIPALE-(2*CONTOUR_ARRIERE_PLAN), HEIGHT_FENETRE_PRINCIPALE-(2*CONTOUR_ARRIERE_PLAN)};
+    SDL_FillRect(fenetre_affichage, &zone, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
     m_nom_fenetre.afficherTexte(fenetre_affichage);
     m_label.afficherTexte(fenetre_affichage);
@@ -68,7 +71,6 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
 }
 
 void EcranNom::obtenirChangement(Observable &obj){
-
 
 }
 
