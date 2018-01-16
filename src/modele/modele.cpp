@@ -114,7 +114,11 @@ void Modele::deplacement(Direction dir)
 //                                                                   v->obtenirValeurNutritive());
 //                }
 
-
+                if (m_joueur.obtenirQuete()->obtenirValeurObjectif()<= m_joueur.obtenirQuete()->obtenirValeurAvancement() && !m_joueur.obtenirQuete()->estfini())
+                {
+                    m_campement.ajouterObjet(m_joueur.obtenirQuete()->obtenirRecompense());
+                    m_joueur.obtenirQuete()->finir();
+                }
             }
 
             m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
