@@ -8,6 +8,7 @@
 class Quete
 {
 private:
+    bool m_fini;
     std::string m_nom;
     std::string m_description;
     int m_valeurObjectif;
@@ -38,6 +39,8 @@ public:
     void miseEnPause();
     void reprise();
     void augmenterValeur(int valeur);
+    void finir();
+    bool estfini();
 
 };
 
