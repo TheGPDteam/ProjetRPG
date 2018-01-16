@@ -6,9 +6,10 @@
 #include <SDL/SDL.h>
 #include "textesdl.h"
 #include "policetexte.h"
+#include "typeecran.h"
 
-const int x_position = 360;
-const int y_position = 200;
+const int x_position = WIDTH_FENETRE_PRINCIPALE/2;
+const int y_position = HEIGHT_FENETRE_PRINCIPALE/2;
 
 const int TAILLE_NOM_MAX = 15;
 

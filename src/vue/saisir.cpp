@@ -1,8 +1,8 @@
 #include "saisir.h"
 
 Saisir::Saisir():buffer {""},
-    rec{x_position,y_position, TAILLE_NOM_MAX*20, 50},
-    m_bufferSDL{new TexteSDL(buffer, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 12, std::make_pair(x_position+10, y_position+20))}
+    rec{x_position-TAILLE_NOM_MAX*10,y_position-10, TAILLE_NOM_MAX*20, 50},
+    m_bufferSDL{new TexteSDL(buffer, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 12, std::make_pair(x_position, y_position))}
 {
 
 }
@@ -23,7 +23,7 @@ void Saisir::ajouterChar(char *c){
 }
 
 void Saisir::setbufferSDL() {
-    m_bufferSDL = new TexteSDL(buffer, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(rec.x+20, rec.y+20));
+    m_bufferSDL = new TexteSDL(buffer, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(rec.x+20, rec.y+15));
 }
 void Saisir::afficher(SDL_Surface *fenetre_affichage){
 
