@@ -18,8 +18,6 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2));
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-//    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10, coordB.second+10)), &ActionsBoutons::boutonNouvellePartie);
-    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonQuete);
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
 
@@ -48,7 +46,9 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
 {
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
+    //SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
+    SDL_Surface* imageFond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
+    SDL_BlitSurface(imageFond,new SDL_Rect{0,0,1024,668},fenetre_affichage,new SDL_Rect{0,0,0,0});
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 

@@ -1,1 +1,18 @@
-Scenario a ecrire
+Nous sommes en Septembre 1944, apres le debarquement de Normandie.
+ 
+Adolf Hitler a conscience que la guerre est sur le point d'etre 
+perdue et qu'il ne peut pas continuer a se battre sur deux fronts. 
+Il decide donc de se servir d'une arme secrete : un virus qui 
+necrose le claustrum, region du cerveau en charge de la conscience.
+ 
+Une personne sur 10 est naturellement resistante a ce virus, 
+et par chance vous en faites partie. Vous etes le commandant d'une
+division de la gendarmerie allemande basee sur l'ile d'Oleron. 
+Vous sortez des jeunesses hitleriennes comme bon nombre de vos 
+compagnons et par chance, 7 des 9 soldats sont egalement 
+resistants. Les deux autres devenant des zombies, vous vous devez
+de les executer. Vous organisez donc un petit groupe de survivants, 
+bien decides a rester en vie et a retourner en Allemagne reveler
+aux habitants les agissements du dictateur afin de le renverser.
+
+

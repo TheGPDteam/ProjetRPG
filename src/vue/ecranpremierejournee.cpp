@@ -10,14 +10,14 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     largeurFond = WIDTH_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
     hauteurFond = HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
 
-    m_fondRecapitulatif = {(short int)DECALAGE_FOND_RECAP_NUIT, (short int)DECALAGE_FOND_RECAP_NUIT, largeurFond, hauteurFond};
+    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
     recupererHistoire();
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 90)),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, HEIGHT_FENETRE_PRINCIPALE - 90)),
                                 &ActionsBoutons::boutonChoixNom);
 }
 
@@ -28,7 +28,7 @@ void EcranPremiereJournee::recupererHistoire()
     std::ifstream fichier(CHEMIN_HISTOIRE, std::ifstream::in);
     std::string ligne;
 
-    int coordY = m_fondRecapitulatif.y + 15;
+    int coordY = m_fondRecapitulatif.y + 90;
     TexteSDL* tmpTexte;
 
     if(fichier.good())
