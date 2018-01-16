@@ -26,7 +26,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonQuete);
 
-        coordB.second = coordB.second + 70;
+    coordB.second = coordB.second + 70;
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
 }
@@ -45,10 +45,10 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 
 void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
 {
-//    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-//    //SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
-//    SDL_Surface* imageFond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
-//    SDL_BlitSurface(imageFond,new SDL_Rect{0,0,1024,668},fenetre_affichage,new SDL_Rect{0,0,0,0});
+    //    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    //    //SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
+    //    SDL_Surface* imageFond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
+    //    SDL_BlitSurface(imageFond,new SDL_Rect{0,0,1024,668},fenetre_affichage,new SDL_Rect{0,0,0,0});
     afficherFondEcran(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }

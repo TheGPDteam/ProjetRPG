@@ -11,7 +11,7 @@ private:
 
     TexteSDL m_nomFenetre;
 
-    SDL_Rect m_fond;
+    SDL_Rect m_rectangle_fond;
     SDL_Rect m_bordure;
 
 public:
