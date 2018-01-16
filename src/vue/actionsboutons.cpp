@@ -115,10 +115,12 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 }
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
     return TypeEcran::RecolteJoueur;
 }
 

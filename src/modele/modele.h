@@ -28,8 +28,8 @@ public:
     Humain* m_nouvelArrivant;
 
     Modele();
-    void premiereJournee();//TO-DO
-    Humain *journeeSuivante();//TO-DO
+    void premiereJournee();
+    Humain *journeeSuivante();
     std::string obtenirNomPartie() const;
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);

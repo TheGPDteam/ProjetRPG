@@ -36,7 +36,7 @@ void EcranPremiereJournee::recupererHistoire()
         do
         {
             std::getline(fichier, ligne);
-            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, coordY));
+            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
             m_zoneHistoire.push_back(tmpTexte);
             coordY += tmpTexte->getHauteurFont();
         }
