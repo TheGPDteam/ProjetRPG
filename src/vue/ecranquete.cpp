@@ -6,7 +6,7 @@
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-    m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+    m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
@@ -26,10 +26,10 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_CoordChasse = std::make_pair(m_CoordPrenom.first + 170, m_fondDescriptionPerso.y + 12);
     m_CoordRecolte = std::make_pair(m_CoordChasse.first + 120, m_fondDescriptionPerso.y + 12);
 
-    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, m_CoordNom);
-    m_zonePrenomPersonnage = new TexteSDL("Prenom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, m_CoordPrenom);
-    m_zoneChassePersonnage = new TexteSDL("Chasse", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, m_CoordChasse);           // position imprécise **
-    m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
+    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordNom);
+    m_zonePrenomPersonnage = new TexteSDL("Prenom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordPrenom);
+    m_zoneChassePersonnage = new TexteSDL("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordChasse);           // position imprécise **
+    m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
 
 
 
@@ -52,8 +52,9 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
 //    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
 //    std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+//    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+//    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    afficherFondEcran(fenetre_affichage);
 
     SDL_FillRect(fenetre_affichage, &m_fondPerso, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondRecolte, SDL_MapRGB(fenetre_affichage->format, 100,100,100));

@@ -21,8 +21,8 @@ EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur) :
     int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
     int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
 
-    m_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
-    m_bordure = {m_fond.x-2,m_fond.y-2  ,m_fond.w+4,m_fond.h+4};
+    m_rectangle_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
+    m_bordure = {m_rectangle_fond.x-2,m_rectangle_fond.y-2  ,m_rectangle_fond.w+4,m_rectangle_fond.h+4};
 
 }
 
@@ -30,7 +30,7 @@ EcranQueteJoueur::~EcranQueteJoueur(){}
 
 void EcranQueteJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_bordure, SDL_MapRGB(fenetre_affichage->format, 75, 75, 75));
-    SDL_FillRect(fenetre_affichage, &m_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    SDL_FillRect(fenetre_affichage, &m_rectangle_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     m_nomFenetre.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
