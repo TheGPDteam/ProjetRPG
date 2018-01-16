@@ -1,13 +1,15 @@
 #include "ecranquete.h"
 #include "constantesbouton.h"
 #include "bouton.h"
+#include "EcranRepartitionJoueur.h"
 #include <utility>
 
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
-                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
+                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+    m_humain_a_affecter{nullptr}
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
@@ -88,6 +90,21 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
 
     }
     afficherBoutons(coord_souris, fenetre_affichage);
+
+    if(m_humain_a_affecter != nullptr){
+        RepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage);
+        int rep = repartition.affecter();
+        if(rep == CHASSE){
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse()->ajouterPersonnage(m_humain_a_affecter);
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        }
+        if(rep == RECOLTE){
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->ajouterPersonnage(m_humain_a_affecter);
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        }
+        m_humain_a_affecter = nullptr;
+        std::cout << "choix fait " << std::endl;
+    }
 }
 
 
@@ -96,7 +113,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
     SDL_Event evenements;
 
 
-
+    std::cout << "kklk" << std::endl;
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)
@@ -112,20 +129,19 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
                 if(evenements.button.y >= m_CoordPrenom.second && evenements.button.y <= m_CoordPrenom.second+(240)
                         && evenements.button.x >= m_CoordNom.first ){
                    int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
-                    Humain* humain = nullptr;
+
                     int i=0;
                    for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
                    {
                        i++;
                        if(i==idHumain)
                        {
-                           humain = h;
+                           m_humain_a_affecter = h;
                            break;
                        }
                    }
 
-                   if(humain!=nullptr)
-                    std::cout << humain->obtenirPrenom() << std::endl;
+
                 }
 
                 clique_souris = true;

@@ -33,6 +33,7 @@ private:
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
 
+    Humain * m_humain_a_affecter;
     //Controleur* m_controleur;
 
 public:
