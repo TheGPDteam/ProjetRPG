@@ -1,4 +1,6 @@
 #include "controleur.h"
+#include "../vue/typeecran.h"
+#include "../vue/vue.h"
 #include <iostream>
 
 Controleur::Controleur(Vue* vue, Modele *modele)
@@ -25,7 +27,10 @@ void Controleur::deplacementJoueur(Direction dir)
 
 }
 void Controleur::deroulementJournee(){
-    m_modele->obtenirTemps()->obtenirTempsRestant();
+    if(m_modele->obtenirTemps()->obtenirTempsRestant()<=0)
+    {
+        m_vue->changerEcran(TypeEcran::RecapitulatifNuit);
+    }
 }
 
 void Controleur::nouvellePartie(){

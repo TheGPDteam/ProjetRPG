@@ -9,6 +9,7 @@
 
 const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 560); // Pk pas utiliser coord bouton avant
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -30,7 +31,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+10,coordB.second+10)}, &ActionsBoutons::boutonEquipe);
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+10,coordB2.second+10)},&ActionsBoutons::boutonInventaire);
-
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB3, tailleB, std::make_pair(coordB3.first+10,coordB3.second+10)},&ActionsBoutons::boutonFinirQuete);;
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)

@@ -17,7 +17,7 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, HEIGHT_FENETRE_PRINCIPALE - 90)),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, HEIGHT_FENETRE_PRINCIPALE - 87)),
                                 &ActionsBoutons::boutonChoixNom);
 }
 

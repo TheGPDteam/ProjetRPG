@@ -154,3 +154,12 @@ TypeEcran ActionsBoutons::boutonViderInventaire() {
     }
     return TypeEcran::Inventaire;
 }
+
+TypeEcran ActionsBoutons::boutonFinirQuete() {
+    return TypeEcran::RecapitulatifNuit;
+}
+
+TypeEcran ActionsBoutons::boutonChoixPersonnageCycle() {
+    m_controleur->journeeSuivante();
+    return TypeEcran::ChoixPersonnage;
+}
