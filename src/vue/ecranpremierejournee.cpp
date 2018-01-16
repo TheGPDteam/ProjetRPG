@@ -17,7 +17,7 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, HEIGHT_FENETRE_PRINCIPALE - 90)),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, HEIGHT_FENETRE_PRINCIPALE - 87)),
                                 &ActionsBoutons::boutonChoixNom);
 }
 
@@ -36,7 +36,7 @@ void EcranPremiereJournee::recupererHistoire()
         do
         {
             std::getline(fichier, ligne);
-            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, coordY));
+            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
             m_zoneHistoire.push_back(tmpTexte);
             coordY += tmpTexte->getHauteurFont();
         }

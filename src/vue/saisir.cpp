@@ -23,7 +23,7 @@ void Saisir::ajouterChar(char *c){
 }
 
 void Saisir::setbufferSDL() {
-    m_bufferSDL = new TexteSDL(buffer, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(rec.x+20, rec.y+15));
+    m_bufferSDL = new TexteSDL(buffer, SDL_Color{0,0,0,0}, POLICE_COLLEGED, 20, std::make_pair(rec.x+20, rec.y+15));
 }
 void Saisir::afficher(SDL_Surface *fenetre_affichage){
 

@@ -35,6 +35,10 @@ public:
 
     TypeEcran boutonNouvellePartie() const;
     TypeEcran boutonViderInventaire();
+
+    TypeEcran boutonFinirQuete();
+
+    TypeEcran boutonChoixPersonnageCycle();
 };
 
 #endif // ACTIONSBOUTONS_H

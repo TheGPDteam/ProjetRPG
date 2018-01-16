@@ -18,7 +18,7 @@ Joueur::Joueur()
 {
     m_position.first=25;
     m_position.second=25;
-    m_nom = "Ali Baba";
+    m_nom = "Friedrich";
     //m_camp= new Campement();
     m_equipe = new Equipe();
 }
@@ -37,7 +37,7 @@ Joueur::Joueur(const Quete &quete) :
 {
     m_position.first=5;
     m_position.second=5;
-    m_nom = "Ali Baba";
+    m_nom = "Friedrich";
     //m_camp = new Campement();
     m_equipe = new Equipe();
     m_inventaireJoueur = new Inventaire();

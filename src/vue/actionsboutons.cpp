@@ -115,10 +115,12 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 }
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
     return TypeEcran::RecolteJoueur;
 }
 
@@ -151,4 +153,13 @@ TypeEcran ActionsBoutons::boutonViderInventaire() {
         m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
     }
     return TypeEcran::Inventaire;
+}
+
+TypeEcran ActionsBoutons::boutonFinirQuete() {
+    return TypeEcran::RecapitulatifNuit;
+}
+
+TypeEcran ActionsBoutons::boutonChoixPersonnageCycle() {
+    m_controleur->journeeSuivante();
+    return TypeEcran::ChoixPersonnage;
 }
