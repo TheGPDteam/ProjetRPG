@@ -11,10 +11,8 @@ private:
 
     TexteSDL m_nomFenetre;
 
-  //  SDL_Rect m_fondEcran; ?.??
-
     SDL_Rect m_rectangleFichePersonnage;
-    SDL_Rect m_rectangleBas;
+
 
     TexteSDL* m_zonePrenomPersonnage;
     TexteSDL* m_zoneNomPersonnage;
