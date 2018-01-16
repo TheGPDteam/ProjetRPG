@@ -34,5 +34,6 @@ int Temps::dureeJournee()
 
 void Temps::reinitialiserTemps()
 {
+    m_tempsDebutjournee = time(nullptr);
     m_tempsDureePause = 0;
 }

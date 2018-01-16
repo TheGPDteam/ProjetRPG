@@ -64,8 +64,6 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         valise.afficherSprite(fenetre_affichage);
     }
 
-    m_controleur->obtenirModele()->reinitialiserTemps();
-
     if (m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement() < m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()) {
         m_objectif.mettreAJourTexte("Objectif: "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement())+" sur "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()));
     }
