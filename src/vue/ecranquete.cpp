@@ -105,6 +105,25 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
         case SDL_MOUSEBUTTONUP:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
+                if(evenements.button.y >= m_CoordPrenom.second && evenements.button.y <= m_CoordPrenom.second+(240)
+                        && evenements.button.x >= m_CoordNom.first ){
+                   int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
+                    Humain* humain = nullptr;
+                    int i=0;
+                   for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
+                   {
+                       i++;
+                       if(i==idHumain)
+                       {
+                           humain = h;
+                           break;
+                       }
+                   }
+
+                   if(humain!=nullptr)
+                    std::cout << humain->obtenirPrenom() << std::endl;
+                }
+
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
