@@ -61,6 +61,18 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFichePersonnage, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
+    Humain *h = m_controleur->obtenirModele()->m_nouvelArrivant;
+    m_zoneNomPersonnage->mettreAJourTexte("Nom : " + h->obtenirNom());
+    m_zonePrenomPersonnage->mettreAJourTexte("Prenom : " + h->obtenirPrenom());
+    m_zoneNiveauPersonnage->mettreAJourTexte("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()));
+    m_zoneForcePersonnage->mettreAJourTexte("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()));
+    m_zoneChassePersonnage->mettreAJourTexte("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()));
+    m_zoneRecoltePersonnage->mettreAJourTexte("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()));
+    m_zoneIntelligencePersonnage->mettreAJourTexte("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()));
+    m_zoneVitessePersonnage->mettreAJourTexte("Vitesse : " + std::to_string(h->obtenirVitesse()));
+    m_zoneDescArmePersonnage->mettreAJourTexte("Description : " + h->obtenirArme()->obtenirDescription());
+    m_zoneNomArmePersonnage->mettreAJourTexte("Arme : " + h->obtenirArme()->obtenirNom());
+    m_zoneDegatsArmePersonnage->mettreAJourTexte("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()));
 
     m_nomFenetre.afficherTexte(fenetre_affichage);
     m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
