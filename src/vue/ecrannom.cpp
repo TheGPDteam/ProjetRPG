@@ -44,10 +44,8 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
                 clique_souris = true;
-                std::cout << coord_souris.first << "  " << coord_souris.second << std::endl;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
-                std::cout << coord_souris.first << "  " << coord_souris.second << std::endl;
             }
             break;
         case SDL_KEYDOWN:

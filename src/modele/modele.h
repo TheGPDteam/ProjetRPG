@@ -36,7 +36,6 @@ public:
     bool testChangementDeCarte(Direction dir);
     void lancerCombat();//TO-DO
 
-
     Temps *obtenirTemps();
     void definirTemps(Temps temps);
     Carte* obtenirCarte() ;

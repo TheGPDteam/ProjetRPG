@@ -131,7 +131,6 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
             m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
         }
         m_humain_a_affecter = nullptr;
-        std::cout << "choix fait " << std::endl;
     }
 }
 
@@ -141,7 +140,6 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
     SDL_Event evenements;
 
 
-    std::cout << "kklk" << std::endl;
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)

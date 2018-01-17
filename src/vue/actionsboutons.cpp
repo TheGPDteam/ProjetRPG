@@ -116,11 +116,13 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
     m_controleur->obtenirModele()->reinitialiserTemps();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse());
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
     m_controleur->obtenirModele()->reinitialiserTemps();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte());
     return TypeEcran::RecolteJoueur;
 }
 
