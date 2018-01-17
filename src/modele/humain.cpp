@@ -42,11 +42,11 @@ Humain::Humain()
     :m_coutEntretien{0},
       m_arme{new Arme()}, m_consommation{30}
 {
-    m_chasse.definirValeur(rand()%m_chasse.obtenirValeurMax());
-    m_recolte.definirValeur(rand()%m_recolte.obtenirValeurMax());
-    m_force.definirValeur(rand()%m_force.obtenirValeurMax());
-    m_intelligence.definirValeur(rand()%m_intelligence.obtenirValeurMax());
-    m_vitesse.definirValeur(rand()%m_vitesse.obtenirValeurMax());
+    m_chasse.definirValeur((rand()%m_chasse.obtenirValeurMax())+1);
+    m_recolte.definirValeur((rand()%m_recolte.obtenirValeurMax())+1);
+    m_force.definirValeur((rand()%m_force.obtenirValeurMax())+1);
+    m_intelligence.definirValeur((rand()%m_intelligence.obtenirValeurMax())+1);
+    m_vitesse.definirValeur((rand()%m_vitesse.obtenirValeurMax())+1);
 
     m_niveau.definirNiveauActuel(1);
     int genre=rand()%2;

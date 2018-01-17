@@ -1,4 +1,4 @@
-#include "EcranRepartitionJoueur.h"
+#include "ecranrepartitionjoueur.h"
 #include "utility"
 
 #include "bouton.h"
@@ -42,7 +42,7 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
                            std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
                            std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
                            std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
-    m_chasse = new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20,
+    m_chasse = new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20,
                           std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
                           std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
                           std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));

@@ -16,6 +16,8 @@ private:
     SDL_Rect m_fondDescriptionRecolte;
 
     TexteSDL m_nomFenetre;
+    TexteSDL m_titreChasse;
+    TexteSDL m_titreRecolte;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
@@ -34,7 +36,6 @@ private:
     std::pair<int, int>m_CoordVitesse;
 
     Humain * m_humain_a_affecter;
-    //Controleur* m_controleur;
 
 public:
     EcranQuete(Controleur *controleur);

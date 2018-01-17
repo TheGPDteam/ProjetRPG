@@ -1,7 +1,7 @@
 #include "ecranquete.h"
 #include "constantesbouton.h"
 #include "bouton.h"
-#include "EcranRepartitionJoueur.h"
+#include "ecranrepartitionjoueur.h"
 #include <utility>
 
 EcranQuete::EcranQuete(Controleur *controleur) :
@@ -9,6 +9,8 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+    m_titreRecolte("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(200,HEIGHT_FENETRE_PRINCIPALE/2+40)),
+    m_titreChasse("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(700,HEIGHT_FENETRE_PRINCIPALE/2+40)),
     m_humain_a_affecter{nullptr}
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
@@ -32,7 +34,6 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_zonePrenomPersonnage = new TexteSDL("Prenom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordPrenom);
     m_zoneChassePersonnage = new TexteSDL("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordChasse);           // position imprécise **
     m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
-
 
 
     //Equipe* equipe = controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
@@ -71,6 +72,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_zonePrenomPersonnage->afficherTexte(fenetre_affichage);
     m_zoneChassePersonnage->afficherTexte(fenetre_affichage);
     m_zoneRecoltePersonnage->afficherTexte(fenetre_affichage);
+    m_titreChasse.afficherTexte(fenetre_affichage);
+    m_titreRecolte.afficherTexte(fenetre_affichage);
 
     //Fonction interessante mais probleme avec obtenirModele()
     int i=0;
@@ -89,6 +92,31 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Attribuer", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(m_CoordRecolte.first + 150, m_CoordRecolte.second + 30 * i)), &ActionsBoutons::boutonChoixJoueur);
 
     }
+    int j=0;
+    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->obtenirListePersonnage())
+    {
+        Humain *h = dynamic_cast <Humain *> (p);
+        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(50,410+30*j));
+        tempNomPersonnage.afficherTexte(fenetre_affichage);
+        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(250,410+30*j));
+        tempPrenomPersonnage.afficherTexte(fenetre_affichage);
+        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(400,410+30*j));
+        tempRecoltePersonnage.afficherTexte(fenetre_affichage);
+        ++j;
+    }
+    int k=0;
+    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse()->obtenirListePersonnage())
+    {
+        Humain *h = dynamic_cast <Humain *> (p);
+        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(550,410+30*k));
+        tempNomPersonnage.afficherTexte(fenetre_affichage);
+        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
+        tempPrenomPersonnage.afficherTexte(fenetre_affichage);
+        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
+        tempRecoltePersonnage.afficherTexte(fenetre_affichage);
+        ++k;
+    }
+
     afficherBoutons(coord_souris, fenetre_affichage);
 
     if(m_humain_a_affecter != nullptr){
