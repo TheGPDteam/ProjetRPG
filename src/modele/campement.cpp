@@ -58,13 +58,14 @@ unsigned short Campement::obtenirNbVivres() const
 //! Enleve les vivres du stock et decremente la quantite enregistree
 //!
 
-void Campement::consommerVivre(unsigned short nbVivresConsommes)
+int Campement::consommerVivre()
 {
-    for (int i=0; i<nbVivresConsommes;i++)
-    {
-        m_quantiteVivre--;
-        m_stockVivre.erase(m_stockVivre.begin());
-    }
+    int valeurNutritive = 0;
+    std::set<Vivre*>::iterator it = m_stockVivre.begin();
+    Vivre *v = *it;
+    valeurNutritive = v->obtenirValeurNutritive();
+    m_stockVivre.erase(v);
+    return valeurNutritive;
 }
 
 //!
@@ -213,4 +214,9 @@ void Campement::ajouterObjet(Objet *obj) {
     else {
         m_objets.push_back(obj);
     }
+}
+
+std::set<Vivre*> Campement::obtenirVivres()
+{
+    return m_stockVivre;
 }

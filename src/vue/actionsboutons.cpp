@@ -100,6 +100,7 @@ TypeEcran ActionsBoutons::boutonQuete() const {
 TypeEcran ActionsBoutons::boutonQueteAcceptation()
 {
     m_controleur->choixNouvelArrivant(true);
+    m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->definirValeurObjectif(m_controleur->obtenirModele()->obtenirCampement()->obtenirConsommation());
     return TypeEcran::ChoixQuete;
 }
 
@@ -158,6 +159,7 @@ TypeEcran ActionsBoutons::boutonViderInventaire() {
 }
 
 TypeEcran ActionsBoutons::boutonFinirQuete() {
+    m_controleur->finJournee();
     return TypeEcran::RecapitulatifNuit;
 }
 

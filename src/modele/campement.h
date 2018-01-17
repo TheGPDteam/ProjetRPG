@@ -24,7 +24,7 @@ public:
     void ajouterPersonne(Humain *humain);
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
-    void consommerVivre(unsigned short nbVivresConsommes);
+    int consommerVivre();
     int obtenirConsommation() ;
 
     std::set<Humain *>& obtenirNonAttribuees();
@@ -36,6 +36,8 @@ public:
     void charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte);
 
     void ajouterObjet(Objet* obj);
+
+    std::set<Vivre *> obtenirVivres();
 };
 
 #endif

@@ -36,6 +36,8 @@ public :
   
     void choixNouvelArrivant(bool choix);
 
+    void finJournee() const;
+
   Vue* obtenirVue();
 };
 

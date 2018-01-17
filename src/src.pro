@@ -112,4 +112,6 @@ HEADERS += \
     vue/ecranpremierejournee.h \
     vue/ecranrecapitulatifnuit.h \
     modele/typeobjet.h \
-    vue/ecranrepartitionjoueur.h
+    vue/ecranrepartitionjoueur.h \
+    modele/typequete.h \
+    modele/typedefaite.h

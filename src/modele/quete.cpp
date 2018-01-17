@@ -18,8 +18,8 @@
 //! Constructeur paramétré de la classe Quete
 //!
 
-Quete::Quete(std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
-    :m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
+Quete::Quete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
+    :m_type{tq}, m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
       m_recompenseExperience{recompenseExperience}, m_recompense{recompense}, m_fini{false}
 {
 }
@@ -208,4 +208,8 @@ bool Quete::estfini()
 void Quete::finir()
 {
     m_fini = true;
+}
+
+TypeQuete Quete::obtenirType() const {
+    return m_type;
 }

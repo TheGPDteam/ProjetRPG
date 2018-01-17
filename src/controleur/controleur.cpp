@@ -29,6 +29,7 @@ void Controleur::deplacementJoueur(Direction dir)
 void Controleur::deroulementJournee(){
     if(m_modele->obtenirTemps()->obtenirTempsRestant()<=0)
     {
+        m_modele->finJournee();
         m_vue->changerEcran(TypeEcran::RecapitulatifNuit);
     }
 }
@@ -60,4 +61,8 @@ Vue* Controleur::obtenirVue(){
 
 Humain * Controleur::journeeSuivante() const {
     return m_modele->journeeSuivante();
+}
+
+void Controleur::finJournee() const {
+    m_modele->finJournee();
 }
