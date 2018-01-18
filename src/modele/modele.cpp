@@ -67,7 +67,7 @@ bool Modele::testerDeplacement(Direction& dir){
 
     switch(dir){
     case Nord:
-        if (posY==0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirEstMarchable())
+        if (posY==1 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirEstMarchable())
             return true;
         return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         break;
