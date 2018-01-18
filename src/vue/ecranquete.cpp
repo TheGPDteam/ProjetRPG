@@ -90,7 +90,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordRecolte.first,m_CoordRecolte.second+30*i));
         tempRecoltePersonnage.afficherTexte(fenetre_affichage);
         //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Attribuer", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(m_CoordRecolte.first + 150, m_CoordRecolte.second + 30 * i)), &ActionsBoutons::boutonChoixJoueur);
-
+        if(i==8)
+            break;
     }
     int j=0;
     for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->obtenirListePersonnage())
@@ -152,7 +153,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
         case SDL_MOUSEBUTTONDOWN:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
-                if(evenements.button.y >= m_CoordPrenom.second+30 && evenements.button.y <= m_CoordPrenom.second+30+(m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().size()*30)
+                if(evenements.button.y >= m_CoordPrenom.second+30 && evenements.button.y <= m_CoordPrenom.second+30+(8*30)
                         && evenements.button.x >= m_CoordNom.first ){
                       int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
 
