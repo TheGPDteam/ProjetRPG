@@ -53,7 +53,7 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
             if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "backspace"){
                 s->enleverChar();
             }
-            else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){ // Autre que les lettre de l'alpha ont même char acsii
+            else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){
                     s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
                 }
             m_controleur->obtenirModele()->obtenirJoueur()->definirNom(s->obtenirBuffer());
