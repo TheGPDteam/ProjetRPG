@@ -29,7 +29,7 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 90)),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85)),
                                 &ActionsBoutons::boutonChoixPersonnageCycle);
 
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
