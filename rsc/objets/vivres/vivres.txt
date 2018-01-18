@@ -1,18 +1,19 @@
-Baguette/100/aaaa
-Steak/150/aaaa
-Tomate/30/aaaa
-Banane/70/aaaa
-Eau/100/aaaa
-Cookie/15/aaaa
-Carotte/30/aaaa
-Riz/200/aaaa
-Pates/200/aaaa
-Lait/120/aaaa
-Orange/35/aaaa
-Ananas/80/aaaa
-Quenelle/100/aaaa
-Peche/35/aaaa
-Patates/100/aaaa
-Salade/30/aaaa
-Biscuit/15/aaaa
-Poisson/170/aaaa
+Baguette/30/Une petite bague pour vos petits creux
+Steak/40/Trouvez une hache
+Eau/20/L eau c est la vie
+Cookie/5/Pour une vraie petite faim
+Riz/75/Ca calle bien
+Pates/75/Ca calle bien
+Lait/15/Matin leger avec lactel
+Orange/10/Tu captes la blague 
+Ananas/20/Toi tu me donnes ton abricot moi je te donne mon ananas
+Quenelle/60/Attention a Dieudo
+Peche/10/Pas besoin de canne
+Patates/25/La vie est dure quand on est une petite patate
+Salade/5/Pour les Vegans
+Biscuit/10/Triscuit
+Poisson/50/Pour pas etre con le poisson
+Tacos Legendaire/100/Avec frites et boisson
+Tomate/10/Beau fruit rouge
+Banane/10/Beau fruit jaune
+Carotte/10/Beau tubercule orange
