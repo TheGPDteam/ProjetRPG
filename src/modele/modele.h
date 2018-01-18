@@ -10,6 +10,7 @@
 #include "campement.h"
 #include "combat.h"
 #include "joueur.h"
+#include "utilitaires.h"
 
 class Modele
 {
@@ -48,6 +49,7 @@ public:
     Joueur *obtenirJoueur() ;
     void definirJoueur(Joueur joueur);
     std::string serialiser() const;
+    void charger(const std::__cxx11::string &donnees);
 };
 
 #endif

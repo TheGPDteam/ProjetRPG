@@ -2,6 +2,7 @@
 #define arme_h
 
 #include "objet.h"
+#include "utilitaires.h"
 #include <string>
 #include <vector>
 #include <fstream>
@@ -23,8 +24,8 @@ public:
     unsigned short obtenirVitesse();
     unsigned short obtenirChance();
     std::string serialiser() const override;
-    void charger(std::vector<std::string> donnees);
     TypeObjet obtenirType() const override;
+    void charger(const std::string &donnees);
 };
 
 #endif

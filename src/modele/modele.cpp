@@ -371,8 +371,18 @@ void Modele::definirJoueur(Joueur joueur)
 
 std::string Modele::serialiser() const
 {
-    return "<Modele>\n"
+    return "<Modele><NomPartie>" + m_nomPartie + "</NomPartie>"
             + m_campement.serialiser()
             + m_joueur.serialiser()
-            + "   <NomPartie>\n" + m_nomPartie + "\n</NomPartie>\n</Modele>\n";
+            + "</Modele>";
+}
+
+void Modele::charger(const std::string &donnees)
+{
+    m_nomPartie = obtenirSousChaineEntre2Predicats(donnees,"<NomPartie>","</NomPartie>");
+    std::string donneesCampement = obtenirSousChaineEntre2Predicats(donnees,"<Campement>","</Campement");
+    m_campement = Campement();
+    m_campement.charger(donneesCampement);
+    m_joueur = Joueur();
+    m_joueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<Joueur>","</Joueur>"));
 }

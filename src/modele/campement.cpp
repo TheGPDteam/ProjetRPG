@@ -160,23 +160,23 @@ Equipe* Campement::obtenirRecolte()
 
 std::string Campement::serialiser() const
 {
-    std::string donnees_campement = "<Campement>\n"
-                                    "   <QuantiteVivre>\n" + std::to_string(m_quantiteVivre) + "\n</QuantiteVivre>\n"
-                                                                                               "   <StockVivre>\n";
+    std::string donnees_campement = "<Campement>"
+                                    "   <QuantiteVivre>" + std::to_string(m_quantiteVivre) + "</QuantiteVivre>"
+                                                                                             "   <StockVivre>";
     for (Vivre* v : m_stockVivre)
         donnees_campement += v->serialiser();
-    donnees_campement += "\n</StockVivre>\n"
-                         "   <EquipeRecolte>\n"
+    donnees_campement += "</StockVivre>"
+                         "   <EquipeRecolte>"
             + m_equipeRecolte.serialiser()
-            + "\n</EquipeRecolte>\n"
-              "   <EquipeChasse>\n"
+            + "</EquipeRecolte>"
+              "   <EquipeChasse>"
             + m_equipeChasse.serialiser()
-            + " \n</EquipeChasse>\n"
-              " <PersonnesNonAttribuees>\n";
+            + " </EquipeChasse>"
+              " <PersonnesNonAttribuees>";
     for (Personnage* p : m_personnesNonAttribuees)
         donnees_campement += p->serialiser();
-    donnees_campement += "\n</PersonnesNonAttribuees>\n"
-                         "   \n</Campement>\n";
+    donnees_campement += "</PersonnesNonAttribuees>"
+                         "   </Campement>";
 
     return donnees_campement;
 }
@@ -195,11 +195,44 @@ std::set <Humain *> Campement::obtenirNonAttribuees()
 
 //!
 //! \brief Chargement des attrubuts du campement
-//! \author mpardo
-//! \date 24/10/17
+//! \author mpardo,nlesne
+//! \date 17/01/18
 //! \version 1.0
 //!
 
-void Campement::charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte){
-    //todo
+void Campement::charger(std::string &donnees)
+{
+    m_quantiteVivre = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<QuantiteVivre>","</QuantiteVivre>"));
+
+    if (donnees.find("<StockVivre>") != std::string::npos)
+    {
+        std::string donneesStockVivre = obtenirSousChaineEntre2Predicats(donnees,"<StockVivre>","</StockVivre>");
+        while (!obtenirSousChaineEntre2Predicats(donneesStockVivre,"<Vivre>","</Vivre>").empty())
+        {
+            Vivre* v = new Vivre();
+            v->charger(obtenirSousChaineEntre2Predicats(donneesStockVivre,"<Vivre>","</Vivre>"));
+            m_stockVivre.insert(v);
+            supprimmerSousChaineEntre2Predicats(donneesStockVivre,"<Vivre>","</Vivre>");
+        }
+    }
+
+    std::string donneesEquipeRecolte = obtenirSousChaineEntre2Predicats(donnees,"<EquipeRecolte>","</EquipeRecolte>");
+    m_equipeRecolte = Equipe();
+    m_equipeRecolte.charger(donneesEquipeRecolte);
+
+    std::string donneesEquipeChasse = obtenirSousChaineEntre2Predicats(donnees,"<EquipeChasse>","</EquipeChasse>");
+    m_equipeChasse = Equipe();
+    m_equipeChasse.charger(donneesEquipeChasse);
+
+    if (donnees.find("<PersonnesNonAttribuees>") != std::string::npos)
+    {
+        std::string donneesPersonnesNonAttribuees = obtenirSousChaineEntre2Predicats(donnees,"<PersonnesNonAttribuees>","</PersonnesNonAttribuees>");
+        while (!obtenirSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>").empty())
+        {
+            Humain* h = new Humain();
+            h->charger(obtenirSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>"));
+            m_personnesNonAttribuees.insert(h);
+            supprimmerSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>");
+        }
+    }
 }

@@ -126,13 +126,24 @@ Equipe* Equipe::genererEquipeZombie()
 
 std::string Equipe::serialiser() const
 {
-    std::string donnees_equipe = "<Equipe>\n";
+    std::string donnees_equipe = "<Equipe>";
 
     for (Personnage* p : m_personnages)
     {
         donnees_equipe += p->serialiser();
     }
-    donnees_equipe += "\n</Equipe>\n";
+    donnees_equipe += "</Equipe>";
 
     return donnees_equipe;
+}
+
+void Equipe::charger(std::string &donnees)
+{
+    while (!obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>").empty())
+    {
+        Humain* h = new Humain();
+        h->charger(donnees);
+        m_personnages.insert(h);
+        supprimmerSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>");
+    }
 }

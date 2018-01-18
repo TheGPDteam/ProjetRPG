@@ -90,18 +90,18 @@ void Statistique::augmenter(int valeur)
 
 
 std::string Statistique::serialiser() const{
-    return "<Statistique>\n"
-            "   <Actuelle>\n" + std::to_string(m_statActuelle) + "\n</Actuelle>\n"
-            "   <Maximum>\n" + std::to_string(m_STATMAX) + "\n</Maximum>\n"
-            "</Statistique>\n";
+    return "<Statistique>"
+            "   <Actuelle>" + std::to_string(m_statActuelle) + "</Actuelle>"
+            "</Statistique>";
 }
 
 //! \brief charge les attribut de la classe Statistique
-//! \author parMarius
-//! \date 19/10/17
+//! \author parMarius,nlesne
+//! \date 18/01/18
 //! \version 1.0
 //!
 
-void Statistique::charger(std::vector<std::string> donnees){
-    m_statActuelle = std::stoi(donnees[0]);
+void Statistique::charger(const std::string &donnees)
+{
+    m_statActuelle = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Actuelle>","</Actuelle>"));
 }

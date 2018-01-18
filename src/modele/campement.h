@@ -5,6 +5,7 @@
 #include "equipe.h"
 #include "vivre.h"
 #include "humain.h"
+#include "utilitaires.h"
 #include <vector>
 #include <string>
 
@@ -32,7 +33,7 @@ public:
     Equipe* obtenirRecolte();
 
     std::string serialiser() const;
-    void charger(std::vector<std::string> donnees, std::vector<std::string> donnees_equipe_chasse, std::vector<std::string> donnees_equipe_recolte);
+    void charger(std::__cxx11::string &donnees);
 };
 
 #endif

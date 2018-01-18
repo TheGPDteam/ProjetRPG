@@ -7,6 +7,8 @@
 #include <assert.h>
 #include "personnage.h"
 #include "zombie.h"
+#include "humain.h"
+#include "utilitaires.h"
 
 class Equipe
 {
@@ -28,6 +30,7 @@ public:
         return m_personnages.end();
     }
     std::string serialiser() const;
+    void charger(std::__cxx11::string &donnees);
 };
 
 #endif

@@ -11,11 +11,16 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
         std::cerr << "Dossier créé !" << std::endl;
     }
 
-    std::ofstream fichierSauvegarde("save/Modele.xml",std::ios::out | std::ios::trunc);
+    std::string cheminFichier = "save/";
+    if (!modele->obtenirNomPartie().empty())
+        cheminFichier += modele->obtenirNomPartie()+".xml";
+    else
+        cheminFichier += "Defaut.xml";
+    std::ofstream fichierSauvegarde(cheminFichier,std::ios::out | std::ios::trunc);
 
     if (fichierSauvegarde.is_open())
     {
-        fichierSauvegarde << EN_TETE_XML+"\n";
+        fichierSauvegarde << EN_TETE_XML+"";
         fichierSauvegarde << modele->serialiser();
         fichierSauvegarde.close();
     }
@@ -26,10 +31,18 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
 void Sauvegarde::chargerModele(Modele* modele,std::string chemin)
 {
     std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
+    std::string ligneCourante = "";
 
     if (fichierSauvegarde.is_open())
     {
+        std::getline(fichierSauvegarde,ligneCourante);
+        if (ligneCourante == EN_TETE_XML) // Teste si le fichier est un fichier contenant une sauvegarde
+        {
+            std::string donnees_fichier { std::istreambuf_iterator<char>(fichierSauvegarde), std::istreambuf_iterator<char>() };
+            modele->charger(donnees_fichier);
+        }
 
+        fichierSauvegarde.close();
     }
 
 }

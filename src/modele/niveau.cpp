@@ -127,23 +127,23 @@ void Niveau::niveauSuperieur()
 //! \version 0.2
 //!
 std::string Niveau::serialiser() const{
-    return "<Niveau>\n"
-            "   <NiveauActuel>\n" + std::to_string(m_niveauActuel) + "\n</NiveauActuel>\n"
-            "   <NiveauMax>\n" + std::to_string(m_NIVEAUMAX) + "\n</NiveauMax>\n"
-            "   <ExperienceActuelle>\n" + std::to_string(m_pointsExperienceActuels) + "\n</ExperienceActuelle>\n"
-            "   <ExperiencePourNiveauSuivant>\n" + std::to_string(m_pointsExperiencePourNiveauSuivant) + "\n</ExperiencePourNiveauSuivant>\n"
-            "</Niveau>\n";
+    return "<Niveau>"
+            "   <NiveauActuel>" + std::to_string(m_niveauActuel) + "</NiveauActuel>"
+            "   <ExperienceActuelle>" + std::to_string(m_pointsExperienceActuels) + "</ExperienceActuelle>"
+            "   <ExperiencePourNiveauSuivant>" + std::to_string(m_pointsExperiencePourNiveauSuivant) + "</ExperiencePourNiveauSuivant>"
+            "</Niveau>";
 
 }
 
 //! \brief charger les attributs de la classe Niveau
-//! \author parMarius
-//! \date 19/10/17
+//! \author parMarius,nlesne
+//! \date 18/01/18
 //! \version 1.0
 //!
 
-void Niveau::charger(std::vector<std::string> donnees){
-    m_niveauActuel = std::stoi(donnees[0]);
-    m_pointsExperienceActuels = std::stoi(donnees[1]);
-    m_pointsExperiencePourNiveauSuivant = std::stoi(donnees[2]);
+void Niveau::charger(const std::string &donnees)
+{
+    m_niveauActuel = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<NiveauActuel>","</NiveauActuel>"));
+    m_pointsExperienceActuels = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ExperienceActuelle>","</ExperienceActuelle>"));
+    m_pointsExperiencePourNiveauSuivant = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ExperiencePourNiveauSuivant>","</ExperiencePourNiveauSuivant>"));
 }

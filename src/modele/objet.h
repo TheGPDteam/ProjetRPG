@@ -16,6 +16,7 @@ protected:
     std::string m_nom; /// Nom de l'Objet
     std::string m_description; /// Description de l'Objet
 public:
+    Objet();
     Objet(std::string nom, std::string description);
     virtual ~Objet();
     std::string obtenirNom() const;
@@ -24,6 +25,7 @@ public:
     void definirDescription(const std::string &description);
     virtual std::string serialiser() const;
     virtual TypeObjet obtenirType() const;
+    virtual void charger(const std::string &donnees);
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define vivre_h
 
 #include "objet.h"
+#include "utilitaires.h"
 #include <string>
 #include <vector>
 #include <fstream>
@@ -21,6 +22,7 @@ public:
     void definirValeurNutritive(const int &valeurNutritive);
     std::string serialiser() const override;
     TypeObjet obtenirType() const override;
+    void charger(const std::string &donnees);
 };
 
 #endif

@@ -254,15 +254,32 @@ Quete* Joueur::obtenirQuete() {
 
 std::string Joueur::serialiser() const
 {
-    return "<Joueur>\n"
-            "   <NomJoueur>\n" + m_nom + "\n</NomJoueur>\n"
+    return "<Joueur>"
+            "   <NomJoueur>" + m_nom + "</NomJoueur>"
+            "   <EquipeJoueur>"
             + m_equipe->serialiser()
             +
-            "   <PersonnageJoueur>\n"
+            "   </EquipeJoueur>"
+            "   <PersonnageJoueur>"
             + m_personnageJoueur.serialiser()
             +
-            "   \n</PersonnageJoueur>\n"
+            "   </PersonnageJoueur>"
             + m_inventaireJoueur->serialiser()
             +
-            "</Joueur>\n";
+            "</Joueur>";
+}
+
+void Joueur::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<NomJoueur>","</NomJoueur>");
+
+    std::string donneesEquipe = obtenirSousChaineEntre2Predicats(donnees,"<EquipeJoueur>","</EquipeJoueur>");
+    m_equipe = new Equipe();
+    m_equipe->charger(donneesEquipe);
+
+    m_personnageJoueur = Humain();
+    m_personnageJoueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<PersonnageJoueur>","</PersonnageJoueur>"));
+
+    m_inventaireJoueur = new Inventaire();
+    m_inventaireJoueur->charger(obtenirSousChaineEntre2Predicats(donnees,"<Inventaire>","</Inventaire>"));
 }

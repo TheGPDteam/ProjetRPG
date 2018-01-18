@@ -52,7 +52,8 @@ SOURCES += \
     vue/ecrannom.cpp \
     vue/saisir.cpp \
     vue/ecranpremierejournee.cpp \
-    vue/ecranrecapitulatifnuit.cpp
+    vue/ecranrecapitulatifnuit.cpp \
+    modele/utilitaires.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -110,4 +111,5 @@ HEADERS += \
     observable.h \
     vue/ecranpremierejournee.h \
     vue/ecranrecapitulatifnuit.h \
-    modele/typeobjet.h
+    modele/typeobjet.h \
+    modele/utilitaires.h

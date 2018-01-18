@@ -270,36 +270,74 @@ std::string Humain::serialiser() const
     else
         genre = "Inconnu";
 
-    return "<Humain>\n"
-            "   <Nom>\n" + m_nom + "\n</Nom>\n"
-            "   <Prenom>\n" + m_prenom + "\n</Prenom>\n"
-            "   <Genre>\n" + genre + "\n</Genre>\n"
-            "   <Force>\n"
-            + m_force.serialiser()
-            +
-            "   </Force>\n"
-            "   <Intelligence>\n"
-            + m_intelligence.serialiser()
-            +
-            "   </Intelligence>\n"
-            "   <Vitesse>\n"
-            + m_vitesse.serialiser()
-            +
-            "   </Vitesse>\n"
+    return "<Humain>"
+            "   <Nom>" + m_nom + "</Nom>"
+            "   <Prenom>" + m_prenom + "</Prenom>"
+            "   <Genre>" + genre + "</Genre>"
             + m_vie.serialiser()
             +
-            "   <CompetenceChasse>\n"
+            "   <Force>"
+            + m_force.serialiser()
+            +
+            "   </Force>"
+            "   <Intelligence>"
+            + m_intelligence.serialiser()
+            +
+            "   </Intelligence>"
+            "   <Vitesse>"
+            + m_vitesse.serialiser()
+            +
+            "   </Vitesse>"
+            + m_vie.serialiser()
+            +
+            "   <CompetenceChasse>"
             + m_chasse.serialiser()
             +
-            "  </CompetenceChasse>\n"
-            "   <CompetenceRecolte>\n"
+            "  </CompetenceChasse>"
+            "   <CompetenceRecolte>"
             + m_recolte.serialiser()
             +
-            "   </CompetenceRecolte>\n"
-            "   <CoutEntretien>\n" + std::to_string(m_coutEntretien) + "\n</CoutEntretien>\n"
+            "   </CompetenceRecolte>"
+            "   <CoutEntretien>" + std::to_string(m_coutEntretien) + "</CoutEntretien>"
             + m_niveau.serialiser()
             + m_arme->serialiser()
             +
-            "</Humain>\n";
+            "</Humain>";
+}
+
+void Humain::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
+    m_prenom = obtenirSousChaineEntre2Predicats(donnees,"<Prenom>","</Prenom>");
+
+    std::string donneesGenre = obtenirSousChaineEntre2Predicats(donnees,"<Genre>","</Genre>");
+    if (donneesGenre.find("Homme") != std::string::npos)
+        m_genre = Genre::Homme;
+    else if (donneesGenre.find("Femme") != std::string::npos)
+        m_genre = Genre::Femme;
+
+
+    m_force = Statistique();
+    m_force.charger(obtenirSousChaineEntre2Predicats(donnees,"<Force>","</Force>"));
+
+    m_intelligence = Statistique();
+    m_intelligence.charger(obtenirSousChaineEntre2Predicats(donnees,"<Intelligence>","</Intelligence>"));
+
+    m_vitesse = Statistique();
+    m_vitesse.charger(obtenirSousChaineEntre2Predicats(donnees,"<Vitesse>","</Vitesse>"));
+
+    m_chasse = Competence();
+    m_chasse.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceChasse>","</CompetenceChasse>"));
+
+    m_recolte = Competence();
+    m_chasse.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceRecolte>","</CompetenceRecolte>"));
+
+    m_coutEntretien = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<CoutEntretien>","</CoutEntretien>"));
+
+    m_niveau = Niveau();
+    m_niveau.charger(obtenirSousChaineEntre2Predicats(donnees,"<Niveau>","</Niveau>"));
+
+    m_arme = new Arme();
+    m_arme->charger(obtenirSousChaineEntre2Predicats(donnees,"<Arme>","</Arme>"));
 }
 

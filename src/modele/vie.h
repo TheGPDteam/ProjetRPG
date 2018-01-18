@@ -6,8 +6,8 @@
 //! \date 03/11/2016
 //!
 
-#include <vector>
 #include <string>
+#include "utilitaires.h"
 
 class Vie
 {
@@ -24,7 +24,7 @@ public:
     void diminuer(int valeur);
     void augmenter(int valeur);
     std::string serialiser()const;
-    void charger(std::vector<std::string> donnees);
+    void charger(const std::string &donnees);
 };
 
 #endif

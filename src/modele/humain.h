@@ -8,6 +8,7 @@
 #include "arme.h"
 #include "niveau.h"
 #include "personnage.h"
+#include "utilitaires.h"
 
 enum Genre {
     Homme,
@@ -42,6 +43,7 @@ public:
     void augmenterExperience(int exp);
     int obtenirConsommation() const;
     std::string serialiser() const override;
+    void charger(const std::string &donnees);
 };
 
 #endif

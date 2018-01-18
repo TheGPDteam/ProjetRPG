@@ -99,8 +99,12 @@ unsigned short Competence::obtenirValeurMax() const
 
 std::string Competence::serialiser() const
 {
-    return "<Competence>\n"
-            "   <Valeur>\n" + std::to_string(m_valeur) + "\n</Valeur>\n"
-            "   <ValeurMaximum>\n" + std::to_string(M_VALEUR_MAX) + "\n</ValeurMaximum>\n"
-            "\n</Competence>\n";
+    return "<Competence>"
+            "   <Valeur>" + std::to_string(m_valeur) + "</Valeur>"
+            "</Competence>";
+}
+
+void Competence::charger(const std::string &donnees)
+{
+    m_valeur = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Valeur>","</Valeur>"));
 }

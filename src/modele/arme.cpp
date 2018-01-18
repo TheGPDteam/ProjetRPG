@@ -196,28 +196,24 @@ unsigned short Arme::obtenirVitesse()
 
 std::string Arme::serialiser() const
 {
-    return "<Arme>\n"
-           "    <Nom>\n" + m_nom + "\n</Nom>\n"
-            "   <Description>\n" + m_description + "\n</Description>\n"
-            "   <Degats>\n" + std::to_string(m_degats) + "\n</Degats>\n"
-            "   <Vitesse>\n" + std::to_string(m_vitesse) + "\n</Vitesse>\n"
-            "   <Chance>\n" + std::to_string(m_chance) + "\n</Chance>\n"
-            "</Arme>\n";
-}
-
-//!
-//! \brief Charger les données des armes
-//! \author parMarius
-//! \date 16/10/17
-//! \version 1.0
-//! \return les données des armes
-//!
-
-void Arme::charger(std::vector<std::string> donnees){
-    m_degats = std::stoi(donnees[0]);
-    m_description = donnees[1];
+    return "<Arme>"
+           "    <Nom>" + m_nom + "</Nom>"
+            "   <Description>" + m_description + "</Description>"
+            "   <Degats>" + std::to_string(m_degats) + "</Degats>"
+            "   <Vitesse>" + std::to_string(m_vitesse) + "</Vitesse>"
+            "   <Chance>" + std::to_string(m_chance) + "</Chance>"
+            "</Arme>";
 }
 
 TypeObjet Arme::obtenirType() const {
     return TypeObjet::Arme;
+}
+
+void Arme::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
+    m_description = obtenirSousChaineEntre2Predicats(donnees,"<Description>","</Description>");
+    m_degats = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Degats>","</Degats>"));
+    m_vitesse = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Vitesse>","</Vitesse>"));
+    m_chance = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Chance>","</Chance>"));
 }

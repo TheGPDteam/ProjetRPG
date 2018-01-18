@@ -132,9 +132,9 @@ void Vie::augmenter(int valeur)
 //!
 
 std::string Vie::serialiser() const{
-    return "<Vie>\n"
-            "<Maximum>\n" + std::to_string(m_valeurMax) + "\n</Maximum>\n"
-            "</Vie>\n";
+    return "<Vie>"
+            "<Maximum>" + std::to_string(m_valeurMax) + "</Maximum>"
+            "</Vie>";
 }
 //! \brief charge les attributs de la classe Vie
 //! \author Marius
@@ -142,6 +142,7 @@ std::string Vie::serialiser() const{
 //! \version 1.0
 //!
 
-void Vie::charger(std::vector<std::string> donnees){
-    m_valeurMax = std::stoi(donnees[0]);
+void Vie::charger(const std::string &donnees){
+    m_valeurMax = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Maximum>","</Maximum>"));
+    m_valeur = m_valeurMax;
 }

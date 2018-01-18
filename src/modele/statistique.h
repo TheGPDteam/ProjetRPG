@@ -5,6 +5,7 @@
 #include <random>
 #include <vector>
 #include <string>
+#include "utilitaires.h"
 
 class Statistique
 {
@@ -18,7 +19,7 @@ public:
     void definirValeur(int valeur);
     void augmenter(int valeur);
     std::string serialiser() const;
-    void charger(std::vector<std::string> donnees);
+    void charger(const std::string &donnees);
 };
 
 #endif

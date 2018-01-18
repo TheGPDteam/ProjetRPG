@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "objet.h"
+#include "arme.h"
+#include "vivre.h"
 
 //!
 //! \brief Classe de gestion de l'inventaire
@@ -24,6 +26,8 @@ public:
     void supprimerObjet(Objet *objet);
     bool estPlein() const;
     std::string serialiser() const;
+    void charger(const std::string &donnees);
+    void chargerDansConteneur(const std::string &donnees);
 };
 
 #endif

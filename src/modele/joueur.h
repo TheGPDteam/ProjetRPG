@@ -10,6 +10,7 @@
 #include "inventaire.h"
 #include "quete.h"
 #include "direction.h"
+#include "utilitaires.h"
 
 class Joueur : public Observable
 {
@@ -39,6 +40,7 @@ public:
     Inventaire* obtenirInventaireJoueur();
     Quete* obtenirQuete();
     std::string serialiser() const;
+    void charger(const std::string &donnees);
 };
 
 #endif

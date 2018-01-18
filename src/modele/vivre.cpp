@@ -105,13 +105,20 @@ void Vivre::affecterValeurs(string ligne)
 
 std::string Vivre::serialiser() const
 {
-    return "<Vivre>\n"
-            "   <Nom>\n" + m_nom + "\n</Nom>\n"
-            "   <Description>\n" + m_description + "\n</Description>\n"
-            "   <ValeurNutritive>\n" + std::to_string(m_valeurNutritive) + "\n</ValeurNutritive>\n"
-            "</Vivre>\n";
+    return "<Vivre>"
+            "   <Nom>" + m_nom + "</Nom>"
+            "   <Description>" + m_description + "</Description>"
+            "   <ValeurNutritive>" + std::to_string(m_valeurNutritive) + "</ValeurNutritive>"
+            "</Vivre>";
 }
 
 TypeObjet Vivre::obtenirType() const {
     return TypeObjet::Vivre;
+}
+
+void Vivre::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
+    m_description = obtenirSousChaineEntre2Predicats(donnees,"<Description>","</Description>");
+    m_valeurNutritive = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ValeurNutritive>","</ValeurNutritive>"));
 }
