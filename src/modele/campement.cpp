@@ -58,13 +58,14 @@ unsigned short Campement::obtenirNbVivres() const
 //! Enleve les vivres du stock et decremente la quantite enregistree
 //!
 
-void Campement::consommerVivre(unsigned short nbVivresConsommes)
+int Campement::consommerVivre()
 {
-    for (int i=0; i<nbVivresConsommes;i++)
-    {
-        m_quantiteVivre--;
-        m_stockVivre.erase(m_stockVivre.begin());
-    }
+    int valeurNutritive = 0;
+    std::set<Vivre*>::iterator it = m_stockVivre.begin();
+    Vivre *v = *it;
+    valeurNutritive = v->obtenirValeurNutritive();
+    m_stockVivre.erase(v);
+    return valeurNutritive;
 }
 
 //!
@@ -188,7 +189,7 @@ std::string Campement::serialiser() const
 //! \version 1.0
 //!
 
-std::set <Humain *> Campement::obtenirNonAttribuees()
+std::set<Humain *> &Campement::obtenirNonAttribuees()
 {
     return m_personnesNonAttribuees;
 }
@@ -235,4 +236,20 @@ void Campement::charger(std::string &donnees)
             supprimmerSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>");
         }
     }
+}
+
+void Campement::ajouterObjet(Objet *obj) {
+    if (obj->obtenirType()==TypeObjet::Vivre)
+    {
+        Vivre* v = dynamic_cast<Vivre *> (obj);
+        m_stockVivre.insert(v);
+    }
+    else {
+        m_objets.push_back(obj);
+    }
+}
+
+std::set<Vivre*> Campement::obtenirVivres()
+{
+    return m_stockVivre;
 }

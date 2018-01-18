@@ -18,13 +18,13 @@ private:
     std::pair<int,int> m_position;
     Quete m_queteJoueur;
     std::string m_nom;
-    Campement* m_camp;
+    //Campement* m_camp;
     Equipe* m_equipe;
     Humain m_personnageJoueur;
     Inventaire* m_inventaireJoueur;
 public:
     Joueur();
-    Joueur(Quete quete);
+    Joueur(const Quete &quete);
     Joueur(Quete quete, std::string nom);
     ~Joueur();
 

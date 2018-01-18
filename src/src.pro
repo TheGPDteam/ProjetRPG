@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
+
 INCLUDEPATH+=/usr/include/SDL/
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
@@ -54,6 +55,7 @@ SOURCES += \
     vue/ecranpremierejournee.cpp \
     vue/ecranrecapitulatifnuit.cpp \
     modele/utilitaires.cpp
+    vue/ecranrepartitionjoueur.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -112,4 +114,8 @@ HEADERS += \
     vue/ecranpremierejournee.h \
     vue/ecranrecapitulatifnuit.h \
     modele/typeobjet.h \
-    modele/utilitaires.h
+    modele/utilitaires.h \
+    vue/ecranrepartitionjoueur.h \
+    modele/typequete.h \
+    modele/typedefaite.h \
+

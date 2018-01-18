@@ -16,26 +16,26 @@ private:
     SDL_Rect m_fondDescriptionRecolte;
 
     TexteSDL m_nomFenetre;
+    TexteSDL m_titreChasse;
+    TexteSDL m_titreRecolte;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
     TexteSDL* m_zoneNomPersonnage;
-    TexteSDL* m_zoneNiveauPersonnage;
-    TexteSDL* m_zoneViePersonnage;
-    TexteSDL* m_zoneIntelligencePersonnage;
+    TexteSDL* m_zonePrenomPersonnage;
+    TexteSDL* m_zoneChassePersonnage;
+    TexteSDL* m_zoneRecoltePersonnage;
     TexteSDL* m_zoneForcePersonnage;
     TexteSDL* m_zoneVitessePersonnage;
 
     std::pair<int, int>m_CoordNom;
-    std::pair<int, int>m_CoordNiveau;
-    std::pair<int, int>m_CoordVie;
-    std::pair<int, int>m_CoordIntelligence;
+    std::pair<int, int>m_CoordPrenom;
+    std::pair<int, int>m_CoordChasse;
+    std::pair<int, int>m_CoordRecolte;
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
 
-    std::vector<Humain*>m_equipe;
-
-    Controleur* m_controleur;
+    Humain * m_humain_a_affecter;
 
 public:
     EcranQuete(Controleur *controleur);

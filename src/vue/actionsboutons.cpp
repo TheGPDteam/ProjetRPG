@@ -8,7 +8,8 @@
 //! \version 0.1
 //!
 
-ActionsBoutons::ActionsBoutons()
+ActionsBoutons::ActionsBoutons(Controleur * controleur)
+    :m_controleur{controleur}
 {
 }
 
@@ -91,20 +92,38 @@ TypeEcran ActionsBoutons::boutonChoixPersonnage() const
 {
     return TypeEcran::ChoixPersonnage;
 }
-TypeEcran ActionsBoutons::boutonQuete() const
-{
+
+TypeEcran ActionsBoutons::boutonQuete() const {
     return TypeEcran::ChoixQuete;
 }
+
+TypeEcran ActionsBoutons::boutonQueteAcceptation()
+{
+    m_controleur->choixNouvelArrivant(true);
+    m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->definirValeurObjectif(m_controleur->obtenirModele()->obtenirCampement()->obtenirConsommation());
+    return TypeEcran::ChoixQuete;
+}
+
+TypeEcran ActionsBoutons::boutonQueteRefus()
+{
+    m_controleur->choixNouvelArrivant(false);
+    return TypeEcran::ChoixQuete;
+}
+
 TypeEcran ActionsBoutons::boutonChoixJoueur() const
 {
     return TypeEcran::PopUpJoueur;
 }
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse());
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
+    m_controleur->obtenirModele()->reinitialiserTemps();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte());
     return TypeEcran::RecolteJoueur;
 }
 
@@ -124,4 +143,27 @@ TypeEcran ActionsBoutons::boutonNouvellePartie() const
 TypeEcran ActionsBoutons::boutonChoixNom() const
 {
     return TypeEcran::choixNom;
+}
+
+TypeEcran ActionsBoutons::boutonViderInventaire() {
+    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet()!=0) {
+        std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets();
+        for (Objet* obj : objets) {
+            m_controleur->obtenirModele()->obtenirCampement()->ajouterObjet(obj);
+            m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->supprimerObjet(obj);
+        }
+        m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
+        m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
+    }
+    return TypeEcran::Inventaire;
+}
+
+TypeEcran ActionsBoutons::boutonFinirQuete() {
+    m_controleur->finJournee();
+    return TypeEcran::RecapitulatifNuit;
+}
+
+TypeEcran ActionsBoutons::boutonChoixPersonnageCycle() {
+    m_controleur->journeeSuivante();
+    return TypeEcran::ChoixPersonnage;
 }

@@ -1,4 +1,6 @@
 #include "controleur.h"
+#include "../vue/typeecran.h"
+#include "../vue/vue.h"
 #include <iostream>
 
 Controleur::Controleur(Vue* vue, Modele *modele)
@@ -19,13 +21,17 @@ void Controleur::definirVue(Vue *vue)
 
 void Controleur::deplacementJoueur(Direction dir)
 {
-    //if(!m_modele->testChangementDeCarte())
+    if(!m_modele->testChangementDeCarte(dir))
         m_modele->deplacement(dir);
 
 
 }
 void Controleur::deroulementJournee(){
-    m_modele->obtenirTemps()->obtenirTempsRestant();
+    if(m_modele->obtenirTemps()->obtenirTempsRestant()<=0)
+    {
+        m_modele->finJournee();
+        m_vue->changerEcran(TypeEcran::RecapitulatifNuit);
+    }
 }
 
 void Controleur::nouvellePartie(){
@@ -52,3 +58,11 @@ void Controleur::choixNouvelArrivant(bool choix)
 Vue* Controleur::obtenirVue(){
      return m_vue ;
  }
+
+Humain * Controleur::journeeSuivante() const {
+    return m_modele->journeeSuivante();
+}
+
+void Controleur::finJournee() const {
+    m_modele->finJournee();
+}

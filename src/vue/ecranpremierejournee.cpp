@@ -3,21 +3,22 @@
 
 #include <list>
 
-EcranPremiereJournee::EcranPremiereJournee()
+EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
+    : EcranGeneral{controleur}
 {
     short unsigned int largeurFond, hauteurFond;
     largeurFond = WIDTH_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
     hauteurFond = HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
 
-    m_fondRecapitulatif = {(short int)DECALAGE_FOND_RECAP_NUIT, (short int)DECALAGE_FOND_RECAP_NUIT, largeurFond, hauteurFond};
+    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
     recupererHistoire();
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 310, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 90)),
-                                &ActionsBoutons::boutonChoixPersonnage);
+                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, HEIGHT_FENETRE_PRINCIPALE - 87)),
+                                &ActionsBoutons::boutonChoixNom);
 }
 
 
@@ -27,7 +28,7 @@ void EcranPremiereJournee::recupererHistoire()
     std::ifstream fichier(CHEMIN_HISTOIRE, std::ifstream::in);
     std::string ligne;
 
-    int coordY = m_fondRecapitulatif.y + 15;
+    int coordY = m_fondRecapitulatif.y + 90;
     TexteSDL* tmpTexte;
 
     if(fichier.good())
@@ -35,7 +36,7 @@ void EcranPremiereJournee::recupererHistoire()
         do
         {
             std::getline(fichier, ligne);
-            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, coordY));
+            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
             m_zoneHistoire.push_back(tmpTexte);
             coordY += tmpTexte->getHauteurFont();
         }

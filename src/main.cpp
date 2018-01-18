@@ -11,10 +11,14 @@
 #include "modele/equipe.h"
 #include "modele/inventaire.h"
 
-void mainloop_func(void* c){
+void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
+    Controleur* controleur = (Controleur*) ctrl;
     while (!vue->getFermerJeu())
+    {
         vue->affichageVue();
+        controleur->deroulementJournee();
+    }
 }
 
 //!
@@ -36,14 +40,14 @@ int main (){
     Controleur controleur{vue,modele}; // On instancie le controleur
 
     vue->definirControleur(&controleur);
-    controleur.definirVue(vue);
-    controleur.definirModele(modele);
+//    controleur.definirVue(vue);
+//    controleur.definirModele(modele);
 
 #ifdef EMSCRIPTEN
     emscripten_set_main_loop_arg(mainloop_func,vue, 60, 0);
     emscripten_exit_with_live_runtime();
 #else
-    mainloop_func(vue);
+    mainloop_func(vue, &controleur);
 #endif
 
     delete vue;

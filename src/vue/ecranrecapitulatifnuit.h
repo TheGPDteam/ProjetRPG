@@ -14,6 +14,11 @@ private:
     const std::string TEXTE_ZOMBIES_TUES = "Nombre de zombies tues : ";
     const std::string TEXTE_ZOMBIES_ATTAQUANT = "Nombre de zombies attaquants : ";
     const std::string TEXTE_HUMAINS_TUES = "Nombre de morts dans le camp : ";
+    const std::string TEXTE_VIVRES_CONSOMMES = "Nombre de vivres consommes : ";
+
+    const std::string TEXTE_GAME_OVER = "Vous avez perdu";
+    const std::string TEXTE_GAME_OVER_FAMINE = "Vous ne pouvez assumer la consommation de votre camp";
+    const std::string TEXTE_GAME_OVER_ATTAQUE_MORTELLE = "Les zombies etaient trop forts pour vous";
 
     SDL_Rect m_fondRecapitulatif;
 
@@ -23,9 +28,13 @@ private:
 
     TexteSDL* m_zoneNombreHumainsTues;
 
+    TexteSDL* m_zoneVivresConsommes;
+
+    TexteSDL* m_zoneGameOver;
+
     void recuperationDonneesDeLaJournee();
 public:
-    EcranRecapitulatifNuit();
+    EcranRecapitulatifNuit(Controleur *controleur);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

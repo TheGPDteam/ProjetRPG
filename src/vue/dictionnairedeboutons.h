@@ -17,7 +17,7 @@ protected:
     void afficherBoutons(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage);
 
 public:
-    DictionnaireDeBoutons();
+    DictionnaireDeBoutons(Controleur *controleur);
 
     TypeEcran verificationCliqueSourisSurBouton(const std::pair<int, int> coord_souris, TypeEcran type_ecran_courant);
     void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);

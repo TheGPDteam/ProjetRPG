@@ -17,6 +17,7 @@ private:
     std::set <Humain*> m_personnesNonAttribuees;
     Equipe m_equipeRecolte;
     Equipe m_equipeChasse;
+    std::vector <Objet *> m_objets;
 public:
     Campement();
 
@@ -24,16 +25,18 @@ public:
     void ajouterPersonne(Humain *humain);
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
-    void consommerVivre(unsigned short nbVivresConsommes);
+    int consommerVivre();
     int obtenirConsommation() ;
 
-    std::set<Humain *> obtenirNonAttribuees();
+    std::set<Humain *>& obtenirNonAttribuees();
 
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();
 
     std::string serialiser() const;
     void charger(std::__cxx11::string &donnees);
+    void ajouterObjet(Objet* obj);
+    std::set<Vivre *> obtenirVivres();
 };
 
 #endif

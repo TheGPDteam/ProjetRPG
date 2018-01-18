@@ -4,10 +4,12 @@
 #include <string>
 #include "objet.h"
 #include <ctime>
+#include "typequete.h"
 
 class Quete
 {
 private:
+    bool m_fini;
     std::string m_nom;
     std::string m_description;
     int m_valeurObjectif;
@@ -18,10 +20,11 @@ private:
     std::clock_t m_tempsDebutQuete;
     std::clock_t m_tempsDebutPause;
     int m_secondesJeuPause;
+    TypeQuete m_type;
 
 public:
     Quete() = default;
-    Quete(std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense);
+    Quete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense);
     Quete(const Quete& copie) = default;
 
     Objet* obtenirRecompense() const;
@@ -38,8 +41,9 @@ public:
     void miseEnPause();
     void reprise();
     void augmenterValeur(int valeur);
-
+    void finir();
+    bool estfini();
+    TypeQuete obtenirType() const;
 };
-
 
 #endif

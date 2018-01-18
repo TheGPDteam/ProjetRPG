@@ -26,7 +26,7 @@ private:
     TexteSDL m_nomJoueur;
     TexteSDL m_tempsRestant;
 
-    Controleur* m_controleur;
+//    Controleur* m_controleur;
 
 public:
     EcranJeuPrincipal(Controleur *controleur);

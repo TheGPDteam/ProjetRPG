@@ -14,13 +14,8 @@
 //!
 
 Personnage::Personnage()
-{
-    m_force.definirValeur(1);
-    m_intelligence.definirValeur(1);
-    m_vitesse.definirValeur(1);
-    m_vie.definirValeur(1);
-    m_vie.definirValeurMax(1);
-}
+    : m_vie{rand()%100}
+{}
 
 //!
 //! \brief Constructeur parametre du personnage

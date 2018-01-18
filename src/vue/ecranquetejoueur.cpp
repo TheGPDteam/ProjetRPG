@@ -3,7 +3,9 @@
 #include "bouton.h"
 #include <utility>
 
-EcranQueteJoueur::EcranQueteJoueur() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur) :
+    EcranGeneral{controleur},
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Que Voulez vous faire ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE-HEIGHT_BOUTON_NORMAL))
 {
@@ -14,13 +16,13 @@ EcranQueteJoueur::EcranQueteJoueur() : m_methodeVerificationCliqueSourisSurBouto
 
     coordB = {(WIDTH_FENETRE_PRINCIPALE/2)+15, (HEIGHT_FENETRE_PRINCIPALE/2)};
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 10, coordB.second + 10)), &ActionsBoutons::boutonChasseJoueur);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 10, coordB.second + 10)), &ActionsBoutons::boutonChasseJoueur);
 
     int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
     int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
 
-    m_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
-    m_bordure = {m_fond.x-2,m_fond.y-2  ,m_fond.w+4,m_fond.h+4};
+    m_rectangle_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
+    m_bordure = {m_rectangle_fond.x-2,m_rectangle_fond.y-2  ,m_rectangle_fond.w+4,m_rectangle_fond.h+4};
 
 }
 
@@ -28,7 +30,7 @@ EcranQueteJoueur::~EcranQueteJoueur(){}
 
 void EcranQueteJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_bordure, SDL_MapRGB(fenetre_affichage->format, 75, 75, 75));
-    SDL_FillRect(fenetre_affichage, &m_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    SDL_FillRect(fenetre_affichage, &m_rectangle_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     m_nomFenetre.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
