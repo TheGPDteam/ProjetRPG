@@ -96,11 +96,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->obtenirListePersonnage())
     {
         Humain *h = dynamic_cast <Humain *> (p);
-        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(50,410+30*j));
+        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(50,410+30*j));
         tempNomPersonnage.afficherTexte(fenetre_affichage);
-        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(250,410+30*j));
+        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(250,410+30*j));
         tempPrenomPersonnage.afficherTexte(fenetre_affichage);
-        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(400,410+30*j));
+        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(400,410+30*j));
         tempRecoltePersonnage.afficherTexte(fenetre_affichage);
         ++j;
     }
@@ -108,11 +108,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse()->obtenirListePersonnage())
     {
         Humain *h = dynamic_cast <Humain *> (p);
-        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(550,410+30*k));
+        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(550,410+30*k));
         tempNomPersonnage.afficherTexte(fenetre_affichage);
-        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
+        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
         tempPrenomPersonnage.afficherTexte(fenetre_affichage);
-        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
+        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255        ,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
         tempRecoltePersonnage.afficherTexte(fenetre_affichage);
         ++k;
     }
@@ -149,16 +149,17 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             SDL_Quit();
             break;
 
-        case SDL_MOUSEBUTTONUP:
+        case SDL_MOUSEBUTTONDOWN:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
-                if(evenements.button.y >= m_CoordPrenom.second && evenements.button.y <= m_CoordPrenom.second+(240)
+                if(evenements.button.y >= m_CoordPrenom.second+30 && evenements.button.y <= m_CoordPrenom.second+30+(m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().size()*30)
                         && evenements.button.x >= m_CoordNom.first ){
-                   int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
+                      int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
 
                     int i=0;
                    for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
                    {
+
                        i++;
                        if(i==idHumain)
                        {
