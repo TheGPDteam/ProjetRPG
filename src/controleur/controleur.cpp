@@ -34,6 +34,16 @@ void Controleur::deroulementJournee(){
     }
 }
 
+void Controleur::chargerSauvegarde()
+{
+    Sauvegarde::chargerModele(m_modele);
+}
+
+void Controleur::sauvegarderModele()
+{
+    Sauvegarde::sauvegarderModele(m_modele);
+}
+
 void Controleur::nouvellePartie(){
     m_modele->premiereJournee();
 }

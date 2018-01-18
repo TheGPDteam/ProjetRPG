@@ -54,7 +54,7 @@ SOURCES += \
     vue/saisir.cpp \
     vue/ecranpremierejournee.cpp \
     vue/ecranrecapitulatifnuit.cpp \
-    modele/utilitaires.cpp
+    modele/utilitaires.cpp \
     vue/ecranrepartitionjoueur.cpp
 
 include(deployment.pri)
@@ -113,6 +113,7 @@ HEADERS += \
     observable.h \
     vue/ecranpremierejournee.h \
     vue/ecranrecapitulatifnuit.h \
+    vue/repartitionjoueur.h \
     modele/typeobjet.h \
     modele/utilitaires.h \
     vue/ecranrepartitionjoueur.h \

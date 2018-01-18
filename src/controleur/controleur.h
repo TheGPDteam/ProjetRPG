@@ -4,6 +4,7 @@
 #include <string>
 
 #include "modele/modele.h"
+#include "save/sauvegarde.h"
 
 class Vue;
 
@@ -23,7 +24,7 @@ public :
 
     void deroulementJournee();
 
-    void chargerSauvegarde(std::string nomSauvegarde);
+    void chargerSauvegarde();
 
     void sauvegarderModele();
     void sauvegarderModele(std::string nomSauvegarde);

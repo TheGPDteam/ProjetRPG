@@ -28,8 +28,9 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
         std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
 }
 
-void Sauvegarde::chargerModele(Modele* modele,std::string chemin)
+void Sauvegarde::chargerModele(Modele* modele)
 {
+    std::string chemin = "save/Defaut.xml";
     std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
     std::string ligneCourante = "";
 

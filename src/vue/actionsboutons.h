@@ -38,6 +38,8 @@ public:
 
     TypeEcran boutonFinirQuete();
 
+    TypeEcran boutonChargement();
+
     TypeEcran boutonChoixPersonnageCycle();
 };
 

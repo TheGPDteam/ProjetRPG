@@ -167,3 +167,9 @@ TypeEcran ActionsBoutons::boutonChoixPersonnageCycle() {
     m_controleur->journeeSuivante();
     return TypeEcran::ChoixPersonnage;
 }
+
+
+TypeEcran ActionsBoutons::boutonChargement() {
+    m_controleur->chargerSauvegarde();
+    return TypeEcran::ChoixQuete;
+}

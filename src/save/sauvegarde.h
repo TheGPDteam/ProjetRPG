@@ -16,7 +16,7 @@ class Sauvegarde
 {
 public:
     static void sauvegarderModele(Modele *modele);
-    static void chargerModele(Modele* modele, std::string cheminFichier);
+    static void chargerModele(Modele* modele);
 };
 
 #endif

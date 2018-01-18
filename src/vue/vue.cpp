@@ -147,6 +147,7 @@ void Vue::affichageVue()
     }
     case TypeEcran::RecapitulatifNuit:
     {
+        m_controleur->sauvegarderModele();
         afficherEcran(m_ecranRecapitulatifNuit);
         break;
     }

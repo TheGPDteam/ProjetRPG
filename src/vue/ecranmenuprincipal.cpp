@@ -24,7 +24,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
     coordB.second = coordB.second + 70;
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonQuete);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
 
     coordB.second = coordB.second + 70;
 
