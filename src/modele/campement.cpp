@@ -253,3 +253,14 @@ std::set<Vivre*> Campement::obtenirVivres()
 {
     return m_stockVivre;
 }
+
+
+int Campement::obtenirValeurNutritiveDisponible() const
+{
+    int valeurTotale = 0;
+    for (Vivre *v : m_stockVivre)
+    {
+        valeurTotale+=v->obtenirValeurNutritive();
+    }
+    return valeurTotale;
+}

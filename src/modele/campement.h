@@ -37,6 +37,8 @@ public:
     void charger(std::__cxx11::string &donnees);
     void ajouterObjet(Objet* obj);
     std::set<Vivre *> obtenirVivres();
+
+    int obtenirValeurNutritiveDisponible() const;
 };
 
 #endif

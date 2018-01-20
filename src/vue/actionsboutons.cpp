@@ -173,3 +173,7 @@ TypeEcran ActionsBoutons::boutonChargement() {
     m_controleur->chargerSauvegarde();
     return TypeEcran::ChoixQuete;
 }
+
+TypeEcran ActionsBoutons::boutonRetourMenuPrincipal() {
+    return TypeEcran::MenuPrincipal;
+}

@@ -41,6 +41,8 @@ public:
     TypeEcran boutonChargement();
 
     TypeEcran boutonChoixPersonnageCycle();
+
+    TypeEcran boutonRetourMenuPrincipal();
 };
 
 #endif // ACTIONSBOUTONS_H
