@@ -61,6 +61,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranNom = new EcranNom(m_controleur);
     m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
+    m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
@@ -154,6 +155,11 @@ void Vue::affichageVue()
     case  TypeEcran::Quitter:
     {
         m_quitterJeu = true;
+        break;
+    }
+    case TypeEcran::AccueilCampement:
+    {
+        afficherEcran(m_ecranAccueilCampement);
         break;
     }
     default:{

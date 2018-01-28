@@ -10,7 +10,6 @@ private :
 
     TexteSDL m_nomFenetre;
 
-    SDL_Rect m_fondEcran;
 
     SDL_Rect m_rectangleHaut;
 //    SDL_Rect m_rectangleNomEquipe;

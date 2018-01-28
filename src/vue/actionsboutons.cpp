@@ -177,3 +177,7 @@ TypeEcran ActionsBoutons::boutonChargement() {
 TypeEcran ActionsBoutons::boutonRetourMenuPrincipal() {
     return TypeEcran::MenuPrincipal;
 }
+
+TypeEcran ActionsBoutons::boutonCampement() {
+    return TypeEcran::AccueilCampement;
+}

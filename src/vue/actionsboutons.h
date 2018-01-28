@@ -43,6 +43,8 @@ public:
     TypeEcran boutonChoixPersonnageCycle();
 
     TypeEcran boutonRetourMenuPrincipal();
+
+    TypeEcran boutonCampement();
 };
 
 #endif // ACTIONSBOUTONS_H

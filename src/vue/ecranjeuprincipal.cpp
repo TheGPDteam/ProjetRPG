@@ -9,7 +9,8 @@
 
 const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 560); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 530); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 590); // Pk pas utiliser coord bouton avant
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -22,7 +23,6 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     : EcranGeneral{controleur},
       m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,256,64,64}}},
-      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
@@ -31,7 +31,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+40,coordB2.second+15)},&ActionsBoutons::boutonInventaire);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB3, tailleB, std::make_pair(coordB3.first+30,coordB3.second+15)},&ActionsBoutons::boutonFinirQuete);;
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Aller au campement", POLICE_COLLEGED, 16, coordB3, tailleB, std::make_pair(coordB3.first+5,coordB3.second+15)},&ActionsBoutons::boutonCampement);;
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB4, tailleB, std::make_pair(coordB4.first+30,coordB4.second+15)},&ActionsBoutons::boutonFinirQuete);;
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
@@ -77,7 +78,6 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_spriteJoueur->afficherSprite(fenetre_affichage);
     m_nomJoueur.afficherTexte(fenetre_affichage);
     m_objectif.afficherTexte(fenetre_affichage);
-    m_texteObjectif.afficherTexte(fenetre_affichage);
     m_tempsRestant.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 
@@ -177,7 +177,19 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 //Affichage d'arbre en dehors de la bordure de la carte
                 if(i<0 || i>63 || j<0 || j>63)
                 {
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                    if (i < 0)
+                    {
+                        if (m_carte->obtenirZoneActive()->obtenirTuile(0,j)->obtenirType()==TypeTuile::Beton /*&& m_carte->obtenirZoneActive()->obtenirTuile(0,j)->obtenirHachageJonction() == TypeJonction::AucuneJonction*/) {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{896,0,64,64});
+                        } else if (m_carte->obtenirZoneActive()->obtenirTuile(0,posY)->obtenirType()==TypeTuile::Terre)
+                        {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{832,0,64,64});
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                    }
                 }
                 else
                 {

@@ -21,12 +21,11 @@ private:
     std::set<std::pair<short,short> > m_spriteObjets;
     Carte* m_carte;
 
-    TexteSDL m_texteObjectif;
     TexteSDL m_objectif;
     TexteSDL m_nomJoueur;
     TexteSDL m_tempsRestant;
 
-//    Controleur* m_controleur;
+
 
 public:
     EcranJeuPrincipal(Controleur *controleur);

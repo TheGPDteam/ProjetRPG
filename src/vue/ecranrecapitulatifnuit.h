@@ -11,7 +11,7 @@ private:
     const static int NB_DONNEES_NUIT = 3;
     const std::string CHEMIN_RECAP_NUIT = "./../rsc/recapNuits/recap.txt";
 
-    const std::string TEXTE_ZOMBIES_TUES = "Nombre de zombies tues : ";
+    const std::string TEXTE_ZOMBIES_TUES = "Nombre de zombies tues dans la journee : ";
     const std::string TEXTE_ZOMBIES_ATTAQUANT = "Nombre de zombies attaquants : ";
     const std::string TEXTE_HUMAINS_TUES = "Nombre de morts dans le camp : ";
     const std::string TEXTE_VIVRES_CONSOMMES = "Nombre de vivres consommes : ";
