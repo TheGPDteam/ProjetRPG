@@ -181,3 +181,16 @@ TypeEcran ActionsBoutons::boutonRetourMenuPrincipal() {
 TypeEcran ActionsBoutons::boutonCampement() {
     return TypeEcran::AccueilCampement;
 }
+
+TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
+    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet()!=0) {
+        std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets();
+        for (Objet* obj : objets) {
+            m_controleur->obtenirModele()->obtenirCampement()->ajouterObjet(obj);
+            m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->supprimerObjet(obj);
+        }
+        m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
+        m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
+    }
+    return TypeEcran::AccueilCampement;
+}

@@ -45,6 +45,8 @@ public:
     TypeEcran boutonRetourMenuPrincipal();
 
     TypeEcran boutonCampement();
+
+    TypeEcran boutonViderInventaireCampement();
 };
 
 #endif // ACTIONSBOUTONS_H

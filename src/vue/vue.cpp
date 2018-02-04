@@ -71,6 +71,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteJoueur);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranAccueilCampement);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());

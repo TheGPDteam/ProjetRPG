@@ -264,3 +264,7 @@ int Campement::obtenirValeurNutritiveDisponible() const
     }
     return valeurTotale;
 }
+
+std::vector<Objet *> Campement::obtenirObjets() {
+    return m_objets;
+}

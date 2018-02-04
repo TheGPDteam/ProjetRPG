@@ -6,7 +6,14 @@
 class EcranAccueilCampement : public EcranGeneral
 {
 private:
+    const std::string TEXTE_NOMBRE_OBJETS = "Nombre d'objets dans le camp : ";
+    const std::string TEXTE_CONSOMMATION = "Valeur nutritive necessaire pour survivre : ";
+    const std::string TEXTE_CONSOMMATION_DISPONIBLE = "Valeur nutritive disponible actuellement : ";
+
     TexteSDL m_nomFenetre;
+    TexteSDL m_nombreObjets;
+    TexteSDL m_consommation;
+    TexteSDL m_consoDispo;
 public:
     EcranAccueilCampement(Controleur* controleur);
 

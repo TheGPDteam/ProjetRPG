@@ -38,6 +38,7 @@ public:
     void ajouterObjet(Objet* obj);
     std::set<Vivre *> obtenirVivres();
 
+    std::vector <Objet *> obtenirObjets();
     int obtenirValeurNutritiveDisponible() const;
 };
 

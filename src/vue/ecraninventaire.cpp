@@ -27,7 +27,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Donner", POLICE_COLLEGED, 20, std::make_pair(m_rectangleBas.x + 10, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::);
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Jeter", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 50, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 217, m_rectangleBas.y + 27)), &ActionsBoutons::boutonJeuPrincipal);
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Transferer au camp", POLICE_COLLEGED, 15, std::make_pair(100, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(100 + 15, m_rectangleBas.y + 27)), &ActionsBoutons::boutonViderInventaire);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Aller au camp", POLICE_COLLEGED, 16, std::make_pair(100, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(100 + 40, m_rectangleBas.y + 27)), &ActionsBoutons::boutonCampement);
 }
 
 
