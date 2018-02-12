@@ -30,6 +30,7 @@ public:
     Sprite* obtenirSpriteBouton();
     TypeBouton obtenirTypeBouton();
     bool obtenirBoutonCliquable();
+    void devenirCliquable();
 
     ~Bouton();
 };

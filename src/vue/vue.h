@@ -13,6 +13,7 @@
 #include "ecranrecapitulatifnuit.h"
 #include "ecranpremierejournee.h"
 #include "ecranaccueilcampement.h"
+#include "ecranlisteobjets.h"
 
 #include <iostream>
 
@@ -34,6 +35,7 @@ private:
     EcranPremiereJournee* m_ecranPremiereJournee;
     EcranRecapitulatifNuit* m_ecranRecapitulatifNuit;
     EcranAccueilCampement* m_ecranAccueilCampement;
+    EcranListeObjet* m_ecranListeObjet;
 
     Controleur* m_controleur;
 

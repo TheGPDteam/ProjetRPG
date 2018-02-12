@@ -56,7 +56,8 @@ SOURCES += \
     vue/ecranrecapitulatifnuit.cpp \
     modele/utilitaires.cpp \
     vue/ecranrepartitionjoueur.cpp \
-    vue/ecranaccueilcampement.cpp
+    vue/ecranaccueilcampement.cpp \
+    vue/ecranlisteobjets.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -120,5 +121,6 @@ HEADERS += \
     vue/ecranrepartitionjoueur.h \
     modele/typequete.h \
     modele/typedefaite.h \
-    vue/ecranaccueilcampement.h
+    vue/ecranaccueilcampement.h \
+    vue/ecranlisteobjets.h
 

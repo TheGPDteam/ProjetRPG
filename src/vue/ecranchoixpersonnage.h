@@ -1,8 +1,6 @@
 #ifndef ECRANCHOIXPERSONNAGE_H
 #define ECRANCHOIXPERSONNAGE_H
 
-#endif // ECRANCHOIXPERSONNAGE_H
-
 
 #include "ecrangeneral.h"
 class EcranChoixPersonnage : public EcranGeneral{
@@ -47,3 +45,5 @@ public:
     ~EcranChoixPersonnage();
 
 };
+
+#endif // ECRANCHOIXPERSONNAGE_H

@@ -194,3 +194,7 @@ TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
     }
     return TypeEcran::AccueilCampement;
 }
+
+TypeEcran ActionsBoutons::boutonListeObjet() {
+    return TypeEcran::ListeObjet;
+}

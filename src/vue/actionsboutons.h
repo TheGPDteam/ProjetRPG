@@ -47,6 +47,8 @@ public:
     TypeEcran boutonCampement();
 
     TypeEcran boutonViderInventaireCampement();
+
+    TypeEcran boutonListeObjet();
 };
 
 #endif // ACTIONSBOUTONS_H

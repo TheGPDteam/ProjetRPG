@@ -4,10 +4,10 @@
 #include "bouton.h"
 #include "constantesbouton.h"
 
-const int ESPACE_X_RECTANGLE_PERSONNAGE = 20;
-const int ESPACE_Y_RECTANGLE_PERSONNAGE = 115;
-const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_X_RECTANGLE_PERSONNAGE;
-const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_PERSONNAGE;
+const int ESPACE_X_RECTANGLE_OBJET = 20;
+const int ESPACE_Y_RECTANGLE_OBJET = 115;
+const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_X_RECTANGLE_OBJET;
+const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_OBJET;
 
 
 RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
@@ -15,7 +15,7 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
     m_fenetre{fenetre}
 
 {
-    m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_PERSONNAGE, ESPACE_Y_RECTANGLE_PERSONNAGE, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
+    m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
     m_zoneNomPersonnage = new TexteSDL("Nom : " + h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
     m_zonePrenomPersonnage = new TexteSDL("Prenom : " + h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
 

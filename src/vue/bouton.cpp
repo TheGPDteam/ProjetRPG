@@ -203,3 +203,14 @@ Bouton::~Bouton()
         delete m_texteBouton;
     }
 }
+
+//!
+//! \brief Met l'attribut cliquable a vrai
+//! \author mleothaud
+//! \date 11/11/16
+//! \version 1.0
+//!
+void Bouton::devenirCliquable()
+{
+    m_boutonCliquable = true;
+}

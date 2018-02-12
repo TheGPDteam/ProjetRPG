@@ -20,6 +20,7 @@ EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
 {
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Retour jeu", POLICE_COLLEGED, 17, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 100), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 240, HEIGHT_FENETRE_PRINCIPALE - 82)), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Deposer inventaire", POLICE_COLLEGED, 15, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 275, HEIGHT_FENETRE_PRINCIPALE - 182)), &ActionsBoutons::boutonViderInventaireCampement);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Liste objets", POLICE_COLLEGED, 15, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 300), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 235, HEIGHT_FENETRE_PRINCIPALE - 282)), &ActionsBoutons::boutonListeObjet);
 }
 
 void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)

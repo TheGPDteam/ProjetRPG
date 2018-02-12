@@ -40,7 +40,7 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
 void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
 {
 
-    // SEule ligne de base : SDL_FillRect(fenetre_affichage, &fenetre_affichage->clip_rect, SDL_MapRGB(fenetre_affichage->format, 0, 0, 0));
+    // Seule ligne de base : SDL_FillRect(fenetre_affichage, &fenetre_affichage->clip_rect, SDL_MapRGB(fenetre_affichage->format, 0, 0, 0));
 
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
