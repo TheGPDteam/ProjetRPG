@@ -42,10 +42,10 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
 //!
 //! \brief Affiche l'écran de jeu principal
-//! \author pgutierrez
+//! \author pgutierrez, mleothaud
 //! @param fenetre_affichage fenetre où s'affichera l'objet
 //! \date 23/11/16
-//! \version 0.1
+//! \version 1.0
 //!
 //! Affiche le contenu d'un écran de jeu principal
 //!

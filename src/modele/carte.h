@@ -26,6 +26,7 @@ public :
     ~Carte();
     Zone *obtenirZoneActive();
     void changerZoneActive(Direction direction);
+    void recharger();
 };
 
 #endif

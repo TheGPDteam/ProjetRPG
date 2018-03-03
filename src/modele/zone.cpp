@@ -256,39 +256,42 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
 
 void Zone::ajouterObjets(int nbObjets)
 {
-    for (int i=0;i<nbObjets;++i)
+    if (nbObjets > 0)
     {
-        int posX = rand() % m_largeur;
-        int posY = rand() % m_hauteur;
-
-        Tuile * t  = m_position_to_tuile.at(std::make_pair(posX,posY));
-
-        // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
-        while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY)))
+        for (int i=0;i<nbObjets;++i)
         {
-            posX = rand() % m_largeur;
-            posY = rand() % m_hauteur;
-            t = m_position_to_tuile.at(std::make_pair(posX,posY));
-        }
-        int typeObj = rand()%5;
-        switch (typeObj) {
-        case 0:
-            m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-            break;
-        case 1:
-            m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-            break;
-        case 2:
-            m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-            break;
-        case 3:
-            m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-            break;
-        case 4://A revoir pour un objet aléatoire
-            m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
-            break;
-        default:
-            break;
+            int posX = rand() % m_largeur;
+            int posY = rand() % m_hauteur;
+
+            Tuile * t  = m_position_to_tuile.at(std::make_pair(posX,posY));
+
+            // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
+            while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY)))
+            {
+                posX = rand() % m_largeur;
+                posY = rand() % m_hauteur;
+                t = m_position_to_tuile.at(std::make_pair(posX,posY));
+            }
+            int typeObj = rand()%5;
+            switch (typeObj) {
+            case 0:
+                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                break;
+            case 1:
+                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                break;
+            case 2:
+                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                break;
+            case 3:
+                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                break;
+            case 4://A revoir pour un objet aléatoire
+                m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
+                break;
+            default:
+                break;
+            }
         }
     }
 }
@@ -482,4 +485,16 @@ void Zone::initialiserSousTypeTuile(){
         t->definirHachageJonction(voisin, jonction);
     }
 
+}
+
+//!
+//! \brief Fonction de rechargement de la zone
+//! \version 0.1
+//! \date 01/03/18
+//! \author mleothaud
+//!
+
+void Zone::recharger()
+{
+    ajouterObjets(20 - m_objets.size());
 }

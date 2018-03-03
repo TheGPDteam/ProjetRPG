@@ -53,7 +53,7 @@ public:
 	std::string obtenirNom();
     std::map <Tuile*, std::pair<int,int>> obtenirTuiles() const;
     int obtenirTaille() const;
-
+    void recharger();
 };
 
 #endif

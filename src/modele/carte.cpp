@@ -123,3 +123,21 @@ void Carte::changerZoneActive(Direction direction)
     }
     }
 }
+
+//!
+//! \brief Fonction de rechargement des objets dans les zones de la carte
+//! \version 0.1
+//! \date 01/03/18
+//! \author mleothaud
+//!
+
+void Carte::recharger()
+{
+    for (int i = 0; i < TAILLE_CARTE_X ; i++)
+    {
+        for(int j = 0; i < TAILLE_CARTE_Y ; ++j)
+        {
+            m_zones[i][j]->recharger();
+        }
+    }
+}

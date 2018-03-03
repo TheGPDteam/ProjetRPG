@@ -537,6 +537,9 @@ void Modele::finJournee() {
         m_perdu=true;
         m_td = TypeDefaite::FAMINE;
     }
+
+    //Reapprovisionnement de la carte en objets*
+    //m_carte.recharger();
 }
 
 
