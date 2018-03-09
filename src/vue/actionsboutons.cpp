@@ -42,7 +42,7 @@ TypeEcran ActionsBoutons::boutonJeuPrincipal() const
 
 TypeEcran ActionsBoutons::boutonQuitter() const
 {
-    return TypeEcran:: Quitter;
+    return TypeEcran::Quitter;
 }
 
 
@@ -197,4 +197,21 @@ TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
 
 TypeEcran ActionsBoutons::boutonListeObjet() {
     return TypeEcran::ListeObjet;
+}
+
+//!
+//! \brief Methode pour retourner au jeu depuis le campement
+//! @return TypeEcran retourne le nouveau type de l'écran
+//! \author mleothaud
+//! \date 09/03/18
+//! \version 1.0
+//!
+//! Note : temps de retard de la vue
+//!
+
+TypeEcran ActionsBoutons::boutonJeuPrincipalCampement()
+{
+    m_controleur->obtenirModele()->obtenirCarte()->zoneActiveCampement();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirPosition(std::make_pair(10,10));
+    return TypeEcran::JeuPrincipal;
 }

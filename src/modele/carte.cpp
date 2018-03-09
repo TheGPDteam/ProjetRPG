@@ -135,9 +135,23 @@ void Carte::recharger()
 {
     for (int i = 0; i < TAILLE_CARTE_X ; i++)
     {
-        for(int j = 0; i < TAILLE_CARTE_Y ; ++j)
+        for(int j = 0; j < TAILLE_CARTE_Y ; ++j)
         {
             m_zones[i][j]->recharger();
         }
     }
+}
+
+//!
+//! \brief Fonction pour retourner dans la zone ou est le campement
+//! \version 1.0
+//! \date 09/03/18
+//! \author mleothaud
+//!
+
+void Carte::zoneActiveCampement()
+{
+   m_xZoneActive = 1;
+   m_yZoneActive = 1;
+   m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
 }

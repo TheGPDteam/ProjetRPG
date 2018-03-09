@@ -196,7 +196,6 @@ Humain* Modele::journeeSuivante()
     m_joueur.nouvelleQuete(Quete(TypeQuete::QUETERECOLTE,"Survivre","Recolter de la nouriture",
                                  m_campement.obtenirConsommation(),
                                  50,new Vivre()));
-
     return m_nouvelArrivant;
 }
 
@@ -539,7 +538,7 @@ void Modele::finJournee() {
     }
 
     //Reapprovisionnement de la carte en objets*
-    //m_carte.recharger();
+    m_carte.recharger();
 }
 
 

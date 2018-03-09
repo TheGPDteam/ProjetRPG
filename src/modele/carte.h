@@ -27,6 +27,7 @@ public :
     Zone *obtenirZoneActive();
     void changerZoneActive(Direction direction);
     void recharger();
+    void zoneActiveCampement();
 };
 
 #endif

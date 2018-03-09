@@ -14,7 +14,7 @@
 //!
 
 Personnage::Personnage()
-    : m_vie{rand()%100}
+    : m_vie{(rand()%100)+1}
 {}
 
 //!

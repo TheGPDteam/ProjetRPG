@@ -69,7 +69,7 @@ Vue* Controleur::obtenirVue(){
      return m_vue ;
  }
 
-Humain * Controleur::journeeSuivante() const {
+Humain * Controleur::journeeSuivante()  {
     return m_modele->journeeSuivante();
 }
 
