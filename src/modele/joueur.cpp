@@ -137,6 +137,10 @@ void Joueur::deplacerJoueur(Direction dir){
         m_position.first++;
         break;
     }
+    case Aucune :
+    {
+        break;
+    }
     }
 
     mettreAChange();

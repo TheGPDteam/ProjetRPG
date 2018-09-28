@@ -19,8 +19,8 @@
 //!
 
 Quete::Quete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
-    :m_type{tq}, m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
-      m_recompenseExperience{recompenseExperience}, m_recompense{recompense}, m_fini{false}
+    :m_fini{false}, m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
+      m_recompenseExperience{recompenseExperience}, m_recompense{recompense}, m_type{tq}
 {
 }
 

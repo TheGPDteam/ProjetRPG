@@ -17,11 +17,10 @@ using namespace std;
 //!
 
 Modele::Modele()
-    : m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
+    : m_td{TypeDefaite::PASDEDEFAITE}, m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
                      50, 50, new Vivre())},
       m_deplacementDepuisDernierCombat{0},
-      m_nouvelArrivant(nullptr), m_perdu{false}, m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0},
-      m_td{TypeDefaite::PASDEDEFAITE}
+      m_nbPersosMorts{0}, m_nbZombiesTues{0}, m_nbZombiesAttaquant{0}, m_perdu{false}, m_nouvelArrivant{nullptr}
 {
     premiereJournee();
 }
@@ -430,7 +429,7 @@ void Modele::finJournee() {
     m_nbZombiesAttaquant = (50 * m_nbJoursPasses) - m_nbZombiesTues;
 
     //On calcule si et combien de personnages du campement sont morts dans la nuit
-    int totalChasseCampement=0;
+    unsigned int totalChasseCampement=0;
     for (Personnage *p : m_campement.obtenirChasse()->obtenirListePersonnage())
     {
         Humain *h = (Humain*) (p);
@@ -458,13 +457,13 @@ void Modele::finJournee() {
 
     if (m_nbPersosMorts > 0) {
         //Verifier si on a assez de personnes à tuer
-        int nbPersosCamp = 0;
+        unsigned int nbPersosCamp = 0;
         nbPersosCamp+=m_campement.obtenirRecolte()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirChasse()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
         if (nbPersosCamp>m_nbPersosMorts)
         {
-            for (int i=0; i<m_nbPersosMorts;++i)
+            for (unsigned int i=0; i<m_nbPersosMorts;++i)
             {
                 bool persoMort = false;
                 while(!persoMort) {
@@ -500,6 +499,7 @@ void Modele::finJournee() {
             }
         } else {
             m_perdu = true;
+            //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
             m_td = TypeDefaite::ATTAQUEZOMBIES;
         }
     }
@@ -534,6 +534,7 @@ void Modele::finJournee() {
         }
     } else {
         m_perdu=true;
+        //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
         m_td = TypeDefaite::FAMINE;
     }
 

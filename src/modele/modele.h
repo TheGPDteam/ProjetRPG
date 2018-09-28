@@ -36,7 +36,7 @@ private:
 
     bool m_perdu;
 public:
-    Humain* m_nouvelArrivant;
+    Humain * m_nouvelArrivant;
 
     Modele();
     void premiereJournee();

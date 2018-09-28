@@ -115,6 +115,7 @@ Tuile* Zone::obtenirTuile(int valeurX, int valeurY) const
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
 }
 
 Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
@@ -122,6 +123,7 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
 }
 
 Objet* Zone::obtenirObjet(std::pair <int,int> position) const
@@ -129,7 +131,7 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const
     for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
         if (it->second == position)
             return it->first;
-    return NULL;
+    return nullptr;
 }
 
 bool Zone::objetPresent(std::pair<int, int> position) const

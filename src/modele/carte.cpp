@@ -121,6 +121,10 @@ void Carte::changerZoneActive(Direction direction)
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
     }
+    case Aucune :
+    {
+        break;
+    }
     }
 }
 
