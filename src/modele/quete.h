@@ -27,6 +27,7 @@ public:
     Quete() = default;
     Quete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense);
     Quete(const Quete& copie) = default;
+    ~Quete();
 
     Objet* obtenirRecompense() const;
     int obtenirValeurAvancement() const;

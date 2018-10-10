@@ -215,18 +215,9 @@ Inventaire* Joueur::obtenirInventaireJoueur()
 
 Joueur::~Joueur()
 {
-    //    if(m_equipe != nullptr)
-    //    {
-    //        delete m_equipe;
-    //    }
-    if(m_inventaireJoueur != nullptr)
-    {
-        delete m_inventaireJoueur;
-    }
-    //    if(m_camp != nullptr)
-    //    {
-    //        delete m_camp;
-    //    }
+    if(m_equipe != nullptr) delete m_equipe;
+    if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
+    //if(m_camp != nullptr) delete m_camp;
 }
 
 //!
@@ -265,6 +256,9 @@ std::string Joueur::serialiser() const
 
 void Joueur::charger(const std::string &donnees)
 {
+
+    if(m_equipe != nullptr) delete m_equipe;
+    if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
     m_nom = obtenirSousChaineEntre2Predicats(donnees,"<NomJoueur>","</NomJoueur>");
 
     std::string donneesEquipe = obtenirSousChaineEntre2Predicats(donnees,"<EquipeJoueur>","</EquipeJoueur>");

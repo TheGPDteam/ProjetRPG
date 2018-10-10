@@ -99,29 +99,25 @@ void Modele::deplacement(Direction dir)
     if(testerDeplacement(dir)){
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
-        if(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()) != NULL && !obtenirJoueur()->obtenirInventaireJoueur()->estPlein())
+        Zone * zoneActive = m_carte.obtenirZoneActive();
+        pair<int, int> position = m_joueur.obtenirPosition();
+        if(zoneActive->obtenirObjet(position) != NULL && !m_joueur.obtenirInventaireJoueur()->estPlein())
         {
-            m_joueur.obtenirInventaireJoueur()->ajouterObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
-            //(m_carte.obtenirZoneActive()->obtenirObjets().find(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())));
-            TypeObjet to = m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition())->obtenirType();
+            Objet * objet = zoneActive->obtenirObjet(position);
+            m_joueur.obtenirInventaireJoueur()->ajouterObjet(objet);
+
+            TypeObjet to = objet->obtenirType();
             if(to == TypeObjet::Vivre){
-                Vivre* v = dynamic_cast<Vivre*>(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
-                m_joueur.obtenirQuete()->augmenterValeur(v->obtenirValeurNutritive());
-
-                //                if (v != nullptr) {
-                //                    m_joueur.obtenirQuete()->definirValeurObjectif(m_joueur.obtenirQuete()->obtenirValeurObjectif()-
-                //                                                                   m_joueur.obtenirQuete()->obtenirValeurAvancement()-
-                //                                                                   v->obtenirValeurNutritive());
-                //                }
-
-                if (m_joueur.obtenirQuete()->obtenirValeurObjectif()<= m_joueur.obtenirQuete()->obtenirValeurAvancement() && !m_joueur.obtenirQuete()->estfini())
+                Quete * q = m_joueur.obtenirQuete();
+                Vivre* v = dynamic_cast<Vivre*>(objet);
+                q->augmenterValeur(v->obtenirValeurNutritive());
+                if (q->obtenirValeurObjectif()<= q->obtenirValeurAvancement() && !q->estfini())
                 {
-                    m_campement.ajouterObjet(m_joueur.obtenirQuete()->obtenirRecompense());
-                    m_joueur.obtenirQuete()->finir();
+                    m_campement.ajouterObjet(q->obtenirRecompense());
+                    q->finir();
                 }
             }
-
-            m_carte.obtenirZoneActive()->supprimerObjet(m_carte.obtenirZoneActive()->obtenirObjet(m_joueur.obtenirPosition()));
+            zoneActive->supprimerObjet(objet);
         }
     }
 }

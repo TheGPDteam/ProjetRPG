@@ -272,7 +272,7 @@ public:
     static std::map<std::string, SDL_Surface*> m_imagesDeFeuilleDeSprites;
 
     static ChargementFeuilleDeSprites* instance();
-
+    static void supprimerInstance();
 };
 
 #endif // CHARGEMENTFEUILLEDESPRITES_H

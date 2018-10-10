@@ -19,6 +19,7 @@ void mainloop_func(void* c, void* ctrl){
         vue->affichageVue();
         controleur->deroulementJournee();
     }
+    ChargementFeuilleDeSprites::supprimerInstance();
 }
 
 //!

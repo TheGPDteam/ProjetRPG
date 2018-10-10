@@ -25,6 +25,17 @@ Quete::Quete(TypeQuete tq, std::string nom, std::string description, int valeurO
 }
 
 //!
+//! \brief Destructeur
+//! \date 10/10/18
+//! \author rbourqui
+//! \version 0.1
+//!
+//! Destructeur de la classe Quete
+//!
+
+Quete::~Quete(){}
+
+//!
 //! \brief Accesseur récompense
 //! \date 10/11/16
 //! \version 1.0

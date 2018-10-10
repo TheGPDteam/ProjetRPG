@@ -10,8 +10,8 @@ class EcranGeneral : public DictionnaireDeBoutons, public Observateur
 {
 protected :
     Controleur* m_controleur;
-
     SDL_Surface * m_fond;
+
 public:
     EcranGeneral(Controleur * controleur);
 

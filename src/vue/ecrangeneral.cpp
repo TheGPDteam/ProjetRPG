@@ -24,7 +24,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur) :
 
 EcranGeneral::~EcranGeneral()
 {
-    delete m_fond;
+    SDL_FreeSurface(m_fond);
 }
 
 //!
@@ -35,5 +35,6 @@ EcranGeneral::~EcranGeneral()
 //!
 void EcranGeneral::afficherFondEcran(SDL_Surface* fenetre_affichage) {
     SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_BlitSurface(m_fond,&fond_ecran,fenetre_affichage,new SDL_Rect{0,0,0,0});
+    SDL_Rect dest_rect = {0, 0, 0, 0};
+    SDL_BlitSurface(m_fond,&fond_ecran,fenetre_affichage,&dest_rect);
 }

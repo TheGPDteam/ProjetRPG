@@ -98,6 +98,7 @@ void TexteSDL::afficherTexte(SDL_Surface* surface_affichage)
 void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
 {
   m_texteStr = nouveauTexte;
+  if(m_texte != nullptr) SDL_FreeSurface(m_texte);
   m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
 }
 

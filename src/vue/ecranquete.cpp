@@ -36,7 +36,13 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
 }
 
-EcranQuete::~EcranQuete(){}
+EcranQuete::~EcranQuete(){
+    if(m_zoneNomPersonnage != nullptr) delete m_zoneNomPersonnage;
+    if(m_zonePrenomPersonnage != nullptr) delete m_zonePrenomPersonnage;
+    if(m_zoneChassePersonnage != nullptr) delete m_zoneChassePersonnage;
+    if(m_zoneRecoltePersonnage != nullptr) delete m_zoneRecoltePersonnage;
+
+}
 
 
 void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)

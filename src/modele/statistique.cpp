@@ -1,4 +1,5 @@
 #include "statistique.h"
+#include <assert.h>
 
 //! \file fichier statistique
 //! \date 17/11/16
@@ -54,10 +55,8 @@ int Statistique::obtenirValeurMax() const
 
 void Statistique::definirValeur(int valeur)
 {
-    if (valeur <= m_STATMAX)
-        m_statActuelle=valeur;
-    else
-        valeur=rand()%m_STATMAX+1;
+    assert(valeur <= m_STATMAX);
+    m_statActuelle=valeur;
 }
 
 //!

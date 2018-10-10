@@ -301,6 +301,12 @@ Vue::~Vue()
         m_ecranPremiereJournee = nullptr;
     }
 
+    if (m_ecranAccueilCampement != nullptr)
+    {
+        delete m_ecranAccueilCampement;
+        m_ecranAccueilCampement = nullptr;
+    }
+
     SDL_FreeSurface(m_fenetrePrincipale);
     TTF_Quit();
     SDL_Quit();

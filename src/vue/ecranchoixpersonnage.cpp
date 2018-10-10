@@ -131,31 +131,16 @@ void EcranChoixPersonnage::obtenirChangement(Observable &obj) {
 
 
 EcranChoixPersonnage::~EcranChoixPersonnage(){
-
-    if(m_zoneNomPersonnage != nullptr)
-        delete m_zoneNomPersonnage;
-    if(m_zoneForcePersonnage != nullptr)
-        delete m_zoneForcePersonnage;
-    if(m_zoneNomPersonnage != nullptr)
-        delete m_zoneNomPersonnage;
-    if(m_zonePrenomPersonnage != nullptr)
-        delete m_zonePrenomPersonnage;
-    if(m_zoneForcePersonnage != nullptr)
-        delete m_zoneForcePersonnage;
-    if(m_zoneIntelligencePersonnage != nullptr)
-        delete m_zoneIntelligencePersonnage;
-    if(m_zoneVitessePersonnage != nullptr)
-        delete m_zoneVitessePersonnage;
-    if (m_zoneChassePersonnage != nullptr)
-        delete m_zoneChassePersonnage;
-    if (m_zoneRecoltePersonnage != nullptr)
-        delete m_zoneRecoltePersonnage;
-    if (m_zoneNomArmePersonnage != nullptr)
-        delete m_zoneNomArmePersonnage;
-    if (m_zoneDegatsArmePersonnage != nullptr)
-        delete m_zoneDegatsArmePersonnage;
-    if (m_zoneDescArmePersonnage != nullptr)
-        delete m_zoneDescArmePersonnage;
-
-
+    if(m_zonePrenomPersonnage != nullptr)       delete m_zonePrenomPersonnage;
+    if(m_zoneNomPersonnage != nullptr)          delete m_zoneNomPersonnage;
+    if(m_zoneForcePersonnage != nullptr)        delete m_zoneForcePersonnage;
+    if(m_zoneIntelligencePersonnage != nullptr) delete m_zoneIntelligencePersonnage;
+    if(m_zoneVitessePersonnage != nullptr)      delete m_zoneVitessePersonnage;
+    if (m_zoneChassePersonnage != nullptr)      delete m_zoneChassePersonnage;
+    if (m_zoneRecoltePersonnage != nullptr)     delete m_zoneRecoltePersonnage;
+    if(m_zoneNiveauPersonnage != nullptr)       delete m_zoneNiveauPersonnage;
+    if (m_zoneNomArmePersonnage != nullptr)     delete m_zoneNomArmePersonnage;
+    if (m_zoneDescArmePersonnage != nullptr)    delete m_zoneDescArmePersonnage;
+    if (m_zoneDegatsArmePersonnage != nullptr)  delete m_zoneDegatsArmePersonnage;
+    if (m_zoneQuestion!= nullptr)               delete m_zoneQuestion;
 }

@@ -23,10 +23,11 @@ void Saisir::ajouterChar(char *c){
 }
 
 void Saisir::setbufferSDL() {
+//    if(m_bufferSDL != nullptr) delete m_bufferSDL;
     m_bufferSDL = new TexteSDL(buffer, SDL_Color{0,0,0,0}, POLICE_COLLEGED, 20, std::make_pair(m_rec.x+20, m_rec.y+15));
 }
-void Saisir::afficher(SDL_Surface *fenetre_affichage){
 
+void Saisir::afficher(SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_rec, SDL_MapRGB(fenetre_affichage->format, 170, 170, 170));
     m_bufferSDL->afficherTexte(fenetre_affichage);
 }
