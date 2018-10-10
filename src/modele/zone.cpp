@@ -131,7 +131,7 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const
     for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
         if (it->second == position)
             return it->first;
-    return NULL;
+    return nullptr;
 }
 
 bool Zone::objetPresent(std::pair<int, int> position) const

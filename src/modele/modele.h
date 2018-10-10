@@ -36,6 +36,10 @@ private:
     bool testerDeplacement(Direction &dir);
 
 public:
+<<<<<<< HEAD
+=======
+    Humain * m_nouvelArrivant;
+>>>>>>> 1d278dd585fc78a4da5268fce39def7d0e48a06e
 
     Modele();
     void premiereJournee();
