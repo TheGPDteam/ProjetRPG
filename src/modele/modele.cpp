@@ -430,7 +430,7 @@ void Modele::finJournee() {
     m_nbZombiesAttaquant = (50 * m_nbJoursPasses) - m_nbZombiesTues;
 
     //On calcule si et combien de personnages du campement sont morts dans la nuit
-    int totalChasseCampement=0;
+    unsigned int totalChasseCampement=0;
     for (Personnage *p : m_campement.obtenirChasse()->obtenirListePersonnage())
     {
         Humain *h = (Humain*) (p);
@@ -448,23 +448,20 @@ void Modele::finJournee() {
     }
 
     if (m_nbZombiesAttaquant > totalChasseCampement)
-    {
         m_nbPersosMorts = (m_nbZombiesAttaquant - totalChasseCampement)/25;
-    }
     else
-    {
         m_nbPersosMorts = 0;
-    }
+
 
     if (m_nbPersosMorts > 0) {
         //Verifier si on a assez de personnes à tuer
-        int nbPersosCamp = 0;
+        unsigned int nbPersosCamp = 0;
         nbPersosCamp+=m_campement.obtenirRecolte()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirChasse()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
         if (nbPersosCamp>m_nbPersosMorts)
         {
-            for (int i=0; i<m_nbPersosMorts;++i)
+            for (unsigned int i=0; i<m_nbPersosMorts;++i)
             {
                 bool persoMort = false;
                 while(!persoMort) {
@@ -569,4 +566,12 @@ bool Modele::perdu() {
 
 TypeDefaite Modele::obtenirTypeDefaite() const {
     return m_td;
+}
+
+Humain * Modele::nouvelArrivant(){
+    return m_nouvelArrivant;
+}
+
+void Modele::changerNouvelArrivant(Humain * h){
+    m_nouvelArrivant = h;
 }

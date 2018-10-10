@@ -9,10 +9,9 @@
 //!
 
 EcranGeneral::EcranGeneral(Controleur *controleur) :
-    m_controleur{controleur}, DictionnaireDeBoutons(controleur)
+    DictionnaireDeBoutons(controleur), m_controleur{controleur}
 {
     m_fond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
-
 }
 
 

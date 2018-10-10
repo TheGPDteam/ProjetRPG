@@ -34,19 +34,8 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_zonePrenomPersonnage = new TexteSDL("Prenom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordPrenom);
     m_zoneChassePersonnage = new TexteSDL("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordChasse);           // position imprécise **
     m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
-
-
-    //Equipe* equipe = controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe();
-//    Humain* h = new Humain;
-//    h->definirNom("nn");
-//    equipe->ajouterPersonnage(h);
-
- //   for (auto p: equipe->obtenirListePersonnage())
-  //  {
-    //    m_equipe.push_back(dynamic_cast<Humain*>(p));
-   // }
-
 }
+
 EcranQuete::~EcranQuete(){}
 
 
@@ -55,8 +44,6 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-//    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-//    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     afficherFondEcran(fenetre_affichage);
 
     SDL_FillRect(fenetre_affichage, &m_fondPerso, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
@@ -65,7 +52,6 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionChasse, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionRecolte, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
 
     m_nomFenetre.afficherTexte(fenetre_affichage);
     m_zoneNomPersonnage->afficherTexte(fenetre_affichage);

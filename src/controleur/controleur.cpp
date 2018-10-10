@@ -60,10 +60,11 @@ void Controleur::choixNouvelArrivant(bool choix)
 {
     if(choix)
     {
-        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->m_nouvelArrivant);
-        m_modele->m_nouvelArrivant = nullptr;
+        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->nouvelArrivant());
+        m_modele->changerNouvelArrivant(nullptr);
     }
 }
+
 
 Vue* Controleur::obtenirVue(){
      return m_vue ;

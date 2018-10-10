@@ -118,25 +118,19 @@ void Joueur::definirPosition(std::pair<int,int> nouvellePosition)
 void Joueur::deplacerJoueur(Direction dir){
     switch(dir){
     case Nord:
-    {
         m_position.second--;
         break;
-    }
     case Sud:
-    {
         m_position.second++;
         break;
-    }
     case Ouest:
-    {
         m_position.first--;
         break;
-    }
     case Est:
-    {
         m_position.first++;
         break;
-    }
+    default:
+        break;
     }
 
     mettreAChange();
@@ -221,18 +215,18 @@ Inventaire* Joueur::obtenirInventaireJoueur()
 
 Joueur::~Joueur()
 {
-//    if(m_equipe != nullptr)
-//    {
-//        delete m_equipe;
-//    }
+    //    if(m_equipe != nullptr)
+    //    {
+    //        delete m_equipe;
+    //    }
     if(m_inventaireJoueur != nullptr)
     {
         delete m_inventaireJoueur;
     }
-//    if(m_camp != nullptr)
-//    {
-//        delete m_camp;
-//    }
+    //    if(m_camp != nullptr)
+    //    {
+    //        delete m_camp;
+    //    }
 }
 
 //!
@@ -255,8 +249,8 @@ Quete* Joueur::obtenirQuete() {
 std::string Joueur::serialiser() const
 {
     return "<Joueur>"
-            "   <NomJoueur>" + m_nom + "</NomJoueur>"
-            "   <EquipeJoueur>"
+           "   <NomJoueur>" + m_nom + "</NomJoueur>"
+                                      "   <EquipeJoueur>"
             + m_equipe->serialiser()
             +
             "   </EquipeJoueur>"

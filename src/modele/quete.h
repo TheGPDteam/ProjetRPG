@@ -9,18 +9,19 @@
 class Quete
 {
 private:
-    bool m_fini;
+    TypeQuete m_type;
     std::string m_nom;
     std::string m_description;
     int m_valeurObjectif;
     int m_valeurActuelle;
     int m_recompenseExperience;
     Objet* m_recompense;
+    bool m_fini;
+
 
     std::clock_t m_tempsDebutQuete;
     std::clock_t m_tempsDebutPause;
     int m_secondesJeuPause;
-    TypeQuete m_type;
 
 public:
     Quete() = default;

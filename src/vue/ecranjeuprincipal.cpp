@@ -159,11 +159,10 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
     // Test si c'est un joueur
     Joueur* joueur = dynamic_cast<Joueur*>(&obj);
-
     m_spriteObjets.clear();
 
     if(joueur!=nullptr){
-        std::cerr << "MAJ données vue EcranJeuPrincipal carte" << std::endl;
+
         //recupère la position du joueur sur la carte
         int posX = joueur->obtenirPosition().first-5;
         int posY = joueur->obtenirPosition().second-5;
@@ -177,19 +176,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 //Affichage d'arbre en dehors de la bordure de la carte
                 if(i<0 || i>63 || j<0 || j>63)
                 {
-                    if (i < 0)
-                    {
-                        if (m_carte->obtenirZoneActive()->obtenirTuile(0,j)->obtenirType()==TypeTuile::Beton /*&& m_carte->obtenirZoneActive()->obtenirTuile(0,j)->obtenirHachageJonction() == TypeJonction::AucuneJonction*/) {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{896,0,64,64});
-                        } else if (m_carte->obtenirZoneActive()->obtenirTuile(0,posY)->obtenirType()==TypeTuile::Terre)
-                        {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{832,0,64,64});
-                        } else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
-                        }
-                    } else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
-                    }
+                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
                 }
                 else
                 {

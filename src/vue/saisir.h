@@ -17,8 +17,8 @@ class Saisir
 {
 private:
     std::string buffer;
+    SDL_Rect m_rec;
     TexteSDL* m_bufferSDL;
-    SDL_Rect rec;
 
 public:
     Saisir();

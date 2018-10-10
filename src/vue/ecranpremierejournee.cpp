@@ -6,11 +6,7 @@
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     : EcranGeneral{controleur}
 {
-    short unsigned int largeurFond, hauteurFond;
-    largeurFond = WIDTH_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
-    hauteurFond = HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
-
-    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+   m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
     recupererHistoire();
 
@@ -65,7 +61,6 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
     SDL_Event evenements;
-
     while(SDL_PollEvent(&evenements))
     {
         switch(evenements.type)
@@ -94,7 +89,6 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
 
 void EcranPremiereJournee::obtenirChangement(Observable &obj)
 {
-
 }
 
 

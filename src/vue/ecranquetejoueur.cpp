@@ -18,12 +18,17 @@ EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur) :
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 75, coordB.second + 15)), &ActionsBoutons::boutonChasseJoueur);
 
-    int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
-    int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
+    short int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
+    short int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
+    Uint16 largeur_fond = WIDTH_FENETRE_PRINCIPALE-x*2;
+    Uint16 hauteur_fond = HEIGHT_FENETRE_PRINCIPALE-y*2;
+    m_rectangle_fond = {x,y,largeur_fond, hauteur_fond};
 
-    m_rectangle_fond = {x,y,WIDTH_FENETRE_PRINCIPALE-x*2,HEIGHT_FENETRE_PRINCIPALE-y*2};
-    m_bordure = {m_rectangle_fond.x-2,m_rectangle_fond.y-2  ,m_rectangle_fond.w+4,m_rectangle_fond.h+4};
-
+    x = x - 2;
+    y = y - 2;
+    Uint16 largeur_bordure = largeur_fond+4;
+    Uint16 hauteur_bordure = hauteur_fond+4;
+    m_bordure = {x,y,largeur_bordure,hauteur_bordure};
 }
 
 EcranQueteJoueur::~EcranQueteJoueur(){}

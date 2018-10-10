@@ -25,7 +25,6 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
 
 void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
 {
-
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
@@ -76,7 +75,6 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;
-
         }
     }
 }

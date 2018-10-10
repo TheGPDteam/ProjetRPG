@@ -6,7 +6,7 @@ EcranNom::EcranNom(Controleur* controleur) :
                                         std::make_pair(0,HEIGHT_FENETRE_PRINCIPALE/4), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 40)),
                        m_label("Tapez votre nom : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                                              std::make_pair(0,(HEIGHT_FENETRE_PRINCIPALE/2) - 50), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 40)),
-                       s{new Saisir()}
+                       m_s{new Saisir()}
 {
      ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Commencer", POLICE_COLLEGED, 20, std::make_pair(390,3*(HEIGHT_FENETRE_PRINCIPALE/4) - 70), std::make_pair(200,50),std::make_pair(390 + 45, 3*(HEIGHT_FENETRE_PRINCIPALE/4) - 55)), &ActionsBoutons::boutonChoixPersonnage); // Pk taille = position texte sdl ?
 }
@@ -23,7 +23,7 @@ void EcranNom::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fene
     m_nom_fenetre.afficherTexte(fenetre_affichage);
     m_label.afficherTexte(fenetre_affichage);
 
-    s->afficher(fenetre_affichage);
+    m_s->afficher(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 
@@ -51,12 +51,12 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
         case SDL_KEYDOWN:
 
             if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "backspace"){
-                s->enleverChar();
+                m_s->enleverChar();
             }
             else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){
-                    s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
+                    m_s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
                 }
-            m_controleur->obtenirModele()->obtenirJoueur()->definirNom(s->obtenirBuffer());
+            m_controleur->obtenirModele()->obtenirJoueur()->definirNom(m_s->obtenirBuffer());
             break;
 
         default:
@@ -74,5 +74,5 @@ void EcranNom::obtenirChangement(Observable &obj){
 
 
 EcranNom::~EcranNom(){
-    delete s;
+    delete m_s;
 }

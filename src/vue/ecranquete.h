@@ -8,16 +8,18 @@ class EcranQuete : public EcranGeneral
 private:
     std::function<TypeEcran(DictionnaireDeBoutons&, std::pair<int, int> coord_souris, TypeEcran)> m_methodeVerificationCliqueSourisSurBouton;
 
+    TexteSDL m_nomFenetre;
+    TexteSDL m_titreRecolte;
+    TexteSDL m_titreChasse;
+
+    Humain * m_humain_a_affecter;
+
     SDL_Rect m_fondChasse;
     SDL_Rect m_fondRecolte;
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
     SDL_Rect m_fondDescriptionChasse;
     SDL_Rect m_fondDescriptionRecolte;
-
-    TexteSDL m_nomFenetre;
-    TexteSDL m_titreChasse;
-    TexteSDL m_titreRecolte;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
@@ -34,9 +36,6 @@ private:
     std::pair<int, int>m_CoordRecolte;
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
-
-    Humain * m_humain_a_affecter;
-
 public:
     EcranQuete(Controleur *controleur);
 
@@ -46,8 +45,6 @@ public:
     ~EcranQuete();
 
     void obtenirChangement(Observable &obj) override;
-
 };
-
 #endif // CHOIXQUETE_H
 

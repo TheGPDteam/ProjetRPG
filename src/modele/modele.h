@@ -16,27 +16,26 @@
 class Modele
 {
 private:
+    Joueur m_joueur;
+    int m_deplacementDepuisDernierCombat;
+    Humain* m_nouvelArrivant;
+    bool m_perdu;
+    unsigned int m_nbPersosMorts;
+    unsigned int m_nbZombiesAttaquant;
+    unsigned int m_nbZombiesTues;
     TypeDefaite m_td;
+
     Temps m_temps;
     Carte m_carte;
     Campement m_campement;
     Combat m_combat;
-    Joueur m_joueur;
-    std::string m_nomPartie;
-    int m_deplacementDepuisDernierCombat;
-
+    std::string m_nomPartie;    
     unsigned int m_vivresConsommesNuit;
-    unsigned int m_nbPersosMorts;
-    unsigned int m_nbZombiesTues;
-    unsigned int m_nbZombiesAttaquant;
-
     unsigned int m_nbJoursPasses;
 
     bool testerDeplacement(Direction &dir);
 
-    bool m_perdu;
 public:
-    Humain* m_nouvelArrivant;
 
     Modele();
     void premiereJournee();
@@ -57,6 +56,8 @@ public:
     void definirCombat(Combat combat);
     Joueur *obtenirJoueur() ;
     void definirJoueur(Joueur joueur);
+    Humain * nouvelArrivant();
+    void changerNouvelArrivant(Humain * h);
     std::string serialiser() const;
     void charger(const std::string &donnees);
     void reinitialiserTemps();

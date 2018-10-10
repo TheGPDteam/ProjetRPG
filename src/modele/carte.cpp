@@ -98,29 +98,23 @@ void Carte::changerZoneActive(Direction direction)
 {
     switch (direction) {
     case Nord :
-    {
         m_yZoneActive -= 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Sud :
-    {
         m_yZoneActive += 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Est :
-    {
         m_xZoneActive += 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Ouest :
-    {
         m_xZoneActive -= 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
+    default :
+        break;
     }
 }
 

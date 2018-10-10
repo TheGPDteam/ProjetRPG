@@ -8,6 +8,7 @@ LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
 INCLUDEPATH+=/usr/include/SDL/
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
+
 SOURCES += \
     modele/equipe.cpp \
     vue/vue.cpp \
