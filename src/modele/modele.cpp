@@ -17,10 +17,10 @@ using namespace std;
 //!
 
 Modele::Modele()
-    : m_td{TypeDefaite::PASDEDEFAITE}, m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
+    : m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
                      50, 50, new Vivre())},
-      m_deplacementDepuisDernierCombat{0},
-      m_nbPersosMorts{0}, m_nbZombiesTues{0}, m_nbZombiesAttaquant{0}, m_perdu{false}, m_nouvelArrivant{nullptr}
+      m_deplacementDepuisDernierCombat{0}, m_nouvelArrivant{nullptr}, m_perdu{false},
+      m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}
 {
     premiereJournee();
 }

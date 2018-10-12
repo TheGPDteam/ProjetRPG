@@ -24,7 +24,7 @@ Zone::Zone(int longueur, int largeur)
 void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i)
 {
 
-    for (int j=0;j<129 && j < fichier[i].size(); ++j)
+    for (unsigned int j = 0; j < (unsigned int) 129 && j < fichier[i].size(); ++j)
     {
         int cpt=0;
         if(fichier[i][j]==' ')
