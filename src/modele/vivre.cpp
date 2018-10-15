@@ -47,9 +47,13 @@ void Vivre::chargerVivre(std::string nomFichier)
         }
         fichier.close();
     }
-    std::string ligneChoisie;
-    ligneChoisie = lignesAliments[rand()%lignesAliments.size()];
-    affecterValeurs(ligneChoisie);
+    if (!lignesAliments.empty())
+    {
+        std::string ligneChoisie;
+        int random_line =  rand()%(lignesAliments.size());
+        ligneChoisie = lignesAliments[random_line];
+        affecterValeurs(ligneChoisie);
+    }
 }
 
 void Vivre::affecterValeurs(string ligne)
@@ -106,10 +110,10 @@ void Vivre::affecterValeurs(string ligne)
 std::string Vivre::serialiser() const
 {
     return "<Vivre>"
-            "   <Nom>" + m_nom + "</Nom>"
-            "   <Description>" + m_description + "</Description>"
-            "   <ValeurNutritive>" + std::to_string(m_valeurNutritive) + "</ValeurNutritive>"
-            "</Vivre>";
+           "   <Nom>" + m_nom + "</Nom>"
+                                "   <Description>" + m_description + "</Description>"
+                                                                     "   <ValeurNutritive>" + std::to_string(m_valeurNutritive) + "</ValeurNutritive>"
+                                                                                                                                  "</Vivre>";
 }
 
 TypeObjet Vivre::obtenirType() const {

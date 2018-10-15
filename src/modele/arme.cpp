@@ -49,9 +49,13 @@ Arme::Arme()
         }
         fichier.close();
     }
-    std::string ligneChoisie;
-    ligneChoisie = lignesArmes[rand()%lignesArmes.size()];
-    affecterValeurs(ligneChoisie);
+    if (!lignesArmes.empty())
+    {
+        std::string ligneChoisie;
+        ligneChoisie = lignesArmes[rand()%lignesArmes.size()];
+        affecterValeurs(ligneChoisie);
+    }
+
 }
 
 //!

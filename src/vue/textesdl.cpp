@@ -33,6 +33,7 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const
     if(m_policeTexte == nullptr)
     {
         std::cout << SDL_GetError() << std::endl;
+        exit (1);
     }
 
     m_texteStr = texte;
