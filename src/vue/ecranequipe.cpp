@@ -12,7 +12,7 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
     m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT,  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
-//    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
+    //    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
     m_rectangleBas {COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250),  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
     m_rectangleDescription {COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
     m_zoneNomPersonnage {new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
@@ -76,7 +76,7 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
         zoneTempV.afficherTexte(fenetre_affichage);
     }
 
-     afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
 }
 
@@ -147,5 +147,5 @@ EcranEquipe::~EcranEquipe()
 
 void EcranEquipe::obtenirChangement(Observable &obj){
 
-//     Equipe* equipe = dynamic_cast<Equipe *>(&obj);
+    //     Equipe* equipe = dynamic_cast<Equipe *>(&obj);
 }
