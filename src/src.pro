@@ -10,120 +10,121 @@ INCLUDEPATH+=/usr/include/SDL/
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
 
 SOURCES += \
-    modele/equipe.cpp \
-    vue/vue.cpp \
     controleur/controleur.cpp \
-    modele/modele.cpp \
-    modele/statistique.cpp \
-    modele/temps.cpp \
-    modele/tuile.cpp \
-    modele/vie.cpp \
-    modele/vivre.cpp \
-    modele/zone.cpp \
-    modele/objet.cpp \
-    modele/personnage.cpp \
-    modele/quete.cpp \
-    modele/arme.cpp \
-    modele/campement.cpp \
-    modele/carte.cpp \
-    modele/combat.cpp \
-    modele/competence.cpp \
-    modele/humain.cpp \
-    modele/inventaire.cpp \
+    modele/abstrait/statistique.cpp \
+    modele/abstrait/temps.cpp \
+    modele/abstrait/utilitaires.cpp \
+    modele/environnement/carte/carte.cpp \
+    modele/environnement/carte/tuile.cpp \
+    modele/environnement/carte/zone.cpp \
+    modele/environnement/campement.cpp \
+    modele/objets/armes/arme.cpp \
+    modele/objets/objet.cpp \
+    modele/personnages/enemmis/zombie.cpp \
+    modele/personnages/humain.cpp \
+    modele/personnages/personnage.cpp \
+    modele/survie/combat/combat.cpp \
+    modele/survie/experience/competence.cpp \
+    modele/survie/experience/niveau.cpp \
+    modele/survie/quetes/quete.cpp \
+    modele/survie/equipe.cpp \
+    modele/survie/inventaire.cpp \
+    modele/survie/vie.cpp \
+    modele/survie/vivre.cpp \
     modele/joueur.cpp \
-    main.cpp \
-    modele/niveau.cpp \
-    modele/zombie.cpp \
-    vue/bouton.cpp \
-    vue/chargementfeuilledesprite.cpp \
-    vue/ecranmenuprincipal.cpp \
-    vue/sprite.cpp \
-    vue/textesdl.cpp \
-    vue/actionsboutons.cpp \
-    vue/ecrangeneral.cpp \
-    vue/ecranjeuprincipal.cpp \
-    vue/ecranquete.cpp \
-    observateur.cpp \
-    observable.cpp \
-    vue/dictionnairedeboutons.cpp \
+    modele/modele.cpp \
     save/sauvegarde.cpp \
-    vue/ecranequipe.cpp \
-    vue/ecraninventaire.cpp \
-    vue/ecranchoixpersonnage.cpp \
-    vue/ecranquetejoueur.cpp \
-    vue/ecrannom.cpp \
-    vue/saisir.cpp \
-    vue/ecranpremierejournee.cpp \
-    vue/ecranrecapitulatifnuit.cpp \
-    modele/utilitaires.cpp \
-    vue/ecranrepartitionjoueur.cpp \
-    vue/ecranaccueilcampement.cpp \
-    vue/ecranlisteobjets.cpp \
-    vue/ecrancombat.cpp
+    vue/ecran/jeu/ecranchoixpersonnage.cpp \
+    vue/ecran/jeu/ecrancombat.cpp \
+    vue/ecran/jeu/ecranequipe.cpp \
+    vue/ecran/jeu/ecraninventaire.cpp \
+    vue/ecran/jeu/ecranjeuprincipal.cpp \
+    vue/ecran/jeu/ecranlisteobjets.cpp \
+    vue/ecran/menu/ecranaccueilcampement.cpp \
+    vue/ecran/menu/ecranmenuprincipal.cpp \
+    vue/ecran/menu/ecrannom.cpp \
+    vue/ecran/menu/ecranpremierejournee.cpp \
+    vue/ecran/menu/ecranquete.cpp \
+    vue/ecran/menu/ecranquetejoueur.cpp \
+    vue/ecran/menu/ecranrecapitulatifnuit.cpp \
+    vue/ecran/menu/ecranrepartitionjoueur.cpp \
+    vue/ecran/ecrangeneral.cpp \
+    vue/interfaceutilisateur/conteneur/bouton/actionsboutons.cpp \
+    vue/interfaceutilisateur/conteneur/bouton/bouton.cpp \
+    vue/interfaceutilisateur/conteneur/bouton/dictionnairedeboutons.cpp \
+    vue/interfaceutilisateur/ressources/chargementfeuilledesprite.cpp \
+    vue/interfaceutilisateur/saisir.cpp \
+    vue/interfaceutilisateur/sprite.cpp \
+    vue/interfaceutilisateur/textesdl.cpp \
+    vue/vue.cpp \
+    main.cpp \
+    observable.cpp \
+    observateur.cpp
+
+
+
+
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
     controleur/controleur.h \
-    modele/equipe.h \
-    modele/modele.h \
-    modele/statistique.h \
-    modele/temps.h \
-    modele/tuile.h \
-    modele/vie.h \
-    modele/vivre.h \
-    modele/zone.h \
-    modele/objet.h \
-    modele/personnage.h \
-    modele/quete.h \
-    modele/arme.h \
-    modele/campement.h \
-    modele/carte.h \
-    modele/combat.h \
-    modele/competence.h \
-    modele/humain.h \
-    modele/inventaire.h \
+    modele/abstrait/statistique.h \
+    modele/abstrait/temps.h \
+    modele/abstrait/typedefaite.h \
+    modele/abstrait/utilitaires.h \
+    modele/environnement/carte/carte.h \
+    modele/environnement/carte/tuile.h \
+    modele/environnement/carte/zone.h \
+    modele/environnement/campement.h \
+    modele/objets/armes/arme.h \
+    modele/objets/objet.h \
+    modele/objets/typeobjet.h \
+    modele/personnages/enemmis/zombie.h \
+    modele/personnages/humain.h \
+    modele/personnages/personnage.h \
+    modele/survie/combat/actioncombat.h \
+    modele/survie/combat/combat.h \
+    modele/survie/experience/competence.h \
+    modele/survie/experience/niveau.h \
+    modele/survie/quetes/quete.h \
+    modele/survie/quetes/typequete.h \
+    modele/survie/equipe.h \
+    modele/survie/inventaire.h \
+    modele/survie/vie.h \
+    modele/survie/vivre.h \
     modele/joueur.h \
-    modele/actioncombat.h \
-    modele/niveau.h \
-    modele/zombie.h \
+    modele/modele.h \
     save/sauvegarde.h \
+    vue/ecran/jeu/ecranchoixpersonnage.h \
+    vue/ecran/jeu/ecrancombat.h \
+    vue/ecran/jeu/ecranequipe.h \
+    vue/ecran/jeu/ecraninventaire.h \
+    vue/ecran/jeu/ecranjeuprincipal.h \
+    vue/ecran/jeu/ecranlisteobjets.h \
+    vue/ecran/menu/ecranaccueilcampement.h \
+    vue/ecran/menu/ecranmenuprincipal.h \
+    vue/ecran/menu/ecrannom.h \
+    vue/ecran/menu/ecranpremierejournee.h \
+    vue/ecran/menu/ecranquete.h \
+    vue/ecran/menu/ecranquetejoueur.h \
+    vue/ecran/menu/ecranrecapitulatifnuit.h \
+    vue/ecran/menu/ecranrepartitionjoueur.h \
+    vue/ecran/ecrangeneral.h \
+    vue/ecran/typeecran.h \
+    vue/interfaceutilisateur/conteneur/bouton/actionsboutons.h \
+    vue/interfaceutilisateur/conteneur/bouton/bouton.h \
+    vue/interfaceutilisateur/conteneur/bouton/constantesbouton.h \
+    vue/interfaceutilisateur/conteneur/bouton/dictionnairedeboutons.h \
+    vue/interfaceutilisateur/conteneur/bouton/typebouton.h \
+    vue/interfaceutilisateur/ressources/chargementfeuilledesprite.h \
+    vue/interfaceutilisateur/ressources/policetexte.h \
+    vue/interfaceutilisateur/saisir.h \
+    vue/interfaceutilisateur/sprite.h \
+    vue/interfaceutilisateur/textesdl.h \
     vue/vue.h \
-    vue/bouton.h \
-    vue/chargementfeuilledesprite.h \
-    vue/ecranmenuprincipal.h \
-    vue/ecranquete.h \
-    vue/sprite.h \
-    vue/textesdl.h \
-    vue/typebouton.h \
-    vue/typeecran.h \
-    vue/actionsboutons.h \
-    vue/constantesbouton.h \
-    vue/ecrangeneral.h \
-    vue/ecranjeuprincipal.h \
-    vue/dictionnairedeboutons.h \
-    vue/ecranequipe.h \
-    vue/ecraninventaire.h \
-    vue/policetexte.h \
-    vue/ecranchoixpersonnage.h \
-    vue/ecranquetejoueur.h \
-    vue/ecranquetejoueur.h \
-    vue/ecranquetejoueur.h \
-    vue/ecrannom.h \
-    vue/saisir.h \
     direction.h \
-    observateur.h \
     observable.h \
-    vue/ecranpremierejournee.h \
-    vue/ecranrecapitulatifnuit.h \
-    vue/repartitionjoueur.h \
-    modele/typeobjet.h \
-    modele/utilitaires.h \
-    vue/ecranrepartitionjoueur.h \
-    modele/typequete.h \
-    modele/typedefaite.h \
-    vue/ecranaccueilcampement.h \
-    vue/ecranlisteobjets.h \
-    vue/ecrancombat.h
+    observateur.h
 

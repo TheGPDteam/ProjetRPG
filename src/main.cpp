@@ -8,8 +8,8 @@
 #include "vue/vue.h"
 #include "modele/modele.h"
 #include "controleur/controleur.h"
-#include "modele/equipe.h"
-#include "modele/inventaire.h"
+#include "modele/survie/equipe.h"
+#include "modele/survie/inventaire.h"
 
 void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;

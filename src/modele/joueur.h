@@ -4,13 +4,13 @@
 #include <utility>
 #include <string>
 #include "observable.h"
-#include "humain.h"
-#include "equipe.h"
-#include "campement.h"
-#include "inventaire.h"
-#include "quete.h"
+#include "./personnages/humain.h"
+#include "./survie/equipe.h"
+#include "./environnement/campement.h"
+#include "./survie/inventaire.h"
+#include "./survie/quetes/quete.h"
 #include "direction.h"
-#include "utilitaires.h"
+#include "./abstrait/utilitaires.h"
 
 class Joueur : public Observable
 {

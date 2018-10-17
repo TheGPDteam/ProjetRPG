@@ -1,5 +1,5 @@
 #include "controleur.h"
-#include "../vue/typeecran.h"
+#include "../vue/ecran/typeecran.h"
 #include "../vue/vue.h"
 #include <iostream>
 

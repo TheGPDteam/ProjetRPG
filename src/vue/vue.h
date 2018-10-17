@@ -2,18 +2,18 @@
 #define vue_h
 
 #include "controleur/controleur.h"
-#include "ecranmenuprincipal.h"
-#include "ecranjeuprincipal.h"
-#include "ecranequipe.h"
-#include "ecranchoixpersonnage.h"
-#include "ecranquete.h"
-#include "ecraninventaire.h"
-#include "ecranquetejoueur.h"
-#include "ecrannom.h"
-#include "ecranrecapitulatifnuit.h"
-#include "ecranpremierejournee.h"
-#include "ecranaccueilcampement.h"
-#include "ecranlisteobjets.h"
+#include "./ecran/menu/ecranmenuprincipal.h"
+#include "./ecran/jeu/ecranjeuprincipal.h"
+#include "./ecran/jeu/ecranequipe.h"
+#include "./ecran/jeu/ecranchoixpersonnage.h"
+#include "./ecran/menu/ecranquete.h"
+#include "./ecran/jeu/ecraninventaire.h"
+#include "./ecran/menu/ecranquetejoueur.h"
+#include "./ecran/menu/ecrannom.h"
+#include "./ecran/menu/ecranrecapitulatifnuit.h"
+#include "./ecran/menu/ecranpremierejournee.h"
+#include "./ecran/menu/ecranaccueilcampement.h"
+#include "./ecran/jeu/ecranlisteobjets.h"
 
 #include <iostream>
 

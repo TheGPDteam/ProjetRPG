@@ -4,14 +4,14 @@
 #include <string>
 #include <typeinfo>
 #include "../direction.h"
-#include "humain.h"
-#include "temps.h"
-#include "carte.h"
-#include "campement.h"
-#include "combat.h"
+#include "./personnages/humain.h"
+#include "./abstrait/temps.h"
+#include "./environnement/carte/carte.h"
+#include "./environnement/campement.h"
+#include "./survie/combat/combat.h"
 #include "joueur.h"
-#include "utilitaires.h"
-#include "typedefaite.h"
+#include "./abstrait/utilitaires.h"
+#include "./abstrait/typedefaite.h"
 
 class Modele
 {
