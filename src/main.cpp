@@ -38,9 +38,9 @@ int main (){
     srand(time(NULL));
     Vue* vue = new Vue(); //On instancie la vue
     Modele* modele= new Modele(); // On instancie le modele
-    Controleur* controleur = new Controleur(vue,modele); // On instancie le controleur
+    Controleur controleur{vue,modele}; // On instancie le controleur
 
-    vue->definirControleur(controleur);
+    vue->definirControleur(&controleur);
 //    controleur.definirVue(vue);
 //    controleur.definirModele(modele);
 
@@ -50,7 +50,7 @@ int main (){
 #else
     mainloop_func(vue, &controleur);
 #endif
-    delete controleur;
+
     delete vue;
     delete modele;
 

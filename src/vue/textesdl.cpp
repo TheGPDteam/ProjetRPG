@@ -129,7 +129,6 @@ int TexteSDL::getHauteurFont() const
 //! Detruit le SDL_Surface servant à afficher le texte si il est initialisé
 //!
 
-/*segfault ici à la fin*/
 TexteSDL::~TexteSDL()
 {
     if(m_texte != nullptr)
