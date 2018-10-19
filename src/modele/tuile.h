@@ -1,29 +1,54 @@
 #ifndef tuile_h
 #define tuile_h
 
+#include "direction.h"
+
 enum TypeTuile {
-    Eau,
+    Eau=0,
     Sable,
     Herbe,
     Beton,
     Terre,
-    Arbre
+    Arbre,
+    AucunType
 };
 
+enum TypeJonction{
+    AucuneJonction,
+    HautGaucheEntrant,
+    HautDroiteSortant,
+    HautDroiteEntrant,
+    BasDroiteSortant,
+    BasDroiteEntrant,
+    BasGaucheSortant,
+    BasGaucheEntrant,
+    Haut,
+    Gauche,
+    Droite,
+    Bas,
+    HautGaucheSortant
+};
 
 class Tuile
 {
 protected:
     TypeTuile m_type;
+    int m_jonction;
 private:
-    bool m_extremiteCarte;
+    Direction m_directionChangementZone;
+
 public:
-    void definirExtremiteCarte(bool extremite);
-    bool obtenirExtremiteCarte() const;
+    Direction obtenirDirection() const;
+    void definirDirection(Direction dir);
     Tuile(int val);
     TypeTuile obtenirType() const;
     bool obtenirEstMarchable() const;
     bool obtenirPeutApparaitre() const;
+
+    void definirHachageJonction(TypeTuile typeVoisin, TypeJonction positionVoisin);
+    int obtenirHachageJonction() const;
+
+    static int hacher(TypeTuile typeVoisin, TypeJonction positionVoisin);
 };
 
 #endif

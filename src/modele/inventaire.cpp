@@ -135,3 +135,60 @@ bool Inventaire::estPlein() const
 {
     return (obtenirNombreObjet() == this->obtenirTailleMax());
 }
+
+//!
+//! \brief Serialise les objets de l'inventaire
+//! \author nlesne
+//! \date 12/11/17
+//! \return Chaine contenant l'inventaire sous format XML
+//! \version 0.1
+//!
+//! Convertit les données des objets de l'inventaire au format XML
+//!
+
+std::string Inventaire::serialiser() const
+{
+    std::string donnees_objets = "<Inventaire>";
+    for (Objet* obj : m_objets)
+        donnees_objets += obj->serialiser();
+    donnees_objets += "</Inventaire>";
+
+    return donnees_objets;
+}
+
+void Inventaire::charger(const std::string &donnees)
+{
+    std::string donneesInventaire = donnees;
+    if (donneesInventaire.find("<Arme>") != std::string::npos)
+    {
+        while (!obtenirSousChaineEntre2Predicats(donneesInventaire,"<Arme>","</Arme>").empty())
+        {
+            Arme* a = new Arme();
+            a->charger(obtenirSousChaineEntre2Predicats(donneesInventaire,"<Arme>","</Arme>"));
+            m_objets.push_back(a);
+            supprimmerSousChaineEntre2Predicats(donneesInventaire,"<Arme>","</Arme>");
+        }
+    }
+
+    if (donneesInventaire.find("<Vivre>") != std::string::npos)
+    {
+        while (!obtenirSousChaineEntre2Predicats(donneesInventaire,"<Vivre>","</Vivre>").empty())
+        {
+            Vivre* v = new Vivre();
+            v->charger(obtenirSousChaineEntre2Predicats(donneesInventaire,"<Vivre>","</Vivre>"));
+            m_objets.push_back(v);
+            supprimmerSousChaineEntre2Predicats(donneesInventaire,"<Vivre>","</Vivre>");
+        }
+    }
+
+    if (donneesInventaire.find("<Objet>") != std::string::npos)
+    {
+        while (!obtenirSousChaineEntre2Predicats(donneesInventaire,"<Objet>","</Objet>").empty())
+        {
+            Objet* obj = new Objet();
+            obj->charger(obtenirSousChaineEntre2Predicats(donneesInventaire,"<Vivre>","</Vivre>"));
+            m_objets.push_back(obj);
+            supprimmerSousChaineEntre2Predicats(donneesInventaire,"<Objet>","</Objet>");
+        }
+    }
+}

@@ -3,6 +3,9 @@
 
 #include <ctime>
 #include <random>
+#include <vector>
+#include <string>
+#include "utilitaires.h"
 
 class Statistique
 {
@@ -15,6 +18,8 @@ public:
     int obtenirValeurMax() const;
     void definirValeur(int valeur);
     void augmenter(int valeur);
+    std::string serialiser() const;
+    void charger(const std::string &donnees);
 };
 
 #endif

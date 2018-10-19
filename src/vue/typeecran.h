@@ -3,18 +3,17 @@
 
 const int WIDTH_FENETRE_PRINCIPALE = 1024;
 const int HEIGHT_FENETRE_PRINCIPALE = 668;
-const int BPP = 32;
+const int BPP = 12;
 
 //!
-//! Représente tout les type d'écran possible
+//! Représente tout les types d'écran possibles
 //! \author pgutierrez
 //! \date 11/11/16
 //! \version 0.1
 //!
 
-enum TypeEcran
+enum class TypeEcran
 {
-    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe
+    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage, ChoixQuete, PopUpJoueur,RecolteJoueur, ChasseJoueur, RecapitulatifNuit, PremiereJournee, choixNom, AccueilCampement, ListeObjet
 };
-
 #endif // TYPEECRAN_H

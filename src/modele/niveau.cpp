@@ -120,3 +120,30 @@ void Niveau::niveauSuperieur()
     m_niveauActuel++;
     m_pointsExperiencePourNiveauSuivant=m_niveauActuel*100;
 }
+
+//! \brief serialise les attributs de la classe niveau
+//! \author parMarius,nlesne
+//! \date 19/10/17
+//! \version 0.2
+//!
+std::string Niveau::serialiser() const{
+    return "<Niveau>"
+            "   <NiveauActuel>" + std::to_string(m_niveauActuel) + "</NiveauActuel>"
+            "   <ExperienceActuelle>" + std::to_string(m_pointsExperienceActuels) + "</ExperienceActuelle>"
+            "   <ExperiencePourNiveauSuivant>" + std::to_string(m_pointsExperiencePourNiveauSuivant) + "</ExperiencePourNiveauSuivant>"
+            "</Niveau>";
+
+}
+
+//! \brief charger les attributs de la classe Niveau
+//! \author parMarius,nlesne
+//! \date 18/01/18
+//! \version 1.0
+//!
+
+void Niveau::charger(const std::string &donnees)
+{
+    m_niveauActuel = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<NiveauActuel>","</NiveauActuel>"));
+    m_pointsExperienceActuels = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ExperienceActuelle>","</ExperienceActuelle>"));
+    m_pointsExperiencePourNiveauSuivant = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ExperiencePourNiveauSuivant>","</ExperiencePourNiveauSuivant>"));
+}

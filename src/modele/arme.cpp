@@ -35,7 +35,6 @@ Arme::Arme(unsigned short degats, std::string nom, std::string description)
 Arme::Arme()
     :Objet("","")
 {
-    srand(time(NULL));
     std::vector<std::string> lignesArmes;
 
     std::ifstream fichier("./../rsc/objets/armes/armes.txt", std::ifstream::in);
@@ -105,7 +104,7 @@ void Arme::affecterValeurs(std::string ligne)
     bool separateurVitessePasse=false;
     bool separateurChancePasse=false;
 
-    for (int i=0;i<ligne.size();++i)
+    for (unsigned int i=0;i+1<=ligne.size();++i)
     {
         if (!separateurNomPasse)
         {
@@ -187,8 +186,34 @@ unsigned short Arme::obtenirVitesse()
     return m_vitesse;
 }
 
-std::vector<std::string> Arme::serialiser() const
+//!
+//! \brief Serialise les données des armes
+//! \author nlesne
+//! \date 16/10/17
+//! \version 1.0
+//! \return les données des armes
+//!
+
+std::string Arme::serialiser() const
 {
-    std::vector<std::string> donnees {std::to_string(m_degats),m_description};
-    return donnees;
+    return "<Arme>"
+           "    <Nom>" + m_nom + "</Nom>"
+            "   <Description>" + m_description + "</Description>"
+            "   <Degats>" + std::to_string(m_degats) + "</Degats>"
+            "   <Vitesse>" + std::to_string(m_vitesse) + "</Vitesse>"
+            "   <Chance>" + std::to_string(m_chance) + "</Chance>"
+            "</Arme>";
+}
+
+TypeObjet Arme::obtenirType() const {
+    return TypeObjet::Arme;
+}
+
+void Arme::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
+    m_description = obtenirSousChaineEntre2Predicats(donnees,"<Description>","</Description>");
+    m_degats = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Degats>","</Degats>"));
+    m_vitesse = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Vitesse>","</Vitesse>"));
+    m_chance = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Chance>","</Chance>"));
 }

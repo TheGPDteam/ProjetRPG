@@ -1,4 +1,4 @@
-#include "carte.h"
+ #include "carte.h"
 
 //! \file fichier campement
 //! \date 17/11/16
@@ -98,28 +98,54 @@ void Carte::changerZoneActive(Direction direction)
 {
     switch (direction) {
     case Nord :
-    {
         m_yZoneActive -= 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Sud :
-    {
         m_yZoneActive += 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Est :
-    {
         m_xZoneActive += 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
-    }
     case Ouest :
-    {
         m_xZoneActive -= 1;
         m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
         break;
+    default :
+        break;
     }
+}
+
+//!
+//! \brief Fonction de rechargement des objets dans les zones de la carte
+//! \version 0.1
+//! \date 01/03/18
+//! \author mleothaud
+//!
+
+void Carte::recharger()
+{
+    for (int i = 0; i < TAILLE_CARTE_X ; i++)
+    {
+        for(int j = 0; j < TAILLE_CARTE_Y ; ++j)
+        {
+            m_zones[i][j]->recharger();
+        }
     }
+}
+
+//!
+//! \brief Fonction pour retourner dans la zone ou est le campement
+//! \version 1.0
+//! \date 09/03/18
+//! \author mleothaud
+//!
+
+void Carte::zoneActiveCampement()
+{
+   m_xZoneActive = 1;
+   m_yZoneActive = 1;
+   m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
 }

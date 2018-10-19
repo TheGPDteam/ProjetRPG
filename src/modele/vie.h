@@ -6,6 +6,9 @@
 //! \date 03/11/2016
 //!
 
+#include <string>
+#include "utilitaires.h"
+
 class Vie
 {
 private:
@@ -20,6 +23,8 @@ public:
     void definirValeurMax(int nouvelleValeurMax);
     void diminuer(int valeur);
     void augmenter(int valeur);
+    std::string serialiser()const;
+    void charger(const std::string &donnees);
 };
 
 #endif

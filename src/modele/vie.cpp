@@ -14,7 +14,7 @@
 //!
 
 Vie::Vie()
-    :m_valeur{1},m_valeurMax{1}
+    :m_valeur{1},m_valeurMax{100}
 {}
 
 //!
@@ -123,4 +123,26 @@ void Vie::augmenter(int valeur)
         this->definirValeur(this->obtenirValeurMax());
     else
         this->definirValeur(this->obtenirValeur() + valeur);
+}
+
+//! \brief serialise les attributs de la classe Vie
+//! \author Marius,nlesne
+//! \date 19/10/17
+//! \version 0.2
+//!
+
+std::string Vie::serialiser() const{
+    return "<Vie>"
+            "<Maximum>" + std::to_string(m_valeurMax) + "</Maximum>"
+            "</Vie>";
+}
+//! \brief charge les attributs de la classe Vie
+//! \author Marius
+//! \date 19/10/17
+//! \version 1.0
+//!
+
+void Vie::charger(const std::string &donnees){
+    m_valeurMax = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Maximum>","</Maximum>"));
+    m_valeur = m_valeurMax;
 }

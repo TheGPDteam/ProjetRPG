@@ -98,6 +98,7 @@ void TexteSDL::afficherTexte(SDL_Surface* surface_affichage)
 void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
 {
   m_texteStr = nouveauTexte;
+  if(m_texte != nullptr) SDL_FreeSurface(m_texte);
   m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
 }
 
@@ -105,6 +106,16 @@ void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
 std::string TexteSDL::getTexteStr() const
 {
     return m_texteStr;
+}
+
+int TexteSDL::getHauteurFont() const
+{
+    if (m_texte != nullptr)
+    {
+        return m_texte->h;
+    }
+
+    return 0;
 }
 
 
@@ -123,6 +134,4 @@ TexteSDL::~TexteSDL()
     {
         SDL_FreeSurface(m_texte);
     }
-
-    TTF_Quit();
 }

@@ -22,18 +22,18 @@ std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé per
 //!
 
 Bouton::Bouton(const TypeBouton type_bouton, const bool bouton_cliquable, std::string texte, const std::string chemin_police, const int taille_police,
-               const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton) : m_typeDeBouton(type_bouton), m_boutonCliquable(bouton_cliquable)
+               const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton, const std::pair<int, int> coord_texte) : m_typeDeBouton(type_bouton), m_boutonCliquable(bouton_cliquable)
 
 {
-    initialisationAffichageBouton(coord_bouton);
+    initialisationAffichageBouton(coord_bouton, taille_bouton);
 
     if(m_boutonCliquable)
     {
-        m_texteBouton = new TexteSDL(texte, COULEUR_BOUTON_CLIQUABLE, chemin_police, taille_police, coord_bouton, taille_bouton);
+        m_texteBouton = new TexteSDL(texte, COULEUR_BOUTON_CLIQUABLE, chemin_police, taille_police, coord_texte);
     }
     else
     {
-        m_texteBouton = new TexteSDL(texte, COULEUR_BOUTON_NON_CLIQUABLE, chemin_police, taille_police, coord_bouton, taille_bouton);
+        m_texteBouton = new TexteSDL(texte, COULEUR_BOUTON_NON_CLIQUABLE, chemin_police, taille_police, coord_texte);
     }
 }
 
@@ -129,7 +129,7 @@ bool Bouton::obtenirBoutonCliquable() {
 //! Initialise le sprite du bouton en fonction du type du bouton
 //!
 
-void Bouton::initialisationAffichageBouton(const std::pair<int, int> coord_bouton)
+void Bouton::initialisationAffichageBouton(const std::pair<int, int> coord_bouton,const std::pair<int, int> taille_bouton)
 {
     SDL_Rect positionFenetre;
     SDL_Rect positionFeuilleDeSprite;
@@ -138,7 +138,7 @@ void Bouton::initialisationAffichageBouton(const std::pair<int, int> coord_bouto
     {
     case Normal:
         positionFenetre = initialisationRectangle(coord_bouton.first, coord_bouton.second, 0, 0);
-        positionFeuilleDeSprite = initialisationRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+        positionFeuilleDeSprite = initialisationRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, taille_bouton.first, taille_bouton.second);
 
         m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetre, positionFeuilleDeSprite);
         break;
@@ -202,4 +202,15 @@ Bouton::~Bouton()
     {
         delete m_texteBouton;
     }
+}
+
+//!
+//! \brief Met l'attribut cliquable a vrai
+//! \author mleothaud
+//! \date 11/11/16
+//! \version 1.0
+//!
+void Bouton::devenirCliquable()
+{
+    m_boutonCliquable = true;
 }

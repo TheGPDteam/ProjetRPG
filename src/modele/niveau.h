@@ -1,7 +1,9 @@
 #ifndef NIVEAU_H
 #define NIVEAU_H
 
-
+#include <vector>
+#include <string>
+#include "utilitaires.h"
 
 class Niveau
 {
@@ -19,6 +21,8 @@ public:
     int obtenirPointsExperiencePourNiveauSuivant() const;
     bool ajouterExperience(int valeur);
     void niveauSuperieur();
+    std::string serialiser() const;
+    void charger(const std::string &donnees);
 };
 
 #endif // NIVEAU_H

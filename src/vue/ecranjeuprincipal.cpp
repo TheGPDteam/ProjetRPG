@@ -6,10 +6,12 @@
 #include <string>
 #include <iostream>
 
-std::pair<int, int> const coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 
-std::pair<int, int> const coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2));
-std::pair<int, int> const tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
+const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 530); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 590); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
 //! \brief Constructeur écran jeu principal
@@ -18,29 +20,32 @@ std::pair<int, int> const tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 //! \version 1.0
 //!
 
-EcranJeuPrincipal::EcranJeuPrincipal()
-    : m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,0,63,63}}},
-      m_texteObjectif{(std::string)"position :", SDL_Color{255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,120)}
+EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
+    : EcranGeneral{controleur},
+      m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,256,64,64}}},
+      m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
+      m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
+      m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
 {
-
     //* AJOUT DES BOUTONS *//
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB}, &ActionsBoutons::boutonEquipe);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB},&ActionsBoutons::boutonInventaire);
 
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+40,coordB2.second+15)},&ActionsBoutons::boutonInventaire);
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Aller au campement", POLICE_COLLEGED, 16, coordB3, tailleB, std::make_pair(coordB3.first+5,coordB3.second+15)},&ActionsBoutons::boutonCampement);;
+    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB4, tailleB, std::make_pair(coordB4.first+30,coordB4.second+15)},&ActionsBoutons::boutonFinirQuete);;
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
         for(int j = 0;j< 12;j++)
-            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{i*63,j*63,0,0}, SDL_Rect{0,128,64,64}};
+            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
 }
-
 
 //!
 //! \brief Affiche l'écran de jeu principal
-//! \author pgutierrez
+//! \author pgutierrez, mleothaud
 //! @param fenetre_affichage fenetre où s'affichera l'objet
 //! \date 23/11/16
-//! \version 0.1
+//! \version 1.0
 //!
 //! Affiche le contenu d'un écran de jeu principal
 //!
@@ -54,9 +59,28 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         for(auto x : c)
             x->afficherSprite(fenetre_affichage);
 
+    //Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0,0,127,63}, SDL_Rect{256,192,63,63}};
+
+    for(auto p : m_spriteObjets){
+        Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(p.first*63),(short int)(p.second*63),127,63}, SDL_Rect{256,192,63,63}};
+        valise.afficherSprite(fenetre_affichage);
+    }
+
+    if (m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement() < m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()) {
+        m_objectif.mettreAJourTexte("Objectif: "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement())+" sur "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()));
+    }
+    else
+    {
+        m_objectif.mettreAJourTexte("Objectif atteint");
+    }
+    m_nomJoueur.mettreAJourTexte(m_controleur->obtenirModele()->obtenirJoueur()->obtenirNom());
+    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()%60));
     m_spriteJoueur->afficherSprite(fenetre_affichage);
-    m_texteObjectif.afficherTexte(fenetre_affichage);
+    m_nomJoueur.afficherTexte(fenetre_affichage);
+    m_objectif.afficherTexte(fenetre_affichage);
+    m_tempsRestant.afficherTexte(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
+
 }
 
 
@@ -135,8 +159,10 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
     // Test si c'est un joueur
     Joueur* joueur = dynamic_cast<Joueur*>(&obj);
+    m_spriteObjets.clear();
 
     if(joueur!=nullptr){
+
         //recupère la position du joueur sur la carte
         int posX = joueur->obtenirPosition().first-5;
         int posY = joueur->obtenirPosition().second-5;
@@ -150,58 +176,19 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 //Affichage d'arbre en dehors de la bordure de la carte
                 if(i<0 || i>63 || j<0 || j>63)
                 {
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,320,64,64});
+                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
                 }
                 else
                 {
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
-                    bool find = carte->objetPresent(temp);
-                    switch(carte->obtenirTuile(i,j)->obtenirType()){
-                    case TypeTuile::Eau:
-                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,0,64,64});
-                        break;
-                    case TypeTuile::Sable:
-                        if(!find)
-                        {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,64,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,64,127});
-                        }
-                        break;
-                    case TypeTuile::Herbe:
-                        if(!find)
-                        {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,128,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,128,64,191});
-                        }
-                        break;
-                    case TypeTuile::Beton:
-                        if(!find)
-                        {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,192,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,192, 255});
-                        }
-                        break;
-                    case TypeTuile::Terre:
-                        if(!find)
-                        {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{0,256,64,64});
-                        }
-                        else {
-                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{64,127,256, 319});
-                        }
-                        break;
-                    case TypeTuile::Arbre:
-                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{128,291,64,64});
-                    default:
-                        break;
-                    }
+                    Tuile * t = carte->obtenirTuile(i,j);
+                    SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+
+                    if(carte->objetPresent(temp))
+                        m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
+
                 }
             }
         }

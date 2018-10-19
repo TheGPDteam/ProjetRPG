@@ -7,6 +7,7 @@
 class Personnage
 {
 protected:
+    static int const m_CHANCE_CC_BASE = 10;
     Statistique m_force;
     Statistique m_intelligence;
     Statistique m_vitesse;
@@ -19,7 +20,7 @@ public:
     Vie* obtenirVie();
     virtual unsigned short obtenirVitesse()=0;
     virtual unsigned short obtenirDegats();
-    virtual std::vector<std::string> serialiser() const;
+    virtual std::string serialiser() const;
 };
 
 #endif

@@ -4,6 +4,19 @@
 //! \date 17/11/16
 //! \version 1.0
 
+
+//!
+//! \brief Constructeur par défaut
+//! \author nlesne
+//! \date 18/01/18
+//! \version 1.0
+//!
+
+Objet::Objet()
+{
+
+}
+
 //!
 //! \brief Constructeur paramétré
 //! \author jsorin001
@@ -93,7 +106,20 @@ void Objet::definirNom(const std::string &nom)
     m_nom = nom;
 }
 
-std::vector<std::string> Objet::serialiser() const
+std::string Objet::serialiser() const
 {
-    return {};
+    return "<Objet>"
+            "   <Nom>" + m_nom + "</Nom>"
+            "   <Description>" + m_description + "</Description>"
+            "</Objet>";
+
+}
+
+TypeObjet Objet::obtenirType() const {
+    return TypeObjet::Objet;
+}
+
+void Objet::charger(const std::string &donnees)
+{
+
 }

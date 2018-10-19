@@ -1,34 +1,49 @@
 #include "sauvegarde.h"
 
-int Sauvegarde::sauvegarderModele(Modele *modele)
+void Sauvegarde::sauvegarderModele(Modele *modele)
 {
     #ifdef __MINGW32__
     if (!mkdir("save"))
     #elif __linux__
-    if (!mkdir("save", 0777))
+    if (mkdir("save", 0777) == 0)
     #endif
     {
         std::cerr << "Dossier créé !" << std::endl;
     }
 
-    TiXmlDocument doc("save/save.xml");
-    TiXmlHandle manipulateur(&doc);
+    std::string cheminFichier = "save/";
+    if (!modele->obtenirNomPartie().empty())
+        cheminFichier += modele->obtenirNomPartie()+".xml";
+    else
+        cheminFichier += "Defaut.xml";
+    std::ofstream fichierSauvegarde(cheminFichier,std::ios::out | std::ios::trunc);
 
-    TiXmlElement *elem = new TiXmlElement("Sauvegarde");
-    doc.LinkEndChild(elem);
+    if (fichierSauvegarde.is_open())
+    {
+        fichierSauvegarde << EN_TETE_XML+"";
+        fichierSauvegarde << modele->serialiser();
+        fichierSauvegarde.close();
+    }
+    else
+        std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
+}
 
-    elem->SetAttribute("personnage", "statistiques");
+void Sauvegarde::chargerModele(Modele* modele)
+{
+    std::string chemin = "save/Defaut.xml";
+    std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
+    std::string ligneCourante = "";
 
-    TiXmlElement *stats = new TiXmlElement("statistiques");
-    elem->LinkEndChild(stats);
+    if (fichierSauvegarde.is_open())
+    {
+        std::getline(fichierSauvegarde,ligneCourante);
+        if (ligneCourante == EN_TETE_XML) // Teste si le fichier est un fichier contenant une sauvegarde
+        {
+            std::string donnees_fichier { std::istreambuf_iterator<char>(fichierSauvegarde), std::istreambuf_iterator<char>() };
+            modele->charger(donnees_fichier);
+        }
 
-    stats->SetAttribute("Niveau", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirNiveau().obtenirNiveauActuel()).c_str());
-    stats->SetAttribute("Vie", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur()).c_str());
-    stats->SetAttribute("Force", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirForce()->obtenirValeur()).c_str());
-    stats->SetAttribute("Intelligence", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirIntelligence()->obtenirValeur()).c_str());
-    stats->SetAttribute("Vitesse", std::to_string(modele->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVitesse()).c_str());
+        fichierSauvegarde.close();
+    }
 
-    doc.SaveFile("save/save.xml");
-
-    return 0;
 }

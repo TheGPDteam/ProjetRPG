@@ -4,7 +4,7 @@ using namespace  std;
 
 std::map<std::string, SDL_Surface*> ChargementFeuilleDeSprites::m_imagesDeFeuilleDeSprites; // map servant à éviter les chargements multiple d'une même image ou feuille de sprite
 bool ChargementFeuilleDeSprites::m_objetConstruit = false;
-ChargementFeuilleDeSprites * ChargementFeuilleDeSprites::m_instance= new ChargementFeuilleDeSprites();
+ChargementFeuilleDeSprites * ChargementFeuilleDeSprites::m_instance= nullptr;
 //!
 //! \brief Constructeur du système de chargement d'image
 //! \author pgutierrez
@@ -16,8 +16,6 @@ ChargementFeuilleDeSprites * ChargementFeuilleDeSprites::m_instance= new Chargem
 
 ChargementFeuilleDeSprites::ChargementFeuilleDeSprites()
 {
-     //   m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = optimisationChargementImage("../rsc/sprites/Sprites.bmp");
-        //m_objetConstruit = true;
 }
 
 
@@ -45,7 +43,8 @@ SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char*
     }
     else
     {
-        std::cout << SDL_GetError() << std::endl;
+        std::cerr << SDL_GetError() << std::endl;
+        exit(-1);
     }
 
     Uint32 colorkey = SDL_MapRGB( image->format, 128, 255, 255 );
@@ -77,13 +76,19 @@ ChargementFeuilleDeSprites::~ChargementFeuilleDeSprites()
 
         m_imagesDeFeuilleDeSprites.clear();
     }
-    if(nullptr != m_instance)
-        delete m_instance;
 }
 
 ChargementFeuilleDeSprites* ChargementFeuilleDeSprites::instance() {
+    if(m_instance == nullptr)
+        m_instance = new ChargementFeuilleDeSprites();
     if(!m_objetConstruit){
         m_instance->m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = m_instance->optimisationChargementImage("../rsc/sprites/Sprites.bmp");
     }
    return m_instance;
+}
+
+
+void ChargementFeuilleDeSprites::supprimerInstance(){
+    if(m_instance != nullptr)
+        delete m_instance;
 }

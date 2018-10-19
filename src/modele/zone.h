@@ -6,6 +6,8 @@
 #include <utility>
 #include <string>
 #include "objet.h"
+#include "vivre.h"
+#include "arme.h"
 #include "tuile.h"
 #include "observable.h"
 
@@ -34,7 +36,7 @@ private:
     void initZone();
     void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
-
+    void initialiserSousTypeTuile();
 public:
 
     Zone()=default;
@@ -51,7 +53,7 @@ public:
 	std::string obtenirNom();
     std::map <Tuile*, std::pair<int,int>> obtenirTuiles() const;
     int obtenirTaille() const;
-
+    void recharger();
 };
 
 #endif

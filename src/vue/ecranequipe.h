@@ -10,7 +10,6 @@ private :
 
     TexteSDL m_nomFenetre;
 
-    SDL_Rect m_fondEcran;
 
     SDL_Rect m_rectangleHaut;
 //    SDL_Rect m_rectangleNomEquipe;
@@ -21,7 +20,6 @@ private :
     // Champ à compléter + intégration
     // Taille équipe ?
     //
-
     TexteSDL* m_zoneNomPersonnage;
     TexteSDL* m_zoneNiveauPersonnage;
     TexteSDL* m_zoneViePersonnage;
@@ -35,7 +33,7 @@ private :
 
 
 public:
-    EcranEquipe();
+    EcranEquipe(Controleur *controleur);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

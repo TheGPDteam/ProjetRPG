@@ -33,7 +33,6 @@ void Vivre::definirValeurNutritive(const int &valeurNutritive)
 void Vivre::chargerVivre(std::string nomFichier)
 {
     //Lire dans le fichier vivre.txt
-    srand(time(NULL));
     std::vector<std::string> lignesAliments;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);
@@ -62,7 +61,7 @@ void Vivre::affecterValeurs(string ligne)
     bool separateurNomPasse=false;
     bool separateurNutritivePasse=false;
 
-    for (int i=0;i<ligne.size();++i)
+    for (unsigned int i=0;i+1<=ligne.size();++i)
     {
         if (!separateurNomPasse)
         {
@@ -98,14 +97,28 @@ void Vivre::affecterValeurs(string ligne)
 
 //!
 //! \brief Sérialise les attributs de l'objet
-//! \return un vecteur des attributs
+//! \return Une chaine contenant les données de la vivre au format XML
 //! \author nlesne
-//! \date 16/10/17
-//! \version 0.1
+//! \date 12/11/17
+//! \version 0.2
 //!
 
-std::vector<std::string> Vivre::serialiser() const
+std::string Vivre::serialiser() const
 {
-    std::vector<std::string> donnees_vivre {std::to_string(m_valeurNutritive)};
-    return donnees_vivre;
+    return "<Vivre>"
+            "   <Nom>" + m_nom + "</Nom>"
+            "   <Description>" + m_description + "</Description>"
+            "   <ValeurNutritive>" + std::to_string(m_valeurNutritive) + "</ValeurNutritive>"
+            "</Vivre>";
+}
+
+TypeObjet Vivre::obtenirType() const {
+    return TypeObjet::Vivre;
+}
+
+void Vivre::charger(const std::string &donnees)
+{
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
+    m_description = obtenirSousChaineEntre2Predicats(donnees,"<Description>","</Description>");
+    m_valeurNutritive = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ValeurNutritive>","</ValeurNutritive>"));
 }

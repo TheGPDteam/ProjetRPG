@@ -4,6 +4,7 @@
 #include <string>
 
 #include "modele/modele.h"
+#include "save/sauvegarde.h"
 
 class Vue;
 
@@ -23,9 +24,7 @@ public :
 
     void deroulementJournee();
 
-    void miseAJourVue(); //TO-DO
-
-    void chargerSauvegarde(std::string nomSauvegarde);
+    void chargerSauvegarde();
 
     void sauvegarderModele();
     void sauvegarderModele(std::string nomSauvegarde);
@@ -33,6 +32,14 @@ public :
     void deplacementJoueur(Direction dir);
 
     Modele* obtenirModele();
+
+    Humain * journeeSuivante();
+  
+    void choixNouvelArrivant(bool choix);
+
+    void finJournee() const;
+
+  Vue* obtenirVue();
 };
 
 #endif

@@ -4,10 +4,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
-INCLUDEPATH+=-I/usr/include/SDL/
+
+INCLUDEPATH+=/usr/include/SDL/
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
+
 SOURCES += \
+    modele/equipe.cpp \
     vue/vue.cpp \
     controleur/controleur.cpp \
     modele/modele.cpp \
@@ -25,7 +28,6 @@ SOURCES += \
     modele/carte.cpp \
     modele/combat.cpp \
     modele/competence.cpp \
-    modele/equipe.cpp \
     modele/humain.cpp \
     modele/inventaire.cpp \
     modele/joueur.cpp \
@@ -40,23 +42,31 @@ SOURCES += \
     vue/actionsboutons.cpp \
     vue/ecrangeneral.cpp \
     vue/ecranjeuprincipal.cpp \
+    vue/ecranquete.cpp \
     observateur.cpp \
     observable.cpp \
     vue/dictionnairedeboutons.cpp \
     save/sauvegarde.cpp \
-    ../ext/tinyxml/tinystr.cpp \
-    ../ext/tinyxml/tinyxml.cpp \
-    ../ext/tinyxml/tinyxmlparser.cpp \
-    ../ext/tinyxml/tinyxmlerror.cpp \
     vue/ecranequipe.cpp \
-    vue/ecraninventaire.cpp
+    vue/ecraninventaire.cpp \
+    vue/ecranchoixpersonnage.cpp \
+    vue/ecranquetejoueur.cpp \
+    vue/ecrannom.cpp \
+    vue/saisir.cpp \
+    vue/ecranpremierejournee.cpp \
+    vue/ecranrecapitulatifnuit.cpp \
+    modele/utilitaires.cpp \
+    vue/ecranrepartitionjoueur.cpp \
+    vue/ecranaccueilcampement.cpp \
+    vue/ecranlisteobjets.cpp \
+    vue/ecrancombat.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    vue/vue.h \
     controleur/controleur.h \
+    modele/equipe.h \
     modele/modele.h \
     modele/statistique.h \
     modele/temps.h \
@@ -72,17 +82,18 @@ HEADERS += \
     modele/carte.h \
     modele/combat.h \
     modele/competence.h \
-    modele/equipe.h \
     modele/humain.h \
     modele/inventaire.h \
     modele/joueur.h \
     modele/actioncombat.h \
     modele/niveau.h \
-    direction.h \
     modele/zombie.h \
+    save/sauvegarde.h \
+    vue/vue.h \
     vue/bouton.h \
     vue/chargementfeuilledesprite.h \
     vue/ecranmenuprincipal.h \
+    vue/ecranquete.h \
     vue/sprite.h \
     vue/textesdl.h \
     vue/typebouton.h \
@@ -91,12 +102,28 @@ HEADERS += \
     vue/constantesbouton.h \
     vue/ecrangeneral.h \
     vue/ecranjeuprincipal.h \
-    observateur.h \
-    observable.h \
     vue/dictionnairedeboutons.h \
-    save/sauvegarde.h \
-    ../ext/tinyxml/tinystr.h \
-    ../ext/tinyxml/tinyxml.h \
     vue/ecranequipe.h \
     vue/ecraninventaire.h \
-    vue/policetexte.h
+    vue/policetexte.h \
+    vue/ecranchoixpersonnage.h \
+    vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h \
+    vue/ecranquetejoueur.h \
+    vue/ecrannom.h \
+    vue/saisir.h \
+    direction.h \
+    observateur.h \
+    observable.h \
+    vue/ecranpremierejournee.h \
+    vue/ecranrecapitulatifnuit.h \
+    vue/repartitionjoueur.h \
+    modele/typeobjet.h \
+    modele/utilitaires.h \
+    vue/ecranrepartitionjoueur.h \
+    modele/typequete.h \
+    modele/typedefaite.h \
+    vue/ecranaccueilcampement.h \
+    vue/ecranlisteobjets.h \
+    vue/ecrancombat.h
+

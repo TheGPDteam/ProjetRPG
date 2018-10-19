@@ -7,6 +7,8 @@
 #include <assert.h>
 #include "personnage.h"
 #include "zombie.h"
+#include "humain.h"
+#include "utilitaires.h"
 
 class Equipe
 {
@@ -19,7 +21,7 @@ public:
     std::set<Personnage*> obtenirListePersonnage();
     void supprimerPersonnage(Personnage *personnage);
     void ajouterPersonnage(Personnage* personnage);
-    Equipe *genererEquipeZombie();
+    static Equipe *genererEquipeZombie();
 
     std::set<Personnage *>::iterator begin(){
         return m_personnages.begin();
@@ -27,7 +29,8 @@ public:
     std::set<Personnage *>::iterator end(){
         return m_personnages.end();
     }
-    std::vector<std::string> serialiser() const;
+    std::string serialiser() const;
+    void charger(std::__cxx11::string &donnees);
 };
 
 #endif

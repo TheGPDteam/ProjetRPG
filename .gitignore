@@ -2,3 +2,4 @@ build-src-Desktop-Debug/
 build-src*/
 *.o
 *.pro.*
+src/save/*.xml

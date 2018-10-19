@@ -18,11 +18,22 @@
 //! Constructeur paramétré de la classe Quete
 //!
 
-Quete::Quete(std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
-    :m_nom{nom}, m_description{description}, m_valeurActuelle{0}, m_valeurObjectif{valeurObjectif},
-      m_recompense{recompense}, m_recompenseExperience{recompenseExperience}
+Quete::Quete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet *recompense)
+    :m_type{tq}, m_nom{nom}, m_description{description}, m_valeurObjectif{valeurObjectif}, m_valeurActuelle{0},
+      m_recompenseExperience{recompenseExperience}, m_recompense{recompense}, m_fini{false}
 {
 }
+
+//!
+//! \brief Destructeur
+//! \date 10/10/18
+//! \author rbourqui
+//! \version 0.1
+//!
+//! Destructeur de la classe Quete
+//!
+
+Quete::~Quete(){}
 
 //!
 //! \brief Accesseur récompense
@@ -50,6 +61,19 @@ Objet* Quete::obtenirRecompense() const
 int Quete::obtenirRecompenseExp() const
 {
     return m_recompenseExperience;
+}
+
+//!
+//! \brief Putateur objectif
+//! \date 20/11/17
+//! \version 1.0
+//! \author adeguilhem
+//! \param Nouvelle valeur de l'objectif
+//!
+
+void Quete::definirValeurObjectif(int valeur)
+{
+    m_valeurObjectif = valeur;
 }
 
 //!
@@ -172,4 +196,31 @@ int Quete::obtenirValeurAvancement() const {
 
 int Quete::obtenirValeurObjectif() const {
     return m_valeurObjectif;
+}
+
+//!
+//! \brief augmentValeur
+//! \date 19/01/17
+//! \version 1.0
+//! \author dberrouet
+//!
+//! Augmente la valeur de la progression de l'objectif
+//!
+
+void Quete::augmenterValeur(int valeur) {
+    m_valeurActuelle += valeur;
+}
+
+bool Quete::estfini()
+{
+    return m_fini;
+}
+
+void Quete::finir()
+{
+    m_fini = true;
+}
+
+TypeQuete Quete::obtenirType() const {
+    return m_type;
 }

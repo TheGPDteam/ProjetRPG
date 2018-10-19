@@ -1,6 +1,8 @@
 #ifndef competence_h
 #define competence_h
 
+#include <string>
+#include "utilitaires.h"
 
 class Competence
 {
@@ -14,6 +16,8 @@ public:
     unsigned short obtenirValeur() const;
     void augmenter(unsigned short valeur);
     unsigned short obtenirValeurMax() const;
+    std::string serialiser() const;
+    void charger(const std::string &donnees);
 };
 
 #endif

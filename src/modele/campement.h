@@ -4,6 +4,8 @@
 #include "personnage.h"
 #include "equipe.h"
 #include "vivre.h"
+#include "humain.h"
+#include "utilitaires.h"
 #include <vector>
 #include <string>
 
@@ -12,18 +14,32 @@ class Campement
 private:
     unsigned short m_quantiteVivre;
     std::set <Vivre*> m_stockVivre;
-    std::set <Personnage*> m_personnesNonAttribuees;
+    std::set <Humain*> m_personnesNonAttribuees;
     Equipe m_equipeRecolte;
     Equipe m_equipeChasse;
+    std::vector <Objet *> m_objets;
 public:
     Campement();
-    void ajouterPersonne(Personnage *perso, Equipe *equipe);
+
+    void ajouterPersonne(Humain *perso, Equipe *equipe);
+    void ajouterPersonne(Humain *humain);
     void ajouterVivre(Vivre vivre);
     unsigned short obtenirNbVivres() const;
-    void consommerVivre(unsigned short nbVivresConsommes);
+    int consommerVivre();
+    int obtenirConsommation() ;
+
+    std::set<Humain *>& obtenirNonAttribuees();
+
     Equipe* obtenirChasse();
     Equipe* obtenirRecolte();
-    std::vector<std::string> serialiser() const;
+
+    std::string serialiser() const;
+    void charger(std::__cxx11::string &donnees);
+    void ajouterObjet(Objet* obj);
+    std::set<Vivre *> obtenirVivres();
+
+    std::vector <Objet *> obtenirObjets();
+    int obtenirValeurNutritiveDisponible() const;
 };
 
 #endif

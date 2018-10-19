@@ -10,20 +10,21 @@
 #include "inventaire.h"
 #include "quete.h"
 #include "direction.h"
+#include "utilitaires.h"
 
 class Joueur : public Observable
 {
 private:
     std::pair<int,int> m_position;
+    Quete m_queteJoueur;
     std::string m_nom;
-    Campement* m_camp;
+    //Campement* m_camp;
     Equipe* m_equipe;
     Humain m_personnageJoueur;
-    Quete m_queteJoueur;
     Inventaire* m_inventaireJoueur;
 public:
     Joueur();
-    Joueur(Quete quete);
+    Joueur(const Quete &quete);
     Joueur(Quete quete, std::string nom);
     ~Joueur();
 
@@ -38,6 +39,8 @@ public:
     void nouvelleQuete(Quete quete);
     Inventaire* obtenirInventaireJoueur();
     Quete* obtenirQuete();
+    std::string serialiser() const;
+    void charger(const std::string &donnees);
 };
 
 #endif

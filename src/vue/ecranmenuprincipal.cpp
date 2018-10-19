@@ -10,18 +10,25 @@
 //! Initialise tout le contenu de l'écran principal de jeu
 //!
 
-EcranMenuPrincipal::EcranMenuPrincipal() : m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
+    EcranGeneral{controleur},
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
     //! A EFFACER*
-    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2));
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 20, coordB, tailleB), &ActionsBoutons::boutonJeuPrincipal);
+
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
 
     coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
-    coordB.second = (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2) +100;
+    coordB.second = coordB.second + 70;
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 30, coordB, tailleB), &ActionsBoutons::boutonQuitter);
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
+
+    coordB.second = coordB.second + 70;
+
+    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
 }
 
 
@@ -38,8 +45,11 @@ EcranMenuPrincipal::EcranMenuPrincipal() : m_methodeVerificationCliqueSourisSurB
 
 void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
 {
-    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
+    //    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    //    //SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 255, 150, 150));
+    //    SDL_Surface* imageFond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
+    //    SDL_BlitSurface(imageFond,new SDL_Rect{0,0,1024,668},fenetre_affichage,new SDL_Rect{0,0,0,0});
+    afficherFondEcran(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 

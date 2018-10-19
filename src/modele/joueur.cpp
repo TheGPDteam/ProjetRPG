@@ -18,8 +18,8 @@ Joueur::Joueur()
 {
     m_position.first=25;
     m_position.second=25;
-    m_nom = "Ali Baba";
-    m_camp = new Campement();
+    m_nom = "Friedrich";
+    //m_camp= new Campement();
     m_equipe = new Equipe();
 }
 
@@ -32,13 +32,13 @@ Joueur::Joueur()
 //! \version 1.0
 //!
 
-Joueur::Joueur(Quete quete) :
+Joueur::Joueur(const Quete &quete) :
     m_queteJoueur{quete}
 {
     m_position.first=5;
     m_position.second=5;
-    m_nom = "Ali Baba";
-    m_camp = new Campement();
+    m_nom = "Friedrich";
+    //m_camp = new Campement();
     m_equipe = new Equipe();
     m_inventaireJoueur = new Inventaire();
 }
@@ -58,8 +58,8 @@ Joueur::Joueur(Quete quete, std::string nom) :
 {
     m_position.first=5;
     m_position.second=5;
-    m_camp = new Campement();
-    m_equipe = new Equipe();
+    //m_camp = new Campement();
+    m_equipe = nullptr;//new Equipe();
     m_inventaireJoueur = new Inventaire();
 }
 
@@ -118,25 +118,19 @@ void Joueur::definirPosition(std::pair<int,int> nouvellePosition)
 void Joueur::deplacerJoueur(Direction dir){
     switch(dir){
     case Nord:
-    {
         m_position.second--;
         break;
-    }
     case Sud:
-    {
         m_position.second++;
         break;
-    }
     case Ouest:
-    {
         m_position.first--;
         break;
-    }
     case Est:
-    {
         m_position.first++;
         break;
-    }
+    default:
+        break;
     }
 
     mettreAChange();
@@ -221,18 +215,9 @@ Inventaire* Joueur::obtenirInventaireJoueur()
 
 Joueur::~Joueur()
 {
-    if(m_equipe != nullptr)
-    {
-        delete m_equipe;
-    }
-    if(m_inventaireJoueur != nullptr)
-    {
-        delete m_inventaireJoueur;
-    }
-    if(m_camp != nullptr)
-    {
-        delete m_camp;
-    }
+    if(m_equipe != nullptr) delete m_equipe;
+    if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
+    //if(m_camp != nullptr) delete m_camp;
 }
 
 //!
@@ -242,4 +227,47 @@ Joueur::~Joueur()
 
 Quete* Joueur::obtenirQuete() {
     return &m_queteJoueur;
+}
+
+//!
+//! \brief Serialise les données de la classe Joueur
+//! \return Les données de la classe joueur au format XML
+//! \date 12/11/17
+//! \author nlesne
+//! \version 0.2
+//!
+
+std::string Joueur::serialiser() const
+{
+    return "<Joueur>"
+           "   <NomJoueur>" + m_nom + "</NomJoueur>"
+                                      "   <EquipeJoueur>"
+            + m_equipe->serialiser()
+            +
+            "   </EquipeJoueur>"
+            "   <PersonnageJoueur>"
+            + m_personnageJoueur.serialiser()
+            +
+            "   </PersonnageJoueur>"
+            + m_inventaireJoueur->serialiser()
+            +
+            "</Joueur>";
+}
+
+void Joueur::charger(const std::string &donnees)
+{
+
+    if(m_equipe != nullptr) delete m_equipe;
+    if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
+    m_nom = obtenirSousChaineEntre2Predicats(donnees,"<NomJoueur>","</NomJoueur>");
+
+    std::string donneesEquipe = obtenirSousChaineEntre2Predicats(donnees,"<EquipeJoueur>","</EquipeJoueur>");
+    m_equipe = new Equipe();
+    m_equipe->charger(donneesEquipe);
+
+    m_personnageJoueur = Humain();
+    m_personnageJoueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<PersonnageJoueur>","</PersonnageJoueur>"));
+
+    m_inventaireJoueur = new Inventaire();
+    m_inventaireJoueur->charger(obtenirSousChaineEntre2Predicats(donnees,"<Inventaire>","</Inventaire>"));
 }

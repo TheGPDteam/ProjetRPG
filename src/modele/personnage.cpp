@@ -14,13 +14,8 @@
 //!
 
 Personnage::Personnage()
-{
-    m_force.definirValeur(1);
-    m_intelligence.definirValeur(1);
-    m_vitesse.definirValeur(1);
-    m_vie.definirValeur(1);
-    m_vie.definirValeurMax(1);
-}
+    : m_vie{(rand()%100)+1}
+{}
 
 //!
 //! \brief Constructeur parametre du personnage
@@ -82,12 +77,34 @@ Vie* Personnage::obtenirVie()
     return &m_vie;
 }
 
+//!
+//! \brief Accesseur en lecture des dégats + coups critiques
+//! \return la vie du personnage
+//! \author mleothaud, mpardo
+//! \date 17/11/2016 - 26/10/2017
+//! \version 2.0
+//!
+
 unsigned short Personnage::obtenirDegats()
 {
-    return m_force.obtenirValeur();
+    bool coupCritique = (rand() % 101) < m_CHANCE_CC_BASE + (2) * m_intelligence.obtenirValeur(); // ([Chance CC de Base]​ + [Multiplicateur CC]​ * [Point d’intelligence])
+    if(coupCritique){
+        return m_force.obtenirValeur() + (m_force.obtenirValeur() / 2);
+    }
+    else{
+        return m_force.obtenirValeur();
+    }
 }
 
-std::vector<std::string> Personnage::serialiser() const
+//!
+//! \brief Méthode virtuelle de serialisation des personnages
+//! \author nlesne
+//! \date 16/10/17
+//! \version 1.0
+//! \return Vecteur Vide
+//!
+
+std::string Personnage::serialiser() const
 {
     return {};
 }

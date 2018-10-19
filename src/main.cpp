@@ -8,12 +8,18 @@
 #include "vue/vue.h"
 #include "modele/modele.h"
 #include "controleur/controleur.h"
+#include "modele/equipe.h"
+#include "modele/inventaire.h"
 
-
-void mainloop_func(void* c){
+void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
+    Controleur* controleur = (Controleur*) ctrl;
     while (!vue->getFermerJeu())
+    {
         vue->affichageVue();
+        controleur->deroulementJournee();
+    }
+    ChargementFeuilleDeSprites::supprimerInstance();
 }
 
 //!
@@ -27,22 +33,22 @@ void mainloop_func(void* c){
 //!
 //! Contient la boucle de jeu et l'initialisation des classes principales
 //!
-int main (int argc, char * argv[]){
+int main (){
 
-
+    srand(time(NULL));
     Vue* vue = new Vue(); //On instancie la vue
     Modele* modele= new Modele(); // On instancie le modele
     Controleur controleur{vue,modele}; // On instancie le controleur
 
     vue->definirControleur(&controleur);
-    controleur.definirVue(vue);
-    controleur.definirModele(modele);
+//    controleur.definirVue(vue);
+//    controleur.definirModele(modele);
 
 #ifdef EMSCRIPTEN
     emscripten_set_main_loop_arg(mainloop_func,vue, 60, 0);
     emscripten_exit_with_live_runtime();
 #else
-    mainloop_func(vue);
+    mainloop_func(vue, &controleur);
 #endif
 
     delete vue;

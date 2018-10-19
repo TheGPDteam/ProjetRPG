@@ -116,14 +116,34 @@ Equipe* Equipe::genererEquipeZombie()
     return e;
 }
 
-std::vector<std::string> Equipe::serialiser() const
+//!
+//! \brief Serialise les données de l'équipe
+//! \author nlesne
+//! \date 12/11/17
+//! \version 0.2
+//! \return Chaine contenant les données de l'équipe
+//!
+
+std::string Equipe::serialiser() const
 {
-    std::vector<std::string> donnees_equipe;
-    std::vector<std::string> donnees_personnages;
-    for (Personnage* p : m_personnages )
+    std::string donnees_equipe = "<Equipe>";
+
+    for (Personnage* p : m_personnages)
     {
-        std::vector<std::string> buffer = p->serialiser();
-        donnees_personnages.insert(donnees_personnages.end(),buffer.begin(),buffer.end());
+        donnees_equipe += p->serialiser();
     }
-    donnees_equipe.insert(donnees_equipe.end(),donnees_personnages.begin(),donnees_personnages.end());
+    donnees_equipe += "</Equipe>";
+
+    return donnees_equipe;
+}
+
+void Equipe::charger(std::string &donnees)
+{
+    while (!obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>").empty())
+    {
+        Humain* h = new Humain();
+        h->charger(donnees);
+        m_personnages.insert(h);
+        supprimmerSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>");
+    }
 }

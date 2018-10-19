@@ -1,4 +1,5 @@
 #include "statistique.h"
+#include <assert.h>
 
 //! \file fichier statistique
 //! \date 17/11/16
@@ -54,10 +55,8 @@ int Statistique::obtenirValeurMax() const
 
 void Statistique::definirValeur(int valeur)
 {
-    if (valeur <= m_STATMAX)
-        m_statActuelle=valeur;
-    else
-        valeur=rand()%m_STATMAX+1;
+    assert(valeur <= m_STATMAX);
+    m_statActuelle=valeur;
 }
 
 //!
@@ -80,4 +79,28 @@ void Statistique::augmenter(int valeur)
         m_statActuelle=1;
     else if (valeur>0)
         m_statActuelle=20;
+}
+
+//! \brief serialise les attributs de la classe Statistique
+//! \author parMarius,nlesne
+//! \date 19/10/17
+//! \version 0.2
+//!
+
+
+std::string Statistique::serialiser() const{
+    return "<Statistique>"
+            "   <Actuelle>" + std::to_string(m_statActuelle) + "</Actuelle>"
+            "</Statistique>";
+}
+
+//! \brief charge les attribut de la classe Statistique
+//! \author parMarius,nlesne
+//! \date 18/01/18
+//! \version 1.0
+//!
+
+void Statistique::charger(const std::string &donnees)
+{
+    m_statActuelle = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<Actuelle>","</Actuelle>"));
 }
