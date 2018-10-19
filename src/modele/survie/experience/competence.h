@@ -2,7 +2,7 @@
 #define competence_h
 
 #include <string>
-#include "../../abstrait/utilitaires.h"
+#include "../../utilitaires.h"
 
 class Competence
 {

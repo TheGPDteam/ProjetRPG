@@ -10,7 +10,7 @@
 #include "./survie/inventaire.h"
 #include "./survie/quetes/quete.h"
 #include "direction.h"
-#include "./abstrait/utilitaires.h"
+#include "./utilitaires.h"
 
 class Joueur : public Observable
 {

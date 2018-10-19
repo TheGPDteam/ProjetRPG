@@ -6,9 +6,9 @@
 #include <algorithm>
 #include <assert.h>
 #include "../personnages/personnage.h"
-#include "../personnages/enemmis/zombie.h"
+#include "../personnages/enemis/zombie.h"
 #include "../personnages/humain.h"
-#include "../abstrait/utilitaires.h"
+#include "../utilitaires.h"
 
 class Equipe
 {

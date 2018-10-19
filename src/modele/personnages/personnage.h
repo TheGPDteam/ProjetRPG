@@ -1,7 +1,7 @@
 #ifndef personnage_h
 #define personnage_h
 
-#include "../abstrait/statistique.h"
+#include "../statistique.h"
 #include "../survie/vie.h"
 
 class Personnage

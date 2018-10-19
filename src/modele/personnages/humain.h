@@ -8,7 +8,7 @@
 #include "../objets/armes/arme.h"
 #include "../survie/experience/niveau.h"
 #include "personnage.h"
-#include "../abstrait/utilitaires.h"
+#include "../utilitaires.h"
 
 enum Genre {
     Homme,

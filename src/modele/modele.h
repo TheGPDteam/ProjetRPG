@@ -5,13 +5,13 @@
 #include <typeinfo>
 #include "../direction.h"
 #include "./personnages/humain.h"
-#include "./abstrait/temps.h"
+#include "./temps.h"
 #include "./environnement/carte/carte.h"
 #include "./environnement/campement.h"
 #include "./survie/combat/combat.h"
 #include "joueur.h"
-#include "./abstrait/utilitaires.h"
-#include "./abstrait/typedefaite.h"
+#include "./utilitaires.h"
+#include "./survie/typedefaite.h"
 
 class Modele
 {

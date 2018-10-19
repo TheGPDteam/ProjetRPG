@@ -11,16 +11,13 @@ QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
 
 SOURCES += \
     controleur/controleur.cpp \
-    modele/abstrait/statistique.cpp \
-    modele/abstrait/temps.cpp \
-    modele/abstrait/utilitaires.cpp \
     modele/environnement/carte/carte.cpp \
     modele/environnement/carte/tuile.cpp \
     modele/environnement/carte/zone.cpp \
     modele/environnement/campement.cpp \
     modele/objets/armes/arme.cpp \
     modele/objets/objet.cpp \
-    modele/personnages/enemmis/zombie.cpp \
+    modele/personnages/enemis/zombie.cpp \
     modele/personnages/humain.cpp \
     modele/personnages/personnage.cpp \
     modele/survie/combat/combat.cpp \
@@ -33,6 +30,9 @@ SOURCES += \
     modele/survie/vivre.cpp \
     modele/joueur.cpp \
     modele/modele.cpp \
+    modele/statistique.cpp \
+    modele/temps.cpp \
+    modele/utilitaires.cpp \
     save/sauvegarde.cpp \
     vue/ecran/jeu/ecranchoixpersonnage.cpp \
     vue/ecran/jeu/ecrancombat.cpp \
@@ -65,15 +65,12 @@ SOURCES += \
 
 
 
+
 include(deployment.pri)
 qtcAddDeployment()
 
 HEADERS += \
     controleur/controleur.h \
-    modele/abstrait/statistique.h \
-    modele/abstrait/temps.h \
-    modele/abstrait/typedefaite.h \
-    modele/abstrait/utilitaires.h \
     modele/environnement/carte/carte.h \
     modele/environnement/carte/tuile.h \
     modele/environnement/carte/zone.h \
@@ -81,7 +78,7 @@ HEADERS += \
     modele/objets/armes/arme.h \
     modele/objets/objet.h \
     modele/objets/typeobjet.h \
-    modele/personnages/enemmis/zombie.h \
+    modele/personnages/enemis/zombie.h \
     modele/personnages/humain.h \
     modele/personnages/personnage.h \
     modele/survie/combat/actioncombat.h \
@@ -92,10 +89,14 @@ HEADERS += \
     modele/survie/quetes/typequete.h \
     modele/survie/equipe.h \
     modele/survie/inventaire.h \
+    modele/survie/typedefaite.h \
     modele/survie/vie.h \
     modele/survie/vivre.h \
     modele/joueur.h \
     modele/modele.h \
+    modele/statistique.h \
+    modele/temps.h \
+    modele/utilitaires.h \
     save/sauvegarde.h \
     vue/ecran/jeu/ecranchoixpersonnage.h \
     vue/ecran/jeu/ecrancombat.h \
@@ -127,4 +128,5 @@ HEADERS += \
     direction.h \
     observable.h \
     observateur.h
+
 
