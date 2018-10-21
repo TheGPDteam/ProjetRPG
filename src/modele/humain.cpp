@@ -329,10 +329,12 @@ void Humain::charger(const std::string &donnees)
     m_prenom = obtenirSousChaineEntre2Predicats(donnees,"<Prenom>","</Prenom>");
 
     std::string donneesGenre = obtenirSousChaineEntre2Predicats(donnees,"<Genre>","</Genre>");
-    if (donneesGenre.find("Homme") != std::string::npos)
+    if (donneesGenre == "Homme")
         m_genre = Genre::Homme;
-    else if (donneesGenre.find("Femme") != std::string::npos)
+    else if (donneesGenre == "Femme")
         m_genre = Genre::Femme;
+    else
+        m_genre = Genre::Inconnu;
 
 
     m_force = Statistique();

@@ -12,15 +12,15 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
     }
 
     std::string cheminFichier = "save/";
-    if (!modele->obtenirNomPartie().empty())
-        cheminFichier += modele->obtenirNomPartie()+".xml";
-    else
+    //if (!modele->obtenirNomPartie().empty())
+        //cheminFichier += modele->obtenirNomPartie()+".xml";
+    //else
         cheminFichier += "Defaut.xml";
     std::ofstream fichierSauvegarde(cheminFichier,std::ios::out | std::ios::trunc);
 
     if (fichierSauvegarde.is_open())
     {
-        fichierSauvegarde << EN_TETE_XML+"";
+        fichierSauvegarde << EN_TETE_XML;
         fichierSauvegarde << modele->serialiser();
         fichierSauvegarde.close();
     }
@@ -32,12 +32,13 @@ void Sauvegarde::chargerModele(Modele* modele)
 {
     std::string chemin = "save/Defaut.xml";
     std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
-    std::string ligneCourante = "";
+    std::string emplacementXMLAttendu;
 
     if (fichierSauvegarde.is_open())
     {
-        std::getline(fichierSauvegarde,ligneCourante);
-        if (ligneCourante == EN_TETE_XML) // Teste si le fichier est un fichier contenant une sauvegarde
+        std::copy_n(std::istreambuf_iterator<char>(fichierSauvegarde.rdbuf()), 38, std::back_inserter(emplacementXMLAttendu));
+
+        if (emplacementXMLAttendu == EN_TETE_XML) // Teste si le fichier est un fichier contenant une sauvegarde
         {
             std::string donnees_fichier { std::istreambuf_iterator<char>(fichierSauvegarde), std::istreambuf_iterator<char>() };
             modele->charger(donnees_fichier);

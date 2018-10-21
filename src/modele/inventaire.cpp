@@ -121,6 +121,26 @@ void Inventaire::supprimerObjet(Objet* objet)
     }
 }
 
+
+//!
+//! \brief Vide l'inventaire
+//! \author nlesne
+//! \date 22/10/18
+//! \version 1.0
+//!
+//! Supprime tous les objets de l'inventaire
+//!
+void Inventaire::viderInventaire()
+{
+    if (!m_objets.empty())
+    {
+        for (Objet* o : m_objets)
+        {
+            this->supprimerObjet(o);
+        }
+    }
+}
+
 //!
 //! \brief Donne l'état de l'inventaire
 //! \author jsorin001
