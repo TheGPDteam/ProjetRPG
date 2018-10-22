@@ -12,7 +12,8 @@
 
 enum Genre {
     Homme,
-    Femme
+    Femme,
+    Inconnu
 };
 
 class Humain : public Personnage

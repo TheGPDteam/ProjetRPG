@@ -256,16 +256,12 @@ std::string Joueur::serialiser() const
 
 void Joueur::charger(const std::string &donnees)
 {
-
-    if(m_equipe != nullptr) delete m_equipe;
-    if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
     m_nom = obtenirSousChaineEntre2Predicats(donnees,"<NomJoueur>","</NomJoueur>");
 
     std::string donneesEquipe = obtenirSousChaineEntre2Predicats(donnees,"<EquipeJoueur>","</EquipeJoueur>");
     m_equipe = new Equipe();
     m_equipe->charger(donneesEquipe);
 
-    m_personnageJoueur = Humain();
     m_personnageJoueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<PersonnageJoueur>","</PersonnageJoueur>"));
 
     m_inventaireJoueur = new Inventaire();

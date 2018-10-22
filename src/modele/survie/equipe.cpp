@@ -139,11 +139,14 @@ std::string Equipe::serialiser() const
 
 void Equipe::charger(std::string &donnees)
 {
-    while (!obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>").empty())
+    if (!obtenirSousChaineEntre2Predicats(donnees, "<Equipe>","</Equipe>").empty())
     {
-        Humain* h = new Humain();
-        h->charger(donnees);
-        m_personnages.insert(h);
-        supprimmerSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>");
+        while (!obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>").empty())
+        {
+            Humain* h = new Humain();
+            h->charger(obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>"));
+            m_personnages.insert(h);
+            supprimmerSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>");
+        }
     }
 }

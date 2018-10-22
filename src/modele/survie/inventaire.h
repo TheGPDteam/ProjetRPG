@@ -24,6 +24,7 @@ public:
     unsigned short obtenirNombreObjet() const;
     void ajouterObjet(Objet *objet);
     void supprimerObjet(Objet *objet);
+    void viderInventaire();
     bool estPlein() const;
     std::string serialiser() const;
     void charger(const std::string &donnees);
