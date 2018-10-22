@@ -50,7 +50,7 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 
     for (TexteSDL* texte : m_zoneHistoire)
     {
-        texte->afficherTexte(fenetre_affichage);
+        texte->afficher(fenetre_affichage);
     }
 
     afficherBoutons(coord_souris, fenetre_affichage);

@@ -59,13 +59,13 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionChasse, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionRecolte, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
-    m_zonePrenomPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneChassePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneRecoltePersonnage->afficherTexte(fenetre_affichage);
-    m_titreChasse.afficherTexte(fenetre_affichage);
-    m_titreRecolte.afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_zoneNomPersonnage->afficher(fenetre_affichage);
+    m_zonePrenomPersonnage->afficher(fenetre_affichage);
+    m_zoneChassePersonnage->afficher(fenetre_affichage);
+    m_zoneRecoltePersonnage->afficher(fenetre_affichage);
+    m_titreChasse.afficher(fenetre_affichage);
+    m_titreRecolte.afficher(fenetre_affichage);
 
     int i=0;
     for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
@@ -73,13 +73,13 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         ++i;
         //m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + m_fondDescriptionPerso.h*i));
         TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordNom.first,m_CoordNom.second+30*i));
-        tempNomPersonnage.afficherTexte(fenetre_affichage);
+        tempNomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordPrenom.first,m_CoordPrenom.second+30*i));
-        tempPrenomPersonnage.afficherTexte(fenetre_affichage);
+        tempPrenomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempChassePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordChasse.first,m_CoordChasse.second+30*i));           // position imprécise **
-        tempChassePersonnage.afficherTexte(fenetre_affichage);
+        tempChassePersonnage.afficher(fenetre_affichage);
         TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordRecolte.first,m_CoordRecolte.second+30*i));
-        tempRecoltePersonnage.afficherTexte(fenetre_affichage);
+        tempRecoltePersonnage.afficher(fenetre_affichage);
         //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Attribuer", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(m_CoordRecolte.first + 150, m_CoordRecolte.second + 30 * i)), &ActionsBoutons::boutonChoixJoueur);
         if(i==8)
             break;
@@ -89,11 +89,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     {
         Humain *h = dynamic_cast <Humain *> (p);
         TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(50,410+30*j));
-        tempNomPersonnage.afficherTexte(fenetre_affichage);
+        tempNomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(250,410+30*j));
-        tempPrenomPersonnage.afficherTexte(fenetre_affichage);
+        tempPrenomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(400,410+30*j));
-        tempRecoltePersonnage.afficherTexte(fenetre_affichage);
+        tempRecoltePersonnage.afficher(fenetre_affichage);
         ++j;
     }
     int k=0;
@@ -101,11 +101,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     {
         Humain *h = dynamic_cast <Humain *> (p);
         TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(550,410+30*k));
-        tempNomPersonnage.afficherTexte(fenetre_affichage);
+        tempNomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
-        tempPrenomPersonnage.afficherTexte(fenetre_affichage);
+        tempPrenomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255        ,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
-        tempRecoltePersonnage.afficherTexte(fenetre_affichage);
+        tempRecoltePersonnage.afficher(fenetre_affichage);
         ++k;
     }
 

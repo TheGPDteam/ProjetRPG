@@ -28,9 +28,9 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_nomObjet.afficherTexte(fenetre_affichage);
-    m_descObjet.afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_nomObjet.afficher(fenetre_affichage);
+    m_descObjet.afficher(fenetre_affichage);
 
     afficherBoutons(coord_souris, fenetre_affichage);
 
@@ -43,9 +43,9 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
             break;
         }
         TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(50, 120 + 30 * i));
-        zoneTempNom.afficherTexte(fenetre_affichage);
+        zoneTempNom.afficher(fenetre_affichage);
         TexteSDL zoneTempNiv = TexteSDL (o->obtenirDescription(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(350, 120 + 30 * i));
-        zoneTempNiv.afficherTexte(fenetre_affichage);
+        zoneTempNiv.afficher(fenetre_affichage);
     }
 }
 

@@ -28,10 +28,10 @@ void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_nombreObjets.afficherTexte(fenetre_affichage);
-    m_consommation.afficherTexte(fenetre_affichage);
-    m_consoDispo.afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_nombreObjets.afficher(fenetre_affichage);
+    m_consommation.afficher(fenetre_affichage);
+    m_consoDispo.afficher(fenetre_affichage);
 
     afficherBoutons(coord_souris, fenetre_affichage);
 }

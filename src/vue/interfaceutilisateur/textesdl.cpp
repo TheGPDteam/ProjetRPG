@@ -18,7 +18,9 @@ std::map<int, TTF_Font*> TexteSDL::m_fonts= {};
 //!
 TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
                    const std::pair<int, int> coord_texte)
+    :Affichable((SDL_Rect){coord_texte.first, coord_texte.second})
 {
+
     if(TTF_Init() == -1)
     {
         std::cout << "Erreur d'initialisation de TTF_Init" << std::endl;
@@ -43,6 +45,10 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const
 
     m_positionTexte.x = coord_texte.first;
     m_positionTexte.y = coord_texte.second;
+
+
+
+
 }
 
 
@@ -66,9 +72,14 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const
 TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
                    const std::pair<int, int> coord_rectangle, const std::pair<int, int> taille_rectangle)
     : TexteSDL(texte, couleur_texte, chemin_police, taille_police, coord_rectangle)
+
 {
-    m_positionTexte.x = (coord_rectangle.first + (taille_rectangle.first/2)) - (m_texte->w/2);
-    m_positionTexte.y = (coord_rectangle.second + (taille_rectangle.second/2)) - (m_texte->h/2);
+    SDL_Rect position = {
+        .x = m_positionTexte.x = (coord_rectangle.first + (taille_rectangle.first/2)) - (m_texte->w/2),
+        .y = m_positionTexte.y = (coord_rectangle.second + (taille_rectangle.second/2)) - (m_texte->h/2)
+    };
+    redimensionner(position);
+
 }
 
 
@@ -82,9 +93,13 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const
 //! Affichage du texte dans la fenêtre d'affichage
 //!
 
-void TexteSDL::afficherTexte(SDL_Surface* surface_affichage)
+void TexteSDL::afficher(SDL_Surface* surface_affichage)
 {
-    SDL_BlitSurface(m_texte, nullptr, surface_affichage, &m_positionTexte);
+    SDL_BlitSurface(m_texte, nullptr, surface_affichage, &m_rectangle);
+}
+
+void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
+    m_rectangle = nouvelleDimension;
 }
 
 //!

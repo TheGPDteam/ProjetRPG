@@ -75,7 +75,7 @@ bool Bouton::evenementSurBouton(std::pair<int, int> coord_souris)
 void Bouton::afficherBouton(SDL_Surface* surface_affichage)
 {
     m_spriteBouton->afficherSprite(surface_affichage);
-    m_texteBouton->afficherTexte(surface_affichage);
+    m_texteBouton->afficher(surface_affichage);
 }
 
 
