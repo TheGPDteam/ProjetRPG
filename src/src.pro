@@ -118,7 +118,6 @@ HEADERS += \
     vue/interfaceutilisateur/conteneur/bouton/bouton.h \
     vue/interfaceutilisateur/conteneur/bouton/constantesbouton.h \
     vue/interfaceutilisateur/conteneur/bouton/dictionnairedeboutons.h \
-    vue/interfaceutilisateur/conteneur/bouton/typebouton.h \
     vue/interfaceutilisateur/ressources/chargementfeuilledesprite.h \
     vue/interfaceutilisateur/ressources/policetexte.h \
     vue/interfaceutilisateur/saisir.h \
