@@ -21,9 +21,13 @@ std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé per
 //! Initialise l'image et le texte qu'aura le bouton
 //!
 
-Bouton::Bouton(const TypeBouton type_bouton, const bool bouton_cliquable, std::string texte, const std::string chemin_police, const int taille_police,
-               const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton, const std::pair<int, int> coord_texte) : m_typeDeBouton(type_bouton), m_boutonCliquable(bouton_cliquable)
-
+Bouton( texte,
+        rectangle,
+        sprite,
+        coef_coord_texte,
+        bouton_cliquable
+        )
+    :
 {
     initialisationAffichageBouton(coord_bouton, taille_bouton);
 
@@ -75,7 +79,7 @@ bool Bouton::evenementSurBouton(std::pair<int, int> coord_souris)
 void Bouton::afficherBouton(SDL_Surface* surface_affichage)
 {
     m_spriteBouton->afficherSprite(surface_affichage);
-    m_texteBouton->afficher(surface_affichage);
+    m_texteBouton->afficherTexte(surface_affichage);
 }
 
 
@@ -90,20 +94,6 @@ void Bouton::afficherBouton(SDL_Surface* surface_affichage)
 Sprite* Bouton::obtenirSpriteBouton()
 {
     return m_spriteBouton;
-}
-
-
-//!
-//! \brief Retourne le type du bouton
-//! \return TypeBouton
-//! \author pgutierrez
-//! \date 26/11/16
-//! \version 1.0
-//!
-
-TypeBouton Bouton::obtenirTypeBouton()
-{
-    return m_typeDeBouton;
 }
 
 
@@ -177,6 +167,11 @@ SDL_Rect Bouton::initialisationRectangle(const int x, const int y, const int wid
 //!
 //! Détruit l'image et le texte d'un bouton si ils ont été initialisé
 //!
+
+void Bouton::setSpriteBouton(Sprite *spriteBouton)
+{
+    m_spriteBouton = spriteBouton;
+}
 
 Bouton::~Bouton()
 {
