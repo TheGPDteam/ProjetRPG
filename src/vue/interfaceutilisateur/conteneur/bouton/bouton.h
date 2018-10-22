@@ -3,7 +3,8 @@
 
 #include "../../textesdl.h"
 #include "../../sprite.h"
-
+#include "vue/affichable.h"
+//#include "cliquable"
 
 class Bouton : public Affichable, public Cliquable
 {
@@ -41,7 +42,10 @@ public:
 
     ~Bouton();
 
-    void afficher();
+    //!
+    //! \brief afficher hérité de Affichable
+    //!
+    void afficher(SDL_Surface* surface);
 
     //Accés variables
 
