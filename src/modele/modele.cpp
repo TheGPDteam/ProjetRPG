@@ -388,7 +388,6 @@ void Modele::charger(const std::string &donnees)
     std::string donneesCampement = obtenirSousChaineEntre2Predicats(donnees,"<Campement>","</Campement");
     m_campement = Campement();
     m_campement.charger(donneesCampement);
-    m_joueur = Joueur();
     m_joueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<Joueur>","</Joueur>"));
 }
 

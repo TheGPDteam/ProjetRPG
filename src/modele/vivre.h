@@ -22,7 +22,7 @@ public:
     void definirValeurNutritive(const int &valeurNutritive);
     std::string serialiser() const override;
     TypeObjet obtenirType() const override;
-    void charger(const std::string &donnees);
+    void charger(const std::string &donnees) override;
 };
 
 #endif
