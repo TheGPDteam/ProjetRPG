@@ -1,6 +1,7 @@
 #ifndef AFFICHABLE_H
 #define AFFICHABLE_H
 
+#include <SDL/SDL.h>
 
 class Affichable
 {
@@ -8,7 +9,7 @@ class Affichable
 protected:
     SDL_Rect m_rectangle;
 public:
-    Affichable();
+    Affichable(SDL_Rect rectangle);
     virtual void afficher() = 0;
     virtual void redimensionner() = 0;
 };
