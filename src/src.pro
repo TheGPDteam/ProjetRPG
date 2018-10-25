@@ -59,7 +59,8 @@ SOURCES += \
     vue/vue.cpp \
     main.cpp \
     observable.cpp \
-    observateur.cpp
+    observateur.cpp \
+    vue/interfaceutilisateur/cliquable.cpp
 
 
 
@@ -127,6 +128,7 @@ HEADERS += \
     vue/vue.h \
     direction.h \
     observable.h \
-    observateur.h
+    observateur.h \
+    vue/interfaceutilisateur/cliquable.h
 
 
