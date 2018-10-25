@@ -20,8 +20,8 @@ void EcranNom::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fene
     SDL_Rect zone = {CONTOUR_ARRIERE_PLAN,CONTOUR_ARRIERE_PLAN,WIDTH_FENETRE_PRINCIPALE-(2*CONTOUR_ARRIERE_PLAN), HEIGHT_FENETRE_PRINCIPALE-(2*CONTOUR_ARRIERE_PLAN)};
     SDL_FillRect(fenetre_affichage, &zone, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nom_fenetre.afficherTexte(fenetre_affichage);
-    m_label.afficherTexte(fenetre_affichage);
+    m_nom_fenetre.afficher(fenetre_affichage);
+    m_label.afficher(fenetre_affichage);
 
     m_s->afficher(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);

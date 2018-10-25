@@ -56,19 +56,19 @@ void RepartitionJoueur::afficher(){
 
 
 
-    m_zoneNomPersonnage->afficherTexte(m_fenetre);
-    m_zonePrenomPersonnage->afficherTexte(m_fenetre);
+    m_zoneNomPersonnage->afficher(m_fenetre);
+    m_zonePrenomPersonnage->afficher(m_fenetre);
 
-    m_zoneNiveauPersonnage->afficherTexte(m_fenetre);
-    m_zoneForcePersonnage->afficherTexte(m_fenetre);
-    m_zoneChassePersonnage->afficherTexte(m_fenetre);
-    m_zoneRecoltePersonnage->afficherTexte(m_fenetre);
-    m_zoneIntelligencePersonnage->afficherTexte(m_fenetre);
-    m_zoneVitessePersonnage->afficherTexte(m_fenetre);
-    m_zoneDescArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneNomArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneDegatsArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneQuestion->afficherTexte(m_fenetre);
+    m_zoneNiveauPersonnage->afficher(m_fenetre);
+    m_zoneForcePersonnage->afficher(m_fenetre);
+    m_zoneChassePersonnage->afficher(m_fenetre);
+    m_zoneRecoltePersonnage->afficher(m_fenetre);
+    m_zoneIntelligencePersonnage->afficher(m_fenetre);
+    m_zoneVitessePersonnage->afficher(m_fenetre);
+    m_zoneDescArmePersonnage->afficher(m_fenetre);
+    m_zoneNomArmePersonnage->afficher(m_fenetre);
+    m_zoneDegatsArmePersonnage->afficher(m_fenetre);
+    m_zoneQuestion->afficher(m_fenetre);
 
     m_recolte->afficherBouton(m_fenetre);
     m_retour->afficherBouton(m_fenetre);

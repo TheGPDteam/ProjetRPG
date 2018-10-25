@@ -74,19 +74,19 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     m_zoneNomArmePersonnage->mettreAJourTexte("Arme : " + h->obtenirArme()->obtenirNom());
     m_zoneDegatsArmePersonnage->mettreAJourTexte("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
-    m_zonePrenomPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneNiveauPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneForcePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneChassePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneRecoltePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneIntelligencePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneDescArmePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneNomArmePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneDegatsArmePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneQuestion->afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_zoneNomPersonnage->afficher(fenetre_affichage);
+    m_zonePrenomPersonnage->afficher(fenetre_affichage);
+    m_zoneNiveauPersonnage->afficher(fenetre_affichage);
+    m_zoneForcePersonnage->afficher(fenetre_affichage);
+    m_zoneChassePersonnage->afficher(fenetre_affichage);
+    m_zoneRecoltePersonnage->afficher(fenetre_affichage);
+    m_zoneIntelligencePersonnage->afficher(fenetre_affichage);
+    m_zoneVitessePersonnage->afficher(fenetre_affichage);
+    m_zoneDescArmePersonnage->afficher(fenetre_affichage);
+    m_zoneNomArmePersonnage->afficher(fenetre_affichage);
+    m_zoneDegatsArmePersonnage->afficher(fenetre_affichage);
+    m_zoneQuestion->afficher(fenetre_affichage);
 
 
     afficherBoutons(coord_souris, fenetre_affichage);

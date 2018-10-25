@@ -49,13 +49,13 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
     SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
     SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_zoneNomPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneNiveauPersonnage->afficherTexte(fenetre_affichage);
-    m_zoneViePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneIntelligencePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneForcePersonnage->afficherTexte(fenetre_affichage);
-    m_zoneVitessePersonnage->afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_zoneNomPersonnage->afficher(fenetre_affichage);
+    m_zoneNiveauPersonnage->afficher(fenetre_affichage);
+    m_zoneViePersonnage->afficher(fenetre_affichage);
+    m_zoneIntelligencePersonnage->afficher(fenetre_affichage);
+    m_zoneForcePersonnage->afficher(fenetre_affichage);
+    m_zoneVitessePersonnage->afficher(fenetre_affichage);
 
     int i=0;
     for(auto p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage())
@@ -63,17 +63,17 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
         ++i;
         Humain *h = dynamic_cast<Humain*> (p);
         TexteSDL zoneTempNom = TexteSDL (h->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficherTexte(fenetre_affichage);
+        zoneTempNom.afficher(fenetre_affichage);
         TexteSDL zoneTempNiv = TexteSDL (std::to_string(h->obtenirNiveau().obtenirNiveauActuel()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 190 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNiv.afficherTexte(fenetre_affichage);
+        zoneTempNiv.afficher(fenetre_affichage);
         TexteSDL zoneTempVie = TexteSDL (std::to_string(h->obtenirVie()->obtenirValeur()) + " sur " + std::to_string(h->obtenirVie()->obtenirValeurMax()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 310 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempVie.afficherTexte(fenetre_affichage);
+        zoneTempVie.afficher(fenetre_affichage);
         TexteSDL zoneTempInt = TexteSDL (std::to_string(h->obtenirIntelligence()->obtenirValeur()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 460 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempInt.afficherTexte(fenetre_affichage);
+        zoneTempInt.afficher(fenetre_affichage);
         TexteSDL zoneTempF = TexteSDL(std::to_string(h->obtenirForce()->obtenirValeur()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 690 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempF.afficherTexte(fenetre_affichage);
+        zoneTempF.afficher(fenetre_affichage);
         TexteSDL zoneTempV = TexteSDL(std::to_string(h->obtenirVitesse()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 800 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempV.afficherTexte(fenetre_affichage);
+        zoneTempV.afficher(fenetre_affichage);
     }
 
      afficherBoutons(coord_souris, fenetre_affichage);

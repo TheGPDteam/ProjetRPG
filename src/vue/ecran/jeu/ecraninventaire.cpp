@@ -52,12 +52,12 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
     SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_zoneNomObjet->afficherTexte(fenetre_affichage);
-    m_zoneDescriptionObjet->afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_zoneNomObjet->afficher(fenetre_affichage);
+    m_zoneDescriptionObjet->afficher(fenetre_affichage);
 
     definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
-    m_quantiteInventaire->afficherTexte(fenetre_affichage);
+    m_quantiteInventaire->afficher(fenetre_affichage);
 
 //    if(!m_vecteurObjetPourAffichage.empty())
 //    {
@@ -66,7 +66,7 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
 //            for(int j = 0; j < 2; ++j)
 //            {
 //                if(m_vecteurObjetPourAffichage[i][j] != nullptr)
-//                    m_vecteurObjetPourAffichage[i][j]->afficherTexte(fenetre_affichage);
+//                    m_vecteurObjetPourAffichage[i][j]->afficher(fenetre_affichage);
 //            }
 //        }
 //    }
@@ -76,9 +76,9 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     {
         ++i;
         TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficherTexte(fenetre_affichage);
+        zoneTempNom.afficher(fenetre_affichage);
         TexteSDL zoneTempDesc = TexteSDL (o->obtenirDescription(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 380 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempDesc.afficherTexte(fenetre_affichage);
+        zoneTempDesc.afficher(fenetre_affichage);
     }
 
     afficherBoutons(coord_souris, fenetre_affichage);

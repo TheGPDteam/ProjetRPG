@@ -3,36 +3,56 @@
 
 #include "../../textesdl.h"
 #include "../../sprite.h"
-#include "typebouton.h"
 
 
-class Bouton
+class Bouton : public Affichable, public Cliquable
 {
 private:
-    static std::string m_cleMapSprites;
 
-    TypeBouton m_typeDeBouton;
-    TexteSDL* m_texteBouton;
+    ZoneTexte* m_texteBouton;
+
     Sprite* m_spriteBouton;
 
-    bool m_boutonCliquable;
-
-    void initialisationAffichageBouton(const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton);
-    SDL_Rect initialisationRectangle(const int x, const int y, const int width, const int height);
 
 public:
-    Bouton(const TypeBouton type_bouton, const bool bouton_cliquable, const std::string texte, const std::string chemin_police, const int taille_police,
-            const std::pair<int, int> coord_bouton, const std::pair<int, int> taille_bouton, const std::pair<int, int> coord_texte);
 
-    bool evenementSurBouton(std::pair<int, int> coord_souris);
-    void afficherBouton(SDL_Surface *surface_affichage);
+    //!
+    //! \author cerutti & pin
+    //! \date 22/10/18
+    //! \version 0.1
+    //!
+    //! @brief Crée un bouton.
+    //! @param texte le texte à afficher.
+    //! @param rectangle, la position x, y, longueur, hauteur.
+    //! @param sprite, l'image de fond.
+    //! @param action, la fonction à appeler.
+    //! @param coef_coord_texte, les coefficients d'ancrage du texte relativement au bouton.
+    //! 0,0 en haut à gauche jusqu'à 1,1.
+    //! @param bouton_cliquable, true si il est cliquable.
+    //!
+    Bouton( const std::string texte,
+            const SDL_Rect rectangle,
+            const Sprite* sprite,
+            void (*action)(),
+            const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
+            const bool bouton_cliquable = true
+            );
 
-    Sprite* obtenirSpriteBouton();
-    TypeBouton obtenirTypeBouton();
-    bool obtenirBoutonCliquable();
-    void devenirCliquable();
 
     ~Bouton();
+
+    void afficher();
+
+    //Accés variables
+
+    bool estCliquable();
+
+    void devenirCliquable( bool peutCliquer );
+
+    void changerSpriteBouton(Sprite *spriteBouton);
+
+    Sprite* obtenirSpriteBouton();
+
 };
 
 #endif // BOUTON_H

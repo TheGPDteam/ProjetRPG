@@ -29,7 +29,7 @@ void Saisir::setbufferSDL() {
 
 void Saisir::afficher(SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_rec, SDL_MapRGB(fenetre_affichage->format, 170, 170, 170));
-    m_bufferSDL->afficherTexte(fenetre_affichage);
+    m_bufferSDL->afficher(fenetre_affichage);
 }
 
 void Saisir::enleverChar(){

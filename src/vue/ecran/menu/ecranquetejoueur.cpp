@@ -36,7 +36,7 @@ EcranQueteJoueur::~EcranQueteJoueur(){}
 void EcranQueteJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_bordure, SDL_MapRGB(fenetre_affichage->format, 75, 75, 75));
     SDL_FillRect(fenetre_affichage, &m_rectangle_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
-    m_nomFenetre.afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 

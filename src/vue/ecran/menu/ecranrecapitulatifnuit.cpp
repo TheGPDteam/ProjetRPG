@@ -88,26 +88,26 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
 
     if (m_controleur->obtenirModele()->perdu())
     {
-        m_zoneGameOver->afficherTexte(fenetre_affichage);
+        m_zoneGameOver->afficher(fenetre_affichage);
         switch (m_controleur->obtenirModele()->obtenirTypeDefaite())
         {
         case TypeDefaite::FAMINE:
         {
             TexteSDL m_zoneGameOverFamine = TexteSDL(TEXTE_GAME_OVER_FAMINE, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 25, m_fondRecapitulatif.y + 100));
-            m_zoneGameOverFamine.afficherTexte(fenetre_affichage);
+            m_zoneGameOverFamine.afficher(fenetre_affichage);
             // Donner des indications sur pourquoi il a perdu (consommation campement + vivres disponibles)
             TexteSDL m_zoneConsommationCampement = TexteSDL("Consommation du campement : " + std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirConsommation()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 25, m_fondRecapitulatif.y + 200));
-            m_zoneConsommationCampement.afficherTexte(fenetre_affichage);
+            m_zoneConsommationCampement.afficher(fenetre_affichage);
             TexteSDL m_zoneVivreCampement = TexteSDL("Vivres disponibles : " + std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirValeurNutritiveDisponible()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 25, m_fondRecapitulatif.y + 300));
-            m_zoneVivreCampement.afficherTexte(fenetre_affichage);
+            m_zoneVivreCampement.afficher(fenetre_affichage);
             break;
         }
         case TypeDefaite::ATTAQUEZOMBIES:
         {
             TexteSDL m_zoneGameOverAttaqueZombie = TexteSDL(TEXTE_GAME_OVER_ATTAQUE_MORTELLE, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 100));
-            m_zoneGameOverAttaqueZombie.afficherTexte(fenetre_affichage);
+            m_zoneGameOverAttaqueZombie.afficher(fenetre_affichage);
             // Donner les indications sur les zombies attaquants et le nombre de morts
-            m_zoneNombreZombiesAttaquants->afficherTexte(fenetre_affichage);
+            m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
             break;
         }
         default:
@@ -121,9 +121,9 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
                                                std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85)),
                                     &ActionsBoutons::boutonRetourMenuPrincipal);
     } else {
-        m_zoneNombreZombiesTues->afficherTexte(fenetre_affichage);
-        m_zoneNombreZombiesAttaquants->afficherTexte(fenetre_affichage);
-        m_zoneNombreHumainsTues->afficherTexte(fenetre_affichage);
+        m_zoneNombreZombiesTues->afficher(fenetre_affichage);
+        m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
+        m_zoneNombreHumainsTues->afficher(fenetre_affichage);
     }
 
     afficherBoutons(coord_souris, fenetre_affichage);
