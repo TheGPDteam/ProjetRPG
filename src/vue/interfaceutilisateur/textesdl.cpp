@@ -16,9 +16,9 @@ std::map<int, TTF_Font*> TexteSDL::m_fonts= {};
 //!
 //! Initialise un texte SDL avec sa taille, sa police et son emplacement
 //!
-TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
+TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, const std::string chemin_police, const int taille_police,
                    const std::pair<int, int> coord_texte)
-    :Affichable((SDL_Rect){coord_texte.first, coord_texte.second})
+    : Affichable((SDL_Rect){coord_texte.first, coord_texte.second})
 {
 
     if(TTF_Init() == -1)
@@ -69,7 +69,7 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const
 //! Initialise un texte SDL avec sa taille, sa police et son emplacement en le centrant par rapport à un rectangle
 //!
 
-TexteSDL::TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
+TexteSDL::TexteSDL(const std::string texte, const SDL_Color & couleur_texte, const std::string chemin_police, const int taille_police,
                    const std::pair<int, int> coord_rectangle, const std::pair<int, int> taille_rectangle)
     : TexteSDL(texte, couleur_texte, chemin_police, taille_police, coord_rectangle)
 

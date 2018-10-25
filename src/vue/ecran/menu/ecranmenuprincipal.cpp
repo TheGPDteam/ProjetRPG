@@ -11,26 +11,25 @@
 //!
 
 EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
-    EcranGeneral{controleur}//,
-    //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+    EcranGeneral{controleur},
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
     //! A EFFACER*
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
+    ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, new Sprite(), m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);
 
-    /* A SUPPRIMER
+    //coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
+    //coordB.second = coordB.second + 70;
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
 
-    coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
-    coordB.second = coordB.second + 70;
+    //coordB.second = coordB.second + 70;
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
-
-    coordB.second = coordB.second + 70;
-
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
-    */
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
 }
 
 

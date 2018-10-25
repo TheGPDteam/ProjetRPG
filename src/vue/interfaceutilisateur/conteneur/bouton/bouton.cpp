@@ -32,8 +32,9 @@ Bouton::Bouton(const std::string texte,
                )
     :
       Affichable(rectangle),
-      Cliquable(controleur, action, bouton_cliquable),
+      Cliquable(controleur, /*action,*/ bouton_cliquable),
       //m_texteBouton(new ZoneTexte(texte, rectangle, police)),
+      m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte)),
       m_spriteBouton(sprite)
 
 {
@@ -82,8 +83,9 @@ Bouton::~Bouton()
 
 void Bouton::afficher(SDL_Surface* surface_affichage)
 {
-    //m_spriteBouton->afficher(surface_affichage);
+    m_spriteBouton->afficherSprite(surface_affichage);
     //m_texteBouton->afficher(surface_affichage);
+    m_texte->afficher(surface_affichage);
 }
 
 

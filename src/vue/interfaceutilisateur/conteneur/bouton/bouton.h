@@ -4,6 +4,7 @@
 #include "../../textesdl.h"
 #include "../../sprite.h"
 #include "../../cliquable.h"
+
 //#include "../../zonetexte.h"
 
 class Bouton : public Affichable, public Cliquable
@@ -11,9 +12,10 @@ class Bouton : public Affichable, public Cliquable
 private:
 
     //ZoneTexte* m_texteBouton;
-
+    TexteSDL * m_texte;
     Sprite* m_spriteBouton;
 
+    SDL_Rect  zone() const { return m_spriteBouton->getCoordSprite();}
 
 public:
 
@@ -30,7 +32,7 @@ public:
     ~Bouton();
 
     void afficher(SDL_Surface* surface_affichage);
-
+    void redimensionner(SDL_Rect rect) override{}
     //Accés variables
 
     bool estCliquable();
@@ -40,6 +42,8 @@ public:
     void changerSpriteBouton(Sprite *spriteBouton);
 
     Sprite* obtenirSpriteBouton();
+
+    void clique() override {}
 
 };
 

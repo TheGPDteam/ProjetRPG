@@ -61,7 +61,8 @@ SOURCES += \
     observable.cpp \
     observateur.cpp \
     vue/interfaceutilisateur/cliquable.cpp \
-    vue/interfaceutilisateur/zonetexte.cpp
+    vue/interfaceutilisateur/zonetexte.cpp \
+    vue/affichable.cpp
 
 
 
@@ -130,6 +131,7 @@ HEADERS += \
     observable.h \
     observateur.h \
     vue/interfaceutilisateur/cliquable.h \
-    vue/interfaceutilisateur/zonetexte.h
+    vue/interfaceutilisateur/zonetexte.h \
+    vue/affichable.h
 
 
