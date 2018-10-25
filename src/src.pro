@@ -60,7 +60,7 @@ SOURCES += \
     main.cpp \
     observable.cpp \
     observateur.cpp \
-    vue/affichable.cpp
+    vue/interfaceutilisateur/cliquable.cpp
 
 
 
@@ -128,6 +128,6 @@ HEADERS += \
     direction.h \
     observable.h \
     observateur.h \
-    vue/affichable.h
+    vue/interfaceutilisateur/cliquable.h
 
 
