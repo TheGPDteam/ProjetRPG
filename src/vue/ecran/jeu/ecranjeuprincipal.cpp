@@ -185,8 +185,26 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
                     Tuile * t = carte->obtenirTuile(i,j);
-                    SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                    if (t->obtenirDirection() == Direction::Aucune)
+                    {
+                        SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                    } else
+                    {
+                        if (i == 0) { //Je suis a gauche donc sprite fleche de gauche
+                            SDL_Rect lecture {64 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else if (i > 63) { // Je suis a droite
+                            SDL_Rect lecture {0 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else if (j == 0) { // Je suis en haut
+                            SDL_Rect lecture {128 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else { // Je suis en bas
+                            SDL_Rect lecture {192 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        }
+                    }
 
                     if(carte->objetPresent(temp))
                         m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
