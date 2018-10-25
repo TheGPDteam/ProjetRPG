@@ -26,12 +26,14 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
     m_zoneNombreHumainsTues = new TexteSDL(TEXTE_HUMAINS_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbPersosMorts()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 315));
     m_zoneGameOver = new TexteSDL(TEXTE_GAME_OVER, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30, std::make_pair(m_fondRecapitulatif.x + 250, m_fondRecapitulatif.y + 50));
 
+    //A SUPPRIMER
+    /*
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85)),
                                 &ActionsBoutons::boutonChoixPersonnageCycle);
-
+    */
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();
 }
@@ -115,18 +117,22 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
         }
 
         //Afficher un bouton pour retourner au menu
+        //A SUPPRIMER
+        /*
         ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Retour menu", POLICE_COLLEGED, 18,
                                                std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100),
                                                std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
                                                std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85)),
                                     &ActionsBoutons::boutonRetourMenuPrincipal);
+                                    */
     } else {
         m_zoneNombreZombiesTues->afficher(fenetre_affichage);
         m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
         m_zoneNombreHumainsTues->afficher(fenetre_affichage);
     }
 
-    afficherBoutons(coord_souris, fenetre_affichage);
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 
