@@ -6,9 +6,9 @@
 
 
 //!
-//! \brief Constructeur paramétré d'un bouton
-//! \author pgutierrez
-//! \date 11/11/16
+//! \brief Constructeur parametre d'un bouton
+//! \author cerutti & pin
+//! \date 25/10/18
 //! @param type_bouton type du bouton
 //! @param texte texte du bouton
 //! @param couleur_texte couleur du texte du bouton
@@ -18,18 +18,18 @@
 //! @param taille_bouton taille du bouton
 //! \version 0.2
 //!
-//! Initialise l'image et le texte qu'aura le bouton
+//! Initialise l'image et le texte qu'aura le bouton, ainsi
+//! que l'action pour les événements de notre boutons.
 //!
-
 Bouton::Bouton(const std::string texte,
-                SDL_Rect rectangle,
-                Sprite *sprite,
+               SDL_Rect rectangle,
+               Sprite *sprite,
                Controleur *controleur,
-                void *action,
-                const bool bouton_cliquable,
-                const std::pair<float, float> coef_coord_texte,
-                const std::string police
-        )
+               void *action,
+               const bool bouton_cliquable,
+               const std::pair<float, float> coef_coord_texte,
+               const std::string police
+               )
     :
       Affichable(rectangle),
       Cliquable(controleur, action, bouton_cliquable),
@@ -73,9 +73,9 @@ Bouton::~Bouton()
 
 //!
 //! \brief Affiche un bouton
-//! \author pgutierrez
-//! \date 11/11/16
-//! \version 0.1
+//! \author cerutti
+//! \date 25/10/18
+//! \version 1.0
 //!
 //! Elle affiche le sprite et le texte du bouton
 //!

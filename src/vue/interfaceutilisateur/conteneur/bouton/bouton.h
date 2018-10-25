@@ -17,7 +17,6 @@ private:
 
 public:
 
-
     Bouton(const std::string texte,
             SDL_Rect rectangle,
             Sprite* sprite,
@@ -28,12 +27,8 @@ public:
             const std::string police = "Defaut"
             );
 
-
     ~Bouton();
 
-    /**
-     * @brief afficher hérité de Affichable
-     */
     void afficher(SDL_Surface* surface_affichage);
 
     //Accés variables
