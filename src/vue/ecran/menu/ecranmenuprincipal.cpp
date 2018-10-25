@@ -11,13 +11,14 @@
 //!
 
 EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
-    EcranGeneral{controleur},
-    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+    EcranGeneral{controleur}//,
+    //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
     //! A EFFACER*
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
+    /* A SUPPRIMER
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
 
@@ -29,6 +30,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     coordB.second = coordB.second + 70;
 
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
+    */
 }
 
 
@@ -50,7 +52,9 @@ void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Sur
     //    SDL_Surface* imageFond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
     //    SDL_BlitSurface(imageFond,new SDL_Rect{0,0,1024,668},fenetre_affichage,new SDL_Rect{0,0,0,0});
     afficherFondEcran(fenetre_affichage);
-    afficherBoutons(coord_souris, fenetre_affichage);
+
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 

@@ -36,7 +36,7 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
     m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
 
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));
-
+    /* A SUPPRIMER
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Oui", POLICE_COLLEGED, 20,
                                            std::make_pair(WIDTH_FENETRE_PRINCIPALE - WIDTH_BOUTON_NORMAL - 70 ,
                                                           m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
@@ -51,12 +51,13 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
                                            std::make_pair(WIDTH_FENETRE_PRINCIPALE - WIDTH_BOUTON_NORMAL * 3./2. - 110 ,
                                                           m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10)),
                                 &ActionsBoutons::boutonQueteRefus);
+                                */
 }
 
 void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
 
-//    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-//    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    //    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    //    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFichePersonnage, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
@@ -88,8 +89,8 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     m_zoneDegatsArmePersonnage->afficher(fenetre_affichage);
     m_zoneQuestion->afficher(fenetre_affichage);
 
-
-    afficherBoutons(coord_souris, fenetre_affichage);
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 
 
 }

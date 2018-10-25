@@ -1,6 +1,7 @@
 #include "dictionnairedeboutons.h"
 #include "constantesbouton.h"
 
+/*
 //!
 //! \brief Constructeur par défaut de la map de boutons
 //! \author pgutierrez
@@ -158,3 +159,4 @@ DictionnaireDeBoutons::~DictionnaireDeBoutons()
         delete m_actionsBoutons;
     }
 }
+*/

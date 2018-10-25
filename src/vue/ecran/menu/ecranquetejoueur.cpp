@@ -5,18 +5,20 @@
 
 EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur) :
     EcranGeneral{controleur},
-    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+    //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Que Voulez vous faire ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE-HEIGHT_BOUTON_NORMAL))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-15, (HEIGHT_FENETRE_PRINCIPALE/2));
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first + 65, coordB.second + 15)), &ActionsBoutons::boutonRecolteJoueur);
+    //A SUPPRIMER
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first + 65, coordB.second + 15)), &ActionsBoutons::boutonRecolteJoueur);
 
     coordB = {(WIDTH_FENETRE_PRINCIPALE/2)+15, (HEIGHT_FENETRE_PRINCIPALE/2)};
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 75, coordB.second + 15)), &ActionsBoutons::boutonChasseJoueur);
+    //A SUPPRIMER
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 75, coordB.second + 15)), &ActionsBoutons::boutonChasseJoueur);
 
     short int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
     short int y = (HEIGHT_FENETRE_PRINCIPALE/2)-HEIGHT_BOUTON_NORMAL-15;
@@ -37,7 +39,9 @@ void EcranQueteJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfa
     SDL_FillRect(fenetre_affichage, &m_bordure, SDL_MapRGB(fenetre_affichage->format, 75, 75, 75));
     SDL_FillRect(fenetre_affichage, &m_rectangle_fond, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     m_nomFenetre.afficher(fenetre_affichage);
-    afficherBoutons(coord_souris, fenetre_affichage);
+
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 void EcranQueteJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){

@@ -6,7 +6,7 @@
 
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
-    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+    //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
     m_titreRecolte("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(200,HEIGHT_FENETRE_PRINCIPALE/2+40)),
@@ -16,7 +16,8 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Votre quete", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+35,coordB.second+15)), &ActionsBoutons::boutonChoixJoueur);
+    //A SUPPRIMER
+    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Votre quete", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+35,coordB.second+15)), &ActionsBoutons::boutonChoixJoueur);
 
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
     m_fondRecolte = {20,HEIGHT_FENETRE_PRINCIPALE/2+20,WIDTH_FENETRE_PRINCIPALE/2-20*2+10,HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
@@ -109,7 +110,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         ++k;
     }
 
-    afficherBoutons(coord_souris, fenetre_affichage);
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 
     if(m_humain_a_affecter != nullptr){
         RepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage);
