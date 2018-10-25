@@ -2,6 +2,7 @@
 #define CLIQUABLE_H
 
 #include <string>
+#include <functional>
 #include "controleur/controleur.h"
 #include <SDL/SDL.h>
 
@@ -13,7 +14,7 @@ private:
     Controleur * m_controleur;
 
     bool m_actif; // Si on peut cliquer l'objet
-    void* m_action; // Pointeur vers la fonction à appeler pour réaliser l'action associée à l'objet cliquable
+    std::function<void>* m_action; // Pointeur vers la fonction à appeler pour réaliser l'action associée à l'objet cliquable
 
     virtual SDL_Rect * zone() const = 0;
 
