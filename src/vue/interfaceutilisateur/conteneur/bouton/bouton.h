@@ -3,13 +3,14 @@
 
 #include "../../textesdl.h"
 #include "../../sprite.h"
-
+#include "../../cliquable.h"
+//#include "../../zonetexte.h"
 
 class Bouton : public Affichable, public Cliquable
 {
 private:
 
-    ZoneTexte* m_texteBouton;
+    //ZoneTexte* m_texteBouton;
 
     Sprite* m_spriteBouton;
 
@@ -17,12 +18,13 @@ private:
 public:
 
 
-    Bouton( const std::string texte,
-            const SDL_Rect rectangle,
-            const Sprite* sprite,
-            void (*action)(),
-            const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
+    Bouton(const std::string texte,
+            SDL_Rect rectangle,
+            Sprite* sprite,
+            Controleur * controleur,
+            void *action,
             const bool bouton_cliquable = true,
+            const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
             const std::string police = "Defaut"
             );
 

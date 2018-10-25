@@ -9,12 +9,14 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
     recupererHistoire();
-
+    //A SUPPRIMER
+    /*
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
                                            std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, HEIGHT_FENETRE_PRINCIPALE - 87)),
                                 &ActionsBoutons::boutonChoixNom);
+                                */
 }
 
 
@@ -53,7 +55,8 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
         texte->afficher(fenetre_affichage);
     }
 
-    afficherBoutons(coord_souris, fenetre_affichage);
+    //A SUPPRIMER
+    //afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 

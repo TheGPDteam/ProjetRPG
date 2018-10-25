@@ -2,7 +2,7 @@
 #include "constantesbouton.h"
 
 
-std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé permettant de trouver la bonne feuille de sprite pour les boutons
+//std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé permettant de trouver la bonne feuille de sprite pour les boutons
 
 
 //!
@@ -21,22 +21,23 @@ std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé per
 //! Initialise l'image et le texte qu'aura le bouton
 //!
 
-Bouton::Bouton( const std::string texte,
-                const SDL_Rect rectangle,
-                const Sprite* sprite,
-                void (*action)(),
-                const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
-                const bool bouton_cliquable = true,
-                const std::string police = "Default"
+Bouton::Bouton(const std::string texte,
+                SDL_Rect rectangle,
+                Sprite *sprite,
+               Controleur *controleur,
+                void *action,
+                const bool bouton_cliquable,
+                const std::pair<float, float> coef_coord_texte,
+                const std::string police
         )
     :
       Affichable(rectangle),
-      Cliquable(action, bouton_cliquable),
-      m_texteBouton(new ZoneTexte(texte, rectangle, police)),
+      Cliquable(controleur, action, bouton_cliquable),
+      //m_texteBouton(new ZoneTexte(texte, rectangle, police)),
       m_spriteBouton(sprite)
 
 {
-    if(m_boutonCliquable)
+    if(bouton_cliquable)
     {
         //m_texteBouton.setColor(COULEUR_BOUTON_CLIQUABLE);
     }
@@ -62,11 +63,12 @@ Bouton::~Bouton()
     {
         delete m_spriteBouton;
     }
-
+    /*
     if(m_texteBouton != nullptr)
     {
         delete m_texteBouton;
     }
+    */
 }
 
 //!
@@ -80,8 +82,8 @@ Bouton::~Bouton()
 
 void Bouton::afficher(SDL_Surface* surface_affichage)
 {
-    m_spriteBouton->afficher(surface_affichage);
-    m_texteBouton->afficher(surface_affichage);
+    //m_spriteBouton->afficher(surface_affichage);
+    //m_texteBouton->afficher(surface_affichage);
 }
 
 
@@ -108,7 +110,7 @@ Sprite* Bouton::obtenirSpriteBouton()
 //! \version 1.1
 //!
 
-bool Bouton::obtenirBoutonCliquable() {
+bool Bouton::estCliquable() {
     return true;
 }
 
@@ -131,4 +133,5 @@ void Bouton::definirCliquable(bool peut_cliquer)
         //m_texteBouton.definirCouleur(COULEUR_BOUTON_NONCLIQUABLE);
     }
     //m_boutonCliquable = peut_cliquer;
+    */
 }
