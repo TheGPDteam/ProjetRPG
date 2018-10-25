@@ -1,5 +1,6 @@
 #include "ecranmenuprincipal.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "../../outilsvue.h"
 
 //!
 //! \brief Constructeur par défaut de l'écran de menu principal
@@ -14,13 +15,23 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     EcranGeneral{controleur},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
-    SDL_Rect positionFeuilleSpriteNouvellePartie = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect positionFenetreNouvellePartie = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
                                                     (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
                                                     WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreNouvellePartie, positionFeuilleSpriteNouvellePartie);
+    SDL_Rect positionFenetreContinuer = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
+                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 170,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreQuitter = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
+                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 240,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreNouvellePartie, positionFeuilleSprite);
+    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreContinuer, positionFeuilleSprite);
+    Sprite * bouton3 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreQuitter, positionFeuilleSprite);
     //! A REFAIRE*
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
@@ -28,14 +39,18 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, bouton, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);
 
-    //coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
-    //coordB.second = coordB.second + 70;
+    coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
+    coordB.second = coordB.second + 70;
 
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
-
-    //coordB.second = coordB.second + 70;
+    ajoutBoutonDansMapDeBoutons(new Bouton("Continuer", rect, bouton2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChargement);
+    coordB.second = coordB.second + 70;
 
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
+    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, bouton3, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+75,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
+
 }
 
 

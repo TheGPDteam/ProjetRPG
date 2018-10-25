@@ -62,7 +62,8 @@ SOURCES += \
     observateur.cpp \
     vue/interfaceutilisateur/cliquable.cpp \
     vue/interfaceutilisateur/zonetexte.cpp \
-    vue/affichable.cpp
+    vue/affichable.cpp \
+    vue/outilsvue.cpp
 
 
 

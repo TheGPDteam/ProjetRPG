@@ -6,7 +6,6 @@
 
 #include "../../../observable.h"
 #include "../ecrangeneral.h"
-#include "../../outilsvue.h"
 
 
 class EcranMenuPrincipal : public EcranGeneral
