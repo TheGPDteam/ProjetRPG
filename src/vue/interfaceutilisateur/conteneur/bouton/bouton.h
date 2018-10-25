@@ -16,38 +16,29 @@ private:
 
 public:
 
-    //!
-    //! \author cerutti & pin
-    //! \date 22/10/18
-    //! \version 0.1
-    //!
-    //! @brief Crée un bouton.
-    //! @param texte le texte à afficher.
-    //! @param rectangle, la position x, y, longueur, hauteur.
-    //! @param sprite, l'image de fond.
-    //! @param action, la fonction à appeler.
-    //! @param coef_coord_texte, les coefficients d'ancrage du texte relativement au bouton.
-    //! 0,0 en haut à gauche jusqu'à 1,1.
-    //! @param bouton_cliquable, true si il est cliquable.
-    //!
+
     Bouton( const std::string texte,
             const SDL_Rect rectangle,
             const Sprite* sprite,
             void (*action)(),
             const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
-            const bool bouton_cliquable = true
+            const bool bouton_cliquable = true,
+            const std::string police = "Defaut"
             );
 
 
     ~Bouton();
 
-    void afficher();
+    /**
+     * @brief afficher hérité de Affichable
+     */
+    void afficher(SDL_Surface* surface_affichage);
 
     //Accés variables
 
     bool estCliquable();
 
-    void devenirCliquable( bool peutCliquer );
+    void definirCliquable(bool peut_cliquer );
 
     void changerSpriteBouton(Sprite *spriteBouton);
 
