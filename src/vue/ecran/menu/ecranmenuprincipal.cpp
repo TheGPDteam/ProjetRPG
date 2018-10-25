@@ -14,12 +14,18 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     EcranGeneral{controleur},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
 {
-    //! A EFFACER*
+    SDL_Rect positionFeuilleSpriteNouvellePartie = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreNouvellePartie = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
+                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreNouvellePartie, positionFeuilleSpriteNouvellePartie);
+    //! A REFAIRE*
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
-    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Nouvelle Partie", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+20,coordB.second+15)), &ActionsBoutons::boutonNouvellePartie);
-    ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, new Sprite(), m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, bouton, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);
 
     //coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
@@ -53,7 +59,7 @@ void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Sur
     afficherFondEcran(fenetre_affichage);
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 

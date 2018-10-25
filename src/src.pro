@@ -132,6 +132,7 @@ HEADERS += \
     observateur.h \
     vue/interfaceutilisateur/cliquable.h \
     vue/interfaceutilisateur/zonetexte.h \
-    vue/affichable.h
+    vue/affichable.h \
+    vue/outilsvue.h
 
 
