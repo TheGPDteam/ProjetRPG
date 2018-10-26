@@ -31,8 +31,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
     SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect positionFenetreEquipe = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
-                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
-                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+                                                          (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
+                                                          WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
     Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreEquipe, positionFeuilleSprite);
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
@@ -192,6 +192,68 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 if(i<0 || i>63 || j<0 || j>63)
                 {
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                }
+                if (i < 0)
+                {
+                    if (j > 0 && j < 63) {
+                        if (carte->obtenirTuile(0,j)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(0,j+1)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(0,j-1)->obtenirDirection()!= Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            //AFFICHER ROUTE
+                            Tuile * t = carte->obtenirTuile(0,j);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+
+                } else if (i > 63)
+                {
+                    if (j > 0 && j < 63)
+                    {
+                        if (carte->obtenirTuile(63,j)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(63,j+1)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(63,j-1)->obtenirDirection()!= Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            //AFFICHER ROUTE
+                            Tuile * t = carte->obtenirTuile(63,j);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+                } else if (j < 0)
+                {
+                    if (i > 0 && i < 63)
+                    {
+                        if (carte->obtenirTuile(i,0)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(i+1,0)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(i-1,0)->obtenirDirection()!= Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            Tuile * t = carte->obtenirTuile(i,0);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+                } else if (j > 63) {
+                    if (i > 0 && i < 63)
+                    {
+                        if (carte->obtenirTuile(i,63)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(i+1,63)->obtenirDirection()!= Direction::Aucune
+                                || carte->obtenirTuile(i-1,63)->obtenirDirection()!= Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            Tuile * t = carte->obtenirTuile(i,63);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
                 }
                 else
                 {
