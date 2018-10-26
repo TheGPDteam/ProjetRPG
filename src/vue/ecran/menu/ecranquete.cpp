@@ -17,6 +17,15 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
     //A SUPPRIMER
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreVotreQuete = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
+                                                    (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreVotreQuete, positionFeuilleSprite);
+
+    ajoutBoutonDansMapDeBoutons(new Bouton("Votre Quete", rect, bouton, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChoixJoueur);
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Votre quete", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+35,coordB.second+15)), &ActionsBoutons::boutonChoixJoueur);
 
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
@@ -111,7 +120,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     }
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
     if(m_humain_a_affecter != nullptr){
         RepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage);
