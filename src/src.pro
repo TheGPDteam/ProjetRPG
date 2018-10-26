@@ -17,7 +17,7 @@ SOURCES += \
     modele/environnement/campement.cpp \
     modele/objets/armes/arme.cpp \
     modele/objets/objet.cpp \
-    modele/personnages/enemis/zombie.cpp \
+    modele/personnages/ennemis/zombie.cpp \
     modele/personnages/humain.cpp \
     modele/personnages/personnage.cpp \
     modele/survie/combat/combat.cpp \
@@ -82,7 +82,7 @@ HEADERS += \
     modele/objets/armes/arme.h \
     modele/objets/objet.h \
     modele/objets/typeobjet.h \
-    modele/personnages/enemis/zombie.h \
+    modele/personnages/ennemis/zombie.h \
     modele/personnages/humain.h \
     modele/personnages/personnage.h \
     modele/survie/combat/actioncombat.h \
