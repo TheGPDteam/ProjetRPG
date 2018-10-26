@@ -28,6 +28,19 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
 {
     //* AJOUT DES BOUTONS *//
+
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreEquipe = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
+                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreEquipe, positionFeuilleSprite);
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
+    std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, bouton, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
+
     /*A SUPRIMER
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+40,coordB2.second+15)},&ActionsBoutons::boutonInventaire);
@@ -81,7 +94,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_tempsRestant.afficher(fenetre_affichage);
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
 }
 
