@@ -67,7 +67,7 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
 
             if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "backspace"){
                 m_s->enleverChar();
-            } else if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "return") {//entree
+            } else if((std::string)SDL_GetKeyName(evenements.key.keysym.sym) == "return") { // Entree
                 //On valide le nom en simulant un clic sur bouton
                 clique_souris = true;
                 coord_souris.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2) + 30;
