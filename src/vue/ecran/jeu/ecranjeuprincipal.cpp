@@ -9,8 +9,8 @@
 
 const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 530); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 590); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 450); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 510); // Pk pas utiliser coord bouton avant
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -30,16 +30,30 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     //* AJOUT DES BOUTONS *//
 
     SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreEquipe = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
-                                                          (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
-                                                          WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreEquipe = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
+    SDL_Rect positionFenetreInventaire = initialiserRectangle(coordB2.first, coordB2.second, tailleB.first, tailleB.second);
+    SDL_Rect positionFenetreCampement = initialiserRectangle(coordB3.first, coordB3.second, tailleB.first, tailleB.second);
+    SDL_Rect positionFenetreFinJournee = initialiserRectangle(coordB4.first, coordB4.second, tailleB.first, tailleB.second);
 
     Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreEquipe, positionFeuilleSprite);
-    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
-    std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, bouton, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
+
+    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreInventaire, positionFeuilleSprite);
+    SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, bouton2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
+
+    Sprite * bouton3 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreCampement, positionFeuilleSprite);
+    SDL_Rect rect3 = {coordB3.first, coordB3.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Campement", rect3, bouton3, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB3.first+20,coordB3.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
+
+    Sprite * bouton4 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreFinJournee, positionFeuilleSprite);
+    SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, bouton4, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB4.first+20,coordB4.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
     /*A SUPRIMER
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
