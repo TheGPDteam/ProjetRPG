@@ -183,6 +183,7 @@ TypeEcran ActionsBoutons::boutonCampement() {
 }
 
 TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
+    //CECI N'A RIEN A FAIRE DANS LA VUE, ON DOIT APPELER UNE FONCTION DU CONTROLEUR, QUI DOIT APPELER UNE FONCTION DU MODELE EFFECTUANT TOUT CELA
     if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet()!=0) {
         std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets();
         for (Objet* obj : objets) {
