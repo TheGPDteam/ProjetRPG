@@ -201,10 +201,12 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 }
                 if (i < 0)
                 {
-                    if (j > 0 && j < 63) {
+                    if (j > 1 && j < 62) {
                         if (carte->obtenirTuile(0,j)->obtenirDirection() != Direction::Aucune
                                 || carte->obtenirTuile(0,j+1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(0,j-1)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                                || carte->obtenirTuile(0,j-1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0,j-2)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0, j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             //AFFICHER ROUTE
                             Tuile * t = carte->obtenirTuile(0,j);
@@ -217,11 +219,13 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
                 } else if (i > 63)
                 {
-                    if (j > 0 && j < 63)
+                    if (j > 1 && j < 62)
                     {
                         if (carte->obtenirTuile(63,j)->obtenirDirection() != Direction::Aucune
                                 || carte->obtenirTuile(63,j+1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(63,j-1)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                                || carte->obtenirTuile(63,j-1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j-2)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             //AFFICHER ROUTE
                             Tuile * t = carte->obtenirTuile(63,j);
@@ -233,11 +237,13 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     }
                 } else if (j < 0)
                 {
-                    if (i > 0 && i < 63)
+                    if (i > 1 && i < 62)
                     {
                         if (carte->obtenirTuile(i,0)->obtenirDirection() != Direction::Aucune
                                 || carte->obtenirTuile(i+1,0)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-1,0)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                                || carte->obtenirTuile(i-1,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,0)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             Tuile * t = carte->obtenirTuile(i,0);
                             SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
@@ -247,11 +253,13 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                         }
                     }
                 } else if (j > 63) {
-                    if (i > 0 && i < 63)
+                    if (i > 1 && i < 62)
                     {
                         if (carte->obtenirTuile(i,63)->obtenirDirection() != Direction::Aucune
                                 || carte->obtenirTuile(i+1,63)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-1,63)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                                || carte->obtenirTuile(i-1,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,63)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             Tuile * t = carte->obtenirTuile(i,63);
                             SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
