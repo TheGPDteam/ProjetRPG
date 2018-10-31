@@ -52,18 +52,13 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
                                                           m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10)),
                                 &ActionsBoutons::boutonQueteRefus);
                                 */
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreOui = initialiserRectangle((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),
-                                                    (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
-                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Oui", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteAcceptation);
-    SDL_Rect positionFenetreNon = positionFenetreOui;
-    positionFenetreNon.x+=250;
+
     coordB.first+=250;
     SDL_Rect rect2 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 

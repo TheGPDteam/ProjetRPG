@@ -23,7 +23,7 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
 
-    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+40,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
 }
