@@ -34,6 +34,8 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
 
     m_zoneQuestion = new TexteSDL("Quelle tache doit-il faire ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 40, m_rectangleFichePersonnage.y + 350));
 
+    //A SUPPRIMER
+    /*
     m_retour = new Bouton(Normal, true, "Retour", POLICE_COLLEGED, 20,
                           std::make_pair(m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
                           std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
@@ -46,7 +48,7 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
                           std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
                           std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
                           std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
-
+    */
 
 }
 
@@ -56,23 +58,23 @@ void RepartitionJoueur::afficher(){
 
 
 
-    m_zoneNomPersonnage->afficherTexte(m_fenetre);
-    m_zonePrenomPersonnage->afficherTexte(m_fenetre);
+    m_zoneNomPersonnage->afficher(m_fenetre);
+    m_zonePrenomPersonnage->afficher(m_fenetre);
 
-    m_zoneNiveauPersonnage->afficherTexte(m_fenetre);
-    m_zoneForcePersonnage->afficherTexte(m_fenetre);
-    m_zoneChassePersonnage->afficherTexte(m_fenetre);
-    m_zoneRecoltePersonnage->afficherTexte(m_fenetre);
-    m_zoneIntelligencePersonnage->afficherTexte(m_fenetre);
-    m_zoneVitessePersonnage->afficherTexte(m_fenetre);
-    m_zoneDescArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneNomArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneDegatsArmePersonnage->afficherTexte(m_fenetre);
-    m_zoneQuestion->afficherTexte(m_fenetre);
+    m_zoneNiveauPersonnage->afficher(m_fenetre);
+    m_zoneForcePersonnage->afficher(m_fenetre);
+    m_zoneChassePersonnage->afficher(m_fenetre);
+    m_zoneRecoltePersonnage->afficher(m_fenetre);
+    m_zoneIntelligencePersonnage->afficher(m_fenetre);
+    m_zoneVitessePersonnage->afficher(m_fenetre);
+    m_zoneDescArmePersonnage->afficher(m_fenetre);
+    m_zoneNomArmePersonnage->afficher(m_fenetre);
+    m_zoneDegatsArmePersonnage->afficher(m_fenetre);
+    m_zoneQuestion->afficher(m_fenetre);
 
-    m_recolte->afficherBouton(m_fenetre);
-    m_retour->afficherBouton(m_fenetre);
-    m_chasse->afficherBouton(m_fenetre);
+    m_recolte->afficher(m_fenetre);
+    m_retour->afficher(m_fenetre);
+    m_chasse->afficher(m_fenetre);
 
     SDL_Flip(m_fenetre);
     //   afficherBoutons(coord_souris, m_fenetre);
@@ -108,6 +110,7 @@ int RepartitionJoueur::gestionDesEvenements(){
         case SDL_MOUSEBUTTONUP:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
+                /*
                 if(m_retour->evenementSurBouton(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RETOUR;
                     break;
@@ -120,6 +123,7 @@ int RepartitionJoueur::gestionDesEvenements(){
                     repartition = CHASSE;
                     break;
                 }
+                */
             }
             break;
 

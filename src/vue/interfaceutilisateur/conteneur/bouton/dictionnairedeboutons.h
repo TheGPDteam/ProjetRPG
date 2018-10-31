@@ -23,6 +23,7 @@ public:
     void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);
 
     virtual ~DictionnaireDeBoutons();
+
 };
 
 #endif // MAPDEBOUTONS_H

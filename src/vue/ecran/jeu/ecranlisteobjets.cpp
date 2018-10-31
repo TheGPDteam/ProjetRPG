@@ -20,7 +20,15 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
                   std::make_pair(350,0), std::make_pair(150, 250))
 {
     m_rectangleFicheObjet = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET};
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
+    //A SUPPRIMER
+    //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreRetourJeu = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
+
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreRetourJeu, positionFeuilleSprite);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, bouton, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+40,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
 }
 
 void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
@@ -28,10 +36,11 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_nomObjet.afficherTexte(fenetre_affichage);
-    m_descObjet.afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_nomObjet.afficher(fenetre_affichage);
+    m_descObjet.afficher(fenetre_affichage);
 
+    //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 
     int i=0;
@@ -43,9 +52,9 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
             break;
         }
         TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(50, 120 + 30 * i));
-        zoneTempNom.afficherTexte(fenetre_affichage);
+        zoneTempNom.afficher(fenetre_affichage);
         TexteSDL zoneTempNiv = TexteSDL (o->obtenirDescription(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(350, 120 + 30 * i));
-        zoneTempNiv.afficherTexte(fenetre_affichage);
+        zoneTempNiv.afficher(fenetre_affichage);
     }
 }
 

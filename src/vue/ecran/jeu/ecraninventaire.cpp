@@ -13,21 +13,40 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     EcranGeneral{controleur},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-     m_compteurInventaire(-1),
-     m_fondEcran{},
-     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
-     m_rectangleBas{COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
-     m_rectangleDescription{COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
-     m_zoneNomObjet{new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
-     m_zoneDescriptionObjet{new TexteSDL("Description", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE / 2 - 100, m_rectangleDescription.y + 10))},
-     m_quantiteInventaire{new TexteSDL("probleme affichage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_rectangleBas.w - 250, m_rectangleBas.y + m_rectangleBas.h - 50))},
-     m_vecteurObjetPourAffichage(10,std::vector<TexteSDL*> (2,nullptr)),
-     m_idObjetSelectionne(-1)
+    m_compteurInventaire(-1),
+    m_fondEcran{},
+    m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
+    m_rectangleBas{COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
+    m_rectangleDescription{COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
+    m_zoneNomObjet{new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
+    m_zoneDescriptionObjet{new TexteSDL("Description", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE / 2 - 100, m_rectangleDescription.y + 10))},
+    m_quantiteInventaire{new TexteSDL("probleme affichage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_rectangleBas.w - 250, m_rectangleBas.y + m_rectangleBas.h - 50))},
+    m_vecteurObjetPourAffichage(10,std::vector<TexteSDL*> (2,nullptr)),
+    m_idObjetSelectionne(-1)
 {
+    /* A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Donner", POLICE_COLLEGED, 20, std::make_pair(m_rectangleBas.x + 10, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::);
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Jeter", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 50, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL)), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 217, m_rectangleBas.y + 27)), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Aller au camp", POLICE_COLLEGED, 16, std::make_pair(100, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(100 + 40, m_rectangleBas.y + 27)), &ActionsBoutons::boutonCampement);
+    */
+
+    const std::pair<int, int> coordB(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10);
+    const std::pair<int, int> coordB2(100, m_rectangleBas.y + 10);
+    const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect positionFenetreRetourJeu = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
+    SDL_Rect positionFenetreAllerCampement = initialiserRectangle(coordB2.first, coordB2.second, tailleB.first, tailleB.second);
+
+    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreRetourJeu, positionFeuilleSprite);
+    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreAllerCampement, positionFeuilleSprite);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    SDL_Rect rect2= {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, bouton, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+    ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, bouton2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 }
 
 
@@ -52,35 +71,35 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
     SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
-    m_nomFenetre.afficherTexte(fenetre_affichage);
-    m_zoneNomObjet->afficherTexte(fenetre_affichage);
-    m_zoneDescriptionObjet->afficherTexte(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
+    m_zoneNomObjet->afficher(fenetre_affichage);
+    m_zoneDescriptionObjet->afficher(fenetre_affichage);
 
     definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
-    m_quantiteInventaire->afficherTexte(fenetre_affichage);
+    m_quantiteInventaire->afficher(fenetre_affichage);
 
-//    if(!m_vecteurObjetPourAffichage.empty())
-//    {
-//        for(unsigned int i = 0; i+1 <= m_vecteurObjetPourAffichage.size(); ++i)
-//        {
-//            for(int j = 0; j < 2; ++j)
-//            {
-//                if(m_vecteurObjetPourAffichage[i][j] != nullptr)
-//                    m_vecteurObjetPourAffichage[i][j]->afficherTexte(fenetre_affichage);
-//            }
-//        }
-//    }
+    //    if(!m_vecteurObjetPourAffichage.empty())
+    //    {
+    //        for(unsigned int i = 0; i+1 <= m_vecteurObjetPourAffichage.size(); ++i)
+    //        {
+    //            for(int j = 0; j < 2; ++j)
+    //            {
+    //                if(m_vecteurObjetPourAffichage[i][j] != nullptr)
+    //                    m_vecteurObjetPourAffichage[i][j]->afficher(fenetre_affichage);
+    //            }
+    //        }
+    //    }
 
     int i=0;
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
         ++i;
         TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficherTexte(fenetre_affichage);
+        zoneTempNom.afficher(fenetre_affichage);
         TexteSDL zoneTempDesc = TexteSDL (o->obtenirDescription(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 380 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempDesc.afficherTexte(fenetre_affichage);
+        zoneTempDesc.afficher(fenetre_affichage);
     }
-
+    //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 
@@ -200,10 +219,10 @@ bool EcranInventaire::definirObjetPourAffichage(std::vector<Objet *> objets)
         //if(m_vecteurObjetPourAffichage[cpt][0]->getTexteStr().compare(objet->obtenirNom()) != 0 && m_vecteurObjetPourAffichage[cpt][1]->getTexteStr().compare(objet->obtenirDescription()) != 0)
         //{
 
-            m_vecteurObjetPourAffichage[cpt][0] = new TexteSDL(objet->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18,
-                                                               std::make_pair(m_rectangleDescription.x + 10, (m_rectangleDescription.y + 50) + cpt * 25)); // Nom
-            m_vecteurObjetPourAffichage[cpt][1] = new TexteSDL(objet->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE/2 - 100, (m_rectangleDescription.y + 50) + cpt * 25)); // Description
-            ajoutEffectue = true;
+        m_vecteurObjetPourAffichage[cpt][0] = new TexteSDL(objet->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18,
+                                                           std::make_pair(m_rectangleDescription.x + 10, (m_rectangleDescription.y + 50) + cpt * 25)); // Nom
+        m_vecteurObjetPourAffichage[cpt][1] = new TexteSDL(objet->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE/2 - 100, (m_rectangleDescription.y + 50) + cpt * 25)); // Description
+        ajoutEffectue = true;
         //}
 
         cpt++;

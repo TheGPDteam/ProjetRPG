@@ -5,6 +5,7 @@
 #include "../interfaceutilisateur/conteneur/bouton/dictionnairedeboutons.h"
 #include "../../observateur.h"
 #include "../interfaceutilisateur/ressources/policetexte.h"
+#include "../outilsvue.h"
 
 class EcranGeneral : public DictionnaireDeBoutons, public Observateur
 {

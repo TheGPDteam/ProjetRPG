@@ -18,7 +18,7 @@ bool comparerVitesse(Personnage* p1, Personnage* p2) {
 //!
 
 Combat::Combat(Equipe *equipeHaute, Equipe *equipeBasse)
-    : m_equipeBasse{equipeBasse}, m_equipeHaute{equipeHaute}, m_ordrePassage{nullptr}, m_numeroDePassage{0}
+    : m_equipeBasse(equipeBasse), m_equipeHaute{equipeHaute}, m_ordrePassage{nullptr}, m_numeroDePassage{0}
 {
     int i=0;
     for (Personnage* p : *m_equipeHaute)
@@ -51,7 +51,10 @@ Combat::Combat(Equipe *equipeHaute, Equipe *equipeBasse)
 
 
 Combat::Combat(Equipe *equipeHaute)
-    : m_equipeBasse{Equipe::genererEquipeZombie()}, m_equipeHaute{equipeHaute},m_ordrePassage{nullptr}, m_numeroDePassage{0}
+    : m_equipeBasse(Equipe::genererEquipeZombie()),
+      m_equipeHaute(equipeHaute),
+      m_ordrePassage{nullptr},
+      m_numeroDePassage(0)
 {
     int i=0;
     for (Personnage* p : *m_equipeHaute)
@@ -138,7 +141,7 @@ void Combat::effectuerAttaque(Personnage *agresseur, Personnage *cible)
 
 void Combat::ajouterAction(Personnage* cible, Personnage* source, ActionCombat action)
 {
-    if (!source->obtenirVie()->obtenirValeur()==0)
+    if (!(source->obtenirVie()->obtenirValeur()==0))
     {
 
         switch (action)
