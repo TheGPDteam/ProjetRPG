@@ -44,7 +44,7 @@ public:
 
     bool estCliquable();
 
-    void definirCliquable(bool peut_cliquer );
+    void definirCliquable(bool peutCliquer );
 
     void changerSpriteBouton(Sprite *spriteBouton);
 

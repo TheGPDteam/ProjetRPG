@@ -84,8 +84,8 @@ Bouton::~Bouton()
 
 void Bouton::afficher(SDL_Surface* surface)
 {
-    //m_spriteBouton->afficher(surface);
-    //m_texteBouton->afficher(surface);
+    m_spriteBouton->afficherSprite(surface);
+    m_texte->afficher(surface);
 }
 
 
@@ -124,7 +124,7 @@ bool Bouton::estCliquable() {
 //! \param peut_cliquer,
 //! \version 1.1
 //!
-void Bouton::definirCliquable(bool peut_cliquer)
+void Bouton::definirCliquable(bool peutCliquer)
 {
     /*
     if(peut_cliquer)
