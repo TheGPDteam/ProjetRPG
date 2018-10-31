@@ -5,10 +5,15 @@ Cliquable::Cliquable(Controleur * controleur,  /*std::function<void *>& action,*
 {
 }
 
-bool Cliquable::contient(std::pair<int, int> &coord_souris) const {
+bool Cliquable::estCliquable() const
+{
+    return m_actif;
+}
+
+bool Cliquable::contient(std::pair<int, int> coord_souris) const {
     SDL_Rect z = zone();
 
-    return (coord_souris.first > z.x && coord_souris.first < z.x + z.w &&
+    return (estCliquable() && coord_souris.first > z.x && coord_souris.first < z.x + z.w &&
             coord_souris.second > z.y && coord_souris.second < z.y + z.h);
 }
 

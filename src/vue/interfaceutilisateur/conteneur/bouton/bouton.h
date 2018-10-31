@@ -23,7 +23,6 @@ public:
 
     Bouton(const std::string texte,
             SDL_Rect rectangle,
-            Sprite* sprite,
             Controleur * controleur,
             void *action,
             const bool bouton_cliquable = true,

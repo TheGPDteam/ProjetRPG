@@ -1,5 +1,6 @@
 #include "bouton.h"
 #include "constantesbouton.h"
+#include "../../../outilsvue.h"
 
 
 //std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé permettant de trouver la bonne feuille de sprite pour les boutons
@@ -23,7 +24,6 @@
 //!
 Bouton::Bouton(const std::string texte,
                SDL_Rect rectangle,
-               Sprite *sprite,
                Controleur *controleur,
                void *action,
                const bool bouton_cliquable,
@@ -34,10 +34,10 @@ Bouton::Bouton(const std::string texte,
       Affichable(rectangle),
       Cliquable(controleur, /*action,*/ bouton_cliquable),
       //m_texteBouton(new ZoneTexte(texte, rectangle, police)),
-      m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte)),
-      m_spriteBouton(sprite)
-
+      m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte))
 {
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, positionFeuilleSprite);
     if(bouton_cliquable)
     {
         //m_texteBouton.setColor(COULEUR_BOUTON_CLIQUABLE);

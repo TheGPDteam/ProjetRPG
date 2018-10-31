@@ -34,13 +34,8 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85)),
                                 &ActionsBoutons::boutonChoixPersonnageCycle);
     */
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreSuivant = initialiserRectangle(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100,
-                                                           WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreSuivant, positionFeuilleSprite);
-    SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, bouton, m_controleur, nullptr,
+    SDL_Rect rect = {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85), POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnageCycle);
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();
@@ -133,13 +128,8 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
                                                std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85)),
                                     &ActionsBoutons::boutonRetourMenuPrincipal);
                                     */
-        SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-        SDL_Rect positionFenetreSuivant = initialiserRectangle(DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100,
-                                                               WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-
-        Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreSuivant, positionFeuilleSprite);
         SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-        ajoutBoutonDansMapDeBoutons(new Bouton("Retour menu", rect, bouton, m_controleur, nullptr,
+        ajoutBoutonDansMapDeBoutons(new Bouton("Retour menu", rect,  m_controleur, nullptr,
                                                true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85), POLICE_COLLEGED), &ActionsBoutons::boutonRetourMenuPrincipal);
     } else {
         m_zoneNombreZombiesTues->afficher(fenetre_affichage);

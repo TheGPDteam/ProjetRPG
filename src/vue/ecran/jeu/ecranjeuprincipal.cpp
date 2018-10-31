@@ -29,30 +29,22 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 {
     //* AJOUT DES BOUTONS *//
 
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreEquipe = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
-    SDL_Rect positionFenetreInventaire = initialiserRectangle(coordB2.first, coordB2.second, tailleB.first, tailleB.second);
-    SDL_Rect positionFenetreCampement = initialiserRectangle(coordB3.first, coordB3.second, tailleB.first, tailleB.second);
-    SDL_Rect positionFenetreFinJournee = initialiserRectangle(coordB4.first, coordB4.second, tailleB.first, tailleB.second);
 
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreEquipe, positionFeuilleSprite);
+
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, bouton, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
 
-    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreInventaire, positionFeuilleSprite);
     SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, bouton2, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
 
-    Sprite * bouton3 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreCampement, positionFeuilleSprite);
     SDL_Rect rect3 = {coordB3.first, coordB3.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Campement", rect3, bouton3, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Campement", rect3, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB3.first+20,coordB3.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
-    Sprite * bouton4 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreFinJournee, positionFeuilleSprite);
     SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, bouton4, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB4.first+20,coordB4.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
     /*A SUPRIMER

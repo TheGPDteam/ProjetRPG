@@ -35,17 +35,12 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     const std::pair<int, int> coordB2(100, m_rectangleBas.y + 10);
     const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreRetourJeu = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
-    SDL_Rect positionFenetreAllerCampement = initialiserRectangle(coordB2.first, coordB2.second, tailleB.first, tailleB.second);
 
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreRetourJeu, positionFeuilleSprite);
-    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreAllerCampement, positionFeuilleSprite);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
     SDL_Rect rect2= {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, bouton, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
-    ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, bouton2, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 }
 

@@ -57,18 +57,17 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
                                                     (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100,
                                                     WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreOui, positionFeuilleSprite);
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Oui", rect, bouton, m_controleur, nullptr,
+    SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Oui", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteAcceptation);
     SDL_Rect positionFenetreNon = positionFenetreOui;
     positionFenetreNon.x+=250;
-    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreNon, positionFeuilleSprite);
     coordB.first+=250;
+    SDL_Rect rect2 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
-    ajoutBoutonDansMapDeBoutons(new Bouton("Non", rect, bouton2, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Non", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteRefus);
 }
 

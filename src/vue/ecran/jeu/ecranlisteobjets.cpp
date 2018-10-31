@@ -22,12 +22,9 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
     m_rectangleFicheObjet = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET};
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFenetreRetourJeu = initialiserRectangle(coordB.first, coordB.second, tailleB.first, tailleB.second);
 
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreRetourJeu, positionFeuilleSprite);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, bouton, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+40,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
 }
 

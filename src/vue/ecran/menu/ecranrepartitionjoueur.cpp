@@ -35,20 +35,50 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre) :
     m_zoneQuestion = new TexteSDL("Quelle tache doit-il faire ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 40, m_rectangleFichePersonnage.y + 350));
 
     //A SUPPRIMER
-    /*
-    m_retour = new Bouton(Normal, true, "Retour", POLICE_COLLEGED, 20,
-                          std::make_pair(m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
-                          std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
-                          std::make_pair(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
-    m_recolte = new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20,
-                           std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
-                           std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
-                           std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
-    m_chasse = new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20,
-                          std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
-                          std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
-                          std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
-    */
+
+//    m_retour = new Bouton(Normal, true, "Retour", POLICE_COLLEGED, 20,
+//                          std::make_pair(m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
+//                          std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
+//                          std::make_pair(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+    SDL_Rect rect = {m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                     WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    m_retour = new Bouton("Retour", rect, NULL, nullptr,
+                          true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+//    m_recolte = new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20,
+//                           std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
+//                           std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
+//                           std::make_pair(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
+            SDL_Rect rect2 = {m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                              WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    m_recolte = new Bouton("Recolte", rect2, NULL, nullptr,
+                           true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+//    m_chasse = new Bouton(Normal, true, "Chasse", POLICE_COLLEGED, 20,
+//                          std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
+//                          std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
+//                          std::make_pair(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ));
+    SDL_Rect rect3 = {m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    m_chasse = new Bouton("Chasse", rect3, NULL, nullptr,
+            true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+
+/*
+    SDL_Rect rect = {m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                     WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Retour", rect, NULL, nullptr,
+                                           true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED), NULL);
+
+    SDL_Rect rect2 = {m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 577,
+                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+
+    ajoutBoutonDansMapDeBoutons(new Bouton("Recolte", rect2, NULL, nullptr,
+                                           true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED), NULL);
+
+    SDL_Rect rect3 = {m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+
+    ajoutBoutonDansMapDeBoutons(new Bouton("Chasse", rect3, NULL, nullptr,
+                                           true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED), NULL);
+*/
 
 }
 
@@ -77,7 +107,7 @@ void RepartitionJoueur::afficher(){
     m_chasse->afficher(m_fenetre);
 
     SDL_Flip(m_fenetre);
-    //   afficherBoutons(coord_souris, m_fenetre);
+   // afficherBoutons(coord_souris, m_fenetre);
 
 
 }
@@ -110,20 +140,19 @@ int RepartitionJoueur::gestionDesEvenements(){
         case SDL_MOUSEBUTTONUP:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
-                /*
-                if(m_retour->evenementSurBouton(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+
+                if(m_retour->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RETOUR;
                     break;
                 }
-                else if(m_recolte->evenementSurBouton(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                else if(m_recolte->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RECOLTE;
                     break;
                 }
-                else if(m_chasse->evenementSurBouton(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                else if(m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = CHASSE;
                     break;
                 }
-                */
             }
             break;
 

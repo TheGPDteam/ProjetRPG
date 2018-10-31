@@ -24,8 +24,10 @@ public:
 
     virtual ~Cliquable() = default;
 
-    virtual bool contient(std::pair<int, int> &coord_souris) const;
+    virtual bool contient(std::pair<int, int> coord_souris) const;
     virtual void clique() = 0;
+
+    bool estCliquable() const;
 };
 
 #endif // CLIQUABLE_H

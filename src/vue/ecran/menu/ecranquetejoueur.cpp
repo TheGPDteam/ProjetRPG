@@ -11,26 +11,21 @@ EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur) :
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-15, (HEIGHT_FENETRE_PRINCIPALE/2));
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+
+    SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Recolte", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first + 65, coordB.second + 15)), &ActionsBoutons::boutonRecolteJoueur);
-    SDL_Rect positionFenetreRecolte = initialiserRectangle(coordB.first, coordB.second,
-                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    Sprite * bouton = new Sprite(SPRITES_PRINCIPAUX, positionFenetreRecolte, positionFeuilleSprite);
-    ajoutBoutonDansMapDeBoutons(new Bouton("Recolte", rect, bouton, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Recolte", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(coordB.first+65,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonRecolteJoueur);
 
     std::pair<int,int> coordB2 = {(WIDTH_FENETRE_PRINCIPALE/2)+15, (HEIGHT_FENETRE_PRINCIPALE/2)};
 
+    SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Chasse", POLICE_COLLEGED, 20, coordB, tailleB,std::make_pair(coordB.first + 75, coordB.second + 15)), &ActionsBoutons::boutonChasseJoueur);
-    SDL_Rect positionFenetreChasse = initialiserRectangle(coordB2.first, coordB2.second,
-                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-    Sprite * bouton2 = new Sprite(SPRITES_PRINCIPAUX, positionFenetreChasse, positionFeuilleSprite);
-    ajoutBoutonDansMapDeBoutons(new Bouton("Chasse", rect, bouton2, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Chasse", rect2, m_controleur, nullptr,
                                            false, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChasseJoueur);
 
     short int x = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL)-30;
