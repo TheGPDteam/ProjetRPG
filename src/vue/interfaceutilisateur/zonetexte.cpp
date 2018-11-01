@@ -9,8 +9,8 @@ ZoneTexte::ZoneTexte(const std::string chemin_police, const int taille_police, c
 }
 
 ZoneTexte::~ZoneTexte(){
- for(TexteSDL * t : m_texteSDL)
-     delete t;
+    for(TexteSDL * t : m_texteSDL)
+        delete t;
 }
 
 void ZoneTexte::afficher(SDL_Surface *surface_affichage)
@@ -45,12 +45,25 @@ void ZoneTexte::adapterTexte()
     case COMPORTEMENT_TEXTE::SAUT_DE_LIGNE :
     {
         //On regarde mot par mot si le texte rentre dans la zone, sinon on crée un nouveau texte SDL qu'on ajoute au vector
+        std::string copTexte = m_texte;
+        while (copTexte.length() != 0)
+        {
+            std::string tmp = "";
+
+            int i = 0;
+            do {
+                tmp += copTexte[i];
+                ++i;
+            } while ((tmp.length() * m_taillePolice) > m_rectangle.w);
+            TexteSDL * t = new TexteSDL(tmp, m_couleur, m_cheminPolice, m_taillePolice,
+                                        std::make_pair<int,int>(m_rectangle.x, m_rectangle.y + ((m_taillePolice+5)*m_texteSDL.size())));
+            m_texteSDL.insert(m_texteSDL.end(), t);
+        }
         break;
     }
     default:
     {
-
-    }
         break;
+    }
     }
 }
