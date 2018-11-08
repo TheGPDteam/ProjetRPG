@@ -13,7 +13,6 @@ public:
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     bool contient(std::pair<int, int> &coord_souris) const override;
-    void clique() override;
 };
 
 #endif // LIGNE_H
