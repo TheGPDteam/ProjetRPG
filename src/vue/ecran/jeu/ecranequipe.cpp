@@ -24,6 +24,12 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
 {
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Retour jeu", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 245, m_rectangleBas.y + 25)), &ActionsBoutons::boutonJeuPrincipal);
+    const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+    SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+
 }
 
 
@@ -78,7 +84,7 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
     }
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
 }
 

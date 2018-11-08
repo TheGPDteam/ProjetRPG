@@ -7,11 +7,10 @@ Il va servir à ordonner les étapes d'avancement du projet décrit ci-dessous.
 
 ## Un Survival-RPG
 
-Ce projet sera donc un jeu, plus précisément un **Survival-RPG** codé en C++ et transpillé en JavaScript.
+Ce projet sera donc un jeu, plus précisément un **Survival-RPG** codé en C++ et possiblement transpillé en JavaScript.
 Il va permettre aux étudiants de travailler sur un plus gros projet et de pouvoir accéder à des fonctions et des fonctionnalités plus étoffées dans un programme plus important. Il leur permettra également de développer des compétences techniques ainsi que l'esprit d'équipe.
 
-Ce projet est également l'occasion pour certains de produire de la musique, des effets sonores et des sprites (ou images). Ce projet
-offre également la possibilité de créer un site web pour intégrer le jeu.
+Ce projet est également l'occasion pour certains de produire de la musique, des effets sonores et des sprites (ou images). Ce projet offre également la possibilité de créer un site web pour intégrer le jeu.
 
 ## Scénario
 
@@ -57,23 +56,93 @@ La liste de choses à faire est disponible à l'adresse : https://trello.com/b/C
 
 #### Les développeurs : 
 
-- Florent Vain (intégrateur / controlleur)
-- Mathieu Leothaud (modèle)
-- Pablo Gutierrez (vue)
-- Julien Sorin (modèle)
-- Anthony Nguyen (vue)
-- Anthony Martin (modèle)
 - Aymeric Devriesere (modèle)
+- Pablo Gutierrez (vue)
+- Mathieu Leothaud (modèle)
 - Nathan Lesne (modèle)
+- Anthony Martin (modèle)
+- Anthony Nguyen (vue)
+- Julien Sorin (modèle)
+- Florent Vain (intégrateur / controlleur)
 
 ### Deuxième génération : 
 
-#### To be continued...
+#### Les tuteurs : 
+
+- Mathieu Leothaud
+- Florent Vain
+
+#### Développeurs : 
+
+- Barry Housseynatou
+- Berrouet Damien
+- Line Calvi
+- Aurelie Casanova
+- Sarah Chourouq
+- Amaury Deguilhem
+- Maroua Essaid
+- Claudel Frank Fonkwa Fodouop
+- Pablo Gutierrez 
+- Kevin Hadjari
+- Stephanie Hubert
+- Dorian Lacoste 
+- Antonin Lerouge 
+- Nathan Lesne 
+- Arina Moldovean 
+- Romain Owczarek
+- Marius Pardo 
+- Enzo Peruzzetto 
+- Anthony Regnies 
+- Baptiste Rousserie 
+- Baptiste Senac
+- Orson Villa 
+
+
+### Troisième génération : 
+
+#### Le tuteur :
+
+- Mathieu Leothaud
+
+#### Les développeurs : 
+
+- Barrere Louis Gabriel
+- Beltran Lila
+- Boitelle Adrien
+- Celerier Adrien
+- Cerutti Marc
+- Chipot Frederic
+- Debaty Zoe
+- Dekeyser Numa
+- Diallo Mohamed
+- Dubert Julien
+- Dupouey Leo
+- Even Melvin
+- Giraud Bjorn
+- Khelifi Amine
+- Lacoste Dorian
+- Lecomte Hugo
+- Lesne Nathan
+- Lotf Mohamed
+- Lu Hongyi
+- Mella Cyril
+- Mignot-Bousseau Dylan
+- Navarro Robin
+- Neuville Chloe
+- Pin Matthieu
+- Ponton Benjamin
+- Regnies Anthony
+- Stergiou Alexandros
+- Tsoy Viktoriya
 
 ## Remerciements
 
-- A Monsieur Olivier Gauwin, pour son implication, son soutien et son engouement pour ce projet.
-
 - A Monsieur Romain Bourqui, professeur de l'IUT en charge du bon déroulement de ce projet.
+
+- A Monsieur Patrick Felix, professeur de l'IUT et directeur du club innovation pour sa confiance et son engagement.
+
+- A Monsieur Raphaël Marczak, pour son intervention sur le game-design et ses précieux conseils.
+
+- A Monsieur Olivier Gauwin, pour son implication, son soutien et son engouement pour ce projet.
 
 - A Monsieur Jeremy Garcia, ancien élève de l'IUT, en sa qualité de tuteur, ayant rendu possible que ce projet file droit.

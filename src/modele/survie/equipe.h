@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <assert.h>
 #include "../personnages/personnage.h"
-#include "../personnages/enemis/zombie.h"
+#include "../personnages/ennemis/zombie.h"
 #include "../personnages/humain.h"
 #include "../utilitaires.h"
 

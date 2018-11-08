@@ -17,7 +17,7 @@ SOURCES += \
     modele/environnement/campement.cpp \
     modele/objets/armes/arme.cpp \
     modele/objets/objet.cpp \
-    modele/personnages/enemis/zombie.cpp \
+    modele/personnages/ennemis/zombie.cpp \
     modele/personnages/humain.cpp \
     modele/personnages/personnage.cpp \
     modele/survie/combat/combat.cpp \
@@ -62,7 +62,11 @@ SOURCES += \
     observateur.cpp \
     vue/interfaceutilisateur/cliquable.cpp \
     vue/interfaceutilisateur/zonetexte.cpp \
-    vue/interfaceutilisateur/ligne.cpp
+    vue/affichable.cpp \
+    vue/outilsvue.cpp \
+    vue/interfaceutilisateur/conteneur/tableau/case.cpp \
+    vue/interfaceutilisateur/ligne.cpp \
+
 
 
 
@@ -81,7 +85,7 @@ HEADERS += \
     modele/objets/armes/arme.h \
     modele/objets/objet.h \
     modele/objets/typeobjet.h \
-    modele/personnages/enemis/zombie.h \
+    modele/personnages/ennemis/zombie.h \
     modele/personnages/humain.h \
     modele/personnages/personnage.h \
     modele/survie/combat/actioncombat.h \
@@ -132,6 +136,10 @@ HEADERS += \
     observateur.h \
     vue/interfaceutilisateur/cliquable.h \
     vue/interfaceutilisateur/zonetexte.h \
-    vue/interfaceutilisateur/ligne.h
+    vue/affichable.h \
+    vue/outilsvue.h \
+    vue/interfaceutilisateur/conteneur/tableau/case.h \
+    vue/interfaceutilisateur/ligne.h \
+
 
 

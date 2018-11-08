@@ -1,5 +1,6 @@
 #include "bouton.h"
 #include "constantesbouton.h"
+#include "../../../outilsvue.h"
 
 
 //std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé permettant de trouver la bonne feuille de sprite pour les boutons
@@ -23,7 +24,6 @@
 //!
 Bouton::Bouton(const std::string texte,
                SDL_Rect rectangle,
-               Sprite *sprite,
                Controleur *controleur,
                void *action,
                const bool bouton_cliquable,
@@ -32,11 +32,12 @@ Bouton::Bouton(const std::string texte,
                )
     :
       Affichable(rectangle),
-      Cliquable(controleur, action, bouton_cliquable),
+      Cliquable(controleur, /*action,*/ bouton_cliquable),
       //m_texteBouton(new ZoneTexte(texte, rectangle, police)),
-      m_spriteBouton(sprite)
-
+      m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte))
 {
+    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, positionFeuilleSprite);
     if(bouton_cliquable)
     {
         //m_texteBouton.setColor(COULEUR_BOUTON_CLIQUABLE);
@@ -80,10 +81,11 @@ Bouton::~Bouton()
 //! Elle affiche le sprite et le texte du bouton
 //!
 
-void Bouton::afficher(SDL_Surface* surface_affichage)
+
+void Bouton::afficher(SDL_Surface* surface)
 {
-    //m_spriteBouton->afficher(surface_affichage);
-    //m_texteBouton->afficher(surface_affichage);
+    m_spriteBouton->afficherSprite(surface);
+    m_texte->afficher(surface);
 }
 
 
@@ -99,6 +101,7 @@ Sprite* Bouton::obtenirSpriteBouton()
 {
     return m_spriteBouton;
 }
+
 
 
 ///A CHANGER AVEC CLIQUABLE
@@ -121,7 +124,7 @@ bool Bouton::estCliquable() {
 //! \param peut_cliquer,
 //! \version 1.1
 //!
-void Bouton::definirCliquable(bool peut_cliquer)
+void Bouton::definirCliquable(bool peutCliquer)
 {
     /*
     if(peut_cliquer)

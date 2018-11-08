@@ -3,23 +3,26 @@
 
 #include "../../textesdl.h"
 #include "../../sprite.h"
+#include "vue/affichable.h"
 #include "../../cliquable.h"
+
 //#include "../../zonetexte.h"
+
 
 class Bouton : public Affichable, public Cliquable
 {
 private:
 
     //ZoneTexte* m_texteBouton;
-
+    TexteSDL * m_texte;
     Sprite* m_spriteBouton;
 
+    SDL_Rect  zone() const { return m_spriteBouton->getCoordSprite();}
 
 public:
 
     Bouton(const std::string texte,
             SDL_Rect rectangle,
-            Sprite* sprite,
             Controleur * controleur,
             void *action,
             const bool bouton_cliquable = true,
@@ -29,17 +32,24 @@ public:
 
     ~Bouton();
 
-    void afficher(SDL_Surface* surface_affichage);
+    //!
+    //! \brief afficher hérité de Affichable
+    //!
+    void afficher(SDL_Surface* surface);
+
+    void redimensionner(SDL_Rect rect) override{}
 
     //Accés variables
 
     bool estCliquable();
 
-    void definirCliquable(bool peut_cliquer );
+    void definirCliquable(bool peutCliquer );
 
     void changerSpriteBouton(Sprite *spriteBouton);
 
     Sprite* obtenirSpriteBouton();
+
+    void clique() override {}
 
 };
 

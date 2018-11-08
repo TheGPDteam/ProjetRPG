@@ -52,6 +52,18 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
                                                           m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10)),
                                 &ActionsBoutons::boutonQueteRefus);
                                 */
+
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)+ 50  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 185 );
+    std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Oui", rect, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteAcceptation);
+
+    coordB.first+=250;
+    SDL_Rect rect2 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
+
+    ajoutBoutonDansMapDeBoutons(new Bouton("Non", rect2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteRefus);
 }
 
 void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
@@ -90,7 +102,7 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     m_zoneQuestion->afficher(fenetre_affichage);
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
 
 }

@@ -8,7 +8,13 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
 {
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
-    recupererHistoire();
+     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
+     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+
+     ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
+                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
+     recupererHistoire();
     //A SUPPRIMER
     /*
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
@@ -56,7 +62,7 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     }
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 
