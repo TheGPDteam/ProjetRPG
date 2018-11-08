@@ -1,4 +1,6 @@
 #include "textesdl.h"
+#include "ressources/policetexte.h"
+#include <iostream>
 
 std::map<int, TTF_Font*> TexteSDL::m_fonts= {};
 
@@ -18,7 +20,7 @@ std::map<int, TTF_Font*> TexteSDL::m_fonts= {};
 //!
 TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, const std::string chemin_police, const int taille_police,
                    const std::pair<int, int> coord_texte)
-    : Affichable((SDL_Rect){coord_texte.first, coord_texte.second})
+    : Affichable({coord_texte.first, coord_texte.second})
 {
 
     if(TTF_Init() == -1)
@@ -31,24 +33,14 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, cons
         m_fonts[taille_police] = TTF_OpenFont(chemin_police.c_str(), taille_police);
 
     m_policeTexte = m_fonts.at(taille_police);
-
     if(m_policeTexte == nullptr)
     {
         std::cout << SDL_GetError() << std::endl;
     }
 
     m_texteStr = texte;
-
     m_couleurTexte = couleur_texte;
-
     m_texte = TTF_RenderText_Blended(m_policeTexte, texte.c_str(), m_couleurTexte);
-
-    m_positionTexte.x = coord_texte.first;
-    m_positionTexte.y = coord_texte.second;
-
-
-
-
 }
 
 
@@ -75,11 +67,10 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color & couleur_texte, con
 
 {
     SDL_Rect position = {
-        .x = m_positionTexte.x = (coord_rectangle.first + (taille_rectangle.first/2)) - (m_texte->w/2),
-        .y = m_positionTexte.y = (coord_rectangle.second + (taille_rectangle.second/2)) - (m_texte->h/2)
+        .x = (coord_rectangle.first + (taille_rectangle.first/2)) - (m_texte->w/2),
+        .y = (coord_rectangle.second + (taille_rectangle.second/2)) - (m_texte->h/2)
     };
-    redimensionner(position);
-
+    m_rectangle = position;
 }
 
 
@@ -99,8 +90,39 @@ void TexteSDL::afficher(SDL_Surface* surface_affichage)
 }
 
 void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
+    std::pair<int, int > tailleTexte = obtenirRectTexte();
+
+    float ratio_largeur  = tailleTexte.first * 1. / nouvelleDimension.w;
+    float ratio_hauteur  = tailleTexte.second * 1. / nouvelleDimension.h;
+    float ratio = std::max(ratio_hauteur, ratio_largeur);
+    int ancienneTaillePolice = TTF_FontHeight(m_policeTexte);
+    int nouvelleTaillePolice = ancienneTaillePolice / ratio ;
+
+    if(nouvelleTaillePolice > ancienneTaillePolice) ancienneTaillePolice-=2;
+    else ancienneTaillePolice += 2;
+
+    if(m_fonts.find(nouvelleTaillePolice)== m_fonts.end())
+        m_fonts[nouvelleTaillePolice] = TTF_OpenFont(POLICE_COLLEGED.c_str(), nouvelleTaillePolice);
+    m_policeTexte = m_fonts.at(nouvelleTaillePolice);
+
+    m_texte = TTF_RenderText_Blended(m_policeTexte, m_texteStr.c_str(), m_couleurTexte);
+
+    tailleTexte = obtenirRectTexte();
+
     m_rectangle = nouvelleDimension;
 }
+
+void TexteSDL::positionner(std::pair<int, int> & coord){
+    m_rectangle.x = coord.first;
+    m_rectangle.y = coord.second;
+}
+
+std::pair<int, int> TexteSDL::obtenirRectTexte() const{
+    int w,h;
+    TTF_SizeText(m_policeTexte, m_texteStr.c_str(), &w, &h);
+    return {w,h};
+}
+
 
 //!
 //! \brief Mise à jour du contenu texte à afficher
@@ -112,18 +134,18 @@ void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
 //!
 void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
 {
-  m_texteStr = nouveauTexte;
-  if(m_texte != nullptr) SDL_FreeSurface(m_texte);
-  m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
+    m_texteStr = nouveauTexte;
+    if(m_texte != nullptr) SDL_FreeSurface(m_texte);
+    m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
 }
 
 
-std::string TexteSDL::getTexteStr() const
+std::string TexteSDL::obtenirTexteStr() const
 {
     return m_texteStr;
 }
 
-int TexteSDL::getHauteurFont() const
+int TexteSDL::obtenirHauteurFont() const
 {
     if (m_texte != nullptr)
     {

@@ -18,10 +18,9 @@ private:
     SDL_Color m_couleurTexte;
 
     static std::map<int, TTF_Font *> m_fonts;
-    TTF_Font* m_policeTexte;
-    SDL_Rect m_positionTexte;
 
-public:
+    TTF_Font* m_policeTexte;
+  public:
     static constexpr SDL_Color COULEUR_BLANC{255,255,255, 255};
 
     TexteSDL(const std::string texte, const SDL_Color&couleur_texte, const std::string chemin_police, const int taille_police,
@@ -30,16 +29,18 @@ public:
     TexteSDL(const std::string texte, const SDL_Color &couleur_texte, const std::string chemin_police, const int taille_police,
              const std::pair<int, int> coord_texte);
 
+    virtual ~TexteSDL();
+
     void afficher(SDL_Surface *surface_affichage);
 
     void redimensionner(SDL_Rect nouvelleDimension);
 
     void mettreAJourTexte(std::string nouveauTexte);
 
-    std::string getTexteStr() const;
-    int getHauteurFont() const;
-
-    virtual ~TexteSDL();
+    void positionner(std::pair<int, int> & coord);
+    std::string obtenirTexteStr() const;
+    int obtenirHauteurFont() const;
+    std::pair<int, int> obtenirRectTexte() const;
 };
 
 #endif // TEXTESDL_H

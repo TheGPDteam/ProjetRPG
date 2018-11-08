@@ -19,10 +19,12 @@ private:
     std::string m_texte;
     COMPORTEMENT_TEXTE m_comportement;
     ALIGNEMENT_TEXTE m_alignement;
+
     std::string m_cheminPolice;
-    const int m_taillePoliceMax;
+    const int M_TAILLE_POLICE_MAX;
     int m_taillePolice;
-    std::pair<int, int> m_coordTexte;
+
+    std::pair<int, int> m_coord;
     SDL_Color m_couleur;
 
     void adapterTexte();

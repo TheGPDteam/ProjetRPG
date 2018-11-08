@@ -1,9 +1,11 @@
 #include "zonetexte.h"
+#include <iostream>
+using namespace std;
 
 ZoneTexte::ZoneTexte(const std::string chemin_police, const int taille_police, const std::pair<int, int> coord_texte, SDL_Rect r,
                      std::string texte, const SDL_Color couleur_texte, COMPORTEMENT_TEXTE ct, ALIGNEMENT_TEXTE at)
-    : Affichable(r), m_texte{texte}, m_comportement{ct}, m_alignement{at}, m_cheminPolice{chemin_police}, m_taillePoliceMax{taille_police},
-      m_taillePolice{taille_police}, m_coordTexte{coord_texte}, m_couleur{couleur_texte}
+    : Affichable(r), m_texte{texte}, m_comportement{ct}, m_alignement{at}, m_cheminPolice{chemin_police}, M_TAILLE_POLICE_MAX{taille_police},
+      m_taillePolice{taille_police}, m_coord{coord_texte}, m_couleur{couleur_texte}
 {
     adapterTexte();
 }
@@ -15,6 +17,7 @@ ZoneTexte::~ZoneTexte(){
 
 void ZoneTexte::afficher(SDL_Surface *surface_affichage)
 {
+
     for (TexteSDL * t : m_texteSDL)
     {
         t->afficher(surface_affichage);
@@ -37,8 +40,15 @@ void ZoneTexte::adapterTexte()
     case COMPORTEMENT_TEXTE::REDIMENTIONNE :
     {
         //Modification de la taille pour que le texte rentre dans sa zone
-        int tailleLettre = m_texte.length()/m_rectangle.w; // A verifier
+        int tailleLettre = std::min(M_TAILLE_POLICE_MAX, (int) (m_rectangle.w/m_texte.length())); // A verifier
         TexteSDL * t = new TexteSDL(m_texte, m_couleur, m_cheminPolice, tailleLettre,std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
+
+        std::pair<int, int > tailleTexte = t->obtenirRectTexte();
+        SDL_Rect nouveauRectangle = {m_rectangle.x+(m_rectangle.w-tailleTexte.first)/2,m_rectangle.y+(m_rectangle.h-tailleTexte.second)/2, m_rectangle.w, m_rectangle.h};
+        t->redimensionner(nouveauRectangle);
+        pair<int, int> nouvellePosition = {m_rectangle.x+(m_rectangle.w-nouveauRectangle.w)/2,
+                                           m_rectangle.y+(m_rectangle.h-nouveauRectangle.h)/2};
+        t->positionner(nouvellePosition);
         m_texteSDL.insert(m_texteSDL.begin(), t);
         break;
     }

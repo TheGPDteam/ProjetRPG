@@ -6,15 +6,15 @@
 #include "vue/affichable.h"
 #include "../../cliquable.h"
 
-//#include "../../zonetexte.h"
+#include "../../zonetexte.h"
 
 
 class Bouton : public Affichable, public Cliquable
 {
 private:
 
-    //ZoneTexte* m_texteBouton;
-    TexteSDL * m_texte;
+    ZoneTexte* m_texteBouton;
+    //TexteSDL * m_texte;
     Sprite* m_spriteBouton;
 
     SDL_Rect  zone() const { return m_spriteBouton->getCoordSprite();}
