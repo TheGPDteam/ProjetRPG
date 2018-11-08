@@ -2,6 +2,7 @@
 #define ECRANACCUEILCAMPEMENT_H
 
 #include "../ecrangeneral.h"
+#include "../../outilsvue.h"
 
 class EcranAccueilCampement : public EcranGeneral
 {

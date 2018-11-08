@@ -30,6 +30,15 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 217, m_rectangleBas.y + 27)), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Aller au camp", POLICE_COLLEGED, 16, std::make_pair(100, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(100 + 40, m_rectangleBas.y + 27)), &ActionsBoutons::boutonCampement);
     */
+    const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+
+
+    SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
+    SDL_Rect rect2 = {100, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(rect.x + 20,rect.y + 15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+    ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 }
 
 
@@ -83,7 +92,7 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
         zoneTempDesc.afficher(fenetre_affichage);
     }
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 

@@ -24,10 +24,10 @@ private:
 public:
     static constexpr SDL_Color COULEUR_BLANC{255,255,255, 255};
 
-    TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
+    TexteSDL(const std::string texte, const SDL_Color&couleur_texte, const std::string chemin_police, const int taille_police,
              const std::pair<int, int> coord_rectangle, const std::pair<int, int> taille_rectangle);
 
-    TexteSDL(const std::string texte, const SDL_Color couleur_texte, const std::string chemin_police, const int taille_police,
+    TexteSDL(const std::string texte, const SDL_Color &couleur_texte, const std::string chemin_police, const int taille_police,
              const std::pair<int, int> coord_texte);
 
     void afficher(SDL_Surface *surface_affichage);
@@ -39,7 +39,7 @@ public:
     std::string getTexteStr() const;
     int getHauteurFont() const;
 
-    ~TexteSDL();
+    virtual ~TexteSDL();
 };
 
 #endif // TEXTESDL_H

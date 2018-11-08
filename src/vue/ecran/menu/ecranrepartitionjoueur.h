@@ -10,8 +10,6 @@ class RepartitionJoueur{
 
 private:
 
-
-
     SDL_Rect m_rectangleFichePersonnage;
 
 

@@ -34,6 +34,9 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
                                            std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85)),
                                 &ActionsBoutons::boutonChoixPersonnageCycle);
     */
+    SDL_Rect rect = {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85), POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnageCycle);
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();
 }
@@ -125,6 +128,9 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
                                                std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85)),
                                     &ActionsBoutons::boutonRetourMenuPrincipal);
                                     */
+        SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+        ajoutBoutonDansMapDeBoutons(new Bouton("Retour menu", rect,  m_controleur, nullptr,
+                                               true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85), POLICE_COLLEGED), &ActionsBoutons::boutonRetourMenuPrincipal);
     } else {
         m_zoneNombreZombiesTues->afficher(fenetre_affichage);
         m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
@@ -132,7 +138,7 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
     }
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 }
 
 

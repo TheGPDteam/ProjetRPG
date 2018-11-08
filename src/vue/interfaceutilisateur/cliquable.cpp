@@ -1,14 +1,19 @@
 #include "cliquable.h"
 
-Cliquable::Cliquable(Controleur * controleur, void* action, bool actif)
-    : m_controleur{controleur}, m_actif{actif}, m_action{action}
+Cliquable::Cliquable(Controleur * controleur,  /*std::function<void *>& action,*/ bool actif)
+    : m_controleur{controleur}, m_actif{actif}//, m_action{action}
 {
 }
 
-bool Cliquable::contient(std::pair<int, int> &coord_souris) const {
-    SDL_Rect* z = zone();
+bool Cliquable::estCliquable() const
+{
+    return m_actif;
+}
 
-    return (coord_souris.first > z->x && coord_souris.first < z->x + z->w &&
-            coord_souris.second > z->y && coord_souris.second < z->y + z->h);
+bool Cliquable::contient(std::pair<int, int> coord_souris) const {
+    SDL_Rect z = zone();
+
+    return (estCliquable() && coord_souris.first > z.x && coord_souris.first < z.x + z.w &&
+            coord_souris.second > z.y && coord_souris.second < z.y + z.h);
 }
 

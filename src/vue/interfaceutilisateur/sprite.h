@@ -14,7 +14,7 @@ private:
 
 public:
     Sprite(const std::string cle_map_sprites, const SDL_Rect position_dans_fenetre, const SDL_Rect position_dans_feuille_de_sprite);
-
+    Sprite() = default;
     void changementSprite(const SDL_Rect position_dans_feuille_de_sprite);
     void afficherSprite(SDL_Surface *surface_affichage);
     void bougerSprite(int x, int y);

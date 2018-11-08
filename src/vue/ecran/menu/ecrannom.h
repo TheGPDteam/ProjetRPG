@@ -4,6 +4,8 @@
 
 #include "../ecrangeneral.h"
 #include "../../interfaceutilisateur/saisir.h"
+#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "../../outilsvue.h"
 
 class EcranNom : public EcranGeneral {
 private:

@@ -2,7 +2,7 @@
 #define ECRANPREMIEREJOURNEE_H
 
 #include "../ecrangeneral.h"
-
+#include "../../outilsvue.h"
 #include <string.h>
 
 class EcranPremiereJournee : public EcranGeneral

@@ -9,8 +9,8 @@
 
 const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
 const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 530); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 590); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 450); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 510); // Pk pas utiliser coord bouton avant
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -28,6 +28,25 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
 {
     //* AJOUT DES BOUTONS *//
+
+
+
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
+
+    SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
+
+    SDL_Rect rect3 = {coordB3.first, coordB3.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Campement", rect3, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB3.first+20,coordB3.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
+
+    SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
+    ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
+                                           true, std::make_pair<float, float>(coordB4.first+20,coordB4.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
+
     /*A SUPRIMER
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+40,coordB2.second+15)},&ActionsBoutons::boutonInventaire);
@@ -81,7 +100,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_tempsRestant.afficher(fenetre_affichage);
 
     //A SUPPRIMER
-    //afficherBoutons(coord_souris, fenetre_affichage);
+    afficherBoutons(coord_souris, fenetre_affichage);
 
 }
 
@@ -180,17 +199,104 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 {
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
                 }
+                if (i < 0)
+                {
+                    if (j > 1 && j < 62) {
+                        if (carte->obtenirTuile(0,j)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0,j+1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0,j-1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0,j-2)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(0, j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            //AFFICHER ROUTE
+                            Tuile * t = carte->obtenirTuile(0,j);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+
+                } else if (i > 63)
+                {
+                    if (j > 1 && j < 62)
+                    {
+                        if (carte->obtenirTuile(63,j)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j+1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j-1)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j-2)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(63,j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            //AFFICHER ROUTE
+                            Tuile * t = carte->obtenirTuile(63,j);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+                } else if (j < 0)
+                {
+                    if (i > 1 && i < 62)
+                    {
+                        if (carte->obtenirTuile(i,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+1,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-1,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,0)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,0)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            Tuile * t = carte->obtenirTuile(i,0);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+                } else if (j > 63) {
+                    if (i > 1 && i < 62)
+                    {
+                        if (carte->obtenirTuile(i,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+1,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-1,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,63)->obtenirDirection() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,63)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        {
+                            Tuile * t = carte->obtenirTuile(i,63);
+                            SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else {
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
+                        }
+                    }
+                }
                 else
                 {
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
                     Tuile * t = carte->obtenirTuile(i,j);
-                    SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                    if (t->obtenirDirection() == Direction::Aucune)
+                    {
+                        SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                        (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                    } else
+                    {
+                        if (i == 0) { //Je suis a gauche donc sprite fleche de gauche
+                            SDL_Rect lecture {64 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else if (i == 63) { // Je suis a droite
+                            SDL_Rect lecture {0 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else if (j == 0) { // Je suis en haut
+                            SDL_Rect lecture {128 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        } else { // Je suis en bas
+                            SDL_Rect lecture {192 , 64*3, 64, 64};
+                            (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                        }
+                    }
 
-                    if(carte->objetPresent(temp))
+                    if(carte->objetPresent(temp) && m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
                         m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
-
                 }
             }
         }

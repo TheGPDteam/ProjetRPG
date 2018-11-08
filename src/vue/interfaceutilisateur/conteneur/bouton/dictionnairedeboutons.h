@@ -9,7 +9,6 @@
 
 class DictionnaireDeBoutons
 {
-    /* A SUPPRIMER
 protected:
     ActionsBoutons* m_actionsBoutons;
     std::map<Bouton *, std::function<TypeEcran(ActionsBoutons&)>> m_mapDeBoutons;
@@ -24,7 +23,7 @@ public:
     void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);
 
     virtual ~DictionnaireDeBoutons();
-    */
+
 };
 
 #endif // MAPDEBOUTONS_H
