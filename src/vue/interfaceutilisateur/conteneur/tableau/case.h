@@ -18,7 +18,7 @@ public :
     void redimensionner(SDL_Rect m_rectangle);
 
     void definirDonnee(Affichable* donnee);
-    void obtenirDonnee() const;
+    Affichable* obtenirDonnee() const;
 };
 
 #endif // CASE_H

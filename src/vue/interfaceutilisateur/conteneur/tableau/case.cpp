@@ -28,7 +28,7 @@ void Case::definirDonnee(Affichable *donnee)
     m_donnee = donnee;
 }
 
-void Case::obtenirDonnee() const
+Affichable *Case::obtenirDonnee() const
 {
     return m_donnee;
 }
