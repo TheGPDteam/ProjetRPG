@@ -63,7 +63,10 @@ SOURCES += \
     vue/interfaceutilisateur/cliquable.cpp \
     vue/interfaceutilisateur/zonetexte.cpp \
     vue/affichable.cpp \
-    vue/outilsvue.cpp
+    vue/outilsvue.cpp \
+    vue/interfaceutilisateur/conteneur/tableau/case.cpp \
+    vue/interfaceutilisateur/ligne.cpp \
+
 
 
 
@@ -134,6 +137,9 @@ HEADERS += \
     vue/interfaceutilisateur/cliquable.h \
     vue/interfaceutilisateur/zonetexte.h \
     vue/affichable.h \
-    vue/outilsvue.h
+    vue/outilsvue.h \
+    vue/interfaceutilisateur/conteneur/tableau/case.h \
+    vue/interfaceutilisateur/ligne.h \
+
 
 
