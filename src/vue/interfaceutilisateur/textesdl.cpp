@@ -90,26 +90,28 @@ void TexteSDL::afficher(SDL_Surface* surface_affichage)
 }
 
 void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
+    m_rectangle = nouvelleDimension;
     std::pair<int, int > tailleTexte = obtenirRectTexte();
+    tailleTexte.first*=1.4;
+    tailleTexte.second*=1.4;
 
-    float ratio_largeur  = tailleTexte.first * 1. / nouvelleDimension.w;
-    float ratio_hauteur  = tailleTexte.second * 1. / nouvelleDimension.h;
+    float ratio_largeur  = tailleTexte.first * 1. / m_rectangle.w;
+    float ratio_hauteur  = tailleTexte.second * 1. / m_rectangle.h;
     float ratio = std::max(ratio_hauteur, ratio_largeur);
     int ancienneTaillePolice = TTF_FontHeight(m_policeTexte);
-    int nouvelleTaillePolice = ancienneTaillePolice / ratio ;
+    int nouvelleTaillePolice = (ancienneTaillePolice / ratio);
 
-    if(nouvelleTaillePolice > ancienneTaillePolice) ancienneTaillePolice-=2;
-    else ancienneTaillePolice += 2;
+    //    if(nouvelleTaillePolice > ancienneTaillePolice) ancienneTaillePolice-=2;
+//    else ancienneTaillePolice += 2;
 
-    if(m_fonts.find(nouvelleTaillePolice)== m_fonts.end())
+    if(m_fonts.find(nouvelleTaillePolice) == m_fonts.end())
         m_fonts[nouvelleTaillePolice] = TTF_OpenFont(POLICE_COLLEGED.c_str(), nouvelleTaillePolice);
     m_policeTexte = m_fonts.at(nouvelleTaillePolice);
 
     m_texte = TTF_RenderText_Blended(m_policeTexte, m_texteStr.c_str(), m_couleurTexte);
 
-    tailleTexte = obtenirRectTexte();
+    //tailleTexte = obtenirRectTexte();
 
-    m_rectangle = nouvelleDimension;
 }
 
 void TexteSDL::positionner(std::pair<int, int> & coord){
