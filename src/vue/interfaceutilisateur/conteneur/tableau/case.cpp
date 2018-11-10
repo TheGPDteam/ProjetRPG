@@ -5,9 +5,9 @@
 //! \param rect x, y, hauteur, largeur en pixel
 //! \param donnee la donnee de la case
 //!
-Case(SDL_Rect rect, Affichable * donnee)
+Case::Case(SDL_Rect rect, Affichable * donnee)
     : Affichable(rect),
-      donne(donnee)
+      m_donnee(donnee)
 {
     redimensionner(rect);
 }
@@ -35,7 +35,7 @@ void Case::afficher(SDL_Surface *surface)
 //!
 void Case::redimensionner(SDL_Rect m_rectangle)
 {
-    donnee->redimensionner(rect);
+    m_donnee->redimensionner(m_rectangle);
 }
 
 //!
