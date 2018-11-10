@@ -4,7 +4,7 @@
 #include <list>
 
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
-    : EcranGeneral{controleur}
+    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0), SDL_Rect {3,3,WIDTH_FENETRE_PRINCIPALE,HEIGHT_FENETRE_PRINCIPALE / 2},recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
@@ -27,26 +27,31 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
 
 
 
-void EcranPremiereJournee::recupererHistoire()
+std::string EcranPremiereJournee::recupererHistoire()
 {
     std::ifstream fichier(CHEMIN_HISTOIRE, std::ifstream::in);
     std::string ligne;
 
     int coordY = m_fondRecapitulatif.y + 90;
-    TexteSDL* tmpTexte;
+    TexteSDL* tmpTextes;
+    std::string tmpTexte="";
 
     if(fichier.good())
     {
         do
         {
             std::getline(fichier, ligne);
-            tmpTexte = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
-            m_zoneHistoire.push_back(tmpTexte);
-            coordY += tmpTexte->getHauteurFont();
+            tmpTexte+=ligne;
+            tmpTextes = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
+            m_zoneHistoire.push_back(tmpTextes);
+            coordY += tmpTextes->obtenirHauteurFont();
         }
         while(!fichier.eof());
 
+
+
         fichier.close();
+        return tmpTexte;
     }
 }
 
@@ -56,10 +61,11 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 {
     SDL_FillRect(fenetre_affichage, &m_fondRecapitulatif, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
 
-    for (TexteSDL* texte : m_zoneHistoire)
+    /*for (TexteSDL* texte : m_zoneHistoire)
     {
         texte->afficher(fenetre_affichage);
-    }
+    }*/
+    m_zoneTexte.afficher(fenetre_affichage);
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);

@@ -14,8 +14,9 @@ private:
     SDL_Rect m_fondRecapitulatif;
 
     std::vector< TexteSDL* > m_zoneHistoire;
+    ZoneTexte m_zoneTexte;
 
-    void recupererHistoire();
+    std::string recupererHistoire();
 
 public:
     EcranPremiereJournee(Controleur *controleur);
