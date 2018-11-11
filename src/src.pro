@@ -66,6 +66,7 @@ SOURCES += \
     vue/outilsvue.cpp \
     vue/interfaceutilisateur/conteneur/tableau/case.cpp \
     vue/interfaceutilisateur/ligne.cpp \
+    vue/interfaceutilisateur/tableau.cpp
 
 
 
@@ -140,6 +141,7 @@ HEADERS += \
     vue/outilsvue.h \
     vue/interfaceutilisateur/conteneur/tableau/case.h \
     vue/interfaceutilisateur/ligne.h \
+    vue/interfaceutilisateur/tableau.h
 
 
 

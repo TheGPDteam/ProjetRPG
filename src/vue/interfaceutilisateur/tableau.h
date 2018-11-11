@@ -3,17 +3,19 @@
 
 #include "../affichable.h"
 #include <vector>
+#include "ligne.h"
 
 class Tableau : public Affichable
 {
 private :
-    const float hauteurLigne;
-    const float hauteur, largeur;
-    Ligne *enTete;
-    std::vector<Ligne*> lignes;
-    int nbLignesMax, nbColonnesMax;
+    float m_hauteurLigne;
+    float m_hauteur;
+    float m_largeur;
+    Ligne * m_enTete;
+    std::vector<Ligne*> m_lignes;
+    int m_nbLignesMax;
 public:
-    Tableau(const float hauteur,const float largeur, const float hauteurLigne);
+    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete);
     void ajouterElement(std::vector<Affichable*> affichables);
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect nouvelleDimension) override;
