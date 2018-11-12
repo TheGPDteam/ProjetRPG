@@ -44,6 +44,7 @@ Humain::Humain()
 {
     m_chasse.definirValeur((rand()%m_chasse.obtenirValeurMax())+1);
     m_recolte.definirValeur((rand()%m_recolte.obtenirValeurMax())+1);
+    m_campement.definirValeur((rand()%m_campement.obtenirValeurMax())+1);
     m_force.definirValeur((rand()%m_force.obtenirValeurMax())+1);
     m_intelligence.definirValeur((rand()%m_intelligence.obtenirValeurMax())+1);
     m_vitesse.definirValeur((rand()%m_vitesse.obtenirValeurMax())+1);
@@ -90,6 +91,20 @@ Competence Humain::obtenirChasse() const
 Competence Humain::obtenirRecolte() const
 {
     return m_recolte;
+}
+
+//!
+//! \brief obtenir la competence campement
+//! \return la competence campement
+//! \author mpin & lgbarrere
+//! \date 12/11/2018
+//! \version 1.0
+//! Contient le return
+//!
+
+Competence Humain::obtenirCampement() const
+{
+    return m_campement;
 }
 
 //!
@@ -250,6 +265,7 @@ void Humain::augmenterExperience(int exp)
     {
         this->m_chasse.augmenter(1);
         this->m_force.augmenter(1);
+        this->m_campement.augmenter(1);
         this->m_intelligence.augmenter(1);
         this->m_recolte.augmenter(1);
         this->m_vie.definirValeurMax(this->m_vie.obtenirValeurMax()+1);
@@ -316,6 +332,10 @@ std::string Humain::serialiser() const
             + m_recolte.serialiser()
             +
             "   </CompetenceRecolte>"
+            "   <CompetenceCampement>"
+            + m_campement.serialiser()
+            +
+            "  </CompetenceCampement>"
             "   <CoutEntretien>" + std::to_string(m_coutEntretien) + "</CoutEntretien>"
             + m_niveau.serialiser()
             + m_arme->serialiser()
@@ -350,7 +370,10 @@ void Humain::charger(const std::string &donnees)
     m_chasse.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceChasse>","</CompetenceChasse>"));
 
     m_recolte = Competence();
-    m_chasse.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceRecolte>","</CompetenceRecolte>"));
+    m_recolte.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceRecolte>","</CompetenceRecolte>"));
+
+    m_campement = Competence();
+    m_campement.charger(obtenirSousChaineEntre2Predicats(donnees,"<CompetenceCampement>","</CompetenceCampement>"));
 
     m_coutEntretien = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<CoutEntretien>","</CoutEntretien>"));
 

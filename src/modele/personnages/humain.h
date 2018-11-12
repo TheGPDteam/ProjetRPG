@@ -22,8 +22,10 @@ protected:
     std::string m_nom;
     std::string m_prenom;
     Genre m_genre;
+
     Competence m_chasse;
     Competence m_recolte;
+    Competence m_campement;
     unsigned short m_coutEntretien;
     Niveau m_niveau;
     Arme* m_arme;
@@ -32,6 +34,7 @@ public:
     Humain();
     Competence obtenirChasse() const;
     Competence obtenirRecolte() const;
+    Competence obtenirCampement() const;
     std::string obtenirNom() const;
     void definirNom(std::string nom);
     std::string obtenirPrenom() const;
