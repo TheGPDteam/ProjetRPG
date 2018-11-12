@@ -3,7 +3,7 @@
 
 #include "../ecrangeneral.h"
 
-enum AFFECTATION {RETOUR, RIEN, CHASSE, RECOLTE};
+enum AFFECTATION {RETOUR, RIEN, CHASSE, RECOLTE, CAMPEMENT};
 
 class RepartitionJoueur{
 
@@ -22,6 +22,7 @@ private:
 
     TexteSDL* m_zoneChassePersonnage;
     TexteSDL* m_zoneRecoltePersonnage;
+    TexteSDL* m_zoneCampementPersonnage;
 
     TexteSDL* m_zoneNiveauPersonnage;
 
@@ -34,6 +35,7 @@ private:
     Bouton * m_retour;
     Bouton * m_chasse;
     Bouton * m_recolte;
+    Bouton * m_campement;
 
     SDL_Surface* m_fenetre;
 

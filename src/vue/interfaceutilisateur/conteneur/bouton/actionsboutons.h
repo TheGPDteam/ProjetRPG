@@ -31,6 +31,8 @@ public:
 
     TypeEcran boutonChasseJoueur() const;
 
+    TypeEcran boutonCampementJoueur() const;
+
     TypeEcran boutonChoixNom() const;
 
     TypeEcran boutonNouvellePartie() const;
