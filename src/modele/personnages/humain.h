@@ -26,6 +26,7 @@ protected:
     Competence m_chasse;
     Competence m_recolte;
     Competence m_campement;
+
     unsigned short m_coutEntretien;
     Niveau m_niveau;
     Arme* m_arme;
