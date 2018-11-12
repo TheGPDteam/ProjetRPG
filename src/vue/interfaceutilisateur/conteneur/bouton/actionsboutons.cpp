@@ -90,6 +90,7 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 //!
 TypeEcran ActionsBoutons::boutonChoixPersonnage() const
 {
+    m_controleur->obtenirModele()->changerNouvelArrivant(new Humain);
     return TypeEcran::ChoixPersonnage;
 }
 
