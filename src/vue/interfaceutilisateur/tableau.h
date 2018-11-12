@@ -8,9 +8,9 @@
 class Tableau : public Affichable
 {
 private :
-    float m_hauteurLigne;
     float m_hauteur;
     float m_largeur;
+    float m_hauteurLigne;
     Ligne * m_enTete;
     std::vector<Ligne*> m_lignes;
     int m_nbLignesMax;
