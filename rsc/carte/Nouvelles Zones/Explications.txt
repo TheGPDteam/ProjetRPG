@@ -12,6 +12,7 @@
 
 - Bordures intérieures : Arbres
 - Bordures extérieures : Eau
+
 - Mise en place des Cartes :
   zone1 = Haut/Gauche
   zone2 = Haut
@@ -23,6 +24,7 @@
   zone8 = Bas
   zone9 = Bas/Droit
 
-Aux bordures ext, il y a soit de l'eau (aux coins extérieurs), sinon du sable, sauf zone 8 où il a la porte au milieu/bas de la zone.
 
-Pour l'instantn la porte "finale" (bas de la piece 8) est une porte de 1. Peut être elle serat modifiée en porte plus large.
+Il y a une bordure de 6 tuiles autour de chaques zones écrites dans le fichier texte.
+
+Pour l'instant la porte "finale" (bas de la piece 8) est une porte de 1. Peut être elle serat modifiée en porte plus large.
