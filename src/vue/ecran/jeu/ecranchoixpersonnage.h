@@ -20,6 +20,7 @@ private:
 
     TexteSDL* m_zoneChassePersonnage;
     TexteSDL* m_zoneRecoltePersonnage;
+    TexteSDL* m_zoneCampementPersonnage;
 
     TexteSDL* m_zoneNiveauPersonnage;
 
