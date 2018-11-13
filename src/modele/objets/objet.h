@@ -26,6 +26,8 @@ public:
     virtual std::string serialiser() const;
     virtual TypeObjet obtenirType() const;
     virtual void charger(const std::string &donnees);
+    virtual bool operator==(const Objet* obj);
+    virtual bool operator>(const Objet* obj);
 };
 
 #endif

@@ -123,3 +123,33 @@ void Objet::charger(const std::string &donnees)
 {
 
 }
+
+//!
+//! \brief Comparateur d'égalité
+//! \author nlesne
+//! \date 12/11/18
+//! \param obj un pointeur sur un objet
+//! \return Vrai si les objets sont égaux
+//! \version 1.0
+//!
+bool Objet::operator==(const Objet *obj)
+{
+    if (obj == nullptr || m_nom != obj->obtenirNom() || m_description != obj->obtenirDescription())
+        return false;
+    return true;
+}
+
+//!
+//! \brief Comparateur d'
+//! \author nlesne
+//! \date 12/11/18
+//! \param obj un pointeur sur un objet
+//! \return Vrai si this est
+//! \version 1.0
+//!
+bool Objet::operator>(const Objet *obj)
+{
+    if (obj == nullptr)
+        return false;
+    return m_nom > obj->obtenirNom();
+}

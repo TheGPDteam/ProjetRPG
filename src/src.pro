@@ -7,7 +7,7 @@ LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
 
 INCLUDEPATH+=/usr/include/SDL/
 
-QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra
+QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra -Wno-narrowing
 
 SOURCES += \
     controleur/controleur.cpp \
@@ -66,7 +66,9 @@ SOURCES += \
     vue/outilsvue.cpp \
     vue/interfaceutilisateur/conteneur/tableau/case.cpp \
     vue/interfaceutilisateur/ligne.cpp \
-    vue/interfaceutilisateur/tableau.cpp
+    vue/interfaceutilisateur/tableau.cpp \
+    modele/queteprincipale.cpp \
+    modele/objets/partiebus.cpp
 
 
 
@@ -141,7 +143,9 @@ HEADERS += \
     vue/outilsvue.h \
     vue/interfaceutilisateur/conteneur/tableau/case.h \
     vue/interfaceutilisateur/ligne.h \
-    vue/interfaceutilisateur/tableau.h
+    vue/interfaceutilisateur/tableau.h \
+    modele/queteprincipale.h \
+    modele/objets/partiebus.h
 
 
 
