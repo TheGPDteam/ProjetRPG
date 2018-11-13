@@ -17,6 +17,7 @@ private:
     std::set <Humain*> m_personnesNonAttribuees;
     Equipe m_equipeRecolte;
     Equipe m_equipeChasse;
+    Equipe m_equipeCampement;
     std::vector <Objet *> m_objets;
 public:
     Campement();

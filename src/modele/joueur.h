@@ -11,6 +11,7 @@
 #include "./survie/quetes/quete.h"
 #include "direction.h"
 #include "./utilitaires.h"
+#include "queteprincipale.h"
 
 class Joueur : public Observable
 {
@@ -22,6 +23,7 @@ private:
     Equipe* m_equipe;
     Humain m_personnageJoueur;
     Inventaire* m_inventaireJoueur;
+    QuetePrincipale m_quetePrincipale;
 public:
     Joueur();
     Joueur(const Quete &quete);

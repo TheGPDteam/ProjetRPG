@@ -15,6 +15,7 @@
 //!
 
 Joueur::Joueur()
+    : m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
 {
     m_position.first=25;
     m_position.second=25;
@@ -33,7 +34,7 @@ Joueur::Joueur()
 //!
 
 Joueur::Joueur(const Quete &quete) :
-    m_queteJoueur{quete}
+    m_queteJoueur{quete}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
 {
     m_position.first=5;
     m_position.second=5;
@@ -54,7 +55,7 @@ Joueur::Joueur(const Quete &quete) :
 //!
 
 Joueur::Joueur(Quete quete, std::string nom) :
-    m_queteJoueur{quete}, m_nom{nom}
+    m_queteJoueur{quete}, m_nom{nom}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
 {
     m_position.first=5;
     m_position.second=5;
