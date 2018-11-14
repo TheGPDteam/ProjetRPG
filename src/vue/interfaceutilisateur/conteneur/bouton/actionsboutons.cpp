@@ -127,6 +127,13 @@ TypeEcran ActionsBoutons::boutonRecolteJoueur() const
     m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte());
     return TypeEcran::RecolteJoueur;
 }
+TypeEcran ActionsBoutons::boutonCampementJoueur() const
+{
+    m_controleur->obtenirModele()->reinitialiserTemps();
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement());
+    return TypeEcran::RecolteJoueur;
+}
+
 
 //!
 //! \brief Méthode lançant l'affichage de l'écran de l'histoire

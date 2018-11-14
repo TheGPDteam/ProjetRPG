@@ -151,6 +151,20 @@ Equipe* Campement::obtenirRecolte()
     return &m_equipeRecolte;
 }
 
+
+//!
+//! \brief Accesseur en lecture de l'equipe de campement
+//! \author mleothaud
+//! \date 13/11/18
+//! \version 1.0
+//! \return l'equipe de campement
+//!
+
+Equipe* Campement::obtenirCampement()
+{
+    return &m_equipeCampement;
+}
+
 //!
 //! \brief Serialisation du campement
 //! \author nlesne

@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include "objets/partiebus.h"
+#include "survie/equipe.h"
 
 class QuetePrincipale
 {
@@ -15,6 +16,7 @@ private:
     const std::map<TypePartieBus,int> m_nombrePartiesRequises;
     bool m_partiesBusReunies;
     bool m_fini;
+    unsigned short m_avancement;
 
     void calculerPartiesBusReunies();
 public:
@@ -24,6 +26,7 @@ public:
     bool partiesBusReunies() const;
     std::map<PartieBus*, int> obtenirProgression() const;
     void ajouterPartieBus(PartieBus* partieBus);
+    bool ajouterTravail(Equipe * equipe); //TODO
 };
 
 #endif // QUETEPRINCIPALE_H

@@ -85,6 +85,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tempChassePersonnage.afficher(fenetre_affichage);
         TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordRecolte.first,m_CoordRecolte.second+30*i));
         tempRecoltePersonnage.afficher(fenetre_affichage);
+        TexteSDL tempCampementPersonnage(std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_CoordCampement.first,m_CoordCampement.second+30*i));
+        tempCampementPersonnage.afficher(fenetre_affichage);
         //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, false, "Attribuer", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(m_CoordRecolte.first + 150, m_CoordRecolte.second + 30 * i)), &ActionsBoutons::boutonChoixJoueur);
         if(i==8)
             break;
@@ -109,9 +111,21 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tempNomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
         tempPrenomPersonnage.afficher(fenetre_affichage);
-        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255        ,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
+        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
         tempRecoltePersonnage.afficher(fenetre_affichage);
         ++k;
+    }
+    int l=0;
+    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
+    {
+        Humain *h = dynamic_cast <Humain *> (p);
+        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1050,410+30*l));
+        tempNomPersonnage.afficher(fenetre_affichage);
+        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1250,410+30*l));
+        tempPrenomPersonnage.afficher(fenetre_affichage);
+        TexteSDL tempCampementPersonnage(std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1400,410+30*l));
+        tempCampementPersonnage.afficher(fenetre_affichage);
+        ++l;
     }
 
     //A SUPPRIMER
@@ -126,6 +140,10 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         }
         if(rep == RECOLTE){
             m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->ajouterPersonnage(m_humain_a_affecter);
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        }
+        if(rep == CAMPEMENT){
+            m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->ajouterPersonnage(m_humain_a_affecter);
             m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
         }
         m_humain_a_affecter = nullptr;

@@ -34,6 +34,7 @@ private:
     std::pair<int, int>m_CoordPrenom;
     std::pair<int, int>m_CoordChasse;
     std::pair<int, int>m_CoordRecolte;
+    std::pair<int, int>m_CoordCampement;
     std::pair<int, int>m_CoordForce;
     std::pair<int, int>m_CoordVitesse;
 public:

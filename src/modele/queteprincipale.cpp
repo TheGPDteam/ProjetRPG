@@ -48,3 +48,20 @@ bool QuetePrincipale::obtenirFini() const
 {
     return m_fini;
 }
+
+bool QuetePrincipale::ajouterTravail(Equipe *equipe)
+{
+    if (m_partiesBusReunies)
+    {
+        for (Personnage *p : equipe->obtenirListePersonnage())
+        {
+            Humain * h = dynamic_cast<Humain *>(p);
+            m_avancement += h->obtenirCampement().obtenirValeur();
+        }
+    }
+    if (m_avancement >= TEMPS_ASSEMBLAGE)
+    {
+        m_fini = true;
+    }
+    return m_fini;
+}
