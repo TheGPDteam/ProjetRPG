@@ -10,15 +10,15 @@
 
 CC            = gcc
 CXX           = g++
-DEFINES       = 
+DEFINES       =
 CFLAGS        = -m64 -pipe -g -Wall -W $(DEFINES)
 CXXFLAGS      = -m64 -pipe -std=c++11 -pedantic -Wall -Wextra -Wno-narrowing -g -Wall -W $(DEFINES)
 INCPATH       = -I/usr/share/qt4/mkspecs/linux-g++-64 -I. -I/usr/include/SDL
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS)   `sdl-config --libs` -lSDL_image -lSDL_ttf 
+LIBS          = $(SUBLIBS)   `sdl-config --libs` -lSDL_image -lSDL_ttf
 AR            = ar cqs
-RANLIB        = 
+RANLIB        =
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt4/bin/qmake
 TAR           = tar -cf
 COMPRESS      = gzip -9f
@@ -101,7 +101,7 @@ SOURCES       = controleur/controleur.cpp \
 		vue/interfaceutilisateur/ligne.cpp \
 		vue/interfaceutilisateur/tableau.cpp \
 		modele/queteprincipale.cpp \
-		modele/objets/partiebus.cpp 
+		modele/objets/partiebus.cpp
 OBJECTS       = controleur.o \
 		carte.o \
 		tuile.o \
@@ -185,7 +185,7 @@ DIST          = /usr/share/qt4/mkspecs/common/unix.conf \
 		/usr/share/qt4/mkspecs/features/include_source_dir.prf \
 		src.pro
 QMAKE_TARGET  = src
-DESTDIR       = 
+DESTDIR       =
 TARGET        = src
 
 first: all
@@ -212,7 +212,7 @@ first: all
 
 all: Makefile $(TARGET)
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET):  $(OBJECTS)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 	{ test -n "$(DESTDIR)" && DESTDIR="$(DESTDIR)" || DESTDIR=.; } && test $$(gdb --version | sed -e 's,[^0-9][^0-9]*\([0-9]\)\.\([0-9]\).*,\1\2,;q') -gt 72 && gdb --nx --batch --quiet -ex 'set confirm off' -ex "save gdb-index $$DESTDIR" -ex quit '$(TARGET)' && test -f $(TARGET).gdb-index && objcopy --add-section '.gdb_index=$(TARGET).gdb-index' --set-section-flags '.gdb_index=readonly' '$(TARGET)' '$(TARGET)' && rm -f $(TARGET).gdb-index || true
 
@@ -264,12 +264,12 @@ deployment.pri:
 qmake:  FORCE
 	@$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++-64 CONFIG+=debug -o Makefile src.pro
 
-dist: 
-	@$(CHK_DIR_EXISTS) .tmp/src1.0.0 || $(MKDIR) .tmp/src1.0.0 
+dist:
+	@$(CHK_DIR_EXISTS) .tmp/src1.0.0 || $(MKDIR) .tmp/src1.0.0
 	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/src1.0.0/ && (cd `dirname .tmp/src1.0.0` && $(TAR) src1.0.0.tar src1.0.0 && $(COMPRESS) src1.0.0.tar) && $(MOVE) `dirname .tmp/src1.0.0`/src1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/src1.0.0
 
 
-clean:compiler_clean 
+clean:compiler_clean
 	-$(DEL_FILE) $(OBJECTS)
 	-$(DEL_FILE) *~ core *.core
 
@@ -277,7 +277,7 @@ clean:compiler_clean
 ####### Sub-libraries
 
 distclean: clean
-	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) $(TARGET)
 	-$(DEL_FILE) Makefile
 
 
@@ -296,7 +296,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean:
 
 ####### Compile
 
@@ -1782,12 +1782,12 @@ partiebus.o: modele/objets/partiebus.cpp modele/objets/partiebus.h \
 ####### Install
 
 install_target: first FORCE
-	@$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/opt/src/bin/ || $(MKDIR) $(INSTALL_ROOT)/opt/src/bin/ 
+	@$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/opt/src/bin/ || $(MKDIR) $(INSTALL_ROOT)/opt/src/bin/
 	-$(INSTALL_PROGRAM) "$(QMAKE_TARGET)" "$(INSTALL_ROOT)/opt/src/bin/$(QMAKE_TARGET)"
 
 uninstall_target:  FORCE
 	-$(DEL_FILE) "$(INSTALL_ROOT)/opt/src/bin/$(QMAKE_TARGET)"
-	-$(DEL_DIR) $(INSTALL_ROOT)/opt/src/bin/ 
+	-$(DEL_DIR) $(INSTALL_ROOT)/opt/src/bin/
 
 
 install:  install_target  FORCE
@@ -1795,4 +1795,3 @@ install:  install_target  FORCE
 uninstall: uninstall_target   FORCE
 
 FORCE:
-

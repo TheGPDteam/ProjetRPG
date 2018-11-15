@@ -41,6 +41,8 @@ private:
     std::string obtenirTexteStr() const;
     int obtenirHauteurFont() const;
     std::pair<int, int> obtenirRectTexte() const;
+
+    TTF_Font * obtenirPolice();
 };
 
 #endif // TEXTESDL_H

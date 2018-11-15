@@ -354,17 +354,6 @@ Joueur* Modele::obtenirJoueur()
 {
     return &m_joueur;
 }
-//!
-//! \brief Accesseur en ecriture du joueur
-//! \author mleothaud
-//! \date 17/11/16
-//! \version 1.0
-//!
-
-void Modele::definirJoueur(Joueur joueur)
-{
-    m_joueur = joueur;
-}
 
 //!
 //! \brief Serialise les attributs du modèle

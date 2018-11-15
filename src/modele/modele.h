@@ -54,7 +54,6 @@ public:
     Combat *obtenirCombat();
     void definirCombat(Combat combat);
     Joueur *obtenirJoueur() ;
-    void definirJoueur(Joueur joueur);
     Humain * nouvelArrivant();
     void changerNouvelArrivant(Humain * h);
     std::string serialiser() const;

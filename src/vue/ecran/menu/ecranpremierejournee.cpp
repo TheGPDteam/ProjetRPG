@@ -3,8 +3,11 @@
 
 #include <list>
 
+const float MARGE_RATIO = 0.1;
+
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
-    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0), SDL_Rect {3,3,WIDTH_FENETRE_PRINCIPALE,HEIGHT_FENETRE_PRINCIPALE / 2},recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
+    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0), SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
+                                                                                                                        ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
@@ -41,7 +44,7 @@ std::string EcranPremiereJournee::recupererHistoire()
         do
         {
             std::getline(fichier, ligne);
-            tmpTexte+=ligne;
+            tmpTexte+="\n"+ligne;
             tmpTextes = new TexteSDL(ligne, SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, coordY));
             m_zoneHistoire.push_back(tmpTextes);
             coordY += tmpTextes->obtenirHauteurFont();
