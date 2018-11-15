@@ -174,3 +174,17 @@ TexteSDL::~TexteSDL()
         SDL_FreeSurface(m_texte);
     }
 }
+
+
+//!
+//! \brief Accesseur sur la police
+//! \author rbourqui
+//! \date 11/11/18
+//! \version 0.1
+//!
+//! Retourne la police utilisée par le TexteSDL
+//!
+
+TTF_Font * TexteSDL::obtenirPolice(){
+    return m_policeTexte;
+}
