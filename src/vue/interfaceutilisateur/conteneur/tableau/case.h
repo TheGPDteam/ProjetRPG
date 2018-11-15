@@ -4,6 +4,7 @@
 #include "../../../affichable.h"
 #include <iostream>
 #include "../../zonetexte.h"
+#include "../../ressources/policetexte.h"
 
 
 class Case : public Affichable
