@@ -1,7 +1,7 @@
 #ifndef TABLEAU_H
 #define TABLEAU_H
 
-#include "../affichable.h"
+#include "affichable.h"
 #include <vector>
 #include "ligne.h"
 
@@ -14,11 +14,12 @@ private :
     Ligne * m_enTete;
     std::vector<Ligne*> m_lignes;
     int m_nbLignesMax;
-    Controleur m_controleur;
+    Controleur *m_controleur;
 
     void creeLigne(std::vector<std::string> ligne);
+
 public:
-    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete, Controleur controleur);
+    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete, Controleur *controleur);
     void ajouterElement(std::vector<Affichable*> affichables);
     void ajouterHumain(Humain* perso);
     void ajouterObjet(Objet* obj);

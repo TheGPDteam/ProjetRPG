@@ -1,7 +1,7 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur controleur, SDL_Rect rectangleParLigne)
-    : Affichable(rectangleParLigne), Cliquable(controleur, /*action,*/ true), m_donnees{donnees}
+Ligne::Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur * controleur, SDL_Rect rectangleParLigne)
+    : Affichable(rectangleParLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees)
 {
 
 }
@@ -27,4 +27,12 @@ bool Ligne::contient(std::pair<int, int> coord_souris) const
 //    {
 //        c->contient(coord_souris);
 //    }
+}
+
+void Ligne::clique() {
+
+}
+
+SDL_Rect Ligne::zone() const{
+    return SDL_Rect();
 }

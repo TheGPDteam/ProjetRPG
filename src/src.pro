@@ -5,8 +5,9 @@ CONFIG -= qt
 
 LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
 
-INCLUDEPATH+=/usr/include/SDL/
-
+INCLUDEPATH+=/usr/include/SDL/ ./controleur ./modele ./modele/environnement ./modele/environnement/carte ./modele/objets/ ./modele/objets/armes ./modele/personnages \
+        ./modele/personnages/ennemis ./modele/survie ./modele/survie/combat ./modele/survie/experience ./modele/survie/quetes ./save ./vue ./vue/ecran ./vue/ecran/jeu \
+        ./vue/ecran/menu ./vue/interfaceutilisateur ./vue/interfaceutilisateur/conteneur ./vue/interfaceutilisateur/conteneur/bouton ./vue/interfaceutilisateur/conteneur/tableau ./vue/interfaceutilisateur/ressources
 QMAKE_CXXFLAGS += -std=c++11 -pedantic -Wall -Wextra -Wno-narrowing
 
 SOURCES += \
@@ -65,8 +66,8 @@ SOURCES += \
     vue/affichable.cpp \
     vue/outilsvue.cpp \
     vue/interfaceutilisateur/conteneur/tableau/case.cpp \
-    vue/interfaceutilisateur/ligne.cpp \
-    vue/interfaceutilisateur/tableau.cpp \
+    vue/interfaceutilisateur/conteneur/tableau/ligne.cpp \
+    vue/interfaceutilisateur/conteneur/tableau/tableau.cpp \
     modele/queteprincipale.cpp \
     modele/objets/partiebus.cpp
 

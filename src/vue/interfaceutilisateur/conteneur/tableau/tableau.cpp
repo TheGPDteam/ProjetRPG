@@ -1,8 +1,6 @@
 #include "tableau.h"
-#include "../affichable.h"
 
-
-Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne *enTete, Controleur controleur)
+Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne *enTete, Controleur *controleur)
     :Affichable{rect}, m_hauteur{hauteur}, m_largeur{largeur}, m_hauteurLigne {hauteurLigne}, m_enTete{enTete}, m_controleur{controleur}
 {
 }
@@ -40,28 +38,28 @@ void Tableau::ajouterHumain(Humain* perso){
     creeLigne(tmp);
 }
 
-void ajouterObjet(Objet* obj){
+void Tableau::ajouterObjet(Objet* obj){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());
     if(obj->obtenirType() == TypeObjet::Arme ) {
-        Arme arme = (Arme)obj;
-        tmp.insert(tmp.end(),std::to_string((int)arme.obtenirDegats()));
-        tmp.insert(tmp.end(),std::to_string((int)arme.obtenirVitesse()));
-        tmp.insert(tmp.end(),std::to_string((int)arme.obtenirChance()));
+        Arme * arme = dynamic_cast<Arme *>(obj);
+        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
+        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
+        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
     }else if(obj->obtenirType() == TypeObjet::Vivre){
-        Vivre vivre = (Vivre)obj;
-        tmp.insert(tmp.end(),std::to_string(vivre.obtenirValeurNutritive()));
+        Vivre * vivre = dynamic_cast<Vivre*>(obj);
+        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
     }
     creeLigne(tmp);
 }
 
-void creeLigne(std::vector<std::string> ligne){
+void Tableau::creeLigne(std::vector<std::string> ligne){
     SDL_Rect rectangleParLigne;
     rectangleParLigne.x=this->m_rectangle.x;
     rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_lignes.size();
     rectangleParLigne.h= this->m_hauteurLigne;
     rectangleParLigne.w=this->m_rectangle.w;
-    Ligne *l = new Ligne(tmp, this->m_hauteurLigne, this->m_controleur, rectangleParLigne);
-    m_lignes.insert(std::end, l);
+    Ligne *l = new Ligne(ligne, this->m_hauteurLigne, this->m_controleur, rectangleParLigne);
+    m_lignes.push_back(l);
 }
