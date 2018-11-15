@@ -2,6 +2,8 @@
 #define CASE_H
 
 #include "../../../affichable.h"
+#include <iostream>
+#include "../../zonetexte.h"
 
 
 class Case : public Affichable
@@ -11,6 +13,7 @@ private :
 
 public :
     Case(SDL_Rect rect, Affichable* donnee);
+    Case(SDL_Rect rect, std::string donnee);
     Case() = delete;
     ~Case();
 
