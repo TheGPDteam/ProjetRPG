@@ -7,10 +7,10 @@
 class Ligne : public Affichable, public Cliquable
 {
 private:
-    std::vector<Case *> m_cases;
+    std::vector<std::string> m_donnees;
 public:
     Ligne() = delete;
-    Ligne(std::vector<Case *> cases, SDL_Rect affichable, Controleur * controleur, void* action, bool actif );
+    Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur controleur, SDL_Rect rectangleParLigne);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     virtual bool contient(std::pair<int, int> coord_souris) const override;

@@ -1,18 +1,18 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<Case *> cases, SDL_Rect affichable, Controleur * controleur, void* action, bool actif )
-    : Affichable(affichable), Cliquable(controleur, /*action,*/ actif), m_cases{cases}
+Ligne::Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur controleur, SDL_Rect rectangleParLigne)
+    : Affichable(rectangleParLigne), Cliquable(controleur, /*action,*/ true), m_donnees{donnees}
 {
 
 }
 
 void Ligne::afficher(SDL_Surface *surface)
 {
-    for (Case * c : m_cases)
-    {
-        //TODO SOMETHING
-        c->afficher(surface);
-    }
+//    for (Case * c : m_cases)
+//    {
+//        //TODO SOMETHING
+//        c->afficher(surface);
+//    }
 }
 
 void Ligne::redimensionner(SDL_Rect m_rectangle)
