@@ -37,6 +37,8 @@ public:
 
     virtual ~ZoneTexte();
 
+    void mettreAJourTexte(std::string texte);
+
     virtual void afficher(SDL_Surface *surface_affichage);
     virtual void redimensionner(SDL_Rect nouvelleDimension);
 };

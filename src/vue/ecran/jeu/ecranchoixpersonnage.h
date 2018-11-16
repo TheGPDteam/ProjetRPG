@@ -25,7 +25,7 @@ private:
     TexteSDL* m_zoneNiveauPersonnage;
 
     TexteSDL* m_zoneNomArmePersonnage;
-    TexteSDL* m_zoneDescArmePersonnage;
+    ZoneTexte* m_zoneDescArmePersonnage;
     TexteSDL* m_zoneDegatsArmePersonnage;
 
     TexteSDL* m_zoneQuestion;

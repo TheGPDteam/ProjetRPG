@@ -33,7 +33,10 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
     m_zoneCampementPersonnage = new TexteSDL("Campement : " + std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
 
     m_zoneNomArmePersonnage = new TexteSDL("Arme : " + h->obtenirArme()->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
-    m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
+    //m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
+    m_zoneDescArmePersonnage = new ZoneTexte(POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270),
+                                             SDL_Rect{m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270, WIDTH_FENETRE_PRINCIPALE - (m_rectangleFichePersonnage.x + 50), 21},
+                                             "Description : " + h->obtenirArme()->obtenirDescription(),SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::GAUCHE);
     m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
 
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));

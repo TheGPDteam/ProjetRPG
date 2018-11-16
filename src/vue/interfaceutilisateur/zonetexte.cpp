@@ -57,6 +57,7 @@ void ZoneTexte::adapterTexte()
     {
         delete t;
     }
+    m_texteSDL.clear();
     switch (m_comportement) {
     case COMPORTEMENT_TEXTE::REDIMENTIONNE :
     {
@@ -70,8 +71,15 @@ void ZoneTexte::adapterTexte()
                                      m_rectangle.w,
                                      m_rectangle.h};
         t->redimensionner(nouveauRectangle);
-        std::pair<int, int> nouvellePosition = {m_rectangle.x + ((m_rectangle.w - t->obtenirRectTexte().first) / 2),
-                                                (m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
+        std::pair<int, int> nouvellePosition;
+        if (m_alignement == ALIGNEMENT_TEXTE::CENTRE)
+        {
+            nouvellePosition = {m_rectangle.x + ((m_rectangle.w - t->obtenirRectTexte().first) / 2),
+                                                    (m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
+        } else if (m_alignement == ALIGNEMENT_TEXTE::GAUCHE)
+        {
+            nouvellePosition = {m_rectangle.x,(m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
+        }
         t->positionner(nouvellePosition);
         m_texteSDL.insert(m_texteSDL.begin(), t);
         break;
@@ -122,4 +130,10 @@ void ZoneTexte::adapterTexte()
         break;
     }
     }
+}
+
+void ZoneTexte::mettreAJourTexte(std::string texte)
+{
+    m_texte = texte;
+    adapterTexte();
 }
