@@ -20,6 +20,7 @@ private:
     SDL_Rect m_fondDescriptionPerso;
     SDL_Rect m_fondDescriptionChasse;
     SDL_Rect m_fondDescriptionRecolte;
+    SDL_Rect m_fondDescriptionCampement;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
@@ -27,6 +28,7 @@ private:
     TexteSDL* m_zonePrenomPersonnage;
     TexteSDL* m_zoneChassePersonnage;
     TexteSDL* m_zoneRecoltePersonnage;
+    TexteSDL* m_zoneCampementPersonnage;
     TexteSDL* m_zoneForcePersonnage;
     TexteSDL* m_zoneVitessePersonnage;
 
