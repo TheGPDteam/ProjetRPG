@@ -17,16 +17,40 @@ void Tableau::afficher(SDL_Surface *surface_affichage)
 void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
-    SDL_Rect rectangleParLigne = nouvelleDimension;
-    rectangleParLigne.h = rectangleParLigne.h / m_lignes.size();
+    SDL_Rect rectangleLigne = nouvelleDimension;
+    rectangleLigne.h = rectangleLigne.h / m_lignes.size();
     for (Ligne * l : m_lignes)
     {
-        l->redimensionner(nouvelleDimension);
-        rectangleParLigne.y += m_hauteurLigne;
+        l->redimensionner(rectangleLigne);
+        rectangleLigne.y += m_hauteurLigne;
     }
 }
+//!
+//! \brief indique la ligne survolé
+//! \param coord_souris
+//! \return la ligne survolé par la souris
+//!
+Ligne*
+Tableau::ligneSurvole(std::pair<int, int> coord_souris){
+    for(Ligne *l : m_lignes){
+        if(l->contient(coord_souris))
+            return l;
+    }
+ }
 
-void Tableau::ajouterHumain(Humain* perso){
+void
+Tableau::ajouterElement(std::vector<Affichable*> affichables){
+
+ }
+//!
+//! \brief Tableau::ajouterHumain
+//! \param perso
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//!
+//!
+void
+Tableau::ajouterHumain(Humain* perso){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),perso->obtenirNom());
     tmp.insert(tmp.end(),perso->obtenirPrenom());
@@ -35,10 +59,11 @@ void Tableau::ajouterHumain(Humain* perso){
     tmp.insert(tmp.end(),std::to_string((int)perso->obtenirCampement().obtenirValeur()));
     tmp.insert(tmp.end(),perso->obtenirArme()->obtenirNom());
     tmp.insert(tmp.end(),std::to_string((int)perso->obtenirNiveau().obtenirNiveauActuel()));
-    creeLigne(tmp);
+    creerLigne(tmp);
 }
 
-void Tableau::ajouterObjet(Objet* obj){
+void
+Tableau::ajouterObjet(Objet* obj){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());
@@ -51,15 +76,20 @@ void Tableau::ajouterObjet(Objet* obj){
         Vivre * vivre = dynamic_cast<Vivre*>(obj);
         tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
     }
-    creeLigne(tmp);
+    creerLigne(tmp);
 }
 
-void Tableau::creeLigne(std::vector<std::string> ligne){
+void
+Tableau::creerLigne(std::vector<std::string> donneesLigne){
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne());
+    m_lignes.push_back(l);
+}
+
+SDL_Rect
+Tableau::creerRectLigne(){
     SDL_Rect rectangleParLigne;
     rectangleParLigne.x=this->m_rectangle.x;
     rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_lignes.size();
     rectangleParLigne.h= this->m_hauteurLigne;
     rectangleParLigne.w=this->m_rectangle.w;
-    Ligne *l = new Ligne(ligne, this->m_hauteurLigne, this->m_controleur, rectangleParLigne);
-    m_lignes.push_back(l);
 }

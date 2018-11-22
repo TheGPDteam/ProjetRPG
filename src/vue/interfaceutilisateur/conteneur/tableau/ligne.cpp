@@ -1,36 +1,55 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur * controleur, SDL_Rect rectangleParLigne)
-    : Affichable(rectangleParLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees)
+Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect rectangleLigne)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees)
 {
+    for(std::string d : m_donnees) {
+        creerCaseString(d);
+    }
+}
 
+void
+Ligne::creerCaseString(std::string donnee){
+    this->m_cases.push_back(new Case(creerRectCase(), donnee));
+}
+void
+Ligne::creerCaseElement(Affichable* affichable){
+    this->m_cases.push_back(new Case(creerRectCase(), affichable));
+}
+
+SDL_Rect
+Ligne::creerRectCase(){
+    SDL_Rect recCase;
+    int largeurCaseDefaut=this->m_rectangle.w/this->m_donnees.size();
+    recCase.y=this->m_rectangle.y;
+    recCase.x=this->m_rectangle.x + largeurCaseDefaut * this->m_cases.size();
+    recCase.w= largeurCaseDefaut;
+    recCase.h=this->m_rectangle.h;
 }
 
 void Ligne::afficher(SDL_Surface *surface)
 {
-//    for (Case * c : m_cases)
-//    {
-//        //TODO SOMETHING
-//        c->afficher(surface);
-//    }
+    for (Case * c : m_cases)
+    {
+        c->afficher(surface);
+    }
 }
 
-void Ligne::redimensionner(SDL_Rect m_rectangle)
+void Ligne::redimensionner(SDL_Rect nouvelleDimension)
 {
-    //TODO
-}
-
-bool Ligne::contient(std::pair<int, int> coord_souris) const
-{
-    //Si souris est dans le rectangle d'affichage
-//    for (Case * c : m_cases)
-//    {
-//        c->contient(coord_souris);
-//    }
+    m_rectangle = nouvelleDimension;
+    SDL_Rect rectCase = nouvelleDimension;
+    int nouvelleLargeurCase=this->m_rectangle.w/this->m_donnees.size();
+    rectCase.w = nouvelleLargeurCase;
+    for (Case * c : m_cases)
+    {
+        c->redimensionner(rectCase);
+        rectCase.x += nouvelleLargeurCase;
+    }
 }
 
 void Ligne::clique() {
-
+    //TODO
 }
 
 SDL_Rect Ligne::zone() const{

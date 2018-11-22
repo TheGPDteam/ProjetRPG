@@ -8,13 +8,16 @@ class Ligne : public Affichable, public Cliquable
 {
 private:
     std::vector<std::string> m_donnees;
+    std::vector<Case*> m_cases;
     SDL_Rect zone() const ;
+    void creerCaseString(std::string donnee);
+    void creerCaseElement(Affichable* affichable);
+    SDL_Rect creerRectCase();
 public:
     Ligne() = delete;
-    Ligne(std::vector<std::string> donnees, float hauteurLigne, Controleur *controleur, SDL_Rect rectangleParLigne);
+    Ligne(std::vector<std::string> donnees, Controleur *controleur, SDL_Rect rectangleParLigne);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
-    virtual bool contient(std::pair<int, int> coord_souris) const override;
     void clique() override;
 };
 
