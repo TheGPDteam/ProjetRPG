@@ -1,12 +1,19 @@
 #include "ligne.h"
 
 Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect rectangleLigne)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr)
 {
     for(std::string d : m_donnees) {
         creerCaseString(d);
     }
 }
+
+void
+Ligne::ajouterAffichable(Affichable *affichable){
+    m_affichable= affichable;
+    this->redimensionner(m_rectangle);
+}
+
 //!
 //! \brief cree une case
 //! \param donnee
@@ -72,6 +79,8 @@ void Ligne::redimensionner(SDL_Rect nouvelleDimension)
     m_rectangle = nouvelleDimension;
     SDL_Rect rectCase = nouvelleDimension;
     int nouvelleLargeurCase=this->m_rectangle.w/this->m_donnees.size();
+    if(m_affichable != nullptr)
+        nouvelleLargeurCase=this->m_rectangle.w/(this->m_donnees.size()+1);
     rectCase.w = nouvelleLargeurCase;
     for (Case * c : m_cases)
     {

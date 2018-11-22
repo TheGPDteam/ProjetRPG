@@ -13,9 +13,11 @@ private:
     void creerCaseString(std::string donnee);
     void creerCaseElement(Affichable* affichable);
     SDL_Rect creerRectCase();
+    Affichable *m_affichable;
 public:
     Ligne() = delete;
     Ligne(std::vector<std::string> donnees, Controleur *controleur, SDL_Rect rectangleParLigne);
+    void ajouterAffichable(Affichable * affichable);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     void clique() override;
