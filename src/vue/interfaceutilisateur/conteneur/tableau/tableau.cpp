@@ -5,6 +5,13 @@ Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne
 {
 }
 
+
+//!
+//! \brief affiche le contenu du tableau
+//! \param surface_affichage
+//! \author Lacoste Dorian
+//! \date 15/11/2018
+//!
 void Tableau::afficher(SDL_Surface *surface_affichage)
 {
     m_enTete->afficher(surface_affichage);
@@ -13,7 +20,12 @@ void Tableau::afficher(SDL_Surface *surface_affichage)
         l->afficher(surface_affichage);
     }
 }
-
+//!
+//! \brief redimensionne la tableau
+//! \param nouvelleDimension
+//! \author Lacoste Dorian, Regnies Anthony
+//! \date 15/11/18
+//!
 void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
@@ -29,6 +41,8 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 //! \brief indique la ligne survolé
 //! \param coord_souris
 //! \return la ligne survolé par la souris
+//! \author Lacoste Dorian, Regnies Anthony
+//! \date 22/11/18
 //!
 Ligne*
 Tableau::ligneSurvole(std::pair<int, int> coord_souris){
@@ -43,7 +57,7 @@ Tableau::ajouterElement(std::vector<Affichable*> affichables){
 
  }
 //!
-//! \brief Tableau::ajouterHumain
+//! \brief Ajouter un humain dans le tableau
 //! \param perso
 //! \author Lacoste Dorian, Anthony Regnies
 //! \date 22/11/18
@@ -62,6 +76,11 @@ Tableau::ajouterHumain(Humain* perso){
     creerLigne(tmp);
 }
 
+//!
+//! \brief Ajouter un objet dans le tableau
+//! \param obj
+//! \author Lacoste Dorian
+//! \date 15/11/2018
 void
 Tableau::ajouterObjet(Objet* obj){
     std::vector<std::string> tmp;
@@ -78,13 +97,23 @@ Tableau::ajouterObjet(Objet* obj){
     }
     creerLigne(tmp);
 }
-
+//!
+//! \brief Créer une ligne
+//! \param donneesLigne
+//! \author Lacoste Dorian
+//! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<std::string> donneesLigne){
     Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne());
     m_lignes.push_back(l);
 }
 
+//!
+//! \brief Créer le rectangle ou s'affichera la ligne
+//! \return SDL_Rect : la rectangle de la ligne
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//!
 SDL_Rect
 Tableau::creerRectLigne(){
     SDL_Rect rectangleParLigne;
