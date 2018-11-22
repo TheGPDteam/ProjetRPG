@@ -7,16 +7,35 @@ Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect
         creerCaseString(d);
     }
 }
-
+//!
+//! \brief cree une case
+//! \param donnee
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//! cree une case a partir d'une donnee string
+//!
 void
 Ligne::creerCaseString(std::string donnee){
     this->m_cases.push_back(new Case(creerRectCase(), donnee));
 }
+//!
+//! \brief cree une case
+//! \param affichable
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//! cree une case  à partir d'une donnee Affichable
+//!
 void
 Ligne::creerCaseElement(Affichable* affichable){
     this->m_cases.push_back(new Case(creerRectCase(), affichable));
 }
 
+//!
+//! \brief cree Rectangle de la case
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//! \return un rectangle de la case en fonction des autres cases
+//!
 SDL_Rect
 Ligne::creerRectCase(){
     SDL_Rect recCase;
@@ -25,8 +44,15 @@ Ligne::creerRectCase(){
     recCase.x=this->m_rectangle.x + largeurCaseDefaut * this->m_cases.size();
     recCase.w= largeurCaseDefaut;
     recCase.h=this->m_rectangle.h;
+    return recCase;
 }
 
+//!
+//! \brief affiche la ligne
+//! \param surface
+//! \author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//!
 void Ligne::afficher(SDL_Surface *surface)
 {
     for (Case * c : m_cases)
@@ -35,6 +61,12 @@ void Ligne::afficher(SDL_Surface *surface)
     }
 }
 
+//!
+//! \brief redimmensionne une ligne
+//! \param nouvelleDimension
+//!\author Lacoste Dorian, Anthony Regnies
+//! \date 22/11/18
+//!
 void Ligne::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
