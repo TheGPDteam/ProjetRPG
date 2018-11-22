@@ -143,8 +143,8 @@ HEADERS += \
     vue/affichable.h \
     vue/outilsvue.h \
     vue/interfaceutilisateur/conteneur/tableau/case.h \
-    vue/interfaceutilisateur/ligne.h \
-    vue/interfaceutilisateur/tableau.h \
+    vue/interfaceutilisateur/conteneur/tableau/ligne.h \
+    vue/interfaceutilisateur/conteneur/tableau/tableau.h \
     modele/queteprincipale.h \
     modele/objets/partiebus.h
 
