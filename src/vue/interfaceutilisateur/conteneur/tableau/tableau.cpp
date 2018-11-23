@@ -50,12 +50,40 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
         if(l->contient(coord_souris))
             return l;
     }
- }
+}
+
+void
+Tableau::ajouterEnTeteHumain(){
+    std::vector<std::string> tmp;
+    tmp.push_back("Nom");
+    tmp.push_back("Prénom");
+    tmp.push_back("Chasse");
+    tmp.push_back("Recolte");
+    tmp.push_back("Campement");
+    tmp.push_back("Arme");
+    tmp.push_back("Niveau");
+    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne());
+}
+
+void
+Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
+    std::vector<std::string> tmp;
+    tmp.push_back("Nom");
+    tmp.push_back("Description");
+    if(typeObjet == TypeObjet::Arme ) {
+        tmp.push_back("Degats");
+        tmp.push_back("Vitesse");
+        tmp.push_back("Chance");
+    }else if(typeObjet == TypeObjet::Vivre){
+        tmp.push_back("ValeurNutritive");
+    }
+}
+
 
 void
 Tableau::ajouterElement(std::vector<Affichable*> affichables){
 
- }
+}
 //!
 //! \brief Ajouter un humain dans le tableau
 //! \param perso
@@ -65,6 +93,7 @@ Tableau::ajouterElement(std::vector<Affichable*> affichables){
 //!
 void
 Tableau::ajouterHumain(Humain* perso){
+    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),perso->obtenirNom());
     tmp.insert(tmp.end(),perso->obtenirPrenom());
@@ -83,6 +112,7 @@ Tableau::ajouterHumain(Humain* perso){
 //! \date 15/11/2018
 void
 Tableau::ajouterObjet(Objet* obj){
+    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());

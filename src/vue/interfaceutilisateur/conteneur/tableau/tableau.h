@@ -20,6 +20,8 @@ private :
 public:
     Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete, Controleur *controleur);
     void ajouterElement(std::vector<Affichable*> affichables);
+    void ajouterEnTeteHumain();
+    void ajouterEnTeteObjet(TypeObjet typeObjet);
     void ajouterHumain(Humain* perso);
     void ajouterObjet(Objet* obj);
 
