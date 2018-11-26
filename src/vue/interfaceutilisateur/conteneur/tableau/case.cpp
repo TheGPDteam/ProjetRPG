@@ -16,8 +16,6 @@ Case::Case(SDL_Rect rect, Affichable * donnee)
 //! \brief Case
 //! \param rect x, y, hauteur, largeur en pixel
 //! \param donnee le texte de la case
-//! \author Anthony Regnies
-//! \date 15/11/18
 //!
 Case::Case(SDL_Rect rect, std::string donnee)
     : Affichable(rect),
@@ -55,7 +53,7 @@ void Case::redimensionner(SDL_Rect m_rectangle)
 //!
 //! \brief Case::definirDonnee
 //! \param donnee
-//! Attention, la donnee precedente est effacé
+//! Attention, la donnee precedente est efface
 //!
 void Case::definirDonnee(Affichable *donnee)
 {

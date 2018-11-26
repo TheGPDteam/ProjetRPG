@@ -5,13 +5,6 @@ Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne
 {
 }
 
-
-//!
-//! \brief affiche le contenu du tableau
-//! \param surface_affichage
-//! \author Lacoste Dorian
-//! \date 15/11/2018
-//!
 void Tableau::afficher(SDL_Surface *surface_affichage)
 {
     m_enTete->afficher(surface_affichage);
@@ -20,80 +13,20 @@ void Tableau::afficher(SDL_Surface *surface_affichage)
         l->afficher(surface_affichage);
     }
 }
-//!
-//! \brief redimensionne la tableau
-//! \param nouvelleDimension
-//! \author Lacoste Dorian, Regnies Anthony
-//! \date 15/11/18
-//!
+
 void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
-    SDL_Rect rectangleLigne = nouvelleDimension;
-    rectangleLigne.h = rectangleLigne.h / m_lignes.size();
+    SDL_Rect rectangleParLigne = nouvelleDimension;
+    rectangleParLigne.h = rectangleParLigne.h / m_lignes.size();
     for (Ligne * l : m_lignes)
     {
-        l->redimensionner(rectangleLigne);
-        rectangleLigne.y += m_hauteurLigne;
-    }
-}
-//!
-//! \brief indique la ligne survolé
-//! \param coord_souris
-//! \return la ligne survolé par la souris
-//! \author Lacoste Dorian, Regnies Anthony
-//! \date 22/11/18
-//!
-Ligne*
-Tableau::ligneSurvole(std::pair<int, int> coord_souris){
-    for(Ligne *l : m_lignes){
-        if(l->contient(coord_souris))
-            return l;
+        l->redimensionner(nouvelleDimension);
+        rectangleParLigne.y += m_hauteurLigne;
     }
 }
 
-void
-Tableau::ajouterEnTeteHumain(){
-    std::vector<std::string> tmp;
-    tmp.push_back("Nom");
-    tmp.push_back("Prénom");
-    tmp.push_back("Chasse");
-    tmp.push_back("Recolte");
-    tmp.push_back("Campement");
-    tmp.push_back("Arme");
-    tmp.push_back("Niveau");
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne());
-}
-
-void
-Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
-    std::vector<std::string> tmp;
-    tmp.push_back("Nom");
-    tmp.push_back("Description");
-    if(typeObjet == TypeObjet::Arme ) {
-        tmp.push_back("Degats");
-        tmp.push_back("Vitesse");
-        tmp.push_back("Chance");
-    }else if(typeObjet == TypeObjet::Vivre){
-        tmp.push_back("ValeurNutritive");
-    }
-}
-
-
-void
-Tableau::ajouterElement(std::vector<Affichable*> affichables){
-
-}
-//!
-//! \brief Ajouter un humain dans le tableau
-//! \param perso
-//! \author Lacoste Dorian, Anthony Regnies
-//! \date 22/11/18
-//!
-//!
-void
-Tableau::ajouterHumain(Humain* perso){
-    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
+void Tableau::ajouterHumain(Humain* perso){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),perso->obtenirNom());
     tmp.insert(tmp.end(),perso->obtenirPrenom());
@@ -102,17 +35,10 @@ Tableau::ajouterHumain(Humain* perso){
     tmp.insert(tmp.end(),std::to_string((int)perso->obtenirCampement().obtenirValeur()));
     tmp.insert(tmp.end(),perso->obtenirArme()->obtenirNom());
     tmp.insert(tmp.end(),std::to_string((int)perso->obtenirNiveau().obtenirNiveauActuel()));
-    creerLigne(tmp);
+    creeLigne(tmp);
 }
 
-//!
-//! \brief Ajouter un objet dans le tableau
-//! \param obj
-//! \author Lacoste Dorian
-//! \date 15/11/2018
-void
-Tableau::ajouterObjet(Objet* obj){
-    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
+void Tableau::ajouterObjet(Objet* obj){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());
@@ -125,30 +51,15 @@ Tableau::ajouterObjet(Objet* obj){
         Vivre * vivre = dynamic_cast<Vivre*>(obj);
         tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
     }
-    creerLigne(tmp);
-}
-//!
-//! \brief Créer une ligne
-//! \param donneesLigne
-//! \author Lacoste Dorian
-//! \date 15/11/2018
-void
-Tableau::creerLigne(std::vector<std::string> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne());
-    m_lignes.push_back(l);
+    creeLigne(tmp);
 }
 
-//!
-//! \brief Créer le rectangle ou s'affichera la ligne
-//! \return SDL_Rect : la rectangle de la ligne
-//! \author Lacoste Dorian, Anthony Regnies
-//! \date 22/11/18
-//!
-SDL_Rect
-Tableau::creerRectLigne(){
+void Tableau::creeLigne(std::vector<std::string> ligne){
     SDL_Rect rectangleParLigne;
     rectangleParLigne.x=this->m_rectangle.x;
     rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_lignes.size();
     rectangleParLigne.h= this->m_hauteurLigne;
     rectangleParLigne.w=this->m_rectangle.w;
+    Ligne *l = new Ligne(ligne, this->m_hauteurLigne, this->m_controleur, rectangleParLigne);
+    m_lignes.push_back(l);
 }

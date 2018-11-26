@@ -15,17 +15,15 @@ private :
     std::vector<Ligne*> m_lignes;
     int m_nbLignesMax;
     Controleur *m_controleur;
-    void creerLigne(std::vector<std::string> ligne);
-    SDL_Rect creerRectLigne();
+
+    void creeLigne(std::vector<std::string> ligne);
+
 public:
     Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete, Controleur *controleur);
     void ajouterElement(std::vector<Affichable*> affichables);
-    void ajouterEnTeteHumain();
-    void ajouterEnTeteObjet(TypeObjet typeObjet);
     void ajouterHumain(Humain* perso);
     void ajouterObjet(Objet* obj);
 
-    Ligne *ligneSurvole(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect nouvelleDimension) override;
 
