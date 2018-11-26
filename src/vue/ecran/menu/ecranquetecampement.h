@@ -6,7 +6,7 @@
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
 
 
-class EcranQueteCampement : EcranGeneral
+class EcranQueteCampement : public EcranGeneral
 {
 private:
     std::vector<SDL_Rect> m_emplacementRoues;
