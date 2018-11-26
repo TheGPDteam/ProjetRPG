@@ -16,6 +16,8 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
 }
 
 void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
+    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 
