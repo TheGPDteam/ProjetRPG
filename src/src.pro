@@ -69,7 +69,8 @@ SOURCES += \
     vue/interfaceutilisateur/conteneur/tableau/ligne.cpp \
     vue/interfaceutilisateur/conteneur/tableau/tableau.cpp \
     modele/queteprincipale.cpp \
-    modele/objets/partiebus.cpp
+    modele/objets/partiebus.cpp \
+    vue/ecran/menu/ecranquetecampement.cpp
 
 
 
@@ -146,7 +147,8 @@ HEADERS += \
     vue/interfaceutilisateur/conteneur/tableau/ligne.h \
     vue/interfaceutilisateur/conteneur/tableau/tableau.h \
     modele/queteprincipale.h \
-    modele/objets/partiebus.h
+    modele/objets/partiebus.h \
+    vue/ecran/menu/ecranquetecampement.h
 
 
 
