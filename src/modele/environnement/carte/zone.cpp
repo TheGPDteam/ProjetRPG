@@ -274,7 +274,7 @@ void Zone::ajouterObjets(int nbObjets)
                 t = m_position_to_tuile.at(std::make_pair(posX,posY));
             }
             //int typeObj = rand()%5; //A revoir si un jour integration objets autres que arme et vivre
-            int typeObj = rand()%4;
+            int typeObj = rand()%6;
             switch (typeObj) {
             case 0:
                 m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
@@ -291,6 +291,9 @@ void Zone::ajouterObjets(int nbObjets)
             /*case 4://A revoir pour un objet aléatoire
                 m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
                 break;*/
+            case 5:
+                m_objets.insert(std::make_pair(new PartieBus() ,std::make_pair(posX,posY)));
+                break;
             default:
                 break;
             }
