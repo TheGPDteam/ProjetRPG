@@ -136,7 +136,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     afficherBoutons(coord_souris, fenetre_affichage);
 
     if(m_humain_a_affecter != nullptr){
-        RepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage);
+        RepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage, m_controleur);
         int rep = repartition.affecter();
         if(rep == CHASSE){
             m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse()->ajouterPersonnage(m_humain_a_affecter);

@@ -70,7 +70,7 @@ SOURCES += \
     vue/interfaceutilisateur/conteneur/tableau/tableau.cpp \
     modele/queteprincipale.cpp \
     modele/objets/partiebus.cpp \
-    vue/ecran/menu/ecranquetecampement.cpp
+    vue/ecran/menu/ecranquetecampement.cpp \
     vue/interfaceutilisateur/zonedefilable.cpp
 
 
@@ -148,7 +148,7 @@ HEADERS += \
     vue/interfaceutilisateur/conteneur/tableau/tableau.h \
     modele/queteprincipale.h \
     modele/objets/partiebus.h \
-    vue/ecran/menu/ecranquetecampement.h
+    vue/ecran/menu/ecranquetecampement.h \
     vue/interfaceutilisateur/zonedefilable.h
 
 
