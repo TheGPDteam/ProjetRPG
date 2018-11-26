@@ -1,10 +1,7 @@
 #include "ecranquetecampement.h"
 
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
-    :
-      EcranGeneral (controleur)
-
-
+    : EcranGeneral (controleur)
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200};
     coordBoutonRetour = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 300};
