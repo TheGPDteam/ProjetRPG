@@ -10,7 +10,7 @@
 
 class Cliquable
 {
-private:
+protected:
     Controleur * m_controleur;
 
     bool m_actif; // Si on peut cliquer l'objet

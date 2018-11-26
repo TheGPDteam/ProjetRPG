@@ -3,6 +3,7 @@
 
 #include "../ecrangeneral.h"
 #include "../../outilsvue.h"
+#include "zonedefilable.h"
 #include <string.h>
 
 class EcranPremiereJournee : public EcranGeneral
@@ -14,6 +15,7 @@ private:
     SDL_Rect m_fondRecapitulatif;
 
     std::vector< TexteSDL* > m_zoneHistoire;
+    ZoneDefilable * m_defilable;
     ZoneTexte m_zoneTexte;
 
     std::string recupererHistoire();

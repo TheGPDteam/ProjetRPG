@@ -1,14 +1,21 @@
 #include "ecranpremierejournee.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "zonedefilable.h"
 
+#include <iostream>
 #include <list>
 
 const float MARGE_RATIO = 0.1;
 
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
-    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0), SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
-                                                                                                                        ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
+    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0),
+                                            SDL_Rect {0,0,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},
+                                            recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
+   SDL_Rect rectDefilable =  {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
+           ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 3};
+   m_defilable = new ZoneDefilable(&m_zoneTexte, m_controleur, true, rectDefilable);
+
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
      std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
@@ -64,11 +71,8 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 {
     SDL_FillRect(fenetre_affichage, &m_fondRecapitulatif, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
 
-    /*for (TexteSDL* texte : m_zoneHistoire)
-    {
-        texte->afficher(fenetre_affichage);
-    }*/
-    m_zoneTexte.afficher(fenetre_affichage);
+     //m_zoneTexte.afficher(fenetre_affichage);
+    m_defilable->afficher(fenetre_affichage);
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
@@ -95,6 +99,12 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
                 coord_souris.second = evenements.button.y;
             }
             break;
+        case SDL_KEYDOWN:
+            if(evenements.key.keysym.sym == SDLK_UP){
+                m_defilable->defiler(true);
+            }
+            else if(evenements.key.keysym.sym == SDLK_DOWN)
+                m_defilable->defiler(false);
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
@@ -120,4 +130,5 @@ EcranPremiereJournee::~EcranPremiereJournee()
             delete m_zoneHistoire[cpt];
         }
     }
+    delete m_defilable;
 }

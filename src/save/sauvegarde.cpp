@@ -1,10 +1,4 @@
 #include "sauvegarde.h"
-#ifdef _WIN32
-   #include <io.h>
-   #define access    _access_s
-#else
-   #include <unistd.h>
-#endif
 
 void Sauvegarde::sauvegarderModele(Modele *modele)
 {
@@ -16,10 +10,13 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
     {
         std::cerr << "Dossier créé !" << std::endl;
     }
+
+    std::string cheminFichier = "save/";
     //if (!modele->obtenirNomPartie().empty())
         //cheminFichier += modele->obtenirNomPartie()+".xml";
     //else
-    std::ofstream fichierSauvegarde(FICHIER_SAUVEGARDE,std::ios::out | std::ios::trunc);
+        cheminFichier += "Defaut.xml";
+    std::ofstream fichierSauvegarde(cheminFichier,std::ios::out | std::ios::trunc);
 
     if (fichierSauvegarde.is_open())
     {
@@ -33,12 +30,13 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
 
 void Sauvegarde::chargerModele(Modele* modele)
 {
-    std::ifstream fichierSauvegarde(FICHIER_SAUVEGARDE,std::ifstream::in);
+    std::string chemin = "save/Defaut.xml";
+    std::ifstream fichierSauvegarde(chemin,std::ifstream::in);
     std::string emplacementXMLAttendu;
 
     if (fichierSauvegarde.is_open())
     {
-        std::copy_n(std::istreambuf_iterator<char>(fichierSauvegarde.rdbuf()), EN_TETE_XML.length(), std::back_inserter(emplacementXMLAttendu));
+        std::copy_n(std::istreambuf_iterator<char>(fichierSauvegarde.rdbuf()), 38, std::back_inserter(emplacementXMLAttendu));
 
         if (emplacementXMLAttendu == EN_TETE_XML) // Teste si le fichier est un fichier contenant une sauvegarde
         {
@@ -49,9 +47,4 @@ void Sauvegarde::chargerModele(Modele* modele)
         fichierSauvegarde.close();
     }
 
-}
-
-bool Sauvegarde::fichierSauvegardeExiste()
-{
-    return access(FICHIER_SAUVEGARDE.c_str(),R_OK) == 0;
 }
