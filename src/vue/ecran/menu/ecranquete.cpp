@@ -115,8 +115,8 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tempNomPersonnage.afficher(fenetre_affichage);
         TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(750,410+30*k));
         tempPrenomPersonnage.afficher(fenetre_affichage);
-        TexteSDL tempRecoltePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
-        tempRecoltePersonnage.afficher(fenetre_affichage);
+        TexteSDL tempChassePersonnage(std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(900,410+30*k));
+        tempChassePersonnage.afficher(fenetre_affichage);
         ++k;
     }
     int l=0;
