@@ -7,6 +7,7 @@
 #include <string>
 #include "../../objets/objet.h"
 #include "../../survie/vivre.h"
+#include "../../objets/partiebus.h"
 #include "../../objets/armes/arme.h"
 #include "tuile.h"
 #include "observable.h"

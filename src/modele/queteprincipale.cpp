@@ -34,13 +34,17 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
     :
       m_nom{nom}, m_description{description},
       m_partiesBus{
-{new PartieBus("Roue","",TypePartieBus::ROUE),0},
-{new PartieBus("Moteur","",TypePartieBus::MOTEUR),0},
-{new PartieBus("Essence","",TypePartieBus::ESSENCE),0}},
+        {new PartieBus("Roue","",TypePartieBus::ROUE),0},
+        {new PartieBus("Moteur","",TypePartieBus::MOTEUR),0},
+        {new PartieBus("Essence","",TypePartieBus::ESSENCE),0},
+        {new PartieBus("Huile","",TypePartieBus::HUILE),0},
+      },
       m_nombrePartiesRequises{
-{TypePartieBus::ROUE,6},
-{TypePartieBus::MOTEUR,1},
-{TypePartieBus::ESSENCE,1}}
+        {TypePartieBus::ROUE,6},
+        {TypePartieBus::MOTEUR,1},
+        {TypePartieBus::ESSENCE,1},
+        {TypePartieBus::HUILE,2}
+      }
 {
 }
 
