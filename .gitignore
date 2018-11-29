@@ -3,3 +3,4 @@ build-src*/
 *.o
 *.pro.*
 src/save/*.xml
+src/src

@@ -11,6 +11,7 @@ private :
     float m_hauteur;
     float m_largeur;
     float m_hauteurLigne;
+    int m_nbLignes;
     Ligne * m_enTete;
     std::vector<Ligne*> m_lignes;
     int m_nbLignesMax;
@@ -18,10 +19,10 @@ private :
     void creerLigne(std::vector<std::string> ligne);
     SDL_Rect creerRectLigne();
 public:
-    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne* enTete, Controleur *controleur);
+    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Controleur *controleur);
     void ajouterElement(std::vector<Affichable*> affichables);
     void ajouterEnTeteHumain();
-    void ajouterEnTeteObjet(TypeObjet typeObjet);
+    void ajouterEnTeteObjet();
     void ajouterHumain(Humain* perso);
     void ajouterObjet(Objet* obj);
 
