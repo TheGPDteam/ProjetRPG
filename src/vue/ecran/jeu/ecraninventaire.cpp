@@ -61,14 +61,6 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-//    SDL_FillRect(fenetre_affichage, &m_rectangleHaut, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-//    SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-//    SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
-//    m_nomFenetre.afficher(fenetre_affichage);
-    //m_zoneNomObjet->afficher(fenetre_affichage);
-    //m_zoneDescriptionObjet->afficher(fenetre_affichage);
-
     definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_quantiteInventaire->afficher(fenetre_affichage);
 

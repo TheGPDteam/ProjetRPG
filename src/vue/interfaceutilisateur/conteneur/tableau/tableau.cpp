@@ -56,7 +56,7 @@ void
 Tableau::ajouterEnTeteHumain(){
     std::vector<std::string> tmp;
     tmp.push_back("Nom");
-    tmp.push_back("Prénom");
+    tmp.push_back("Prenom");
     tmp.push_back("Chasse");
     tmp.push_back("Recolte");
     tmp.push_back("Campement");
