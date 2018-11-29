@@ -1,6 +1,7 @@
 #include "ecraninventaire.h"
 #include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "tableau.h"
 #include <utility>
 #include <iostream>
 
@@ -33,6 +34,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 
+    int i=0;
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     SDL_Rect rect2 = {100, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr,
@@ -82,15 +84,11 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     //        }
     //    }
 
-    int i=0;
-    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
-    {
-        ++i;
-        TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficher(fenetre_affichage);
-        TexteSDL zoneTempDesc = TexteSDL (o->obtenirDescription(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 380 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempDesc.afficher(fenetre_affichage);
-    }
+//    Tableau tabObjet = new Tableau(m_rectangleHaut,m_rectangleHaut.h, m_rectangleHaut.w,)
+//    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
+//    {
+
+//    }
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
