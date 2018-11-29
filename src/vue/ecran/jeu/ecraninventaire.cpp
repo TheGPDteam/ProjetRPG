@@ -1,6 +1,7 @@
 #include "ecraninventaire.h"
 #include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "tableau.h"
 #include <utility>
 #include <iostream>
 
@@ -33,6 +34,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 
+    int i=0;
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     SDL_Rect rect2 = {100, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr,
@@ -59,14 +61,6 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    SDL_FillRect(fenetre_affichage, &m_rectangleHaut, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-    SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-    SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
-    m_nomFenetre.afficher(fenetre_affichage);
-    m_zoneNomObjet->afficher(fenetre_affichage);
-    m_zoneDescriptionObjet->afficher(fenetre_affichage);
-
     definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_quantiteInventaire->afficher(fenetre_affichage);
 
@@ -82,15 +76,13 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     //        }
     //    }
 
-    int i=0;
+    Tableau tabObjet(ecran, 32, m_controleur);
+    tabObjet.ajouterEnTeteObjet();
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
-        ++i;
-        TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficher(fenetre_affichage);
-        TexteSDL zoneTempDesc = TexteSDL (o->obtenirDescription(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 380 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempDesc.afficher(fenetre_affichage);
+        tabObjet.ajouterObjet(o);
     }
+    tabObjet.afficher(fenetre_affichage);
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
