@@ -11,12 +11,14 @@
 #include <sys/types.h>
 
 const std::string EN_TETE_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+const std::string FICHIER_SAUVEGARDE = "save/Default.xml";
 
 class Sauvegarde
 {
 public:
     static void sauvegarderModele(Modele *modele);
     static void chargerModele(Modele* modele);
+    static bool fichierSauvegardeExiste();
 };
 
 #endif
