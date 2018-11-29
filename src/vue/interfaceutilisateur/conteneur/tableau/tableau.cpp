@@ -1,7 +1,7 @@
 #include "tableau.h"
 
-Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Controleur *controleur)
-    :Affichable{rect}, m_hauteur{hauteur}, m_largeur{largeur}, m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_nbLignes{0}
+Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur)
+    :Affichable{rect},m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_nbLignes{0}
 {
 }
 
