@@ -28,8 +28,9 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     SDL_Rect rect2 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
+    bool chargementPossible = Sauvegarde::fichierSauvegardeExiste();
     ajoutBoutonDansMapDeBoutons(new Bouton("Continuer", rect2, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChargement);
+                                           chargementPossible, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChargement);
     coordB.second = coordB.second + 70;
 
     SDL_Rect rect3 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
