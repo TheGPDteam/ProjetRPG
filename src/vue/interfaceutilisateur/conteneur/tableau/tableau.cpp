@@ -62,7 +62,7 @@ Tableau::ajouterEnTeteHumain(){
     tmp.push_back("Campement");
     tmp.push_back("Arme");
     tmp.push_back("Niveau");
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne());
+    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0);
     m_nbLignes++;
 }
 
@@ -78,7 +78,7 @@ Tableau::ajouterEnTeteObjet(){
 //    }else if(typeObjet == TypeObjet::Vivre){
 //        tmp.push_back("ValeurNutritive");
 //    }
-m_enTete = new Ligne(tmp, m_controleur, creerRectLigne());
+m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
 m_nbLignes++;
 }
 
@@ -137,7 +137,7 @@ Tableau::ajouterObjet(Objet* obj){
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<std::string> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne());
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2);
     m_lignes.push_back(l);
     m_nbLignes++;
 }
