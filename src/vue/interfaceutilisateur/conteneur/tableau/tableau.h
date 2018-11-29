@@ -8,8 +8,6 @@
 class Tableau : public Affichable
 {
 private :
-    float m_hauteur;
-    float m_largeur;
     float m_hauteurLigne;
     int m_nbLignes;
     Ligne * m_enTete;
@@ -19,7 +17,7 @@ private :
     void creerLigne(std::vector<std::string> ligne);
     SDL_Rect creerRectLigne();
 public:
-    Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Controleur *controleur);
+    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
     void ajouterElement(std::vector<Affichable*> affichables);
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet();

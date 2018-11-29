@@ -84,7 +84,7 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     //        }
     //    }
 
-    Tableau tabObjet(ecran,m_rectangleHaut.h, m_rectangleHaut.w, 32, m_controleur);
+    Tableau tabObjet(ecran, 32, m_controleur);
     tabObjet.ajouterEnTeteObjet();
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
