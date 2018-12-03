@@ -1,7 +1,7 @@
 #include "tableau.h"
 
-Tableau::Tableau(SDL_Rect rect, float hauteur, float largeur, float hauteurLigne, Ligne *enTete, Controleur *controleur)
-    :Affichable{rect}, m_hauteur{hauteur}, m_largeur{largeur}, m_hauteurLigne {hauteurLigne}, m_enTete{enTete}, m_controleur{controleur}
+Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur)
+    :Affichable{rect},m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_nbLignes{0}
 {
 }
 
@@ -56,27 +56,30 @@ void
 Tableau::ajouterEnTeteHumain(){
     std::vector<std::string> tmp;
     tmp.push_back("Nom");
-    tmp.push_back("Prénom");
+    tmp.push_back("Prenom");
     tmp.push_back("Chasse");
     tmp.push_back("Recolte");
     tmp.push_back("Campement");
     tmp.push_back("Arme");
     tmp.push_back("Niveau");
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne());
+    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0);
+    m_nbLignes++;
 }
 
 void
-Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
+Tableau::ajouterEnTeteObjet(){
     std::vector<std::string> tmp;
     tmp.push_back("Nom");
     tmp.push_back("Description");
-    if(typeObjet == TypeObjet::Arme ) {
-        tmp.push_back("Degats");
-        tmp.push_back("Vitesse");
-        tmp.push_back("Chance");
-    }else if(typeObjet == TypeObjet::Vivre){
-        tmp.push_back("ValeurNutritive");
-    }
+//    if(typeObjet == TypeObjet::Arme ) {
+//        tmp.push_back("Degats");
+//        tmp.push_back("Vitesse");
+//        tmp.push_back("Chance");
+//    }else if(typeObjet == TypeObjet::Vivre){
+//        tmp.push_back("ValeurNutritive");
+//    }
+m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
+m_nbLignes++;
 }
 
 
@@ -93,7 +96,7 @@ Tableau::ajouterElement(std::vector<Affichable*> affichables){
 //!
 void
 Tableau::ajouterHumain(Humain* perso){
-    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
+    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),perso->obtenirNom());
     tmp.insert(tmp.end(),perso->obtenirPrenom());
@@ -112,19 +115,19 @@ Tableau::ajouterHumain(Humain* perso){
 //! \date 15/11/2018
 void
 Tableau::ajouterObjet(Objet* obj){
-    assert (m_enTete != nullptr); //l'entete dois etre defini avant d'ajouter des objets
+    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());
-    if(obj->obtenirType() == TypeObjet::Arme ) {
-        Arme * arme = dynamic_cast<Arme *>(obj);
-        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
-        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
-        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
-    }else if(obj->obtenirType() == TypeObjet::Vivre){
-        Vivre * vivre = dynamic_cast<Vivre*>(obj);
-        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
-    }
+//    if(obj->obtenirType() == TypeObjet::Arme ) {
+//        Arme * arme = dynamic_cast<Arme *>(obj);
+//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
+//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
+//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
+//    }else if(obj->obtenirType() == TypeObjet::Vivre){
+//        Vivre * vivre = dynamic_cast<Vivre*>(obj);
+//        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
+//    }
     creerLigne(tmp);
 }
 //!
@@ -134,8 +137,9 @@ Tableau::ajouterObjet(Objet* obj){
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<std::string> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne());
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2);
     m_lignes.push_back(l);
+    m_nbLignes++;
 }
 
 //!
@@ -146,9 +150,8 @@ Tableau::creerLigne(std::vector<std::string> donneesLigne){
 //!
 SDL_Rect
 Tableau::creerRectLigne(){
-    SDL_Rect rectangleParLigne;
-    rectangleParLigne.x=this->m_rectangle.x;
-    rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_lignes.size();
+    SDL_Rect rectangleParLigne = m_rectangle;
+    rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_nbLignes;
     rectangleParLigne.h= this->m_hauteurLigne;
-    rectangleParLigne.w=this->m_rectangle.w;
+    return rectangleParLigne;
 }

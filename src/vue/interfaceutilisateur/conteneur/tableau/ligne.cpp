@@ -1,8 +1,9 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect rectangleLigne)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr)
+Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre)
 {
+
     for(std::string d : m_donnees) {
         creerCaseString(d);
     }
@@ -62,6 +63,14 @@ Ligne::creerRectCase(){
 //!
 void Ligne::afficher(SDL_Surface *surface)
 {
+    Uint32 couleurFond = SDL_MapRGB(surface->format, 100, 100, 100);
+    if(m_sombre == 1)
+        couleurFond = SDL_MapRGB(surface->format, 200, 200, 200);
+    else if (m_sombre == 2)
+        couleurFond = SDL_MapRGB(surface->format, 170, 170, 170);
+
+
+        SDL_FillRect(surface, &m_rectangle,couleurFond);
     for (Case * c : m_cases)
     {
         c->afficher(surface);
