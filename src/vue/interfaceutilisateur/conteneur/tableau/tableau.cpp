@@ -71,15 +71,32 @@ Tableau::ajouterEnTeteObjet(){
     std::vector<std::string> tmp;
     tmp.push_back("Nom");
     tmp.push_back("Description");
-//    if(typeObjet == TypeObjet::Arme ) {
-//        tmp.push_back("Degats");
-//        tmp.push_back("Vitesse");
-//        tmp.push_back("Chance");
-//    }else if(typeObjet == TypeObjet::Vivre){
-//        tmp.push_back("ValeurNutritive");
-//    }
-m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
-m_nbLignes++;
+    //    if(typeObjet == TypeObjet::Arme ) {
+    //        tmp.push_back("Degats");
+    //        tmp.push_back("Vitesse");
+    //        tmp.push_back("Chance");
+    //    }else if(typeObjet == TypeObjet::Vivre){
+    //        tmp.push_back("ValeurNutritive");
+    //    }
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
+    m_nbLignes++;
+}
+
+void Tableau::ajouterEnTeteCampement(){
+    std::vector<std::string> tmp;
+    //    tmp.push_back("Icone");
+    tmp.push_back("Nom");
+    tmp.push_back("Description");
+    tmp.push_back("Quantite");
+    //    if(typeObjet == TypeObjet::Arme ) {
+    //        tmp.push_back("Degats");
+    //        tmp.push_back("Vitesse");
+    //        tmp.push_back("Chance");
+    //    }else if(typeObjet == TypeObjet::Vivre){
+    //        tmp.push_back("ValeurNutritive");
+    //    }
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
+    m_nbLignes++;
 }
 
 
@@ -119,17 +136,85 @@ Tableau::ajouterObjet(Objet* obj){
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
     tmp.insert(tmp.end(),obj->obtenirDescription());
-//    if(obj->obtenirType() == TypeObjet::Arme ) {
-//        Arme * arme = dynamic_cast<Arme *>(obj);
-//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
-//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
-//        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
-//    }else if(obj->obtenirType() == TypeObjet::Vivre){
-//        Vivre * vivre = dynamic_cast<Vivre*>(obj);
-//        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
-//    }
+    //    if(obj->obtenirType() == TypeObjet::Arme ) {
+    //        Arme * arme = dynamic_cast<Arme *>(obj);
+    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
+    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
+    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
+    //    }else if(obj->obtenirType() == TypeObjet::Vivre){
+    //        Vivre * vivre = dynamic_cast<Vivre*>(obj);
+    //        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
+    //    }
     creerLigne(tmp);
 }
+
+void Tableau::ajouterObjetsCampement(Campement *c)
+{
+    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
+    std::vector<std::string> tmp;
+    std::map<PartieBus*, unsigned short> cpt;
+    //Pour chaque partie bus
+    for (Objet *o : c->obtenirObjets())
+    {
+        if (o->obtenirType()==TypeObjet::Partie_bus)
+        {
+
+            PartieBus *p = dynamic_cast<PartieBus *> (o);
+            bool ajoute = false;
+            //Compter le nombre
+            if (cpt.size()!=0)
+            {
+                for (std::map<PartieBus*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it)
+                {
+                    if (p->obtenirTypePartie()==it->first->obtenirTypePartie()) //Quand je le trouve
+                    {
+                        ajoute=true;
+                        it->second++;
+                    } else if (it->first==cpt.rbegin()->first && !ajoute)
+                    {
+                        cpt.insert(cpt.begin(), std::make_pair(p, 1));
+                    }
+                }
+            } else {
+                cpt.insert(cpt.begin(), std::make_pair(p, 1));
+            }
+            /*
+            if (cpt.find(p) != cpt.end()) //Quand je le trouve
+            {
+                cpt.find(p)++;
+            } else
+            {
+            }*/
+        }
+    }
+    for (std::map<PartieBus*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it)
+    {
+        /*            //Inserer l'icone
+            if (it->first->obtenirTypePartie() == TypePartieBus::ROUE)
+            {
+
+            } else if (it->first->obtenirTypePartie() == TypePartieBus::ESSENCE)
+            {
+
+            } else if (it->first->obtenirTypePartie() == TypePartieBus::MOTEUR)
+            {
+
+            } else //HUILE
+            {
+
+            }
+*/
+        //Inserer nom
+        tmp.insert(tmp.end(),it->first->obtenirNom());
+        //Inserer description
+        tmp.insert(tmp.end(),it->first->obtenirDescription());
+        //Inserer la quantite
+        tmp.insert(tmp.end(), std::to_string(it->second));
+        creerLigne(tmp);
+        tmp.clear();
+    }
+}
+
 //!
 //! \brief Créer une ligne
 //! \param donneesLigne

@@ -21,8 +21,10 @@ public:
     void ajouterElement(std::vector<Affichable*> affichables);
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet();
+    void ajouterEnTeteCampement();
     void ajouterHumain(Humain* perso);
     void ajouterObjet(Objet* obj);
+    void ajouterObjetsCampement(Campement *c);
 
     Ligne *ligneSurvole(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface *surface_affichage) override;

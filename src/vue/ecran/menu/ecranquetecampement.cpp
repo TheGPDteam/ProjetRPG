@@ -27,6 +27,11 @@ void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Su
     m_spriteMoteur->afficherSprite(fenetre_affichage);
     m_spriteEssence->afficherSprite(fenetre_affichage);
     m_spriteHuile->afficherSprite(fenetre_affichage);
+
+    Tableau tabEquipe(ecran,64,m_controleur);
+    tabEquipe.ajouterEnTeteCampement();
+    tabEquipe.ajouterObjetsCampement(m_controleur->obtenirModele()->obtenirCampement());
+    tabEquipe.afficher(fenetre_affichage);
 }
 
 void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){

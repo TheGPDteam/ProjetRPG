@@ -4,7 +4,7 @@
 #include "../ecrangeneral.h"
 #include "../outilsvue.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
-
+#include "tableau.h"
 
 class EcranQueteCampement : public EcranGeneral
 {
