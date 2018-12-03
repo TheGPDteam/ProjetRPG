@@ -1,7 +1,11 @@
 #ifndef CHOIXQUETE_H
 #define CHOIXQUETE_H
 
-#include "../ecrangeneral.h"
+#include "ecrangeneral.h"
+
+#define MARGE_ENTRE_FICHES 30
+#define NOMBRE_DE_FICHES 3
+#define MARGE_RECOLTE_CHASSE_CAMPEMENT (NOMBRE_DE_FICHES * MARGE_ENTRE_FICHES)/(NOMBRE_DE_FICHES+1)
 
 class EcranQuete : public EcranGeneral
 {
@@ -11,11 +15,13 @@ private:
     TexteSDL m_nomFenetre;
     TexteSDL m_titreRecolte;
     TexteSDL m_titreChasse;
+    TexteSDL m_titreCampement;
 
     Humain * m_humain_a_affecter;
 
     SDL_Rect m_fondChasse;
     SDL_Rect m_fondRecolte;
+    SDL_Rect m_fondCampement;
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
     SDL_Rect m_fondDescriptionChasse;
@@ -24,6 +30,7 @@ private:
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;
+    TexteSDL* m_zoneCampement;
     TexteSDL* m_zoneNomPersonnage;
     TexteSDL* m_zonePrenomPersonnage;
     TexteSDL* m_zoneChassePersonnage;

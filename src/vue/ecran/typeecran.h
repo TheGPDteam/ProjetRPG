@@ -1,9 +1,9 @@
 #ifndef TYPEECRAN_H
 #define TYPEECRAN_H
 
-const int WIDTH_FENETRE_PRINCIPALE = 1024;
-const int HEIGHT_FENETRE_PRINCIPALE = 668;
-const int BPP = 12;
+#define WIDTH_FENETRE_PRINCIPALE 1024
+#define HEIGHT_FENETRE_PRINCIPALE 668
+#define BPP 12
 
 //!
 //! Représente tout les types d'écran possibles

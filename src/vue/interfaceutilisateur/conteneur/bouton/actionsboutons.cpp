@@ -26,6 +26,7 @@ ActionsBoutons::ActionsBoutons(Controleur * controleur)
 
 TypeEcran ActionsBoutons::boutonJeuPrincipal() const
 {
+    m_controleur->obtenirModele()->obtenirTemps()->reprendre();
     return TypeEcran::JeuPrincipal;
 }
 
