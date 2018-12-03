@@ -23,6 +23,7 @@ Modele::Modele()
       m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}
 {
     premiereJournee();
+    this->m_temps.mettreEnPause();
 }
 
 //!
