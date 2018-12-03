@@ -14,6 +14,15 @@ private:
     Sprite* m_spriteHuile;
     Sprite* m_spriteEssence;
     Sprite* m_spriteMoteur;
+    TexteSDL* m_labelRoue;
+    TexteSDL* m_labelHuile;
+    TexteSDL* m_labelEssence;
+    TexteSDL* m_labelMoteur;
+
+    TexteSDL* m_jaugeHuile;
+    TexteSDL* m_jaugeEssence;
+    TexteSDL* m_nombreRoues;
+
     std::pair<int,int> coordBoutonRetour;
     std::pair<int,int> coordBoutonCampement;
 public:
