@@ -44,8 +44,11 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
         {TypePartieBus::MOTEUR,1},
         {TypePartieBus::ESSENCE,1},
         {TypePartieBus::HUILE,2}
-      }
+      },
+      m_partiesBusReunies{false}
+
 {
+
 }
 
 bool QuetePrincipale::obtenirFini() const

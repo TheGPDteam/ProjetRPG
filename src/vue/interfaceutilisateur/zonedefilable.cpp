@@ -63,7 +63,7 @@ SDL_Rect ZoneDefilable::zone() const {
 void ZoneDefilable::defiler(bool haut){
     if(m_fenetreGlissante.h < m_contenu->rectangle().h){
         // nouvelle ordonnée est bornée entre 0 et la hauteur du contenu moins la hauteur de la zone défilable
-        int nouvelle_ordonnee = m_fenetreGlissante.y + (haut ? 1. : -1.) * m_fenetreGlissante.h*VITESSE_DEFILEMENT ;
+        int nouvelle_ordonnee = m_fenetreGlissante.y + (!haut ? 1. : -1.) * m_fenetreGlissante.h*VITESSE_DEFILEMENT ;
         nouvelle_ordonnee = std::max(0, nouvelle_ordonnee);
         nouvelle_ordonnee = std::min(nouvelle_ordonnee,m_contenu->rectangle().h - m_fenetreGlissante.h);
 

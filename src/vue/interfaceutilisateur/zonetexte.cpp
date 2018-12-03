@@ -71,6 +71,9 @@ void ZoneTexte::adapterTexte()
                                      m_rectangle.w,
                                      m_rectangle.h};
         t->redimensionner(nouveauRectangle);
+        if(m_rectangle.h > (tailleTexte.second)+30) {
+            m_rectangle.h = m_rectangle.h - tailleTexte.second;
+        }
         std::pair<int, int> nouvellePosition;
         if (m_alignement == ALIGNEMENT_TEXTE::CENTRE)
         {
@@ -81,6 +84,8 @@ void ZoneTexte::adapterTexte()
             nouvellePosition = {m_rectangle.x,(m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
         }
         t->positionner(nouvellePosition);
+
+
         m_texteSDL.insert(m_texteSDL.begin(), t);
         break;
     }
@@ -122,7 +127,12 @@ void ZoneTexte::adapterTexte()
                                  std::make_pair<int,int>(m_rectangle.x, m_rectangle.y + ((m_taillePolice+5)*m_texteSDL.size())));
                 m_texteSDL.push_back(t);
             }
+            std::pair<int, int > tailleTexte = t->obtenirRectTexte();
+            if(m_rectangle.h > tailleTexte.second) {
+                m_rectangle.h = m_rectangle.h - (tailleTexte.second - 4);
+            }
         }
+
         break;
     }
     default:
