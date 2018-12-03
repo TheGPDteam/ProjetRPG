@@ -2,6 +2,7 @@
 
 #include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "tableau.h"
 
 const int ESPACE_X_RECTANGLE_OBJET = 20;
 const int ESPACE_Y_RECTANGLE_OBJET = 90;
@@ -34,25 +35,19 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
     m_nomFenetre.afficher(fenetre_affichage);
-    m_nomObjet.afficher(fenetre_affichage);
-    m_descObjet.afficher(fenetre_affichage);
+   // m_nomObjet.afficher(fenetre_affichage);
+    //m_descObjet.afficher(fenetre_affichage);
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 
-    int i=0;
+    Tableau tabListObj(m_rectangleFicheObjet,32,m_controleur);
+    tabListObj.ajouterEnTeteObjet();
     for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
     {
-        ++i;
-        if (i==11)
-        {
-            break;
-        }
-        TexteSDL zoneTempNom = TexteSDL (o->obtenirNom(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(50, 120 + 30 * i));
-        zoneTempNom.afficher(fenetre_affichage);
-        TexteSDL zoneTempNiv = TexteSDL (o->obtenirDescription(),SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(350, 120 + 30 * i));
-        zoneTempNiv.afficher(fenetre_affichage);
+       tabListObj.ajouterObjet(o);
     }
+    tabListObj.afficher(fenetre_affichage);
 }
 
 void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){

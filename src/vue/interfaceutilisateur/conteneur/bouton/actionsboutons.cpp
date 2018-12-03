@@ -225,3 +225,8 @@ TypeEcran ActionsBoutons::boutonJeuPrincipalCampement()
     m_controleur->obtenirModele()->obtenirJoueur()->definirPosition(std::make_pair(10,10));
     return TypeEcran::JeuPrincipal;
 }
+
+TypeEcran ActionsBoutons::boutonEtatQuetePrincipale()
+{
+    return TypeEcran::QueteCampement;
+}

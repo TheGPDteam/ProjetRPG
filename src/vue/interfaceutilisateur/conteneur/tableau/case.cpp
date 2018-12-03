@@ -19,7 +19,7 @@ Case::Case(SDL_Rect rect, Affichable * donnee)
 //!
 Case::Case(SDL_Rect rect, std::string donnee)
     : Affichable(rect),
-      m_donnee(new ZoneTexte(POLICE_COLLEGED, 12, std::make_pair(rect.x,rect.y), rect, donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::GAUCHE))
+      m_donnee(new ZoneTexte(POLICE_COLLEGED, 12, std::make_pair(rect.x,rect.y), rect, donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE))
 {
     redimensionner(rect);
 }

@@ -53,6 +53,8 @@ public:
     TypeEcran boutonListeObjet();
 
     TypeEcran boutonJeuPrincipalCampement();
+
+    TypeEcran boutonEtatQuetePrincipale();
 };
 
 #endif // ACTIONSBOUTONS_H

@@ -63,6 +63,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
     m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
+    m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
@@ -73,6 +74,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranAccueilCampement);
+    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteCampement);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
     m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
@@ -167,6 +169,11 @@ void Vue::affichageVue()
     case TypeEcran::ListeObjet:
     {
         afficherEcran(m_ecranListeObjet);
+        break;
+    }
+    case TypeEcran::QueteCampement:
+    {
+        afficherEcran(m_ecranQueteCampement);
         break;
     }
     default:{

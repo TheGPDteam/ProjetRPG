@@ -268,3 +268,7 @@ void Joueur::charger(const std::string &donnees)
     m_inventaireJoueur = new Inventaire();
     m_inventaireJoueur->charger(obtenirSousChaineEntre2Predicats(donnees,"<Inventaire>","</Inventaire>"));
 }
+
+QuetePrincipale Joueur::obtenirQuetePrincipale() {
+    return m_quetePrincipale;
+}

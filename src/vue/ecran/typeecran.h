@@ -14,6 +14,6 @@
 
 enum class TypeEcran
 {
-    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage, ChoixQuete, PopUpJoueur,RecolteJoueur, ChasseJoueur, RecapitulatifNuit, PremiereJournee, choixNom, AccueilCampement, ListeObjet
+    MenuPrincipal, JeuPrincipal, Quitter, Inventaire, Equipe, ChoixPersonnage, ChoixQuete, PopUpJoueur,RecolteJoueur, ChasseJoueur, RecapitulatifNuit, PremiereJournee, choixNom, AccueilCampement, ListeObjet, QueteCampement
 };
 #endif // TYPEECRAN_H

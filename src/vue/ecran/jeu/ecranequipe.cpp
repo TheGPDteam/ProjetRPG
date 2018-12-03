@@ -2,6 +2,7 @@
 #include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
 #include <utility>
+#include "tableau.h"
 
 // a déclarer autre part
 const short COORD_X_RECTANGLE_HAUT = 20;
@@ -52,37 +53,15 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    SDL_FillRect(fenetre_affichage, &m_rectangleHaut, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-    SDL_FillRect(fenetre_affichage, &m_rectangleBas, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
-    SDL_FillRect(fenetre_affichage, &m_rectangleDescription, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
     m_nomFenetre.afficher(fenetre_affichage);
-    m_zoneNomPersonnage->afficher(fenetre_affichage);
-    m_zoneNiveauPersonnage->afficher(fenetre_affichage);
-    m_zoneViePersonnage->afficher(fenetre_affichage);
-    m_zoneIntelligencePersonnage->afficher(fenetre_affichage);
-    m_zoneForcePersonnage->afficher(fenetre_affichage);
-    m_zoneVitessePersonnage->afficher(fenetre_affichage);
 
-    int i=0;
+    Tableau tabEquipe(ecran,32,m_controleur);
+    tabEquipe.ajouterEnTeteHumain();
     for(auto p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage())
     {
-        ++i;
-        Humain *h = dynamic_cast<Humain*> (p);
-        TexteSDL zoneTempNom = TexteSDL (h->obtenirNom(),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNom.afficher(fenetre_affichage);
-        TexteSDL zoneTempNiv = TexteSDL (std::to_string(h->obtenirNiveau().obtenirNiveauActuel()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 190 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempNiv.afficher(fenetre_affichage);
-        TexteSDL zoneTempVie = TexteSDL (std::to_string(h->obtenirVie()->obtenirValeur()) + " sur " + std::to_string(h->obtenirVie()->obtenirValeurMax()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 310 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempVie.afficher(fenetre_affichage);
-        TexteSDL zoneTempInt = TexteSDL (std::to_string(h->obtenirIntelligence()->obtenirValeur()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 460 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempInt.afficher(fenetre_affichage);
-        TexteSDL zoneTempF = TexteSDL(std::to_string(h->obtenirForce()->obtenirValeur()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 690 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempF.afficher(fenetre_affichage);
-        TexteSDL zoneTempV = TexteSDL(std::to_string(h->obtenirVitesse()),SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 800 , m_rectangleDescription.y + 20 + 30 * i));
-        zoneTempV.afficher(fenetre_affichage);
+        tabEquipe.ajouterHumain(dynamic_cast<Humain*> (p));
     }
-
+    tabEquipe.afficher(fenetre_affichage);
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 

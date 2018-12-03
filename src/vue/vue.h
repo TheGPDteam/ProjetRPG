@@ -14,6 +14,7 @@
 #include "./ecran/menu/ecranpremierejournee.h"
 #include "./ecran/menu/ecranaccueilcampement.h"
 #include "./ecran/jeu/ecranlisteobjets.h"
+#include "./ecran/menu/ecranquetecampement.h"
 
 #include <iostream>
 
@@ -36,6 +37,7 @@ private:
     EcranRecapitulatifNuit* m_ecranRecapitulatifNuit;
     EcranAccueilCampement* m_ecranAccueilCampement;
     EcranListeObjet* m_ecranListeObjet;
+    EcranQueteCampement* m_ecranQueteCampement;
 
     Controleur* m_controleur;
 

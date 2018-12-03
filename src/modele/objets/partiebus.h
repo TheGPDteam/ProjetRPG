@@ -7,7 +7,8 @@ enum TypePartieBus
 {
     ROUE,
     ESSENCE,
-    MOTEUR
+    MOTEUR,
+    HUILE
 };
 
 class PartieBus : public Objet
@@ -16,6 +17,7 @@ private:
     TypePartieBus m_partie;
 public:
     PartieBus(std::string nom, std::string description, TypePartieBus partie);
+    PartieBus();
     TypeObjet obtenirType() const;
     TypePartieBus obtenirTypePartie() const;
     bool operator==(PartieBus* obj);

@@ -10,6 +10,8 @@ class RepartitionJoueur{
 
 private:
 
+    Controleur * m_controleur;
+
     SDL_Rect m_rectangleFichePersonnage;
 
 
@@ -44,7 +46,7 @@ private:
 
 public:
 
-    RepartitionJoueur(Humain * humain, SDL_Surface * fenetre);
+    RepartitionJoueur(Humain * humain, SDL_Surface * fenetre, Controleur * controleur);
 
 
     int affecter();

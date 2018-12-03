@@ -9,12 +9,12 @@ const float MARGE_RATIO = 0.1;
 
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0),
-                                            SDL_Rect {0,0,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},
+                                            SDL_Rect {0,0,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,2*(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},
                                             recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
    SDL_Rect rectDefilable =  {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
            ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 3};
-   m_defilable = new ZoneDefilable(&m_zoneTexte, m_controleur, true, rectDefilable);
+   m_defilable = new ZoneDefilable(&m_zoneTexte,SDL_Color{100, 100, 100,255}, m_controleur, true, rectDefilable);
 
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
