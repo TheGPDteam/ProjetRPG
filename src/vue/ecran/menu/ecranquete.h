@@ -13,10 +13,6 @@ private:
     std::function<TypeEcran(DictionnaireDeBoutons&, std::pair<int, int> coord_souris, TypeEcran)> m_methodeVerificationCliqueSourisSurBouton;
 
     TexteSDL m_nomFenetre;
-    TexteSDL m_titreRecolte;
-    TexteSDL m_titreChasse;
-    TexteSDL m_titreCampement;
-
     Humain * m_humain_a_affecter;
 
     SDL_Rect m_fondChasse;
@@ -24,9 +20,6 @@ private:
     SDL_Rect m_fondCampement;
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
-    SDL_Rect m_fondDescriptionChasse;
-    SDL_Rect m_fondDescriptionRecolte;
-    SDL_Rect m_fondDescriptionCampement;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;

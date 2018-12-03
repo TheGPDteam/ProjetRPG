@@ -10,9 +10,6 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_titreRecolte("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(200, HEIGHT_FENETRE_PRINCIPALE/2+40)),
-    m_titreChasse("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(700, HEIGHT_FENETRE_PRINCIPALE/2+40)),
-    m_titreCampement("Campement", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(700, HEIGHT_FENETRE_PRINCIPALE/2+40)),
     m_humain_a_affecter{nullptr}
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
@@ -30,9 +27,6 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_fondChasse = {WIDTH_FENETRE_PRINCIPALE/3+20-10 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
-    m_fondDescriptionChasse = {WIDTH_FENETRE_PRINCIPALE/2+20, HEIGHT_FENETRE_PRINCIPALE/2+30, WIDTH_FENETRE_PRINCIPALE/2-20*2-10, 40};
-    m_fondDescriptionRecolte = {30, HEIGHT_FENETRE_PRINCIPALE/2+30, WIDTH_FENETRE_PRINCIPALE/2-20*2-10, 40};
-    m_fondDescriptionCampement = {30, HEIGHT_FENETRE_PRINCIPALE/2+40, WIDTH_FENETRE_PRINCIPALE/2-20*2-10, 40};
 
     m_CoordNom = std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 12);
     m_CoordPrenom = std::make_pair(m_CoordNom.first + 260, m_fondDescriptionPerso.y + 12);
@@ -69,9 +63,6 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondCampement, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-    SDL_FillRect(fenetre_affichage, &m_fondDescriptionChasse, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-    SDL_FillRect(fenetre_affichage, &m_fondDescriptionRecolte, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
     m_nomFenetre.afficher(fenetre_affichage);
 
     Tableau tabHumain(m_fondPerso,32,m_controleur);
@@ -97,6 +88,14 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tabHumainChasse.ajouterHumain(dynamic_cast <Humain *> (p));
     }
     tabHumainChasse.afficher(fenetre_affichage);
+
+    Tableau tabHumainCampement(m_fondCampement,32,m_controleur);
+    tabHumainCampement.ajouterEnTeteHumain();
+    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
+    {
+        tabHumainCampement.ajouterHumain(dynamic_cast <Humain *> (p));
+    }
+    tabHumainCampement.afficher(fenetre_affichage);
 
     int l=0;
     for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
