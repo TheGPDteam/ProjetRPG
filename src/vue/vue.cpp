@@ -66,7 +66,8 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
 
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
+    //m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
+    m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->ajouterObservateur(*m_ecranInventaire);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixQuete);

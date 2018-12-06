@@ -2,16 +2,17 @@
 #define inventaire_h
 
 #include <vector>
-#include "../objets/objet.h"
-#include "../objets/armes/arme.h"
+#include "objet.h"
+#include "arme.h"
 #include "vivre.h"
+#include "observable.h"
 
 //!
 //! \brief Classe de gestion de l'inventaire
 //! \date 03/11/2016
 //!
 
-class Inventaire
+class Inventaire : public Observable
 {
 private:
     std::vector<Objet*> m_objets; /// Liste des objets dans l'inventaire

@@ -2,6 +2,7 @@
 #define CHOIXQUETE_H
 
 #include "ecrangeneral.h"
+#include "tableau.h"
 
 #define MARGE_ENTRE_FICHES 30
 #define NOMBRE_DE_FICHES 3
@@ -20,6 +21,11 @@ private:
     SDL_Rect m_fondCampement;
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
+
+    Tableau * m_tableauNonAffectes;
+    Tableau * m_tableauRecolte;
+    Tableau * m_tableauChasse;
+    Tableau * m_tableauCampement;
 
     TexteSDL* m_zoneRecolte;
     TexteSDL* m_zoneChasse;

@@ -28,6 +28,31 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
 
+    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur);
+    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur);
+    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur);
+    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur);
+    Campement * c = m_controleur->obtenirModele()->obtenirCampement();
+    for (Humain *h : c->obtenirNonAttribuees())
+    {
+        m_tableauNonAffectes->ajouterLigne(h);
+    }
+
+    for (Personnage *p : c->obtenirRecolte()->obtenirListePersonnage())
+    {
+        m_tableauRecolte->ajouterLigne(dynamic_cast <Humain *> (p));
+    }
+
+    for (Personnage *p : c->obtenirChasse()->obtenirListePersonnage())
+    {
+        m_tableauChasse->ajouterLigne(dynamic_cast <Humain *> (p));
+    }
+
+    for (Personnage *p : c->obtenirCampement()->obtenirListePersonnage())
+    {
+        m_tableauCampement->ajouterLigne(dynamic_cast <Humain *> (p));
+    }
+
     m_CoordNom = std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 12);
     m_CoordPrenom = std::make_pair(m_CoordNom.first + 260, m_fondDescriptionPerso.y + 12);
     m_CoordChasse = std::make_pair(m_CoordPrenom.first + 170, m_fondDescriptionPerso.y + 12);
@@ -65,38 +90,13 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
     m_nomFenetre.afficher(fenetre_affichage);
 
-    Tableau tabHumain(m_fondPerso,32,m_controleur);
-    tabHumain.ajouterEnTeteHumain();
-    for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
-    {
-        tabHumain.ajouterHumain(h);
-    }
-    tabHumain.afficher(fenetre_affichage);
 
-    Tableau tabHumainRecolte(m_fondRecolte,32,m_controleur);
-    tabHumainRecolte.ajouterEnTeteHumain();
-    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte()->obtenirListePersonnage())
-    {
-        tabHumainRecolte.ajouterHumain(dynamic_cast <Humain *> (p));
-    }
-    tabHumainRecolte.afficher(fenetre_affichage);
+    m_tableauCampement->afficher(fenetre_affichage);
+    m_tableauChasse->afficher(fenetre_affichage);
+    m_tableauRecolte->afficher(fenetre_affichage);
+    m_tableauNonAffectes->afficher(fenetre_affichage);
 
-    Tableau tabHumainChasse(m_fondChasse,32,m_controleur);
-    tabHumainChasse.ajouterEnTeteHumain();
-    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse()->obtenirListePersonnage())
-    {
-        tabHumainChasse.ajouterHumain(dynamic_cast <Humain *> (p));
-    }
-    tabHumainChasse.afficher(fenetre_affichage);
-
-    Tableau tabHumainCampement(m_fondCampement,32,m_controleur);
-    tabHumainCampement.ajouterEnTeteHumain();
-    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
-    {
-        tabHumainCampement.ajouterHumain(dynamic_cast <Humain *> (p));
-    }
-    tabHumainCampement.afficher(fenetre_affichage);
-
+    /*
     int l=0;
     for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
     {
@@ -109,6 +109,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         tempCampementPersonnage.afficher(fenetre_affichage);
         ++l;
     }
+    */
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);

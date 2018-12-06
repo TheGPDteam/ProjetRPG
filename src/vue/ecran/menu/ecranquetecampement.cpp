@@ -1,11 +1,15 @@
 #include "ecranquetecampement.h"
 
+//SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
     : EcranGeneral (controleur),
       m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,64,128,128},SDL_Rect{0,384,128,128}}},
       m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
       m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
-      m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}}
+      m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}},
+      m_tableauEquipe(Tableau::tableauCampement(m_ecran,64,m_controleur))
+
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200};
     coordBoutonRetour = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 300};
@@ -16,22 +20,19 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
 
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour Campement",rectBoutonCampement,m_controleur, nullptr,true,
                                            std::make_pair<float,float>(coordBoutonCampement.first+20,coordBoutonCampement.second+15),POLICE_COLLEGED),&ActionsBoutons::boutonCampement);
+    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
 
 }
 
 void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
-    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     afficherBoutons(coord_souris, fenetre_affichage);
     m_spriteRoue->afficherSprite(fenetre_affichage);
     m_spriteMoteur->afficherSprite(fenetre_affichage);
     m_spriteEssence->afficherSprite(fenetre_affichage);
     m_spriteHuile->afficherSprite(fenetre_affichage);
 
-    Tableau tabEquipe(ecran,64,m_controleur);
-    tabEquipe.ajouterEnTeteCampement();
-    tabEquipe.ajouterObjetsCampement(m_controleur->obtenirModele()->obtenirCampement());
-    tabEquipe.afficher(fenetre_affichage);
+    m_tableauEquipe->afficher(fenetre_affichage);
 }
 
 void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){

@@ -8,12 +8,14 @@
 // A déclarer autre part ?
 const short COORD_X_RECTANGLE_HAUT = 20;
 const short COORD_Y_RECTANGLE_HAUT = 50;
+//SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
 
 EcranInventaire::EcranInventaire(Controleur* controleur) :
     EcranGeneral{controleur},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+    m_tableau_objets(Tableau::tableauObjet(m_ecran, 32, m_controleur)),
     m_compteurInventaire(-1),
     m_fondEcran{},
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
@@ -41,6 +43,11 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
                                            true, std::make_pair<float, float>(rect.x + 20,rect.y + 15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
+
+    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
+    {
+        m_tableau_objets->ajouterLigne(o);
+    }
 }
 
 
@@ -58,8 +65,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
 
 void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
 {
-    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
     definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_quantiteInventaire->afficher(fenetre_affichage);
@@ -76,13 +82,8 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     //        }
     //    }
 
-    Tableau tabObjet(ecran, 32, m_controleur);
-    tabObjet.ajouterEnTeteObjet();
-    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
-    {
-        tabObjet.ajouterObjet(o);
-    }
-    tabObjet.afficher(fenetre_affichage);
+
+    m_tableau_objets->afficher(fenetre_affichage);
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
@@ -169,6 +170,10 @@ EcranInventaire::~EcranInventaire()
             }
         }
     }
+    if(m_tableau_objets != nullptr)
+    {
+        delete m_tableau_objets;
+    }
 }
 
 
@@ -176,19 +181,21 @@ EcranInventaire::~EcranInventaire()
 void EcranInventaire::obtenirChangement(Observable &obj)
 {
     Joueur* joueur = dynamic_cast<Joueur *>(&obj);
-    if (joueur == nullptr) return;
+    if (joueur != nullptr){
+        if (m_compteurInventaire == -1)
+            m_compteurInventaire = joueur->obtenirInventaireJoueur()->obtenirNombreObjet();
 
-    if (m_compteurInventaire == -1)
-        m_compteurInventaire = joueur->obtenirInventaireJoueur()->obtenirNombreObjet();
+        if( joueur->obtenirInventaireJoueur()->obtenirNombreObjet() != m_compteurInventaire)
+        {
+            definirObjetPourAffichage(joueur->obtenirInventaireJoueur()->obtenirObjets());
+            definirEtatQuantite(joueur->obtenirInventaireJoueur()->obtenirNombreObjet());
+        }
+    }
 
-
-    if( joueur->obtenirInventaireJoueur()->obtenirNombreObjet() != m_compteurInventaire)
+    m_tableau_objets->vider();
+    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
-        //m_vecteurObjetPourAffichage.resize(joueur->obtenirInventaireJoueur()->obtenirTailleMax());
-
-
-        definirObjetPourAffichage(joueur->obtenirInventaireJoueur()->obtenirObjets());
-        definirEtatQuantite(joueur->obtenirInventaireJoueur()->obtenirNombreObjet());
+        m_tableau_objets->ajouterLigne(o);
     }
 }
 

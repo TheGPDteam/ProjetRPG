@@ -94,6 +94,8 @@ void Inventaire::ajouterObjet(Objet *objet)
     {
         m_objets.push_back(objet);
     }
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -119,6 +121,8 @@ void Inventaire::supprimerObjet(Objet* objet)
         }
         ++i;
     }
+    mettreAChange();
+    notifierTous();
 }
 
 
@@ -139,6 +143,7 @@ void Inventaire::viderInventaire()
             this->supprimerObjet(o);
         }
     }
+
 }
 
 //!
@@ -211,4 +216,8 @@ void Inventaire::charger(const std::string &donnees)
             supprimmerSousChaineEntre2Predicats(donneesInventaire,"<Objet>","</Objet>");
         }
     }
+
+    mettreAChange();
+    notifierTous();
+
 }

@@ -1,7 +1,8 @@
 #ifndef ECRANEQUIPE_H
 #define ECRANEQUIPE_H
 
-#include "../ecrangeneral.h"
+#include "tableau.h"
+#include "ecrangeneral.h"
 
 class EcranEquipe : public EcranGeneral
 {
@@ -10,6 +11,7 @@ private :
 
     TexteSDL m_nomFenetre;
 
+    Tableau * m_tableau_equipe;
 
     SDL_Rect m_rectangleHaut;
 //    SDL_Rect m_rectangleNomEquipe;

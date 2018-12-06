@@ -101,8 +101,8 @@ void Tableau::ajouterEnTeteCampement(){
 
 
 void
-Tableau::ajouterElement(std::vector<Affichable*> affichables){
-
+Tableau::ajouterLigne(std::vector<Affichable*> affichables){
+    //creerLigne(affichables);
 }
 //!
 //! \brief Ajouter un humain dans le tableau
@@ -112,7 +112,7 @@ Tableau::ajouterElement(std::vector<Affichable*> affichables){
 //!
 //!
 void
-Tableau::ajouterHumain(Humain* perso){
+Tableau::ajouterLigne(Humain* perso){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),perso->obtenirNom());
@@ -131,7 +131,7 @@ Tableau::ajouterHumain(Humain* perso){
 //! \author Lacoste Dorian
 //! \date 15/11/2018
 void
-Tableau::ajouterObjet(Objet* obj){
+Tableau::ajouterLigne(Objet* obj){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
     tmp.insert(tmp.end(),obj->obtenirNom());
@@ -148,7 +148,7 @@ Tableau::ajouterObjet(Objet* obj){
     creerLigne(tmp);
 }
 
-void Tableau::ajouterObjetsCampement(Campement *c)
+void Tableau::ajouterLigne(Campement *c)
 {
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<std::string> tmp;
@@ -239,4 +239,30 @@ Tableau::creerRectLigne(){
     rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_nbLignes;
     rectangleParLigne.h= this->m_hauteurLigne;
     return rectangleParLigne;
+}
+
+
+Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
+    t->ajouterEnTeteHumain();
+    return t;
+}
+
+Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
+    t->ajouterEnTeteObjet();
+    return t;
+}
+
+Tableau * Tableau::tableauCampement(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
+    t->ajouterEnTeteCampement();
+    return t;
+}
+
+void Tableau::vider(){
+    for(auto & l : m_lignes)
+        delete l;
+    m_lignes.clear();
+    m_nbLignes = 1;
 }

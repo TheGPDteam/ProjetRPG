@@ -16,19 +16,28 @@ private :
     Controleur *m_controleur;
     void creerLigne(std::vector<std::string> ligne);
     SDL_Rect creerRectLigne();
-public:
-    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
-    void ajouterElement(std::vector<Affichable*> affichables);
+
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet();
     void ajouterEnTeteCampement();
-    void ajouterHumain(Humain* perso);
-    void ajouterObjet(Objet* obj);
-    void ajouterObjetsCampement(Campement *c);
+
+public:
+    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
+
+    void vider();
+
+    void ajouterLigne(std::vector<Affichable*> affichables);
+    void ajouterLigne(Humain* perso);
+    void ajouterLigne(Objet* obj);
+    void ajouterLigne(Campement *c);
 
     Ligne *ligneSurvole(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect nouvelleDimension) override;
+
+    static Tableau * tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
+    static Tableau * tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
+    static Tableau * tableauCampement(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
 
 };
 

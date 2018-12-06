@@ -5,6 +5,7 @@
 
 //std::string Bouton::m_cleMapSprites = SPRITES_PRINCIPAUX; //Ceci est la clé permettant de trouver la bonne feuille de sprite pour les boutons
 
+const SDL_Rect POSITION_FEUILLE_SPRITE = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
 //! \brief Constructeur parametre d'un bouton
@@ -36,8 +37,7 @@ Bouton::Bouton(const std::string texte,
       m_texteBouton(new ZoneTexte(police, 18, std::make_pair<int,int>(0,0), rectangle, texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE)))
     //, m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte))
 {
-    SDL_Rect positionFeuilleSprite = initialiserRectangle(COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-    m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, positionFeuilleSprite);
+    m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_FEUILLE_SPRITE);
     if(bouton_cliquable)
     {
         //m_texteBouton.setColor(COULEUR_BOUTON_CLIQUABLE);

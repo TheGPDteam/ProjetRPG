@@ -13,6 +13,7 @@ protected :
     Controleur* m_controleur;
     SDL_Surface * m_fond;
 
+    SDL_Rect m_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 public:
     EcranGeneral(Controleur * controleur);
 

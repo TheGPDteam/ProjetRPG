@@ -1,7 +1,8 @@
 #ifndef ECRANINVENTAIRE_H
 #define ECRANINVENTAIRE_H
 
-#include "../ecrangeneral.h"
+#include "tableau.h"
+#include "ecrangeneral.h"
 
 #include <vector>
 
@@ -9,7 +10,7 @@ class EcranInventaire : public EcranGeneral
 {
 private:
     TexteSDL m_nomFenetre;
-
+    Tableau * m_tableau_objets;
     int m_compteurInventaire;
 
     SDL_Rect m_fondEcran;

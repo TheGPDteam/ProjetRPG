@@ -1,13 +1,14 @@
 #ifndef ECRANLISTEOBJETS_H
 #define ECRANLISTEOBJETS_H
 
-#include "../ecrangeneral.h"
+#include "tableau.h"
+#include "ecrangeneral.h"
 
 class EcranListeObjet : public EcranGeneral
 {
 private:
     TexteSDL m_nomFenetre;
-
+    Tableau * m_tableau_objets;
     TexteSDL m_nomObjet;
     TexteSDL m_descObjet;
 
