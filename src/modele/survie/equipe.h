@@ -5,12 +5,13 @@
 #include <set>
 #include <algorithm>
 #include <assert.h>
-#include "../personnages/personnage.h"
-#include "../personnages/ennemis/zombie.h"
-#include "../personnages/humain.h"
-#include "../utilitaires.h"
+#include "personnage.h"
+#include "zombie.h"
+#include "humain.h"
+#include "utilitaires.h"
+#include "observable.h"
 
-class Equipe
+class Equipe : public Observable
 {
 private:
     std::set<Personnage*> m_personnages;

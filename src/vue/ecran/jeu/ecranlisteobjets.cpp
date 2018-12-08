@@ -38,16 +38,16 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
 void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
 {
     afficherFondEcran(fenetre_affichage);
-    SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
+    SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
     m_nomFenetre.afficher(fenetre_affichage);
    // m_nomObjet.afficher(fenetre_affichage);
     //m_descObjet.afficher(fenetre_affichage);
 
+    m_tableau_objets->afficher(fenetre_affichage);
+
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
-
-    m_tableau_objets->afficher(fenetre_affichage);
 }
 
 void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
@@ -81,5 +81,9 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
 }
 
 void EcranListeObjet::obtenirChangement(Observable &obj) {
-
+    m_tableau_objets->vider();
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
+    {
+        m_tableau_objets->ajouterLigne(o);
+    }
 }

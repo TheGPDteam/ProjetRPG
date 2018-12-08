@@ -16,13 +16,13 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT,  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
     //    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
     m_rectangleBas {COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250),  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
-    m_rectangleDescription {COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
-    m_zoneNomPersonnage {new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
-    m_zoneNiveauPersonnage {new TexteSDL("Niveau", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 190, m_rectangleDescription.y + 10))},
-    m_zoneViePersonnage {new TexteSDL("Vie", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 310, m_rectangleDescription.y + 10))},           // position imprécise **
-    m_zoneIntelligencePersonnage {new TexteSDL("Intelligence", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 460, m_rectangleDescription.y + 10))},
-    m_zoneForcePersonnage {new TexteSDL("Force", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 690, m_rectangleDescription.y + 10))},
-    m_zoneVitessePersonnage {new TexteSDL("Vitesse", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 800, m_rectangleDescription.y + 10))}
+    m_rectangleDescription {COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40}
+//    m_zoneNomPersonnage {new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
+//    m_zoneNiveauPersonnage {new TexteSDL("Niveau", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 190, m_rectangleDescription.y + 10))},
+//    m_zoneViePersonnage {new TexteSDL("Vie", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 310, m_rectangleDescription.y + 10))},           // position imprécise **
+//    m_zoneIntelligencePersonnage {new TexteSDL("Intelligence", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 460, m_rectangleDescription.y + 10))},
+//    m_zoneForcePersonnage {new TexteSDL("Force", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 690, m_rectangleDescription.y + 10))},
+//    m_zoneVitessePersonnage {new TexteSDL("Vitesse", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 800, m_rectangleDescription.y + 10))}
 {
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Retour jeu", POLICE_COLLEGED, 20, std::make_pair(WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10), std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL), std::make_pair(WIDTH_FENETRE_PRINCIPALE - 245, m_rectangleBas.y + 25)), &ActionsBoutons::boutonJeuPrincipal);
@@ -123,10 +123,10 @@ void EcranEquipe::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu
 
 EcranEquipe::~EcranEquipe()
 {
-    if(m_zoneNomPersonnage != nullptr)
-    {
-        delete m_zoneNomPersonnage;
-    }
+//    if(m_zoneNomPersonnage != nullptr)
+//    {
+//        delete m_zoneNomPersonnage;
+//    }
     if(m_tableau_equipe != nullptr)
     {
         delete m_tableau_equipe;

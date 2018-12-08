@@ -65,6 +65,8 @@ int Campement::consommerVivre()
     Vivre *v = *it;
     valeurNutritive = v->obtenirValeurNutritive();
     m_stockVivre.erase(v);
+    mettreAChange();
+    notifierTous();
     return valeurNutritive;
 }
 
@@ -123,6 +125,8 @@ void Campement::ajouterPersonne(Humain *perso, Equipe *equipe)
 void Campement::ajouterPersonne(Humain *humain)
 {
     m_personnesNonAttribuees.insert(humain);
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -226,7 +230,7 @@ void Campement::charger(std::string &donnees)
         {
             Vivre* v = new Vivre();
             v->charger(obtenirSousChaineEntre2Predicats(donneesStockVivre,"<Vivre>","</Vivre>"));
-            m_stockVivre.insert(v);
+            ajouterObjet(v);
             supprimmerSousChaineEntre2Predicats(donneesStockVivre,"<Vivre>","</Vivre>");
         }
     }
@@ -246,7 +250,7 @@ void Campement::charger(std::string &donnees)
         {
             Humain* h = new Humain();
             h->charger(obtenirSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>"));
-            m_personnesNonAttribuees.insert(h);
+            ajouterPersonne(h);
             supprimmerSousChaineEntre2Predicats(donneesPersonnesNonAttribuees,"<Humain>","</Humain>");
         }
     }
@@ -261,6 +265,8 @@ void Campement::ajouterObjet(Objet *obj) {
     else {
         m_objets.push_back(obj);
     }
+    mettreAChange();
+    notifierTous();
 }
 
 std::set<Vivre*> Campement::obtenirVivres()

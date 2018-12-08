@@ -2,7 +2,7 @@
 #define ECRANCHOIXPERSONNAGE_H
 
 
-#include "../ecrangeneral.h"
+#include "ecrangeneral.h"
 class EcranChoixPersonnage : public EcranGeneral{
 
 private:

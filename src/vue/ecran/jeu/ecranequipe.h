@@ -14,7 +14,6 @@ private :
     Tableau * m_tableau_equipe;
 
     SDL_Rect m_rectangleHaut;
-//    SDL_Rect m_rectangleNomEquipe;
     SDL_Rect m_rectangleBas;
     SDL_Rect m_rectangleDescription;
 
@@ -22,12 +21,12 @@ private :
     // Champ à compléter + intégration
     // Taille équipe ?
     //
-    TexteSDL* m_zoneNomPersonnage;
-    TexteSDL* m_zoneNiveauPersonnage;
-    TexteSDL* m_zoneViePersonnage;
-    TexteSDL* m_zoneIntelligencePersonnage;
-    TexteSDL* m_zoneForcePersonnage;
-    TexteSDL* m_zoneVitessePersonnage;
+//    TexteSDL* m_zoneNomPersonnage;
+//    TexteSDL* m_zoneNiveauPersonnage;
+//    TexteSDL* m_zoneViePersonnage;
+//    TexteSDL* m_zoneIntelligencePersonnage;
+//    TexteSDL* m_zoneForcePersonnage;
+//    TexteSDL* m_zoneVitessePersonnage;
 
    // std::vector< TexteSDL* > m_vecteurPersonnagePourAffichage;
 

@@ -53,26 +53,13 @@ EcranQuete::EcranQuete(Controleur *controleur) :
         m_tableauCampement->ajouterLigne(dynamic_cast <Humain *> (p));
     }
 
-    m_CoordNom = std::make_pair(m_fondDescriptionPerso.x + 10, m_fondDescriptionPerso.y + 12);
-    m_CoordPrenom = std::make_pair(m_CoordNom.first + 260, m_fondDescriptionPerso.y + 12);
-    m_CoordChasse = std::make_pair(m_CoordPrenom.first + 170, m_fondDescriptionPerso.y + 12);
-    m_CoordRecolte = std::make_pair(m_CoordChasse.first + 120, m_fondDescriptionPerso.y + 12);
-    m_CoordCampement = std::make_pair(m_CoordRecolte.first + 120, m_fondDescriptionPerso.y + 12);
-
-    m_zoneNomPersonnage = new TexteSDL("Nom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordNom);
-    m_zonePrenomPersonnage = new TexteSDL("Prenom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordPrenom);
-    m_zoneChassePersonnage = new TexteSDL("Chasse", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordChasse);           // position imprécise **
-    m_zoneRecoltePersonnage = new TexteSDL("Recolte", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordRecolte);
-    m_zoneCampementPersonnage = new TexteSDL("Campement", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, m_CoordCampement);
 }
 
 EcranQuete::~EcranQuete(){
-    if(m_zoneNomPersonnage != nullptr) delete m_zoneNomPersonnage;
-    if(m_zonePrenomPersonnage != nullptr) delete m_zonePrenomPersonnage;
-    if(m_zoneChassePersonnage != nullptr) delete m_zoneChassePersonnage;
-    if(m_zoneRecoltePersonnage != nullptr) delete m_zoneRecoltePersonnage;
-    if(m_zoneCampementPersonnage != nullptr) delete m_zoneCampementPersonnage;
-
+    delete m_tableauChasse;
+    delete m_tableauRecolte;
+    delete m_tableauCampement;
+    delete m_tableauNonAffectes;
 }
 
 
@@ -96,20 +83,6 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_tableauRecolte->afficher(fenetre_affichage);
     m_tableauNonAffectes->afficher(fenetre_affichage);
 
-    /*
-    int l=0;
-    for (Personnage *p : m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement()->obtenirListePersonnage())
-    {
-        Humain *h = dynamic_cast <Humain *> (p);
-        TexteSDL tempNomPersonnage(h->obtenirNom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1050,410+30*l));
-        tempNomPersonnage.afficher(fenetre_affichage);
-        TexteSDL tempPrenomPersonnage(h->obtenirPrenom(), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1250,410+30*l));
-        tempPrenomPersonnage.afficher(fenetre_affichage);
-        TexteSDL tempCampementPersonnage(std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(1400,410+30*l));
-        tempCampementPersonnage.afficher(fenetre_affichage);
-        ++l;
-    }
-    */
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
@@ -151,24 +124,24 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
         case SDL_MOUSEBUTTONDOWN:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
-                if(evenements.button.y >= m_CoordPrenom.second+30 && evenements.button.y <= m_CoordPrenom.second+30+(8*30)
-                        && evenements.button.x >= m_CoordNom.first ){
-                      int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
+//                if(evenements.button.y >= m_CoordPrenom.second+30 && evenements.button.y <= m_CoordPrenom.second+30+(8*30)
+//                        && evenements.button.x >= m_CoordNom.first ){
+//                      int idHumain = (evenements.button.y - m_CoordPrenom.second)/30;
 
-                    int i=0;
-                   for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
-                   {
+//                    int i=0;
+//                   for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
+//                   {
 
-                       i++;
-                       if(i==idHumain)
-                       {
-                           m_humain_a_affecter = h;
-                           break;
-                       }
-                   }
+//                       i++;
+//                       if(i==idHumain)
+//                       {
+//                           m_humain_a_affecter = h;
+//                           break;
+//                       }
+//                   }
 
 
-                }
+//                }
 
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;

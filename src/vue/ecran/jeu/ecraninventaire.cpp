@@ -21,10 +21,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
     m_rectangleBas{COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
     m_rectangleDescription{COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
-    m_zoneNomObjet{new TexteSDL("Nom", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleDescription.x + 10, m_rectangleDescription.y + 10))},
-    m_zoneDescriptionObjet{new TexteSDL("Description", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE / 2 - 100, m_rectangleDescription.y + 10))},
     m_quantiteInventaire{new TexteSDL("probleme affichage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_rectangleBas.w - 250, m_rectangleBas.y + m_rectangleBas.h - 50))},
-    m_vecteurObjetPourAffichage(10,std::vector<TexteSDL*> (2,nullptr)),
     m_idObjetSelectionne(-1)
 {
     /* A SUPPRIMER
@@ -35,15 +32,14 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     */
     const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-
-    int i=0;
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     SDL_Rect rect2 = {100, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr,
+    ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(rect.x + 20,rect.y + 15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
+    definirEtatQuantite(0);
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
         m_tableau_objets->ajouterLigne(o);
@@ -67,20 +63,8 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
 {
     SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
-    m_quantiteInventaire->afficher(fenetre_affichage);
 
-    //    if(!m_vecteurObjetPourAffichage.empty())
-    //    {
-    //        for(unsigned int i = 0; i+1 <= m_vecteurObjetPourAffichage.size(); ++i)
-    //        {
-    //            for(int j = 0; j < 2; ++j)
-    //            {
-    //                if(m_vecteurObjetPourAffichage[i][j] != nullptr)
-    //                    m_vecteurObjetPourAffichage[i][j]->afficher(fenetre_affichage);
-    //            }
-    //        }
-    //    }
+    m_quantiteInventaire->afficher(fenetre_affichage);
 
 
     m_tableau_objets->afficher(fenetre_affichage);
@@ -145,31 +129,11 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
 
 EcranInventaire::~EcranInventaire()
 {
-    if(m_zoneDescriptionObjet != nullptr)
-    {
-        delete m_zoneDescriptionObjet;
-    }
-
-    if(m_zoneNomObjet != nullptr)
-    {
-        delete m_zoneNomObjet;
-    }
-
     if(m_quantiteInventaire != nullptr)
     {
         delete m_quantiteInventaire;
     }
 
-    if(!m_vecteurObjetPourAffichage.empty())
-    {
-        for(int i = 0; i < 0; ++i)
-        {
-            for(int j = 0; j < 2; ++j)
-            {
-                delete m_vecteurObjetPourAffichage[i][j];
-            }
-        }
-    }
     if(m_tableau_objets != nullptr)
     {
         delete m_tableau_objets;
@@ -187,11 +151,11 @@ void EcranInventaire::obtenirChangement(Observable &obj)
 
         if( joueur->obtenirInventaireJoueur()->obtenirNombreObjet() != m_compteurInventaire)
         {
-            definirObjetPourAffichage(joueur->obtenirInventaireJoueur()->obtenirObjets());
+//            definirObjetPourAffichage(joueur->obtenirInventaireJoueur()->obtenirObjets());
             definirEtatQuantite(joueur->obtenirInventaireJoueur()->obtenirNombreObjet());
         }
     }
-
+    definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     m_tableau_objets->vider();
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
@@ -200,33 +164,9 @@ void EcranInventaire::obtenirChangement(Observable &obj)
 }
 
 
-bool EcranInventaire::definirObjetPourAffichage(std::vector<Objet *> objets)
-{
-    int cpt = 0;
-    bool ajoutEffectue = false;
-
-    for(Objet * objet : objets)
-    {
-        //if(m_vecteurObjetPourAffichage[cpt][0]->getTexteStr().compare(objet->obtenirNom()) != 0 && m_vecteurObjetPourAffichage[cpt][1]->getTexteStr().compare(objet->obtenirDescription()) != 0)
-        //{
-
-        m_vecteurObjetPourAffichage[cpt][0] = new TexteSDL(objet->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18,
-                                                           std::make_pair(m_rectangleDescription.x + 10, (m_rectangleDescription.y + 50) + cpt * 25)); // Nom
-        m_vecteurObjetPourAffichage[cpt][1] = new TexteSDL(objet->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 18, std::make_pair(WIDTH_FENETRE_PRINCIPALE/2 - 100, (m_rectangleDescription.y + 50) + cpt * 25)); // Description
-        ajoutEffectue = true;
-        //}
-
-        cpt++;
-    }
-
-    return ajoutEffectue;
-}
-
-
-
 void EcranInventaire::definirEtatQuantite(int quantite_objets)
 {
-    std::string tmp = "Stockage : " + std::to_string(quantite_objets) + " - " + std::to_string(m_vecteurObjetPourAffichage.size());
+    std::string tmp = "Stockage : " + std::to_string(quantite_objets); + " - " + std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirTailleMax());
 
     if(m_quantiteInventaire != nullptr)
     {

@@ -1,15 +1,15 @@
 #ifndef campement_h
 #define campement_h
 
-#include "../personnages/personnage.h"
-#include "../survie/equipe.h"
-#include "../survie/vivre.h"
-#include "../personnages/humain.h"
-#include "../utilitaires.h"
+#include "personnage.h"
+#include "equipe.h"
+#include "vivre.h"
+#include "humain.h"
+#include "utilitaires.h"
 #include <vector>
 #include <string>
 
-class Campement
+class Campement : public Observable
 {
 private:
     unsigned short m_quantiteVivre;

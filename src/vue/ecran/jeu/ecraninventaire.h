@@ -14,15 +14,11 @@ private:
     int m_compteurInventaire;
 
     SDL_Rect m_fondEcran;
-    SDL_Rect m_rectangleHaut;
-    SDL_Rect m_rectangleBas;
-    SDL_Rect m_rectangleDescription;
+    const SDL_Rect m_rectangleHaut;
+    const SDL_Rect m_rectangleBas;
+    const SDL_Rect m_rectangleDescription;
 
-    TexteSDL* m_zoneNomObjet;
-    TexteSDL* m_zoneDescriptionObjet;
     TexteSDL* m_quantiteInventaire;
-
-    std::vector< std::vector< TexteSDL* > > m_vecteurObjetPourAffichage;
 
     int m_idObjetSelectionne;
 

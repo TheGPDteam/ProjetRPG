@@ -17,6 +17,8 @@
 void Equipe::ajouterPersonnage(Personnage *personnage)
 {
     m_personnages.insert(personnage);
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -48,6 +50,8 @@ void Equipe::supprimerPersonnage(Personnage *personnage)
 {
     assert(m_personnages.find(personnage)!=m_personnages.end());
     m_personnages.erase(m_personnages.find(personnage));
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -92,7 +96,7 @@ Equipe::Equipe()
 
 Equipe::Equipe(Personnage *personnage)
 {
-    m_personnages.insert(personnage);
+    this->ajouterPersonnage(personnage);
 }
 
 //!
@@ -145,7 +149,7 @@ void Equipe::charger(std::string &donnees)
         {
             Humain* h = new Humain();
             h->charger(obtenirSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>"));
-            m_personnages.insert(h);
+            this->ajouterPersonnage(h);
             supprimmerSousChaineEntre2Predicats(donnees,"<Humain>","</Humain>");
         }
     }
