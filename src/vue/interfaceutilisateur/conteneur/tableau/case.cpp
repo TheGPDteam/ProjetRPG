@@ -9,18 +9,7 @@ Case::Case(SDL_Rect rect, Affichable * donnee)
     : Affichable(rect),
       m_donnee(donnee)
 {
-    redimensionner(rect);
-}
-
-//!
-//! \brief Case
-//! \param rect x, y, hauteur, largeur en pixel
-//! \param donnee le texte de la case
-//!
-Case::Case(SDL_Rect rect, std::string donnee)
-    : Affichable(rect),
-      m_donnee(new ZoneTexte(POLICE_COLLEGED, 12, std::make_pair(rect.x,rect.y), rect, donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE))
-{
+    donnee->redimensionner(rect);
     redimensionner(rect);
 }
 

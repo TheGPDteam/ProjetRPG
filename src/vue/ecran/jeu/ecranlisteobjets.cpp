@@ -37,6 +37,10 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
     {
         m_tableau_objets->ajouterLigne(o);
     }
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres())
+    {
+        m_tableau_objets->ajouterLigne(o);
+    }
 }
 
 void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
@@ -87,6 +91,10 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
 void EcranListeObjet::obtenirChangement(Observable &obj) {
     m_tableau_objets->vider();
     for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
+    {
+        m_tableau_objets->ajouterLigne(o);
+    }
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres())
     {
         m_tableau_objets->ajouterLigne(o);
     }

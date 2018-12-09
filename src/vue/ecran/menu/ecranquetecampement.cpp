@@ -8,7 +8,7 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}},
       m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
       m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
-      m_tableauEquipe(Tableau::tableauCampement(m_ecran,64,m_controleur))
+      m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,TypeObjet::Partie_bus))
 
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200};
@@ -20,6 +20,11 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
 
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour Campement",rectBoutonCampement,m_controleur, nullptr,true,
                                            std::make_pair<float,float>(coordBoutonCampement.first+20,coordBoutonCampement.second+15),POLICE_COLLEGED),&ActionsBoutons::boutonCampement);
+//    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets()){
+//        if(o->obtenirType() == TypeObjet::Partie_bus){
+//            m_tableauEquipe->ajouterLigne(o);
+//        }
+//    }
     m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
 
 }
@@ -65,4 +70,7 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
     }
 }
 
-void EcranQueteCampement::obtenirChangement(Observable &obj){}
+void EcranQueteCampement::obtenirChangement(Observable &obj){
+    m_tableauEquipe->vider();
+    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
+}

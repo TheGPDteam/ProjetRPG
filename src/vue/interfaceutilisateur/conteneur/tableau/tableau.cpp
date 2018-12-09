@@ -50,31 +50,31 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
         if(l->contient(coord_souris))
             return l;
     }
+    return nullptr;
 }
 
 void
 Tableau::ajouterEnTeteHumain(){
-    std::vector<std::string> tmp;
-    tmp.push_back("Nom");
-    tmp.push_back("Prenom");
-    tmp.push_back("Chasse");
-    tmp.push_back("Recolte");
-    tmp.push_back("Campement");
-    tmp.push_back("Arme");
-    tmp.push_back("Niveau");
+    std::vector<Affichable *> tmp;
+    tmp.push_back(creeZoneTexte("Nom"));
+    tmp.push_back(creeZoneTexte("Prenom"));
+    tmp.push_back(creeZoneTexte("Chasse"));
+    tmp.push_back(creeZoneTexte("Recolte"));
+    tmp.push_back(creeZoneTexte("Campement"));
+    tmp.push_back(creeZoneTexte("Arme"));
+    tmp.push_back(creeZoneTexte("Niveau"));
     m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0);
     m_nbLignes++;
 }
 
 void
-Tableau::ajouterEnTeteObjet(){
-    std::vector<std::string> tmp;
-    tmp.push_back("Nom");
-    tmp.push_back("Description");
-    //    if(typeObjet == TypeObjet::Arme ) {
-    //        tmp.push_back("Degats");
-    //        tmp.push_back("Vitesse");
-    //        tmp.push_back("Chance");
+Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
+    std::vector<Affichable *> tmp;
+    tmp.push_back(creeZoneTexte("Nom"));
+    tmp.push_back(creeZoneTexte("Description"));
+    if(typeObjet == TypeObjet::Partie_bus ) {
+        tmp.push_back(creeZoneTexte("Quantite"));
+    }
     //    }else if(typeObjet == TypeObjet::Vivre){
     //        tmp.push_back("ValeurNutritive");
     //    }
@@ -82,12 +82,12 @@ Tableau::ajouterEnTeteObjet(){
     m_nbLignes++;
 }
 
-void Tableau::ajouterEnTeteCampement(){
-    std::vector<std::string> tmp;
+void Tableau::ajouterEnTetePartiesBus(){
+    std::vector<Affichable *> tmp;
     //    tmp.push_back("Icone");
-    tmp.push_back("Nom");
-    tmp.push_back("Description");
-    tmp.push_back("Quantite");
+    tmp.push_back(creeZoneTexte("Nom"));
+    tmp.push_back(creeZoneTexte("Description"));
+    tmp.push_back(creeZoneTexte("Quantite"));
     //    if(typeObjet == TypeObjet::Arme ) {
     //        tmp.push_back("Degats");
     //        tmp.push_back("Vitesse");
@@ -102,7 +102,8 @@ void Tableau::ajouterEnTeteCampement(){
 
 void
 Tableau::ajouterLigne(std::vector<Affichable*> affichables){
-    //creerLigne(affichables);
+    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
+    creerLigne(affichables);
 }
 //!
 //! \brief Ajouter un humain dans le tableau
@@ -114,15 +115,27 @@ Tableau::ajouterLigne(std::vector<Affichable*> affichables){
 void
 Tableau::ajouterLigne(Humain* perso){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    std::vector<std::string> tmp;
-    tmp.insert(tmp.end(),perso->obtenirNom());
-    tmp.insert(tmp.end(),perso->obtenirPrenom());
-    tmp.insert(tmp.end(),std::to_string((int)perso->obtenirChasse().obtenirValeur()));
-    tmp.insert(tmp.end(),std::to_string((int)perso->obtenirRecolte().obtenirValeur()));
-    tmp.insert(tmp.end(),std::to_string((int)perso->obtenirCampement().obtenirValeur()));
-    tmp.insert(tmp.end(),perso->obtenirArme()->obtenirNom());
-    tmp.insert(tmp.end(),std::to_string((int)perso->obtenirNiveau().obtenirNiveauActuel()));
+    std::vector<Affichable*> tmp;
+    tmp.push_back(creeZoneTexte(perso->obtenirNom()));
+    tmp.push_back(creeZoneTexte(perso->obtenirPrenom()));
+    tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirChasse().obtenirValeur())));
+    tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirRecolte().obtenirValeur())));
+    tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirCampement().obtenirValeur())));
+    tmp.push_back(creeZoneTexte(perso->obtenirArme()->obtenirNom()));
+    tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirNiveau().obtenirNiveauActuel())));
     creerLigne(tmp);
+}
+
+//!
+//! \brief Tableau::creeZoneTexte
+//! \param donnee
+//! \author Lacoste Dorian
+//! \date 09/12/18
+//! \return un affichable zoneTexte
+//!
+ZoneTexte *
+Tableau::creeZoneTexte(std::string donnee){
+    return new ZoneTexte(POLICE_COLLEGED, 12, std::make_pair(0,0), SDL_Rect(), donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE);
 }
 
 //!
@@ -133,17 +146,17 @@ Tableau::ajouterLigne(Humain* perso){
 void
 Tableau::ajouterLigne(Objet* obj){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    std::vector<std::string> tmp;
-    tmp.insert(tmp.end(),obj->obtenirNom());
-    tmp.insert(tmp.end(),obj->obtenirDescription());
+    std::vector<Affichable *> tmp;
+    tmp.push_back(creeZoneTexte(obj->obtenirNom()));
+    tmp.push_back(creeZoneTexte(obj->obtenirDescription()));
     //    if(obj->obtenirType() == TypeObjet::Arme ) {
     //        Arme * arme = dynamic_cast<Arme *>(obj);
-    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirDegats()));
-    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirVitesse()));
-    //        tmp.insert(tmp.end(),std::to_string((int)arme->obtenirChance()));
+    //        tmp.push_back(,std::to_string((int)arme->obtenirDegats()));
+    //        tmp.push_back(std::to_string((int)arme->obtenirVitesse()));
+    //        tmp.push_back(std::to_string((int)arme->obtenirChance()));
     //    }else if(obj->obtenirType() == TypeObjet::Vivre){
     //        Vivre * vivre = dynamic_cast<Vivre*>(obj);
-    //        tmp.insert(tmp.end(),std::to_string(vivre->obtenirValeurNutritive()));
+    //        tmp.push_back(std::to_string(vivre->obtenirValeurNutritive()));
     //    }
     creerLigne(tmp);
 }
@@ -151,7 +164,7 @@ Tableau::ajouterLigne(Objet* obj){
 void Tableau::ajouterLigne(Campement *c)
 {
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    std::vector<std::string> tmp;
+    std::vector<Affichable *> tmp;
     std::map<PartieBus*, unsigned short> cpt;
     //Pour chaque partie bus
     for (Objet *o : c->obtenirObjets())
@@ -205,15 +218,16 @@ void Tableau::ajouterLigne(Campement *c)
             }
 */
         //Inserer nom
-        tmp.insert(tmp.end(),it->first->obtenirNom());
+        tmp.push_back(creeZoneTexte(it->first->obtenirNom()));
         //Inserer description
-        tmp.insert(tmp.end(),it->first->obtenirDescription());
+        tmp.push_back(creeZoneTexte(it->first->obtenirDescription()));
         //Inserer la quantite
-        tmp.insert(tmp.end(), std::to_string(it->second));
+        tmp.push_back(creeZoneTexte(std::to_string(it->second)));
         creerLigne(tmp);
         tmp.clear();
     }
 }
+
 
 //!
 //! \brief Créer une ligne
@@ -221,7 +235,7 @@ void Tableau::ajouterLigne(Campement *c)
 //! \author Lacoste Dorian
 //! \date 15/11/2018
 void
-Tableau::creerLigne(std::vector<std::string> donneesLigne){
+Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
     Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2);
     m_lignes.push_back(l);
     m_nbLignes++;
@@ -248,15 +262,9 @@ Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *
     return t;
 }
 
-Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
+Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, TypeObjet typeObjet){
     Tableau * t = new Tableau(rect, hauteurLigne, controleur);
-    t->ajouterEnTeteObjet();
-    return t;
-}
-
-Tableau * Tableau::tableauCampement(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
-    t->ajouterEnTeteCampement();
+    t->ajouterEnTeteObjet(typeObjet);
     return t;
 }
 

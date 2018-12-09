@@ -1,10 +1,10 @@
 #ifndef CASE_H
 #define CASE_H
 
-#include "../../../affichable.h"
+#include "affichable.h"
 #include <iostream>
-#include "../../zonetexte.h"
-#include "../../ressources/policetexte.h"
+#include "zonetexte.h"
+#include "policetexte.h"
 
 
 class Case : public Affichable
@@ -14,12 +14,11 @@ private :
 
 public :
     Case(SDL_Rect rect, Affichable* donnee);
-    Case(SDL_Rect rect, std::string donnee);
     Case() = delete;
     ~Case();
 
-    void afficher(SDL_Surface *surface);
-    void redimensionner(SDL_Rect m_rectangle);
+    void afficher(SDL_Surface *surface) override;
+    void redimensionner(SDL_Rect m_rectangle) override;
 
     void definirDonnee(Affichable* donnee);
     Affichable* obtenirDonnee() const;

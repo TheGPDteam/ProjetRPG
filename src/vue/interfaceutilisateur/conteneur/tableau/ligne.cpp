@@ -1,31 +1,15 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<std::string> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre)
+Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre)
     : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre)
 {
 
-    for(std::string d : m_donnees) {
-        creerCaseString(d);
+    for(Affichable *a: m_donnees) {
+        this->creerCaseElement(a);
     }
 }
 
-void
-Ligne::ajouterAffichable(Affichable *affichable){
-    m_affichable= affichable;
-    this->redimensionner(m_rectangle);
-}
 
-//!
-//! \brief cree une case
-//! \param donnee
-//! \author Lacoste Dorian, Anthony Regnies
-//! \date 22/11/18
-//! cree une case a partir d'une donnee string
-//!
-void
-Ligne::creerCaseString(std::string donnee){
-    this->m_cases.push_back(new Case(creerRectCase(), donnee));
-}
 //!
 //! \brief cree une case
 //! \param affichable
@@ -70,7 +54,7 @@ void Ligne::afficher(SDL_Surface *surface)
         couleurFond = SDL_MapRGB(surface->format, 170, 170, 170);
 
 
-        SDL_FillRect(surface, &m_rectangle,couleurFond);
+    SDL_FillRect(surface, &m_rectangle,couleurFond);
     for (Case * c : m_cases)
     {
         c->afficher(surface);

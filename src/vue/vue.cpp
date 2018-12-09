@@ -23,15 +23,15 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 
     m_typeEcran = TypeEcran::MenuPrincipal;
 
-//    //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
-//    m_menuPrincipal = new EcranMenuPrincipal();
-//    m_ecranEquipe = new EcranEquipe();
-//    m_ecranInventaire = new EcranInventaire();
-//    m_ecranChoixPersonnage = new EcranChoixPersonnage();
-//    m_ecranQueteJoueur = new EcranQueteJoueur();
-//    m_ecranNom = new EcranNom();
-//    m_ecranPremiereJournee = new EcranPremiereJournee();
-//    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
+    //    //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
+    //    m_menuPrincipal = new EcranMenuPrincipal();
+    //    m_ecranEquipe = new EcranEquipe();
+    //    m_ecranInventaire = new EcranInventaire();
+    //    m_ecranChoixPersonnage = new EcranChoixPersonnage();
+    //    m_ecranQueteJoueur = new EcranQueteJoueur();
+    //    m_ecranNom = new EcranNom();
+    //    m_ecranPremiereJournee = new EcranPremiereJournee();
+    //    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
 
     m_cliqueSouris = false;
     m_coordSouris = {0,0};
@@ -68,7 +68,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
     //m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
     m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->ajouterObservateur(*m_ecranInventaire);
-//    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
+    //    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
     m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->ajouterObservateur(*m_ecranEquipe);
     m_controleur->obtenirModele()->obtenirCampement()->ajouterObservateur(*m_ecranListeObjet);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
@@ -77,10 +77,11 @@ void Vue::definirControleur(Controleur *controleur)
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
     m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranAccueilCampement);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteCampement);
+    m_controleur->obtenirModele()->obtenirCampement()->ajouterObservateur(*m_ecranQueteCampement);
+    //    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteCampement);
     m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
 
-   // m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
+    // m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
     //m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
 
     m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
@@ -115,8 +116,8 @@ void Vue::affichageVue()
     }
     case TypeEcran::RecolteJoueur:{
         //Vivre* v = new Vivre("steak","steak",15);
-//        Quete q("Récolte","fais à manger!",10,100,v);
-//        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+        //        Quete q("Récolte","fais à manger!",10,100,v);
+        //        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
         changerEcran(TypeEcran::JeuPrincipal);
         break;
     }
