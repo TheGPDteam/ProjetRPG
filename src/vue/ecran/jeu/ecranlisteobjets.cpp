@@ -14,14 +14,18 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 EcranListeObjet::EcranListeObjet(Controleur *controleur)
     :EcranGeneral{controleur},
       m_nomFenetre("Liste des objets", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
-                   std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100)),
-      m_rectangleFicheObjet ({ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET}),
-      m_tableau_objets(Tableau::tableauObjet(m_rectangleFicheObjet, 32, controleur)),
-      m_nomObjet("Nom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
-                 std::make_pair(0,0), std::make_pair(150, 250)),
-      m_descObjet("Description", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
-                  std::make_pair(350,0), std::make_pair(150, 250))
+                   std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100))
+
+//      m_nomObjet("Nom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
+//                 std::make_pair(0,0), std::make_pair(150, 250)),
+//      m_descObjet("Description", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
+//                  std::make_pair(350,0), std::make_pair(150, 250)),m_rectangleFicheObjet ({ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET})
+
 {
+    m_rectangleFicheObjet = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET};
+
+    m_tableau_objets = Tableau::tableauObjet(m_rectangleFicheObjet, 32, controleur);
+
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
 
@@ -40,7 +44,7 @@ void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    m_nomFenetre.afficher(fenetre_affichage);
+   // m_nomFenetre.afficher(fenetre_affichage);
    // m_nomObjet.afficher(fenetre_affichage);
     //m_descObjet.afficher(fenetre_affichage);
 

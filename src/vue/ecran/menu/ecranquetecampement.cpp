@@ -5,9 +5,9 @@
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
     : EcranGeneral (controleur),
       m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,64,128,128},SDL_Rect{0,384,128,128}}},
-      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
-      m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}},
+      m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
+      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
       m_tableauEquipe(Tableau::tableauCampement(m_ecran,64,m_controleur))
 
 {
