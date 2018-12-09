@@ -9,7 +9,7 @@ class EcranEquipe : public EcranGeneral
 
 private :
 
-    TexteSDL m_nomFenetre;
+//    TexteSDL m_nomFenetre;
 
     Tableau * m_tableau_equipe;
 

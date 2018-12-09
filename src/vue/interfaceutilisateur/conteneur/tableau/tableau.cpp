@@ -1,9 +1,15 @@
 #include "tableau.h"
 
-Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur)
+Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom)
     :Affichable{rect},m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_nbLignes{0}
 {
+    std::vector<Affichable * > tmp;
+    tmp.push_back(creeZoneTexte(nom));
+    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1);
+    m_nbLignes++;
+    m_enTete=nullptr;
 }
+
 
 
 //!
@@ -14,6 +20,7 @@ Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur)
 //!
 void Tableau::afficher(SDL_Surface *surface_affichage)
 {
+    m_titre->afficher(surface_affichage);
     m_enTete->afficher(surface_affichage);
     for (Ligne * l : m_lignes)
     {
@@ -55,6 +62,7 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
 
 void
 Tableau::ajouterEnTeteHumain(){
+    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
     tmp.push_back(creeZoneTexte("Nom"));
     tmp.push_back(creeZoneTexte("Prenom"));
@@ -69,6 +77,7 @@ Tableau::ajouterEnTeteHumain(){
 
 void
 Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
+    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
     tmp.push_back(creeZoneTexte("Nom"));
     tmp.push_back(creeZoneTexte("Description"));
@@ -83,6 +92,7 @@ Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
 }
 
 void Tableau::ajouterEnTetePartiesBus(){
+    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
     //    tmp.push_back("Icone");
     tmp.push_back(creeZoneTexte("Nom"));
@@ -256,14 +266,14 @@ Tableau::creerRectLigne(){
 }
 
 
-Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
+Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre);
     t->ajouterEnTeteHumain();
     return t;
 }
 
-Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, TypeObjet typeObjet){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur);
+Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, TypeObjet typeObjet){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre);
     t->ajouterEnTeteObjet(typeObjet);
     return t;
 }
@@ -272,5 +282,5 @@ void Tableau::vider(){
     for(auto & l : m_lignes)
         delete l;
     m_lignes.clear();
-    m_nbLignes = 1;
+    m_nbLignes = 2;
 }

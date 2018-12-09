@@ -8,7 +8,7 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}},
       m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
       m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
-      m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,TypeObjet::Partie_bus))
+      m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,"Partie(s) du Bus",TypeObjet::Partie_bus))
 
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200};

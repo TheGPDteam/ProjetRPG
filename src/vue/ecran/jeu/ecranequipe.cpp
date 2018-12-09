@@ -10,9 +10,9 @@ const short COORD_Y_RECTANGLE_HAUT = 50;
 
 EcranEquipe::EcranEquipe(Controleur* controleur) :
     EcranGeneral{controleur},
-    m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
-                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_tableau_equipe(Tableau::tableauHumain(m_ecran, 32, controleur)),
+//    m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+//                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+    m_tableau_equipe(Tableau::tableauHumain(m_ecran, 32, controleur,"Equipe")),
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT,  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
     //    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
     m_rectangleBas {COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250),  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
@@ -58,7 +58,7 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
 
     SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
-    m_nomFenetre.afficher(fenetre_affichage);
+//    m_nomFenetre.afficher(fenetre_affichage);
 
     m_tableau_equipe->afficher(fenetre_affichage);
     //A SUPPRIMER

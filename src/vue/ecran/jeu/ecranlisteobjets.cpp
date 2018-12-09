@@ -24,7 +24,7 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
 {
     m_rectangleFicheObjet = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET};
 
-    m_tableau_objets = Tableau::tableauObjet(m_rectangleFicheObjet, 32, controleur);
+    m_tableau_objets = Tableau::tableauObjet(m_rectangleFicheObjet, 32, controleur, "Liste des objets");
 
     //A SUPPRIMER
     //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);

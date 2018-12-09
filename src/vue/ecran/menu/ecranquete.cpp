@@ -8,8 +8,8 @@
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
     //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-    m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
-                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
+//    m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
+//                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
     m_humain_a_affecter{nullptr}
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
@@ -28,10 +28,10 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
 
-    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur);
-    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur);
-    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur);
-    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur);
+    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur,"Non Affectes");
+    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur, "Chasse");
+    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur, "Recolte");
+    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur, "Campement");
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
     for (Humain *h : c->obtenirNonAttribuees())
     {
@@ -75,7 +75,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondCampement, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-    m_nomFenetre.afficher(fenetre_affichage);
+//    m_nomFenetre.afficher(fenetre_affichage);
 
 
     m_tableauCampement->afficher(fenetre_affichage);
