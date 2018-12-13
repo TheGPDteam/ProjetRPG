@@ -4,3 +4,4 @@ build-src*/
 *.pro.*
 src/save/*.xml
 src/src
+src/Makefile
