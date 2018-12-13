@@ -18,7 +18,7 @@ private :
     void creerLigne(std::vector<std::string> ligne);
     void creerLigne(std::vector<Affichable *> donneesLigne);
     SDL_Rect creerRectLigne();
-
+    void trie(Case * c);
 
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet(TypeObjet typeObjet);
@@ -33,7 +33,7 @@ public:
     void ajouterLigne(Humain* perso);
     void ajouterLigne(Objet* obj);
     void ajouterLigne(Campement *c);
-
+    bool testTri(Ligne * l, std::pair<int, int> coord_souris);
     ZoneTexte *creeZoneTexte(std::string donnee);
     Ligne *ligneSurvole(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface *surface_affichage) override;

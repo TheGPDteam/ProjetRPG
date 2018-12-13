@@ -5,8 +5,9 @@
 //! \param rect x, y, hauteur, largeur en pixel
 //! \param donnee la donnee de la case
 //!
-Case::Case(SDL_Rect rect, Affichable * donnee)
+Case::Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur)
     : Affichable(rect),
+      Cliquable(controleur,true),
       m_donnee(donnee)
 {
     donnee->redimensionner(rect);
@@ -57,4 +58,12 @@ void Case::definirDonnee(Affichable *donnee)
 Affichable *Case::obtenirDonnee() const
 {
     return m_donnee;
+}
+
+SDL_Rect Case::zone() const {
+   return m_rectangle;
+}
+
+void Case::clique(){
+ //TODO
 }

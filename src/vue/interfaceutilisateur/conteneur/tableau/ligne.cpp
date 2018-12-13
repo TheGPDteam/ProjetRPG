@@ -3,12 +3,28 @@
 Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne)
     : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre), m_idLigne(idLigne)
 {
-
     for(Affichable *a: m_donnees) {
         this->creerCaseElement(a);
     }
 }
 
+
+//!
+//! \brief indique la case cliqué
+//! \param coord_souris
+//! \return la case cliqué par la souris ou nullptr
+//! \author Lacoste Dorian
+//! \date 13/12/18
+//!
+Case *
+Ligne::caseClique(std::pair<int, int> coord_souris){
+    for(Case *c : m_cases){
+        if(c->contient(coord_souris)){
+            return c;
+        }
+    }
+    return nullptr;
+}
 
 //!
 //! \brief cree une case
@@ -19,7 +35,7 @@ Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rec
 //!
 void
 Ligne::creerCaseElement(Affichable* affichable){
-    this->m_cases.push_back(new Case(creerRectCase(), affichable));
+    this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur));
 }
 
 //!

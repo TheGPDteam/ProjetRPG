@@ -75,14 +75,15 @@ void Vue::definirControleur(Controleur *controleur)
     c->obtenirEquipeChasse()->ajouterObservateur(*m_ecranChoixQuete);
     c->obtenirEquipeRecolte()->ajouterObservateur(*m_ecranChoixQuete);
     c->obtenirEquipeCampement()->ajouterObservateur(*m_ecranChoixQuete);
+
     j->ajouterObservateur(*m_ecranChoixPersonnage);
     j->ajouterObservateur(*m_ecranQueteJoueur);
     j->ajouterObservateur(*m_ecranRecapitulatifNuit);
     j->ajouterObservateur(*m_ecranPremiereJournee);
     j->ajouterObservateur(*m_ecranAccueilCampement);
+
     c->ajouterObservateur(*m_ecranQueteCampement);
     c->ajouterObservateur(*m_ecranListeObjet);
-    //    j->ajouterObservateur(*m_ecranQueteCampement);
     m_jeuPrincipal->definirCarte(modele->obtenirCarte());
 
     // m_ecranInventaire->definirEtatQuantite(j->obtenirInventaireJoueur()->obtenirNombreObjet());

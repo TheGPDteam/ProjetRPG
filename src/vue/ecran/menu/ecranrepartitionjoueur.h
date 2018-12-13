@@ -5,7 +5,7 @@
 
 enum AFFECTATION {RETOUR, RIEN, CHASSE, RECOLTE, CAMPEMENT};
 
-class RepartitionJoueur{
+class EcranRepartitionJoueur{
 
 
 private:
@@ -46,12 +46,12 @@ private:
 
 public:
 
-    RepartitionJoueur(Humain * humain, SDL_Surface * fenetre, Controleur * controleur);
+    EcranRepartitionJoueur(Humain * humain, SDL_Surface * fenetre, Controleur * controleur);
 
 
     int affecter();
 
-    ~RepartitionJoueur();
+    ~EcranRepartitionJoueur();
 };
 
 #endif // ECRANREPARTITIONJOUEUR_H
