@@ -99,7 +99,7 @@ void
 Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
     assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
-    tmp.push_back(creeZoneTexte("Image"));
+    tmp.push_back(creeZoneTexte(" "));
     tmp.push_back(creeZoneTexte("Nom"));
     tmp.push_back(creeZoneTexte("Description"));
     if(typeObjet == TypeObjet::Partie_bus ) {
