@@ -237,7 +237,7 @@ void Modele::premiereJournee()
         //m_campement.ajouterPersonne(h, m_campement.obtenirRecolte());
     }
     m_nbJoursPasses = 0;
-    m_joueur.definirEquipe(m_campement.obtenirRecolte());
+    m_joueur.definirEquipe(m_campement.obtenirEquipeRecolte());
 
 
     m_temps.reinitialiserTemps();
@@ -397,7 +397,7 @@ void Modele::finJournee() {
     if (m_joueur.obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
     {
         int totalChasseEquipeChasse=0;
-        for (Personnage *p : m_campement.obtenirChasse()->obtenirListePersonnage())
+        for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage())
         {
             Humain *h = (Humain*) (p);
             totalChasseEquipeChasse+=h->obtenirChasse().obtenirValeur();
@@ -415,12 +415,12 @@ void Modele::finJournee() {
 
     //On calcule si et combien de personnages du campement sont morts dans la nuit
     unsigned int totalChasseCampement=0;
-    for (Personnage *p : m_campement.obtenirChasse()->obtenirListePersonnage())
+    for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage())
     {
         Humain *h = (Humain*) (p);
         totalChasseCampement+=h->obtenirChasse().obtenirValeur();
     }
-    for (Personnage *p : m_campement.obtenirRecolte()->obtenirListePersonnage())
+    for (Personnage *p : m_campement.obtenirEquipeRecolte()->obtenirListePersonnage())
     {
         Humain *h = (Humain*) (p);
         totalChasseCampement+=h->obtenirChasse().obtenirValeur();
@@ -440,8 +440,8 @@ void Modele::finJournee() {
     if (m_nbPersosMorts > 0) {
         //Verifier si on a assez de personnes à tuer
         unsigned int nbPersosCamp = 0;
-        nbPersosCamp+=m_campement.obtenirRecolte()->obtenirListePersonnage().size();
-        nbPersosCamp+=m_campement.obtenirChasse()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
         if (nbPersosCamp>m_nbPersosMorts)
         {
@@ -452,17 +452,17 @@ void Modele::finJournee() {
                     switch (rand()%3) {
                     case 0:
                         //On tue un mec de recolte
-                        if (m_campement.obtenirRecolte()->obtenirListePersonnage().size()>0)
+                        if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
                         {
-                            m_campement.obtenirRecolte()->obtenirListePersonnage().erase(m_campement.obtenirRecolte()->obtenirListePersonnage().begin());
+                            m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
                             persoMort = true;
                         }
                         break;
                     case 1:
                         //On tue un mec de chasse
-                        if (m_campement.obtenirChasse()->obtenirListePersonnage().size()>0)
+                        if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
                         {
-                            m_campement.obtenirChasse()->obtenirListePersonnage().erase(m_campement.obtenirRecolte()->obtenirListePersonnage().begin());
+                            m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
                             persoMort = true;
                         }
                         break;

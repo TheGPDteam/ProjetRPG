@@ -119,19 +119,19 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
     m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirChasse());
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeChasse());
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
     m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirRecolte());
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeRecolte());
     return TypeEcran::RecolteJoueur;
 }
 TypeEcran ActionsBoutons::boutonCampementJoueur() const
 {
     m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirCampement());
+    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeCampement());
     return TypeEcran::RecolteJoueur;
 }
 

@@ -137,7 +137,7 @@ void Campement::ajouterPersonne(Humain *humain)
 //! \return l'equipe de chasse
 //!
 
-Equipe* Campement::obtenirChasse()
+Equipe* Campement::obtenirEquipeChasse()
 {
     return &m_equipeChasse;
 }
@@ -150,7 +150,7 @@ Equipe* Campement::obtenirChasse()
 //! \return l'equipe de recolte
 //!
 
-Equipe* Campement::obtenirRecolte()
+Equipe* Campement::obtenirEquipeRecolte()
 {
     return &m_equipeRecolte;
 }
@@ -164,7 +164,7 @@ Equipe* Campement::obtenirRecolte()
 //! \return l'equipe de campement
 //!
 
-Equipe* Campement::obtenirCampement()
+Equipe* Campement::obtenirEquipeCampement()
 {
     return &m_equipeCampement;
 }

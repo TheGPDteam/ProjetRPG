@@ -5,7 +5,7 @@ Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std:
 {
     std::vector<Affichable * > tmp;
     tmp.push_back(creeZoneTexte(nom));
-    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1);
+    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1);
     m_nbLignes++;
     m_enTete=nullptr;
 }
@@ -47,7 +47,7 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 //!
 //! \brief indique la ligne survolé
 //! \param coord_souris
-//! \return la ligne survolé par la souris
+//! \return la ligne survolé par la souris ou nullptr si elle n'est pas survolé
 //! \author Lacoste Dorian, Regnies Anthony
 //! \date 22/11/18
 //!
@@ -71,7 +71,7 @@ Tableau::ajouterEnTeteHumain(){
     tmp.push_back(creeZoneTexte("Campement"));
     tmp.push_back(creeZoneTexte("Arme"));
     tmp.push_back(creeZoneTexte("Niveau"));
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0);
+    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0,m_nbLignes+1);
     m_nbLignes++;
 }
 
@@ -87,7 +87,7 @@ Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
     //    }else if(typeObjet == TypeObjet::Vivre){
     //        tmp.push_back("ValeurNutritive");
     //    }
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0, m_nbLignes+1);
     m_nbLignes++;
 }
 
@@ -105,7 +105,7 @@ void Tableau::ajouterEnTetePartiesBus(){
     //    }else if(typeObjet == TypeObjet::Vivre){
     //        tmp.push_back("ValeurNutritive");
     //    }
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0);
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0,m_nbLignes+1);
     m_nbLignes++;
 }
 
@@ -246,7 +246,7 @@ void Tableau::ajouterLigne(Campement *c)
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2);
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2, m_nbLignes+1);
     m_lignes.push_back(l);
     m_nbLignes++;
 }

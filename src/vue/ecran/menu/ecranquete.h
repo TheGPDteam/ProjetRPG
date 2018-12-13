@@ -13,7 +13,7 @@ class EcranQuete : public EcranGeneral
 private:
     std::function<TypeEcran(DictionnaireDeBoutons&, std::pair<int, int> coord_souris, TypeEcran)> m_methodeVerificationCliqueSourisSurBouton;
 
-//    TexteSDL m_nomFenetre;
+    //    TexteSDL m_nomFenetre;
     Humain * m_humain_a_affecter;
 
     SDL_Rect m_fondChasse;
@@ -27,24 +27,24 @@ private:
     Tableau * m_tableauChasse;
     Tableau * m_tableauCampement;
 
-//    TexteSDL* m_zoneRecolte;
-//    TexteSDL* m_zoneChasse;
-//    TexteSDL* m_zoneCampement;
-//    TexteSDL* m_zoneNomPersonnage;
-//    TexteSDL* m_zonePrenomPersonnage;
-//    TexteSDL* m_zoneChassePersonnage;
-//    TexteSDL* m_zoneRecoltePersonnage;
-//    TexteSDL* m_zoneCampementPersonnage;
-//    TexteSDL* m_zoneForcePersonnage;
-//    TexteSDL* m_zoneVitessePersonnage;
+    //    TexteSDL* m_zoneRecolte;
+    //    TexteSDL* m_zoneChasse;
+    //    TexteSDL* m_zoneCampement;
+    //    TexteSDL* m_zoneNomPersonnage;
+    //    TexteSDL* m_zonePrenomPersonnage;
+    //    TexteSDL* m_zoneChassePersonnage;
+    //    TexteSDL* m_zoneRecoltePersonnage;
+    //    TexteSDL* m_zoneCampementPersonnage;
+    //    TexteSDL* m_zoneForcePersonnage;
+    //    TexteSDL* m_zoneVitessePersonnage;
 
-//    std::pair<int, int>m_CoordNom;
-//    std::pair<int, int>m_CoordPrenom;
-//    std::pair<int, int>m_CoordChasse;
-//    std::pair<int, int>m_CoordRecolte;
-//    std::pair<int, int>m_CoordCampement;
-//    std::pair<int, int>m_CoordForce;
-//    std::pair<int, int>m_CoordVitesse;
+    //    std::pair<int, int>m_CoordNom;
+    //    std::pair<int, int>m_CoordPrenom;
+    //    std::pair<int, int>m_CoordChasse;
+    //    std::pair<int, int>m_CoordRecolte;
+    //    std::pair<int, int>m_CoordCampement;
+    //    std::pair<int, int>m_CoordForce;
+    //    std::pair<int, int>m_CoordVitesse;
 public:
     EcranQuete(Controleur *controleur);
 

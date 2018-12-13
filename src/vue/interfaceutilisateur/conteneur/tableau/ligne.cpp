@@ -1,7 +1,7 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre)
+Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre), m_idLigne(idLigne)
 {
 
     for(Affichable *a: m_donnees) {
@@ -87,5 +87,5 @@ void Ligne::clique() {
 }
 
 SDL_Rect Ligne::zone() const{
-    return SDL_Rect();
+    return m_rectangle;
 }

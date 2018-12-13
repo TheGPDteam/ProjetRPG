@@ -65,28 +65,31 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
 
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_jeuPrincipal);
-    //m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranInventaire);
-    m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->ajouterObservateur(*m_ecranInventaire);
-    //    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranEquipe);
-    m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->ajouterObservateur(*m_ecranEquipe);
-    m_controleur->obtenirModele()->obtenirCampement()->ajouterObservateur(*m_ecranListeObjet);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixPersonnage);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranChoixQuete);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteJoueur);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranRecapitulatifNuit);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranPremiereJournee);
-    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranAccueilCampement);
-    m_controleur->obtenirModele()->obtenirCampement()->ajouterObservateur(*m_ecranQueteCampement);
-    //    m_controleur->obtenirModele()->obtenirJoueur()->ajouterObservateur(*m_ecranQueteCampement);
-    m_jeuPrincipal->definirCarte(m_controleur->obtenirModele()->obtenirCarte());
+    Modele * modele = m_controleur->obtenirModele();
+    Joueur * j = modele->obtenirJoueur();
+    Campement * c = modele->obtenirCampement();
+    j->ajouterObservateur(*m_jeuPrincipal);
+    j->obtenirInventaireJoueur()->ajouterObservateur(*m_ecranInventaire);
+    j->obtenirEquipe()->ajouterObservateur(*m_ecranEquipe);
 
-    // m_ecranInventaire->definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
-    //m_ecranInventaire->definirObjetPourAffichage(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets());
+    c->obtenirEquipeChasse()->ajouterObservateur(*m_ecranChoixQuete);
+    c->obtenirEquipeRecolte()->ajouterObservateur(*m_ecranChoixQuete);
+    c->obtenirEquipeCampement()->ajouterObservateur(*m_ecranChoixQuete);
+    j->ajouterObservateur(*m_ecranChoixPersonnage);
+    j->ajouterObservateur(*m_ecranQueteJoueur);
+    j->ajouterObservateur(*m_ecranRecapitulatifNuit);
+    j->ajouterObservateur(*m_ecranPremiereJournee);
+    j->ajouterObservateur(*m_ecranAccueilCampement);
+    c->ajouterObservateur(*m_ecranQueteCampement);
+    c->ajouterObservateur(*m_ecranListeObjet);
+    //    j->ajouterObservateur(*m_ecranQueteCampement);
+    m_jeuPrincipal->definirCarte(modele->obtenirCarte());
 
-    m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
-    m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
-    // m_ecranChoix ?
+    // m_ecranInventaire->definirEtatQuantite(j->obtenirInventaireJoueur()->obtenirNombreObjet());
+    //m_ecranInventaire->definirObjetPourAffichage(j->obtenirInventaireJoueur()->obtenirObjets());
+
+    j->mettreAChange();
+    j->notifierTous();
 }
 
 

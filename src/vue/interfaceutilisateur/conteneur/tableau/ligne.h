@@ -9,18 +9,19 @@ class Ligne : public Affichable, public Cliquable
 private:
     std::vector<Affichable *> m_donnees;
     std::vector<Case*> m_cases;
-    SDL_Rect zone() const ;
     int m_sombre;
     void creerCaseString(std::string donnee);
     void creerCaseElement(Affichable* affichable);
     SDL_Rect creerRectCase();
     Affichable *m_affichable;
 public:
+    const int m_idLigne;
     Ligne() = delete;
-    Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre);
+    Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     void clique() override;
+    SDL_Rect zone() const ;
 };
 
 #endif // LIGNE_H
