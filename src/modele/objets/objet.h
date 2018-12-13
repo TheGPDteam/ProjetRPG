@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "typeobjet.h"
+#include "sprite.h"
 
 //!
 //! \brief Classe de gestion de l'Objet
@@ -15,10 +16,14 @@ class Objet
 protected:
     std::string m_nom; /// Nom de l'Objet
     std::string m_description; /// Description de l'Objet
+    Sprite* m_sprite;
+
 public:
     Objet();
     Objet(std::string nom, std::string description);
     virtual ~Objet();
+    Sprite* obtenirSprite() const;
+    void definirSprite(Sprite *sprite);
     std::string obtenirNom() const;
     void definirNom(const std::string &nom);
     std::string obtenirDescription() const;

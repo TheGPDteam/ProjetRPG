@@ -76,13 +76,13 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 
     for(auto c : m_spritesCarte)
         for(auto x : c)
-            x->afficherSprite(fenetre_affichage);
+            x->afficher(fenetre_affichage);
 
     //Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0,0,127,63}, SDL_Rect{256,192,63,63}};
 
     for(auto p : m_spriteObjets){
         Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(p.first*63),(short int)(p.second*63),127,63}, SDL_Rect{256,192,63,63}};
-        valise.afficherSprite(fenetre_affichage);
+        valise.afficher(fenetre_affichage);
     }
 
     if (m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement() < m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()) {
@@ -94,7 +94,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     }
     m_nomJoueur.mettreAJourTexte(m_controleur->obtenirModele()->obtenirJoueur()->obtenirNom());
     m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()%60));
-    m_spriteJoueur->afficherSprite(fenetre_affichage);
+    m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
     m_tempsRestant.afficher(fenetre_affichage);

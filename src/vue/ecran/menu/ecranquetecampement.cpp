@@ -4,10 +4,10 @@
 
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
     : EcranGeneral (controleur),
-      m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,64,128,128},SDL_Rect{0,384,128,128}}},
-      m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,64,128,128},SDL_Rect{384,384,128,128}}},
-      m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,64,128,128},SDL_Rect{256,384,128,128}}},
-      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,64,128,128},SDL_Rect{128,384,128,128}}},
+      m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,128,128,128},SDL_Rect{0,448,128,128}}},
+      m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,128,128,128},SDL_Rect{384,448,128,128}}},
+      m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,128,128,128},SDL_Rect{256,448,128,128}}},
+      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,128,128,128},SDL_Rect{128,448,128,128}}},
       m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,"Partie(s) du Bus",TypeObjet::Partie_bus))
 
 {
@@ -32,10 +32,10 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
 void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     afficherBoutons(coord_souris, fenetre_affichage);
-    m_spriteRoue->afficherSprite(fenetre_affichage);
-    m_spriteMoteur->afficherSprite(fenetre_affichage);
-    m_spriteEssence->afficherSprite(fenetre_affichage);
-    m_spriteHuile->afficherSprite(fenetre_affichage);
+    m_spriteRoue->afficher(fenetre_affichage);
+    m_spriteMoteur->afficher(fenetre_affichage);
+    m_spriteEssence->afficher(fenetre_affichage);
+    m_spriteHuile->afficher(fenetre_affichage);
 
     m_tableauEquipe->afficher(fenetre_affichage);
 }

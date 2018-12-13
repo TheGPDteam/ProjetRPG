@@ -15,7 +15,7 @@
 //!
 
 Sprite::Sprite(const std::string cle_map_sprites, const SDL_Rect position_dans_fenetre, const SDL_Rect position_dans_feuille_de_sprite) :
-    m_cleMapSprites(cle_map_sprites), m_coordDansLaFenetre(position_dans_fenetre), m_coordDansLaFeuilleDeSprite(position_dans_feuille_de_sprite)
+    Affichable{position_dans_fenetre}, m_cleMapSprites(cle_map_sprites), m_coordDansLaFeuilleDeSprite(position_dans_feuille_de_sprite)
 {
 
 }
@@ -46,15 +46,20 @@ void Sprite::changementSprite(const SDL_Rect position_dans_feuille_de_sprite)
 //! Affiche une partie de la feuille de sprite, partie correspondant au sprite voulu
 //!
 
-void Sprite::afficherSprite(SDL_Surface* surface_affichage)
+void Sprite::afficher(SDL_Surface* surface_affichage)
 {
     ChargementFeuilleDeSprites * cfds =  ChargementFeuilleDeSprites::instance();
     auto it = cfds->m_imagesDeFeuilleDeSprites.find(m_cleMapSprites);
 
     if(it != cfds->m_imagesDeFeuilleDeSprites.end())
     {
-        SDL_BlitSurface(it->second, &m_coordDansLaFeuilleDeSprite, surface_affichage, &m_coordDansLaFenetre);
+        SDL_BlitSurface(it->second, &m_coordDansLaFeuilleDeSprite, surface_affichage, &m_rectangle);
     }
+}
+
+
+void Sprite::redimensionner(SDL_Rect rectangle){
+    m_rectangle = rectangle;
 }
 
 
@@ -69,7 +74,7 @@ void Sprite::afficherSprite(SDL_Surface* surface_affichage)
 
 SDL_Rect Sprite::getCoordSprite()
 {
-    return m_coordDansLaFenetre;
+    return m_rectangle;
 }
 
 
@@ -86,8 +91,8 @@ SDL_Rect Sprite::getCoordSprite()
 
 void Sprite::bougerSprite(int x, int y)
 {
-    m_coordDansLaFenetre.x = m_coordDansLaFenetre.x+(x*64);
-    m_coordDansLaFenetre.y = m_coordDansLaFenetre.y+(y*64);
+    m_rectangle.x = m_rectangle.x+(x*64);
+    m_rectangle.y = m_rectangle.y+(y*64);
 }
 
 //!

@@ -95,7 +95,7 @@ void Inventaire::ajouterObjet(Objet *objet)
         m_objets.push_back(objet);
     }
     mettreAChange();
-    notifierTous();
+     notifierTous();
 }
 
 //!

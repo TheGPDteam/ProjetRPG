@@ -84,7 +84,7 @@ Bouton::~Bouton()
 
 void Bouton::afficher(SDL_Surface* surface)
 {
-    m_spriteBouton->afficherSprite(surface);
+    m_spriteBouton->afficher(surface);
 
     m_texteBouton->afficher(surface);
     //m_texte->afficher(surface);

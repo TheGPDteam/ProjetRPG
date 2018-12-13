@@ -79,6 +79,7 @@ void
 Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
     assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
+    tmp.push_back(creeZoneTexte("Image"));
     tmp.push_back(creeZoneTexte("Nom"));
     tmp.push_back(creeZoneTexte("Description"));
     if(typeObjet == TypeObjet::Partie_bus ) {
@@ -157,6 +158,7 @@ void
 Tableau::ajouterLigne(Objet* obj){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<Affichable *> tmp;
+    tmp.push_back(obj->obtenirSprite());
     tmp.push_back(creeZoneTexte(obj->obtenirNom()));
     tmp.push_back(creeZoneTexte(obj->obtenirDescription()));
     //    if(obj->obtenirType() == TypeObjet::Arme ) {
@@ -169,6 +171,7 @@ Tableau::ajouterLigne(Objet* obj){
     //        tmp.push_back(std::to_string(vivre->obtenirValeurNutritive()));
     //    }
     creerLigne(tmp);
+
 }
 
 void Tableau::ajouterLigne(Campement *c)

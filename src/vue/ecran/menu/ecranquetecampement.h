@@ -1,9 +1,9 @@
 #ifndef ECRANQUETECAMPEMENT_H
 #define ECRANQUETECAMPEMENT_H
 
-#include "../ecrangeneral.h"
-#include "../outilsvue.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "ecrangeneral.h"
+#include "outilsvue.h"
+#include "constantesbouton.h"
 #include "tableau.h"
 
 class EcranQueteCampement : public EcranGeneral

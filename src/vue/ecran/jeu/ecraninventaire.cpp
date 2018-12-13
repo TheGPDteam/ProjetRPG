@@ -15,7 +15,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     EcranGeneral{controleur},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_tableau_objets(Tableau::tableauObjet(m_ecran, 32, m_controleur, "Inventaire")),
+    m_tableau_objets(Tableau::tableauObjet(m_ecran, 64, m_controleur, "Inventaire")),
     m_compteurInventaire(-1),
     m_fondEcran{},
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},

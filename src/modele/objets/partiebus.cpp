@@ -7,7 +7,10 @@ PartieBus::PartieBus(std::string nom, std::string description, TypePartieBus par
 {
 }
 
-PartieBus::PartieBus() {
+PartieBus::PartieBus() :
+    Objet ("nom","description")
+
+{
     int typePartie = rand()%4;
     this->definirDescription("Une partie du bus");
     switch (typePartie) {

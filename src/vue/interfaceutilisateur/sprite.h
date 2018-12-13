@@ -3,20 +3,21 @@
 
 #include <string>
 
-#include "./ressources/chargementfeuilledesprite.h"
+#include "chargementfeuilledesprite.h"
+#include "affichable.h"
 
-class Sprite
+class Sprite : public Affichable
 {
 private:
     std::string m_cleMapSprites;
-    SDL_Rect m_coordDansLaFenetre;
     SDL_Rect m_coordDansLaFeuilleDeSprite;
 
 public:
     Sprite(const std::string cle_map_sprites, const SDL_Rect position_dans_fenetre, const SDL_Rect position_dans_feuille_de_sprite);
     Sprite() = default;
     void changementSprite(const SDL_Rect position_dans_feuille_de_sprite);
-    void afficherSprite(SDL_Surface *surface_affichage);
+    void afficher(SDL_Surface *surface_affichage) override;
+    void redimensionner(SDL_Rect rectangle);
     void bougerSprite(int x, int y);
 
     SDL_Rect getCoordSprite();

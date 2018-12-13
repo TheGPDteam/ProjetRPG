@@ -28,7 +28,9 @@ Objet::Objet()
 
 Objet::Objet(std::string nom, std::string description)
     : m_nom{nom},
-      m_description{description}
+      m_description{description},
+      m_sprite{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,0,0,0},SDL_Rect{0,640,64,64}}}
+
 {
 
 }
@@ -46,6 +48,29 @@ Objet::Objet(std::string nom, std::string description)
 Objet::~Objet()
 {
 
+}
+
+
+//!
+//! \brief Accesseur du sprite
+//! \author aregnies
+//! \date 13/12/18
+//! \return sprite de l'objet
+//! \version 1.0
+//!
+Sprite * Objet::obtenirSprite() const
+{
+    return m_sprite;
+}
+
+//!
+//! \brief Mutateur du sprite
+//! \author aregnies
+//! \date 13/12/18
+//! \version 1.0
+//!
+void Objet::definirSprite(Sprite *sprite){
+    m_sprite = sprite;
 }
 
 //!
