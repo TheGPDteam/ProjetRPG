@@ -5,10 +5,11 @@
 //! \param rect x, y, hauteur, largeur en pixel
 //! \param donnee la donnee de la case
 //!
-Case::Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur)
+Case::Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur, int idCase)
     : Affichable(rect),
       Cliquable(controleur,true),
-      m_donnee(donnee)
+      m_donnee(donnee),
+        m_id(idCase)
 {
     donnee->redimensionner(rect);
     redimensionner(rect);
@@ -66,4 +67,8 @@ SDL_Rect Case::zone() const {
 
 void Case::clique(){
  //TODO
+}
+
+int Case::obtenirIdCase(){
+    return m_id;
 }

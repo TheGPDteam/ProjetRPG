@@ -65,9 +65,10 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
 
 void
 Tableau::trie(Case * c){
-    ZoneTexte * z = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
-    std::string nom = z->obtenirTexte();
-    std::cout << nom << std::endl;
+//    ZoneTexte * z = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
+//    std::string nom = z->obtenirTexte();
+    std::cout << c->obtenirIdCase() << std::endl;
+
 }
 
 bool

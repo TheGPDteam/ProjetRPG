@@ -35,7 +35,7 @@ Ligne::caseClique(std::pair<int, int> coord_souris){
 //!
 void
 Ligne::creerCaseElement(Affichable* affichable){
-    this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur));
+    this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur, m_cases.size()));
 }
 
 //!
