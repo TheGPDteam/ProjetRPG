@@ -53,11 +53,30 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 //!
 Ligne*
 Tableau::ligneSurvole(std::pair<int, int> coord_souris){
+    if(m_enTete->contient(coord_souris)){
+        return m_enTete;
+    }
     for(Ligne *l : m_lignes){
         if(l->contient(coord_souris))
-            return l;
+            return l; //changer la ligne de couleur
     }
     return nullptr;
+}
+
+void
+Tableau::trie(Case * c){
+    ZoneTexte * z = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
+    std::string nom = z->obtenirTexte();
+    std::cout << nom << std::endl;
+}
+
+bool
+Tableau::testTri(Ligne * l, std::pair<int, int> coord_souris){
+    if(l == m_enTete){
+        this->trie(m_enTete->caseClique(coord_souris));
+        return true;
+    }
+    return  false;
 }
 
 void

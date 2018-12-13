@@ -18,6 +18,7 @@ public:
     const int m_idLigne;
     Ligne() = delete;
     Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne);
+    Case * caseClique(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     void clique() override;

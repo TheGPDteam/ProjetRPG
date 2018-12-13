@@ -51,6 +51,10 @@ void ZoneTexte::redimensionner(SDL_Rect nouvelleDimension)
     adapterTexte();
 }
 
+std::string ZoneTexte::obtenirTexte(){
+    return m_texte;
+}
+
 void ZoneTexte::adapterTexte()
 {
     for (TexteSDL * t : m_texteSDL)

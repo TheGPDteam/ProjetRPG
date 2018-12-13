@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "../affichable.h"
+#include "affichable.h"
 #include "textesdl.h"
 
 enum COMPORTEMENT_TEXTE { REDIMENTIONNE, SAUT_DE_LIGNE };
@@ -38,7 +38,7 @@ public:
     virtual ~ZoneTexte();
 
     void mettreAJourTexte(std::string texte);
-
+    std::string obtenirTexte();
     virtual void afficher(SDL_Surface *surface_affichage);
     virtual void redimensionner(SDL_Rect nouvelleDimension);
 };

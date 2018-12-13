@@ -10,7 +10,7 @@ const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_
 const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_OBJET;
 
 
-RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre, Controleur * controleur) :
+EcranRepartitionJoueur::EcranRepartitionJoueur(Humain * h, SDL_Surface *fenetre, Controleur * controleur) :
 
     m_fenetre{fenetre}, m_controleur{controleur}
 
@@ -84,7 +84,7 @@ RepartitionJoueur::RepartitionJoueur(Humain * h, SDL_Surface *fenetre, Controleu
 
 }
 
-void RepartitionJoueur::afficher(){
+void EcranRepartitionJoueur::afficher(){
 
     SDL_FillRect(m_fenetre, &m_rectangleFichePersonnage, SDL_MapRGB(m_fenetre->format, 200, 200, 200));
 
@@ -116,7 +116,7 @@ void RepartitionJoueur::afficher(){
 
 }
 
-int  RepartitionJoueur::affecter(){
+int  EcranRepartitionJoueur::affecter(){
     int affectation = -1;
     bool quitter = false;
     while(!quitter){
@@ -129,7 +129,7 @@ int  RepartitionJoueur::affecter(){
     return affectation;
 }
 
-int RepartitionJoueur::gestionDesEvenements(){
+int EcranRepartitionJoueur::gestionDesEvenements(){
 
     SDL_Event evenements;
     int repartition = RIEN;
@@ -174,7 +174,7 @@ int RepartitionJoueur::gestionDesEvenements(){
 
 
 
-RepartitionJoueur::~RepartitionJoueur(){
+EcranRepartitionJoueur::~EcranRepartitionJoueur(){
 
     if(m_zoneNomPersonnage != nullptr)
         delete m_zoneNomPersonnage;
