@@ -26,7 +26,7 @@ private :
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet(TypeObjet typeObjet);
     void ajouterEnTetePartiesBus();
-//    bool compareLigne(Ligne* lig1, Ligne* lig2);
+    int positionLigne(Ligne * ligRecherchee);
 
 public:
     Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom);

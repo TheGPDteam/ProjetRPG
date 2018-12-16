@@ -1,7 +1,7 @@
 #include "ligne.h"
 
 Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_numCouleur(sombre), m_idLigne(idLigne)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_numCouleur(sombre), m_affichable(nullptr), m_idLigne(idLigne)
 {
     for(Affichable *a: m_donnees) {
         this->creerCaseElement(a);
@@ -69,9 +69,8 @@ void Ligne::afficher(SDL_Surface *surface)
     else if (m_numCouleur == 2)
         couleurFond = SDL_MapRGB(surface->format, 170, 170, 170);
     else if (m_numCouleur == 3) {
-        couleurFond = SDL_MapRGB(surface->format, 250, 250, 100);
+        couleurFond = SDL_MapRGB(surface->format, 250, 50, 50);
     }
-
 
     SDL_FillRect(surface, &m_rectangle,couleurFond);
     for (Case * c : m_cases)
@@ -89,7 +88,7 @@ void Ligne::afficher(SDL_Surface *surface)
 //!
 Case *
 Ligne::obtenirCase(int numCase) const{
-    assert(numCase >=0 && numCase < m_cases.size());
+    assert(numCase >=0 && numCase < (int)m_cases.size());
     return m_cases.at(numCase);
 }
 

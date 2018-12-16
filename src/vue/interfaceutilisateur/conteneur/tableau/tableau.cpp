@@ -75,12 +75,31 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
 void
 Tableau::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
     Ligne * lSurvole = ligneSurvole(coord_souris);
-    //ligne n'appartient pas au tableau c'est l'entete ou c'est le titre
+    //on remet la ligne survoler precendente comme avant
+    if(m_lignePrecedemmentSurvoler == lSurvole) return;
     if(m_lignePrecedemmentSurvoler != nullptr)
-        m_lignePrecedemmentSurvoler->definirNumCouleur((m_lignePrecedemmentSurvoler->m_idLigne%2==0) ? 1:2);
-    if(lSurvole == nullptr || lSurvole == m_enTete || lSurvole == m_titre) return;
+        m_lignePrecedemmentSurvoler->definirNumCouleur((positionLigne(m_lignePrecedemmentSurvoler)+1)%2+1);
+
+    //ligne n'appartient pas au tableau c'est l'entete ou c'est le titre
+    if(lSurvole == nullptr || lSurvole == m_enTete || lSurvole == m_titre){
+        m_lignePrecedemmentSurvoler=nullptr;
+        return;}
     lSurvole->definirNumCouleur(3);
     m_lignePrecedemmentSurvoler=lSurvole;
+}
+//!
+//! \brief recherche la postion de la ligne dans le vector m_lignes
+//! \param ligRecherchee
+//! \return le postion de la ligne dans le vector
+//!
+int
+Tableau::positionLigne(Ligne * ligRecherchee){
+    int i=0;
+    for(auto l : m_lignes){
+        i++;
+        if(l == ligRecherchee) break;
+    }
+    return i;
 }
 
 //!
@@ -120,7 +139,10 @@ Tableau::trieDefault(){
 //!
 void
 Tableau::trie(Case * c){
-    std::cout << c->obtenirIdCase() << std::endl;
+    ZoneTexte * zone = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
+    if(zone == nullptr) return;
+    if(zone->obtenirTexte() == " ") return;
+
     for(auto *l : m_lignes){
         l->definirNumCaseSelectionnerTri(c->obtenirIdCase());
     }
