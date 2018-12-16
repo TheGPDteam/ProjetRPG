@@ -3,6 +3,7 @@
 #include "interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "ecranrepartitionjoueur.h"
 #include <utility>
+#include <vector>
 #include "tableau.h"
 
 EcranQuete::EcranQuete(Controleur *controleur) :
@@ -37,6 +38,7 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     {
         m_tableauNonAffectes->ajouterLigne(h);
     }
+    m_tableauNonAffectes->trieDefault();
 
     for (Personnage *p : c->obtenirEquipeRecolte()->obtenirListePersonnage())
     {
@@ -116,6 +118,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
 
     while(SDL_PollEvent(&evenements))
     {
+        std::pair<int, int> coord_souris = std::make_pair(evenements.button.x, evenements.button.y);
         switch(evenements.type)
         {
         case SDL_QUIT:
@@ -126,20 +129,16 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
         case SDL_MOUSEBUTTONUP:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
-                std::pair<int, int> coord_souris = std::make_pair(evenements.button.x, evenements.button.y);
                 Ligne * lig = m_tableauNonAffectes->ligneSurvole(coord_souris);
-                if(m_tableauNonAffectes->testTri(lig, coord_souris)) break;
                 if(lig != nullptr){
+                    // test si l'evenement est une demande de tri du tableau
+                    if(m_tableauNonAffectes->testTri(lig, coord_souris)) break;
+
                     int idHumain = lig->m_idLigne-2; // on soustrait le titre et l'entete
 
-                    int i=1;
-                    for(Humain* h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees()) {
-                        if(i==idHumain){
-                            m_humain_a_affecter = h;
-                            break;
-                        }
-                        i++;
-                    }
+                    auto humainsModel=  m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees();
+                    std::vector<Humain *> humains(humainsModel.begin(), humainsModel.end());
+                    m_humain_a_affecter = humains.at(idHumain-1);
                 }
 
                 clique_souris = true;
@@ -173,7 +172,11 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
                 coord_souris.second = evenements.button.y;
             }
             break;*/
-
+        case SDL_MOUSEMOTION:
+              m_tableauNonAffectes->testAffichageLigneSurvole(coord_souris);
+              coord_souris.first = evenements.button.x;
+              coord_souris.second = evenements.button.y;
+            break;
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
@@ -184,8 +187,8 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
 }
 
 void EcranQuete::obtenirChangement(Observable &obj){
-    m_tableauNonAffectes->vider();
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
+    m_tableauNonAffectes->vider();
     for (Humain *h : c->obtenirNonAttribuees())
     {
         m_tableauNonAffectes->ajouterLigne(h);

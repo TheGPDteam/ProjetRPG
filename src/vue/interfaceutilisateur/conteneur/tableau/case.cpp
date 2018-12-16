@@ -69,6 +69,6 @@ void Case::clique(){
  //TODO
 }
 
-int Case::obtenirIdCase(){
+int Case::obtenirIdCase() const{
     return m_id;
 }

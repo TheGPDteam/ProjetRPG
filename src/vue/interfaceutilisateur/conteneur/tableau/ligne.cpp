@@ -1,7 +1,7 @@
 #include "ligne.h"
 
 Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_sombre(sombre), m_idLigne(idLigne)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_affichable(nullptr), m_numCouleur(sombre), m_idLigne(idLigne)
 {
     for(Affichable *a: m_donnees) {
         this->creerCaseElement(a);
@@ -64,10 +64,13 @@ Ligne::creerRectCase(){
 void Ligne::afficher(SDL_Surface *surface)
 {
     Uint32 couleurFond = SDL_MapRGB(surface->format, 100, 100, 100);
-    if(m_sombre == 1)
+    if(m_numCouleur == 1)
         couleurFond = SDL_MapRGB(surface->format, 200, 200, 200);
-    else if (m_sombre == 2)
+    else if (m_numCouleur == 2)
         couleurFond = SDL_MapRGB(surface->format, 170, 170, 170);
+    else if (m_numCouleur == 3) {
+        couleurFond = SDL_MapRGB(surface->format, 250, 250, 100);
+    }
 
 
     SDL_FillRect(surface, &m_rectangle,couleurFond);
@@ -75,6 +78,19 @@ void Ligne::afficher(SDL_Surface *surface)
     {
         c->afficher(surface);
     }
+}
+
+//!
+//! \brief obtient la case a la neme position dans la ligne
+//! \param numCase le numero de la case a récuperer
+//! \return la neme case de la ligne
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
+Case *
+Ligne::obtenirCase(int numCase) const{
+    assert(numCase >=0 && numCase < m_cases.size());
+    return m_cases.at(numCase);
 }
 
 //!
@@ -96,6 +112,25 @@ void Ligne::redimensionner(SDL_Rect nouvelleDimension)
         c->redimensionner(rectCase);
         rectCase.x += nouvelleLargeurCase;
     }
+}
+
+//bool
+//Ligne::operator< (const Ligne &otherLig) const{
+//    int idCase=0;
+//    ZoneTexte * zone1 = dynamic_cast<ZoneTexte * >(this->obtenirCase(idCase)->obtenirDonnee());
+//    ZoneTexte * zone2 = dynamic_cast<ZoneTexte * >(otherLig.obtenirCase(idCase)->obtenirDonnee());
+//    return (zone1->obtenirTexte() < zone2->obtenirTexte());
+//}
+
+void Ligne::definirNumCaseSelectionnerTri(int numCase){
+    this->numCaseSelTri = numCase;
+}
+
+int Ligne::obtenirNumCaseSelectionnerTri(){
+    return this->numCaseSelTri ;
+}
+void Ligne::definirNumCouleur(int sombre){
+    this->m_numCouleur = sombre;
 }
 
 void Ligne::clique() {

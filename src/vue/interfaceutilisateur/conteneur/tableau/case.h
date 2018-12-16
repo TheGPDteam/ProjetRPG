@@ -18,7 +18,7 @@ public :
     Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur, int idCase);
     Case() = delete;
     ~Case();
-    int obtenirIdCase();
+    int obtenirIdCase() const;
     void afficher(SDL_Surface *surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
     void clique() override;

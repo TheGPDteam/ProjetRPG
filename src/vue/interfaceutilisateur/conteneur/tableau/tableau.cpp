@@ -1,7 +1,9 @@
 #include "tableau.h"
+#include "zonetexte.h"
+
 
 Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom)
-    :Affichable{rect},m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_nbLignes{0}
+    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_nbLignes{0}, m_controleur{controleur}
 {
     std::vector<Affichable * > tmp;
     tmp.push_back(creeZoneTexte(nom));
@@ -57,20 +59,89 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
         return m_enTete;
     }
     for(Ligne *l : m_lignes){
-        if(l->contient(coord_souris))
+        if(l->contient(coord_souris)){
             return l; //changer la ligne de couleur
+        }
     }
     return nullptr;
 }
 
+//!
+//! \brief Test si la souris survole une ligne et si oui alors change la couleur de la ligne
+//! \param coord_souris
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
 void
-Tableau::trie(Case * c){
-//    ZoneTexte * z = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
-//    std::string nom = z->obtenirTexte();
-    std::cout << c->obtenirIdCase() << std::endl;
-
+Tableau::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
+    Ligne * lSurvole = ligneSurvole(coord_souris);
+    //ligne n'appartient pas au tableau c'est l'entete ou c'est le titre
+    if(m_lignePrecedemmentSurvoler != nullptr)
+        m_lignePrecedemmentSurvoler->definirNumCouleur((m_lignePrecedemmentSurvoler->m_idLigne%2==0) ? 1:2);
+    if(lSurvole == nullptr || lSurvole == m_enTete || lSurvole == m_titre) return;
+    lSurvole->definirNumCouleur(3);
+    m_lignePrecedemmentSurvoler=lSurvole;
 }
 
+//!
+//! \brief permet de comparer 2 Lignes
+//! \param lig1
+//! \param lig2
+//! \return la ligne la plus proche du debut de l'alphabet
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
+bool compareLigne(Ligne* lig1, Ligne* lig2){
+    int idCase=lig1->obtenirNumCaseSelectionnerTri();
+    std::string texte1 = (dynamic_cast<ZoneTexte * >(lig1->obtenirCase(idCase)->obtenirDonnee()))->obtenirTexte();
+    std::string texte2 = (dynamic_cast<ZoneTexte * >(lig2->obtenirCase(idCase)->obtenirDonnee()))->obtenirTexte();
+    if(isdigit(texte1[0])){ //test si le string est un nombre
+        return std::stoi(texte1) < std::stoi(texte2); //on compare des int
+    }
+    return (texte1 < texte2);
+}
+
+//!
+//! \brief permet de lancer le tri par default sur le tableau
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
+void
+Tableau::trieDefault(){
+    assert(m_enTete != nullptr);
+    this->trie(m_enTete->obtenirCase(0));
+}
+
+//!
+//! \brief trie le tableau en fonction d'une case de reference
+//! \param c la case ou s'effectue le tri
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
+void
+Tableau::trie(Case * c){
+    std::cout << c->obtenirIdCase() << std::endl;
+    for(auto *l : m_lignes){
+        l->definirNumCaseSelectionnerTri(c->obtenirIdCase());
+    }
+    std::sort(m_lignes.begin(), m_lignes.end(), compareLigne);
+    int i=2;
+    for (auto *l : m_lignes)
+    {
+        l->definirNumCouleur(i%2+1);
+        l->redimensionner(creerRectLigne(i)); //deplacer les lignes
+        i++;
+    }
+}
+
+//!
+//! \brief Tableau::testTri
+//! \param l la ligne ou c'est effectué le clique
+//! \param coord_souris
+//! \return true si le trie c'est effectué (clique sur l'entete) , false sinon
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
 bool
 Tableau::testTri(Ligne * l, std::pair<int, int> coord_souris){
     if(l == m_enTete){
@@ -130,7 +201,12 @@ void Tableau::ajouterEnTetePartiesBus(){
     m_nbLignes++;
 }
 
-
+//!
+//! \brief ajoute une ligne contenant des affichables dans le tableau
+//! \param affichables
+//! \author Lacoste Dorian
+//! \date 12/12/18
+//!
 void
 Tableau::ajouterLigne(std::vector<Affichable*> affichables){
     assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
@@ -282,8 +358,12 @@ Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
 //!
 SDL_Rect
 Tableau::creerRectLigne(){
+    return creerRectLigne(m_nbLignes);
+}
+SDL_Rect
+Tableau::creerRectLigne(int numLigne){
     SDL_Rect rectangleParLigne = m_rectangle;
-    rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * m_nbLignes;
+    rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * numLigne;
     rectangleParLigne.h= this->m_hauteurLigne;
     return rectangleParLigne;
 }
