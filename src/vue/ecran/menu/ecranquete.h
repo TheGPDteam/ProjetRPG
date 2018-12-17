@@ -13,7 +13,7 @@ class EcranQuete : public EcranGeneral
 private:
     std::function<TypeEcran(DictionnaireDeBoutons&, std::pair<int, int> coord_souris, TypeEcran)> m_methodeVerificationCliqueSourisSurBouton;
 
-    //    TexteSDL m_nomFenetre;
+    TexteSDL m_nomFenetre;
     Humain * m_humain_a_affecter;
 
     SDL_Rect m_fondChasse;
