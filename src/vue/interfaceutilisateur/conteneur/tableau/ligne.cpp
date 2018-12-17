@@ -69,7 +69,7 @@ void Ligne::afficher(SDL_Surface *surface)
     else if (m_numCouleur == 2)
         couleurFond = SDL_MapRGB(surface->format, 170, 170, 170);
     else if (m_numCouleur == 3) {
-        couleurFond = SDL_MapRGB(surface->format, 250, 50, 50);
+        couleurFond = SDL_MapRGB(surface->format, 200, 150, 50);
     }
 
     SDL_FillRect(surface, &m_rectangle,couleurFond);

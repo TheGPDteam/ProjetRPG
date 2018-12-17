@@ -32,7 +32,7 @@ public:
 
     void obtenirChangement(Observable &obj) override;
 
-    void definirEtatQuantite(int quantite_objets);
+    void definirEtatQuantite(Inventaire * inventaireJ);
     bool definirObjetPourAffichage(std::vector<Objet *> objets);
 };
 

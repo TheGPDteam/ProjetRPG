@@ -144,29 +144,24 @@ EcranInventaire::~EcranInventaire()
 
 void EcranInventaire::obtenirChangement(Observable &obj)
 {
-    Joueur* joueur = dynamic_cast<Joueur *>(&obj);
-    if (joueur != nullptr){
-        if (m_compteurInventaire == -1)
-            m_compteurInventaire = joueur->obtenirInventaireJoueur()->obtenirNombreObjet();
-
-        if( joueur->obtenirInventaireJoueur()->obtenirNombreObjet() != m_compteurInventaire)
-        {
-//            definirObjetPourAffichage(joueur->obtenirInventaireJoueur()->obtenirObjets());
-            definirEtatQuantite(joueur->obtenirInventaireJoueur()->obtenirNombreObjet());
+    Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur();
+        if(inventaire->obtenirNombreObjet() != m_compteurInventaire){
+            definirEtatQuantite(inventaire);
+            m_compteurInventaire = inventaire->obtenirNombreObjet();
         }
-    }
-    definirEtatQuantite(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet());
+
     m_tableau_objets->vider();
-    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
+    for(auto o : inventaire->obtenirObjets())
     {
         m_tableau_objets->ajouterLigne(o);
     }
 }
 
 
-void EcranInventaire::definirEtatQuantite(int quantite_objets)
+void EcranInventaire::definirEtatQuantite(Inventaire * inventaireJ)
 {
-    std::string tmp = "Stockage : " + std::to_string(quantite_objets); + " - " + std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirTailleMax());
+    if(inventaireJ == nullptr) return;
+    std::string tmp = "Stockage : " + std::to_string(inventaireJ->obtenirNombreObjet()) + " - " + std::to_string(inventaireJ->obtenirTailleMax());
 
     if(m_quantiteInventaire != nullptr)
     {

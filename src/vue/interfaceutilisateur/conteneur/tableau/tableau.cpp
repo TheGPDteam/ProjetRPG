@@ -115,7 +115,7 @@ bool compareLigne(Ligne* lig1, Ligne* lig2){
     std::string texte1 = (dynamic_cast<ZoneTexte * >(lig1->obtenirCase(idCase)->obtenirDonnee()))->obtenirTexte();
     std::string texte2 = (dynamic_cast<ZoneTexte * >(lig2->obtenirCase(idCase)->obtenirDonnee()))->obtenirTexte();
     if(isdigit(texte1[0])){ //test si le string est un nombre
-        return std::stoi(texte1) < std::stoi(texte2); //on compare des int
+        return std::stoi(texte1) > std::stoi(texte2); //on compare des int
     }
     return (texte1 < texte2);
 }
@@ -386,7 +386,7 @@ SDL_Rect
 Tableau::creerRectLigne(int numLigne){
     SDL_Rect rectangleParLigne = m_rectangle;
     rectangleParLigne.y=this->m_rectangle.y + this->m_hauteurLigne * numLigne;
-    rectangleParLigne.h= this->m_hauteurLigne;
+    rectangleParLigne.h= this->m_hauteurLigne+1;
     return rectangleParLigne;
 }
 
