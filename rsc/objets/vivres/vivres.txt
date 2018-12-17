@@ -6,7 +6,7 @@ Riz/75/Ca calle bien/4/10
 Pates/75/Ca calle bien/0/10
 Lait/15/Matin leger avec lactel/5/10
 Orange/10/Tu captes la blague /6/10
-Ananas/20/Toi tu me donnes ton abricot moi je te donne mon ananas/0/10
+Ananas/20/Toi tu me donnes ton abricot moi je te donne mon ananas/9/10
 Quenelle/60/Attention a Dieudo/0/10
 Peche/10/Pas besoin de canne/0/10
 Patates/25/La vie est dure quand on est une petite patate/0/10
