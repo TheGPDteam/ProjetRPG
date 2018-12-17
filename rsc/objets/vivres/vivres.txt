@@ -1,19 +1,19 @@
-Baguette/30/Une petite bague pour vos petits creux
-Steak/40/Trouvez une hache
-Eau/20/L eau c est la vie
-Cookie/5/Pour une vraie petite faim
-Riz/75/Ca calle bien
-Pates/75/Ca calle bien
-Lait/15/Matin leger avec lactel
-Orange/10/Tu captes la blague 
-Ananas/20/Toi tu me donnes ton abricot moi je te donne mon ananas
-Quenelle/60/Attention a Dieudo
-Peche/10/Pas besoin de canne
-Patates/25/La vie est dure quand on est une petite patate
-Salade/5/Pour les Vegans
-Biscuit/10/Triscuit
-Poisson/50/Pour pas etre con le poisson
-Tacos Legendaire/100/Avec frites et boisson
-Tomate/10/Beau fruit rouge
-Banane/10/Beau fruit jaune
-Carotte/10/Beau tubercule orange
+Baguette/30/Une petite bague pour vos petits creux/8/10
+Steak/40/Trouvez une hache/1/10
+Eau/20/L eau c est la vie/2/10
+Cookie/5/Pour une vraie petite faim/3/10
+Riz/75/Ca calle bien/4/10
+Pates/75/Ca calle bien/0/10
+Lait/15/Matin leger avec lactel/5/10
+Orange/10/Tu captes la blague /6/10
+Ananas/20/Toi tu me donnes ton abricot moi je te donne mon ananas/0/10
+Quenelle/60/Attention a Dieudo/0/10
+Peche/10/Pas besoin de canne/0/10
+Patates/25/La vie est dure quand on est une petite patate/0/10
+Salade/5/Pour les Vegans/0/10
+Biscuit/10/Triscuit/0/10
+Poisson/50/Pour pas etre con le poisson/0/10
+Tacos Legendaire/100/Avec frites et boisson/0/10
+Tomate/10/Beau fruit rouge/7/10
+Banane/10/Beau fruit jaune/0/10
+Carotte/10/Beau tubercule orange/0/10
