@@ -30,7 +30,7 @@ void Vivre::definirValeurNutritive(const int &valeurNutritive)
 }
 
 
-void Vivre::chargerVivre(std::string nomFichier)
+void Vivre:: chargerVivre(std::string nomFichier)
 {
     //Lire dans le fichier vivre.txt
     std::vector<std::string> lignesAliments;
@@ -57,9 +57,14 @@ void Vivre::affecterValeurs(string ligne)
     string nom="";
     string valeurNutritive="";
     string description="";
+    string emplacementImageX="";
+    string emplacementImageY="";
+
 
     bool separateurNomPasse=false;
     bool separateurNutritivePasse=false;
+    bool separateurDescriptionPasse=false;
+    bool separateurEmplacementImageX=false;
 
     for (unsigned int i=0;i+1<=ligne.size();++i)
     {
@@ -85,14 +90,35 @@ void Vivre::affecterValeurs(string ligne)
                 valeurNutritive+=ligne[i];
             }
         }
-        else
+        else if(!separateurDescriptionPasse)
         {
-            description+=ligne[i];
+            if (ligne[i]=='/')
+            {
+                separateurDescriptionPasse=true;
+            }
+            else {
+                description+=ligne[i];
+            }
+        }
+        else if(!separateurEmplacementImageX){
+            if (ligne[i]=='/')
+            {
+                separateurEmplacementImageX=true;
+            }
+            else {
+                emplacementImageX+=ligne[i];
+            }
+        }
+
+        else {
+             emplacementImageY+=ligne[i];
         }
     }
     m_nom=nom;
     m_valeurNutritive=std::stoi(valeurNutritive);
     m_description=description;
+    m_sprite->changementSprite(SDL_Rect{std::stoi(emplacementImageX)*64,std::stoi(emplacementImageY)*64,64,64});
+
 }
 
 //!

@@ -16,8 +16,8 @@
 //! Construit un objet de la classe arme
 //!
 
-Arme::Arme(unsigned short degats, std::string nom, std::string description)
-    :Objet{nom,description},
+Arme::Arme(unsigned short degats, std::string nom, std::string description, int xImg, int yImg)
+    :Objet{nom,description, xImg, yImg},
       m_degats{degats}
 {
 }
@@ -98,11 +98,15 @@ void Arme::affecterValeurs(std::string ligne)
     std::string valeurVitesse="";
     std::string valeurChance="";
     std::string description="";
+    std::string emplacementImageX="";
+    std::string emplacementImageY="";
 
     bool separateurNomPasse=false;
     bool separateurDegatsPasse=false;
     bool separateurVitessePasse=false;
     bool separateurChancePasse=false;
+    bool separateurDescriptionPasse=false;
+    bool separateurEmplacementImageX=false;
 
     for (unsigned int i=0;i+1<=ligne.size();++i)
     {
@@ -150,9 +154,31 @@ void Arme::affecterValeurs(std::string ligne)
                 valeurChance+=ligne[i];
             }
         }
+        else if (!separateurDescriptionPasse)
+        {
+            if(ligne[i]=='/')
+            {
+                separateurDescriptionPasse=true;
+            }
+            else
+            {
+                description+=ligne[i];
+            }
+        }
+        else if (!separateurEmplacementImageX)
+        {
+            if(ligne[i]=='/')
+            {
+                separateurEmplacementImageX=true;
+            }
+            else
+            {
+                emplacementImageX+=ligne[i];
+            }
+        }
         else
         {
-            description+=ligne[i];
+            emplacementImageY+=ligne[i];
         }
     }
     m_nom=nom;
@@ -160,6 +186,8 @@ void Arme::affecterValeurs(std::string ligne)
     m_vitesse=std::stoi(valeurVitesse);
     m_chance=std::stoi(valeurChance);
     m_description=description;
+    m_sprite->changementSprite(SDL_Rect{std::stoi(emplacementImageX)*64,std::stoi(emplacementImageY)*64,64,64});
+
 }
 
 //!

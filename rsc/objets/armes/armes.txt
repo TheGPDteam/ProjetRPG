@@ -1,12 +1,12 @@
-Couteau/150/100/150/Arme de survie basique simple a utiliser
-Batte de Baseball/140/85/180/Croustibat de Baseball
-Club de golf/140/90/170/Envoie vos ennemis dans le trou
-Rouleau a patisserie/135/85/120/Punissez vos ennemis pour avoir pique dans la reserve
-Pistolet/210/150/150/Pist au caf
-Fusil/300/30/200/Chasser les sangliers nazis
-Mitraillette/250/180/120/Faites de vos ennemis des passoires
-Grenade/400/10/100/Cela fait kaboum
-C4/500/5/100/Explose sur les ennemis
-Pioche/130/80/160/Perce le corps de vos ennemis
-Pelle/120/70/130/Enfonce vos ennemis 6 pieds sous terre
-Masse/180/30/150/Ecrase le crane de vos ennemis
+Couteau/150/100/150/Arme de survie basique simple a utiliser/0/11
+Batte de Baseball/140/85/180/Croustibat de Baseball/1/11
+Club de golf/140/90/170/Envoie vos ennemis dans le trou/2/11
+Rouleau a patisserie/135/85/120/Punissez vos ennemis pour avoir pique dans la reserve/0/10
+Pistolet/210/150/150/Pist au caf/0/10
+Fusil/300/30/200/Chasser les sangliers nazis/0/10
+Mitraillette/250/180/120/Faites de vos ennemis des passoires/0/10
+Grenade/400/10/100/Cela fait kaboum/0/10
+C4/500/5/100/Explose sur les ennemis/0/10
+Pioche/130/80/160/Perce le corps de vos ennemis/0/10
+Pelle/120/70/130/Enfonce vos ennemis 6 pieds sous terre/0/10
+Masse/180/30/150/Ecrase le crane de vos ennemis/0/10

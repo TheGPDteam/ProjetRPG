@@ -1,8 +1,8 @@
 #ifndef arme_h
 #define arme_h
 
-#include "../objet.h"
-#include "../../utilitaires.h"
+#include "objet.h"
+#include "utilitaires.h"
 #include <string>
 #include <vector>
 #include <fstream>
@@ -17,7 +17,7 @@ private:
     void affecterValeurs(std::string ligne);
 public:
     Arme();
-    Arme(unsigned short degats, std::string nom, std::string description);
+    Arme(unsigned short degats, std::string nom, std::string description, int xImg, int yImg);
     ~Arme() override = default;
     unsigned short obtenirDegats() const;
     void definirDegats(const int &degats);

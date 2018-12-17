@@ -26,10 +26,10 @@ Objet::Objet()
 //! Constructeur paramétré
 //!
 
-Objet::Objet(std::string nom, std::string description)
+Objet::Objet(std::string nom, std::string description, int xImg, int yImg)
     : m_nom{nom},
       m_description{description},
-      m_sprite{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,0,0,0},SDL_Rect{0,640,64,64}}}
+      m_sprite{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,0,0,0},SDL_Rect{xImg,yImg,64,64}}}
 
 {
 
