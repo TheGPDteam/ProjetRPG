@@ -21,9 +21,9 @@ ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {
     SDL_Rect rect = m_contenu->rectangle();
-//    if(m_fenetreGlissante.h >= rect.h)
-//        m_contenu->afficher(surface);
-//    else {
+    if(m_fenetreGlissante.h >= rect.h)
+        m_contenu->afficher(surface);
+    else {
         SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h, 12,
                                                       0,0,0,0);
         SDL_Rect r = {0,0,rect.w, rect.h};
@@ -38,7 +38,7 @@ void ZoneDefilable::afficher(SDL_Surface *surface) {
         SDL_FreeSurface(horsEcran);
         SDL_Rect pos = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
         SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 120, 120, 120));
-//    }
+    }
 }
 
 void ZoneDefilable::redimensionner(SDL_Rect rectangle) {

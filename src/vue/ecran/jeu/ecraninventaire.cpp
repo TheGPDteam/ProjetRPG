@@ -1,7 +1,6 @@
 #include "ecraninventaire.h"
 #include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
-#include "tableau.h"
 #include <utility>
 #include <iostream>
 
@@ -39,11 +38,14 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
                                            true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
+    m_zoneDefilable = m_tableau_objets->zoneDefilableTableau(m_rectangleHaut);
+
     definirEtatQuantite(0);
     for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
     {
         m_tableau_objets->ajouterLigne(o);
     }
+
 }
 
 
@@ -67,7 +69,8 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     m_quantiteInventaire->afficher(fenetre_affichage);
 
 
-    m_tableau_objets->afficher(fenetre_affichage);
+    // m_tableau_objets->afficher(fenetre_affichage);
+    m_zoneDefilable->afficher(fenetre_affichage);
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
@@ -90,8 +93,10 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
 {
     SDL_Event evenements;
 
+
     while(SDL_PollEvent(&evenements))
     {
+        SDL_EnableKeyRepeat(10, 10);
         switch(evenements.type)
         {
         case SDL_QUIT:
@@ -107,6 +112,12 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
                 coord_souris.second = evenements.button.y;
             }
             break;
+        case SDL_KEYDOWN:
+            if(evenements.key.keysym.sym == SDLK_UP){
+                m_zoneDefilable->defiler(true);
+            }
+            else if(evenements.key.keysym.sym == SDLK_DOWN)
+                m_zoneDefilable->defiler(false);
 
         default:
             coord_souris.first = evenements.button.x;
@@ -145,10 +156,7 @@ EcranInventaire::~EcranInventaire()
 void EcranInventaire::obtenirChangement(Observable &obj)
 {
     Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur();
-        if(inventaire->obtenirNombreObjet() != m_compteurInventaire){
-            definirEtatQuantite(inventaire);
-            m_compteurInventaire = inventaire->obtenirNombreObjet();
-        }
+    definirEtatQuantite(inventaire);
 
     m_tableau_objets->vider();
     for(auto o : inventaire->obtenirObjets())

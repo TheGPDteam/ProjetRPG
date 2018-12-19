@@ -10,6 +10,7 @@ Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std:
     m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1);
     m_nbLignes++;
     m_enTete=nullptr;
+    m_rectangle.h=m_titre->rectangle().h*2;
 }
 
 
@@ -39,7 +40,9 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
     SDL_Rect rectangleLigne = nouvelleDimension;
-    rectangleLigne.h = rectangleLigne.h / m_lignes.size();
+    if(m_lignes.size()!=0){
+        rectangleLigne.h = rectangleLigne.h / m_lignes.size();
+    }
     for (Ligne * l : m_lignes)
     {
         l->redimensionner(rectangleLigne);
@@ -370,6 +373,7 @@ Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
     Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2, m_nbLignes+1);
     m_lignes.push_back(l);
     m_nbLignes++;
+    m_rectangle.h+=l->rectangle().h;
 }
 
 //!
@@ -403,9 +407,15 @@ Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *c
     return t;
 }
 
+ZoneDefilable * Tableau::zoneDefilableTableau(SDL_Rect rectAffichable){
+    return new ZoneDefilable(this,SDL_Color{100, 100, 100,255}, this->m_controleur,true,rectAffichable);
+}
+
 void Tableau::vider(){
     for(auto & l : m_lignes)
         delete l;
     m_lignes.clear();
     m_nbLignes = 2;
+    m_rectangle.h=m_titre->rectangle().h*2;
+
 }

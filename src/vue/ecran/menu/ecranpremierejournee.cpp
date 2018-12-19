@@ -99,6 +99,17 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
                 coord_souris.second = evenements.button.y;
             }
             break;
+//            case SDL_MOUSEWHEEL:
+//            if(event..wheel.y > 0) // scroll up
+//            {
+//                 // Pull up code here!
+//            }
+//            else if(event.wheel.y < 0) // scroll down
+//            {
+//                 // Pull down code here!
+//            }
+
+
         case SDL_KEYDOWN:
             if(evenements.key.keysym.sym == SDLK_UP){
                 m_defilable->defiler(true);
