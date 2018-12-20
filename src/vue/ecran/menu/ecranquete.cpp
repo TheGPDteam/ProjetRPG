@@ -1,17 +1,15 @@
 #include "ecranquete.h"
 #include "interfaceutilisateur/conteneur/bouton/constantesbouton.h"
 #include "interfaceutilisateur/conteneur/bouton/bouton.h"
-#include "ecranrepartitionjoueur.h"
 #include <utility>
 #include <vector>
 #include "tableau.h"
 
 EcranQuete::EcranQuete(Controleur *controleur) :
     EcranGeneral{controleur},
-//    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
-        m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
-                     std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_humain_a_affecter{nullptr}
+    //    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
+    m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
+                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
@@ -55,6 +53,8 @@ EcranQuete::EcranQuete(Controleur *controleur) :
         m_tableauCampement->ajouterLigne(dynamic_cast <Humain *> (p));
     }
 
+    m_repartitionEcran = new EcranRepartitionJoueur(m_controleur);
+
 }
 
 EcranQuete::~EcranQuete(){
@@ -77,7 +77,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondCampement, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-     m_nomFenetre.afficher(fenetre_affichage);
+    m_nomFenetre.afficher(fenetre_affichage);
 
 
     m_tableauCampement->afficher(fenetre_affichage);
@@ -85,34 +85,42 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_tableauRecolte->afficher(fenetre_affichage);
     m_tableauNonAffectes->afficher(fenetre_affichage);
 
-    if(m_humain_a_affecter != nullptr){
-        EcranRepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage, m_controleur);
-        int rep = repartition.affecter();
-        if(rep == CHASSE){
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeChasse()->ajouterPersonnage(m_humain_a_affecter);
-        }
-        if(rep == RECOLTE){
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeRecolte()->ajouterPersonnage(m_humain_a_affecter);
+    if(m_repartitionEcran->obtenirEtatAfficher()){
+        //        EcranRepartitionJoueur repartition (m_humain_a_affecter, fenetre_affichage, m_controleur);
+        m_repartitionEcran->afficherEcran(coord_souris,fenetre_affichage);
 
-        }
-        if(rep == CAMPEMENT){
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
-            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeCampement()->ajouterPersonnage(m_humain_a_affecter);
+        //        int rep = repartition.affecter();
+        //        if(rep == CHASSE){
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeChasse()->ajouterPersonnage(m_humain_a_affecter);
+        //        }else if(rep == RECOLTE){
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeRecolte()->ajouterPersonnage(m_humain_a_affecter);
 
-        }
-        m_humain_a_affecter = nullptr;
+        //        }else if(rep == CAMPEMENT){
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        //            m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeCampement()->ajouterPersonnage(m_humain_a_affecter);
+
+        //        }else if(rep == NON_AFFECTE){
+        //           m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees().erase(m_humain_a_affecter);
+        //           m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeCampement()->ajouterPersonnage(m_humain_a_affecter);
+
+        //            m_humain_a_affecter = nullptr;
+        //        }
+    }else{
+
+        afficherBoutons(coord_souris, fenetre_affichage);
     }
-
-    //A SUPPRIMER
-    afficherBoutons(coord_souris, fenetre_affichage);
-
 
 }
 
 void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
+
+    if(m_repartitionEcran->obtenirEtatAfficher()){
+        m_repartitionEcran->gestionDesEvenements(controleur, quitter_jeu, clique_souris, coord_souris);
+        return;
+    }
     SDL_Event evenements;
 
 
@@ -131,14 +139,14 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             {
                 Ligne * lig = m_tableauNonAffectes->ligneSurvole(coord_souris);
                 if(lig != nullptr){
-//                     test si l'evenement est une demande de tri du tableau
+                    //                     test si l'evenement est une demande de tri du tableau
                     if(m_tableauNonAffectes->testTri(lig, coord_souris)) break;
 
                     int idHumain = lig->m_idLigne-2; // on soustrait le titre et l'entete
 
                     auto humainsModel=  m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees();
                     std::vector<Humain *> humains(humainsModel.begin(), humainsModel.end());
-                    m_humain_a_affecter = humains.at(idHumain-1);
+                    m_repartitionEcran->definirHumain(humains.at(idHumain-1));
                 }
 
                 clique_souris = true;
@@ -147,7 +155,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             }
             break;
         case SDL_MOUSEMOTION:
-              m_tableauNonAffectes->testAffichageLigneSurvole(coord_souris);
+            m_tableauNonAffectes->testAffichageLigneSurvole(coord_souris);
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;

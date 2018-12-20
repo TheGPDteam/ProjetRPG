@@ -70,6 +70,15 @@ int Campement::consommerVivre()
     return valeurNutritive;
 }
 
+void Campement::supprimerHumain(Humain * h){
+     std::vector<Humain *> personnesNonAttribuees(m_personnesNonAttribuees.begin(), m_personnesNonAttribuees.end());
+     personnesNonAttribuees.push_back(nullptr);
+
+     if(std::find(personnesNonAttribuees.begin(), personnesNonAttribuees.end(), h) != personnesNonAttribuees.end()){
+         m_personnesNonAttribuees.erase(h);
+     }
+}
+
 //!
 //! \brief Retourne la consommation totale de tous les humains du campement
 //! \return Consommation totale du campement

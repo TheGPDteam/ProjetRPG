@@ -28,7 +28,7 @@ public:
     unsigned short obtenirNbVivres() const;
     int consommerVivre();
     int obtenirConsommation() ;
-
+    void supprimerHumain(Humain * h);
     std::set<Humain *>& obtenirNonAttribuees();
 
     Equipe* obtenirEquipeChasse();
