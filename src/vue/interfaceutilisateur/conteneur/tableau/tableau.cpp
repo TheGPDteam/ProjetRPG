@@ -2,12 +2,12 @@
 #include "zonetexte.h"
 
 
-Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom)
-    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_nbLignes{0}, m_controleur{controleur}
+Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom, bool avecImage)
+    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_nbLignes{0}, m_controleur{controleur}, m_avecImage(avecImage)
 {
     std::vector<Affichable * > tmp;
     tmp.push_back(creeZoneTexte(nom));
-    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1);
+    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1, false);
     m_nbLignes++;
     m_enTete=nullptr;
     m_rectangle.h=m_titre->rectangle().h*2;
@@ -187,7 +187,7 @@ Tableau::ajouterEnTeteHumain(){
     tmp.push_back(creeZoneTexte("Campement"));
     tmp.push_back(creeZoneTexte("Arme"));
     tmp.push_back(creeZoneTexte("Niveau"));
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0,m_nbLignes+1);
+    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0,m_nbLignes+1, m_avecImage);
     m_nbLignes++;
 }
 
@@ -204,7 +204,7 @@ Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
     //    }else if(typeObjet == TypeObjet::Vivre){
     //        tmp.push_back("ValeurNutritive");
     //    }
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0, m_nbLignes+1);
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0, m_nbLignes+1, m_avecImage);
     m_nbLignes++;
 }
 
@@ -222,7 +222,7 @@ void Tableau::ajouterEnTetePartiesBus(){
     //    }else if(typeObjet == TypeObjet::Vivre){
     //        tmp.push_back("ValeurNutritive");
     //    }
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0,m_nbLignes+1);
+    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0,m_nbLignes+1, m_avecImage);
     m_nbLignes++;
 }
 
@@ -370,7 +370,7 @@ void Tableau::ajouterLigne(Campement *c)
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2, m_nbLignes+1);
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2, m_nbLignes+1, m_avecImage);
     m_lignes.push_back(l);
     m_nbLignes++;
     m_rectangle.h+=l->rectangle().h;
@@ -395,14 +395,14 @@ Tableau::creerRectLigne(int numLigne){
 }
 
 
-Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre);
+Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre, aUneImage);
     t->ajouterEnTeteHumain();
     return t;
 }
 
-Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, TypeObjet typeObjet){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre);
+Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage, TypeObjet typeObjet){
+    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre, aUneImage);
     t->ajouterEnTeteObjet(typeObjet);
     return t;
 }

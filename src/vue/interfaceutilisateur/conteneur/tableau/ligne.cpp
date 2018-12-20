@@ -1,10 +1,18 @@
 #include "ligne.h"
 
-Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne)
-    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_numCouleur(sombre), m_affichable(nullptr), m_idLigne(idLigne)
+Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne, bool avecImage)
+    : Affichable(rectangleLigne), Cliquable(controleur, /*action,*/ true), m_donnees(donnees), m_numCouleur(sombre), m_affichable(nullptr), m_idLigne(idLigne), m_possedeImage(avecImage)
 {
+    bool premiereColonne=true;
+
     for(Affichable *a: m_donnees) {
-        this->creerCaseElement(a);
+
+        this->creerCaseElement(a, premiereColonne);
+        if (premiereColonne){
+
+            premiereColonne=false;
+
+        }
     }
 }
 
@@ -34,8 +42,16 @@ Ligne::caseClique(std::pair<int, int> coord_souris){
 //! cree une case  à partir d'une donnee Affichable
 //!
 void
-Ligne::creerCaseElement(Affichable* affichable){
-    this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur, m_cases.size()));
+Ligne::creerCaseElement(Affichable* affichable, bool premiereColonne){
+    if (premiereColonne && m_possedeImage){
+       this->m_cases.push_back(new Case(creerRectImage(), affichable, m_controleur, m_cases.size()));
+    }
+
+    else {
+       this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur, m_cases.size()));
+    }
+
+
 }
 
 //!
@@ -47,10 +63,27 @@ Ligne::creerCaseElement(Affichable* affichable){
 SDL_Rect
 Ligne::creerRectCase(){
     SDL_Rect recCase;
-    int largeurCaseDefaut=this->m_rectangle.w/this->m_donnees.size();
+    int largeurCaseDefaut;
+    if (m_possedeImage){
+        largeurCaseDefaut=(this->m_rectangle.w-TAILLE_IMAGE)/(this->m_donnees.size()-1);
+        recCase.x=this->m_rectangle.x + largeurCaseDefaut * (this->m_cases.size()-1) + TAILLE_IMAGE;
+    }
+    else {
+        largeurCaseDefaut=(this->m_rectangle.w)/this->m_donnees.size();
+        recCase.x=this->m_rectangle.x + largeurCaseDefaut * this->m_cases.size();
+    }
     recCase.y=this->m_rectangle.y;
-    recCase.x=this->m_rectangle.x + largeurCaseDefaut * this->m_cases.size();
+
     recCase.w= largeurCaseDefaut;
+    recCase.h=this->m_rectangle.h;
+    return recCase;
+}
+
+SDL_Rect Ligne::creerRectImage(){
+    SDL_Rect recCase;
+    recCase.y=this->m_rectangle.y;
+    recCase.x=this->m_rectangle.x;
+    recCase.w= TAILLE_IMAGE;
     recCase.h=this->m_rectangle.h;
     return recCase;
 }

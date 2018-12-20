@@ -10,17 +10,20 @@ class Ligne : public Affichable, public Cliquable
 private:
     std::vector<Affichable *> m_donnees;
     std::vector<Case*> m_cases;
+    bool m_possedeImage;
+    const int TAILLE_IMAGE = 64;
     int m_numCouleur;
     void creerCaseString(std::string donnee);
-    void creerCaseElement(Affichable* affichable);
+    void creerCaseElement(Affichable* affichable, bool premiereColonne);
     SDL_Rect creerRectCase();
+    SDL_Rect creerRectImage();
     Affichable *m_affichable;
     int numCaseSelTri=0;
 
 public:
     const int m_idLigne;
     Ligne() = delete;
-    Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne);
+    Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rect rectangleLigne, int sombre, int idLigne, bool avecImage);
     Case * caseClique(std::pair<int, int> coord_souris);
     void afficher(SDL_Surface * surface) override;
     void redimensionner(SDL_Rect m_rectangle) override;
