@@ -82,7 +82,7 @@ Ligne::creerRectCase(){
 SDL_Rect Ligne::creerRectImage(){
     SDL_Rect recCase;
     recCase.y=this->m_rectangle.y;
-    recCase.x=0;
+    recCase.x=this->m_rectangle.x;
     recCase.w= TAILLE_IMAGE;
     recCase.h=this->m_rectangle.h;
     return recCase;
