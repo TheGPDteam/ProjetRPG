@@ -29,10 +29,10 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
 
-    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur,"Non Affectes");
-    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur, "Chasse");
-    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur, "Recolte");
-    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur, "Campement");
+    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur,"Non Affectes", false);
+    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur, "Chasse", false);
+    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur, "Recolte", false);
+    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur, "Campement", false);
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
     for (Humain *h : c->obtenirNonAttribuees())
     {

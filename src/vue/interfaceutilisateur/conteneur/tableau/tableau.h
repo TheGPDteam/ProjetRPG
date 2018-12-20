@@ -11,6 +11,7 @@ class Tableau : public Affichable
 private :
     float m_hauteurLigne;
     int m_nbLignes;
+    bool m_avecImage;
     Ligne * m_titre;
     Ligne * m_enTete;
     std::vector<Ligne*> m_lignes;
@@ -29,7 +30,7 @@ private :
     int positionLigne(Ligne * ligRecherchee);
 
 public:
-    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom);
+    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom, bool avecImage);
     void vider();
     void ajouterLigne(std::vector<Affichable*> affichables);
     void ajouterLigne(Humain* perso);
@@ -44,8 +45,8 @@ public:
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect nouvelleDimension) override;
 
-    static Tableau * tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre);
-    static Tableau * tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, TypeObjet typeObjet=TypeObjet::Objet);
+    static Tableau * tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage);
+    static Tableau * tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage, TypeObjet typeObjet=TypeObjet::Objet);
 
 
 //    static Tableau * tableauCampement(SDL_Rect rect, float hauteurLigne, Controleur *controleur);
