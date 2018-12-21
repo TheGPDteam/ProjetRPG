@@ -114,6 +114,31 @@ void ZoneTexte::adapterTexte()
                 m_texteSDL.push_back(t);
             }
         }
+        break;
+    }
+    case COMPORTEMENT_TEXTE::TRONQUE :
+    {
+        TexteSDL * t = new TexteSDL(m_texte, m_couleur, m_cheminPolice, m_taillePolice,
+                                    std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
+        std::pair<int, int>  tailleTexte = t->obtenirRectTexte();
+        if(tailleTexte.first > m_rectangle.w){
+            assert(m_texte.size() > 0);
+            int positionCourante = 0;
+            do {
+                delete t;
+                positionCourante++;
+                std::string texteCourant = m_texte.substr(0, positionCourante)+ "...";
+                t = new TexteSDL(texteCourant, m_couleur, m_cheminPolice, m_taillePolice,
+                                 std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
+                tailleTexte = t->obtenirRectTexte();
+
+            } while(tailleTexte.first < m_rectangle.w && positionCourante < m_texte.size());
+            delete t;
+            std::string texteCourant = m_texte.substr(0, positionCourante-1)+ "...";
+            t = new TexteSDL(texteCourant, m_couleur, m_cheminPolice, m_taillePolice,
+                             std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
+        }
+        m_texteSDL.push_back(t);
 
         break;
     }

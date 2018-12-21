@@ -8,7 +8,7 @@
 #include "affichable.h"
 #include "textesdl.h"
 
-enum COMPORTEMENT_TEXTE { REDIMENTIONNE, SAUT_DE_LIGNE };
+enum COMPORTEMENT_TEXTE { REDIMENTIONNE, SAUT_DE_LIGNE, TRONQUE };
 
 enum ALIGNEMENT_TEXTE { GAUCHE, CENTRE };
 
@@ -32,7 +32,7 @@ public:
     //Constructeurs destructeurs
     ZoneTexte() = delete;
     ZoneTexte(const std::string chemin_police, const int taille_police, SDL_Rect r,
-              std::string texte, const SDL_Color couleur_texte = SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE ct = REDIMENTIONNE, ALIGNEMENT_TEXTE at = CENTRE);
+              std::string texte, const SDL_Color couleur_texte = SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE ct = SAUT_DE_LIGNE, ALIGNEMENT_TEXTE at = CENTRE);
 
     virtual ~ZoneTexte();
 
