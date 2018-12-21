@@ -14,7 +14,6 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
 {
    SDL_Rect rectDefilable =  {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
            ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 3};
-   m_defilable = new ZoneDefilable(&m_zoneTexte,SDL_Color{100, 100, 100,255}, m_controleur, true, rectDefilable);
 
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
@@ -71,8 +70,7 @@ void EcranPremiereJournee::afficherEcran(std::pair<int, int> coord_souris, SDL_S
 {
     SDL_FillRect(fenetre_affichage, &m_fondRecapitulatif, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
 
-     //m_zoneTexte.afficher(fenetre_affichage);
-    m_defilable->afficher(fenetre_affichage);
+    m_zoneTexte.afficher(fenetre_affichage);
 
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
@@ -109,13 +107,6 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
 //                 // Pull down code here!
 //            }
 
-
-        case SDL_KEYDOWN:
-            if(evenements.key.keysym.sym == SDLK_UP){
-                m_defilable->defiler(true);
-            }
-            else if(evenements.key.keysym.sym == SDLK_DOWN)
-                m_defilable->defiler(false);
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
@@ -141,5 +132,4 @@ EcranPremiereJournee::~EcranPremiereJournee()
             delete m_zoneHistoire[cpt];
         }
     }
-    delete m_defilable;
 }

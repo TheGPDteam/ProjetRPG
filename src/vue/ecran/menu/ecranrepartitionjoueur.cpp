@@ -120,7 +120,7 @@ void EcranRepartitionJoueur::definirHumain(Humain * h){
     m_etatAfficher =true;
 }
 
-int  EcranRepartitionJoueur::affecter(){
+//int  EcranRepartitionJoueur::affecter(){
     //    int affectation = -1;
     //    bool quitter = false;
     //    while(!quitter){
@@ -131,7 +131,7 @@ int  EcranRepartitionJoueur::affecter(){
 
     //    }
     //    return affectation;
-}
+//}
 
 void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
 

@@ -155,10 +155,11 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             }
             break;
         case SDL_MOUSEMOTION:
-            m_tableauNonAffectes->testAffichageLigneSurvole(coord_souris);
-        default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
+            m_tableauNonAffectes->testAffichageLigneSurvole(coord_souris);
+            break;
+        default:
             break;
 
         }

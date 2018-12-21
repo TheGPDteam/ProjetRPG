@@ -11,7 +11,7 @@ Case::Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur, int idCa
       m_donnee(donnee),
         m_id(idCase)
 {
-    donnee->redimensionner(rect);
+    //donnee->redimensionner(rect);
     redimensionner(rect);
 }
 

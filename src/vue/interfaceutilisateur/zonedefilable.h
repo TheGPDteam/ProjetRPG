@@ -3,7 +3,7 @@
 
 #include "affichable.h"
 #include "cliquable.h"
-
+#include "sprite.h"
 
 class ZoneDefilable : public Cliquable, public Affichable
 {
@@ -12,11 +12,13 @@ private:
     SDL_Rect m_fenetreGlissante;
     Affichable * m_contenu;
     SDL_Color m_couleur;
+    //Sprite * m_defilementBas, * m_defilementHaut;
+
     SDL_Rect zone() const override;
 public:
     ZoneDefilable() = delete;
     ZoneDefilable(Affichable *contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect rectangle);
-
+    virtual ~ZoneDefilable();
     void afficher(SDL_Surface *surface) override;
     void redimensionner(SDL_Rect rectangle) override;
 

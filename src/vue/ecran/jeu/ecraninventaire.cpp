@@ -119,7 +119,7 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
             }
             else if(evenements.key.keysym.sym == SDLK_DOWN)
                 m_zoneDefilable->defiler(false);
-
+            break;
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;

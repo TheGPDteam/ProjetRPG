@@ -1,22 +1,44 @@
 #include "zonedefilable.h"
 
+#include "outilsvue.h"
 #include "cliquable.h"
-
+#include "chargementfeuilledesprite.h"
 #include <SDL/SDL.h>
 const int LARGEUR_BARRE_LATERALE = 10;
 
+
+const SDL_Rect POSITION_BAS = initialiserRectangle(64, 256,64, 64);
+const SDL_Rect POSITION_HAUT = initialiserRectangle(0, 256,64, 64);
+
+
 ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect rectangle)
-    : Cliquable(controleur, actif), Affichable(rectangle), m_contenu{contenu}, m_couleur{couleur}
+    : Cliquable(controleur, actif), Affichable(rectangle), m_contenu{contenu}, m_couleur{couleur}/*,
+      m_defilementBas(new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_BAS)),
+      m_defilementHaut(new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_HAUT))*/
+
 {
     m_fenetreGlissante = {0,0, m_rectangle.w, m_rectangle.h};
     SDL_Rect rect = m_contenu->rectangle();
-    rect.x = rect.y = 0;    
+    rect.x = rect.y = 0;
     if(m_rectangle.h < rect.h){
         rect.w -= LARGEUR_BARRE_LATERALE*1.2;
         m_fenetreGlissante.w -= LARGEUR_BARRE_LATERALE*1.2;
         m_contenu->redimensionner(rect);
     }
     m_contenu->changerRectangle(rect);
+
+//    rect = initialiserRectangle(rectangle.x + rectangle.w - LARGEUR_BARRE_LATERALE, rectangle.y,
+//                                         LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
+//    m_defilementHaut->redimensionner(rect);
+//    rect.y = rectangle.y + rectangle.h - LARGEUR_BARRE_LATERALE;
+//    m_defilementBas->redimensionner(rect);
+}
+
+
+ZoneDefilable::~ZoneDefilable(){
+    delete m_contenu;
+//    delete m_defilementBas;
+//    delete m_defilementHaut;
 }
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {
@@ -38,6 +60,8 @@ void ZoneDefilable::afficher(SDL_Surface *surface) {
         SDL_FreeSurface(horsEcran);
         SDL_Rect pos = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
         SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 120, 120, 120));
+//        m_defilementBas->afficher(surface);
+//        m_defilementHaut->afficher(surface);
     }
 }
 
