@@ -19,7 +19,7 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
         static_cast<Sint16>(coordBoutonCampement.first), static_cast<Sint16>(coordBoutonCampement.second), static_cast<Uint16>(tailleB.first), static_cast<Uint16>(tailleB.second)};
 
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour Campement",rectBoutonCampement,m_controleur, nullptr,true,
-                                           std::make_pair<float,float>(coordBoutonCampement.first+20,coordBoutonCampement.second+15),POLICE_COLLEGED),&ActionsBoutons::boutonCampement);
+                                           /*std::make_pair<float,float>(coordBoutonCampement.first+20,coordBoutonCampement.second+15),*/POLICE_COLLEGED),&ActionsBoutons::boutonCampement);
 //    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets()){
 //        if(o->obtenirType() == TypeObjet::Partie_bus){
 //            m_tableauEquipe->ajouterLigne(o);

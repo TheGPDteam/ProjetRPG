@@ -28,13 +28,13 @@ Bouton::Bouton(const std::string texte,
                Controleur *controleur,
                void *action,
                const bool bouton_cliquable,
-               const std::pair<float, float> coef_coord_texte,
+               //const std::pair<float, float> coef_coord_texte,
                const std::string police
                )
     :
       Affichable(rectangle),
       Cliquable(controleur, /*action,*/ bouton_cliquable),
-      m_texteBouton(new ZoneTexte(police, 18, std::make_pair<int,int>(0,0), rectangle, texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE)))
+      m_texteBouton(new ZoneTexte(police, 18/*, std::make_pair<int,int>(0,0)*/, rectangle, texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE)))
     //, m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte))
 {
     m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_FEUILLE_SPRITE);

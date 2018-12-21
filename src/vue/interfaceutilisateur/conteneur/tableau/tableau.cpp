@@ -267,7 +267,7 @@ Tableau::ajouterLigne(Humain* perso){
 //!
 ZoneTexte *
 Tableau::creeZoneTexte(std::string donnee){
-    return new ZoneTexte(POLICE_COLLEGED, 12, std::make_pair(0,0), SDL_Rect(), donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE);
+    return new ZoneTexte(POLICE_COLLEGED, 12, /*std::make_pair(0,0),*/ SDL_Rect(), donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE);
 }
 
 //!

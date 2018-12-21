@@ -8,13 +8,10 @@
 const float MARGE_RATIO = 0.1;
 
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
-    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, std::make_pair(m_fondRecapitulatif.x + 60, 0),
-                                            SDL_Rect {0,0,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,2*(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 2},
+    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, /*std::make_pair(m_fondRecapitulatif.x + 60, 0),*/
+                                            SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-4*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE},
                                             recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
-   SDL_Rect rectDefilable =  {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE
-           ,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE / 3};
-
    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
      std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
@@ -22,7 +19,7 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
      SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
      ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
-                                            true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
+                                            true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
      recupererHistoire();
     //A SUPPRIMER
     /*

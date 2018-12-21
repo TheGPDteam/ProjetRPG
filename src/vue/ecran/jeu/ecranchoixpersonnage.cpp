@@ -34,7 +34,7 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
 
     m_zoneNomArmePersonnage = new TexteSDL("Arme : " + h->obtenirArme()->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
     //m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
-    m_zoneDescArmePersonnage = new ZoneTexte(POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270),
+    m_zoneDescArmePersonnage = new ZoneTexte(POLICE_COLLEGED, 20,/* std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270),*/
                                              SDL_Rect{m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270, WIDTH_FENETRE_PRINCIPALE - (m_rectangleFichePersonnage.x + 50), 21},
                                              "Description : " + h->obtenirArme()->obtenirDescription(),SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::GAUCHE);
     m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
@@ -61,13 +61,13 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Oui", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteAcceptation);
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonQueteAcceptation);
 
     coordB.first+=250;
     SDL_Rect rect2 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
     ajoutBoutonDansMapDeBoutons(new Bouton("Non", rect2, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQueteRefus);
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonQueteRefus);
 }
 
 void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){

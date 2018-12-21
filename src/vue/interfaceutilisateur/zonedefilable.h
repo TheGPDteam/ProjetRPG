@@ -12,7 +12,8 @@ private:
     SDL_Rect m_fenetreGlissante;
     Affichable * m_contenu;
     SDL_Color m_couleur;
-    //Sprite * m_defilementBas, * m_defilementHaut;
+    Sprite * m_defilementBas;
+    Sprite * m_defilementHaut;
 
     SDL_Rect zone() const override;
 public:

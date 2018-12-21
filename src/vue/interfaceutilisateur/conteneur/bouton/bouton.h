@@ -26,7 +26,7 @@ public:
             Controleur * controleur,
             void *action,
             const bool bouton_cliquable = true,
-            const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
+            //const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
             const std::string police = "Defaut"
             );
 

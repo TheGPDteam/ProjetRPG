@@ -24,24 +24,24 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
     SDL_Rect rect = {m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 , m_rectangleFichePersonnage.y + HEIGHT_BOUTON_NORMAL - 20,
                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     m_retour = new Bouton("Retour", rect, NULL, nullptr,
-                          true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+                          true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
     SDL_Rect rect2 = {m_rectangleFichePersonnage.x + 60 + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     m_recolte = new Bouton("Recolte", rect2, NULL, nullptr,
-                           true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+                           true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
 
     SDL_Rect rect3 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 50), m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     m_chasse = new Bouton("Chasse", rect3, NULL, nullptr,
-                          true, std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+                          true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
 
     SDL_Rect rect4 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     m_campement = new Bouton("Campement", rect4, NULL, nullptr,
-                             m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale().partiesBusReunies(), std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
+                             m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale().partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
     ajoutBoutonDansMapDeBoutons(m_retour, NULL);
     ajoutBoutonDansMapDeBoutons(m_recolte, NULL);
     ajoutBoutonDansMapDeBoutons(m_chasse, NULL);

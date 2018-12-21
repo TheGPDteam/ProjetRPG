@@ -101,8 +101,6 @@ void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
     int ancienneTaillePolice = TTF_FontHeight(m_policeTexte);
     int nouvelleTaillePolice = (ancienneTaillePolice / ratio);
 
-    //    if(nouvelleTaillePolice > ancienneTaillePolice) ancienneTaillePolice-=2;
-//    else ancienneTaillePolice += 2;
 
     if(m_fonts.find(nouvelleTaillePolice) == m_fonts.end())
         m_fonts[nouvelleTaillePolice] = TTF_OpenFont(POLICE_COLLEGED.c_str(), nouvelleTaillePolice);

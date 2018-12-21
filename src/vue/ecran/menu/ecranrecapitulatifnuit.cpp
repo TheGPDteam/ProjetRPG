@@ -36,7 +36,7 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
     */
     SDL_Rect rect = {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85), POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnageCycle);
+                                           true, /*std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 85),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnageCycle);
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();
 }
@@ -130,7 +130,7 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
                                     */
         SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
         ajoutBoutonDansMapDeBoutons(new Bouton("Retour menu", rect,  m_controleur, nullptr,
-                                               true, std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85), POLICE_COLLEGED), &ActionsBoutons::boutonRetourMenuPrincipal);
+                                               true, /*std::make_pair<float, float>(DECALAGE_FOND_RECAP_NUIT + 340, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 85),*/ POLICE_COLLEGED), &ActionsBoutons::boutonRetourMenuPrincipal);
     } else {
         m_zoneNombreZombiesTues->afficher(fenetre_affichage);
         m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);

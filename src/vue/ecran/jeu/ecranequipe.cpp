@@ -30,7 +30,7 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
 
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+                                           true, /*std::make_pair<float, float>(rect.x+20,rect.y+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
 
     for(auto p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage())
     {

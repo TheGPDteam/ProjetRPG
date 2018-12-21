@@ -31,7 +31,7 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
 
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+40,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+                                           true, /*std::make_pair<float, float>(coordB.first+40,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
 
     for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
     {

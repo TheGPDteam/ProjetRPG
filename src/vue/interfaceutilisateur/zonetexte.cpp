@@ -1,5 +1,6 @@
 #include "zonetexte.h"
 #include <iostream>
+#include <assert.h>
 
 void decouper(const std::string& str, std::vector<std::string>& jetons, const std::string& delimiteurs = " ") {
     if (str.length() == 0) return;
@@ -23,10 +24,10 @@ void decouper(const std::string& str, std::vector<std::string>& jetons, const st
 
 
 
-ZoneTexte::ZoneTexte(const std::string chemin_police, const int taille_police, const std::pair<int, int> coord_texte, SDL_Rect r,
+ZoneTexte::ZoneTexte(const std::string chemin_police, const int taille_police, SDL_Rect r,
                      std::string texte, const SDL_Color couleur_texte, COMPORTEMENT_TEXTE ct, ALIGNEMENT_TEXTE at)
     : Affichable(r), m_texte{texte}, m_comportement{ct}, m_alignement{at}, m_cheminPolice{chemin_police}, M_TAILLE_POLICE_MAX{taille_police},
-      m_taillePolice{taille_police}, m_coord{coord_texte}, m_couleur{couleur_texte}
+      m_taillePolice{taille_police}, m_couleur{couleur_texte}
 {
     adapterTexte();
 }
@@ -68,27 +69,7 @@ void ZoneTexte::adapterTexte()
         //Modification de la taille pour que le texte rentre dans sa zone
         int tailleLettre = std::min(M_TAILLE_POLICE_MAX, (int) (m_rectangle.w/m_texte.length())); // A verifier
         TexteSDL * t = new TexteSDL(m_texte, m_couleur, m_cheminPolice, tailleLettre,std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
-
-        std::pair<int, int > tailleTexte = t->obtenirRectTexte();
-        SDL_Rect nouveauRectangle = {m_rectangle.x+(m_rectangle.w-tailleTexte.first)/2,
-                                     m_rectangle.y+(m_rectangle.h-tailleTexte.second)/2,
-                                     m_rectangle.w,
-                                     m_rectangle.h};
-        t->redimensionner(nouveauRectangle);
-        if(m_rectangle.h > (tailleTexte.second)+30) {
-            m_rectangle.h = m_rectangle.h - tailleTexte.second;
-        }
-        std::pair<int, int> nouvellePosition;
-        if (m_alignement == ALIGNEMENT_TEXTE::CENTRE)
-        {
-            nouvellePosition = {m_rectangle.x + ((m_rectangle.w - t->obtenirRectTexte().first) / 2),
-                                                    (m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
-        } else if (m_alignement == ALIGNEMENT_TEXTE::GAUCHE)
-        {
-            nouvellePosition = {m_rectangle.x,(m_rectangle.y + (m_rectangle.h + 5 - t->obtenirRectTexte().second) / 2)};
-        }
-        t->positionner(nouvellePosition);
-
+        t->redimensionner(m_rectangle);
 
         m_texteSDL.insert(m_texteSDL.begin(), t);
         break;
@@ -127,13 +108,10 @@ void ZoneTexte::adapterTexte()
                     affichage = lignePrec ;
                     motCourant--;
                 }
+                TTF_SizeText(font, affichage.c_str(), &largeur, &hauteur);
                 t = new TexteSDL(affichage, m_couleur, m_cheminPolice, m_taillePolice,
-                                 std::make_pair<int,int>(m_rectangle.x, m_rectangle.y + ((m_taillePolice+5)*m_texteSDL.size())));
+                                 std::make_pair<int,int>(m_rectangle.x + (m_rectangle.w-largeur)/2., m_rectangle.y + ((m_taillePolice+5)*m_texteSDL.size())));
                 m_texteSDL.push_back(t);
-            }
-            std::pair<int, int > tailleTexte = t->obtenirRectTexte();
-            if(m_rectangle.h > tailleTexte.second) {
-                m_rectangle.h = m_rectangle.h - (tailleTexte.second - 4);
             }
         }
 
@@ -143,6 +121,22 @@ void ZoneTexte::adapterTexte()
     {
         break;
     }
+    }
+
+    assert(m_texte.size() > 0);
+    int yMin = m_rectangle.y;
+    int yMax = m_texteSDL[m_texteSDL.size()-1]->obtenirRectTexte().second + m_texteSDL[m_texteSDL.size()-1]->rectangle().y;
+    int decalageY = (m_rectangle.h - (yMax-yMin))/2.;
+    for(unsigned int i = 0; i < m_texteSDL.size(); ++i){
+        TexteSDL * t = m_texteSDL[i];
+        SDL_Rect rectTexte = t->rectangle();
+        std::pair<int, int > tailleTexte = t->obtenirRectTexte();
+        std::pair<int, int> nouvellePosition ;
+        if(ALIGNEMENT_TEXTE::GAUCHE)
+            nouvellePosition = std::make_pair<int,int>(m_rectangle.x, rectTexte.y + decalageY);
+        else if(ALIGNEMENT_TEXTE::CENTRE)
+            nouvellePosition = std::make_pair<int,int>(m_rectangle.x+ (m_rectangle.w - tailleTexte.first)/2., rectTexte.y + decalageY);
+        t->positionner(nouvellePosition);
     }
 }
 

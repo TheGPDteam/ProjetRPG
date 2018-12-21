@@ -36,13 +36,13 @@ EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
     SDL_Rect rect3 = {coordB3.first, coordB3.second, tailleB.first, tailleB.second};
     SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour Jeu", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton("Deposer Inventaire", rect2, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonViderInventaireCampement);
+                                           true, /*std::make_pair<float, float>(coordB2.first+20,coordB2.second+15), */POLICE_COLLEGED), &ActionsBoutons::boutonViderInventaireCampement);
     ajoutBoutonDansMapDeBoutons(new Bouton("Liste objets", rect3, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB3.first+20,coordB3.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonListeObjet);
+                                           true, /*std::make_pair<float, float>(coordB3.first+20,coordB3.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonListeObjet);
     ajoutBoutonDansMapDeBoutons(new Bouton("CONSTRUCTION DU BUS", rect4, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB3.first+20,coordB3.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonEtatQuetePrincipale);
+                                           true, /*std::make_pair<float, float>(coordB3.first+20,coordB3.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonEtatQuetePrincipale);
 }
 
 void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)

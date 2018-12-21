@@ -34,9 +34,9 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     SDL_Rect rect2 = {100, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(rect.x + 20,rect.y + 15), POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
+                                           true, /*std::make_pair<float, float>(rect.x + 20,rect.y + 15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
     ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(rect.x+20,rect.y+15), POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
+                                           true, /*std::make_pair<float, float>(rect.x+20,rect.y+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
     m_zoneDefilable = m_tableau_objets->zoneDefilableTableau(m_rectangleHaut);
 

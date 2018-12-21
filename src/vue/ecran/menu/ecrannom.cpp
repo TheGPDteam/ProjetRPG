@@ -15,7 +15,7 @@ EcranNom::EcranNom(Controleur* controleur) :
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Commencer", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnage);
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnage);
 }
 
 const int CONTOUR_ARRIERE_PLAN = HEIGHT_FENETRE_PRINCIPALE/4;

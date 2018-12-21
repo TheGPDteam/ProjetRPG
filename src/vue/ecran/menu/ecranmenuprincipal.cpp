@@ -20,7 +20,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);
 
     coordB.first = (WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2);
     coordB.second = coordB.second + 70;
@@ -30,14 +30,14 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Continuer", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+60,coordB.second+15)), &ActionsBoutons::boutonChargement);
     bool chargementPossible = Sauvegarde::fichierSauvegardeExiste();
     ajoutBoutonDansMapDeBoutons(new Bouton("Continuer", rect2, m_controleur, nullptr,
-                                           chargementPossible, std::make_pair<float, float>(coordB.first+20,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonChargement);
+                                           chargementPossible, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChargement);
     coordB.second = coordB.second + 70;
 
     SDL_Rect rect3 = {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
     //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Quitter", POLICE_COLLEGED, 17, coordB, tailleB,std::make_pair(coordB.first+75,coordB.second+15)), &ActionsBoutons::boutonQuitter);
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect3, m_controleur, nullptr,
-                                           true, std::make_pair<float, float>(coordB.first+75,coordB.second+15), POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
+                                           true, /*std::make_pair<float, float>(coordB.first+75,coordB.second+15), */POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
 
 }
 
