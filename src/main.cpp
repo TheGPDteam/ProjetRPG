@@ -36,13 +36,14 @@ void mainloop_func(void* c, void* ctrl){
 int main (){
 
     srand(time(NULL));
+    std::cout << "initialisation Vue" << std::endl;
     Vue* vue = new Vue(); //On instancie la vue
+    std::cout << "initialisation Modele" << std::endl;
     Modele* modele= new Modele(); // On instancie le modele
+    std::cout << "initialisation Controleur" << std::endl;
     Controleur controleur{vue,modele}; // On instancie le controleur
-
+    std::cout << "initialisation MVC done" << std::endl;
     vue->definirControleur(&controleur);
-//    controleur.definirVue(vue);
-//    controleur.definirModele(modele);
 
 #ifdef EMSCRIPTEN
     emscripten_set_main_loop_arg(mainloop_func,vue, 60, 0);

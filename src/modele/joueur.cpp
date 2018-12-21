@@ -7,24 +7,6 @@
 //! \version 1.0
 
 //!
-//! \brief initialise un joueur
-//! \author mleothaud
-//! \date 16/11/2016
-//! \version 0.1
-//! Contient l'initialisation des attributs de joueur
-//!
-
-Joueur::Joueur()
-    : m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
-{
-    m_position.first=25;
-    m_position.second=25;
-    m_nom = "Friedrich";
-    //m_camp= new Campement();
-    m_equipe = new Equipe();
-}
-
-//!
 //! \brief Attribuer une quete a un joueur
 //! \return
 //! \author mleothaud, fvain
@@ -44,25 +26,6 @@ Joueur::Joueur(const Quete &quete) :
     m_inventaireJoueur = new Inventaire();
 }
 
-//!
-//! \brief Attribuer une quete a un joueur
-//! \return
-//! \author mleothaud, fvain
-//! \date 16/11/2016
-//! @param prend une quete en parametre
-//! @param prend un nom en paramètre
-//! \version 1.0
-//!
-
-Joueur::Joueur(Quete quete, std::string nom) :
-    m_queteJoueur{quete}, m_nom{nom}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
-{
-    m_position.first=5;
-    m_position.second=5;
-    //m_camp = new Campement();
-    m_equipe = nullptr;//new Equipe();
-    m_inventaireJoueur = new Inventaire();
-}
 
 //!
 //! \brief Obtenir la position d'un joueur
@@ -205,8 +168,8 @@ void Joueur::definirEquipe(Equipe* equipe)
 //! \author mleothaud, fvain
 //!
 
-void Joueur::nouvelleQuete(Quete quete){
-    m_queteJoueur = quete;
+void Joueur::nouvelleQuete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense){
+    m_queteJoueur = Quete(tq, nom, description, valeurObjectif, recompenseExperience, recompense);
 }
 
 Inventaire* Joueur::obtenirInventaireJoueur()

@@ -25,9 +25,7 @@ private:
     Inventaire* m_inventaireJoueur;
     QuetePrincipale m_quetePrincipale;
 public:
-    Joueur();
     Joueur(const Quete &quete);
-    Joueur(Quete quete, std::string nom);
     ~Joueur();
 
     std::pair<int,int> obtenirPosition() const;
@@ -38,7 +36,7 @@ public:
     Humain* obtenirPersonnageJoueur();
     Equipe* obtenirEquipe() const;
     void definirEquipe(Equipe* equipe);
-    void nouvelleQuete(Quete quete);
+    void nouvelleQuete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense);//Quete quete);
     Inventaire* obtenirInventaireJoueur();
     Quete* obtenirQuete();
     std::string serialiser() const;

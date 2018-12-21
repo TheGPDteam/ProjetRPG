@@ -34,20 +34,9 @@ Bouton::Bouton(const std::string texte,
     :
       Affichable(rectangle),
       Cliquable(controleur, /*action,*/ bouton_cliquable),
-      m_texteBouton(new ZoneTexte(police, 18/*, std::make_pair<int,int>(0,0)*/, rectangle, texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE)))
-    //, m_texte(new TexteSDL(texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE),police, 18, coef_coord_texte))
-{
-    m_spriteBouton = new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_FEUILLE_SPRITE);
-    if(bouton_cliquable)
-    {
-        //m_texteBouton.setColor(COULEUR_BOUTON_CLIQUABLE);
-    }
-    else
-    {
-        //ANCIEN
-        //m_texteBouton = new TexteSDL(texte, COULEUR_BOUTON_NON_CLIQUABLE, chemin_police, taille_police, coord_texte);
-    }
-}
+      m_texteBouton(new ZoneTexte(police, 18, rectangle, texte, (bouton_cliquable ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE))),
+      m_spriteBouton(new Sprite(SPRITES_PRINCIPAUX, rectangle, POSITION_FEUILLE_SPRITE))
+{}
 
 //!
 //! \brief Destructeur d'un bouton
@@ -64,12 +53,11 @@ Bouton::~Bouton()
     {
         delete m_spriteBouton;
     }
-    /*
+
     if(m_texteBouton != nullptr)
     {
         delete m_texteBouton;
     }
-    */
 }
 
 //!
@@ -85,9 +73,7 @@ Bouton::~Bouton()
 void Bouton::afficher(SDL_Surface* surface)
 {
     m_spriteBouton->afficher(surface);
-
     m_texteBouton->afficher(surface);
-    //m_texte->afficher(surface);
 }
 
 
@@ -126,17 +112,5 @@ bool Bouton::estCliquable() {
 //! \param peut_cliquer,
 //! \version 1.1
 //!
-void Bouton::definirCliquable(bool peutCliquer)
-{
-    /*
-    if(peut_cliquer)
-    {
-        //m_texteBouton.definirCouleur(COULEUR_BOUTON_CLIQUABLE);
-    }
-    else
-    {
-        //m_texteBouton.definirCouleur(COULEUR_BOUTON_NONCLIQUABLE);
-    }
-    //m_boutonCliquable = peut_cliquer;
-    */
-}
+void Bouton::definirCliquable(bool cliquable)
+{}

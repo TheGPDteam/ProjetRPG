@@ -123,7 +123,7 @@ void DictionnaireDeBoutons::afficherBoutons(const std::pair<int, int> coord_sour
 { 
     for(auto iterateurBouton = m_mapDeBoutons.begin(); iterateurBouton != m_mapDeBoutons.end(); ++iterateurBouton)
     {
-        if(/*iterateurBouton->first->obtenirTypeBouton() == Normal &&*/ iterateurBouton->first->estCliquable())
+        if(iterateurBouton->first->estCliquable())
         {
             verificationSourisSurBouton(iterateurBouton->first, coord_souris);
         }

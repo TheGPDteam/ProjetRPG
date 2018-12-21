@@ -22,17 +22,6 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
     SDL_WM_SetCaption("Projet RPG", NULL);
 
     m_typeEcran = TypeEcran::MenuPrincipal;
-
-    //    //Les nouveaux écrans avec sprites doivent être déclarés après avoir initialisé la fenêtre
-    //    m_menuPrincipal = new EcranMenuPrincipal();
-    //    m_ecranEquipe = new EcranEquipe();
-    //    m_ecranInventaire = new EcranInventaire();
-    //    m_ecranChoixPersonnage = new EcranChoixPersonnage();
-    //    m_ecranQueteJoueur = new EcranQueteJoueur();
-    //    m_ecranNom = new EcranNom();
-    //    m_ecranPremiereJournee = new EcranPremiereJournee();
-    //    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit();
-
     m_cliqueSouris = false;
     m_coordSouris = {0,0};
     m_quitterJeu = false;
@@ -50,20 +39,35 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 
 void Vue::definirControleur(Controleur *controleur)
 {
+
     m_controleur=controleur;
+    std::cout << "initializing EcranJeuPrincipal" << std::endl;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
+    std::cout << "initializing EcranQuete" << std::endl;
     m_ecranChoixQuete = new EcranQuete(m_controleur);
+    std::cout << "initializing EcranMenuPrincipal" << std::endl;
     m_menuPrincipal = new EcranMenuPrincipal(m_controleur);
+    std::cout << "initializing EcranEquipe" << std::endl;
     m_ecranEquipe = new EcranEquipe(m_controleur);
+    std::cout << "initializing EcranInventaire" << std::endl;
     m_ecranInventaire = new EcranInventaire(m_controleur);
+    std::cout << "initializing EcranChoixPersonnage" << std::endl;
     m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur);
+    std::cout << "initializing EcranQueteJoueur" << std::endl;
     m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur);
+    std::cout << "initializing EcranNom" << std::endl;
     m_ecranNom = new EcranNom(m_controleur);
+    std::cout << "initializing EcranPremiereJournee" << std::endl;
     m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
+    std::cout << "initializing EcranRecapitulatifNuit" << std::endl;
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
+    std::cout << "initializing EcranAccueilCampement" << std::endl;
     m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
+    std::cout << "initializing EcranListeObjet" << std::endl;
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
+    std::cout << "initializing EcranQueteCampement" << std::endl;
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
+    std::cout << "initializing ecran done" << std::endl;
 
     Modele * modele = m_controleur->obtenirModele();
     Joueur * j = modele->obtenirJoueur();

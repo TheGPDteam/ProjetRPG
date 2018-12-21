@@ -189,9 +189,9 @@ Humain* Modele::journeeSuivante()
     m_nouvelArrivant = new Humain();
     ++m_nbJoursPasses;
     m_temps.reinitialiserTemps();
-    m_joueur.nouvelleQuete(Quete(TypeQuete::QUETERECOLTE,"Survivre","Recolter de la nouriture",
+    m_joueur.nouvelleQuete(TypeQuete::QUETERECOLTE,"Survivre","Recolter de la nouriture",
                                  m_campement.obtenirConsommation(),
-                                 50,new Vivre()));
+                                 50,new Vivre());
     return m_nouvelArrivant;
 }
 
@@ -234,18 +234,14 @@ void Modele::premiereJournee()
     for(int i=0 ; i<7 ; i++) {
         Humain *h = new Humain();
         m_campement.obtenirNonAttribuees().insert(h);
-        //m_campement.ajouterPersonne(h, m_campement.obtenirRecolte());
     }
     m_nbJoursPasses = 0;
     m_joueur.definirEquipe(m_campement.obtenirEquipeRecolte());
-
 
     m_temps.reinitialiserTemps();
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
     // le calcul se fait pour plusieurs jours à l'avance.
     m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
-    //*m_campement.obtenirNbVivres()/(m_campement.obtenirConsommation())+1));
-    // si m_campement.obtenirNbVivres()/m_campement.obtenirConsommation() > 0 indiquer au joueur le nombre de jours d'avance
 }
 
 //!
