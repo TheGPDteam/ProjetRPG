@@ -6,7 +6,7 @@ Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std:
     :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_nbLignes{0}, m_controleur{controleur}, m_avecImage(avecImage)
 {
     std::vector<Affichable * > tmp;
-    tmp.push_back(creeZoneTexte(nom));
+    tmp.push_back(creeZoneTexte(nom, COMPORTEMENT_TEXTE::TRONQUE, ALIGNEMENT_TEXTE::CENTRE));
     m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1, false);
     m_nbLignes++;
     m_enTete=nullptr;
@@ -42,6 +42,7 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
     SDL_Rect rectangleLigne = nouvelleDimension;
     if(m_lignes.size()!=0){
         rectangleLigne.h = rectangleLigne.h / m_lignes.size();
+        m_hauteurLigne = rectangleLigne.h;
     }
     for (Ligne * l : m_lignes)
     {
@@ -201,9 +202,6 @@ Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
     if(typeObjet == TypeObjet::Partie_bus ) {
         tmp.push_back(creeZoneTexte("Quantite"));
     }
-    //    }else if(typeObjet == TypeObjet::Vivre){
-    //        tmp.push_back("ValeurNutritive");
-    //    }
     m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0, m_nbLignes+1, m_avecImage);
     m_nbLignes++;
 }
@@ -211,17 +209,10 @@ Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
 void Tableau::ajouterEnTetePartiesBus(){
     assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
     std::vector<Affichable *> tmp;
-    //    tmp.push_back("Icone");
     tmp.push_back(creeZoneTexte("Nom"));
     tmp.push_back(creeZoneTexte("Description"));
     tmp.push_back(creeZoneTexte("Quantite"));
-    //    if(typeObjet == TypeObjet::Arme ) {
-    //        tmp.push_back("Degats");
-    //        tmp.push_back("Vitesse");
-    //        tmp.push_back("Chance");
-    //    }else if(typeObjet == TypeObjet::Vivre){
-    //        tmp.push_back("ValeurNutritive");
-    //    }
+
     m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0,m_nbLignes+1, m_avecImage);
     m_nbLignes++;
 }
@@ -266,8 +257,8 @@ Tableau::ajouterLigne(Humain* perso){
 //! \return un affichable zoneTexte
 //!
 ZoneTexte *
-Tableau::creeZoneTexte(std::string donnee){
-    return new ZoneTexte(POLICE_COLLEGED, 12, /*std::make_pair(0,0),*/ SDL_Rect(), donnee, SDL_Color{0,0,0,255}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::CENTRE);
+Tableau::creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportment, ALIGNEMENT_TEXTE alignement){
+    return new ZoneTexte(POLICE_COLLEGED, 12, m_rectangle, donnee, SDL_Color{0,0,0,255}, comportment, alignement);
 }
 
 //!
@@ -282,17 +273,8 @@ Tableau::ajouterLigne(Objet* obj){
     tmp.push_back(obj->obtenirSprite());
     tmp.push_back(creeZoneTexte(obj->obtenirNom()));
     tmp.push_back(creeZoneTexte(obj->obtenirDescription()));
-    //    if(obj->obtenirType() == TypeObjet::Arme ) {
-    //        Arme * arme = dynamic_cast<Arme *>(obj);
-    //        tmp.push_back(,std::to_string((int)arme->obtenirDegats()));
-    //        tmp.push_back(std::to_string((int)arme->obtenirVitesse()));
-    //        tmp.push_back(std::to_string((int)arme->obtenirChance()));
-    //    }else if(obj->obtenirType() == TypeObjet::Vivre){
-    //        Vivre * vivre = dynamic_cast<Vivre*>(obj);
-    //        tmp.push_back(std::to_string(vivre->obtenirValeurNutritive()));
-    //    }
-    creerLigne(tmp);
 
+    creerLigne(tmp);
 }
 
 void Tableau::ajouterLigne(Campement *c)
@@ -325,32 +307,10 @@ void Tableau::ajouterLigne(Campement *c)
             } else {
                 cpt.insert(cpt.begin(), std::make_pair(p, 1));
             }
-            /*
-            if (cpt.find(p) != cpt.end()) //Quand je le trouve
-            {
-                cpt.find(p)++;
-            } else
-            {
-            }*/
         }
     }
     for (std::map<PartieBus*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it)
     {
-        /*            //Inserer l'icone
-            if (it->first->obtenirTypePartie() == TypePartieBus::ROUE)
-            {
-
-            } else if (it->first->obtenirTypePartie() == TypePartieBus::ESSENCE)
-            {
-
-            } else if (it->first->obtenirTypePartie() == TypePartieBus::MOTEUR)
-            {
-
-            } else //HUILE
-            {
-
-            }
-*/
         //Inserer nom
         tmp.push_back(creeZoneTexte(it->first->obtenirNom()));
         //Inserer description

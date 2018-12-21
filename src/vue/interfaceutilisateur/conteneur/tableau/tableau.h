@@ -39,7 +39,7 @@ public:
     bool testTri(Ligne * l, std::pair<int, int> coord_souris);
     void trieDefault();
     void testAffichageLigneSurvole(std::pair<int, int> coord_souris);
-    ZoneTexte *creeZoneTexte(std::string donnee);
+    ZoneTexte *creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportment = COMPORTEMENT_TEXTE::TRONQUE, ALIGNEMENT_TEXTE alignement = ALIGNEMENT_TEXTE::GAUCHE);
     Ligne *ligneSurvole(std::pair<int, int> coord_souris);
     ZoneDefilable * zoneDefilableTableau(SDL_Rect rectAffichable);
     void afficher(SDL_Surface *surface_affichage) override;

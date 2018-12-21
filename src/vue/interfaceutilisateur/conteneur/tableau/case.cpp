@@ -36,9 +36,9 @@ void Case::afficher(SDL_Surface *surface)
 //! \brief Case::redimensionner redimmensione la donnee
 //! \param m_rectangle
 //!
-void Case::redimensionner(SDL_Rect m_rectangle)
+void Case::redimensionner(SDL_Rect rectangle)
 {
-    m_donnee->redimensionner(m_rectangle);
+    m_donnee->redimensionner(rectangle);
 }
 
 //!

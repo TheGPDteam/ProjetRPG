@@ -20,7 +20,7 @@ public :
     ~Case();
     int obtenirIdCase() const;
     void afficher(SDL_Surface *surface) override;
-    void redimensionner(SDL_Rect m_rectangle) override;
+    void redimensionner(SDL_Rect rectangle) override;
     void clique() override;
 
     void definirDonnee(Affichable* donnee);

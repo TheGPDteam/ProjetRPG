@@ -80,15 +80,15 @@ void ZoneTexte::adapterTexte()
         std::string tmpTexte = m_texte;
         std::vector<std::string> paragraphes;
         decouper(tmpTexte, paragraphes, "\n");
+        TexteSDL * t = new TexteSDL("Fake", m_couleur, m_cheminPolice, m_taillePolice,
+                                    std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
+        TTF_Font * font = t->obtenirPolice();
+        delete t;
         for(unsigned int i = 0; i < paragraphes.size(); ++i){
             tmpTexte = paragraphes[i];
             std::vector<std::string> jetons;
             decouper(tmpTexte, jetons, " ");
             int motCourant = 0;
-            TexteSDL * t = new TexteSDL("Fake", m_couleur, m_cheminPolice, m_taillePolice,
-                                        std::make_pair<int,int>(m_rectangle.x, m_rectangle.y + ((m_taillePolice+5)*m_texteSDL.size())));
-            TTF_Font * font = t->obtenirPolice();
-            delete t;
             while(motCourant < jetons.size()){
                 std::string lignePrec = "";
                 std::string ligneCourante = jetons[motCourant];
@@ -157,9 +157,9 @@ void ZoneTexte::adapterTexte()
         SDL_Rect rectTexte = t->rectangle();
         std::pair<int, int > tailleTexte = t->obtenirRectTexte();
         std::pair<int, int> nouvellePosition ;
-        if(ALIGNEMENT_TEXTE::GAUCHE)
+        if(m_alignement == ALIGNEMENT_TEXTE::GAUCHE)
             nouvellePosition = std::make_pair<int,int>(m_rectangle.x, rectTexte.y + decalageY);
-        else if(ALIGNEMENT_TEXTE::CENTRE)
+        else if(m_alignement == ALIGNEMENT_TEXTE::CENTRE)
             nouvellePosition = std::make_pair<int,int>(m_rectangle.x+ (m_rectangle.w - tailleTexte.first)/2., rectTexte.y + decalageY);
         t->positionner(nouvellePosition);
     }
