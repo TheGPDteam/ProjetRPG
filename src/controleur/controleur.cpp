@@ -74,6 +74,6 @@ Humain * Controleur::journeeSuivante()  {
     return m_modele->journeeSuivante();
 }
 
-void Controleur::finJournee() const {
+void Controleur::finJournee() {
     m_modele->finJournee();
 }

@@ -35,6 +35,8 @@ private:
 
     bool testerDeplacement(Direction &dir);
 
+    void tuerPersos();
+
 public:
     Modele();
     void premiereJournee();
