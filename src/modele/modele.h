@@ -13,7 +13,7 @@
 #include "./utilitaires.h"
 #include "./survie/typedefaite.h"
 
-class Modele
+class Modele : public Observable
 {
 private:
     Joueur m_joueur;
@@ -54,7 +54,7 @@ public:
     Combat *obtenirCombat();
     void definirCombat(Combat combat);
     Joueur *obtenirJoueur() ;
-    Humain * nouvelArrivant();
+    Humain * obtenirNouvelArrivant();
     void changerNouvelArrivant(Humain * h);
     std::string serialiser() const;
     void charger(const std::string &donnees);

@@ -17,27 +17,27 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
     m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_PERSONNAGE, ESPACE_Y_RECTANGLE_PERSONNAGE, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
 
 
-    Humain* h = m_controleur->journeeSuivante();
+    // Humain* h = m_controleur->journeeSuivante();
 
-    m_zoneNomPersonnage = new TexteSDL("Nom : " + h->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
-    m_zonePrenomPersonnage = new TexteSDL("Prenom : " + h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
+    m_zoneNomPersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
+    m_zonePrenomPersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
 
-    m_zoneNiveauPersonnage = new TexteSDL("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
+    m_zoneNiveauPersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
 
-    m_zoneForcePersonnage = new TexteSDL("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 100));
-    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 130));
-    m_zoneVitessePersonnage = new TexteSDL("Vitesse : " + std::to_string(h->obtenirVitesse()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 160));
+    m_zoneForcePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 100));
+    m_zoneIntelligencePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 130));
+    m_zoneVitessePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 160));
 
-    m_zoneChassePersonnage = new TexteSDL("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 100));
-    m_zoneRecoltePersonnage = new TexteSDL("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 130));
-    m_zoneCampementPersonnage = new TexteSDL("Campement : " + std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
+    m_zoneChassePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 100));
+    m_zoneRecoltePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 130));
+    m_zoneCampementPersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
 
-    m_zoneNomArmePersonnage = new TexteSDL("Arme : " + h->obtenirArme()->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
-    //m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
+    m_zoneNomArmePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
+    //m_zoneDescArmePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
     m_zoneDescArmePersonnage = new ZoneTexte(POLICE_COLLEGED, 20,/* std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270),*/
                                              SDL_Rect{m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270, WIDTH_FENETRE_PRINCIPALE - (m_rectangleFichePersonnage.x + 50), 21},
-                                             "Description : " + h->obtenirArme()->obtenirDescription(),SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::GAUCHE);
-    m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
+                                             " ",SDL_Color{0,0,0,0}, COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE::GAUCHE);
+    m_zoneDegatsArmePersonnage = new TexteSDL("", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
 
     m_zoneQuestion = new TexteSDL("Voulez vous accepter ce survivant ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 400, m_rectangleFichePersonnage.y + 350));
     /* A SUPPRIMER
@@ -70,15 +70,8 @@ EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
                                            true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonQueteRefus);
 }
 
-void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
-
-    //    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    //    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
-
-    afficherFondEcran(fenetre_affichage);
-    SDL_FillRect(fenetre_affichage, &m_rectangleFichePersonnage, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
-
-    Humain *h = m_controleur->obtenirModele()->nouvelArrivant();
+void EcranChoixPersonnage::mettreAJourInformations(){
+    Humain *h = m_controleur->obtenirModele()->obtenirNouvelArrivant();
     m_zoneNomPersonnage->mettreAJourTexte("Nom : " + h->obtenirNom());
     m_zonePrenomPersonnage->mettreAJourTexte("Prenom : " + h->obtenirPrenom());
     m_zoneNiveauPersonnage->mettreAJourTexte("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()));
@@ -91,6 +84,15 @@ void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_S
     m_zoneDescArmePersonnage->mettreAJourTexte("Description : " + h->obtenirArme()->obtenirDescription());
     m_zoneNomArmePersonnage->mettreAJourTexte("Arme : " + h->obtenirArme()->obtenirNom());
     m_zoneDegatsArmePersonnage->mettreAJourTexte("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()));
+}
+
+void EcranChoixPersonnage::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
+
+    //    SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    //    SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+
+    afficherFondEcran(fenetre_affichage);
+    SDL_FillRect(fenetre_affichage, &m_rectangleFichePersonnage, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
 
     m_nomFenetre.afficher(fenetre_affichage);
     m_zoneNomPersonnage->afficher(fenetre_affichage);
@@ -145,7 +147,8 @@ void EcranChoixPersonnage::gestionDesEvenements(Controleur *controleur, bool &qu
 }
 
 void EcranChoixPersonnage::obtenirChangement(Observable &obj) {
-
+    if(m_controleur->obtenirModele()->obtenirNouvelArrivant()!= nullptr)
+        mettreAJourInformations();
 }
 
 

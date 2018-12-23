@@ -242,6 +242,8 @@ void Modele::premiereJournee()
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
     // le calcul se fait pour plusieurs jours à l'avance.
     m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -518,6 +520,8 @@ void Modele::finJournee() {
 
     //Reapprovisionnement de la carte en objets*
     m_carte.recharger();
+    mettreAChange();
+    notifierTous();
 }
 
 
@@ -550,10 +554,12 @@ TypeDefaite Modele::obtenirTypeDefaite() const {
     return m_td;
 }
 
-Humain * Modele::nouvelArrivant(){
+Humain * Modele::obtenirNouvelArrivant(){
     return m_nouvelArrivant;
 }
 
 void Modele::changerNouvelArrivant(Humain * h){
     m_nouvelArrivant = h;
+    mettreAChange();
+    notifierTous();
 }

@@ -60,7 +60,7 @@ void Controleur::choixNouvelArrivant(bool choix)
 {
     if(choix)
     {
-        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->nouvelArrivant());
+        m_modele->obtenirCampement()->obtenirNonAttribuees().insert(m_modele->obtenirNouvelArrivant());
         m_modele->changerNouvelArrivant(nullptr);
     }
 }

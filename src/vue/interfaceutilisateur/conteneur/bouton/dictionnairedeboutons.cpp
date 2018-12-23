@@ -1,5 +1,6 @@
 #include "dictionnairedeboutons.h"
-#include "constantesbouton.h"
+
+
 
 
 //!
@@ -11,8 +12,12 @@
 //! Initialise la map de boutons d'un écran
 //!
 
-DictionnaireDeBoutons::DictionnaireDeBoutons(Controleur * controleur) : m_actionsBoutons(new ActionsBoutons(controleur))
+DictionnaireDeBoutons::DictionnaireDeBoutons(Controleur * controleur) :
+    RECT_BOUTON_NORMAL_ACTIF{COORD_X_BOUTON_NORMAL_ACTIF, COORD_Y_BOUTON_NORMAL_ACTIF,WIDTH_BOUTON_NORMAL_ACTIF, HEIGHT_BOUTON_NORMAL_ACTIF},
+    RECT_BOUTON_NORMAL{COORD_X_BOUTON_NORMAL, COORD_Y_BOUTON_NORMAL,WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL},
+    m_actionsBoutons(new ActionsBoutons(controleur))
 {
+
 }
 
 
@@ -51,7 +56,7 @@ void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::fun
 //! Le clique de la souris sur un bouton engendre un changement d'état de l'écran (donc de son type)
 //!
 
-TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBouton(std::pair<int, int> coord_souris, TypeEcran type_ecran_courant)
+TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBoutons(std::pair<int, int> coord_souris, TypeEcran type_ecran_courant)
 {
     auto iterateurBouton = m_mapDeBoutons.begin();
     bool trouver = false;
@@ -86,26 +91,15 @@ TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBouton(std::pair<int
 
 void DictionnaireDeBoutons::verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris)
 {
-    SDL_Rect rect;
-
     if (bouton->contient(coord_souris))
-    {
-        rect.x = COORD_X_BOUTON_NORMAL_ACTIF;
-        rect.y = COORD_Y_BOUTON_NORMAL_ACTIF;
-        rect.w = WIDTH_BOUTON_NORMAL_ACTIF;
-        rect.h = HEIGHT_BOUTON_NORMAL_ACTIF;
-
-        bouton->obtenirSpriteBouton()->changementSprite(rect);
-    }
+        bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL_ACTIF);
     else
-    {
-        rect.x = COORD_X_BOUTON_NORMAL;
-        rect.y = COORD_Y_BOUTON_NORMAL;
-        rect.w = WIDTH_BOUTON_NORMAL;
-        rect.h = HEIGHT_BOUTON_NORMAL;
+        bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
+}
 
-        bouton->obtenirSpriteBouton()->changementSprite(rect);
-    }
+void DictionnaireDeBoutons::remiseAZeroBoutons(){
+    for(auto iterateurBouton = m_mapDeBoutons.begin(); iterateurBouton != m_mapDeBoutons.end(); ++iterateurBouton)
+        iterateurBouton->first->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
 }
 
 

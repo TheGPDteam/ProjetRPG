@@ -28,6 +28,7 @@ public:
     virtual void clique() = 0;
 
     bool estCliquable() const;
+    virtual void definirCliquable(bool actif);
 };
 
 #endif // CLIQUABLE_H

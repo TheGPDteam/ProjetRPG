@@ -1,8 +1,8 @@
 #include "ecranrepartitionjoueur.h"
 #include "utility"
 
-#include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "bouton.h"
+#include "constantesbouton.h"
 
 const int ESPACE_X_RECTANGLE_OBJET = 20;
 const int ESPACE_Y_RECTANGLE_OBJET = 115;
@@ -11,7 +11,7 @@ const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_
 
 
 EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
-    EcranGeneral(controleur), m_controleur{controleur}, m_etatAfficher(false)
+    EcranGeneral(controleur), m_etatAfficher(false)
 {
     m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
 
@@ -63,6 +63,7 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
     m_zoneNomArmePersonnage = new TexteSDL("Arme : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
     m_zoneDescArmePersonnage = new TexteSDL("Description : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
     m_zoneDegatsArmePersonnage = new TexteSDL("Degats : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
+    m_zoneQuestion = new TexteSDL("Quelle tache doit-il faire ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 40, m_rectangleFichePersonnage.y + 350));
 
 }
 
@@ -90,7 +91,6 @@ void EcranRepartitionJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL
     //    m_chasse->afficher(fenetre_affichage);
     //    m_campement->afficher(fenetre_affichage);
 
-    //SDL_Flip(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 
 
@@ -98,40 +98,27 @@ void EcranRepartitionJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL
 void EcranRepartitionJoueur::definirHumain(Humain * h){
     m_humain = h;
     m_zoneNomPersonnage->mettreAJourTexte("Nom : " + h->obtenirNom());
-    m_zonePrenomPersonnage = new TexteSDL("Prenom : " + h->obtenirPrenom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
+    m_zonePrenomPersonnage->mettreAJourTexte("Prenom : " + h->obtenirPrenom());
+    m_zoneNiveauPersonnage->mettreAJourTexte("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()));
+    m_zoneForcePersonnage->mettreAJourTexte("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()));
+    m_zoneIntelligencePersonnage->mettreAJourTexte("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()));
+    m_zoneVitessePersonnage->mettreAJourTexte("Vitesse : " + std::to_string(h->obtenirVitesse()));
+    m_zoneChassePersonnage->mettreAJourTexte("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()));
+    m_zoneRecoltePersonnage->mettreAJourTexte("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()));
+    m_zoneCampementPersonnage->mettreAJourTexte("Campement : " + std::to_string(h->obtenirCampement().obtenirValeur()));
 
-    m_zoneNiveauPersonnage = new TexteSDL("Niveau : " + std::to_string(h->obtenirNiveau().obtenirNiveauActuel()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
-
-    m_zoneForcePersonnage = new TexteSDL("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 100));
-    m_zoneIntelligencePersonnage = new TexteSDL("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 130));
-    m_zoneVitessePersonnage = new TexteSDL("Vitesse : " + std::to_string(h->obtenirVitesse()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 160));
-
-    m_zoneChassePersonnage = new TexteSDL("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 130));
-    m_zoneRecoltePersonnage = new TexteSDL("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
-    m_zoneCampementPersonnage = new TexteSDL("Campement : " + std::to_string(h->obtenirCampement().obtenirValeur()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 190));
-
-
-    m_zoneNomArmePersonnage = new TexteSDL("Arme : " + h->obtenirArme()->obtenirNom(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
-    m_zoneDescArmePersonnage = new TexteSDL("Description : " + h->obtenirArme()->obtenirDescription(), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
-    m_zoneDegatsArmePersonnage = new TexteSDL("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()), SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
-
-    m_zoneQuestion = new TexteSDL("Quelle tache doit-il faire ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 40, m_rectangleFichePersonnage.y + 350));
+    m_zoneNomArmePersonnage->mettreAJourTexte("Arme : " + h->obtenirArme()->obtenirNom());
+    m_zoneDescArmePersonnage->mettreAJourTexte("Description : " + h->obtenirArme()->obtenirDescription());
+    m_zoneDegatsArmePersonnage->mettreAJourTexte("Degats : " + std::to_string(h->obtenirArme()->obtenirDegats()));
 
     m_etatAfficher =true;
+    Campement * c = m_controleur->obtenirModele()->obtenirCampement();
+    Equipe *equipeArriver  = c->obtenirEquipePersonnage(h);
+    remiseAZeroBoutons();
+    m_chasse->definirCliquable(equipeArriver != c->obtenirEquipeChasse());
+    m_recolte->definirCliquable(equipeArriver != c->obtenirEquipeRecolte());
+//    m_campement->definirCliquable(equipeArriver != c->obtenirEquipeCampement());
 }
-
-//int  EcranRepartitionJoueur::affecter(){
-    //    int affectation = -1;
-    //    bool quitter = false;
-    //    while(!quitter){
-    //        afficher();
-    //        affectation = gestionDesEvenements();
-    //        if(affectation != RIEN)
-    //            quitter = true;
-
-    //    }
-    //    return affectation;
-//}
 
 void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
 
@@ -162,8 +149,9 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
                     repartition = CAMPEMENT;
                 }
                 if(repartition != RIEN){
-                    gestionRepartion(repartition);
                     m_etatAfficher=false;
+                    if(repartition != RETOUR)
+                        gestionRepartion(repartition);
                 }
             }
             break;
@@ -175,12 +163,11 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
         coord_souris.first = evenements.button.x;
         coord_souris.second = evenements.button.y;
     }
-    //    return repartition;
 }
 void
 EcranRepartitionJoueur::gestionRepartion(AFFECTATION affectation){
     Campement *c  =  m_controleur->obtenirModele()->obtenirCampement();
-    c->supprimerHumain(m_humain);
+    c->supprimerPersonnage(m_humain);
     if(affectation == CHASSE){
         c->obtenirEquipeChasse()->ajouterPersonnage(m_humain);
     }else if(affectation == RECOLTE){

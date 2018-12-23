@@ -91,26 +91,11 @@ Sprite* Bouton::obtenirSpriteBouton()
 }
 
 
-
-///A CHANGER AVEC CLIQUABLE
-//!
-//! \brief Retourne si le bouton est cliquable
-//! \return bool
-//! \author pgutierrez
-//! \date 26/11/16
-//! \version 1.1
-//!
-
-bool Bouton::estCliquable() {
-    return true;
+void Bouton::definirCliquable(bool actif){
+    Cliquable::definirCliquable(actif);
+    m_texteBouton->mettreAJourCouleur((actif ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE));
 }
 
-//!
-//! \brief Met l'attribut cliquable a can_click
-//! \author cerutti & lacoste
-//! \date 25/10/18
-//! \param peut_cliquer,
-//! \version 1.1
-//!
-void Bouton::definirCliquable(bool cliquable)
-{}
+void Bouton::redimensionner(SDL_Rect m_rectangle){
+    this->m_rectangle = m_rectangle;
+}

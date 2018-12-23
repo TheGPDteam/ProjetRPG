@@ -70,13 +70,55 @@ int Campement::consommerVivre()
     return valeurNutritive;
 }
 
-void Campement::supprimerHumain(Humain * h){
-     std::vector<Humain *> personnesNonAttribuees(m_personnesNonAttribuees.begin(), m_personnesNonAttribuees.end());
-     personnesNonAttribuees.push_back(nullptr);
+//!
+//! \brief supprime un personnage qui se trouve dans le camp
+//! \param p le personnage a supprimer
+//!
+void Campement::supprimerPersonnage(Personnage * p){
 
-     if(std::find(personnesNonAttribuees.begin(), personnesNonAttribuees.end(), h) != personnesNonAttribuees.end()){
-         m_personnesNonAttribuees.erase(h);
-     }
+    Equipe * equipePerso = obtenirEquipePersonnage(p);
+
+    if(equipePerso== nullptr && rechercherHumain(m_personnesNonAttribuees, p)){
+        m_personnesNonAttribuees.erase(dynamic_cast<Humain *>(p));
+    }else{
+        equipePerso->supprimerPersonnage(p);
+    }
+}
+
+//!
+//! \brief Campement::obtenirEquipePersonnage
+//! \param h
+//! \return l'equipe dans lequel est le personnage ou nullptr s'il n'est dans aucune equipe
+//!
+Equipe * Campement::obtenirEquipePersonnage(Personnage *p){
+    std::vector<Equipe *> listesEquipe;
+    listesEquipe.push_back(this->obtenirEquipeChasse());
+    listesEquipe.push_back(this->obtenirEquipeRecolte());
+    listesEquipe.push_back(this->obtenirEquipeCampement());
+    for (Equipe * e : listesEquipe) {
+        if(rechercherPersonnage(e->obtenirListePersonnage(), p)){
+            return e;
+        }
+    }
+    return nullptr;
+}
+
+//!
+//! \brief Campement::rechercherPersonnage
+//! \param set le set de recherche
+//! \param p le personnage rechercher
+//! \return true si le personnage se trouve dans le set, false sinon
+//!
+bool Campement::rechercherPersonnage(std::set <Personnage*> set, Personnage * p){
+    std::vector<Personnage *> vectorDeRecherche(set.begin(), set.end());
+    vectorDeRecherche.push_back(nullptr);
+    return std::find(vectorDeRecherche.begin(), vectorDeRecherche.end(), p) != vectorDeRecherche.end();
+}
+
+bool Campement::rechercherHumain(std::set <Humain*> set, Personnage * p){
+    std::vector<Humain *> vectorDeRecherche(set.begin(), set.end());
+    vectorDeRecherche.push_back(nullptr);
+    return std::find(vectorDeRecherche.begin(), vectorDeRecherche.end(), p) != vectorDeRecherche.end();
 }
 
 //!

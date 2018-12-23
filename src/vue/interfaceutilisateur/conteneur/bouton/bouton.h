@@ -17,7 +17,7 @@ private:
     //TexteSDL * m_texte;
     Sprite* m_spriteBouton;
 
-    SDL_Rect  zone() const { return m_spriteBouton->getCoordSprite();}
+    SDL_Rect zone() const override { return m_spriteBouton->getCoordSprite();}
 
 public:
 
@@ -30,20 +30,20 @@ public:
             const std::string police = "Defaut"
             );
 
-    ~Bouton();
+    ~Bouton() override;
 
     //!
     //! \brief afficher hérité de Affichable
     //!
-    void afficher(SDL_Surface* surface);
+    void afficher(SDL_Surface* surface) override;
 
-    void redimensionner(SDL_Rect rect) override{}
+    void redimensionner(SDL_Rect rect) override;
 
     //Accés variables
 
-    bool estCliquable();
+//    bool estCliquable();
 
-    void definirCliquable(bool cliquable );
+    void definirCliquable(bool actif) override;
 
     void changerSpriteBouton(Sprite *spriteBouton);
 

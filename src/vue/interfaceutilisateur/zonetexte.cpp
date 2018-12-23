@@ -66,6 +66,7 @@ void ZoneTexte::adapterTexte()
     switch (m_comportement) {
     case COMPORTEMENT_TEXTE::REDIMENTIONNE :
     {
+        assert(m_texte.length() > 0);
         //Modification de la taille pour que le texte rentre dans sa zone
         int tailleLettre = std::min(M_TAILLE_POLICE_MAX, (int) (m_rectangle.w/m_texte.length())); // A verifier
         TexteSDL * t = new TexteSDL(m_texte, m_couleur, m_cheminPolice, tailleLettre,std::make_pair<int,int>(m_rectangle.x, m_rectangle.y));
@@ -169,4 +170,11 @@ void ZoneTexte::mettreAJourTexte(std::string texte)
 {
     m_texte = texte;
     adapterTexte();
+}
+
+void ZoneTexte::mettreAJourCouleur(SDL_Color couleur_texte){
+    m_couleur = couleur_texte;
+    for(auto t : m_texteSDL){
+        t->mettreAJourCouleur(couleur_texte);
+    }
 }

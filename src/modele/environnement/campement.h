@@ -19,6 +19,8 @@ private:
     Equipe m_equipeChasse;
     Equipe m_equipeCampement;
     std::vector <Objet *> m_objets;
+    bool rechercherPersonnage(std::set <Personnage*> set, Personnage * p);
+    bool rechercherHumain(std::set <Humain*> set, Personnage * p);
 public:
     Campement();
 
@@ -28,7 +30,8 @@ public:
     unsigned short obtenirNbVivres() const;
     int consommerVivre();
     int obtenirConsommation() ;
-    void supprimerHumain(Humain * h);
+    void supprimerPersonnage(Personnage * p);
+    Equipe * obtenirEquipePersonnage(Personnage * p);
     std::set<Humain *>& obtenirNonAttribuees();
 
     Equipe* obtenirEquipeChasse();

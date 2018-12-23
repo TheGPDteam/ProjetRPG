@@ -13,7 +13,7 @@
 
 EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
     EcranGeneral{controleur},
-    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton)
+    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBoutons)
 {
     SDL_Rect rect = {(WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),  (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     ajoutBoutonDansMapDeBoutons(new Bouton("Nouvelle Partie", rect, m_controleur, nullptr, true, POLICE_COLLEGED), &ActionsBoutons::boutonNouvellePartie);

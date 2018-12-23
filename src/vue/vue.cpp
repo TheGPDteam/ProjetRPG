@@ -88,6 +88,7 @@ void Vue::definirControleur(Controleur *controleur)
 
     c->ajouterObservateur(*m_ecranQueteCampement);
     c->ajouterObservateur(*m_ecranListeObjet);
+    modele->ajouterObservateur(*m_ecranChoixPersonnage);
     m_jeuPrincipal->definirCarte(modele->obtenirCarte());
 
     // m_ecranInventaire->definirEtatQuantite(j->obtenirInventaireJoueur()->obtenirNombreObjet());
@@ -223,7 +224,7 @@ void Vue::afficherEcran(EcranGeneral* ecran_courant)
 
         if(m_cliqueSouris)
         {
-            m_typeEcran = ecran_courant->verificationCliqueSourisSurBouton(m_coordSouris, m_typeEcran);
+            m_typeEcran = ecran_courant->verificationCliqueSourisSurBoutons(m_coordSouris, m_typeEcran);
             m_cliqueSouris = false;
         }
     }

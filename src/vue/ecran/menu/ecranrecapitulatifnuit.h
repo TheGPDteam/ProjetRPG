@@ -1,8 +1,8 @@
 #ifndef ECRANRECAPITULATIFNUIT_H
 #define ECRANRECAPITULATIFNUIT_H
 
-#include "../ecrangeneral.h"
-#include "../../interfaceutilisateur/textesdl.h"
+#include "ecrangeneral.h"
+#include "textesdl.h"
 
 class EcranRecapitulatifNuit : public EcranGeneral
 {

@@ -10,6 +10,10 @@ bool Cliquable::estCliquable() const
     return m_actif;
 }
 
+void Cliquable::definirCliquable(bool actif){
+    m_actif = actif;
+}
+
 bool Cliquable::contient(std::pair<int, int> coord_souris) const {
     SDL_Rect z = zone();
 

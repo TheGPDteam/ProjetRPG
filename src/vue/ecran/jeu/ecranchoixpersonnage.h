@@ -38,6 +38,7 @@ public:
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;
 
     void obtenirChangement(Observable &obj) override;
+    void mettreAJourInformations();
 
     ~EcranChoixPersonnage();
 

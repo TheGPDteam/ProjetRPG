@@ -139,6 +139,21 @@ void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
     m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
 }
 
+//!
+//! \brief Mise à jour de la couleur du texte à afficher
+//! \author fvain
+//! \param SDL_Color la vouvelle couleur à afficher
+//! \version 1.0
+//!
+//! Mise à jour de la couleur
+//!
+void TexteSDL::mettreAJourCouleur(SDL_Color nouvelleCouleur)
+{
+    m_couleurTexte = nouvelleCouleur;
+    if(m_texte != nullptr) SDL_FreeSurface(m_texte);
+    m_texte = TTF_RenderText_Blended(m_policeTexte, m_texteStr.c_str(), nouvelleCouleur);
+}
+
 
 std::string TexteSDL::obtenirTexteStr() const
 {

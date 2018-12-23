@@ -4,6 +4,7 @@
 #include "ecrangeneral.h"
 #include "tableau.h"
 #include "ecranrepartitionjoueur.h"
+#include <map>
 
 #define MARGE_ENTRE_FICHES 30
 #define NOMBRE_DE_FICHES 3
@@ -15,7 +16,6 @@ private:
     std::function<TypeEcran(DictionnaireDeBoutons&, std::pair<int, int> coord_souris, TypeEcran)> m_methodeVerificationCliqueSourisSurBouton;
 
     TexteSDL m_nomFenetre;
-//    Humain * m_humain_a_affecter;
     bool m_afficherEcranRepartition=false;
 
     SDL_Rect m_fondChasse;
@@ -28,7 +28,8 @@ private:
     Tableau * m_tableauRecolte;
     Tableau * m_tableauChasse;
     Tableau * m_tableauCampement;
-    EcranRepartitionJoueur * m_repartitionEcran;
+    std::map<Tableau *, Equipe *> m_tableaux;
+    EcranRepartitionJoueur * m_ecranRepartitionJoueur;
 public:
     EcranQuete(Controleur *controleur);
 

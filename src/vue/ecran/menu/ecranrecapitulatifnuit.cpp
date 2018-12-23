@@ -1,5 +1,5 @@
 #include "ecranrecapitulatifnuit.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "constantesbouton.h"
 
 #include <fstream>
 

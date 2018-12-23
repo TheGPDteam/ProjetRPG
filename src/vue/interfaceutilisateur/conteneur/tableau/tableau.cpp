@@ -76,20 +76,21 @@ Tableau::ligneSurvole(std::pair<int, int> coord_souris){
 //! \author Lacoste Dorian
 //! \date 16/12/18
 //!
-void
+bool
 Tableau::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
     Ligne * lSurvole = ligneSurvole(coord_souris);
     //on remet la ligne survoler precendente comme avant
-    if(m_lignePrecedemmentSurvoler == lSurvole) return;
+    if(m_lignePrecedemmentSurvoler == lSurvole) return false;
     if(m_lignePrecedemmentSurvoler != nullptr)
         m_lignePrecedemmentSurvoler->definirNumCouleur((positionLigne(m_lignePrecedemmentSurvoler)+1)%2+1);
 
     //ligne n'appartient pas au tableau c'est l'entete ou c'est le titre
     if(lSurvole == nullptr || lSurvole == m_enTete || lSurvole == m_titre){
         m_lignePrecedemmentSurvoler=nullptr;
-        return;}
+        return false;}
     lSurvole->definirNumCouleur(3);
     m_lignePrecedemmentSurvoler=lSurvole;
+    return true;
 }
 //!
 //! \brief recherche la postion de la ligne dans le vector m_lignes

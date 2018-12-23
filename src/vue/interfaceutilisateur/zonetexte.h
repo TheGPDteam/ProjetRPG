@@ -38,6 +38,7 @@ public:
 
     void mettreAJourTexte(std::string texte);
     std::string obtenirTexte();
+    void mettreAJourCouleur(SDL_Color couleur_texte);
     virtual void afficher(SDL_Surface *surface_affichage);
     virtual void redimensionner(SDL_Rect nouvelleDimension);
 };
