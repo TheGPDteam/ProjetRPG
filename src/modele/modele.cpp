@@ -438,43 +438,11 @@ void Modele::finJournee() {
         unsigned int nbPersosCamp = 0;
         nbPersosCamp+=m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirEquipeCampement()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
         if (nbPersosCamp>m_nbPersosMorts)
         {
-            for (unsigned int i=0; i<m_nbPersosMorts;++i)
-            {
-                bool persoMort = false;
-                while(!persoMort) {
-                    switch (rand()%3) {
-                    case 0:
-                        //On tue un mec de recolte
-                        if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
-                        {
-                            m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                            persoMort = true;
-                        }
-                        break;
-                    case 1:
-                        //On tue un mec de chasse
-                        if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
-                        {
-                            m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                            persoMort = true;
-                        }
-                        break;
-                    case 2:
-                        //On tue un mec non attribué
-                        if (m_campement.obtenirNonAttribuees().size()>0)
-                        {
-                            m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
-                            persoMort = true;
-                        }
-                        break;
-                    default:
-                        break;
-                    }
-                }
-            }
+            tuerPersos();
         } else {
             m_perdu = true;
             //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
@@ -500,8 +468,6 @@ void Modele::finJournee() {
 
     if(valeurNutritiveTotaleCamp > m_campement.obtenirConsommation())
     {
-
-
         //On consomme jusqu'à ce que la valeur nutritive consommee couvre les besoins du campement
         int valeurNutritiveConsommee = 0;
         m_vivresConsommesNuit = 0;
@@ -511,9 +477,22 @@ void Modele::finJournee() {
             ++m_vivresConsommesNuit;
         }
     } else {
-        m_perdu=true;
-        //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
-        m_td = TypeDefaite::FAMINE;
+        //TODO : Tuer les gens mais ne perdre que si tout le monde meurt
+        m_nbPersosMorts = (valeurNutritiveTotaleCamp - m_campement.obtenirConsommation()) / 30;
+        unsigned int nbPersosCamp = 0;
+        nbPersosCamp+=m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirEquipeCampement()->obtenirListePersonnage().size();
+        nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
+        if (m_nbPersosMorts > nbPersosCamp)
+        {
+            m_perdu=true;
+            //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
+            m_td = TypeDefaite::FAMINE;
+        } else
+        {
+            tuerPersos();
+        }
     }
 
     //Reapprovisionnement de la carte en objets*
@@ -556,4 +535,42 @@ Humain * Modele::nouvelArrivant(){
 
 void Modele::changerNouvelArrivant(Humain * h){
     m_nouvelArrivant = h;
+}
+
+void Modele::tuerPersos() {
+    //TODO
+    for (unsigned int i=0; i<m_nbPersosMorts;++i)
+    {
+        bool persoMort = false;
+        while(!persoMort) {
+            switch (rand()%3) {
+            case 0:
+                //On tue un mec de recolte
+                if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
+                {
+                    m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                    persoMort = true;
+                }
+                break;
+            case 1:
+                //On tue un mec de chasse
+                if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
+                {
+                    m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                    persoMort = true;
+                }
+                break;
+            case 2:
+                //On tue un mec non attribué
+                if (m_campement.obtenirNonAttribuees().size()>0)
+                {
+                    m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
+                    persoMort = true;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+    }
 }
