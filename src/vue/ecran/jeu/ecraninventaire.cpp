@@ -93,7 +93,7 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
 void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
     SDL_Event evenements;
-
+    m_zoneDefilable->gestionEvenementDefilable();
 
     while(SDL_PollEvent(&evenements))
     {
@@ -113,13 +113,13 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
                 coord_souris.second = evenements.button.y;
             }
             break;
-        case SDL_KEYDOWN:
-            if(evenements.key.keysym.sym == SDLK_UP){
-                m_zoneDefilable->defiler(true);
-            }
-            else if(evenements.key.keysym.sym == SDLK_DOWN)
-                m_zoneDefilable->defiler(false);
-            break;
+//        case SDL_KEYDOWN:
+//            if(evenements.key.keysym.sym == SDLK_UP){
+//                m_zoneDefilable->defiler(true);
+//            }
+//            else if(evenements.key.keysym.sym == SDLK_DOWN)
+//                m_zoneDefilable->defiler(false);
+//            break;
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;

@@ -89,6 +89,7 @@ void Vue::definirControleur(Controleur *controleur)
     c->ajouterObservateur(*m_ecranQueteCampement);
     c->ajouterObservateur(*m_ecranListeObjet);
     modele->ajouterObservateur(*m_ecranChoixPersonnage);
+    modele->obtenirCarte()->definirObservateurZones(*m_jeuPrincipal);
     m_jeuPrincipal->definirCarte(modele->obtenirCarte());
 
     // m_ecranInventaire->definirEtatQuantite(j->obtenirInventaireJoueur()->obtenirNombreObjet());

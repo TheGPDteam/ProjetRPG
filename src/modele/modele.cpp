@@ -70,16 +70,12 @@ bool Modele::testerDeplacement(Direction& dir){
         if (posY==1 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirEstMarchable())
             return true;
         return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
-        break;
     case Sud:
         return posY+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
-        break;
     case Ouest:
         return posX-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
-        break;
     case Est:
         return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
-        break;
     default :
         return false;
     }
@@ -91,7 +87,6 @@ bool Modele::testerDeplacement(Direction& dir){
 //! \date 17/11/16
 //! \version 2.0
 //! @param dir : la direction du déplacement
-//! A noter : présente un bug dans le changement d'une carte à une autre
 //!
 
 void Modele::deplacement(Direction dir)
@@ -102,23 +97,27 @@ void Modele::deplacement(Direction dir)
         m_joueur.deplacerJoueur(dir);
         Zone * zoneActive = m_carte.obtenirZoneActive();
         pair<int, int> position = m_joueur.obtenirPosition();
-        if(zoneActive->obtenirObjet(position) != NULL && !m_joueur.obtenirInventaireJoueur()->estPlein())
+        if(zoneActive->obtenirObjet(position) != nullptr)
         {
-            Objet * objet = zoneActive->obtenirObjet(position);
-            m_joueur.obtenirInventaireJoueur()->ajouterObjet(objet);
+            if(!m_joueur.obtenirInventaireJoueur()->estPlein()){
+                Objet * objet = zoneActive->obtenirObjet(position);
+                m_joueur.obtenirInventaireJoueur()->ajouterObjet(objet);
 
-            TypeObjet to = objet->obtenirType();
-            if(to == TypeObjet::Vivre){
-                Quete * q = m_joueur.obtenirQuete();
-                Vivre* v = dynamic_cast<Vivre*>(objet);
-                q->augmenterValeur(v->obtenirValeurNutritive());
-                if (q->obtenirValeurObjectif()<= q->obtenirValeurAvancement() && !q->estfini())
-                {
-                    m_campement.ajouterObjet(q->obtenirRecompense());
-                    q->finir();
+                TypeObjet to = objet->obtenirType();
+                if(to == TypeObjet::Vivre){
+                    Quete * q = m_joueur.obtenirQuete();
+                    Vivre* v = dynamic_cast<Vivre*>(objet);
+                    q->augmenterValeur(v->obtenirValeurNutritive());
+                    if (q->obtenirValeurObjectif()<= q->obtenirValeurAvancement() && !q->estfini())
+                    {
+                        m_campement.ajouterObjet(q->obtenirRecompense());
+                        q->finir();
+                    }
                 }
+                zoneActive->supprimerObjet(objet);
+            }else{
+                std::cout << "Inventaire plein !" << std::endl;
             }
-            zoneActive->supprimerObjet(objet);
         }
     }
 }
@@ -134,29 +133,29 @@ bool Modele::testChangementDeCarte(Direction directionDep){
     std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
     bool changementCarte=false;
     // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
-
-    if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Nord && directionDep==Nord)
+    Direction directionTuile = m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection();
+    if (directionTuile == Nord && directionDep==Nord)
     {
         nouvellePosition.first = m_joueur.obtenirPosition().first;
         nouvellePosition.second = 63;
         m_carte.changerZoneActive(Nord);
         changementCarte=true;
     }
-    else if(m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Sud && directionDep==Sud)
+    else if(directionTuile ==Sud && directionDep==Sud)
     {
         nouvellePosition.first = m_joueur.obtenirPosition().first;
         nouvellePosition.second = 0;
         m_carte.changerZoneActive(Sud);
         changementCarte=true;
     }
-    else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Ouest && directionDep==Ouest)
+    else if (directionTuile ==Ouest && directionDep==Ouest)
     {
         nouvellePosition.first = 63;
         nouvellePosition.second = m_joueur.obtenirPosition().second;
         m_carte.changerZoneActive(Ouest);
         changementCarte=true;
     }
-    else if (m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection()==Est && directionDep==Est)
+    else if (directionTuile==Est && directionDep==Est)
     {
         nouvellePosition.first = 0;
         nouvellePosition.second = m_joueur.obtenirPosition().second;
@@ -190,8 +189,8 @@ Humain* Modele::journeeSuivante()
     ++m_nbJoursPasses;
     m_temps.reinitialiserTemps();
     m_joueur.nouvelleQuete(TypeQuete::QUETERECOLTE,"Survivre","Recolter de la nouriture",
-                                 m_campement.obtenirConsommation(),
-                                 50,new Vivre());
+                           m_campement.obtenirConsommation(),
+                           50,new Vivre());
     return m_nouvelArrivant;
 }
 

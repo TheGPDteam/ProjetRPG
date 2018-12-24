@@ -3,12 +3,12 @@
 
 #include <fstream>
 #include <iostream>
-#include "../survie/experience/competence.h"
+#include "competence.h"
 #include "string"
-#include "../objets/armes/arme.h"
-#include "../survie/experience/niveau.h"
+#include "arme.h"
+#include "niveau.h"
 #include "personnage.h"
-#include "../utilitaires.h"
+#include "utilitaires.h"
 
 enum Genre {
     Homme,

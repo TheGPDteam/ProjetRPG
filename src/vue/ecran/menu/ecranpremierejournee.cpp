@@ -1,6 +1,6 @@
 #include "ecranpremierejournee.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
-#include "zonedefilable.h"
+#include "constantesbouton.h"
+
 
 #include <iostream>
 #include <list>
@@ -95,7 +95,7 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
             }
             break;
 //            case SDL_MOUSEWHEEL:
-//            if(event..wheel.y > 0) // scroll up
+//            if(event.wheel.y > 0) // scroll up
 //            {
 //                 // Pull up code here!
 //            }

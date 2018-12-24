@@ -91,3 +91,15 @@ void ZoneDefilable::defiler(bool haut){
         m_fenetreGlissante.y = nouvelle_ordonnee;
     }
 }
+
+void ZoneDefilable::gestionEvenementDefilable(){
+    Uint8 *keystates = SDL_GetKeyState( nullptr );
+
+    //If up is pressed
+    if( keystates[ SDLK_UP ] )
+        defiler(true);
+
+    //If down is pressed
+    if( keystates[ SDLK_DOWN ] )
+        defiler(false);
+}

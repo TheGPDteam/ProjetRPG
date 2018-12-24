@@ -23,7 +23,7 @@ const int MAX_GROUPES_TUILES_TERRE = 15;
 const int MAX_GROUPES_TUILES_SABLE = 15;
 const int MAX_GROUPES_TUILES_ARBRE = 10;
 
-class Zone
+class Zone : public Observable
 {
 private:
     std::map<Objet*,std::pair<int,int>> m_objets;

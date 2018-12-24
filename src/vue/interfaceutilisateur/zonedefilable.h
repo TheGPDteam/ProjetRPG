@@ -22,7 +22,7 @@ public:
     virtual ~ZoneDefilable();
     void afficher(SDL_Surface *surface) override;
     void redimensionner(SDL_Rect rectangle) override;
-
+    void gestionEvenementDefilable();
     void clique() override;
     void defiler(bool haut);
 };

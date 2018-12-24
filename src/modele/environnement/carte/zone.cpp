@@ -149,6 +149,8 @@ bool Zone::objetPresent(std::pair<int, int> position) const
 void Zone::supprimerObjet(Objet* obj)
 {
     m_objets.erase(m_objets.find(obj));
+    mettreAChange();
+    notifierTous();
 }
 
 std::map <Objet*,std::pair <int,int>> Zone::obtenirObjets() const
@@ -299,6 +301,8 @@ void Zone::ajouterObjets(int nbObjets)
             }
         }
     }
+    mettreAChange();
+    notifierTous();
 }
 
 void Zone::initialiserSousTypeTuile(){

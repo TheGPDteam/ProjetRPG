@@ -1,9 +1,8 @@
 #ifndef ECRANPREMIEREJOURNEE_H
 #define ECRANPREMIEREJOURNEE_H
 
-#include "../ecrangeneral.h"
-#include "../../outilsvue.h"
-#include "zonedefilable.h"
+#include "ecrangeneral.h"
+#include "outilsvue.h"
 #include <string.h>
 
 class EcranPremiereJournee : public EcranGeneral

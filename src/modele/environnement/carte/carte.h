@@ -24,6 +24,7 @@ private:
 public :
     Carte();
     ~Carte();
+    void definirObservateurZones(Observateur &obs);
     Zone *obtenirZoneActive();
     void changerZoneActive(Direction direction);
     void recharger();

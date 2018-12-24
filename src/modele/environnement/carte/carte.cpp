@@ -35,6 +35,18 @@ Carte::~Carte()
 }
 
 //!
+//! \brief Ajoute un observateur pour toutes les zones
+//! \param obs
+//! \author dolacoste
+//!
+void
+Carte::definirObservateurZones(Observateur &obs){
+    for (int x = 0; x < TAILLE_CARTE_X;x++)
+        for (int y = 0; y < TAILLE_CARTE_Y; y++)
+            m_zones[x][y]->ajouterObservateur(obs);
+}
+
+//!
 //! \brief Accesseur en lecture de la zone active
 //! \author mleothaud
 //! \date 17/11/16
@@ -84,6 +96,9 @@ void Carte::chargerZone(std::string nomFichierZone, short x, short y)
         m_zones[x][y] = new Zone(64,64);
         m_zoneActive = m_zones[x][y];
     }
+
+    mettreAChange();
+    notifierTous();
 }
 
 //!
@@ -116,6 +131,8 @@ void Carte::changerZoneActive(Direction direction)
     default :
         break;
     }
+    mettreAChange();
+    notifierTous();
 }
 
 //!
