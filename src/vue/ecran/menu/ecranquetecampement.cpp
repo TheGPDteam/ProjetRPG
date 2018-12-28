@@ -7,8 +7,8 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
       m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,128,128,128},SDL_Rect{0,448,128,128}}},
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{448+30,128,128,128},SDL_Rect{384,448,128,128}}},
       m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,128,128,128},SDL_Rect{256,448,128,128}}},
-      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,128,128,128},SDL_Rect{128,448,128,128}}},
-      m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,"Parties du Bus", false, TypeObjet::Partie_bus))
+      m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{192+10,128,128,128},SDL_Rect{128,448,128,128}}}
+//      m_tableauEquipe(Tableau::tableauObjet(m_ecran,64,m_controleur,"Parties du Bus", false, TypeObjet::Partie_bus))
 
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 200};
@@ -25,7 +25,7 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
 //            m_tableauEquipe->ajouterLigne(o);
 //        }
 //    }
-    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
+//    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
 
 }
 
@@ -37,7 +37,7 @@ void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Su
     m_spriteEssence->afficher(fenetre_affichage);
     m_spriteHuile->afficher(fenetre_affichage);
 
-    m_tableauEquipe->afficher(fenetre_affichage);
+//    m_tableauEquipe->afficher(fenetre_affichage);
 }
 
 void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
@@ -71,6 +71,6 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
 }
 
 void EcranQueteCampement::obtenirChangement(Observable &obj){
-    m_tableauEquipe->vider();
-    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
+//    m_tableauEquipe->vider();
+//    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
 }

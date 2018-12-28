@@ -17,7 +17,7 @@ private:
     std::set<Personnage*> m_personnages;
 public:
     Equipe();
-    Equipe(std::set<Personnage*> personnages);
+    Equipe(std::set<Personnage*> peronnages);
     Equipe(Personnage* personnage);
     std::set<Personnage*> obtenirListePersonnage();
     void supprimerPersonnage(Personnage *personnage);

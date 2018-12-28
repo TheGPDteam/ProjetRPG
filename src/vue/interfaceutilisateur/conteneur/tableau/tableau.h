@@ -10,10 +10,7 @@ class Tableau : public Affichable
 {
 private :
     float m_hauteurLigne;
-    int m_nbLignes;
     bool m_avecImage;
-    Ligne * m_titre;
-    Ligne * m_enTete;
     std::vector<Ligne*> m_lignes;
     int m_nbLignesMax;
     Controleur *m_controleur;
@@ -22,7 +19,6 @@ private :
     void creerLigne(std::vector<Affichable *> donneesLigne);
     SDL_Rect creerRectLigne();
     SDL_Rect creerRectLigne(int numLigne);
-    void trie(Case * c);
 
     void ajouterEnTeteHumain();
     void ajouterEnTeteObjet(TypeObjet typeObjet);
@@ -30,23 +26,22 @@ private :
     int positionLigne(Ligne * ligRecherchee);
 
 public:
-    Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom, bool avecImage);
+    Tableau(SDL_Rect rect, Controleur *controleur,bool avecImage, float hauteurLigne);
     void vider();
     void ajouterLigne(std::vector<Affichable*> affichables);
+    void ajouterLigne(std::vector<std::string> strings);
     void ajouterLigne(Humain* perso);
     void ajouterLigne(Objet* obj);
     void ajouterLigne(Campement *c);
-    bool testTri(Ligne * l, std::pair<int, int> coord_souris);
-    void trieDefault();
+    bool trie(Case * c);
+    Ligne * obtenirLigne(int numLigne);
     bool testAffichageLigneSurvole(std::pair<int, int> coord_souris);
     ZoneTexte *creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportement = COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE alignement = ALIGNEMENT_TEXTE::CENTRE);
     Ligne *ligneSurvole(std::pair<int, int> coord_souris);
-    ZoneDefilable * zoneDefilableTableau(SDL_Rect rectAffichable);
+    ZoneDefilable * obtenirZoneDefilableTableau(SDL_Rect rectAffichable);
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect nouvelleDimension) override;
 
-    static Tableau * tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage);
-    static Tableau * tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage, TypeObjet typeObjet=TypeObjet::Objet);
 
 
 //    static Tableau * tableauCampement(SDL_Rect rect, float hauteurLigne, Controleur *controleur);

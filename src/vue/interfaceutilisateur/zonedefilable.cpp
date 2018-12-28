@@ -92,7 +92,8 @@ void ZoneDefilable::defiler(bool haut){
     }
 }
 
-void ZoneDefilable::gestionEvenementDefilable(){
+void ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_souris){
+
     Uint8 *keystates = SDL_GetKeyState( nullptr );
 
     //If up is pressed

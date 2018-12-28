@@ -2,7 +2,7 @@
 #define CHOIXQUETE_H
 
 #include "ecrangeneral.h"
-#include "tableau.h"
+#include "tableaudefilable.h"
 #include "ecranrepartitionjoueur.h"
 #include <map>
 
@@ -24,11 +24,11 @@ private:
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
 
-    Tableau * m_tableauNonAffectes;
-    Tableau * m_tableauRecolte;
-    Tableau * m_tableauChasse;
-    Tableau * m_tableauCampement;
-    std::map<Tableau *, Equipe *> m_tableaux;
+    TableauDefilable * m_tableauNonAffectes;
+    TableauDefilable * m_tableauRecolte;
+    TableauDefilable * m_tableauChasse;
+    TableauDefilable * m_tableauCampement;
+    std::map<TableauDefilable *, Equipe *> m_tableaux;
     EcranRepartitionJoueur * m_ecranRepartitionJoueur;
 public:
     EcranQuete(Controleur *controleur);
@@ -37,7 +37,6 @@ public:
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;
 
     ~EcranQuete();
-
     void obtenirChangement(Observable &obj) override;
 };
 #endif // CHOIXQUETE_H

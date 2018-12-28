@@ -19,10 +19,10 @@ private:
 public:
     ZoneDefilable() = delete;
     ZoneDefilable(Affichable *contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect rectangle);
-    virtual ~ZoneDefilable();
+    virtual ~ZoneDefilable() override;
     void afficher(SDL_Surface *surface) override;
     void redimensionner(SDL_Rect rectangle) override;
-    void gestionEvenementDefilable();
+    void gestionEvenementDefilableClique(std::pair<int, int> &coord_souris);
     void clique() override;
     void defiler(bool haut);
 };

@@ -222,7 +222,7 @@ EcranRecapitulatifNuit::~EcranRecapitulatifNuit()
     {
         delete m_zoneGameOver;
     }
-    if (m_zoneVivresConsommes)
+    if (m_zoneVivresConsommes != nullptr)
     {
         delete m_zoneVivresConsommes;
     }

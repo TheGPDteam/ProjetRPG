@@ -15,7 +15,7 @@ private:
     Sprite* m_spriteEssence;
     Sprite* m_spriteMoteur;
 
-    Tableau * m_tableauEquipe;
+//    Tableau * m_tableauEquipe;
 
     TexteSDL* m_labelRoue;
     TexteSDL* m_labelHuile;

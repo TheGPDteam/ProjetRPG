@@ -27,49 +27,53 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
 
-    m_tableauNonAffectes=Tableau::tableauHumain(m_fondPerso,32,m_controleur,"Non Affectes", false);
-    m_tableauChasse=Tableau::tableauHumain(m_fondChasse,32,m_controleur, "Chasse", false);
-    m_tableauRecolte=Tableau::tableauHumain(m_fondRecolte,32,m_controleur, "Recolte", false);
-    m_tableauCampement=Tableau::tableauHumain(m_fondCampement,32,m_controleur, "Campement", false);
+    m_tableauNonAffectes=TableauDefilable::tableauHumain(m_fondPerso,m_controleur,"Non Affectes", false);
+    m_tableauChasse=TableauDefilable::tableauHumain(m_fondChasse,m_controleur, "Chasse", false);
+    m_tableauRecolte=TableauDefilable::tableauHumain(m_fondRecolte,m_controleur, "Recolte", false);
+    m_tableauCampement=TableauDefilable::tableauHumain(m_fondCampement,m_controleur, "Campement", false);
     Campement * c =m_controleur->obtenirModele()->obtenirCampement();
-    m_tableaux.insert(std::pair<Tableau *, Equipe * >(m_tableauNonAffectes, nullptr));
-    m_tableaux.insert(std::pair<Tableau *, Equipe * >(m_tableauChasse, c->obtenirEquipeChasse()));
-    m_tableaux.insert(std::pair<Tableau *, Equipe * >(m_tableauRecolte, c->obtenirEquipeRecolte()));
-    m_tableaux.insert(std::pair<Tableau *, Equipe * >(m_tableauCampement, c->obtenirEquipeCampement()));
+    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauNonAffectes, nullptr));
+    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauChasse, c->obtenirEquipeChasse()));
+    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauRecolte, c->obtenirEquipeRecolte()));
+    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauCampement, c->obtenirEquipeCampement()));
 
-    for (Humain *h : c->obtenirNonAttribuees())
-    {
-        m_tableauNonAffectes->ajouterLigne(h);
-    }
-    m_tableauNonAffectes->trieDefault();
-
-    for (Personnage *p : c->obtenirEquipeRecolte()->obtenirListePersonnage())
-    {
-        m_tableauRecolte->ajouterLigne(dynamic_cast <Humain *> (p));
-    }
-
-    for (Personnage *p : c->obtenirEquipeChasse()->obtenirListePersonnage())
-    {
-        m_tableauChasse->ajouterLigne(dynamic_cast <Humain *> (p));
-    }
-
-    for (Personnage *p : c->obtenirEquipeCampement()->obtenirListePersonnage())
-    {
-        m_tableauCampement->ajouterLigne(dynamic_cast <Humain *> (p));
-    }
+    obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur());
+//    Tableau * tabNonAffecter = m_tableauNonAffectes->obtenirTableauDonnees();
+//    for (Humain *h : c->obtenirNonAttribuees())
+//    {
+//        tabNonAffecter->ajouterLigne(h);
+//    }
+//    m_tableauNonAffectes->trieDefault();
+//    Tableau * tabRecolte = m_tableauRecolte->obtenirTableauDonnees();
+//    for (Personnage *p : c->obtenirEquipeRecolte()->obtenirListePersonnage())
+//    {
+//        tabRecolte->ajouterLigne(dynamic_cast <Humain *> (p));
+//    }
+//    Tableau * tabChasse = m_tableauRecolte->obtenirTableauDonnees();
+//    for (Personnage *p : c->obtenirEquipeChasse()->obtenirListePersonnage())
+//    {
+//        tabChasse->ajouterLigne(dynamic_cast <Humain *> (p));
+//    }
+//    Tableau * tabCampement = m_tableauRecolte->obtenirTableauDonnees();
+//    for (Personnage *p : c->obtenirEquipeCampement()->obtenirListePersonnage())
+//    {
+//        tabCampement->ajouterLigne(dynamic_cast <Humain *> (p));
+//    }
 
     m_ecranRepartitionJoueur = new EcranRepartitionJoueur(m_controleur);
 
 }
 
 EcranQuete::~EcranQuete(){
-    delete m_tableauChasse;
-    delete m_tableauRecolte;
-    delete m_tableauCampement;
-    delete m_tableauNonAffectes;
+    //        delete m_tableauChasse;
+    //        delete m_tableauRecolte;
+    //        delete m_tableauCampement;
+    //    delete m_tableauNonAffectes;
     delete m_ecranRepartitionJoueur;
-    for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr)
+    for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr){
         delete itr->first;
+        delete itr->second;
+    }
     m_tableaux.clear();
 }
 
@@ -89,10 +93,9 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     m_nomFenetre.afficher(fenetre_affichage);
 
 
-    m_tableauCampement->afficher(fenetre_affichage);
-    m_tableauChasse->afficher(fenetre_affichage);
-    m_tableauRecolte->afficher(fenetre_affichage);
-    m_tableauNonAffectes->afficher(fenetre_affichage);
+    for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr)
+        itr->first->afficher(fenetre_affichage);
+
 
     if(m_ecranRepartitionJoueur->obtenirEtatAfficher()){
         m_ecranRepartitionJoueur->afficherEcran(coord_souris,fenetre_affichage);
@@ -104,13 +107,11 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
 
 void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
-
     if(m_ecranRepartitionJoueur->obtenirEtatAfficher()){
         m_ecranRepartitionJoueur->gestionDesEvenements(controleur, quitter_jeu, clique_souris, coord_souris);
         return;
     }
     SDL_Event evenements;
-
 
     while(SDL_PollEvent(&evenements))
     {
@@ -126,16 +127,13 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
                 for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
-                    Ligne * lig = itr->first->ligneSurvole(coord_souris);
+                    Ligne * lig = itr->first->gestionEvenementClique(coord_souris);
                     if(lig != nullptr){
-                        //test si l'evenement est une demande de tri du tableau
-                        if(itr->first->testTri(lig, coord_souris)) break;
-
-                        int idHumain = lig->m_idLigne-2; // on soustrait le titre et l'entete
+                        int idHumain = lig->m_idLigne;
                         if(itr->second == nullptr){
-                        auto humainsModel=  m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees();
-                        std::vector<Humain *> humains(humainsModel.begin(), humainsModel.end());
-                        m_ecranRepartitionJoueur->definirHumain(humains.at(idHumain-1));
+                            auto humainsModel=  m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees();
+                            std::vector<Humain *> humains(humainsModel.begin(), humainsModel.end());
+                            m_ecranRepartitionJoueur->definirHumain(humains.at(idHumain-1));
                         }else{
                             auto humainsModel=  itr->second->obtenirListePersonnage();
                             std::vector<Personnage *> perso(humainsModel.begin(), humainsModel.end());
@@ -152,7 +150,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
-                if(itr->first->testAffichageLigneSurvole(coord_souris))
+                if(itr->first->obtenirTableauDonnees()->testAffichageLigneSurvole(coord_souris))
                     break;
             }
             break;
@@ -164,25 +162,20 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
 }
 
 void EcranQuete::obtenirChangement(Observable &obj){
-    Campement * c = m_controleur->obtenirModele()->obtenirCampement();
-    m_tableauNonAffectes->vider();
-    for (Humain *h : c->obtenirNonAttribuees())
-    {
-        m_tableauNonAffectes->ajouterLigne(h);
-    }
-    m_tableauRecolte->vider();
-    for (Personnage *p : c->obtenirEquipeRecolte()->obtenirListePersonnage())
-    {
-        m_tableauRecolte->ajouterLigne(dynamic_cast <Humain *> (p));
-    }
-    m_tableauChasse->vider();
-    for (Personnage *p : c->obtenirEquipeChasse()->obtenirListePersonnage())
-    {
-        m_tableauChasse->ajouterLigne(dynamic_cast <Humain *> (p));
-    }
-    m_tableauCampement->vider();
-    for (Personnage *p : c->obtenirEquipeCampement()->obtenirListePersonnage())
-    {
-        m_tableauCampement->ajouterLigne(dynamic_cast <Humain *> (p));
+
+    for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
+        Tableau * tab = itr->first->obtenirTableauDonnees();
+        tab->vider();
+//        itr->first->mettreAJourZoneDefilable();
+        if(itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
+            for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
+            {
+                tab->ajouterLigne(h);
+            }
+        }else{
+            for (Personnage *p : itr->second->obtenirListePersonnage())
+                tab->ajouterLigne(dynamic_cast <Humain *> (p));
+        }
+        itr->first->trieDefault();
     }
 }

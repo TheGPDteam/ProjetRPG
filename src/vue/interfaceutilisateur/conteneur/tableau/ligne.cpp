@@ -113,7 +113,7 @@ void Ligne::afficher(SDL_Surface *surface)
 }
 
 //!
-//! \brief obtient la case a la neme position dans la ligne
+//! \brief obtient la case a la position numCase dans la ligne
 //! \param numCase le numero de la case a récuperer
 //! \return la neme case de la ligne
 //! \author Lacoste Dorian

@@ -1,6 +1,6 @@
 #include "ecraninventaire.h"
-#include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "bouton/bouton.h"
+#include "constantesbouton.h"
 #include <utility>
 #include <iostream>
 
@@ -14,10 +14,9 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     EcranGeneral{controleur},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-    m_tableau_objets(Tableau::tableauObjet(m_ecran, 64, m_controleur, "Inventaire", true)),
     m_compteurInventaire(-1),
     m_fondEcran{},
-    m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
+    m_rectangleHaut(initialiserRectangle(m_ecran.x, m_ecran.y, m_ecran.w, 64*8)),
     m_rectangleBas{COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250), static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2), static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
     m_rectangleDescription{COORD_X_RECTANGLE_HAUT + 10, COORD_Y_RECTANGLE_HAUT + 10, static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 3), 40},
     m_quantiteInventaire{new TexteSDL("probleme affichage", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 18, std::make_pair(m_rectangleBas.w - 250, m_rectangleBas.y + m_rectangleBas.h - 50))},
@@ -38,14 +37,9 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     ajoutBoutonDansMapDeBoutons(new Bouton("Aller au camp", rect2, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(rect.x+20,rect.y+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
-    m_zoneDefilable = m_tableau_objets->zoneDefilableTableau(m_rectangleHaut);
+    m_tableau_objets = TableauDefilable::tableauObjet(m_rectangleHaut, m_controleur, "Inventaire", true);
 
-    definirEtatQuantite(0);
-    for(auto o : m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets())
-    {
-
-        m_tableau_objets->ajouterLigne(o);
-    }
+    obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur());
 
 }
 
@@ -70,8 +64,7 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
     m_quantiteInventaire->afficher(fenetre_affichage);
 
 
-    // m_tableau_objets->afficher(fenetre_affichage);
-    m_zoneDefilable->afficher(fenetre_affichage);
+    m_tableau_objets->afficher(fenetre_affichage);
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
 }
@@ -93,7 +86,6 @@ void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfac
 void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
     SDL_Event evenements;
-    m_zoneDefilable->gestionEvenementDefilable();
 
     while(SDL_PollEvent(&evenements))
     {
@@ -113,13 +105,13 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
                 coord_souris.second = evenements.button.y;
             }
             break;
-//        case SDL_KEYDOWN:
-//            if(evenements.key.keysym.sym == SDLK_UP){
-//                m_zoneDefilable->defiler(true);
-//            }
-//            else if(evenements.key.keysym.sym == SDLK_DOWN)
-//                m_zoneDefilable->defiler(false);
-//            break;
+            //        case SDL_KEYDOWN:
+            //            if(evenements.key.keysym.sym == SDLK_UP){
+            //                m_zoneDefilable->defiler(true);
+            //            }
+            //            else if(evenements.key.keysym.sym == SDLK_DOWN)
+            //                m_zoneDefilable->defiler(false);
+            //            break;
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
@@ -158,11 +150,12 @@ void EcranInventaire::obtenirChangement(Observable &obj)
 {
     Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur();
     definirEtatQuantite(inventaire);
+//    m_tableau_objets->mettreAJourZoneDefilable();
 
-    m_tableau_objets->vider();
+    m_tableau_objets->obtenirTableauDonnees()->vider();
     for(auto o : inventaire->obtenirObjets())
     {
-        m_tableau_objets->ajouterLigne(o);
+        m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);
     }
 }
 

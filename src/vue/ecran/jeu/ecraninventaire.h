@@ -1,7 +1,7 @@
 #ifndef ECRANINVENTAIRE_H
 #define ECRANINVENTAIRE_H
 
-#include "tableau.h"
+#include "tableaudefilable.h"
 #include "zonedefilable.h"
 #include "ecrangeneral.h"
 
@@ -11,8 +11,7 @@ class EcranInventaire : public EcranGeneral
 {
 private:
     TexteSDL m_nomFenetre;
-    Tableau * m_tableau_objets;
-    ZoneDefilable * m_zoneDefilable;
+    TableauDefilable * m_tableau_objets;
     int m_compteurInventaire;
 
     SDL_Rect m_fondEcran;

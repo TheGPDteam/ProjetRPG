@@ -2,15 +2,11 @@
 #include "zonetexte.h"
 
 
-Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std::string nom, bool avecImage)
-    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_nbLignes{0}, m_controleur{controleur}, m_avecImage(avecImage)
+
+Tableau::Tableau(SDL_Rect rect, Controleur *controleur, bool avecImage, float hauteurLigne)
+    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_avecImage(avecImage)
 {
-    std::vector<Affichable * > tmp;
-    tmp.push_back(creeZoneTexte(nom, COMPORTEMENT_TEXTE::TRONQUE, ALIGNEMENT_TEXTE::CENTRE));
-    m_titre = new Ligne(tmp, m_controleur,creerRectLigne(), 1,m_nbLignes+1, false);
-    m_nbLignes++;
-    m_enTete=nullptr;
-    m_rectangle.h=m_titre->rectangle().h*2;
+    m_rectangle.h=0;
 }
 
 
@@ -23,8 +19,6 @@ Tableau::Tableau(SDL_Rect rect, float hauteurLigne, Controleur *controleur, std:
 //!
 void Tableau::afficher(SDL_Surface *surface_affichage)
 {
-    m_titre->afficher(surface_affichage);
-    m_enTete->afficher(surface_affichage);
     for (Ligne * l : m_lignes)
     {
         l->afficher(surface_affichage);
@@ -39,15 +33,11 @@ void Tableau::afficher(SDL_Surface *surface_affichage)
 void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
-    SDL_Rect rectangleLigne = nouvelleDimension;
-    if(m_lignes.size()!=0){
-        rectangleLigne.h = rectangleLigne.h / m_lignes.size();
-        m_hauteurLigne = rectangleLigne.h;
-    }
+    int i=0;
     for (Ligne * l : m_lignes)
     {
-        l->redimensionner(rectangleLigne);
-        rectangleLigne.y += m_hauteurLigne;
+        l->redimensionner(creerRectLigne(i));
+        i++;
     }
 }
 //!
@@ -59,13 +49,9 @@ void Tableau::redimensionner(SDL_Rect nouvelleDimension)
 //!
 Ligne*
 Tableau::ligneSurvole(std::pair<int, int> coord_souris){
-    if(m_enTete->contient(coord_souris)){
-        return m_enTete;
-    }
     for(Ligne *l : m_lignes){
         if(l->contient(coord_souris)){
-            return l; //changer la ligne de couleur
-        }
+            return l;        }
     }
     return nullptr;
 }
@@ -85,7 +71,7 @@ Tableau::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
         m_lignePrecedemmentSurvoler->definirNumCouleur((positionLigne(m_lignePrecedemmentSurvoler)+1)%2+1);
 
     //ligne n'appartient pas au tableau c'est l'entete ou c'est le titre
-    if(lSurvole == nullptr || lSurvole == m_enTete || lSurvole == m_titre){
+    if(lSurvole == nullptr){
         m_lignePrecedemmentSurvoler=nullptr;
         return false;}
     lSurvole->definirNumCouleur(3);
@@ -108,6 +94,17 @@ Tableau::positionLigne(Ligne * ligRecherchee){
 }
 
 //!
+//! \brief obtient la ligne a la position numLignee
+//! \param numLigne le numero de la ligne a récuperer
+//! \return la ligne qui est a cette position dans le vector
+//! \author Lacoste Dorian
+//! \date 16/12/18
+//!
+Ligne * Tableau::obtenirLigne(int numLigne){
+    return m_lignes.at(numLigne);
+}
+
+//!
 //! \brief permet de comparer 2 Lignes
 //! \param lig1
 //! \param lig2
@@ -125,16 +122,7 @@ bool compareLigne(Ligne* lig1, Ligne* lig2){
     return (texte1 < texte2);
 }
 
-//!
-//! \brief permet de lancer le tri par default sur le tableau
-//! \author Lacoste Dorian
-//! \date 16/12/18
-//!
-void
-Tableau::trieDefault(){
-    assert(m_enTete != nullptr);
-    this->trie(m_enTete->obtenirCase(0));
-}
+
 
 //!
 //! \brief trie le tableau en fonction d'une case de reference
@@ -142,23 +130,24 @@ Tableau::trieDefault(){
 //! \author Lacoste Dorian
 //! \date 16/12/18
 //!
-void
+bool
 Tableau::trie(Case * c){
     ZoneTexte * zone = dynamic_cast<ZoneTexte * >(c->obtenirDonnee());
-    if(zone == nullptr) return;
-    if(zone->obtenirTexte() == " ") return;
+    if(zone == nullptr) return false;
+    if(zone->obtenirTexte() == " ") return false;
 
     for(auto *l : m_lignes){
         l->definirNumCaseSelectionnerTri(c->obtenirIdCase());
     }
     std::sort(m_lignes.begin(), m_lignes.end(), compareLigne);
-    int i=2;
+    int i=0;
     for (auto *l : m_lignes)
     {
         l->definirNumCouleur(i%2+1);
-        l->redimensionner(creerRectLigne(i)); //deplacer les lignes
+        l->redimensionner(creerRectLigne(i)); //deplace les lignes
         i++;
     }
+    return true;
 }
 
 //!
@@ -169,54 +158,16 @@ Tableau::trie(Case * c){
 //! \author Lacoste Dorian
 //! \date 16/12/18
 //!
-bool
-Tableau::testTri(Ligne * l, std::pair<int, int> coord_souris){
-    if(l == m_enTete){
-        this->trie(m_enTete->caseClique(coord_souris));
-        return true;
-    }
-    return  false;
-}
+//bool
+//Tableau::testTri(Ligne * l, std::pair<int, int> coord_souris){
+////    if(l == m_enTete){
+////        this->trie(m_enTete->caseClique(coord_souris));
+////        return true;
+////    }
+//    return  false;
+//}
 
-void
-Tableau::ajouterEnTeteHumain(){
-    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
-    std::vector<Affichable *> tmp;
-    tmp.push_back(creeZoneTexte("Nom"));
-    tmp.push_back(creeZoneTexte("Prenom"));
-    tmp.push_back(creeZoneTexte("Chasse"));
-    tmp.push_back(creeZoneTexte("Recolte"));
-    tmp.push_back(creeZoneTexte("Campement"));
-    tmp.push_back(creeZoneTexte("Arme"));
-    tmp.push_back(creeZoneTexte("Niveau"));
-    m_enTete = new Ligne(tmp, m_controleur,creerRectLigne(), 0,m_nbLignes+1, m_avecImage);
-    m_nbLignes++;
-}
 
-void
-Tableau::ajouterEnTeteObjet(TypeObjet typeObjet){
-    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
-    std::vector<Affichable *> tmp;
-    tmp.push_back(creeZoneTexte(" "));
-    tmp.push_back(creeZoneTexte("Nom"));
-    tmp.push_back(creeZoneTexte("Description"));
-    if(typeObjet == TypeObjet::Partie_bus ) {
-        tmp.push_back(creeZoneTexte("Quantite"));
-    }
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0, m_nbLignes+1, m_avecImage);
-    m_nbLignes++;
-}
-
-void Tableau::ajouterEnTetePartiesBus(){
-    assert(m_enTete == nullptr); //aucune enTete ne doit etre defini avant
-    std::vector<Affichable *> tmp;
-    tmp.push_back(creeZoneTexte("Nom"));
-    tmp.push_back(creeZoneTexte("Description"));
-    tmp.push_back(creeZoneTexte("Quantite"));
-
-    m_enTete = new Ligne(tmp, m_controleur, creerRectLigne(), 0,m_nbLignes+1, m_avecImage);
-    m_nbLignes++;
-}
 
 //!
 //! \brief ajoute une ligne contenant des affichables dans le tableau
@@ -226,8 +177,7 @@ void Tableau::ajouterEnTetePartiesBus(){
 //!
 void
 Tableau::ajouterLigne(std::vector<Affichable*> affichables){
-    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    creerLigne(affichables);
+      creerLigne(affichables);
 }
 //!
 //! \brief Ajouter un humain dans le tableau
@@ -238,8 +188,7 @@ Tableau::ajouterLigne(std::vector<Affichable*> affichables){
 //!
 void
 Tableau::ajouterLigne(Humain* perso){
-    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    std::vector<Affichable*> tmp;
+      std::vector<Affichable*> tmp;
     tmp.push_back(creeZoneTexte(perso->obtenirNom()));
     tmp.push_back(creeZoneTexte(perso->obtenirPrenom()));
     tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirChasse().obtenirValeur())));
@@ -247,6 +196,15 @@ Tableau::ajouterLigne(Humain* perso){
     tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirCampement().obtenirValeur())));
     tmp.push_back(creeZoneTexte(perso->obtenirArme()->obtenirNom()));
     tmp.push_back(creeZoneTexte(std::to_string((int)perso->obtenirNiveau().obtenirNiveauActuel())));
+    creerLigne(tmp);
+}
+
+void
+Tableau::ajouterLigne(std::vector<std::string> strings){
+    std::vector<Affichable*> tmp;
+    for(std::string s : strings){
+        tmp.push_back(creeZoneTexte(s));
+    }
     creerLigne(tmp);
 }
 
@@ -269,7 +227,6 @@ Tableau::creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportment, ALIGN
 //! \date 15/11/2018
 void
 Tableau::ajouterLigne(Objet* obj){
-    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
     std::vector<Affichable *> tmp;
     tmp.push_back(obj->obtenirSprite());
     tmp.push_back(creeZoneTexte(obj->obtenirNom()));
@@ -280,8 +237,7 @@ Tableau::ajouterLigne(Objet* obj){
 
 void Tableau::ajouterLigne(Campement *c)
 {
-    assert (m_enTete != nullptr); //l'entete doit etre defini avant d'ajouter des objets
-    std::vector<Affichable *> tmp;
+     std::vector<Affichable *> tmp;
     std::map<PartieBus*, unsigned short> cpt;
     //Pour chaque partie bus
     for (Objet *o : c->obtenirObjets())
@@ -331,9 +287,8 @@ void Tableau::ajouterLigne(Campement *c)
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_nbLignes%2 ==0) ? 1:2, m_nbLignes+1, m_avecImage);
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_lignes.size()%2 ==0) ? 1:2, m_lignes.size()+1, m_avecImage);
     m_lignes.push_back(l);
-    m_nbLignes++;
     m_rectangle.h+=l->rectangle().h;
 }
 
@@ -345,7 +300,7 @@ Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
 //!
 SDL_Rect
 Tableau::creerRectLigne(){
-    return creerRectLigne(m_nbLignes);
+    return creerRectLigne(m_lignes.size());
 }
 SDL_Rect
 Tableau::creerRectLigne(int numLigne){
@@ -356,19 +311,9 @@ Tableau::creerRectLigne(int numLigne){
 }
 
 
-Tableau * Tableau::tableauHumain(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre, aUneImage);
-    t->ajouterEnTeteHumain();
-    return t;
-}
 
-Tableau * Tableau::tableauObjet(SDL_Rect rect, float hauteurLigne, Controleur *controleur, const std::string titre, bool aUneImage, TypeObjet typeObjet){
-    Tableau * t = new Tableau(rect, hauteurLigne, controleur, titre, aUneImage);
-    t->ajouterEnTeteObjet(typeObjet);
-    return t;
-}
 
-ZoneDefilable * Tableau::zoneDefilableTableau(SDL_Rect rectAffichable){
+ZoneDefilable * Tableau::obtenirZoneDefilableTableau(SDL_Rect rectAffichable){
     return new ZoneDefilable(this,SDL_Color{100, 100, 100,255}, this->m_controleur,true,rectAffichable);
 }
 
@@ -376,7 +321,6 @@ void Tableau::vider(){
     for(auto & l : m_lignes)
         delete l;
     m_lignes.clear();
-    m_nbLignes = 2;
-    m_rectangle.h=m_titre->rectangle().h*2;
+    m_rectangle.h=0;
 
 }
