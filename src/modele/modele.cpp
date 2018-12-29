@@ -97,14 +97,13 @@ void Modele::deplacement(Direction dir)
         m_joueur.deplacerJoueur(dir);
         Zone * zoneActive = m_carte.obtenirZoneActive();
         pair<int, int> position = m_joueur.obtenirPosition();
-        if(zoneActive->obtenirObjet(position) != nullptr)
+        if(zoneActive->objetPresent(position))
         {
             if(!m_joueur.obtenirInventaire()->estPlein()){
                 Objet * objet = zoneActive->obtenirObjet(position);
                 m_joueur.obtenirInventaire()->ajouterObjet(objet);
 
-                TypeObjet to = objet->obtenirType();
-                if(to == TypeObjet::Vivre){
+                if(objet->obtenirType() == TypeObjet::Vivre){
                     Quete * q = m_joueur.obtenirQuete();
                     Vivre* v = dynamic_cast<Vivre*>(objet);
                     q->augmenterValeur(v->obtenirValeurNutritive());
@@ -133,7 +132,7 @@ bool Modele::testChangementDeCarte(Direction directionDep){
     std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
     bool changementCarte=false;
     // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
-    Direction directionTuile = m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirection();
+    Direction directionTuile = m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirectionChangementZone();
     if (directionTuile == Nord && directionDep==Nord)
     {
         nouvellePosition.first = m_joueur.obtenirPosition().first;

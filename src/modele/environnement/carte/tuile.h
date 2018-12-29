@@ -38,8 +38,8 @@ private:
     Direction m_directionChangementZone;
 
 public:
-    Direction obtenirDirection() const;
-    void definirDirection(Direction dir);
+    Direction obtenirDirectionChangementZone() const;
+    void definirDirectionChangementZone(Direction dir);
     Tuile(int val);
     TypeTuile obtenirType() const;
     bool obtenirEstMarchable() const;

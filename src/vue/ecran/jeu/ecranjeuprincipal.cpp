@@ -84,16 +84,17 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(p.first*63),(short int)(p.second*63),127,63}, SDL_Rect{256,192,63,63}};
         valise.afficher(fenetre_affichage);
     }
-
-    if (m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement() < m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()) {
-        m_objectif.mettreAJourTexte("Objectif: "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurAvancement())+" sur "+std::to_string(m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirValeurObjectif()));
+    Modele * m = m_controleur->obtenirModele();
+    Quete * q = m->obtenirJoueur()->obtenirQuete();
+    if (q->obtenirValeurAvancement() < q->obtenirValeurObjectif()) {
+        m_objectif.mettreAJourTexte("Objectif: "+std::to_string(q->obtenirValeurAvancement())+" sur "+std::to_string(q->obtenirValeurObjectif()));
     }
     else
     {
         m_objectif.mettreAJourTexte("Objectif atteint");
     }
-    m_nomJoueur.mettreAJourTexte(m_controleur->obtenirModele()->obtenirJoueur()->obtenirNom());
-    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m_controleur->obtenirModele()->obtenirTemps()->obtenirTempsRestant()%60));
+    m_nomJoueur.mettreAJourTexte(m->obtenirJoueur()->obtenirNom());
+    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m->obtenirTemps()->obtenirTempsRestant()%60));
     m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
@@ -178,17 +179,15 @@ EcranJeuPrincipal::~EcranJeuPrincipal()
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
-    // Test si c'est un joueur
-    Joueur* joueur = dynamic_cast<Joueur*>(&obj);
     m_spriteObjets.clear();
+    Joueur * joueur = m_controleur->obtenirModele()->obtenirJoueur();
+    //recupère la position du joueur sur la carte
+    int posX = joueur->obtenirPosition().first-5;
+    int posY = joueur->obtenirPosition().second-5;
+    const Zone * carte = m_carte->obtenirZoneActive();
 
-    if(joueur!=nullptr){
-
-        //recupère la position du joueur sur la carte
-        int posX = joueur->obtenirPosition().first-5;
-        int posY = joueur->obtenirPosition().second-5;
-
-        const Zone * carte = m_carte->obtenirZoneActive();
+    // Test si c'est un joueur
+    if(dynamic_cast<Joueur*>(&obj) !=nullptr){
         //on deplace la carte autour du joueur pour qu'il reste au milieu
         for(int i=posX-DECALAGE_CARTE_X_INFERIEUR;i<posX+DECALAGE_CARTE_X_SUPERIEUR;i++)
         {
@@ -202,11 +201,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 if (i < 0)
                 {
                     if (j > 1 && j < 62) {
-                        if (carte->obtenirTuile(0,j)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(0,j+1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(0,j-1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(0,j-2)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(0, j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        if (carte->obtenirTuile(0,j)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(0,j+1)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(0,j-1)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(0,j-2)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(0, j+2)->obtenirDirectionChangementZone() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             //AFFICHER ROUTE
                             Tuile * t = carte->obtenirTuile(0,j);
@@ -221,11 +220,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 {
                     if (j > 1 && j < 62)
                     {
-                        if (carte->obtenirTuile(63,j)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(63,j+1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(63,j-1)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(63,j-2)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(63,j+2)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        if (carte->obtenirTuile(63,j)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(63,j+1)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(63,j-1)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(63,j-2)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(63,j+2)->obtenirDirectionChangementZone() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             //AFFICHER ROUTE
                             Tuile * t = carte->obtenirTuile(63,j);
@@ -239,11 +238,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 {
                     if (i > 1 && i < 62)
                     {
-                        if (carte->obtenirTuile(i,0)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i+1,0)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-1,0)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i+2,0)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-2,0)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        if (carte->obtenirTuile(i,0)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i+1,0)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i-1,0)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,0)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,0)->obtenirDirectionChangementZone() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             Tuile * t = carte->obtenirTuile(i,0);
                             SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
@@ -255,11 +254,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 } else if (j > 63) {
                     if (i > 1 && i < 62)
                     {
-                        if (carte->obtenirTuile(i,63)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i+1,63)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-1,63)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i+2,63)->obtenirDirection() != Direction::Aucune
-                                || carte->obtenirTuile(i-2,63)->obtenirDirection() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
+                        if (carte->obtenirTuile(i,63)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i+1,63)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i-1,63)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i+2,63)->obtenirDirectionChangementZone() != Direction::Aucune
+                                || carte->obtenirTuile(i-2,63)->obtenirDirectionChangementZone() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
                         {
                             Tuile * t = carte->obtenirTuile(i,63);
                             SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
@@ -274,7 +273,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     //on recupère le type de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
                     Tuile * t = carte->obtenirTuile(i,j);
-                    if (t->obtenirDirection() == Direction::Aucune)
+                    if (t->obtenirDirectionChangementZone() == Direction::Aucune)
                     {
                         SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
@@ -295,13 +294,24 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                         }
                     }
 
-                    if(carte->objetPresent(temp) && m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
+                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
+                        m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
+                }
+            }
+        }
+    }else {
+        for(int i=posX-DECALAGE_CARTE_X_INFERIEUR;i<posX+DECALAGE_CARTE_X_SUPERIEUR;i++)
+        {
+            for(int j= posY-DECALAGE_CARTE_Y_INFERIEUR;j<posY+DECALAGE_CARTE_Y_SUPERIEUR;j++)
+            {
+                if ( j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
+                    std::pair<int, int> temp(i,j);
+                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
                         m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
                 }
             }
         }
     }
-
 }
 
 void EcranJeuPrincipal::definirCarte(Carte* carte){

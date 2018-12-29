@@ -50,12 +50,12 @@ TypeTuile Tuile::obtenirType() const{
     return m_type;
 }
 
-void Tuile::definirDirection(Direction dir)
+void Tuile::definirDirectionChangementZone(Direction dir)
 {
     m_directionChangementZone = dir;
 }
 
-Direction Tuile::obtenirDirection() const{
+Direction Tuile::obtenirDirectionChangementZone() const{
     return m_directionChangementZone;
 }
 

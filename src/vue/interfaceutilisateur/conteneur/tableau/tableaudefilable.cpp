@@ -2,16 +2,13 @@
 #include "outilsvue.h"
 
 TableauDefilable::TableauDefilable(SDL_Rect rect, Controleur *controleur,float hauteurLigne):
-    Affichable (rect), m_hauteurLigne(hauteurLigne), m_controleur(controleur), m_zoneDefilableDonnees(nullptr)
-{
-
-}
+    Affichable (rect), m_hauteurLigne(hauteurLigne), m_controleur(controleur), m_tableauEntete(nullptr),  m_tableauDonnee(nullptr),m_zoneDefilableDonnees(nullptr)
+{}
 
 
 void
 TableauDefilable::afficher(SDL_Surface *surface){
     m_tableauEntete->afficher(surface);
-    //    m_tableauDonnee->afficher(surface);
     m_zoneDefilableDonnees->afficher(surface);
 }
 

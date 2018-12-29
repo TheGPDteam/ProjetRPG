@@ -69,16 +69,16 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
                 Tuile* t = new Tuile(Beton);
                 switch (valeursTuiles[j]) {
                 case CASE_DIRECTION_OUEST:
-                    t->definirDirection(Ouest);
+                    t->definirDirectionChangementZone(Ouest);
                     break;
                 case CASE_DIRECTION_SUD:
-                    t->definirDirection(Sud);
+                    t->definirDirectionChangementZone(Sud);
                     break;
                 case CASE_DIRECTION_EST:
-                    t->definirDirection(Est);
+                    t->definirDirectionChangementZone(Est);
                     break;
                 case CASE_DIRECTION_NORD:
-                    t->definirDirection(Nord);
+                    t->definirDirectionChangementZone(Nord);
                 default:
                     break;
                 }
@@ -125,7 +125,11 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
             return it->first;
     return nullptr;
 }
-
+//!
+//! \brief Zone::obtenirObjet
+//! \param position
+//! \return l'objet a cette position ou nullptr s'il n'y en a pas
+//!
 Objet* Zone::obtenirObjet(std::pair <int,int> position) const
 {
     for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
@@ -136,14 +140,7 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const
 
 bool Zone::objetPresent(std::pair<int, int> position) const
 {
-    for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
-    {
-        if (it->second == position)
-        {
-            return true;
-        }
-    }
-    return false;
+    return obtenirObjet(position) != nullptr;
 }
 
 void Zone::supprimerObjet(Objet* obj)
