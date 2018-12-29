@@ -1,17 +1,14 @@
 #ifndef ECRANLISTEOBJETS_H
 #define ECRANLISTEOBJETS_H
 
-#include "tableau.h"
+#include "tableaudefilable.h"
 #include "ecrangeneral.h"
 
 class EcranListeObjet : public EcranGeneral
 {
 private:
     TexteSDL m_nomFenetre;
-//    Tableau * m_tableau_objets;
-//    TexteSDL m_nomObjet;
-//    TexteSDL m_descObjet;
-
+    TableauDefilable * m_tableau_objets;
     SDL_Rect m_rectangleFicheObjet;
 public:
     EcranListeObjet(Controleur * controleur);

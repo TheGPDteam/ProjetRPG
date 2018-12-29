@@ -73,9 +73,10 @@ void Vue::definirControleur(Controleur *controleur)
     Joueur * j = modele->obtenirJoueur();
     Campement * c = modele->obtenirCampement();
     j->ajouterObservateur(*m_jeuPrincipal);
-    j->obtenirInventaireJoueur()->ajouterObservateur(*m_ecranInventaire);
+    j->obtenirInventaire()->ajouterObservateur(*m_ecranInventaire);
     j->obtenirEquipe()->ajouterObservateur(*m_ecranEquipe);
 
+    c->ajouterObservateur(*m_ecranChoixQuete);
     c->obtenirEquipeChasse()->ajouterObservateur(*m_ecranChoixQuete);
     c->obtenirEquipeRecolte()->ajouterObservateur(*m_ecranChoixQuete);
     c->obtenirEquipeCampement()->ajouterObservateur(*m_ecranChoixQuete);
@@ -91,9 +92,6 @@ void Vue::definirControleur(Controleur *controleur)
     modele->ajouterObservateur(*m_ecranChoixPersonnage);
     modele->obtenirCarte()->definirObservateurZones(*m_jeuPrincipal);
     m_jeuPrincipal->definirCarte(modele->obtenirCarte());
-
-    // m_ecranInventaire->definirEtatQuantite(j->obtenirInventaireJoueur()->obtenirNombreObjet());
-    //m_ecranInventaire->definirObjetPourAffichage(j->obtenirInventaireJoueur()->obtenirObjets());
 
     j->mettreAChange();
     j->notifierTous();

@@ -172,7 +172,7 @@ void Joueur::nouvelleQuete(TypeQuete tq, std::string nom, std::string descriptio
     m_queteJoueur = Quete(tq, nom, description, valeurObjectif, recompenseExperience, recompense);
 }
 
-Inventaire* Joueur::obtenirInventaireJoueur()
+Inventaire* Joueur::obtenirInventaire()
 {
     return m_inventaireJoueur;
 }

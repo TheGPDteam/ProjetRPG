@@ -37,7 +37,7 @@ public:
     Equipe* obtenirEquipe() const;
     void definirEquipe(Equipe* equipe);
     void nouvelleQuete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense);//Quete quete);
-    Inventaire* obtenirInventaireJoueur();
+    Inventaire* obtenirInventaire();
     Quete* obtenirQuete();
     std::string serialiser() const;
     void charger(const std::string &donnees);

@@ -86,15 +86,7 @@ TableauDefilable::redimensionner(SDL_Rect m_rectangle){
 
 }
 
-//resout le probleme d'affichage de la zone mais ne doit pas etre definitif
-void TableauDefilable::mettreAJourZoneDefilable(){
-    m_tableauDonnee->redimensionner(m_rectDonnees);
-    if(m_zoneDefilableDonnees != nullptr)
-        m_zoneDefilableDonnees = m_tableauDonnee->obtenirZoneDefilableTableau(m_rectDonnees);
-
-}
-
-bool TableauDefilable::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
+bool TableauDefilable::gestionAffichageLigneSurvole(std::pair<int, int> coord_souris){
     if(m_zoneDefilableDonnees->contient(coord_souris))
         return m_tableauDonnee->testAffichageLigneSurvole(coordSourisElement(coord_souris));
     return m_tableauDonnee->testAffichageLigneSurvole(std::pair<int,int>());

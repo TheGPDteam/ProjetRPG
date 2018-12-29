@@ -25,7 +25,7 @@ ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur
     m_contenu->changerRectangle(rect);
 
     rect = initialiserRectangle(rectangle.x + rectangle.w - LARGEUR_BARRE_LATERALE, rectangle.y,
-                                         LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
+                                LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
     m_defilementHaut = new Sprite(SPRITES_PRINCIPAUX, rect, POSITION_HAUT);
 
     rect.y = rectangle.y + rectangle.h - LARGEUR_BARRE_LATERALE;
@@ -41,26 +41,22 @@ ZoneDefilable::~ZoneDefilable(){
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {
     SDL_Rect rect = m_contenu->rectangle();
-    if(m_fenetreGlissante.h >= rect.h)
-        m_contenu->afficher(surface);
-    else {
-        SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h, 12,
-                                                      0,0,0,0);
-        SDL_Rect r = {0,0,rect.w, rect.h};
+    SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h, 12,
+                                                  0,0,0,0);
+    SDL_Rect r = {0,0,rect.w, rect.h};
 
-        SDL_FillRect(horsEcran, &r, SDL_MapRGB(surface->format, m_couleur.r, m_couleur.g, m_couleur.b));
-        m_contenu->afficher(horsEcran);
-        SDL_BlitSurface(horsEcran,
-                        &m_fenetreGlissante,
-                        surface,
-                        &m_rectangle);
+    SDL_FillRect(horsEcran, &r, SDL_MapRGB(surface->format, m_couleur.r, m_couleur.g, m_couleur.b));
+    m_contenu->afficher(horsEcran);
+    SDL_BlitSurface(horsEcran, &m_fenetreGlissante, surface,&m_rectangle);
 
-        SDL_FreeSurface(horsEcran);
+    if(m_fenetreGlissante.h < rect.h){
         SDL_Rect pos = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
         SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 120, 120, 120));
         m_defilementBas->afficher(surface);
         m_defilementHaut->afficher(surface);
     }
+
+    SDL_FreeSurface(horsEcran);
 }
 
 void ZoneDefilable::redimensionner(SDL_Rect rectangle) {
@@ -79,7 +75,14 @@ void ZoneDefilable::clique() {
 
 
 SDL_Rect ZoneDefilable::zone() const {
-    return m_rectangle;
+    SDL_Rect rect = m_contenu->rectangle();
+    if(m_fenetreGlissante.h >= rect.h)
+        return m_rectangle;
+    else {
+        rect = m_rectangle;
+        rect.w -= LARGEUR_BARRE_LATERALE;
+        return rect;
+    }
 }
 
 void ZoneDefilable::defiler(bool haut){
@@ -97,27 +100,27 @@ void ZoneDefilable::defiler(bool haut){
 
 bool ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_souris){
     Bouton bBas(" ",m_defilementBas->rectangle(),m_controleur, nullptr);
-   if(bBas.contient(coord_souris)){
-    defiler(false);
-    return true;
-   }
+    if(bBas.contient(coord_souris)){
+        defiler(false);
+        return true;
+    }
 
-   Bouton bHaut(" ",m_defilementHaut->rectangle(),m_controleur, nullptr);
-   if(bHaut.contient(coord_souris)){
-    defiler(true);
-    return true;
-   }
-   return false;
+    Bouton bHaut(" ",m_defilementHaut->rectangle(),m_controleur, nullptr);
+    if(bHaut.contient(coord_souris)){
+        defiler(true);
+        return true;
+    }
+    return false;
 
-//    Uint8 *keystates = SDL_GetKeyState( nullptr );
+    //    Uint8 *keystates = SDL_GetKeyState( nullptr );
 
-//    //If up is pressed
-//    if( keystates[ SDLK_UP ] )
-//        defiler(true);
+    //    //If up is pressed
+    //    if( keystates[ SDLK_UP ] )
+    //        defiler(true);
 
-//    //If down is pressed
-//    if( keystates[ SDLK_DOWN ] )
-//        defiler(false);
+    //    //If down is pressed
+    //    if( keystates[ SDLK_DOWN ] )
+    //        defiler(false);
 }
 
 std::pair<int, int> ZoneDefilable::coordSourisElement(std::pair<int, int> &coord_sourisEcran){

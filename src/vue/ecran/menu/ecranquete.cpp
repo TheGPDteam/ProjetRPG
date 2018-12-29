@@ -150,7 +150,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
-                if(itr->first->testAffichageLigneSurvole(coord_souris))
+                if(itr->first->gestionAffichageLigneSurvole(coord_souris))
                     break;
             }
             break;
@@ -166,7 +166,7 @@ void EcranQuete::obtenirChangement(Observable &obj){
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
         Tableau * tab = itr->first->obtenirTableauDonnees();
         tab->vider();
-        itr->first->mettreAJourZoneDefilable();
+//        itr->first->mettreAJourZoneDefilable();
         if(itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
             for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
             {

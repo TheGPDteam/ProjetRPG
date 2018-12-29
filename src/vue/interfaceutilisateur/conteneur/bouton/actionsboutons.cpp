@@ -118,20 +118,23 @@ TypeEcran ActionsBoutons::boutonChoixJoueur() const
 }
 TypeEcran ActionsBoutons::boutonChasseJoueur() const
 {
-    m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeChasse());
+    Modele * m =  m_controleur->obtenirModele();
+    m->reinitialiserTemps();
+    m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeChasse());
     return TypeEcran::ChasseJoueur;
 }
 TypeEcran ActionsBoutons::boutonRecolteJoueur() const
 {
-    m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeRecolte());
+    Modele * m =  m_controleur->obtenirModele();
+    m->reinitialiserTemps();
+    m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeRecolte());
     return TypeEcran::RecolteJoueur;
 }
 TypeEcran ActionsBoutons::boutonCampementJoueur() const
 {
-    m_controleur->obtenirModele()->reinitialiserTemps();
-    m_controleur->obtenirModele()->obtenirJoueur()->definirEquipe(m_controleur->obtenirModele()->obtenirCampement()->obtenirEquipeCampement());
+    Modele * m =  m_controleur->obtenirModele();
+    m->reinitialiserTemps();
+    m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeCampement());
     return TypeEcran::RecolteJoueur;
 }
 
@@ -155,14 +158,16 @@ TypeEcran ActionsBoutons::boutonChoixNom() const
 }
 
 TypeEcran ActionsBoutons::boutonViderInventaire() {
-    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet()!=0) {
-        std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets();
+    Modele * m = m_controleur->obtenirModele();
+    Joueur * j = m->obtenirJoueur();
+    if(j->obtenirInventaire()->obtenirNombreObjet()!=0) {
+        std::vector<Objet*> objets = j->obtenirInventaire()->obtenirObjets();
         for (Objet* obj : objets) {
-            m_controleur->obtenirModele()->obtenirCampement()->ajouterObjet(obj);
-            m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->supprimerObjet(obj);
+            m->obtenirCampement()->ajouterObjet(obj);
+            j->obtenirInventaire()->supprimerObjet(obj);
         }
-        m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
-        m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
+        j->mettreAChange();
+        j->notifierTous();
     }
     return TypeEcran::Inventaire;
 }
@@ -193,11 +198,11 @@ TypeEcran ActionsBoutons::boutonCampement() {
 
 TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
     //CECI N'A RIEN A FAIRE DANS LA VUE, ON DOIT APPELER UNE FONCTION DU CONTROLEUR, QUI DOIT APPELER UNE FONCTION DU MODELE EFFECTUANT TOUT CELA
-    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirNombreObjet()!=0) {
-        std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->obtenirObjets();
+    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->obtenirNombreObjet()!=0) {
+        std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->obtenirObjets();
         for (Objet* obj : objets) {
             m_controleur->obtenirModele()->obtenirCampement()->ajouterObjet(obj);
-            m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur()->supprimerObjet(obj);
+            m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->supprimerObjet(obj);
         }
         m_controleur->obtenirModele()->obtenirJoueur()->mettreAChange();
         m_controleur->obtenirModele()->obtenirJoueur()->notifierTous();
@@ -218,7 +223,6 @@ TypeEcran ActionsBoutons::boutonListeObjet() {
 //!
 //! Note : temps de retard de la vue
 //!
-
 TypeEcran ActionsBoutons::boutonJeuPrincipalCampement()
 {
     m_controleur->obtenirModele()->obtenirCarte()->zoneActiveCampement();

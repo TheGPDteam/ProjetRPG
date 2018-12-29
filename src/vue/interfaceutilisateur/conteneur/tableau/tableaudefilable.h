@@ -30,8 +30,8 @@ public:
     Ligne * gestionEvenementClique(std::pair<int, int> &coord_souris);
     void trieDefault();
     Tableau * obtenirTableauDonnees();
-    bool testAffichageLigneSurvole(std::pair<int, int> coord_souris);
-    void mettreAJourZoneDefilable();
+    bool gestionAffichageLigneSurvole(std::pair<int, int> coord_souris);
+//    void mettreAJourZoneDefilable();
     std::pair<int, int> coordSourisElement(std::pair<int, int> &coord_sourisEcran);
     ~TableauDefilable() override;
 };

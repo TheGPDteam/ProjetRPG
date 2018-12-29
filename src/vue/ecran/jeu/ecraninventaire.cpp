@@ -39,7 +39,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
 
     m_tableau_objets = TableauDefilable::tableauObjet(m_rectangleHaut, m_controleur, "Inventaire", true);
 
-    obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur());
+    obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire());
 
 }
 
@@ -109,7 +109,7 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
                     case SDL_MOUSEMOTION:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
-            m_tableau_objets->testAffichageLigneSurvole(coord_souris);
+            m_tableau_objets->gestionAffichageLigneSurvole(coord_souris);
             break;
 
         default:
@@ -148,10 +148,9 @@ EcranInventaire::~EcranInventaire()
 
 void EcranInventaire::obtenirChangement(Observable &obj)
 {
-    Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur();
+    Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire();
     definirEtatQuantite(inventaire);
     m_tableau_objets->obtenirTableauDonnees()->vider();
-    m_tableau_objets->mettreAJourZoneDefilable();
     for(auto o : inventaire->obtenirObjets())
     {
         m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);

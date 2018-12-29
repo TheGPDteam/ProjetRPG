@@ -99,9 +99,9 @@ void Modele::deplacement(Direction dir)
         pair<int, int> position = m_joueur.obtenirPosition();
         if(zoneActive->obtenirObjet(position) != nullptr)
         {
-            if(!m_joueur.obtenirInventaireJoueur()->estPlein()){
+            if(!m_joueur.obtenirInventaire()->estPlein()){
                 Objet * objet = zoneActive->obtenirObjet(position);
-                m_joueur.obtenirInventaireJoueur()->ajouterObjet(objet);
+                m_joueur.obtenirInventaire()->ajouterObjet(objet);
 
                 TypeObjet to = objet->obtenirType();
                 if(to == TypeObjet::Vivre){
@@ -454,10 +454,10 @@ void Modele::finJournee() {
     //Consommation de vivres
 
     //Transfert de l'inventaire du joueur vers le campement
-    for (Objet* o : m_joueur.obtenirInventaireJoueur()->obtenirObjets())
+    for (Objet* o : m_joueur.obtenirInventaire()->obtenirObjets())
     {
         m_campement.ajouterObjet(o);
-        m_joueur.obtenirInventaireJoueur()->supprimerObjet(o);
+        m_joueur.obtenirInventaire()->supprimerObjet(o);
     }
 
     //On vérifie que l'on a bien plus de vivres dans le camp que de besoins
