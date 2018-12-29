@@ -3,7 +3,7 @@
 
 #include <string>
 #include <functional>
-#include "controleur/controleur.h"
+#include "controleur.h"
 #include <SDL/SDL.h>
 
 //const std::string DEFAUT_SON_CLIC = "../rsc/audio/default_clic.wav";

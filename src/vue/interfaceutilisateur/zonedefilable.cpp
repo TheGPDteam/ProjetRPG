@@ -2,6 +2,7 @@
 
 #include "outilsvue.h"
 #include "cliquable.h"
+#include "bouton.h"
 #include "chargementfeuilledesprite.h"
 #include <SDL/SDL.h>
 const int LARGEUR_BARRE_LATERALE = 10;
@@ -92,15 +93,37 @@ void ZoneDefilable::defiler(bool haut){
     }
 }
 
-void ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_souris){
 
-    Uint8 *keystates = SDL_GetKeyState( nullptr );
 
-    //If up is pressed
-    if( keystates[ SDLK_UP ] )
-        defiler(true);
+bool ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_souris){
+    Bouton bBas(" ",m_defilementBas->rectangle(),m_controleur, nullptr);
+   if(bBas.contient(coord_souris)){
+    defiler(false);
+    return true;
+   }
 
-    //If down is pressed
-    if( keystates[ SDLK_DOWN ] )
-        defiler(false);
+   Bouton bHaut(" ",m_defilementHaut->rectangle(),m_controleur, nullptr);
+   if(bHaut.contient(coord_souris)){
+    defiler(true);
+    return true;
+   }
+   return false;
+
+//    Uint8 *keystates = SDL_GetKeyState( nullptr );
+
+//    //If up is pressed
+//    if( keystates[ SDLK_UP ] )
+//        defiler(true);
+
+//    //If down is pressed
+//    if( keystates[ SDLK_DOWN ] )
+//        defiler(false);
+}
+
+std::pair<int, int> ZoneDefilable::coordSourisElement(std::pair<int, int> &coord_sourisEcran){
+    int x = coord_sourisEcran.first;
+    int y = coord_sourisEcran.second;
+    x -= rectangle().x;
+    y -= rectangle().y - m_fenetreGlissante.y;
+    return std::pair<int, int>(x,y);
 }

@@ -100,18 +100,18 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
         case SDL_MOUSEBUTTONUP:
             if(evenements.button.button == SDL_BUTTON_LEFT)
             {
+                m_tableau_objets->gestionEvenementClique(coord_souris);
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
             }
             break;
-            //        case SDL_KEYDOWN:
-            //            if(evenements.key.keysym.sym == SDLK_UP){
-            //                m_zoneDefilable->defiler(true);
-            //            }
-            //            else if(evenements.key.keysym.sym == SDLK_DOWN)
-            //                m_zoneDefilable->defiler(false);
-            //            break;
+                    case SDL_MOUSEMOTION:
+            coord_souris.first = evenements.button.x;
+            coord_souris.second = evenements.button.y;
+            m_tableau_objets->testAffichageLigneSurvole(coord_souris);
+            break;
+
         default:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
@@ -150,9 +150,8 @@ void EcranInventaire::obtenirChangement(Observable &obj)
 {
     Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaireJoueur();
     definirEtatQuantite(inventaire);
-//    m_tableau_objets->mettreAJourZoneDefilable();
-
     m_tableau_objets->obtenirTableauDonnees()->vider();
+    m_tableau_objets->mettreAJourZoneDefilable();
     for(auto o : inventaire->obtenirObjets())
     {
         m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);

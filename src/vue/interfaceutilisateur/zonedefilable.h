@@ -8,7 +8,7 @@
 class ZoneDefilable : public Cliquable, public Affichable
 {
 private:
-    const float VITESSE_DEFILEMENT = 0.1;
+    const float VITESSE_DEFILEMENT = 0.17;
     SDL_Rect m_fenetreGlissante;
     Affichable * m_contenu;
     SDL_Color m_couleur;
@@ -22,7 +22,8 @@ public:
     virtual ~ZoneDefilable() override;
     void afficher(SDL_Surface *surface) override;
     void redimensionner(SDL_Rect rectangle) override;
-    void gestionEvenementDefilableClique(std::pair<int, int> &coord_souris);
+    bool gestionEvenementDefilableClique(std::pair<int, int> &coord_souris);
+    std::pair<int, int> coordSourisElement(std::pair<int, int> &coord_sourisEcran);
     void clique() override;
     void defiler(bool haut);
 };

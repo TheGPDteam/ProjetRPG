@@ -12,7 +12,7 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
     EcranGeneral{controleur},
 //    m_nomFenetre("Equipe", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
 //                 std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
-//    m_tableau_equipe(Tableau::tableauHumain(m_ecran, 32, controleur,"Equipe", false)),
+    m_tableau_equipe(TableauDefilable::tableauHumain(m_ecran, controleur,"Equipe", false)),
     m_rectangleHaut {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT,  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>(HEIGHT_FENETRE_PRINCIPALE - 250)},
     //    m_rectangleNomEquipe  {COORD_X_RECTANGLE_HAUT, COORD_Y_RECTANGLE_HAUT, WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2, HEIGHT_FENETRE_PRINCIPALE - 250},,
     m_rectangleBas {COORD_X_RECTANGLE_HAUT, 10 + (50 + HEIGHT_FENETRE_PRINCIPALE - 250),  static_cast<Uint16>(WIDTH_FENETRE_PRINCIPALE - COORD_X_RECTANGLE_HAUT * 2),  static_cast<Uint16>((HEIGHT_FENETRE_PRINCIPALE - (HEIGHT_FENETRE_PRINCIPALE - 250)) - 80)},
@@ -31,10 +31,7 @@ EcranEquipe::EcranEquipe(Controleur* controleur) :
     SDL_Rect rect = {WIDTH_FENETRE_PRINCIPALE - 290, m_rectangleBas.y + 10, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(rect.x+20,rect.y+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonJeuPrincipal);
-    for(auto p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage())
-    {
-        m_tableau_equipe->ajouterLigne(dynamic_cast<Humain*> (p));
-    }
+    obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe());
 }
 
 
@@ -135,6 +132,9 @@ EcranEquipe::~EcranEquipe()
 
 
 void EcranEquipe::obtenirChangement(Observable &obj){
-
-    //     Equipe* equipe = dynamic_cast<Equipe *>(&obj);
+    m_tableau_equipe->obtenirTableauDonnees()->vider();
+    m_tableau_equipe->mettreAJourZoneDefilable();
+    for( Personnage * p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage()){
+        m_tableau_equipe->obtenirTableauDonnees()->ajouterLigne(dynamic_cast<Humain *>(p));
+    }
 }

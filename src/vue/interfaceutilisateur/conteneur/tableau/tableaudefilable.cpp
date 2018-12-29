@@ -11,8 +11,8 @@ TableauDefilable::TableauDefilable(SDL_Rect rect, Controleur *controleur,float h
 void
 TableauDefilable::afficher(SDL_Surface *surface){
     m_tableauEntete->afficher(surface);
-    m_tableauDonnee->afficher(surface);
-//    m_zoneDefilableDonnees->afficher(surface);
+    //    m_tableauDonnee->afficher(surface);
+    m_zoneDefilableDonnees->afficher(surface);
 }
 
 TableauDefilable * TableauDefilable::tableauHumain(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, float hauteurLigne){
@@ -86,10 +86,18 @@ TableauDefilable::redimensionner(SDL_Rect m_rectangle){
 
 }
 
+//resout le probleme d'affichage de la zone mais ne doit pas etre definitif
 void TableauDefilable::mettreAJourZoneDefilable(){
     m_tableauDonnee->redimensionner(m_rectDonnees);
-        if(m_zoneDefilableDonnees != nullptr)
-            m_zoneDefilableDonnees = m_tableauDonnee->obtenirZoneDefilableTableau(m_rectDonnees);
+    if(m_zoneDefilableDonnees != nullptr)
+        m_zoneDefilableDonnees = m_tableauDonnee->obtenirZoneDefilableTableau(m_rectDonnees);
+
+}
+
+bool TableauDefilable::testAffichageLigneSurvole(std::pair<int, int> coord_souris){
+    if(m_zoneDefilableDonnees->contient(coord_souris))
+        return m_tableauDonnee->testAffichageLigneSurvole(coordSourisElement(coord_souris));
+    return m_tableauDonnee->testAffichageLigneSurvole(std::pair<int,int>());
 
 }
 
@@ -98,12 +106,13 @@ TableauDefilable::obtenirTableauDonnees(){
     return m_tableauDonnee;
 }
 //!
-//! \brief TableauDefilable::gestionEvenement
+//! \brief gestionEvenement lors qu'il y un clique de souris
 //! \param coord_souris
 //! \return une ligne survolé ou nullprt si pas de ligne survolé
 //!
 Ligne * TableauDefilable::gestionEvenementClique(std::pair<int, int> &coord_souris){
-    m_zoneDefilableDonnees->gestionEvenementDefilableClique(coord_souris);
+    if(m_zoneDefilableDonnees->gestionEvenementDefilableClique(coord_souris)) return nullptr;
+    //test tri
     Ligne * lig = m_tableauEntete->ligneSurvole(coord_souris);
     if(lig != nullptr){
         if(lig->m_idLigne == 2){ // test si c'est bien l'entete
@@ -111,7 +120,7 @@ Ligne * TableauDefilable::gestionEvenementClique(std::pair<int, int> &coord_sour
             return nullptr;
         }
     }
-    return m_tableauDonnee->ligneSurvole(coord_souris);
+    return m_tableauDonnee->ligneSurvole(m_zoneDefilableDonnees->coordSourisElement(coord_souris));
 }
 //!
 //! \brief permet de lancer le tri par default sur le tableau
@@ -123,6 +132,10 @@ TableauDefilable::trieDefault(){
     Ligne * lig= m_tableauEntete->obtenirLigne(1);
     if(!m_tableauDonnee->trie(lig->obtenirCase(0)))
         m_tableauDonnee->trie(lig->obtenirCase(1));
+}
+
+std::pair<int, int> TableauDefilable::coordSourisElement(std::pair<int, int> &coord_sourisEcran){
+    return m_zoneDefilableDonnees->coordSourisElement(coord_sourisEcran);
 }
 
 TableauDefilable::~TableauDefilable(){
