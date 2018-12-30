@@ -12,7 +12,6 @@ private :
     float m_hauteurLigne;
     bool m_avecImage;
     std::vector<Ligne*> m_lignes;
-    int m_nbLignesMax;
     Controleur *m_controleur;
     Ligne * m_lignePrecedemmentSurvoler = nullptr;
     void creerLigne(std::vector<std::string> ligne);
@@ -34,6 +33,7 @@ public:
     void ajouterLigne(Objet* obj);
     void ajouterLigne(Campement *c);
     bool trie(Case * c);
+    int obtenirNbLignes();
     Ligne * obtenirLigne(int numLigne);
     bool testAffichageLigneSurvole(std::pair<int, int> coord_souris);
     ZoneTexte *creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportement = COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE alignement = ALIGNEMENT_TEXTE::CENTRE);

@@ -143,8 +143,10 @@ bool DictionnaireDeBoutons::boutonValiderEntree(std::string nomBouton,SDL_Event 
             SDL_Rect rectBouton = obtenirBouton(nomBouton)->rectangle();
             coord_souris.first =  rectBouton.x+30;
             coord_souris.second = rectBouton.y+30;
+            return true;
         }
     }
+    return false;
 }
 
 //!

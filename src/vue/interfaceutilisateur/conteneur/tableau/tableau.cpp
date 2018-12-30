@@ -4,7 +4,7 @@
 
 
 Tableau::Tableau(SDL_Rect rect, Controleur *controleur, bool avecImage, float hauteurLigne)
-    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_controleur{controleur}, m_avecImage(avecImage)
+    :Affichable{rect}, m_hauteurLigne {hauteurLigne}, m_avecImage(avecImage), m_controleur{controleur}
 {
     m_rectangle.h=0;
 }
@@ -151,25 +151,6 @@ Tableau::trie(Case * c){
 }
 
 //!
-//! \brief Tableau::testTri
-//! \param l la ligne ou c'est effectué le clique
-//! \param coord_souris
-//! \return true si le trie c'est effectué (clique sur l'entete) , false sinon
-//! \author Lacoste Dorian
-//! \date 16/12/18
-//!
-//bool
-//Tableau::testTri(Ligne * l, std::pair<int, int> coord_souris){
-////    if(l == m_enTete){
-////        this->trie(m_enTete->caseClique(coord_souris));
-////        return true;
-////    }
-//    return  false;
-//}
-
-
-
-//!
 //! \brief ajoute une ligne contenant des affichables dans le tableau
 //! \param affichables
 //! \author Lacoste Dorian
@@ -287,7 +268,7 @@ void Tableau::ajouterLigne(Campement *c)
 //! \date 15/11/2018
 void
 Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
-    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (m_lignes.size()%2 ==0) ? 1:2, m_lignes.size()+1, m_avecImage);
+    Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (obtenirNbLignes()%2 ==0) ? 1:2, obtenirNbLignes()+1, m_avecImage);
     m_lignes.push_back(l);
     m_rectangle.h+=l->rectangle().h;
 }
@@ -300,7 +281,7 @@ Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
 //!
 SDL_Rect
 Tableau::creerRectLigne(){
-    return creerRectLigne(m_lignes.size());
+    return creerRectLigne(obtenirNbLignes());
 }
 SDL_Rect
 Tableau::creerRectLigne(int numLigne){
@@ -323,4 +304,8 @@ void Tableau::vider(){
     m_lignes.clear();
     m_rectangle.h=0;
 
+}
+int
+Tableau::obtenirNbLignes(){
+    return m_lignes.size();
 }

@@ -12,9 +12,13 @@ Temps::Temps()
     m_tempsPause = time(nullptr);
 }
 
-int Temps::obtenirTempsRestant() const
+int Temps::obtenirTempsRestantJournee() const
 {
-    return DUREE_JOURNEE-difftime(time(nullptr), m_tempsDebutjournee+m_tempsDureePause);
+    return DUREE_JOURNEE-obtenirTemps();
+}
+
+int Temps::obtenirTemps() const{
+    return difftime(time(nullptr), m_tempsDebutjournee+m_tempsDureePause);
 }
 
 void Temps::mettreEnPause()

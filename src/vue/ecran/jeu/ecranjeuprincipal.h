@@ -1,11 +1,12 @@
 #ifndef ECRANJEUPRINCIPAL_H
 #define ECRANJEUPRINCIPAL_H
 
-#include "../ecrangeneral.h"
-#include "modele/environnement/carte/carte.h"
-#include "vue/interfaceutilisateur/conteneur/bouton/bouton.h"
-#include "save/sauvegarde.h"
-
+#include "ecrangeneral.h"
+#include "carte.h"
+#include "bouton.h"
+#include "sauvegarde.h"
+#include "tableaudefilable.h"
+#include "temps.h"
 
 class EcranJeuPrincipal : public EcranGeneral
 {
@@ -18,7 +19,7 @@ private:
 
     Sprite* m_spriteJoueur;
     std::array<std::array<Sprite*,TAILLE_CARTE_AFFICHAGE>,TAILLE_CARTE_AFFICHAGE> m_spritesCarte;
-    std::set<std::pair<short,short> > m_spriteObjets;
+    std::set<Sprite*> m_spriteObjets;
     Carte* m_carte;
 
     TexteSDL m_objectif;
@@ -32,8 +33,7 @@ public:
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;
-    ~EcranJeuPrincipal();
-
+    ~EcranJeuPrincipal() override;
     void obtenirChangement(Observable &obj) override;
     void definirCarte(Carte* carte);
 };

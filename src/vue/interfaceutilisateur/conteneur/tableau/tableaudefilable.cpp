@@ -37,6 +37,13 @@ TableauDefilable * TableauDefilable::creationTableauDefilableDefaut(SDL_Rect rec
     return tabDef;
 }
 
+TableauDefilable * TableauDefilable::tableau(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, std::vector<std::string> nomColoneEnTete, float hauteurLigne){
+    TableauDefilable * tabDef = creationTableauDefilableDefaut(rect,controleur,titre,aUneImage,hauteurLigne);
+    if(nomColoneEnTete.size() != 0)
+        tabDef->m_tableauEntete->ajouterLigne(nomColoneEnTete);
+    return tabDef;
+}
+
 void
 TableauDefilable::ajoutertitre(std::string titre){
     std::vector<std::string> tmp;
@@ -71,7 +78,7 @@ TableauDefilable::ajouterEnTeteObjet(TypeObjet typeObjet){
 void
 TableauDefilable::redimensionner(SDL_Rect m_rectangle){
     this->m_rectangle = m_rectangle;
-    float hauteurEnTete = this->m_hauteurLigne*2;
+    float hauteurEnTete = this->m_hauteurLigne* 2;//m_tableauEntete->obtenirNbLignes();
 
     SDL_Rect rectEntete = m_rectangle;
     rectEntete.h = hauteurEnTete;
@@ -131,5 +138,5 @@ TableauDefilable::~TableauDefilable(){
     delete m_tableauDonnee;
     delete m_tableauEntete;
     delete m_zoneDefilableDonnees;
-//    delete m_controleur;
+    //    delete m_controleur;
 }

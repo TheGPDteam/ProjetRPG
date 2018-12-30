@@ -27,6 +27,7 @@ public:
     void redimensionner(SDL_Rect m_rectangle) override;
     static TableauDefilable * tableauHumain(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, float hauteurLigne=32);
     static TableauDefilable * tableauObjet(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, TypeObjet typeObjet=TypeObjet::Objet, float hauteurLigne=64);
+    static TableauDefilable * tableau(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, std::vector<std::string> nomColoneEnTete = std::vector<std::string>(), float hauteurLigne=32);
     Ligne * gestionEvenementClique(std::pair<int, int> &coord_souris);
     void trieDefault();
     Tableau * obtenirTableauDonnees();

@@ -15,9 +15,9 @@ private:
     time_t m_tempsPause;
 
 public:
-
     Temps();
-    int obtenirTempsRestant() const;
+    int obtenirTempsRestantJournee() const;
+    int obtenirTemps() const;
     void mettreEnPause();
     void reprendre();
 

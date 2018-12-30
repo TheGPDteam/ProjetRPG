@@ -1,7 +1,7 @@
 #include "ecranjeuprincipal.h"
-#include "modele/joueur.h"
-#include "modele/environnement/carte/tuile.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "joueur.h"
+#include "tuile.h"
+#include "constantesbouton.h"
 #include "utility"
 #include <string>
 #include <iostream>
@@ -27,6 +27,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
 {
+
     //* AJOUT DES BOUTONS *//
 
 
@@ -35,7 +36,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
 
-    SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
+    const SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(coordB2.first+20,coordB2.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
 
@@ -53,6 +54,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Aller au campement", POLICE_COLLEGED, 16, coordB3, tailleB, std::make_pair(coordB3.first+5,coordB3.second+15)},&ActionsBoutons::boutonCampement);;
     ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB4, tailleB, std::make_pair(coordB4.first+30,coordB4.second+15)},&ActionsBoutons::boutonFinirQuete);;
     */
+
+
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12;i++)
         for(int j = 0;j< 12;j++)
@@ -78,31 +81,26 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         for(auto x : c)
             x->afficher(fenetre_affichage);
 
-    //Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0,0,127,63}, SDL_Rect{256,192,63,63}};
+    for(auto spriteObjet : m_spriteObjets)
+        spriteObjet->afficher(fenetre_affichage);
 
-    for(auto p : m_spriteObjets){
-        Sprite valise = Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(p.first*63),(short int)(p.second*63),127,63}, SDL_Rect{256,192,63,63}};
-        valise.afficher(fenetre_affichage);
-    }
     Modele * m = m_controleur->obtenirModele();
     Quete * q = m->obtenirJoueur()->obtenirQuete();
-    if (q->obtenirValeurAvancement() < q->obtenirValeurObjectif()) {
+    if (q->obtenirValeurAvancement() < q->obtenirValeurObjectif())
         m_objectif.mettreAJourTexte("Objectif: "+std::to_string(q->obtenirValeurAvancement())+" sur "+std::to_string(q->obtenirValeurObjectif()));
-    }
     else
-    {
         m_objectif.mettreAJourTexte("Objectif atteint");
-    }
+
     m_nomJoueur.mettreAJourTexte(m->obtenirJoueur()->obtenirNom());
-    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m->obtenirTemps()->obtenirTempsRestant()/60)+"min"+std::to_string(m->obtenirTemps()->obtenirTempsRestant()%60));
+    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()/60)+"min"+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()%60));
     m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
     m_tempsRestant.afficher(fenetre_affichage);
 
+
     //A SUPPRIMER
     afficherBoutons(coord_souris, fenetre_affichage);
-
 }
 
 
@@ -125,19 +123,19 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
     Uint8 *keystates = SDL_GetKeyState( nullptr );
 
     //If up is pressed
-    if( keystates[ SDLK_UP ] )
+    if( keystates[ SDLK_UP ] ||  keystates[ SDLK_z ])
         controleur->deplacementJoueur(Nord);
 
     //If down is pressed
-    if( keystates[ SDLK_DOWN ] )
+    if( keystates[ SDLK_DOWN ] ||  keystates[ SDLK_s ] )
         controleur->deplacementJoueur(Sud);
 
     //If left is pressed
-    if( keystates[ SDLK_LEFT ] )
+    if( keystates[ SDLK_LEFT ] ||  keystates[ SDLK_q ] )
         controleur->deplacementJoueur(Ouest);
 
     //If right is pressed
-    if( keystates[ SDLK_RIGHT ] )
+    if( keystates[ SDLK_RIGHT ] ||  keystates[ SDLK_d ] )
         controleur->deplacementJoueur(Est);
 
 
@@ -175,7 +173,6 @@ EcranJeuPrincipal::~EcranJeuPrincipal()
         for(int j = 0;j < 10;j++)
             delete m_spritesCarte[i][j];
 }
-
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
@@ -294,8 +291,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                         }
                     }
 
-                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
-                        m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
+                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
+                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
+                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
+                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*63),(short int)(y*63),127,63}, SDL_Rect{256,192,63,63}});
+                    }
                 }
             }
         }
@@ -306,8 +306,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
             {
                 if ( j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
                     std::pair<int, int> temp(i,j);
-                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
-                        m_spriteObjets.insert(std::make_pair(i-posX-DECALAGE_CARTE_X_INFERIEUR,j-posY-DECALAGE_CARTE_Y_INFERIEUR));
+                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
+                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
+                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
+                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*63),(short int)(y*63),127,63}, SDL_Rect{256,192,63,63}});
+                    }
                 }
             }
         }
