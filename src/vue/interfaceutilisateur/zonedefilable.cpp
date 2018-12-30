@@ -34,9 +34,12 @@ ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur
 
 
 ZoneDefilable::~ZoneDefilable(){
-    delete m_contenu;
-    delete m_defilementBas;
-    delete m_defilementHaut;
+    if(m_contenu != nullptr)
+//        delete m_contenu;
+    if(m_defilementBas != nullptr)
+        delete m_defilementBas;
+    if(m_defilementHaut != nullptr)
+        delete m_defilementHaut;
 }
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {

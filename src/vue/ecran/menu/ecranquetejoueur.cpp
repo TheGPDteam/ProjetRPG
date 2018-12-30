@@ -66,6 +66,7 @@ void EcranQueteJoueur::gestionDesEvenements(Controleur *controleur, bool &quitte
             break;
 
         default:
+            if(DictionnaireDeBoutons::boutonValiderEntree("Recolte",evenements,clique_souris,coord_souris)) break;
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;

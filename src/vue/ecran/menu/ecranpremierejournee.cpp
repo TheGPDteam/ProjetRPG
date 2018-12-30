@@ -12,15 +12,15 @@ EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
                                             SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-4*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE},
                                             recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
-   m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
-     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
-     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
-     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
+    std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
+    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
-     ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
-                                            true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
-     recupererHistoire();
+    ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
+                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
+    recupererHistoire();
     //A SUPPRIMER
     /*
     ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
@@ -94,17 +94,8 @@ void EcranPremiereJournee::gestionDesEvenements(Controleur *controleur, bool &qu
                 coord_souris.second = evenements.button.y;
             }
             break;
-//            case SDL_MOUSEWHEEL:
-//            if(event.wheel.y > 0) // scroll up
-//            {
-//                 // Pull up code here!
-//            }
-//            else if(event.wheel.y < 0) // scroll down
-//            {
-//                 // Pull down code here!
-//            }
-
         default:
+            if(DictionnaireDeBoutons::boutonValiderEntree("Suivant",evenements,clique_souris,coord_souris)) break;
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;

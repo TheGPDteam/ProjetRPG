@@ -136,8 +136,8 @@ void EcranChoixPersonnage::gestionDesEvenements(Controleur *controleur, bool &qu
                 coord_souris.second = evenements.button.y;
             }
             break;
-
         default:
+            if(DictionnaireDeBoutons::boutonValiderEntree("Oui",evenements,clique_souris,coord_souris)) break;
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;

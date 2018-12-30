@@ -131,5 +131,5 @@ TableauDefilable::~TableauDefilable(){
     delete m_tableauDonnee;
     delete m_tableauEntete;
     delete m_zoneDefilableDonnees;
-    delete m_controleur;
+//    delete m_controleur;
 }

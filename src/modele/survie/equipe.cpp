@@ -154,3 +154,9 @@ void Equipe::charger(std::string &donnees)
         }
     }
 }
+
+Equipe::~Equipe(){
+    for(Personnage * p : m_personnages){
+        delete p;
+    }
+}

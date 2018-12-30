@@ -32,6 +32,7 @@ public:
     }
     std::string serialiser() const;
     void charger(std::__cxx11::string &donnees);
+    ~Equipe();
 };
 
 #endif

@@ -23,7 +23,8 @@ protected:
 
 public:
     DictionnaireDeBoutons(Controleur *controleur);
-
+    Bouton * obtenirBouton(std::string nomBouton);
+    bool boutonValiderEntree(std::string nomBouton,SDL_Event evenement,bool &clique_souris, std::pair<int, int> &coord_souris);
     TypeEcran verificationCliqueSourisSurBoutons(const std::pair<int, int> coord_souris, TypeEcran type_ecran_courant);
 //    void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);
 

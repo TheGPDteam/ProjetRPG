@@ -22,12 +22,12 @@ private:
 public:
 
     Bouton(const std::string texte,
-            SDL_Rect rectangle,
-            Controleur * controleur,
-            void *action,
-            const bool bouton_cliquable = true,
-            //const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
-            const std::string police = "Defaut"
+           SDL_Rect rectangle,
+           Controleur * controleur,
+           void *action,
+           const bool bouton_cliquable = true,
+           //const std::pair<float, float> coef_coord_texte = std::make_pair(0.5,0.5),
+           const std::string police = "Defaut"
             );
 
     ~Bouton() override;
@@ -40,8 +40,9 @@ public:
     void redimensionner(SDL_Rect rect) override;
 
     //Accés variables
+    std::string obtenirTexte();
 
-//    bool estCliquable();
+    //    bool estCliquable();
 
     void definirCliquable(bool actif) override;
 

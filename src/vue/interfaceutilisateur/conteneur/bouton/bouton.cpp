@@ -99,3 +99,7 @@ void Bouton::definirCliquable(bool actif){
 void Bouton::redimensionner(SDL_Rect m_rectangle){
     this->m_rectangle = m_rectangle;
 }
+
+std::string Bouton::obtenirTexte(){
+    return m_texteBouton->obtenirTexte();
+}

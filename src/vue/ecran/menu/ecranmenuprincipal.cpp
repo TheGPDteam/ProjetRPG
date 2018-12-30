@@ -1,6 +1,6 @@
 #include "ecranmenuprincipal.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
-#include "../../outilsvue.h"
+#include "constantesbouton.h"
+#include "outilsvue.h"
 
 //!
 //! \brief Constructeur par défaut de l'écran de menu principal
@@ -81,12 +81,11 @@ void EcranMenuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quit
                 coord_souris.second = evenements.button.y;
             }
             break;
-
         default:
+            if(DictionnaireDeBoutons::boutonValiderEntree("Nouvelle Partie",evenements,clique_souris,coord_souris)) break;
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;
-
         }
     }
 }

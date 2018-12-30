@@ -108,3 +108,4 @@ std::string Personnage::serialiser() const
 {
     return {};
 }
+

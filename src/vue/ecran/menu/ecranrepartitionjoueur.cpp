@@ -23,29 +23,29 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
     //                          std::make_pair(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
     SDL_Rect rect = {m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 , m_rectangleFichePersonnage.y + HEIGHT_BOUTON_NORMAL - 20,
                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_retour = new Bouton("Retour", rect, NULL, nullptr,
+    m_retour = new Bouton("Retour", rect, m_controleur, nullptr,
                           true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
     SDL_Rect rect2 = {m_rectangleFichePersonnage.x + 60 + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_recolte = new Bouton("Recolte", rect2, NULL, nullptr,
+    m_recolte = new Bouton("Recolte", rect2, m_controleur, nullptr,
                            true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
 
     SDL_Rect rect3 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 50), m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_chasse = new Bouton("Chasse", rect3, NULL, nullptr,
+    m_chasse = new Bouton("Chasse", rect3, m_controleur, nullptr,
                           true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
 
 
     SDL_Rect rect4 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_campement = new Bouton("Campement", rect4, NULL, nullptr,
+    m_campement = new Bouton("Campement", rect4, m_controleur, nullptr,
                              m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale().partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
-    ajoutBoutonDansMapDeBoutons(m_retour, NULL);
-    ajoutBoutonDansMapDeBoutons(m_recolte, NULL);
-    ajoutBoutonDansMapDeBoutons(m_chasse, NULL);
-    ajoutBoutonDansMapDeBoutons(m_campement, NULL);
+    ajoutBoutonDansMapDeBoutons(m_retour, nullptr);
+    ajoutBoutonDansMapDeBoutons(m_recolte, nullptr);
+    ajoutBoutonDansMapDeBoutons(m_chasse, nullptr);
+    ajoutBoutonDansMapDeBoutons(m_campement, nullptr);
     m_zoneNomPersonnage = new TexteSDL("Nom : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
     m_zonePrenomPersonnage = new TexteSDL("Prenom : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
 
@@ -113,7 +113,7 @@ void EcranRepartitionJoueur::definirHumain(Humain * h){
 
     m_etatAfficher =true;
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
-    Equipe *equipeArriver  = c->obtenirEquipePersonnage(h);
+    Equipe *equipeArriver = c->obtenirEquipePersonnage(h);
     remiseAZeroBoutons();
     m_chasse->definirCliquable(equipeArriver != c->obtenirEquipeChasse());
     m_recolte->definirCliquable(equipeArriver != c->obtenirEquipeRecolte());
@@ -129,7 +129,8 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
         switch(evenements.type)
         {
         case SDL_QUIT:
-            SDL_Quit();
+
+//            SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:

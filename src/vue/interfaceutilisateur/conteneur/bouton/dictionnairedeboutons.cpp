@@ -127,6 +127,26 @@ void DictionnaireDeBoutons::afficherBoutons(const std::pair<int, int> coord_sour
 }
 
 
+Bouton * DictionnaireDeBoutons::obtenirBouton(std::string nomBouton){
+    for(auto itB = m_mapDeBoutons.begin(); itB != m_mapDeBoutons.end(); ++itB){
+        if(itB->first->obtenirTexte() == nomBouton)
+            return itB->first;
+    }
+    return nullptr;
+}
+
+bool DictionnaireDeBoutons::boutonValiderEntree(std::string nomBouton,SDL_Event evenement, bool &clique_souris, std::pair<int, int> &coord_souris){
+    if( evenement.type == SDL_KEYDOWN){
+        if((std::string)SDL_GetKeyName(evenement.key.keysym.sym) == "return") { // Entree
+            //On valide en simulant un clic sur bouton
+            clique_souris = true;
+            SDL_Rect rectBouton = obtenirBouton(nomBouton)->rectangle();
+            coord_souris.first =  rectBouton.x+30;
+            coord_souris.second = rectBouton.y+30;
+        }
+    }
+}
+
 //!
 //! \brief Destructeur
 //! \author pgutierrez

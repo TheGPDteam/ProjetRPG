@@ -38,27 +38,6 @@ EcranQuete::EcranQuete(Controleur *controleur) :
     m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauCampement, c->obtenirEquipeCampement()));
 
     obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur());
-//    Tableau * tabNonAffecter = m_tableauNonAffectes->obtenirTableauDonnees();
-//    for (Humain *h : c->obtenirNonAttribuees())
-//    {
-//        tabNonAffecter->ajouterLigne(h);
-//    }
-//    m_tableauNonAffectes->trieDefault();
-//    Tableau * tabRecolte = m_tableauRecolte->obtenirTableauDonnees();
-//    for (Personnage *p : c->obtenirEquipeRecolte()->obtenirListePersonnage())
-//    {
-//        tabRecolte->ajouterLigne(dynamic_cast <Humain *> (p));
-//    }
-//    Tableau * tabChasse = m_tableauRecolte->obtenirTableauDonnees();
-//    for (Personnage *p : c->obtenirEquipeChasse()->obtenirListePersonnage())
-//    {
-//        tabChasse->ajouterLigne(dynamic_cast <Humain *> (p));
-//    }
-//    Tableau * tabCampement = m_tableauRecolte->obtenirTableauDonnees();
-//    for (Personnage *p : c->obtenirEquipeCampement()->obtenirListePersonnage())
-//    {
-//        tabCampement->ajouterLigne(dynamic_cast <Humain *> (p));
-//    }
 
     m_ecranRepartitionJoueur = new EcranRepartitionJoueur(m_controleur);
 
@@ -155,6 +134,9 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             }
             break;
         default:
+            if(DictionnaireDeBoutons::boutonValiderEntree("Votre Quete",evenements,clique_souris,coord_souris)) break;
+            coord_souris.first = evenements.button.x;
+            coord_souris.second = evenements.button.y;
             break;
 
         }
@@ -166,7 +148,6 @@ void EcranQuete::obtenirChangement(Observable &obj){
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
         Tableau * tab = itr->first->obtenirTableauDonnees();
         tab->vider();
-//        itr->first->mettreAJourZoneDefilable();
         if(itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
             for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
             {
