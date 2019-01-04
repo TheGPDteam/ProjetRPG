@@ -131,8 +131,8 @@ EcranEquipe::~EcranEquipe()
 
 
 void EcranEquipe::obtenirChangement(Observable &obj){
-    m_tableau_equipe->obtenirTableauDonnees()->vider();
+    m_tableau_equipe->vider();
     for(Personnage * p : m_controleur->obtenirModele()->obtenirJoueur()->obtenirEquipe()->obtenirListePersonnage()){
-        m_tableau_equipe->obtenirTableauDonnees()->ajouterLigne(dynamic_cast<Humain *>(p));
+        m_tableau_equipe->ajouterLigne(dynamic_cast<Humain *>(p));
     }
 }

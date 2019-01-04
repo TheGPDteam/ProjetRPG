@@ -146,7 +146,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
 void EcranQuete::obtenirChangement(Observable &obj){
 
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
-        Tableau * tab = itr->first->obtenirTableauDonnees();
+        TableauDefilable * tab = itr->first;
         tab->vider();
         if(itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
             for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
@@ -157,6 +157,6 @@ void EcranQuete::obtenirChangement(Observable &obj){
             for (Personnage *p : itr->second->obtenirListePersonnage())
                 tab->ajouterLigne(dynamic_cast <Humain *> (p));
         }
-        itr->first->trieDefault();
+        tab->trieDefault();
     }
 }

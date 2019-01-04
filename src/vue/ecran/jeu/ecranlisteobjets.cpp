@@ -80,13 +80,13 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
 }
 
 void EcranListeObjet::obtenirChangement(Observable &obj) {
-    m_tableau_objets->obtenirTableauDonnees()->vider();
+    m_tableau_objets->vider();
     for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
     {
-        m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);
+        m_tableau_objets->ajouterLigne(o);
     }
     for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres())
     {
-        m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);
+        m_tableau_objets->ajouterLigne(o);
     }
 }

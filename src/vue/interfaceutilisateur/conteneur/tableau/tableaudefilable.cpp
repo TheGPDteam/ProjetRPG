@@ -97,10 +97,6 @@ bool TableauDefilable::gestionAffichageLigneSurvole(std::pair<int, int> coord_so
 
 }
 
-Tableau *
-TableauDefilable::obtenirTableauDonnees(){
-    return m_tableauDonnee;
-}
 //!
 //! \brief gestionEvenement lors qu'il y un clique de souris
 //! \param coord_souris
@@ -132,6 +128,25 @@ TableauDefilable::trieDefault(){
 
 std::pair<int, int> TableauDefilable::coordSourisElement(std::pair<int, int> &coord_sourisEcran){
     return m_zoneDefilableDonnees->coordSourisElement(coord_sourisEcran);
+}
+
+void TableauDefilable::vider(){
+    m_tableauDonnee->vider();
+}
+void TableauDefilable::ajouterLigne(std::vector<Affichable*> affichables){
+    m_tableauDonnee->ajouterLigne(affichables);
+}
+void TableauDefilable::ajouterLigne(std::vector<std::string> strings){
+    m_tableauDonnee->ajouterLigne(strings);
+}
+void TableauDefilable::ajouterLigne(Humain* perso){
+    m_tableauDonnee->ajouterLigne(perso);
+}
+void TableauDefilable::ajouterLigne(Objet* obj){
+    m_tableauDonnee->ajouterLigne(obj);
+}
+void TableauDefilable::ajouterLigne(Campement *c){
+    m_tableauDonnee->ajouterLigne(c);
 }
 
 TableauDefilable::~TableauDefilable(){

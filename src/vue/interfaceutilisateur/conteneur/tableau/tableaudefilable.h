@@ -30,11 +30,17 @@ public:
     static TableauDefilable * tableau(SDL_Rect rect, Controleur *controleur, const std::string titre, bool aUneImage, std::vector<std::string> nomColoneEnTete = std::vector<std::string>(), float hauteurLigne=32);
     Ligne * gestionEvenementClique(std::pair<int, int> &coord_souris);
     void trieDefault();
-    Tableau * obtenirTableauDonnees();
     bool gestionAffichageLigneSurvole(std::pair<int, int> coord_souris);
-//    void mettreAJourZoneDefilable();
     std::pair<int, int> coordSourisElement(std::pair<int, int> &coord_sourisEcran);
     ~TableauDefilable() override;
+
+    //methode de tableau
+    void vider();
+    void ajouterLigne(std::vector<Affichable*> affichables);
+    void ajouterLigne(std::vector<std::string> strings);
+    void ajouterLigne(Humain* perso);
+    void ajouterLigne(Objet* obj);
+    void ajouterLigne(Campement *c);
 };
 
 #endif // TABLEAUDEFILABLE_H

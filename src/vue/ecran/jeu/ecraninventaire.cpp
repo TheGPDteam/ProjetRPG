@@ -150,10 +150,10 @@ void EcranInventaire::obtenirChangement(Observable &obj)
 {
     Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire();
     definirEtatQuantite(inventaire);
-    m_tableau_objets->obtenirTableauDonnees()->vider();
+    m_tableau_objets->vider();
     for(auto o : inventaire->obtenirObjets())
     {
-        m_tableau_objets->obtenirTableauDonnees()->ajouterLigne(o);
+        m_tableau_objets->ajouterLigne(o);
     }
 }
 
