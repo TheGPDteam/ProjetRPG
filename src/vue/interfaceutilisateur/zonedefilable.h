@@ -14,7 +14,7 @@ private:
     SDL_Color m_couleur;
     Sprite * m_defilementBas;
     Sprite * m_defilementHaut;
-
+    SDL_Rect posBarreDefilable;
     SDL_Rect zone() const override;
 public:
     ZoneDefilable() = delete;

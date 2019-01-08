@@ -30,6 +30,7 @@ ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur
 
     rect.y = rectangle.y + rectangle.h - LARGEUR_BARRE_LATERALE;
     m_defilementBas = new Sprite(SPRITES_PRINCIPAUX, rect, POSITION_BAS);
+    posBarreDefilable = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
 }
 
 
@@ -53,11 +54,11 @@ void ZoneDefilable::afficher(SDL_Surface *surface) {
     SDL_BlitSurface(horsEcran, &m_fenetreGlissante, surface,&m_rectangle);
 
     if(m_fenetreGlissante.h < rect.h){
-        SDL_Rect pos = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
-        SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 120, 120, 120));
+        SDL_FillRect(surface, &posBarreDefilable, SDL_MapRGB(surface->format, 120, 120, 120));
         m_defilementBas->afficher(surface);
         m_defilementHaut->afficher(surface);
-    }
+    }else
+        m_fenetreGlissante.y =0;
 
     SDL_FreeSurface(horsEcran);
 }
@@ -69,6 +70,7 @@ void ZoneDefilable::redimensionner(SDL_Rect rectangle) {
     m_fenetreGlissante.h = m_rectangle.h;
     int nouvelle_ordonnee =  std::min((int)m_fenetreGlissante.y, m_contenu->rectangle().h - m_fenetreGlissante.h);
     m_fenetreGlissante.y = nouvelle_ordonnee;
+    posBarreDefilable = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
 }
 
 void ZoneDefilable::clique() {

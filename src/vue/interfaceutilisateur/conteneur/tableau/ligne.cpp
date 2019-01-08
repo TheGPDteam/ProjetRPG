@@ -6,12 +6,9 @@ Ligne::Ligne(std::vector<Affichable *> donnees, Controleur * controleur, SDL_Rec
     bool premiereColonne=true;
 
     for(Affichable *a: m_donnees) {
-
         this->creerCaseElement(a, premiereColonne);
         if (premiereColonne){
-
             premiereColonne=false;
-
         }
     }
 }
@@ -43,17 +40,19 @@ Ligne::caseClique(std::pair<int, int> coord_souris){
 //!
 void
 Ligne::creerCaseElement(Affichable* affichable, bool premiereColonne){
-    if (premiereColonne && m_possedeImage){
-       this->m_cases.push_back(new Case(creerRectImage(), affichable, m_controleur, m_cases.size()));
-    }
+    SDL_Rect rect;
+    if (premiereColonne && m_possedeImage)
+        rect = creerRectImage();
+    else
+        rect = creerRectCase();
 
-    else {
-       this->m_cases.push_back(new Case(creerRectCase(), affichable, m_controleur, m_cases.size()));
-    }
-
-
+    this->m_cases.push_back(new Case(rect, affichable, m_controleur, m_cases.size()));
 }
 
+SDL_Rect
+Ligne::creerRectCase(){
+    return creerRectCase(this->m_cases.size());
+}
 //!
 //! \brief cree Rectangle de la case
 //! \author Lacoste Dorian, Anthony Regnies
@@ -61,16 +60,16 @@ Ligne::creerCaseElement(Affichable* affichable, bool premiereColonne){
 //! \return un rectangle de la case en fonction des autres cases
 //!
 SDL_Rect
-Ligne::creerRectCase(){
+Ligne::creerRectCase(int numCase){
     SDL_Rect recCase;
     int largeurCaseDefaut;
     if (m_possedeImage){
         largeurCaseDefaut=(this->m_rectangle.w-TAILLE_IMAGE)/(this->m_donnees.size()-1);
-        recCase.x=this->m_rectangle.x + largeurCaseDefaut * (this->m_cases.size()-1) + TAILLE_IMAGE;
+        recCase.x=this->m_rectangle.x + largeurCaseDefaut * (numCase-1) + TAILLE_IMAGE;
     }
     else {
         largeurCaseDefaut=(this->m_rectangle.w)/this->m_donnees.size();
-        recCase.x=this->m_rectangle.x + largeurCaseDefaut * this->m_cases.size();
+        recCase.x=this->m_rectangle.x + largeurCaseDefaut * numCase;
     }
     recCase.y=this->m_rectangle.y;
 
@@ -134,15 +133,14 @@ Ligne::obtenirCase(int numCase) const{
 void Ligne::redimensionner(SDL_Rect nouvelleDimension)
 {
     m_rectangle = nouvelleDimension;
-    SDL_Rect rectCase = nouvelleDimension;
-    int nouvelleLargeurCase=this->m_rectangle.w/this->m_donnees.size();
-    if(m_affichable != nullptr)
-        nouvelleLargeurCase=this->m_rectangle.w/(this->m_donnees.size()+1);
-    rectCase.w = nouvelleLargeurCase;
-    for (Case * c : m_cases)
+    SDL_Rect rect;
+    for(int i =0 ; i<m_cases.size(); i++)
     {
-        c->redimensionner(rectCase);
-        rectCase.x += nouvelleLargeurCase;
+        if(m_possedeImage && i==0 )
+            rect = creerRectImage();
+        else
+            rect = creerRectCase(i);
+        m_cases.at(i)->redimensionner(rect);
     }
 }
 

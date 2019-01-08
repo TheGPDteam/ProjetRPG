@@ -16,6 +16,7 @@ private:
     void creerCaseString(std::string donnee);
     void creerCaseElement(Affichable* affichable, bool premiereColonne);
     SDL_Rect creerRectCase();
+    SDL_Rect creerRectCase(int numCase);
     SDL_Rect creerRectImage();
     Affichable *m_affichable;
     int numCaseSelTri=0;
