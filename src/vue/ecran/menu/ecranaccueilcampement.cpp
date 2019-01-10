@@ -5,16 +5,16 @@
 
 EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
     :EcranGeneral{controleur},
-      m_nomFenetre("Campement", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+      m_nomFenetre("Campement", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                    std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 50)),
       m_nombreObjets(TEXTE_NOMBRE_OBJETS+std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres().size()+m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets().size()),
-                     SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+                     SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                      std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100)),
       m_consommation(TEXTE_CONSOMMATION+std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirConsommation()),
-                     SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+                     SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                      std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 150)),
       m_consoDispo(TEXTE_CONSOMMATION_DISPONIBLE+std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirValeurNutritiveDisponible()),
-                   SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
+                  SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                    std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 200))
 
 {
