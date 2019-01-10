@@ -1,6 +1,6 @@
 #include "ecranaccueilcampement.h"
-#include "../../interfaceutilisateur/conteneur/bouton/bouton.h"
-#include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
+#include "interfaceutilisateur/conteneur/bouton/bouton.h"
+#include "interfaceutilisateur/conteneur/bouton/constantesbouton.h"
 #include <utility>
 
 EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
@@ -43,12 +43,17 @@ EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
                                            true, /*std::make_pair<float, float>(coordB3.first+20,coordB3.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonListeObjet);
     ajoutBoutonDansMapDeBoutons(new Bouton("CONSTRUCTION DU BUS", rect4, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(coordB3.first+20,coordB3.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonEtatQuetePrincipale);
+
+    m_fond = SDL_LoadBMP("../rsc/sprites/ecran_campement.bmp");
+
 }
 
 void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
 {
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
+    SDL_Rect dest_rect = {0, 0, 0, 0};
+    SDL_BlitSurface(m_fond,&ecran,fenetre_affichage,&dest_rect);
 
     m_nomFenetre.afficher(fenetre_affichage);
     m_nombreObjets.afficher(fenetre_affichage);
