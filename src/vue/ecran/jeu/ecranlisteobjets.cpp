@@ -4,10 +4,6 @@
 #include "../../interfaceutilisateur/conteneur/bouton/constantesbouton.h"
 #include "tableau.h"
 
-const int ESPACE_X_RECTANGLE_OBJET = 20;
-const int ESPACE_Y_RECTANGLE_OBJET = 90;
-const int LARGEUR_RECTANGLE_OBJET = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_X_RECTANGLE_OBJET;
-const int HAUTEUR_RECTANGLE_OBJET = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_OBJET;
 const std::pair<int, int> coordB(WIDTH_FENETRE_PRINCIPALE-(WIDTH_BOUTON_NORMAL)-75, HEIGHT_FENETRE_PRINCIPALE-(HEIGHT_BOUTON_NORMAL*3)-25);
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
@@ -15,19 +11,10 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
     :EcranGeneral{controleur},
       m_nomFenetre("Liste des objets", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                    std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100))
-
-    //      m_nomObjet("Nom", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
-    //                 std::make_pair(0,0), std::make_pair(150, 250)),
-    //      m_descObjet("Description", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
-    //                  std::make_pair(350,0), std::make_pair(150, 250)),m_rectangleFicheObjet ({ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET})
-
 {
-    m_rectangleFicheObjet = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_OBJET, HAUTEUR_RECTANGLE_OBJET};
+    m_rectangleFicheObjet = {0, 0, 0, 0};
 
     m_tableau_objets = TableauDefilable::tableauObjet(m_rectangleFicheObjet, controleur, "Liste des objets", true);
-
-    //A SUPPRIMER
-    //ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Retour Jeu", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+40,coordB.second+15)}, &ActionsBoutons::boutonJeuPrincipal);
 
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Retour jeu", rect, m_controleur, nullptr,

@@ -1,7 +1,5 @@
 #include "ecranquetecampement.h"
 
-//SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
     : EcranGeneral (controleur),
       m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,128,128,128},SDL_Rect{0,448,128,128}}},

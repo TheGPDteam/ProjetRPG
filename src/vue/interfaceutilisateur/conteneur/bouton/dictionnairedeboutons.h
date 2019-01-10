@@ -18,6 +18,7 @@ protected:
     ActionsBoutons* m_actionsBoutons;
     std::map<Bouton *, std::function<TypeEcran(ActionsBoutons&)>> m_mapDeBoutons;
     void remiseAZeroBoutons();
+    void remiseAZeroBoutons(Bouton * b);
     void ajoutBoutonDansMapDeBoutons(Bouton* bouton, std::function<TypeEcran(ActionsBoutons &)> action_bouton);
     void afficherBoutons(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage);
 
