@@ -15,9 +15,6 @@ private:
     int m_compteurInventaire;
 
     SDL_Rect m_fondEcran;
-    const SDL_Rect m_rectangleHaut;
-    const SDL_Rect m_rectangleBas;
-    const SDL_Rect m_rectangleDescription;
 
     TexteSDL* m_quantiteInventaire;
 
