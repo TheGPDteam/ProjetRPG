@@ -19,7 +19,7 @@ private :
     SDL_Rect creerRectLigne();
     SDL_Rect creerRectLigne(int numLigne);
     int positionLigne(Ligne * ligRecherchee);
-    ZoneTexte *creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportement = COMPORTEMENT_TEXTE::REDIMENTIONNE, ALIGNEMENT_TEXTE alignement = ALIGNEMENT_TEXTE::CENTRE);
+    ZoneTexte *creeZoneTexte(std::string donnee, COMPORTEMENT_TEXTE comportement = COMPORTEMENT_TEXTE::TRONQUE, ALIGNEMENT_TEXTE alignement = ALIGNEMENT_TEXTE::CENTRE);
 
 
 public:
