@@ -15,5 +15,5 @@ Biscuit/10/Triscuit/0/10
 Poisson/50/Pour pas etre con le poisson/0/10
 Tacos Legendaire/100/Avec frites et boisson/0/10
 Tomate/10/Beau fruit rouge/7/10
-Banane/10/Beau fruit jaune/0/10
-Carotte/10/Beau tubercule orange/0/10
+Banane/10/Beau fruit jaune/11/10
+Carotte/10/Beau tubercule orange/10/10
