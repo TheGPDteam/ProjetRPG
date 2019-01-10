@@ -11,6 +11,7 @@ private:
     const std::string TEXTE_NOMBRE_OBJETS = "Nombre d'objets dans le camp : ";
     const std::string TEXTE_CONSOMMATION = "Valeur nutritive necessaire pour survivre : ";
     const std::string TEXTE_CONSOMMATION_DISPONIBLE = "Valeur nutritive disponible actuellement : ";
+    SDL_Surface * m_fond;
 
     TexteSDL m_nomFenetre;
     TexteSDL m_nombreObjets;
