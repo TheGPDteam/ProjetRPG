@@ -102,6 +102,10 @@ void DictionnaireDeBoutons::remiseAZeroBoutons(){
         iterateurBouton->first->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
 }
 
+void DictionnaireDeBoutons::remiseAZeroBoutons(Bouton * b){
+    b->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
+}
+
 
 //!
 //! \brief Vérifie si le clique de la souris est sûr un bouton

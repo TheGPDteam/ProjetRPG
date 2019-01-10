@@ -41,7 +41,7 @@ Ligne::caseClique(std::pair<int, int> coord_souris){
 void
 Ligne::creerCaseElement(Affichable* affichable, bool premiereColonne){
     SDL_Rect rect;
-    if (premiereColonne && m_possedeImage)
+    if (premiereColonne && m_possedeImage && m_donnees.size() > 1)
         rect = creerRectImage();
     else
         rect = creerRectCase();
@@ -63,7 +63,7 @@ SDL_Rect
 Ligne::creerRectCase(int numCase){
     SDL_Rect recCase;
     int largeurCaseDefaut;
-    if (m_possedeImage){
+    if (m_possedeImage && m_donnees.size() >1){
         largeurCaseDefaut=(this->m_rectangle.w-TAILLE_IMAGE)/(this->m_donnees.size()-1);
         recCase.x=this->m_rectangle.x + largeurCaseDefaut * (numCase-1) + TAILLE_IMAGE;
     }

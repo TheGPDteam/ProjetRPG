@@ -3,6 +3,7 @@
 
 #include "ecrangeneral.h"
 #include "outilsvue.h"
+#include "tableaudefilable.h"
 
 class EcranAccueilCampement : public EcranGeneral
 {
@@ -16,6 +17,7 @@ private:
     TexteSDL m_nombreObjets;
     TexteSDL m_consommation;
     TexteSDL m_consoDispo;
+    TableauDefilable * m_tableau_objets;
 public:
     EcranAccueilCampement(Controleur* controleur);
 
