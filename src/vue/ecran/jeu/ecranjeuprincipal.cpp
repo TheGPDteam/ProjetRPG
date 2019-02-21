@@ -22,7 +22,7 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     : EcranGeneral{controleur},
-      m_spriteJoueur{new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{5*63,5*63,127,63}, SDL_Rect{256,256,64,64}}},
+      m_spriteJoueur{SpritePersonnage::obtenirSpritesJoueur()},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
@@ -121,23 +121,29 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 {
     SDL_Event evenements;
     Uint8 *keystates = SDL_GetKeyState( nullptr );
+    Direction direction_deplacement = Direction::Aucune;
 
     //If up is pressed
     if( keystates[ SDLK_UP ] ||  keystates[ SDLK_z ])
-        controleur->deplacementJoueur(Nord);
+        direction_deplacement = Direction::Nord;
 
     //If down is pressed
     if( keystates[ SDLK_DOWN ] ||  keystates[ SDLK_s ] )
-        controleur->deplacementJoueur(Sud);
+        direction_deplacement = Direction::Sud;
 
     //If left is pressed
     if( keystates[ SDLK_LEFT ] ||  keystates[ SDLK_q ] )
-        controleur->deplacementJoueur(Ouest);
+        direction_deplacement = Direction::Ouest;
 
     //If right is pressed
     if( keystates[ SDLK_RIGHT ] ||  keystates[ SDLK_d ] )
-        controleur->deplacementJoueur(Est);
+        direction_deplacement = Direction::Est;
 
+    if (direction_deplacement != Direction::Aucune)
+    {
+        m_spriteJoueur->deplacementJoueur(direction_deplacement);
+        controleur->deplacementJoueur(direction_deplacement);
+    }
 
     while(SDL_PollEvent(&evenements))
     {
