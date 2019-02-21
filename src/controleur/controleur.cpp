@@ -21,11 +21,9 @@ void Controleur::definirVue(Vue *vue)
 
 void Controleur::deplacementJoueur(Direction dir)
 {
-    if(!m_modele->testChangementDeCarte(dir))
         m_modele->deplacement(dir);
-
-
 }
+
 void Controleur::deroulementJournee(){
     if(m_modele->obtenirTemps()->obtenirTempsRestantJournee()<=0)
     {
@@ -52,6 +50,10 @@ Modele* Controleur::obtenirModele(){
     return m_modele;
 }
 
+Vue * Controleur::obtenirVue(){
+    return m_vue;
+}
+
 /**
  * @brief Permet de reagir au chois de l'utilisateur à propos d'un nouvel arrivant
  * @param choix Le choix de l'utilisateur à propos du nouvel arrivant ; True si acceptation ; False si non
@@ -65,10 +67,6 @@ void Controleur::choixNouvelArrivant(bool choix)
     }
 }
 
-
-Vue* Controleur::obtenirVue(){
-     return m_vue ;
- }
 
 Humain * Controleur::journeeSuivante()  {
     return m_modele->journeeSuivante();

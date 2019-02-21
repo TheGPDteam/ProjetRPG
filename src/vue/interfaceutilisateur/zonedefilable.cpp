@@ -5,6 +5,7 @@
 #include "bouton.h"
 #include "chargementfeuilledesprite.h"
 #include <SDL/SDL.h>
+#include "typeecran.h"
 const int LARGEUR_BARRE_LATERALE = 10;
 const SDL_Rect POSITION_BAS = initialiserRectangle(LARGEUR_BARRE_LATERALE, 256,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
 const SDL_Rect POSITION_HAUT = initialiserRectangle(0, 256,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
@@ -45,7 +46,7 @@ ZoneDefilable::~ZoneDefilable(){
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {
     SDL_Rect rect = m_contenu->rectangle();
-    SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h, 12,
+    SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h,BPP ,
                                                   0,0,0,0);
     SDL_Rect r = {0,0,rect.w, rect.h};
 

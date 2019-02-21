@@ -24,6 +24,8 @@ private:
     Humain m_personnageJoueur;
     Inventaire* m_inventaireJoueur;
     QuetePrincipale m_quetePrincipale;
+    Direction m_direction;
+
 public:
     Joueur(const Quete &quete);
     ~Joueur();
@@ -42,6 +44,8 @@ public:
     std::string serialiser() const;
     void charger(const std::string &donnees);
     QuetePrincipale obtenirQuetePrincipale();
+    Direction obtenirDirection() const;
 };
+
 
 #endif

@@ -51,7 +51,7 @@ EcranQuete::~EcranQuete(){
     delete m_ecranRepartitionJoueur;
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr){
         delete itr->first;
-        delete itr->second;
+       // delete itr->second;
     }
     m_tableaux.clear();
 }
