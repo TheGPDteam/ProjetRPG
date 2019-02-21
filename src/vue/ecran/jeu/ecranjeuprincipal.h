@@ -7,6 +7,7 @@
 #include "sauvegarde.h"
 #include "tableaudefilable.h"
 #include "temps.h"
+#include "spritepersonnage.h"
 
 class EcranJeuPrincipal : public EcranGeneral
 {
@@ -18,7 +19,7 @@ private:
     int const DECALAGE_CARTE_X_SUPERIEUR=12;
     int const NB_ETAPES_ANIMATION = 15;
 
-    Sprite* m_spriteJoueur;
+    SpritePersonnage* m_spriteJoueur;
     std::array<std::array<Sprite*,TAILLE_CARTE_AFFICHAGE>,TAILLE_CARTE_AFFICHAGE> m_spritesCarte;
     std::set<Sprite*> m_spriteObjets;
     Carte* m_carte;
