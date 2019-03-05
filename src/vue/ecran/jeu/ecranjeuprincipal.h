@@ -26,9 +26,9 @@ private:
     TexteSDL m_objectif;
     TexteSDL m_nomJoueur;
     TexteSDL m_tempsRestant;
-    void animerDeplacement(Joueur *j);
-    Sprite * creerSprite(int tuileX, int tuileY, int posDessinX,  int posDessinY);
-
+    void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
+    Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
+    Sprite * creerSpriteObjet(Joueur *joueur, int tuileX, int tuileY, int posDessinX, int posDessinY);
 public:
     EcranJeuPrincipal(Controleur *controleur);
 
