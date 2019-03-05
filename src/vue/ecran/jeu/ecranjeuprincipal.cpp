@@ -197,8 +197,16 @@ EcranJeuPrincipal::~EcranJeuPrincipal()
 //   m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(rect);
 //}
 
-Sprite * EcranJeuPrincipal::crerSprite(int tuileX, int tuileY, int posDessinX, int posDessinY){
-    Sprite * s = new Sprite(SPRITES_PRINCIPAUX, SDL_Rect{posDessinX, posDessinY, 0,0}, SDL_Rect{256,192,64,64});
+Sprite * EcranJeuPrincipal::creerSprite(int tuileX, int tuileY, int posDessinX, int posDessinY){
+    Sprite * s = nullptr;
+    if(tuileX < 0 || tuileX >= 64 || tuileY < 0 || tuileY >= 64) // arbre
+        s = new Sprite(SPRITES_PRINCIPAUX, SDL_Rect{posDessinX, posDessinY, 0,0}, SDL_Rect{256,64,64,64});
+    else {
+        Zone * carte = m_carte->obtenirZoneActive();
+        Tuile * t = carte->obtenirTuile(tuileX, tuileY);
+        SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+        s = new Sprite(SPRITES_PRINCIPAUX, SDL_Rect{posDessinX, posDessinY, 0,0}, lecture);
+    }
     return s;
 }
 
@@ -206,40 +214,47 @@ void EcranJeuPrincipal::animerDeplacement(Joueur * j){
     Direction dirJoueur = j->obtenirDirection();
 
     //    on augmente le nombre de tuile en hauteur ou largeur pour permettre l'animation dans la bonne direction
-    int nombreTuileLargeur = TAILLE_CARTE_AFFICHAGE + (dirJoueur==Direction::Est || dirJoueur ==Direction::Ouest)?1:0;
-    int nombreTuileHauteur = TAILLE_CARTE_AFFICHAGE + (nombreTuileLargeur==TAILLE_CARTE_AFFICHAGE)?1:0;
+    int nombreTuileLargeur = TAILLE_CARTE_AFFICHAGE + ((dirJoueur==Direction::Est || dirJoueur ==Direction::Ouest)?1:0);
+    int nombreTuileHauteur = TAILLE_CARTE_AFFICHAGE + ((nombreTuileLargeur==TAILLE_CARTE_AFFICHAGE)?1:0);
+    std::cout << "l " << nombreTuileLargeur << " h " << nombreTuileHauteur<< std::endl;
     SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, nombreTuileLargeur*64, nombreTuileHauteur*64,BPP ,
                                                   0,0,0,0);
-
     int decalageVueX = (dirJoueur == Est ? 0 : (dirJoueur == Ouest ? 1 : 0));
     int decalageVueY = (dirJoueur == Sud ? 0 : (dirJoueur == Nord ? 1 : 0));
-
     for(int i = 0; i < TAILLE_CARTE_AFFICHAGE; ++i){
         for (int j = 0; j < TAILLE_CARTE_AFFICHAGE; ++j){
-            (m_spritesCarte[i][j])->bougerSprite(decalageVueX, decalageVueY);
-            (m_spritesCarte[i][j])->afficher(horsEcran);
-            (m_spritesCarte[i][j])->bougerSprite(-decalageVueX, -decalageVueY);
+           (m_spritesCarte[i][j])->bougerSprite(decalageVueX, decalageVueY);
+           (m_spritesCarte[i][j])->afficher(horsEcran);
+           (m_spritesCarte[i][j])->bougerSprite(-decalageVueX, -decalageVueY);
         }
     }
-    int posX = j->obtenirPosition().first - 5;
-    int posY = j->obtenirPosition().second - 5;
-    if(dirJoueur == Est) posX--;
-    else if (dirJoueur == Ouest) posX++;
-    else if(dirJoueur == Sud) posY--;
-    else posY++;
+    // position de la tuile du joueur (apres animation)
+    int posX = j->obtenirPosition().first;
+    int posY = j->obtenirPosition().second;
+//    if(dirJoueur == Est) posX--;
+//    else if (dirJoueur == Ouest) posX++;
+//    else if(dirJoueur == Sud) posY--;
+//    else posY++;
 
     std::vector<Sprite *> sprites;
     if(dirJoueur == Est || dirJoueur == Ouest){
-        int numeroColonneTuiles = (dirJoueur == Est ? posX+TAILLE_CARTE_AFFICHAGE : posX-1);
-        for(int j = posY; j< posY+TAILLE_CARTE_AFFICHAGE; ++j){
-            Sprite * s = crerSprite(posX,j, (dirJoueur == Est ? TAILLE_CARTE_AFFICHAGE*64 : 0), j*64) ;
+        int numeroColonneTuiles = posX + (dirJoueur == Est ? TAILLE_CARTE_AFFICHAGE/2 : - TAILLE_CARTE_AFFICHAGE/2 + 1);
+        int numeroLigneTuilesDepart = posY - TAILLE_CARTE_AFFICHAGE/2 + 1;
+        int numeroLigneTuilesArrivee = posY  + TAILLE_CARTE_AFFICHAGE/2;
+        std::cout << "pos " << posX << " " << posY << " col " << numeroColonneTuiles << " row " << numeroLigneTuilesDepart << " " << numeroLigneTuilesArrivee << std::endl;
+        for(int j = numeroLigneTuilesDepart; j<=numeroLigneTuilesArrivee; ++j){
+            Sprite * s = creerSprite(numeroColonneTuiles, j, (dirJoueur == Est ? (TAILLE_CARTE_AFFICHAGE)*64 : 0), (j-numeroLigneTuilesDepart)*64) ;
+            std::cout << "pos sprite " << (dirJoueur == Est ? (TAILLE_CARTE_AFFICHAGE)*64 : 0) << " " << (j-numeroLigneTuilesDepart)*64<< std::endl;
             sprites.push_back(s);
         }
     }
     else {
-        int numeroLigneTuiles = (dirJoueur == Sud ? posY+TAILLE_CARTE_AFFICHAGE : posY-1);
-        for(int i = posX; i< posX+TAILLE_CARTE_AFFICHAGE; ++i){
-            Sprite * s = crerSprite(i,posY, i*64, (dirJoueur == Sud ? TAILLE_CARTE_AFFICHAGE*64 : 0));
+        int numeroColonneTuilesDepart = posX - TAILLE_CARTE_AFFICHAGE/2 + 1 ;
+        int numeroColonneTuilesArrivee= posX + TAILLE_CARTE_AFFICHAGE/2;
+        int numeroLigneTuiles = (dirJoueur == Sud ? posY + TAILLE_CARTE_AFFICHAGE/2 : posY - TAILLE_CARTE_AFFICHAGE/2 + 1);
+
+        for(int i = numeroColonneTuilesDepart; i<= numeroColonneTuilesArrivee; ++i){
+            Sprite * s = creerSprite(i,numeroLigneTuiles, (i-numeroColonneTuilesDepart)*64, (dirJoueur == Sud ? TAILLE_CARTE_AFFICHAGE*64 : 0));
             sprites.push_back(s);
         }
     }
@@ -249,18 +264,40 @@ void EcranJeuPrincipal::animerDeplacement(Joueur * j){
     }
 
     SDL_Rect rectLecture = {decalageVueX*64, decalageVueY*64 ,TAILLE_CARTE_AFFICHAGE*64, TAILLE_CARTE_AFFICHAGE*64};
-    int  decalageXParIetration = 64 / NB_ETAPES_ANIMATION * (dirJoueur == Est ? 1 : (dirJoueur == Ouest ? -1 : 0));
-    int decalageYParIetration = 64 / NB_ETAPES_ANIMATION * (dirJoueur == Sud ? 1 : (dirJoueur == Nord ? -1 : 0));
+    float  decalageX = 64. * (dirJoueur == Est ? 1 : (dirJoueur == Ouest ? -1 : 0));
+    float decalageY = 64. * (dirJoueur == Sud ? 1 : (dirJoueur == Nord ? -1 : 0));
     Vue * vue = m_controleur->obtenirVue();
-    for(int i = 0; i< NB_ETAPES_ANIMATION; ++i){
-        SDL_BlitSurface(horsEcran, &rectLecture, vue->obtenirFenetrePrincipale(),nullptr);
-        rectLecture.x += decalageXParIetration;
-        rectLecture.y += decalageYParIetration;
+    SDL_Rect dest_rect = {0, 0,TAILLE_CARTE_AFFICHAGE*64, TAILLE_CARTE_AFFICHAGE*64};
+    for(int i = 1; i<= NB_ETAPES_ANIMATION; ++i){
+        SDL_Rect dep_courant = {rectLecture.x+decalageX*i*1./NB_ETAPES_ANIMATION, rectLecture.y+decalageY*i*1./NB_ETAPES_ANIMATION, rectLecture.w, rectLecture.h};
+        SDL_BlitSurface(horsEcran, &dep_courant, vue->obtenirFenetrePrincipale(),&dest_rect);
+        m_spriteJoueur->afficher(vue->obtenirFenetrePrincipale());
         SDL_Flip(vue->obtenirFenetrePrincipale());
-        SDL_Delay(100);
+//        SDL_Delay(50);
     }
+//    SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, 1280,1280,BPP ,
+//                                                  0,0,0,0);
 
-        SDL_FreeSurface(horsEcran);
+//    Sprite * s = new Sprite (SPRITES_PRINCIPAUX, SDL_Rect{0,0,64,64}, SDL_Rect{192, 0, 64,64});
+//    for(int i = 0; i< 20;++i){
+//        for( int j = 0; j < 20; ++j){
+//            s->bougerSprite(i,j);
+//            s->afficher(horsEcran);
+//            s->bougerSprite(-i,-j);
+//        }
+
+//    }
+//    Vue * vue = m_controleur->obtenirVue();
+//    SDL_Rect dest_rect = {0, 0, 0, 0};
+//    SDL_Rect rectLecture = {0,0,TAILLE_CARTE_AFFICHAGE*64, TAILLE_CARTE_AFFICHAGE*64};
+//    for(int i = 0; i < 10; i++){
+//        SDL_BlitSurface(horsEcran, &rectLecture, vue->obtenirFenetrePrincipale(),&dest_rect);
+//        SDL_Flip(vue->obtenirFenetrePrincipale());
+//        SDL_Delay(100);
+//       // rectLecture.x += 32;
+//    }
+
+    SDL_FreeSurface(horsEcran);
 
 }
 
@@ -278,6 +315,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     Joueur * j = dynamic_cast<Joueur*>(&obj);
     // Test si c'est un joueur
     if(j !=nullptr){
+    if(m_controleur->obtenirVue()->obtenirEcranCourant() == TypeEcran::JeuPrincipal)
         animerDeplacement(joueur);
 
         //on deplace la carte autour du joueur pour qu'il reste au milieu
