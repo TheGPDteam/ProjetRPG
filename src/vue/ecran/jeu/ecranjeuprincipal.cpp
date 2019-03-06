@@ -340,13 +340,13 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
                 } else
                 {
-                    if (i == 0) { //Je suis a gauche donc sprite fleche de gauche
+                    if (i == DECALAGE_TUILE) { //Je suis a gauche donc sprite fleche de gauche
                         SDL_Rect lecture {64 , 64*3, 64, 64};
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-                    } else if (i == TAILLE_ZONE-1) { // Je suis a droite
+                    } else if (i == TAILLE_ZONE-1-DECALAGE_TUILE) { // Je suis a droite
                         SDL_Rect lecture {0 , 64*3, 64, 64};
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-                    } else if (j == 0) { // Je suis en haut
+                    } else if (j == DECALAGE_TUILE) { // Je suis en haut
                         SDL_Rect lecture {128 , 64*3, 64, 64};
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
                     } else { // Je suis en bas
