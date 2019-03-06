@@ -12,6 +12,7 @@
 #include "tuile.h"
 #include "observable.h"
 
+const int DECALAGE_TUILE = 6;
 const int MAX_TUILES_EAU_PER_ZONE = 50;
 const int MAX_TUILES_TERRE_PER_ZONE = 100;
 const int MAX_TUILES_SABLE_PER_ZONE = 100;
@@ -23,6 +24,7 @@ const int MAX_GROUPES_TUILES_TERRE = 15;
 const int MAX_GROUPES_TUILES_SABLE = 15;
 const int MAX_GROUPES_TUILES_ARBRE = 10;
 
+const int TAILLE_ZONE = 76;
 class Zone : public Observable
 {
 private:

@@ -19,10 +19,10 @@ Joueur::Joueur(const Quete &quete) :
     m_queteJoueur{quete}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"},
     m_direction{Direction::Aucune}
 {
-    m_position.first=5;
-    m_position.second=5;
+    m_position.first=11;
+    m_position.second=11;
     m_nom = "Friedrich";
-    //m_camp = new Campement();
+
     m_equipe = new Equipe();
     m_inventaireJoueur = new Inventaire();
 }

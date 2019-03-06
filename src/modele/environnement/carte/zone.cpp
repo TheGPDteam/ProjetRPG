@@ -13,7 +13,6 @@ const int CASE_DIRECTION_SUD = 7;
 const int CASE_DIRECTION_EST = 8;
 const int CASE_DIRECTION_NORD = 9;
 
-
 Zone::Zone(int longueur, int largeur)
     : m_largeur{largeur},
       m_hauteur{longueur}
@@ -24,7 +23,7 @@ Zone::Zone(int longueur, int largeur)
 void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i)
 {
 
-    for (unsigned int j = 0; j < (unsigned int) 129 && j < fichier[i].size(); ++j)
+    for (unsigned int j = 0; /*j < (unsigned int) 129 &&*/ j < fichier[i].size(); ++j)
     {
         int cpt=0;
         if(fichier[i][j]==' ')
@@ -260,16 +259,16 @@ void Zone::ajouterObjets(int nbObjets)
     {
         for (int i=0;i<nbObjets;++i)
         {
-            int posX = rand() % m_largeur;
-            int posY = rand() % m_hauteur;
+            int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
+            int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
 
             Tuile * t  = m_position_to_tuile.at(std::make_pair(posX,posY));
 
             // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
             while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY)))
             {
-                posX = rand() % m_largeur;
-                posY = rand() % m_hauteur;
+                posX = DECALAGE_TUILE + rand() % (m_largeur - 2 * DECALAGE_TUILE);
+                posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
                 t = m_position_to_tuile.at(std::make_pair(posX,posY));
             }
             //int typeObj = rand()%5; //A revoir si un jour integration objets autres que arme et vivre
