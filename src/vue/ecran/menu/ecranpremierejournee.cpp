@@ -51,6 +51,7 @@ std::string EcranPremiereJournee::recupererHistoire()
         fichier.close();
         return tmpTexte;
     }
+    return "";
 }
 
 
