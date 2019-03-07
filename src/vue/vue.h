@@ -45,7 +45,7 @@ private:
     std::pair<int, int> m_coordSouris;
     bool m_quitterJeu;
 
-    const int DELAI = 36;
+    const int DELAI = 5;
 
     void afficherEcran(EcranGeneral* ecran_courant);
 
@@ -56,7 +56,7 @@ public:
     void gestionEvenementJoueur();
 
     SDL_Surface* obtenirFenetrePrincipale();
-
+    TypeEcran obtenirEcranCourant() const;
     void changerEcran(TypeEcran nouvelEcran);
 
     bool getFermerJeu();

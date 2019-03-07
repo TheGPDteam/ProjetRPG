@@ -16,6 +16,7 @@ private:
     int const DECALAGE_CARTE_X_INFERIEUR=0;
     int const DECALAGE_CARTE_Y_INFERIEUR=0;
     int const DECALAGE_CARTE_X_SUPERIEUR=12;
+    int const NB_ETAPES_ANIMATION = 15;
 
     Sprite* m_spriteJoueur;
     std::array<std::array<Sprite*,TAILLE_CARTE_AFFICHAGE>,TAILLE_CARTE_AFFICHAGE> m_spritesCarte;
@@ -25,9 +26,9 @@ private:
     TexteSDL m_objectif;
     TexteSDL m_nomJoueur;
     TexteSDL m_tempsRestant;
-
-
-
+    void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
+    Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
+    Sprite * creerSpriteObjet(Joueur *joueur, int tuileX, int tuileY, int posDessinX, int posDessinY);
 public:
     EcranJeuPrincipal(Controleur *controleur);
 

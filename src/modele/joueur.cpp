@@ -16,12 +16,13 @@
 //!
 
 Joueur::Joueur(const Quete &quete) :
-    m_queteJoueur{quete}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"}
+    m_queteJoueur{quete}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"},
+    m_direction{Direction::Aucune}
 {
-    m_position.first=5;
-    m_position.second=5;
+    m_position.first=11;
+    m_position.second=11;
     m_nom = "Friedrich";
-    //m_camp = new Campement();
+
     m_equipe = new Equipe();
     m_inventaireJoueur = new Inventaire();
 }
@@ -96,9 +97,10 @@ void Joueur::deplacerJoueur(Direction dir){
     default:
         break;
     }
-
+    m_direction = dir;
     mettreAChange();
     notifierTous();
+    m_direction = Direction::Aucune;
 }
 
 //!
@@ -234,4 +236,15 @@ void Joueur::charger(const std::string &donnees)
 
 QuetePrincipale Joueur::obtenirQuetePrincipale() {
     return m_quetePrincipale;
+}
+
+//!
+//! \brief returne la direction du joueur
+//! \return la direction du joueur
+//! \date 21/03/19
+//! \author dolacoste
+//! \version 1
+//!
+Direction Joueur::obtenirDirection() const {
+    return m_direction;
 }

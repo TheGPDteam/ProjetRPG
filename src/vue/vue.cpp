@@ -198,7 +198,8 @@ void Vue::affichageVue()
     {
         SDL_Flip(m_fenetrePrincipale);
 #ifndef EMSCRIPTEN
-        SDL_Delay(DELAI);
+        ;
+//        SDL_Delay(DELAI);
 #endif
     }
 }
@@ -229,6 +230,19 @@ void Vue::afficherEcran(EcranGeneral* ecran_courant)
     }
 }
 
+
+//!
+//! \brief Accesseur m_quitterJeu
+//! \return bool
+//! \author pgutierrez
+//! \date 21/11/16
+//! \version 1.0
+//!
+//! Retourne la valeur de m_quitterJeu
+//!
+TypeEcran Vue::obtenirEcranCourant() const {
+   return m_typeEcran;
+}
 
 
 //!

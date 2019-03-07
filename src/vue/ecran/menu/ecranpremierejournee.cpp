@@ -5,30 +5,22 @@
 #include <iostream>
 #include <list>
 
-const float MARGE_RATIO = 0.1;
+const float MARGE_RATIO = 0.15;
 
 EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
     : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, /*std::make_pair(m_fondRecapitulatif.x + 60, 0),*/
-                                            SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-4*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE},
+                                            SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE},
                                             recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {
     m_fondRecapitulatif = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
 
-    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 200 );
+    std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2)  , (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 300 );
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
 
     ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
-                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
+                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonChoixNom);
     recupererHistoire();
-    //A SUPPRIMER
-    /*
-    ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Suivant", POLICE_COLLEGED, 20,
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 300, HEIGHT_FENETRE_PRINCIPALE - 100),
-                                           std::make_pair(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL),
-                                           std::make_pair(DECALAGE_FOND_RECAP_NUIT + 360, HEIGHT_FENETRE_PRINCIPALE - 87)),
-                                &ActionsBoutons::boutonChoixNom);
-                                */
 }
 
 
