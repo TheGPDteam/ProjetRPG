@@ -59,7 +59,7 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
         {
             if (valeursTuiles[j] < 6)
             {
-                Tuile * t = new Tuile((TypeTuile)valeursTuiles[j], (i>=DECALAGE_TUILE && j >= DECALAGE_TUILE) && (i < fichier.size()-DECALAGE_TUILE && j < fichier.size()- DECALAGE_TUILE));
+                Tuile * t = new Tuile((TypeTuile)valeursTuiles[j], (i>=DECALAGE_TUILE && j >= DECALAGE_TUILE) && (i < fichier.size()-DECALAGE_TUILE && j < valeursTuiles.size()- DECALAGE_TUILE));
                 m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
                 m_position_to_tuile[std::make_pair(j,i)] = t;
             }

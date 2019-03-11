@@ -72,7 +72,9 @@ SOURCES += \
     modele/objets/partiebus.cpp \
     vue/ecran/menu/ecranquetecampement.cpp \
     vue/interfaceutilisateur/zonedefilable.cpp \
-    vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.cpp
+    vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.cpp \
+    vue/spriteanime.cpp \
+    vue/spritepersonnage.cpp
 
 
 
@@ -151,6 +153,8 @@ HEADERS += \
     modele/objets/partiebus.h \
     vue/ecran/menu/ecranquetecampement.h \
     vue/interfaceutilisateur/zonedefilable.h \
-    vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.h
+    vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.h \
+    vue/spriteanime.h \
+    vue/spritepersonnage.h
 
 

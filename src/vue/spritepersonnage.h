@@ -5,6 +5,8 @@
 #include "spriteanime.h"
 #include "vector"
 
+const int NB_ETAPES = 8;
+
 class SpritePersonnage
 {
 private:
@@ -13,6 +15,7 @@ private:
 public:
     SpritePersonnage() = delete;
     SpritePersonnage(std::vector<SpriteAnime*> sprites);
+
     void afficher(SDL_Surface* surface);
     void deplacementJoueur(Direction direction);
     static SpritePersonnage* obtenirSpritesJoueur();

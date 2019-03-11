@@ -34,8 +34,8 @@ class Tuile
 //protected:
 
 private:
-    Direction m_directionChangementZone;
     TypeTuile m_type;
+    Direction m_directionChangementZone;
     int m_jonction;
     bool m_marchable;
 public:
