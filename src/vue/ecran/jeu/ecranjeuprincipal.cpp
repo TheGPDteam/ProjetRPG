@@ -48,14 +48,6 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
                                            true,/* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
-    /*A SUPRIMER
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Equipe", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+70,coordB.second+15)}, &ActionsBoutons::boutonEquipe);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Inventaire", POLICE_COLLEGED, 20, coordB2, tailleB, std::make_pair(coordB2.first+40,coordB2.second+15)},&ActionsBoutons::boutonInventaire);
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Aller au campement", POLICE_COLLEGED, 16, coordB3, tailleB, std::make_pair(coordB3.first+5,coordB3.second+15)},&ActionsBoutons::boutonCampement);;
-    ajoutBoutonDansMapDeBoutons(new Bouton{Normal, true, "Finir journee", POLICE_COLLEGED, 19, coordB4, tailleB, std::make_pair(coordB4.first+30,coordB4.second+15)},&ActionsBoutons::boutonFinirQuete);;
-    */
-
-
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < TAILLE_CARTE_AFFICHAGE;i++)
         for(int j = 0;j< TAILLE_CARTE_AFFICHAGE;j++)
@@ -176,26 +168,6 @@ EcranJeuPrincipal::~EcranJeuPrincipal()
         delete ptr;
     }
 }
-
-//void EcranJeuPrincipal::test(int cote, int j){
-//    if (carte->obtenirTuile(0,j)->obtenirDirectionChangementZone() != Direction::Aucune
-//                                   || carte->obtenirTuile(0,j+1)->obtenirDirectionChangementZone() != Direction::Aucune
-//                                   || carte->obtenirTuile(0,j-1)->obtenirDirectionChangementZone() != Direction::Aucune
-//                                   || carte->obtenirTuile(0,j-2)->obtenirDirectionChangementZone() != Direction::Aucune
-//                                   || carte->obtenirTuile(0, j+2)->obtenirDirectionChangementZone() != Direction::Aucune) //Si je suis en face d'un changement à 1 près je mets une route
-//                           {
-//                               //AFFICHER ROUTE
-//                               Tuile * t = carte->obtenirTuile(0,j);
-//                               SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
-//                               changementSpriteCarte(i,j,lecture);
-//                           } else {
-//                               (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(SDL_Rect{256,64,64,64});
-//                           }
-//}
-
-//void EcranJeuPrincipal::changementSpriteCarte(int i, int j, SDL_Rect rect){
-//   m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(rect);
-//}
 
 Sprite * EcranJeuPrincipal::creerSpriteTuile(int tuileX, int tuileY, int posDessinX, int posDessinY){
     Sprite * s = nullptr;

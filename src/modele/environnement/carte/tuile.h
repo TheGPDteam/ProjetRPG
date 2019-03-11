@@ -31,16 +31,17 @@ enum TypeJonction{
 
 class Tuile
 {
-protected:
-    TypeTuile m_type;
-    int m_jonction;
+//protected:
+
 private:
     Direction m_directionChangementZone;
-
+    TypeTuile m_type;
+    int m_jonction;
+    bool m_marchable;
 public:
     Direction obtenirDirectionChangementZone() const;
     void definirDirectionChangementZone(Direction dir);
-    Tuile(int val);
+    Tuile(int val, bool marchable = true);
     TypeTuile obtenirType() const;
     bool obtenirEstMarchable() const;
     bool obtenirPeutApparaitre() const;

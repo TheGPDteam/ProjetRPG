@@ -6,9 +6,10 @@
 //!
 
 
-Tuile::Tuile(int val)
+Tuile::Tuile(int val, bool marchable)
     : m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType}, m_directionChangementZone{Aucune}
 {
+    m_marchable = marchable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre);
 }
 
 //!
@@ -21,7 +22,7 @@ Tuile::Tuile(int val)
 
 bool Tuile::obtenirEstMarchable() const
 {
-    return (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre);
+    return m_marchable;
 }
 
 
