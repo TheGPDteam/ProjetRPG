@@ -151,11 +151,11 @@ void ZoneTexte::adapterTexte()
 
     assert(m_texte.size() > 0);
     int yMin = m_rectangle.y;
-    int yMax = m_texteSDL[m_texteSDL.size()-1]->obtenirRectTexte().second + m_texteSDL[m_texteSDL.size()-1]->rectangle().y;
+    int yMax = m_texteSDL[m_texteSDL.size()-1]->obtenirRectTexte().second + m_texteSDL[m_texteSDL.size()-1]->obtenirRectangle().y;
     int decalageY = (m_rectangle.h - (yMax-yMin))/2.;
     for(unsigned int i = 0; i < m_texteSDL.size(); ++i){
         TexteSDL * t = m_texteSDL[i];
-        SDL_Rect rectTexte = t->rectangle();
+        SDL_Rect rectTexte = t->obtenirRectangle();
         std::pair<int, int > tailleTexte = t->obtenirRectTexte();
         std::pair<int, int> nouvellePosition ;
         if(m_alignement == ALIGNEMENT_TEXTE::GAUCHE)

@@ -17,12 +17,12 @@ private:
     //TexteSDL * m_texte;
     Sprite* m_spriteBouton;
 
-    SDL_Rect zone() const override { return m_spriteBouton->getCoordSprite();}
+    SDL_Rect zone() const override { return m_spriteBouton->obtenirCoordonneesSprite();}
 
 public:
 
     Bouton(const std::string texte,
-           SDL_Rect rectangle,
+           SDL_Rect obtenirRectangle,
            Controleur * controleur,
            void *action,
            const bool bouton_cliquable = true,

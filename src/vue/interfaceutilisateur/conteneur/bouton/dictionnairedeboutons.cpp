@@ -144,7 +144,7 @@ bool DictionnaireDeBoutons::boutonValiderEntree(std::string nomBouton,SDL_Event 
         if((std::string)SDL_GetKeyName(evenement.key.keysym.sym) == "return") { // Entree
             //On valide en simulant un clic sur bouton
             clique_souris = true;
-            SDL_Rect rectBouton = obtenirBouton(nomBouton)->rectangle();
+            SDL_Rect rectBouton = obtenirBouton(nomBouton)->obtenirRectangle();
             coord_souris.first =  rectBouton.x+30;
             coord_souris.second = rectBouton.y+30;
             return true;

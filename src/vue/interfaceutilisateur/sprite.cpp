@@ -72,7 +72,7 @@ void Sprite::redimensionner(SDL_Rect rectangle){
 //! Retourne la position dans la fenêtre du sprite
 //!
 
-SDL_Rect Sprite::getCoordSprite()
+SDL_Rect Sprite::obtenirCoordonneesSprite()
 {
     return m_rectangle;
 }

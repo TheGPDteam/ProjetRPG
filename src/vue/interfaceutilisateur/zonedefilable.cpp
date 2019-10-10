@@ -16,7 +16,7 @@ ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur
 
 {
     m_fenetreGlissante = {0,0, m_rectangle.w, m_rectangle.h};
-    SDL_Rect rect = m_contenu->rectangle();
+    SDL_Rect rect = m_contenu->obtenirRectangle();
     rect.x = rect.y = 0;
     if(m_rectangle.h < rect.h){
         rect.w -= LARGEUR_BARRE_LATERALE*1.2;
@@ -45,7 +45,7 @@ ZoneDefilable::~ZoneDefilable(){
 }
 
 void ZoneDefilable::afficher(SDL_Surface *surface) {
-    SDL_Rect rect = m_contenu->rectangle();
+    SDL_Rect rect = m_contenu->obtenirRectangle();
     SDL_Surface *horsEcran = SDL_CreateRGBSurface(SDL_HWSURFACE, rect.w, rect.h,BPP ,
                                                   0,0,0,0);
     SDL_Rect r = {0,0,rect.w, rect.h};
@@ -69,7 +69,7 @@ void ZoneDefilable::redimensionner(SDL_Rect rectangle) {
     m_fenetreGlissante.x = 0;
     m_fenetreGlissante.w =  m_rectangle.w;
     m_fenetreGlissante.h = m_rectangle.h;
-    int nouvelle_ordonnee =  std::min((int)m_fenetreGlissante.y, m_contenu->rectangle().h - m_fenetreGlissante.h);
+    int nouvelle_ordonnee =  std::min((int)m_fenetreGlissante.y, m_contenu->obtenirRectangle().h - m_fenetreGlissante.h);
     m_fenetreGlissante.y = nouvelle_ordonnee;
     posBarreDefilable = {m_rectangle.x+m_rectangle.w-LARGEUR_BARRE_LATERALE,  m_rectangle.y, LARGEUR_BARRE_LATERALE, m_rectangle.h};
 }
@@ -81,7 +81,7 @@ void ZoneDefilable::clique() {
 
 
 SDL_Rect ZoneDefilable::zone() const {
-    SDL_Rect rect = m_contenu->rectangle();
+    SDL_Rect rect = m_contenu->obtenirRectangle();
     if(m_fenetreGlissante.h >= rect.h)
         return m_rectangle;
     else {
@@ -92,11 +92,11 @@ SDL_Rect ZoneDefilable::zone() const {
 }
 
 void ZoneDefilable::defiler(bool haut){
-    if(m_fenetreGlissante.h < m_contenu->rectangle().h){
+    if(m_fenetreGlissante.h < m_contenu->obtenirRectangle().h){
         // nouvelle ordonnée est bornée entre 0 et la hauteur du contenu moins la hauteur de la zone défilable
         int nouvelle_ordonnee = m_fenetreGlissante.y + (!haut ? 1. : -1.) * m_fenetreGlissante.h*VITESSE_DEFILEMENT ;
         nouvelle_ordonnee = std::max(0, nouvelle_ordonnee);
-        nouvelle_ordonnee = std::min(nouvelle_ordonnee,m_contenu->rectangle().h - m_fenetreGlissante.h);
+        nouvelle_ordonnee = std::min(nouvelle_ordonnee,m_contenu->obtenirRectangle().h - m_fenetreGlissante.h);
 
         m_fenetreGlissante.y = nouvelle_ordonnee;
     }
@@ -105,13 +105,13 @@ void ZoneDefilable::defiler(bool haut){
 
 
 bool ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_souris){
-    Bouton bBas(" ",m_defilementBas->rectangle(),m_controleur, nullptr);
+    Bouton bBas(" ",m_defilementBas->obtenirRectangle(),m_controleur, nullptr);
     if(bBas.contient(coord_souris)){
         defiler(false);
         return true;
     }
 
-    Bouton bHaut(" ",m_defilementHaut->rectangle(),m_controleur, nullptr);
+    Bouton bHaut(" ",m_defilementHaut->obtenirRectangle(),m_controleur, nullptr);
     if(bHaut.contient(coord_souris)){
         defiler(true);
         return true;
@@ -132,7 +132,7 @@ bool ZoneDefilable::gestionEvenementDefilableClique(std::pair<int, int> &coord_s
 std::pair<int, int> ZoneDefilable::coordSourisElement(std::pair<int, int> &coord_sourisEcran){
     int x = coord_sourisEcran.first;
     int y = coord_sourisEcran.second;
-    x -= rectangle().x;
-    y -= rectangle().y - m_fenetreGlissante.y;
+    x -= obtenirRectangle().x;
+    y -= obtenirRectangle().y - m_fenetreGlissante.y;
     return std::pair<int, int>(x,y);
 }

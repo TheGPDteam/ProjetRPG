@@ -270,7 +270,7 @@ void
 Tableau::creerLigne(std::vector<Affichable *> donneesLigne){
     Ligne *l = new Ligne(donneesLigne, this->m_controleur, creerRectLigne(), (obtenirNbLignes()%2 ==0) ? 1:2, obtenirNbLignes()+1, m_avecImage);
     m_lignes.push_back(l);
-    m_rectangle.h+=l->rectangle().h;
+    m_rectangle.h+=l->obtenirRectangle().h;
 }
 
 //!

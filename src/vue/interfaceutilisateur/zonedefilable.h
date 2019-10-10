@@ -18,10 +18,10 @@ private:
     SDL_Rect zone() const override;
 public:
     ZoneDefilable() = delete;
-    ZoneDefilable(Affichable *contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect rectangle);
+    ZoneDefilable(Affichable *contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect obtenirRectangle);
     virtual ~ZoneDefilable() override;
     void afficher(SDL_Surface *surface) override;
-    void redimensionner(SDL_Rect rectangle) override;
+    void redimensionner(SDL_Rect obtenirRectangle) override;
     bool gestionEvenementDefilableClique(std::pair<int, int> &coord_souris);
     std::pair<int, int> coordSourisElement(std::pair<int, int> &coord_sourisEcran);
     void clique() override;

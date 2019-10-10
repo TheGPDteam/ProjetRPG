@@ -32,7 +32,7 @@ TableauDefilable * TableauDefilable::creationTableauDefilableDefaut(SDL_Rect rec
     tabDef->redimensionner(rect); //donne les bonnes valeurs de rect aux tableauxrect
 
     tabDef->ajoutertitre(titre);
-    SDL_Rect rect2 = tabDef->m_tableauDonnee->rectangle();
+    SDL_Rect rect2 = tabDef->m_tableauDonnee->obtenirRectangle();
     tabDef->m_zoneDefilableDonnees = tabDef->m_tableauDonnee->obtenirZoneDefilableTableau(rect2);
     return tabDef;
 }
