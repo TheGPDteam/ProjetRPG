@@ -25,7 +25,7 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, cons
 
     if(TTF_Init() == -1)
     {
-        std::cout << "Erreur d'initialisation de TTF_Init" << std::endl;
+        std::cerr << "Erreur d'initialisation de TTF_Init" << std::endl;
         TTF_Quit();
     }
 
@@ -35,7 +35,7 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, cons
     m_policeTexte = m_fonts.at(taille_police);
     if(m_policeTexte == nullptr)
     {
-        std::cout << SDL_GetError() << std::endl;
+        std::cerr << SDL_GetError() << std::endl;
     }
 
     m_texteStr = texte;

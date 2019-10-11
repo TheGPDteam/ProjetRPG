@@ -14,7 +14,7 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
     if (mkdir("save", 0777) == 0)
     #endif
     {
-        std::cerr << "Dossier créé !" << std::endl;
+        std::cout << "Dossier créé !" << std::endl;
     }
     //if (!modele->obtenirNomPartie().empty())
         //cheminFichier += modele->obtenirNomPartie()+".xml";
@@ -28,7 +28,7 @@ void Sauvegarde::sauvegarderModele(Modele *modele)
         fichierSauvegarde.close();
     }
     else
-        std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
+        std::cerr << "Erreur lors de l'ouverture du fichier" << std::endl;
 }
 
 void Sauvegarde::chargerModele(Modele* modele)

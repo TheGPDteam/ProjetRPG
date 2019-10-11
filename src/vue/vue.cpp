@@ -14,7 +14,7 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
-        std::cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
+        std::cerr << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
         SDL_Quit();
     }
 
@@ -189,7 +189,7 @@ void Vue::affichageVue()
         break;
     }
     default:{
-        std::cout << "Erreur d'initialisation du type d'affichage !" << std::endl;
+        std::cerr << "Erreur d'initialisation du type d'affichage !" << std::endl;
         break;
     }
     }
