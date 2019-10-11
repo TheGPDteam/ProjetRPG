@@ -59,7 +59,7 @@ public:
     TypeEcran obtenirEcranCourant() const;
     void changerEcran(TypeEcran nouvelEcran);
 
-    bool getFermerJeu();
+    bool obtenirFermerJeu();
 
     ~Vue();
 };

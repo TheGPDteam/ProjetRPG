@@ -255,7 +255,7 @@ TypeEcran Vue::obtenirEcranCourant() const {
 //! Retourne la valeur de m_quitterJeu
 //!
 
-bool Vue::getFermerJeu()
+bool Vue::obtenirFermerJeu()
 {
     return m_quitterJeu;
 }

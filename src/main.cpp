@@ -14,7 +14,7 @@
 void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
     Controleur* controleur = (Controleur*) ctrl;
-    while (!vue->getFermerJeu())
+    while (!vue->obtenirFermerJeu())
     {
         vue->affichageVue();
         controleur->deroulementJournee();
