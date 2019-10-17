@@ -89,10 +89,10 @@ SDL_Rect Sprite::obtenirCoordonneesSprite()
 //! Permet de déplacer le sprite
 //!
 
-void Sprite::bougerSprite(int x, int y)
+void Sprite::changerPostition(int x, int y)
 {
-    m_rectangle.x = m_rectangle.x+(x*64);
-    m_rectangle.y = m_rectangle.y+(y*64);
+    m_rectangle.x = x;
+    m_rectangle.y = y;
 }
 
 //!
