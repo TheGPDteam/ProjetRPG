@@ -69,10 +69,10 @@ Zone *Carte::obtenirZoneActive()
 //! \author mleothaud
 //!
 
-void Carte::chargerZone(std::string nomFichierZone, short x, short y)
+void Carte::chargerZone(std::string nom_fichier_zone, short x, short y)
 {
     std::vector<std::string> cases;
-    std::ifstream fichier(nomFichierZone, std::ifstream::in);
+    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
     if (fichier.good())
     {
         std::string ligne;

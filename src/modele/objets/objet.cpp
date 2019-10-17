@@ -26,10 +26,14 @@ Objet::Objet()
 //! Constructeur paramétré
 //!
 
-Objet::Objet(std::string nom, std::string description, int xImg, int yImg)
+Objet::Objet(std::string nom, std::string description, int image_x, int image_y)
     : m_nom{nom},
       m_description{description},
-      m_sprite{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,0,0,0},SDL_Rect{xImg,yImg,64,64}}}
+      m_sprite{ new Sprite{
+              SPRITES_PRINCIPAUX,SDL_Rect{0,0,0,0},
+              SDL_Rect{image_x, image_y, 64, 64}
+          }
+      }
 
 {
 
@@ -45,8 +49,7 @@ Objet::Objet(std::string nom, std::string description, int xImg, int yImg)
 //! Destructeur par défaut de l'objet Objet
 //!
 
-Objet::~Objet()
-{
+Objet::~Objet(){
 
 }
 
@@ -58,8 +61,7 @@ Objet::~Objet()
 //! \return sprite de l'objet
 //! \version 1.0
 //!
-Sprite * Objet::obtenirSprite() const
-{
+Sprite * Objet::obtenirSprite() const{
     return m_sprite;
 }
 
@@ -83,8 +85,7 @@ void Objet::definirSprite(Sprite *sprite){
 //! Accesseur du nom de l'Objet
 //!
 
-std::string Objet::obtenirNom() const
-{
+std::string Objet::obtenirNom() const{
     return m_nom;
 }
 
@@ -112,8 +113,7 @@ std::string Objet::obtenirDescription() const
 //! Mutateur de la description de l'Objet
 //!
 
-void Objet::definirDescription(const std::string &nom)
-{
+void Objet::definirDescription(const std::string &nom){
     m_description = nom;
 }
 
@@ -126,13 +126,11 @@ void Objet::definirDescription(const std::string &nom)
 //! Mutateur du nom de l'Objet
 //!
 
-void Objet::definirNom(const std::string &nom)
-{
+void Objet::definirNom(const std::string &nom){
     m_nom = nom;
 }
 
-std::string Objet::serialiser() const
-{
+std::string Objet::serialiser() const{
     return "<Objet>"
             "   <Nom>" + m_nom + "</Nom>"
             "   <Description>" + m_description + "</Description>"
@@ -144,8 +142,7 @@ TypeObjet Objet::obtenirType() const {
     return TypeObjet::Objet;
 }
 
-void Objet::charger(const std::string &donnees)
-{
+void Objet::charger(const std::string &donnees){
 
 }
 

@@ -188,8 +188,7 @@ void Campement::ajouterPersonne(Humain *humain)
 //! \return l'equipe de chasse
 //!
 
-Equipe* Campement::obtenirEquipeChasse()
-{
+Equipe* Campement::obtenirEquipeChasse(){
     return &m_equipeChasse;
 }
 
@@ -201,8 +200,7 @@ Equipe* Campement::obtenirEquipeChasse()
 //! \return l'equipe de recolte
 //!
 
-Equipe* Campement::obtenirEquipeRecolte()
-{
+Equipe* Campement::obtenirEquipeRecolte(){
     return &m_equipeRecolte;
 }
 
@@ -215,8 +213,7 @@ Equipe* Campement::obtenirEquipeRecolte()
 //! \return l'equipe de campement
 //!
 
-Equipe* Campement::obtenirEquipeCampement()
-{
+Equipe* Campement::obtenirEquipeCampement(){
     return &m_equipeCampement;
 }
 
@@ -228,8 +225,7 @@ Equipe* Campement::obtenirEquipeCampement()
 //! \return les donnees du campement
 //!
 
-std::string Campement::serialiser() const
-{
+std::string Campement::serialiser() const {
     std::string donnees_campement = "<Campement>"
                                     "   <QuantiteVivre>" + std::to_string(m_quantiteVivre) + "</QuantiteVivre>"
                                                                                              "   <StockVivre>";

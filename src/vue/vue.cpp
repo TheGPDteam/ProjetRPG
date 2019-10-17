@@ -41,33 +41,33 @@ void Vue::definirControleur(Controleur *controleur)
 {
 
     m_controleur=controleur;
-    std::cout << "initializing EcranJeuPrincipal" << std::endl;
+    std::cout << "Initialisation de la scene EcranJeuPrincipal" << std::endl;
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
-    std::cout << "initializing EcranQuete" << std::endl;
+    std::cout << "Initialisation de la scene EcranQuete" << std::endl;
     m_ecranChoixQuete = new EcranQuete(m_controleur);
-    std::cout << "initializing EcranMenuPrincipal" << std::endl;
+    std::cout << "Initialisation de la scene EcranMenuPrincipal" << std::endl;
     m_menuPrincipal = new EcranMenuPrincipal(m_controleur);
-    std::cout << "initializing EcranEquipe" << std::endl;
+    std::cout << "Initialisation de la scene EcranEquipe" << std::endl;
     m_ecranEquipe = new EcranEquipe(m_controleur);
-    std::cout << "initializing EcranInventaire" << std::endl;
+    std::cout << "Initialisation de la scene EcranInventaire" << std::endl;
     m_ecranInventaire = new EcranInventaire(m_controleur);
-    std::cout << "initializing EcranChoixPersonnage" << std::endl;
+    std::cout << "Initialisation de la scene EcranChoixPersonnage" << std::endl;
     m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur);
-    std::cout << "initializing EcranQueteJoueur" << std::endl;
+    std::cout << "Initialisation de la scene EcranQueteJoueur" << std::endl;
     m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur);
-    std::cout << "initializing EcranNom" << std::endl;
+    std::cout << "Initialisation de la scene EcranNom" << std::endl;
     m_ecranNom = new EcranNom(m_controleur);
-    std::cout << "initializing EcranPremiereJournee" << std::endl;
+    std::cout << "Initialisation de la scene EcranPremiereJournee" << std::endl;
     m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
-    std::cout << "initializing EcranRecapitulatifNuit" << std::endl;
+    std::cout << "Initialisation de la scene EcranRecapitulatifNuit" << std::endl;
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
-    std::cout << "initializing EcranAccueilCampement" << std::endl;
+    std::cout << "Initialisation de la scene EcranAccueilCampement" << std::endl;
     m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
-    std::cout << "initializing EcranListeObjet" << std::endl;
+    std::cout << "Initialisation de la scene EcranListeObjet" << std::endl;
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
-    std::cout << "initializing EcranQueteCampement" << std::endl;
+    std::cout << "Initialisation de la scene EcranQueteCampement" << std::endl;
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
-    std::cout << "initializing ecran done" << std::endl;
+    std::cout << "Initialisation de la scene ecran done" << std::endl;
 
     Modele * modele = m_controleur->obtenirModele();
     Joueur * j = modele->obtenirJoueur();
@@ -215,16 +215,16 @@ void Vue::affichageVue()
 //! Affiche tout le contenu de l'écran placé en paramètre et vérifie si il n,'y a pas un clique souris
 //!
 
-void Vue::afficherEcran(EcranGeneral* ecran_courant)
+void Vue::afficherEcran(EcranGeneral* ecranCourant)
 {
-    if(ecran_courant != nullptr)
+    if(ecranCourant != nullptr)
     {
-        ecran_courant->afficherEcran(m_coordSouris, m_fenetrePrincipale);
-        ecran_courant->gestionDesEvenements(m_controleur, m_quitterJeu, m_cliqueSouris, m_coordSouris);
+        ecranCourant->afficherEcran(m_coordSouris, m_fenetrePrincipale);
+        ecranCourant->gestionDesEvenements(m_controleur, m_quitterJeu, m_cliqueSouris, m_coordSouris);
 
         if(m_cliqueSouris)
         {
-            m_typeEcran = ecran_courant->verificationCliqueSourisSurBoutons(m_coordSouris, m_typeEcran);
+            m_typeEcran = ecranCourant->verificationCliqueSourisSurBoutons(m_coordSouris, m_typeEcran);
             m_cliqueSouris = false;
         }
     }

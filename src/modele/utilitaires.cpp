@@ -1,14 +1,14 @@
 #include "utilitaires.h"
 
-std::string obtenirSousChaineEntre2Predicats(const std::string &chaine,const std::string &predicatDebut,const std::string &predicatFin)
+std::string obtenirSousChaineEntre2Predicats(const std::string &chaine,const std::string &predicat_debut,const std::string &predicat_fin)
 {
     if (chaine.empty())
         return "";
 
     std::string chaineRetournee = "";
 
-    std::size_t positionFinPredicatDebut = chaine.find(predicatDebut) + predicatDebut.length();
-    std::size_t positionPredicatFin = chaine.find(predicatFin);
+    std::size_t positionFinPredicatDebut = chaine.find(predicat_debut) + predicat_debut.length();
+    std::size_t positionPredicatFin = chaine.find(predicat_fin);
     std::size_t longueurChaineRetournee = positionPredicatFin - positionFinPredicatDebut;
 
     if (positionFinPredicatDebut != std::string::npos

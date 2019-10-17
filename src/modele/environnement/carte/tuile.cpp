@@ -68,9 +68,9 @@ Direction Tuile::obtenirDirectionChangementZone() const{
 //! \date 15/12/2017
 //! \version 1.0
 //!
-void Tuile::definirHachageJonction(TypeTuile typeVoisin, TypeJonction positionVoisin)
+void Tuile::definirHachageJonction(TypeTuile type_voisin, TypeJonction position_voisin)
 {
-    m_jonction = hacher(typeVoisin, positionVoisin);
+    m_jonction = hacher(type_voisin, position_voisin);
 }
 
 //!
@@ -91,6 +91,6 @@ int Tuile::obtenirHachageJonction() const{
 //! \date 20/12/2017
 //! \version 1.0
 //!
-int Tuile::hacher(TypeTuile typeVoisin, TypeJonction positionVoisin){
-    return typeVoisin * 100 + positionVoisin;
+int Tuile::hacher(TypeTuile type_voisin, TypeJonction position_voisin){
+    return type_voisin * 100 + position_voisin;
 }

@@ -130,32 +130,27 @@ void Modele::deplacement(Direction dir)
 //!
 bool Modele::testChangementDeCarte(Direction directionDep){
     std::pair<int,int> nouvellePosition = m_joueur.obtenirPosition();
+
     bool changementCarte=false;
     // On teste si on est sur une case qui a une direction pour changer de carte, alors on change donc la zone active en fonction de cette direction
     Direction directionTuile = m_carte.obtenirZoneActive()->obtenirTuile(nouvellePosition)->obtenirDirectionChangementZone();
-    if (directionTuile == Nord && directionDep==Nord)
-    {
+    if (directionTuile == Nord && directionDep==Nord) {
         nouvellePosition.first = m_joueur.obtenirPosition().first;
         nouvellePosition.second = 63;
         m_carte.changerZoneActive(Nord);
         changementCarte=true;
-    }
-    else if(directionTuile ==Sud && directionDep==Sud)
-    {
+
+    } else if (directionTuile ==Sud && directionDep==Sud) {
         nouvellePosition.first = m_joueur.obtenirPosition().first;
         nouvellePosition.second = 0;
         m_carte.changerZoneActive(Sud);
         changementCarte=true;
-    }
-    else if (directionTuile ==Ouest && directionDep==Ouest)
-    {
+    } else if (directionTuile ==Ouest && directionDep==Ouest) {
         nouvellePosition.first = 63;
         nouvellePosition.second = m_joueur.obtenirPosition().second;
         m_carte.changerZoneActive(Ouest);
         changementCarte=true;
-    }
-    else if (directionTuile==Est && directionDep==Est)
-    {
+    } else if (directionTuile==Est && directionDep==Est) {
         nouvellePosition.first = 0;
         nouvellePosition.second = m_joueur.obtenirPosition().second;
         m_carte.changerZoneActive(Est);

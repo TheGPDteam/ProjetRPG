@@ -70,9 +70,9 @@ int Vie::obtenirValeurMax() const
 //! Mutateur de la valeur de la Vie
 //!
 
-void Vie::definirValeur(int nouvelleValeur)
+void Vie::definirValeur(int nouvelle_valeur)
 {
-    m_valeur = nouvelleValeur;
+    m_valeur = nouvelle_valeur;
 }
 
 //!
@@ -84,9 +84,9 @@ void Vie::definirValeur(int nouvelleValeur)
 //! Mutateur de la valeur maximale de la Vie
 //!
 
-void Vie::definirValeurMax(int nouvelleValeurMax)
+void Vie::definirValeurMax(int nouvelle_valeur_maximale)
 {
-    m_valeurMax = nouvelleValeurMax;
+    m_valeurMax = nouvelle_valeur_maximale;
 }
 
 //!

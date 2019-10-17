@@ -29,13 +29,13 @@ Personnage::Personnage()
 //! Contient affectations des différentes valeurs aux attributs
 //!
 
-Personnage::Personnage(int valeurForce, int valeurIntelligence, int valeurVitesse, int vieMax)
+Personnage::Personnage(int force, int intelligence, int vitesse, int vie_maximale)
 {
-    m_force.definirValeur(valeurForce);
-    m_intelligence.definirValeur(valeurIntelligence);
-    m_vitesse.definirValeur(valeurVitesse);
-    m_vie.definirValeurMax(vieMax);
-    m_vie.definirValeur(vieMax);
+    m_force.definirValeur(force);
+    m_intelligence.definirValeur(intelligence);
+    m_vitesse.definirValeur(vitesse);
+    m_vie.definirValeurMax(vie_maximale);
+    m_vie.definirValeur(vie_maximale);
 }
 
 //!

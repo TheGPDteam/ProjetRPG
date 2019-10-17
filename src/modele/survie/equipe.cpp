@@ -48,7 +48,7 @@ std::set<Personnage *> Equipe::obtenirListePersonnage()
 
 void Equipe::supprimerPersonnage(Personnage *personnage)
 {
-    assert(m_personnages.find(personnage)!=m_personnages.end());
+    assert(m_personnages.find(personnage) != m_personnages.end());
     m_personnages.erase(m_personnages.find(personnage));
     mettreAChange();
     notifierTous();

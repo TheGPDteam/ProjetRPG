@@ -68,9 +68,9 @@ std::string Joueur::obtenirNom() const
 //! Contient une affectation de variable
 //!
 
-void Joueur::definirPosition(std::pair<int,int> nouvellePosition)
+void Joueur::definirPosition(std::pair<int,int> nouvelle_position)
 {
-    m_position=nouvellePosition;
+    m_position=nouvelle_position;
 }
 
 //!
@@ -170,8 +170,8 @@ void Joueur::definirEquipe(Equipe* equipe)
 //! \author mleothaud, fvain
 //!
 
-void Joueur::nouvelleQuete(TypeQuete tq, std::string nom, std::string description, int valeurObjectif, int recompenseExperience, Objet* recompense){
-    m_queteJoueur = Quete(tq, nom, description, valeurObjectif, recompenseExperience, recompense);
+void Joueur::nouvelleQuete(TypeQuete tq, std::string nom, std::string description, int objectif, int experiences, Objet* recompense){
+    m_queteJoueur = Quete(tq, nom, description, objectif, experiences, recompense);
 }
 
 Inventaire* Joueur::obtenirInventaire()
