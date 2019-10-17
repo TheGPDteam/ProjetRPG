@@ -163,10 +163,6 @@ bool Modele::testChangementDeCarte(Direction directionDep){
     return changementCarte;
 }
 
-
-
-
-
 //!
 //! \brief Permet d'avancer sur une journee, controle les etapes d'une journee
 //! \author mleothaud

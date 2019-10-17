@@ -20,7 +20,7 @@ public:
     void changementSprite(const SDL_Rect position_dans_feuille_de_sprite);
     void afficher(SDL_Surface *surface_affichage) override;
     void redimensionner(SDL_Rect obtenirRectangle) override;
-    void bougerSprite(int x, int y);
+    void changerPosition(int x, int y);
 
     SDL_Rect obtenirCoordonneesSprite();
 
