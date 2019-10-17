@@ -17,8 +17,8 @@ bool comparerVitesse(Personnage* p1, Personnage* p2) {
 //! \version 1.1
 //!
 
-Combat::Combat(Equipe *equipeHaute, Equipe *equipeBasse)
-    : m_equipeBasse(equipeBasse), m_equipeHaute{equipeHaute}, m_ordrePassage{nullptr}, m_numeroDePassage{0}
+Combat::Combat(Equipe *equipe_haute, Equipe *quipe_basse)
+    : m_equipeBasse(quipe_basse), m_equipeHaute{equipe_haute}, m_ordrePassage{nullptr}, m_numeroDePassage{0}
 {
     int i=0;
     for (Personnage* p : *m_equipeHaute)
@@ -50,9 +50,9 @@ Combat::Combat(Equipe *equipeHaute, Equipe *equipeBasse)
 //!
 
 
-Combat::Combat(Equipe *equipeHaute)
+Combat::Combat(Equipe *equipe_haute)
     : m_equipeBasse(Equipe::genererEquipeZombie()),
-      m_equipeHaute(equipeHaute),
+      m_equipeHaute(equipe_haute),
       m_ordrePassage{nullptr},
       m_numeroDePassage(0)
 {

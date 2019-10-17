@@ -179,7 +179,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     const Zone * carte = m_carte->obtenirZoneActive();
 
     // Test si c'est un joueur
-    if(dynamic_cast<Joueur*>(&obj) !=nullptr){
+    if(dynamic_cast<Joueur*>(&obj) != nullptr){
         //on deplace la carte autour du joueur pour qu'il reste au milieu
         for(int i=posX-DECALAGE_CARTE_X_INFERIEUR;i<posX+DECALAGE_CARTE_X_SUPERIEUR;i++)
         {
@@ -217,11 +217,9 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 }
             }
         }
-    }else {
-        for(int i=posX-DECALAGE_CARTE_X_INFERIEUR;i<posX+DECALAGE_CARTE_X_SUPERIEUR;i++)
-        {
-            for(int j= posY-DECALAGE_CARTE_Y_INFERIEUR;j<posY+DECALAGE_CARTE_Y_SUPERIEUR;j++)
-            {
+    } else {
+        for(int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
+            for(int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
                 if ( j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
                     std::pair<int, int> temp(i,j);
                     if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){

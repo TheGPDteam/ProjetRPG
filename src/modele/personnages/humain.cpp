@@ -11,11 +11,11 @@
 //! \return un string qui sera le nom du personnage
 //!
 
-std::string donnerNom(std::string nomFichier)
+std::string donnerNom(std::string nom_fichiers)
 {
     std::vector<std::string> noms;
 
-    std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);
+    std::ifstream fichier(nom_fichiers.c_str(), std::ifstream::in);
     if(fichier.good()){
         std::string nom ;
         fichier >> nom;

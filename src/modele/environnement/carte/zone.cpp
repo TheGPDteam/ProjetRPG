@@ -51,20 +51,17 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     : m_largeur{largeur},
       m_hauteur{longueur}
 {
-    for (unsigned int i=0; i<fichier.size();++i)
-    {
+    for (unsigned int i = 0; i < fichier.size(); ++i){
         std::vector<int> valeursTuiles;
-        ligne2Tuile(fichier,valeursTuiles,i);
-        for (unsigned int j=0; j<valeursTuiles.size();++j)
-        {
-            if (valeursTuiles[j] < 6)
-            {
+        ligne2Tuile(fichier, valeursTuiles, i);
+        for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
+            if (valeursTuiles[j] < 6) {
+
                 Tuile * t = new Tuile((TypeTuile)valeursTuiles[j], (i>=DECALAGE_TUILE && j >= DECALAGE_TUILE) && (i < fichier.size()-DECALAGE_TUILE && j < valeursTuiles.size()- DECALAGE_TUILE));
                 m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
                 m_position_to_tuile[std::make_pair(j,i)] = t;
-            }
-            else
-            {
+            } else {
+
                 Tuile* t = new Tuile(Beton);
                 switch (valeursTuiles[j]) {
                 case CASE_DIRECTION_OUEST:
@@ -81,6 +78,7 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
                 default:
                     break;
                 }
+
                 m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
                 m_position_to_tuile[std::make_pair(j,i)] = t;
             }
@@ -91,8 +89,7 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     initialiserSousTypeTuile();
 }
 
-Zone::~Zone()
-{
+Zone::~Zone(){
     // Libération du dictionnaire d'objets
     for (auto &it : m_objets)
     {
@@ -106,19 +103,17 @@ Zone::~Zone()
     }
 }
 
-Tuile* Zone::obtenirTuile(int valeurX, int valeurY) const
-{
+Tuile* Zone::obtenirTuile(int x, int y) const {
     std::pair<int,int> position;
-    position.first=valeurX;
-    position.second=valeurY;
+    position.first=x;
+    position.second=y;
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
     return nullptr;
 }
 
-Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
-{
+Tuile* Zone::obtenirTuile(std::pair <int,int> position) const {
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
@@ -129,28 +124,24 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const
 //! \param position
 //! \return l'objet a cette position ou nullptr s'il n'y en a pas
 //!
-Objet* Zone::obtenirObjet(std::pair <int,int> position) const
-{
-    for (auto it = m_objets.begin(); it != m_objets.end(); ++it )
+Objet* Zone::obtenirObjet(std::pair <int,int> position) const {
+    for (auto it = m_objets.begin(); it != m_objets.end(); ++it)
         if (it->second == position)
             return it->first;
     return nullptr;
 }
 
-bool Zone::objetPresent(std::pair<int, int> position) const
-{
+bool Zone::objetPresent(std::pair<int, int> position) const {
     return obtenirObjet(position) != nullptr;
 }
 
-void Zone::supprimerObjet(Objet* obj)
-{
+void Zone::supprimerObjet(Objet* obj) {
     m_objets.erase(m_objets.find(obj));
     mettreAChange();
     notifierTous();
 }
 
-std::map <Objet*,std::pair <int,int>> Zone::obtenirObjets() const
-{
+std::map <Objet*,std::pair <int,int>> Zone::obtenirObjets() const {
     return m_objets;
 }
 
@@ -159,8 +150,7 @@ std::string Zone::obtenirNom()
     return m_nom;
 }
 
-std::map<Tuile *, std::pair<int, int> > Zone::obtenirTuiles() const
-{
+std::map<Tuile *, std::pair<int, int> > Zone::obtenirTuiles() const {
     return m_tuiles;
 }
 
@@ -168,11 +158,10 @@ int Zone::obtenirTaille() const {
     return m_largeur;
 }
 
-void Zone::initZone()
-{
-    for(int i=0;i<m_hauteur;i++)
+void Zone::initZone() {
+    for(int i = 0; i < m_hauteur; i++)
     {
-        for(int j=0;j<m_largeur;j++)
+        for(int j = 0; j < m_largeur; j++)
         {
             Tuile * t = new Tuile((TypeTuile)2);
             m_tuiles.insert(std::make_pair(t,std::make_pair(i,j)));
@@ -191,19 +180,19 @@ void Zone::initZone()
 
 }
 
-void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
-{
-    int nbGroupeTuileEau = rand() % maxGroupe;
+void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
+    int nbGroupeTuileEau = rand() % max_groupe;
+
     for(int j = 0 ; j < nbGroupeTuileEau; ++j){
         int posX = rand() % m_largeur;
         int posY = rand() % m_hauteur;
 
-        int nbTuiles = rand() % maxTypeSol ;
+        int nbTuiles = rand() % max_type_sol ;
 
         Tuile * t = m_position_to_tuile.at(std::make_pair(posX, posY));
         m_tuiles.erase(t);
         delete t;
-        t = new Tuile((TypeTuile)typeSol);
+        t = new Tuile((TypeTuile)type_sol);
         m_tuiles.insert(std::make_pair(t,std::make_pair(posX,posY)));
         m_position_to_tuile[std::make_pair(posX, posY)] = t;
 
@@ -213,12 +202,15 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
         if(posX > 0) {
             positionsPossiblesVecteur.push_back({posX-1, posY});
         }
+
         if(posX+1 < m_largeur){
             positionsPossiblesVecteur.push_back({posX+1, posY});
         }
+
         if(posY > 0) {
             positionsPossiblesVecteur.push_back({posX, posY-1});
         }
+
         if(posY+1 < m_hauteur){
             positionsPossiblesVecteur.push_back({posX, posY+1});
         }
@@ -233,19 +225,22 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
             m_tuiles.erase(t);
             delete t;
 
-            t = new Tuile(((TypeTuile)typeSol));
+            t = new Tuile(((TypeTuile)type_sol));
             m_tuiles.insert(std::make_pair(t,std::make_pair(p.first,p.second)));
             m_position_to_tuile[std::make_pair(p.first, p.second)] = t;
 
             if(p.first > 0){
                 positionsPossiblesVecteur.push_back({p.first-1, p.second});
             }
+
             if(p.first+1 < m_largeur){
                 positionsPossiblesVecteur.push_back({p.first+1, p.second});
             }
+
             if(p.second > 0){
                 positionsPossiblesVecteur.push_back({p.first, p.second-1});
             }
+
             if(p.second + 1 < m_hauteur){
                 positionsPossiblesVecteur.push_back({p.first, p.second+1});
             }
@@ -253,20 +248,17 @@ void Zone::ajouterSols(int typeSol, int maxTypeSol, int maxGroupe)
     }
 }
 
-void Zone::ajouterObjets(int nbObjets)
+void Zone::ajouterObjets(int nombre_objets)
 {
-    if (nbObjets > 0)
-    {
-        for (int i=0;i<nbObjets;++i)
-        {
+    if (nombre_objets > 0) {
+        for (int i = 0; i < nombre_objets; ++i) {
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
             int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
 
             Tuile * t  = m_position_to_tuile.at(std::make_pair(posX,posY));
 
             // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
-            while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY)))
-            {
+            while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY))) {
                 posX = DECALAGE_TUILE + rand() % (m_largeur - 2 * DECALAGE_TUILE);
                 posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
                 t = m_position_to_tuile.at(std::make_pair(posX,posY));
@@ -499,7 +491,6 @@ void Zone::initialiserSousTypeTuile(){
 //! \author mleothaud
 //!
 
-void Zone::recharger()
-{
+void Zone::recharger(){
     ajouterObjets(20 - m_objets.size());
 }

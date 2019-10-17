@@ -16,8 +16,8 @@
 //! Construit un objet de la classe arme
 //!
 
-Arme::Arme(unsigned short degats, std::string nom, std::string description, int xImg, int yImg)
-    :Objet{nom,description, xImg, yImg},
+Arme::Arme(unsigned short degats, std::string nom, std::string description, int image_x, int image_y)
+    :Objet{nom,description, image_x, image_y},
       m_degats{degats}
 {
 }

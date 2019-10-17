@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Vivre::Vivre(string nom, string description, int valeurNutritive)
+Vivre::Vivre(string nom, string description, int valeur_nutritive)
     : Objet{nom,description},
-      m_valeurNutritive{valeurNutritive}
+      m_valeurNutritive{valeur_nutritive}
 {
 }
 
@@ -24,9 +24,9 @@ int Vivre::obtenirValeurNutritive() const
     return m_valeurNutritive;
 }
 
-void Vivre::definirValeurNutritive(const int &valeurNutritive)
+void Vivre::definirValeurNutritive(const int &valeur_nutritive)
 {
-    m_valeurNutritive = valeurNutritive;
+    m_valeurNutritive = valeur_nutritive;
 }
 
 

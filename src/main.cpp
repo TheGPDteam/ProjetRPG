@@ -14,8 +14,7 @@
 void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
     Controleur* controleur = (Controleur*) ctrl;
-    while (!vue->obtenirFermerJeu())
-    {
+    while (!vue->obtenirFermerJeu()) {
         vue->affichageVue();
         controleur->deroulementJournee();
     }
@@ -36,13 +35,13 @@ void mainloop_func(void* c, void* ctrl){
 int main (){
 
     srand(time(NULL));
-    std::cout << "initialisation Vue" << std::endl;
+    std::cout << "Initialisation de la Vue" << std::endl;
     Vue* vue = new Vue(); //On instancie la vue
-    std::cout << "initialisation Modele" << std::endl;
+    std::cout << "Initialisation du Modele" << std::endl;
     Modele* modele= new Modele(); // On instancie le modele
-    std::cout << "initialisation Controleur" << std::endl;
+    std::cout << "Initialisation du Controleur" << std::endl;
     Controleur controleur{vue,modele}; // On instancie le controleur
-    std::cout << "initialisation MVC done" << std::endl;
+    std::cout << "Initialisation du MVC effectué" << std::endl;
     vue->definirControleur(&controleur);
 
 #ifdef EMSCRIPTEN

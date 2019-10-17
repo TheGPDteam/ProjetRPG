@@ -20,10 +20,10 @@ void QuetePrincipale::calculerPartiesBusReunies()
     m_partiesBusReunies = true;
 }
 
-void QuetePrincipale::ajouterPartieBus(PartieBus *partieBus)
+void QuetePrincipale::ajouterPartieBus(PartieBus *partie_bus)
 {
-    auto it = m_partiesBus.find(partieBus);
-    if (it != m_partiesBus.end() && it->second < m_nombrePartiesRequises.find(partieBus->obtenirTypePartie())->second )
+    auto it = m_partiesBus.find(partie_bus);
+    if (it != m_partiesBus.end() && it->second < m_nombrePartiesRequises.find(partie_bus->obtenirTypePartie())->second )
     {
         it->second++;
         calculerPartiesBusReunies();

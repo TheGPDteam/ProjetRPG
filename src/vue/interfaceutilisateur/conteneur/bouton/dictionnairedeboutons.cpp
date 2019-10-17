@@ -52,7 +52,7 @@ void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::fun
 //! @param coord_y_souris coordonnées de la souris en y lors du clique de la souris
 //! @param type_ecran_courant le type de l'écran courant afin de la modifier ou non
 //! \version 0.2
-//!
+//!ecran_courant
 //! Le clique de la souris sur un bouton engendre un changement d'état de l'écran (donc de son type)
 //!
 
