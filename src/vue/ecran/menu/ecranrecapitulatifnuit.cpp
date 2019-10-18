@@ -17,8 +17,8 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
     : EcranGeneral{controleur}
 {
     short unsigned int largeurFond, hauteurFond;
-    largeurFond = WIDTH_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
-    hauteurFond = HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT;
+    largeurFond = WIDTH_FENETRE_PRINCIPALE - 2 * DECALAGE_FOND_RECAP_NUIT;
+    hauteurFond = HEIGHT_FENETRE_PRINCIPALE - 2 * DECALAGE_FOND_RECAP_NUIT;
 
     m_fondRecapitulatif = {(short int)DECALAGE_FOND_RECAP_NUIT, (short int)DECALAGE_FOND_RECAP_NUIT, largeurFond, hauteurFond};
     m_zoneNombreZombiesTues = new TexteSDL(TEXTE_ZOMBIES_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbZombiesTues()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 15));
@@ -47,8 +47,7 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
 //! Un fichier contient toutes les données pour le récapitulatif
 //!
 
-void EcranRecapitulatifNuit::recuperationDonneesDeLaJournee()
-{
+void EcranRecapitulatifNuit::recuperationDonneesDeLaJournee(){
     m_zoneNombreZombiesTues->mettreAJourTexte(TEXTE_ZOMBIES_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbZombiesTues()));
     m_zoneNombreZombiesAttaquants->mettreAJourTexte(TEXTE_ZOMBIES_ATTAQUANT + std::to_string(m_controleur->obtenirModele()->obtenirNbZombiesAttaquants()));
     m_zoneNombreHumainsTues->mettreAJourTexte(TEXTE_HUMAINS_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbPersosMorts()));
@@ -64,18 +63,15 @@ void EcranRecapitulatifNuit::recuperationDonneesDeLaJournee()
 //! Un fichier contient toutes les données pour le récapitulatif
 //!
 
-void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
-{
+void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_fondRecapitulatif, SDL_MapRGB(fenetre_affichage->format, 100, 100, 100));
 
     recuperationDonneesDeLaJournee();
 
-
-    if (m_controleur->obtenirModele()->perdu())
-    {
+    if  (m_controleur->obtenirModele()->perdu()){
         m_zoneGameOver->afficher(fenetre_affichage);
-        switch (m_controleur->obtenirModele()->obtenirTypeDefaite())
-        {
+
+        switch (m_controleur->obtenirModele()->obtenirTypeDefaite()){
         case TypeDefaite::FAMINE:
         {
             TexteSDL m_zoneGameOverFamine = TexteSDL(TEXTE_GAME_OVER_FAMINE, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 25, m_fondRecapitulatif.y + 100));
@@ -128,21 +124,17 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
 //! Gère les évènements de cet écran
 //!
 
-void EcranRecapitulatifNuit::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
-{
+void EcranRecapitulatifNuit::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -158,8 +150,7 @@ void EcranRecapitulatifNuit::gestionDesEvenements(Controleur *controleur, bool &
 
 
 
-void EcranRecapitulatifNuit::obtenirChangement(Observable &obj)
-{
+void EcranRecapitulatifNuit::obtenirChangement(Observable &obj){
     //TODO: Définir l'objet permettant d'obtenir le changement et d'utiliser recuperationDonneesDeLaJournee
 }
 
@@ -174,28 +165,24 @@ void EcranRecapitulatifNuit::obtenirChangement(Observable &obj)
 //! Détruit tous les éléments de l'écran recapitulatif
 //!
 
-EcranRecapitulatifNuit::~EcranRecapitulatifNuit()
-{
-    if (m_zoneNombreZombiesTues != nullptr)
-    {
+EcranRecapitulatifNuit::~EcranRecapitulatifNuit(){
+    if (m_zoneNombreZombiesTues != nullptr){
         delete m_zoneNombreZombiesTues;
     }
 
-    if (m_zoneNombreZombiesAttaquants != nullptr)
-    {
+    if (m_zoneNombreZombiesAttaquants != nullptr){
         delete m_zoneNombreZombiesAttaquants;
     }
 
-    if (m_zoneNombreHumainsTues != nullptr)
-    {
+    if (m_zoneNombreHumainsTues != nullptr){
         delete m_zoneNombreHumainsTues;
     }
-    if (m_zoneGameOver != nullptr)
-    {
+
+    if (m_zoneGameOver != nullptr){
         delete m_zoneGameOver;
     }
-    if (m_zoneVivresConsommes != nullptr)
-    {
+
+    if (m_zoneVivresConsommes != nullptr){
         delete m_zoneVivresConsommes;
     }
 }

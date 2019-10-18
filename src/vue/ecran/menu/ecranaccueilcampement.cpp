@@ -43,8 +43,7 @@ EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
 
 }
 
-void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
-{
+void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_Rect ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     SDL_FillRect(fenetre_affichage, &ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
     SDL_Rect dest_rect = {0, 0, 0, 0};
@@ -65,22 +64,18 @@ void EcranAccueilCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_
     afficherBoutons(coord_souris, fenetre_affichage);
 }
 
-void EcranAccueilCampement::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
-{
+void EcranAccueilCampement::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -98,19 +93,16 @@ void EcranAccueilCampement::gestionDesEvenements(Controleur *controleur, bool &q
     }
 }
 
-EcranAccueilCampement::~EcranAccueilCampement()
-{
+EcranAccueilCampement::~EcranAccueilCampement(){
 }
 
-void EcranAccueilCampement::obtenirChangement(Observable &obj)
-{
+void EcranAccueilCampement::obtenirChangement(Observable &obj){
     m_tableau_objets->vider();
-    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
-    {
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets()){
         m_tableau_objets->ajouterLigne(o);
     }
-    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres())
-    {
+
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres()){
         m_tableau_objets->ajouterLigne(o);
     }
     m_consoDispo.mettreAJourTexte(TEXTE_CONSOMMATION_DISPONIBLE+std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirValeurNutritiveDisponible()));

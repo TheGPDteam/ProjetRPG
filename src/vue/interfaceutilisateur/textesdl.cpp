@@ -23,18 +23,15 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color &couleur_texte, cons
     : Affichable({coord_texte.first, coord_texte.second})
 {
 
-    if(TTF_Init() == -1)
-    {
+    if (TTF_Init() == -1){
         std::cerr << "Erreur d'initialisation de TTF_Init" << std::endl;
         TTF_Quit();
     }
 
-    if(m_fonts.find(taille_police)== m_fonts.end())
-        m_fonts[taille_police] = TTF_OpenFont(chemin_police.c_str(), taille_police);
+    if (m_fonts.find(taille_police)== m_fonts.end())  m_fonts[taille_police] = TTF_OpenFont(chemin_police.c_str(), taille_police);
 
     m_policeTexte = m_fonts.at(taille_police);
-    if(m_policeTexte == nullptr)
-    {
+    if (m_policeTexte == nullptr){
         std::cerr << SDL_GetError() << std::endl;
     }
 
@@ -84,13 +81,13 @@ TexteSDL::TexteSDL(const std::string texte, const SDL_Color & couleur_texte, con
 //! Affichage du texte dans la fenêtre d'affichage
 //!
 
-void TexteSDL::afficher(SDL_Surface* surface_affichage)
-{
+void TexteSDL::afficher(SDL_Surface* surface_affichage){
     SDL_BlitSurface(m_texte, nullptr, surface_affichage, &m_rectangle);
 }
 
-void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
-    m_rectangle = nouvelleDimension;
+
+void TexteSDL::redimensionner(SDL_Rect nouvelle_dimension) {
+    m_rectangle = nouvelle_dimension;
     std::pair<int, int > tailleTexte = obtenirRectTexte();
     tailleTexte.first*=1.4;
     tailleTexte.second*=1.4;
@@ -112,10 +109,12 @@ void TexteSDL::redimensionner(SDL_Rect nouvelleDimension) {
 
 }
 
+
 void TexteSDL::positionner(std::pair<int, int> & coord){
     m_rectangle.x = coord.first;
     m_rectangle.y = coord.second;
 }
+
 
 std::pair<int, int> TexteSDL::obtenirRectTexte() const{
     int w,h;
@@ -132,12 +131,12 @@ std::pair<int, int> TexteSDL::obtenirRectTexte() const{
 //!
 //! Mise à jour du texte
 //!
-void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
-{
-    m_texteStr = nouveauTexte;
-    if(m_texte != nullptr) SDL_FreeSurface(m_texte);
-    m_texte = TTF_RenderText_Blended(m_policeTexte, nouveauTexte.c_str(), m_couleurTexte);
+void TexteSDL::mettreAJourTexte(std::string nouveau_texte){
+    m_texteStr = nouveau_texte;
+    if (m_texte != nullptr) SDL_FreeSurface(m_texte);
+    m_texte = TTF_RenderText_Blended(m_policeTexte, nouveau_texte.c_str(), m_couleurTexte);
 }
+
 
 //!
 //! \brief Mise à jour de la couleur du texte à afficher
@@ -147,23 +146,20 @@ void TexteSDL::mettreAJourTexte(std::string nouveauTexte)
 //!
 //! Mise à jour de la couleur
 //!
-void TexteSDL::mettreAJourCouleur(SDL_Color nouvelleCouleur)
-{
-    m_couleurTexte = nouvelleCouleur;
-    if(m_texte != nullptr) SDL_FreeSurface(m_texte);
-    m_texte = TTF_RenderText_Blended(m_policeTexte, m_texteStr.c_str(), nouvelleCouleur);
+void TexteSDL::mettreAJourCouleur(SDL_Color nouvelle_couleur){
+    m_couleurTexte = nouvelle_couleur;
+    if (m_texte != nullptr) SDL_FreeSurface(m_texte);
+    m_texte = TTF_RenderText_Blended(m_policeTexte, m_texteStr.c_str(), nouvelle_couleur);
 }
 
 
-std::string TexteSDL::obtenirTexteStr() const
-{
+std::string TexteSDL::obtenirTexteStr() const {
     return m_texteStr;
 }
 
-int TexteSDL::obtenirHauteurFont() const
-{
-    if (m_texte != nullptr)
-    {
+
+int TexteSDL::obtenirHauteurFont() const {
+    if (m_texte != nullptr){
         return m_texte->h;
     }
 
@@ -179,13 +175,8 @@ int TexteSDL::obtenirHauteurFont() const
 //!
 //! Detruit le SDL_Surface servant à afficher le texte si il est initialisé
 //!
-
-TexteSDL::~TexteSDL()
-{
-    if(m_texte != nullptr)
-    {
-        SDL_FreeSurface(m_texte);
-    }
+TexteSDL::~TexteSDL(){
+    if (m_texte != nullptr) SDL_FreeSurface(m_texte);
 }
 
 

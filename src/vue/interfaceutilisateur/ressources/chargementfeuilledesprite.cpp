@@ -30,19 +30,15 @@ ChargementFeuilleDeSprites::ChargementFeuilleDeSprites()
 //! Optimise le format de l'image correspondant au chemin d'accès passé en paramétre
 //!
 
-SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char* chemin_feuille_sprites)
-{
+SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char* chemin_feuille_sprites){
     m_objetConstruit = true;
     SDL_Surface* image;
     SDL_Surface* imageTemporaire = SDL_LoadBMP(chemin_feuille_sprites);
 
-    if(imageTemporaire != nullptr)
-    {
+    if (imageTemporaire != nullptr){
         image = SDL_DisplayFormat(imageTemporaire);
         SDL_FreeSurface(imageTemporaire);
-    }
-    else
-    {
+    } else {
         std::cerr << SDL_GetError() << std::endl;
         exit(-1);
     }
@@ -50,7 +46,7 @@ SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char*
     Uint32 colorkey = SDL_MapRGB( image->format, 128, 255, 255 );
 
     //Set all pixels of color R 0, G 0xFF, B 0xFF to be transparent
-    SDL_SetColorKey( image, SDL_SRCCOLORKEY, colorkey );
+    SDL_SetColorKey( image, SDL_SRCCOLORKEY, colorkey);
 
     return image;
 }
@@ -65,12 +61,9 @@ SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char*
 //! Détruit tout les SDL_Surface* (correspondant aux images chargées) de la map
 //!
 
-ChargementFeuilleDeSprites::~ChargementFeuilleDeSprites()
-{
-    if(!m_imagesDeFeuilleDeSprites.empty())
-    {
-        for( auto it = m_imagesDeFeuilleDeSprites.begin(); it != m_imagesDeFeuilleDeSprites.end(); ++it)
-        {
+ChargementFeuilleDeSprites::~ChargementFeuilleDeSprites(){
+    if (!m_imagesDeFeuilleDeSprites.empty()){
+        for (auto it = m_imagesDeFeuilleDeSprites.begin(); it != m_imagesDeFeuilleDeSprites.end(); ++it){
             delete it->second;
         }
 
@@ -79,16 +72,13 @@ ChargementFeuilleDeSprites::~ChargementFeuilleDeSprites()
 }
 
 ChargementFeuilleDeSprites* ChargementFeuilleDeSprites::instance() {
-    if(m_instance == nullptr)
-        m_instance = new ChargementFeuilleDeSprites();
-    if(!m_objetConstruit){
-        m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = m_instance->optimisationChargementImage("../rsc/sprites/Sprites.bmp");
-    }
+   if(m_instance == nullptr)   m_instance = new ChargementFeuilleDeSprites();
+   if(!m_objetConstruit)       m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = m_instance->optimisationChargementImage("../rsc/sprites/Sprites.bmp");
+
    return m_instance;
 }
 
 
 void ChargementFeuilleDeSprites::supprimerInstance(){
-    if(m_instance != nullptr)
-        delete m_instance;
+    if(m_instance != nullptr)  delete m_instance;
 }

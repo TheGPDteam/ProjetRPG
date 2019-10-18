@@ -9,22 +9,20 @@ SpritePersonnage::SpritePersonnage(std::vector<SpriteAnime *> sprites)
 }
 
 
-void SpritePersonnage::afficher(SDL_Surface *surface)
-{
+void SpritePersonnage::afficher(SDL_Surface *surface){
     m_sprites_animes.at(m_direction_joueur)->afficher(surface);
 }
 
-void SpritePersonnage::deplacementJoueur(Direction direction)
-{
-    if (m_direction_joueur != direction)
-    {
+
+void SpritePersonnage::deplacementJoueur(Direction direction){
+    if (m_direction_joueur != direction){
         m_sprites_animes.at(m_direction_joueur)->reinitialiser();
         m_direction_joueur = direction;
     }
 }
 
-SpritePersonnage* SpritePersonnage::obtenirSpritesJoueur()
-{
+
+SpritePersonnage* SpritePersonnage::obtenirSpritesJoueur(){
     std::vector<SpriteAnime*> sprites_animes =
     {
         new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320,320,64,64}, SDL_Rect{2*64,5*64,64,64}},
@@ -46,10 +44,9 @@ SpritePersonnage* SpritePersonnage::obtenirSpritesJoueur()
     return new SpritePersonnage(sprites_animes);
 }
 
-SpritePersonnage::~SpritePersonnage()
-{
-    for (SpriteAnime* sprite_anime : m_sprites_animes)
-    {
+
+SpritePersonnage::~SpritePersonnage(){
+    for (SpriteAnime* sprite_anime : m_sprites_animes){
         delete sprite_anime;
     }
 }

@@ -9,11 +9,8 @@
 //!
 //! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
 //!
-
-Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false)
-{
-    if(SDL_Init(SDL_INIT_EVERYTHING) == -1)
-    {
+Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false){
+    if (SDL_Init(SDL_INIT_EVERYTHING) == -1){
         std::cerr << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
         SDL_Quit();
     }
@@ -36,9 +33,7 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 //!
 //! Initialise le controleur de la vue en fonction du controleur en paramètre
 //!
-
-void Vue::definirControleur(Controleur *controleur)
-{
+void Vue::definirControleur(Controleur *controleur){
 
     m_controleur=controleur;
     std::cout << "Initialisation de la scene EcranJeuPrincipal" << std::endl;
@@ -67,7 +62,7 @@ void Vue::definirControleur(Controleur *controleur)
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
     std::cout << "Initialisation de la scene EcranQueteCampement" << std::endl;
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
-    std::cout << "Initialisation de la scene ecran done" << std::endl;
+    std::cout << "Initialisation des ecrans effectués" << std::endl;
 
     Modele * modele = m_controleur->obtenirModele();
     Joueur * j = modele->obtenirJoueur();
@@ -106,101 +101,96 @@ void Vue::definirControleur(Controleur *controleur)
 //!
 //! Affiche la vue en fonction de son type d'écran (correspondant à m_typeEcran)
 //!
-
-void Vue::affichageVue()
-{
-    switch(m_typeEcran)
-    {
-    case TypeEcran::MenuPrincipal:{
-        afficherEcran(m_menuPrincipal);
-        break;
-    }
-    case TypeEcran::ChasseJoueur:{
-        //Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
-        //Quete q("Chasse","Chasse les zombies",10,100,a);
-        //m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
-        changerEcran(TypeEcran::JeuPrincipal);
-        break;
-    }
-    case TypeEcran::RecolteJoueur:{
-        //Vivre* v = new Vivre("steak","steak",15);
-        //        Quete q("Récolte","fais à manger!",10,100,v);
-        //        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
-        changerEcran(TypeEcran::JeuPrincipal);
-        break;
-    }
-    case TypeEcran::JeuPrincipal:{
-        afficherEcran(m_jeuPrincipal);
-        break;
-    }
-    case TypeEcran::Equipe:{
-        afficherEcran(m_ecranEquipe);
-        break;
-    }
-    case TypeEcran::Inventaire:{
-        afficherEcran(m_ecranInventaire);
-        break;
-    }
-    case TypeEcran::ChoixPersonnage:{
-        afficherEcran(m_ecranChoixPersonnage);
-        break;
-    }
-    case TypeEcran::ChoixQuete:{
-        afficherEcran(m_ecranChoixQuete);
-        break;
-    }
-    case TypeEcran::PopUpJoueur:{
-        afficherEcran(m_ecranQueteJoueur);
-        break;
-    }
-    case TypeEcran::choixNom:{
-        afficherEcran(m_ecranNom);
-        break;
-    }
-    case TypeEcran::PremiereJournee:
-    {
-        afficherEcran(m_ecranPremiereJournee);
-        break;
-    }
-    case TypeEcran::RecapitulatifNuit:
-    {
-        m_controleur->sauvegarderModele();
-        afficherEcran(m_ecranRecapitulatifNuit);
-        break;
-    }
-    case  TypeEcran::Quitter:
-    {
-        m_quitterJeu = true;
-        break;
-    }
-    case TypeEcran::AccueilCampement:
-    {
-        afficherEcran(m_ecranAccueilCampement);
-        break;
-    }
-    case TypeEcran::ListeObjet:
-    {
-        afficherEcran(m_ecranListeObjet);
-        break;
-    }
-    case TypeEcran::QueteCampement:
-    {
-        afficherEcran(m_ecranQueteCampement);
-        break;
-    }
-    default:{
-        std::cerr << "Erreur d'initialisation du type d'affichage !" << std::endl;
-        break;
-    }
+void Vue::affichageVue(){
+    switch(m_typeEcran){
+        case TypeEcran::MenuPrincipal:{
+            afficherEcran(m_menuPrincipal);
+            break;
+        }
+        case TypeEcran::ChasseJoueur:{
+            //Arme* a = new Arme(22,"AK","mitrailleur portatif consus durant cette guerre par les Russes pour prendre l'avantages sur ces sales Nazis");
+            //Quete q("Chasse","Chasse les zombies",10,100,a);
+            //m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+            changerEcran(TypeEcran::JeuPrincipal);
+            break;
+        }
+        case TypeEcran::RecolteJoueur:{
+            //Vivre* v = new Vivre("steak","steak",15);
+            //        Quete q("Récolte","fais à manger!",10,100,v);
+            //        m_controleur->obtenirModele()->obtenirJoueur()->nouvelleQuete(q);
+            changerEcran(TypeEcran::JeuPrincipal);
+            break;
+        }
+        case TypeEcran::JeuPrincipal:{
+            afficherEcran(m_jeuPrincipal);
+            break;
+        }
+        case TypeEcran::Equipe:{
+            afficherEcran(m_ecranEquipe);
+            break;
+        }
+        case TypeEcran::Inventaire:{
+            afficherEcran(m_ecranInventaire);
+            break;
+        }
+        case TypeEcran::ChoixPersonnage:{
+            afficherEcran(m_ecranChoixPersonnage);
+            break;
+        }
+        case TypeEcran::ChoixQuete:{
+            afficherEcran(m_ecranChoixQuete);
+            break;
+        }
+        case TypeEcran::PopUpJoueur:{
+            afficherEcran(m_ecranQueteJoueur);
+            break;
+        }
+        case TypeEcran::choixNom:{
+            afficherEcran(m_ecranNom);
+            break;
+        }
+        case TypeEcran::PremiereJournee:
+        {
+            afficherEcran(m_ecranPremiereJournee);
+            break;
+        }
+        case TypeEcran::RecapitulatifNuit:
+        {
+            m_controleur->sauvegarderModele();
+            afficherEcran(m_ecranRecapitulatifNuit);
+            break;
+        }
+        case  TypeEcran::Quitter:
+        {
+            m_quitterJeu = true;
+            break;
+        }
+        case TypeEcran::AccueilCampement:
+        {
+            afficherEcran(m_ecranAccueilCampement);
+            break;
+        }
+        case TypeEcran::ListeObjet:
+        {
+            afficherEcran(m_ecranListeObjet);
+            break;
+        }
+        case TypeEcran::QueteCampement:
+        {
+            afficherEcran(m_ecranQueteCampement);
+            break;
+        }
+        default:{
+            std::cerr << "Erreur d'initialisation du type d'affichage !" << std::endl;
+            break;
+        }
     }
 
-    if(!m_quitterJeu) // Sans cette condition segfault à cause du SDL_Quit() de gestionEvenementJoueur
-    {
+    if(!m_quitterJeu){ // Sans cette condition segfault à cause du SDL_Quit() de gestionEvenementJoueur
         SDL_Flip(m_fenetrePrincipale);
-#ifndef EMSCRIPTEN
-        ;
-//        SDL_Delay(DELAI);
-#endif
+        #ifndef EMSCRIPTEN
+        //        SDL_Delay(DELAI);
+        #endif
     }
 }
 
@@ -214,17 +204,13 @@ void Vue::affichageVue()
 //!
 //! Affiche tout le contenu de l'écran placé en paramètre et vérifie si il n,'y a pas un clique souris
 //!
+void Vue::afficherEcran(EcranGeneral* ecran_courant){
+    if(ecran_courant != nullptr){
+        ecran_courant->afficherEcran(m_coordSouris, m_fenetrePrincipale);
+        ecran_courant->gestionDesEvenements(m_controleur, m_quitterJeu, m_cliqueSouris, m_coordSouris);
 
-void Vue::afficherEcran(EcranGeneral* ecranCourant)
-{
-    if(ecranCourant != nullptr)
-    {
-        ecranCourant->afficherEcran(m_coordSouris, m_fenetrePrincipale);
-        ecranCourant->gestionDesEvenements(m_controleur, m_quitterJeu, m_cliqueSouris, m_coordSouris);
-
-        if(m_cliqueSouris)
-        {
-            m_typeEcran = ecranCourant->verificationCliqueSourisSurBoutons(m_coordSouris, m_typeEcran);
+        if (m_cliqueSouris){
+            m_typeEcran = ecran_courant->verificationCliqueSourisSurBoutons(m_coordSouris, m_typeEcran);
             m_cliqueSouris = false;
         }
     }
@@ -254,9 +240,7 @@ TypeEcran Vue::obtenirEcranCourant() const {
 //!
 //! Retourne la valeur de m_quitterJeu
 //!
-
-bool Vue::obtenirFermerJeu()
-{
+bool Vue::obtenirFermerJeu(){
     return m_quitterJeu;
 }
 
@@ -270,72 +254,59 @@ bool Vue::obtenirFermerJeu()
 //!
 //! Détruit l'écran du menu princiapal si il était initialisé
 //!
+Vue::~Vue(){
 
-Vue::~Vue()
-{
-
-    if(m_menuPrincipal != nullptr)
-    {
+    if (m_menuPrincipal != nullptr){
         delete m_menuPrincipal;
         m_menuPrincipal = nullptr;
     }
 
-    if(m_jeuPrincipal != nullptr)
-    {
+    if (m_jeuPrincipal != nullptr){
         delete m_jeuPrincipal;
         m_jeuPrincipal = nullptr;
     }
 
-    if(m_ecranEquipe != nullptr)
-    {
+    if (m_ecranEquipe != nullptr){
         delete m_ecranEquipe;
         m_ecranEquipe = nullptr;
     }
 
-    if(m_ecranInventaire != nullptr)
-    {
+    if (m_ecranInventaire != nullptr){
         delete m_ecranInventaire;
         m_ecranInventaire = nullptr;
     }
 
-    if(m_ecranChoixQuete != nullptr)
-    {
+    if (m_ecranChoixQuete != nullptr){
         delete m_ecranChoixQuete;
         m_ecranChoixQuete = nullptr;
     }
 
-    if(m_ecranChoixPersonnage != nullptr)
-    {
+    if (m_ecranChoixPersonnage != nullptr){
         delete m_ecranChoixPersonnage;
         m_ecranChoixPersonnage = nullptr;
     }
 
-    if(m_ecranNom != nullptr)
-    {
+    if (m_ecranNom != nullptr){
         delete m_ecranNom;
         m_ecranNom = nullptr;
     }
 
-    if(m_ecranQueteJoueur)
-    {
+    if (m_ecranQueteJoueur){
         delete m_ecranQueteJoueur;
         m_ecranQueteJoueur = nullptr;
     }
 
-    if (m_ecranRecapitulatifNuit)
-    {
+    if (m_ecranRecapitulatifNuit){
         delete m_ecranRecapitulatifNuit;
         m_ecranRecapitulatifNuit = nullptr;
     }
 
-    if (m_ecranPremiereJournee != nullptr)
-    {
+    if (m_ecranPremiereJournee != nullptr){
         delete m_ecranPremiereJournee;
         m_ecranPremiereJournee = nullptr;
     }
 
-    if (m_ecranAccueilCampement != nullptr)
-    {
+    if (m_ecranAccueilCampement != nullptr){
         delete m_ecranAccueilCampement;
         m_ecranAccueilCampement = nullptr;
     }
@@ -345,6 +316,7 @@ Vue::~Vue()
     SDL_Quit();
 }
 
+
 //!
 //! \brief Vue::changerEcran
 //! \param nouvelEcran
@@ -352,6 +324,7 @@ Vue::~Vue()
 void Vue::changerEcran(TypeEcran nouvelEcran){
     m_typeEcran = nouvelEcran;
 }
+
 
 SDL_Surface* Vue::obtenirFenetrePrincipale(){
     return m_fenetrePrincipale;

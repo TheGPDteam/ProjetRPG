@@ -47,15 +47,12 @@ Bouton::Bouton(const std::string texte,
 //! Détruit l'image et le texte d'un bouton si ils ont été initialisé
 //!
 
-Bouton::~Bouton()
-{
-    if(m_spriteBouton != nullptr)
-    {
+Bouton::~Bouton() {
+    if (m_spriteBouton != nullptr){
         delete m_spriteBouton;
     }
 
-    if(m_texteBouton != nullptr)
-    {
+    if (m_texteBouton != nullptr){
         delete m_texteBouton;
     }
 }
@@ -70,8 +67,7 @@ Bouton::~Bouton()
 //!
 
 
-void Bouton::afficher(SDL_Surface* surface)
-{
+void Bouton::afficher(SDL_Surface* surface){
     m_spriteBouton->afficher(surface);
     m_texteBouton->afficher(surface);
 }
@@ -85,8 +81,7 @@ void Bouton::afficher(SDL_Surface* surface)
 //! \version 1.0
 //!
 
-Sprite* Bouton::obtenirSpriteBouton()
-{
+Sprite* Bouton::obtenirSpriteBouton(){
     return m_spriteBouton;
 }
 
@@ -96,8 +91,8 @@ void Bouton::definirCliquable(bool actif){
     m_texteBouton->mettreAJourCouleur((actif ? COULEUR_BOUTON_CLIQUABLE : COULEUR_BOUTON_NON_CLIQUABLE));
 }
 
-void Bouton::redimensionner(SDL_Rect m_rectangle){
-    this->m_rectangle = m_rectangle;
+void Bouton::redimensionner(SDL_Rect rectangle){
+    this->m_rectangle = rectangle;
 }
 
 std::string Bouton::obtenirTexte(){

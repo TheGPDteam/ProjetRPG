@@ -5,3 +5,5 @@ build-src*/
 src/save/*.xml
 src/src
 src/Makefile
+build/
+src/vue/vue.cpp.autosave

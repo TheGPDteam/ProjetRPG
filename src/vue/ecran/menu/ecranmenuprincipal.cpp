@@ -40,8 +40,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 //!
 
 
-void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
-{
+void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
     afficherFondEcran(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
 }
@@ -60,22 +59,18 @@ void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Sur
 //! Gère les évènements de cet écran
 //!
 
-void EcranMenuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
-{
+void EcranMenuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch (evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -100,8 +95,7 @@ void EcranMenuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quit
 //! Détruit tout les élément d'une menu principal
 //!
 
-EcranMenuPrincipal::~EcranMenuPrincipal()
-{
+EcranMenuPrincipal::~EcranMenuPrincipal(){
 
 }
 

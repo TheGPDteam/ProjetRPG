@@ -27,7 +27,7 @@ public :
     void chargerSauvegarde();
 
     void sauvegarderModele();
-    void sauvegarderModele(std::string nomSauvegarde);
+    void sauvegarderModele(std::string nom_sauvegarde);
 
     void deplacementJoueur(Direction dir);
 

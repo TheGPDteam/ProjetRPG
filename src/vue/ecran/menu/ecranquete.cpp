@@ -57,8 +57,7 @@ EcranQuete::~EcranQuete(){
 }
 
 
-void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
-{
+void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
     std::pair<int, int> coordB((WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2), (HEIGHT_FENETRE_PRINCIPALE)-(HEIGHT_BOUTON_NORMAL)-10);
     std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
@@ -76,44 +75,40 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
         itr->first->afficher(fenetre_affichage);
 
 
-    if(m_ecranRepartitionJoueur->obtenirEtatAfficher()){
+    if (m_ecranRepartitionJoueur->obtenirEtatAfficher()){
         m_ecranRepartitionJoueur->afficherEcran(coord_souris,fenetre_affichage);
-    }else{
+    } else {
         afficherBoutons(coord_souris, fenetre_affichage);
     }
-
 }
 
 void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
 {
-    if(m_ecranRepartitionJoueur->obtenirEtatAfficher()){
+    if (m_ecranRepartitionJoueur->obtenirEtatAfficher()){
         m_ecranRepartitionJoueur->gestionDesEvenements(controleur, quitter_jeu, clique_souris, coord_souris);
         return;
     }
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
+    while (SDL_PollEvent(&evenements)){
         //std::pair<int, int> coord_souris2 = std::make_pair(evenements.button.x, evenements.button.y);
-        switch(evenements.type)
-        {
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
                     Ligne * lig = itr->first->gestionEvenementClique(coord_souris);
                     if(lig != nullptr){
                         int idHumain = lig->m_idLigne;
-                        if(itr->second == nullptr){
+                        if (itr->second == nullptr){
                             auto humainsModel=  m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees();
                             std::vector<Humain *> humains(humainsModel.begin(), humainsModel.end());
                             m_ecranRepartitionJoueur->definirHumain(humains.at(idHumain-1));
-                        }else{
+                        } else {
                             auto humainsModel=  itr->second->obtenirListePersonnage();
                             std::vector<Personnage *> perso(humainsModel.begin(), humainsModel.end());
                             m_ecranRepartitionJoueur->definirHumain(dynamic_cast<Humain *>(perso.at(idHumain-1)));
@@ -134,11 +129,11 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             }
             break;
         default:
-            if(DictionnaireDeBoutons::boutonValiderEntree("Votre Quete",evenements,clique_souris,coord_souris)) break;
+            if (DictionnaireDeBoutons::boutonValiderEntree("Votre Quete",evenements,clique_souris,coord_souris)) break;
+
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;
-
         }
     }
 }
@@ -148,12 +143,12 @@ void EcranQuete::obtenirChangement(Observable &obj){
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr) {
         TableauDefilable * tab = itr->first;
         tab->vider();
-        if(itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
+        if (itr->second == nullptr){ //cas ou c'est le tableau non attribue et donc pas d'equipe
             for (Humain *h : m_controleur->obtenirModele()->obtenirCampement()->obtenirNonAttribuees())
             {
                 tab->ajouterLigne(h);
             }
-        }else{
+        } else {
             for (Personnage *p : itr->second->obtenirListePersonnage())
                 tab->ajouterLigne(dynamic_cast <Humain *> (p));
         }

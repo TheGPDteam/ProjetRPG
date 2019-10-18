@@ -24,8 +24,7 @@ ActionsBoutons::ActionsBoutons(Controleur * controleur)
 //! Si un bouton "continuer" est cliqué alors on retourne le nouveau type de l'écran
 //!
 
-TypeEcran ActionsBoutons::boutonJeuPrincipal() const
-{
+TypeEcran ActionsBoutons::boutonJeuPrincipal() const {
     m_controleur->obtenirModele()->obtenirTemps()->reprendre();
     return TypeEcran::JeuPrincipal;
 }
@@ -41,8 +40,7 @@ TypeEcran ActionsBoutons::boutonJeuPrincipal() const
 //! Si un bouton "quitter" est cliqué alors on quitte le jeu
 //!
 
-TypeEcran ActionsBoutons::boutonQuitter() const
-{
+TypeEcran ActionsBoutons::boutonQuitter() const {
     return TypeEcran::Quitter;
 }
 
@@ -57,8 +55,7 @@ TypeEcran ActionsBoutons::boutonQuitter() const
 //! Si un bouton "Inventaire" est cliqué alors on retourne le nouveau type de l'écran
 //!
 
-TypeEcran ActionsBoutons::boutonInventaire() const
-{
+TypeEcran ActionsBoutons::boutonInventaire() const{
     return TypeEcran::Inventaire;
 }
 
@@ -73,8 +70,7 @@ TypeEcran ActionsBoutons::boutonInventaire() const
 //! Si un bouton "Equipe" est cliqué alors on retourne le nouveau type de l'écran
 //!
 
-TypeEcran ActionsBoutons::boutonEquipe() const
-{
+TypeEcran ActionsBoutons::boutonEquipe() const {
     return TypeEcran::Equipe;
 }
 
@@ -89,8 +85,7 @@ TypeEcran ActionsBoutons::boutonEquipe() const
 //!
 //! Si un bouton "ChoixPersonnage" est cliqué alors on retourne le nouveau type de l'écran
 //!
-TypeEcran ActionsBoutons::boutonChoixPersonnage() const
-{
+TypeEcran ActionsBoutons::boutonChoixPersonnage() const {
     m_controleur->obtenirModele()->changerNouvelArrivant(new Humain);
     return TypeEcran::ChoixPersonnage;
 }
@@ -99,39 +94,36 @@ TypeEcran ActionsBoutons::boutonQuete() const {
     return TypeEcran::ChoixQuete;
 }
 
-TypeEcran ActionsBoutons::boutonQueteAcceptation()
-{
+TypeEcran ActionsBoutons::boutonQueteAcceptation(){
     m_controleur->choixNouvelArrivant(true);
     m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuete()->definirValeurObjectif(m_controleur->obtenirModele()->obtenirCampement()->obtenirConsommation());
     return TypeEcran::ChoixQuete;
 }
 
-TypeEcran ActionsBoutons::boutonQueteRefus()
-{
+TypeEcran ActionsBoutons::boutonQueteRefus(){
     m_controleur->choixNouvelArrivant(false);
     return TypeEcran::ChoixQuete;
 }
 
-TypeEcran ActionsBoutons::boutonChoixJoueur() const
-{
+TypeEcran ActionsBoutons::boutonChoixJoueur() const {
     return TypeEcran::PopUpJoueur;
 }
-TypeEcran ActionsBoutons::boutonChasseJoueur() const
-{
+
+TypeEcran ActionsBoutons::boutonChasseJoueur() const {
     Modele * m =  m_controleur->obtenirModele();
     m->reinitialiserTemps();
     m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeChasse());
     return TypeEcran::ChasseJoueur;
 }
-TypeEcran ActionsBoutons::boutonRecolteJoueur() const
-{
+
+TypeEcran ActionsBoutons::boutonRecolteJoueur() const {
     Modele * m =  m_controleur->obtenirModele();
     m->reinitialiserTemps();
     m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeRecolte());
     return TypeEcran::RecolteJoueur;
 }
-TypeEcran ActionsBoutons::boutonCampementJoueur() const
-{
+
+TypeEcran ActionsBoutons::boutonCampementJoueur() const {
     Modele * m =  m_controleur->obtenirModele();
     m->reinitialiserTemps();
     m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeCampement());
@@ -148,19 +140,18 @@ TypeEcran ActionsBoutons::boutonCampementJoueur() const
 //!
 //! Si un bouton "NouvellePartie" est cliqué alors on retourne le nouveau type de l'écran
 //!
-TypeEcran ActionsBoutons::boutonNouvellePartie() const
-{
+TypeEcran ActionsBoutons::boutonNouvellePartie() const {
     return TypeEcran::PremiereJournee;
 }
-TypeEcran ActionsBoutons::boutonChoixNom() const
-{
+
+TypeEcran ActionsBoutons::boutonChoixNom() const {
     return TypeEcran::choixNom;
 }
 
 TypeEcran ActionsBoutons::boutonViderInventaire() {
     Modele * m = m_controleur->obtenirModele();
     Joueur * j = m->obtenirJoueur();
-    if(j->obtenirInventaire()->obtenirNombreObjet()!=0) {
+    if (j->obtenirInventaire()->obtenirNombreObjet()!=0) {
         std::vector<Objet*> objets = j->obtenirInventaire()->obtenirObjets();
         for (Objet* obj : objets) {
             m->obtenirCampement()->ajouterObjet(obj);
@@ -198,7 +189,7 @@ TypeEcran ActionsBoutons::boutonCampement() {
 
 TypeEcran ActionsBoutons::boutonViderInventaireCampement() {
     //CECI N'A RIEN A FAIRE DANS LA VUE, ON DOIT APPELER UNE FONCTION DU CONTROLEUR, QUI DOIT APPELER UNE FONCTION DU MODELE EFFECTUANT TOUT CELA
-    if(m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->obtenirNombreObjet()!=0) {
+    if (m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->obtenirNombreObjet()!=0) {
         std::vector<Objet*> objets = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire()->obtenirObjets();
         for (Objet* obj : objets) {
             m_controleur->obtenirModele()->obtenirCampement()->ajouterObjet(obj);
@@ -223,8 +214,7 @@ TypeEcran ActionsBoutons::boutonListeObjet() {
 //!
 //! Note : temps de retard de la vue
 //!
-TypeEcran ActionsBoutons::boutonJeuPrincipalCampement()
-{
+TypeEcran ActionsBoutons::boutonJeuPrincipalCampement() {
     m_controleur->obtenirModele()->obtenirCarte()->zoneActiveCampement();
     m_controleur->obtenirModele()->obtenirJoueur()->definirPosition(std::make_pair(10,10));
     return TypeEcran::JeuPrincipal;

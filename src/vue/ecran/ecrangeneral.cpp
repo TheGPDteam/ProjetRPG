@@ -23,8 +23,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur) :
 //! \version 1.0
 //!
 
-EcranGeneral::~EcranGeneral()
-{
+EcranGeneral::~EcranGeneral(){
     SDL_FreeSurface(m_fond);
 }
 

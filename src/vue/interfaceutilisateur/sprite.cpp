@@ -31,8 +31,7 @@ Sprite::Sprite(const std::string cle_map_sprites, const SDL_Rect position_dans_f
 //! Change le sprite à partir de la feuille de sprite
 //!
 
-void Sprite::changementSprite(const SDL_Rect position_dans_feuille_de_sprite)
-{
+void Sprite::changementSprite(const SDL_Rect position_dans_feuille_de_sprite){
     m_coordDansLaFeuilleDeSprite = position_dans_feuille_de_sprite;
 }
 
@@ -46,13 +45,11 @@ void Sprite::changementSprite(const SDL_Rect position_dans_feuille_de_sprite)
 //! Affiche une partie de la feuille de sprite, partie correspondant au sprite voulu
 //!
 
-void Sprite::afficher(SDL_Surface* surface_affichage)
-{
+void Sprite::afficher(SDL_Surface* surface_affichage){
     ChargementFeuilleDeSprites * cfds =  ChargementFeuilleDeSprites::instance();
     auto it = cfds->m_imagesDeFeuilleDeSprites.find(m_cleMapSprites);
 
-    if(it != cfds->m_imagesDeFeuilleDeSprites.end())
-    {
+    if (it != cfds->m_imagesDeFeuilleDeSprites.end()){
         SDL_BlitSurface(it->second, &m_coordDansLaFeuilleDeSprite, surface_affichage, &m_rectangle);
     }
 }
@@ -72,8 +69,7 @@ void Sprite::redimensionner(SDL_Rect rectangle){
 //! Retourne la position dans la fenêtre du sprite
 //!
 
-SDL_Rect Sprite::obtenirCoordonneesSprite()
-{
+SDL_Rect Sprite::obtenirCoordonneesSprite(){
     return m_rectangle;
 }
 
@@ -89,11 +85,11 @@ SDL_Rect Sprite::obtenirCoordonneesSprite()
 //! Permet de déplacer le sprite
 //!
 
-void Sprite::changerPosition(int x, int y)
-{
+void Sprite::changerPosition(int x, int y){
     m_rectangle.x = x;
     m_rectangle.y = y;
 }
+
 
 //!
 //! \brief Destructeur d'un sprite
@@ -103,8 +99,6 @@ void Sprite::changerPosition(int x, int y)
 //!
 //! Appelle le destructeur de la classe ChargementFeuilleDeSprite
 //!
-
-Sprite::~Sprite()
-{
+Sprite::~Sprite(){
 
 }

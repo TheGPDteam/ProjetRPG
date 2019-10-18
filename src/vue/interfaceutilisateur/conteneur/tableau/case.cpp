@@ -18,8 +18,7 @@ Case::Case(SDL_Rect rect, Affichable * donnee, Controleur * controleur, int idCa
 //!
 //! \brief Case::~Case
 //!
-Case::~Case()
-{
+Case::~Case(){
     delete m_donnee;
 }
 
@@ -27,8 +26,7 @@ Case::~Case()
 //! \brief Case::afficher
 //! \param surface
 //!
-void Case::afficher(SDL_Surface *surface)
-{
+void Case::afficher(SDL_Surface *surface){
     m_donnee->afficher(surface);
 }
 
@@ -36,8 +34,7 @@ void Case::afficher(SDL_Surface *surface)
 //! \brief Case::redimensionner redimmensione la donnee
 //! \param m_rectangle
 //!
-void Case::redimensionner(SDL_Rect rectangle)
-{
+void Case::redimensionner(SDL_Rect rectangle){
     m_donnee->redimensionner(rectangle);
 }
 
@@ -46,8 +43,7 @@ void Case::redimensionner(SDL_Rect rectangle)
 //! \param donnee
 //! Attention, la donnee precedente est efface
 //!
-void Case::definirDonnee(Affichable *donnee)
-{
+void Case::definirDonnee(Affichable *donnee){
     delete m_donnee;
     m_donnee = donnee;
 }
@@ -56,8 +52,7 @@ void Case::definirDonnee(Affichable *donnee)
 //! \brief Case::obtenirDonnee
 //! \return
 //!
-Affichable *Case::obtenirDonnee() const
-{
+Affichable *Case::obtenirDonnee() const {
     return m_donnee;
 }
 
@@ -69,6 +64,6 @@ void Case::clique(){
  //TODO
 }
 
-int Case::obtenirIdCase() const{
+int Case::obtenirIdCase() const {
     return m_id;
 }

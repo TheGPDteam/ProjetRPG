@@ -47,18 +47,15 @@ void EcranQueteJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surfa
 void EcranQueteJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -66,7 +63,7 @@ void EcranQueteJoueur::gestionDesEvenements(Controleur *controleur, bool &quitte
             break;
 
         default:
-            if(DictionnaireDeBoutons::boutonValiderEntree("Recolte",evenements,clique_souris,coord_souris)) break;
+            if (DictionnaireDeBoutons::boutonValiderEntree("Recolte",evenements,clique_souris,coord_souris)) break;
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
             break;

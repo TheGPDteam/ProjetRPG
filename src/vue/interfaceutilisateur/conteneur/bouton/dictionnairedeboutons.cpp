@@ -32,12 +32,10 @@ DictionnaireDeBoutons::DictionnaireDeBoutons(Controleur * controleur) :
 //! On ne peut ajouter un bouton que si il n'est pas encore présent dns la map
 //!
 
-void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::function<TypeEcran(ActionsBoutons &)> action_bouton)
-{
+void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::function<TypeEcran(ActionsBoutons &)> action_bouton){
     auto iterateurBouton = m_mapDeBoutons.find(bouton);
 
-    if(iterateurBouton == m_mapDeBoutons.end())
-    {
+    if (iterateurBouton == m_mapDeBoutons.end()){
         m_mapDeBoutons[bouton] = action_bouton;
     }
 }
@@ -56,20 +54,15 @@ void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::fun
 //! Le clique de la souris sur un bouton engendre un changement d'état de l'écran (donc de son type)
 //!
 
-TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBoutons(std::pair<int, int> coord_souris, TypeEcran type_ecran_courant)
-{
+TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBoutons(std::pair<int, int> coord_souris, TypeEcran type_ecran_courant){
     auto iterateurBouton = m_mapDeBoutons.begin();
     bool trouver = false;
 
-    while(iterateurBouton != m_mapDeBoutons.end() && !trouver)
-    {
-        if(iterateurBouton->first->estCliquable() && iterateurBouton->first->contient(coord_souris))
-        {
+    while (iterateurBouton != m_mapDeBoutons.end() && !trouver){
+        if (iterateurBouton->first->estCliquable() && iterateurBouton->first->contient(coord_souris)){
             trouver = true;
             type_ecran_courant = iterateurBouton->second(*m_actionsBoutons);
-        }
-        else
-        {
+        } else {
             ++iterateurBouton;
         }
     }
@@ -89,12 +82,9 @@ TypeEcran DictionnaireDeBoutons::verificationCliqueSourisSurBoutons(std::pair<in
 //! Change le sprite du bouton si on le survole
 //!
 
-void DictionnaireDeBoutons::verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris)
-{
-    if (bouton->contient(coord_souris))
-        bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL_ACTIF);
-    else
-        bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
+void DictionnaireDeBoutons::verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris){
+    if (bouton->contient(coord_souris))  bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL_ACTIF);
+    else                                 bouton->obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
 }
 
 void DictionnaireDeBoutons::remiseAZeroBoutons(){
@@ -117,12 +107,9 @@ void DictionnaireDeBoutons::remiseAZeroBoutons(Bouton * b){
 //! Le clique de la souris sur un bouton engendre un changement d'état de l'écran (donc de son type)
 //!
 
-void DictionnaireDeBoutons::afficherBoutons(const std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
-{ 
-    for(auto iterateurBouton = m_mapDeBoutons.begin(); iterateurBouton != m_mapDeBoutons.end(); ++iterateurBouton)
-    {
-        if(iterateurBouton->first->estCliquable())
-        {
+void DictionnaireDeBoutons::afficherBoutons(const std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
+    for (auto iterateurBouton = m_mapDeBoutons.begin(); iterateurBouton != m_mapDeBoutons.end(); ++iterateurBouton){
+        if (iterateurBouton->first->estCliquable()){
             verificationSourisSurBouton(iterateurBouton->first, coord_souris);
         }
 
@@ -132,16 +119,16 @@ void DictionnaireDeBoutons::afficherBoutons(const std::pair<int, int> coord_sour
 
 
 Bouton * DictionnaireDeBoutons::obtenirBouton(std::string nomBouton){
-    for(auto itB = m_mapDeBoutons.begin(); itB != m_mapDeBoutons.end(); ++itB){
-        if(itB->first->obtenirTexte() == nomBouton)
+    for (auto itB = m_mapDeBoutons.begin(); itB != m_mapDeBoutons.end(); ++itB){
+        if (itB->first->obtenirTexte() == nomBouton)
             return itB->first;
     }
     return nullptr;
 }
 
 bool DictionnaireDeBoutons::boutonValiderEntree(std::string nomBouton,SDL_Event evenement, bool &clique_souris, std::pair<int, int> &coord_souris){
-    if( evenement.type == SDL_KEYDOWN){
-        if((std::string)SDL_GetKeyName(evenement.key.keysym.sym) == "return") { // Entree
+    if (evenement.type == SDL_KEYDOWN){
+        if ((std::string)SDL_GetKeyName(evenement.key.keysym.sym) == "return") { // Entree
             //On valide en simulant un clic sur bouton
             clique_souris = true;
             SDL_Rect rectBouton = obtenirBouton(nomBouton)->obtenirRectangle();
@@ -162,20 +149,16 @@ bool DictionnaireDeBoutons::boutonValiderEntree(std::string nomBouton,SDL_Event 
 //! Désalloue une partie de la map (les boutons) si elle n'est pas vide, et désalloue m_actionsBoutons si il est initialisé
 //!
 
-DictionnaireDeBoutons::~DictionnaireDeBoutons()
-{
-    if(!m_mapDeBoutons.empty())
-    {
-        for(auto iterateur = m_mapDeBoutons.begin(); iterateur != m_mapDeBoutons.end(); ++iterateur)
-        {
+DictionnaireDeBoutons::~DictionnaireDeBoutons(){
+    if (!m_mapDeBoutons.empty()){
+        for (auto iterateur = m_mapDeBoutons.begin(); iterateur != m_mapDeBoutons.end(); ++iterateur){
             delete iterateur->first;
         }
 
         m_mapDeBoutons.clear();
     }
 
-    if(m_actionsBoutons != nullptr)
-    {
+    if (m_actionsBoutons != nullptr){
         delete m_actionsBoutons;
     }
 }

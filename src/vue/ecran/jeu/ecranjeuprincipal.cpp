@@ -49,8 +49,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
                                            true,/* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
-    for(int i = 0; i < 12;i++)
-        for(int j = 0;j< 12;j++)
+    for(int i = 0; i < 12; ++i)
+        for(int j = 0; j < 12; ++j)
             m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
 }
 
@@ -64,8 +64,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 //! Affiche le contenu d'un écran de jeu principal
 //!
 
-void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
-{
+void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &fenetre_affichage->clip_rect, SDL_MapRGB(fenetre_affichage->format, 0, 0, 0));
 
 
@@ -109,8 +108,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 //! Gère les évènements de cet écran
 //!
 
-void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
-{
+void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
     Uint8 *keystates = SDL_GetKeyState( nullptr );
     Direction direction_deplacement = Direction::Aucune;
@@ -134,18 +132,15 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
     m_spriteJoueur->deplacementJoueur(direction_deplacement);
     controleur->deplacementJoueur(direction_deplacement);
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while(SDL_PollEvent(&evenements)){
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             //SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -161,11 +156,10 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 
 
 
-EcranJeuPrincipal::~EcranJeuPrincipal()
-{
+EcranJeuPrincipal::~EcranJeuPrincipal(){
     delete m_spriteJoueur;
-    for(int i = 0; i < 10;i++)
-        for(int j = 0;j < 10;j++)
+    for(int i = 0; i < 10; ++i)
+        for(int j = 0; j < 10; ++j)
             delete m_spritesCarte[i][j];
 }
 
@@ -179,22 +173,18 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     const Zone * carte = m_carte->obtenirZoneActive();
 
     // Test si c'est un joueur
-    if(dynamic_cast<Joueur*>(&obj) != nullptr){
+    if (dynamic_cast<Joueur*>(&obj) != nullptr){
         //on deplace la carte autour du joueur pour qu'il reste au milieu
-        for(int i=posX-DECALAGE_CARTE_X_INFERIEUR;i<posX+DECALAGE_CARTE_X_SUPERIEUR;i++)
-        {
-            for(int j= posY-DECALAGE_CARTE_Y_INFERIEUR;j<posY+DECALAGE_CARTE_Y_SUPERIEUR;j++)
-            {
+        for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX+DECALAGE_CARTE_X_SUPERIEUR; ++i){
+            for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY+DECALAGE_CARTE_Y_SUPERIEUR; ++j){
 
                 //on recupère le type de la tuile pour l'afficher
                 std::pair<int, int> temp(i,j);
                 Tuile * t = carte->obtenirTuile(i,j);
-                if (t->obtenirDirectionChangementZone() == Direction::Aucune)
-                {
+                if (t->obtenirDirectionChangementZone() == Direction::Aucune){
                     SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-                } else
-                {
+                } else {
                     if (i == DECALAGE_TUILE) { //Je suis a gauche donc sprite fleche de gauche
                         SDL_Rect lecture {64 , 64*3, 64, 64};
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
@@ -210,7 +200,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     }
                 }
 
-                if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
+                if (carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
                     int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
                     int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
                     m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*63),(short int)(y*63),127,63}, SDL_Rect{256,192,63,63}});
@@ -218,11 +208,11 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
             }
         }
     } else {
-        for(int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
-            for(int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
-                if ( j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
+        for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
+            for (int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
+                if (j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
                     std::pair<int, int> temp(i,j);
-                    if(carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
+                    if (carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
                         int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
                         int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
                         m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*63),(short int)(y*63),127,63}, SDL_Rect{256,192,63,63}});
@@ -234,5 +224,5 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 }
 
 void EcranJeuPrincipal::definirCarte(Carte* carte){
-    m_carte=carte;
+    m_carte = carte;
 }

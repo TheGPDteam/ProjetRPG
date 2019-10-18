@@ -66,22 +66,18 @@ void EcranEquipe::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* f
 //! Gère les évènements de cet écran
 //!
 
-void EcranEquipe::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris)
-{
+void EcranEquipe::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) {
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while(SDL_PollEvent(&evenements)) {
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if(evenements.button.button == SDL_BUTTON_LEFT) {
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -110,10 +106,8 @@ void EcranEquipe::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu
 //! Détruit tout les élément de l'ecran equipe
 //!
 
-EcranEquipe::~EcranEquipe()
-{
-    if(m_tableau_equipe != nullptr)
-    {
+EcranEquipe::~EcranEquipe() {
+    if (m_tableau_equipe != nullptr){
         delete m_tableau_equipe;
     }
 }

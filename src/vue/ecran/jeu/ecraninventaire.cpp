@@ -33,7 +33,6 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
     m_tableau_objets = TableauDefilable::tableauObjet(rect_tableau, m_controleur, "Inventaire", true);
 
     obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire());
-
 }
 
 
@@ -49,8 +48,7 @@ EcranInventaire::EcranInventaire(Controleur* controleur) :
 //!
 
 
-void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage)
-{
+void EcranInventaire::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &m_ecran, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
 
@@ -80,19 +78,16 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
 {
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
+    while(SDL_PollEvent(&evenements)){
         SDL_EnableKeyRepeat(10, 10);
-        switch(evenements.type)
-        {
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 m_tableau_objets->gestionEvenementClique(coord_souris);
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
@@ -126,13 +121,11 @@ void EcranInventaire::gestionDesEvenements(Controleur *controleur, bool &quitter
 
 EcranInventaire::~EcranInventaire()
 {
-    if(m_quantiteInventaire != nullptr)
-    {
+    if (m_quantiteInventaire != nullptr){
         delete m_quantiteInventaire;
     }
 
-    if(m_tableau_objets != nullptr)
-    {
+    if (m_tableau_objets != nullptr){
         delete m_tableau_objets;
     }
 }
@@ -144,8 +137,8 @@ void EcranInventaire::obtenirChangement(Observable &obj)
     Inventaire * inventaire = m_controleur->obtenirModele()->obtenirJoueur()->obtenirInventaire();
     definirEtatQuantite(inventaire);
     m_tableau_objets->vider();
-    for(auto o : inventaire->obtenirObjets())
-    {
+
+    for(auto o : inventaire->obtenirObjets()){
         m_tableau_objets->ajouterLigne(o);
     }
 }
@@ -156,8 +149,7 @@ void EcranInventaire::definirEtatQuantite(Inventaire * inventaireJ)
     if(inventaireJ == nullptr) return;
     std::string tmp = "Stockage : " + std::to_string(inventaireJ->obtenirNombreObjet()) + " - " + std::to_string(inventaireJ->obtenirTailleMax());
 
-    if(m_quantiteInventaire != nullptr)
-    {
+    if (m_quantiteInventaire != nullptr){
         m_quantiteInventaire->mettreAJourTexte(tmp);
     }
 }

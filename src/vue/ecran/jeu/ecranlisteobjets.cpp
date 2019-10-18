@@ -22,8 +22,7 @@ EcranListeObjet::EcranListeObjet(Controleur *controleur)
     obtenirChangement(*m_controleur->obtenirModele()->obtenirCampement());
 }
 
-void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage)
-{
+void EcranListeObjet::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     afficherFondEcran(fenetre_affichage);
     SDL_FillRect(fenetre_affichage, &m_rectangleFicheObjet, SDL_MapRGB(fenetre_affichage->format, 150, 150, 150));
 
@@ -37,18 +36,15 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
 
     SDL_Event evenements;
 
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch(evenements.type){
         case SDL_QUIT:
             quitter_jeu = true;
             SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
                 clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
@@ -68,12 +64,11 @@ void EcranListeObjet::gestionDesEvenements(Controleur *controleur, bool &quitter
 
 void EcranListeObjet::obtenirChangement(Observable &obj) {
     m_tableau_objets->vider();
-    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets())
-    {
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets()){
         m_tableau_objets->ajouterLigne(o);
     }
-    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres())
-    {
+
+    for(auto o : m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres()){
         m_tableau_objets->ajouterLigne(o);
     }
 }

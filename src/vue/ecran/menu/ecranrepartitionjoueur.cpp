@@ -124,35 +124,30 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
 
     SDL_Event evenements;
     AFFECTATION repartition = RIEN;
-    while(SDL_PollEvent(&evenements))
-    {
-        switch(evenements.type)
-        {
+    while (SDL_PollEvent(&evenements)){
+        switch (evenements.type){
         case SDL_QUIT:
 
 //            SDL_Quit();
             break;
 
         case SDL_MOUSEBUTTONUP:
-            if(evenements.button.button == SDL_BUTTON_LEFT)
-            {
+            if (evenements.button.button == SDL_BUTTON_LEFT){
 
-                if(m_retour->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                if (m_retour->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RETOUR;
-                }
-                else if(m_recolte->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                } else if (m_recolte->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RECOLTE;
-                }
-                else if(m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                } else if (m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = CHASSE;
-                }
-                else if(m_campement->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                } else if (m_campement->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = CAMPEMENT;
                 }
-                if(repartition != RIEN){
-                    m_etatAfficher=false;
-                    if(repartition != RETOUR)
-                        gestionRepartion(repartition);
+
+                if (repartition != RIEN){
+                    m_etatAfficher = false;
+
+                    if(repartition != RETOUR)    gestionRepartion(repartition);
                 }
             }
             break;
@@ -165,17 +160,16 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
         coord_souris.second = evenements.button.y;
     }
 }
-void
-EcranRepartitionJoueur::gestionRepartion(AFFECTATION affectation){
+
+void EcranRepartitionJoueur::gestionRepartion(AFFECTATION affectation){
     Campement *c  =  m_controleur->obtenirModele()->obtenirCampement();
     c->supprimerPersonnage(m_humain);
-    if(affectation == CHASSE){
+    if (affectation == CHASSE){
         c->obtenirEquipeChasse()->ajouterPersonnage(m_humain);
-    }else if(affectation == RECOLTE){
+    } else if (affectation == RECOLTE){
         c->obtenirEquipeRecolte()->ajouterPersonnage(m_humain);
-    }else if(affectation == CAMPEMENT){
+    } else if (affectation == CAMPEMENT){
         c->obtenirEquipeCampement()->ajouterPersonnage(m_humain);
-
     }
 }
 
@@ -206,6 +200,7 @@ EcranRepartitionJoueur::~EcranRepartitionJoueur(){
 
 
 }
+
 bool EcranRepartitionJoueur::obtenirEtatAfficher(){
     return m_etatAfficher;
 }

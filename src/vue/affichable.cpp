@@ -4,8 +4,7 @@ Affichable::Affichable(SDL_Rect rectangle)
     :m_rectangle{rectangle}
 {}
 
-Affichable::~Affichable()
-{}
+Affichable::~Affichable(){}
 
 SDL_Rect Affichable::obtenirRectangle() const {
     return m_rectangle;
