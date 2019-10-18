@@ -1,5 +1,6 @@
 #include "chargementfeuilledesprite.h"
 #include <iostream>
+#include "SDL_image.h"
 using namespace  std;
 
 std::map<std::string, SDL_Surface*> ChargementFeuilleDeSprites::m_imagesDeFeuilleDeSprites; // map servant à éviter les chargements multiple d'une même image ou feuille de sprite
@@ -33,7 +34,7 @@ ChargementFeuilleDeSprites::ChargementFeuilleDeSprites()
 SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char* chemin_feuille_sprites){
     m_objetConstruit = true;
     SDL_Surface* image;
-    SDL_Surface* imageTemporaire = SDL_LoadBMP(chemin_feuille_sprites);
+    SDL_Surface* imageTemporaire = IMG_Load(chemin_feuille_sprites);
 
     if (imageTemporaire != nullptr){
         image = SDL_DisplayFormat(imageTemporaire);
