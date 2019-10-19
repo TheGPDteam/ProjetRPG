@@ -36,33 +36,33 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
 void Vue::definirControleur(Controleur *controleur){
 
     m_controleur=controleur;
-    std::cout << "Initialisation de la scene EcranJeuPrincipal" << std::endl;
+    
     m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
-    std::cout << "Initialisation de la scene EcranQuete" << std::endl;
+    
     m_ecranChoixQuete = new EcranQuete(m_controleur);
-    std::cout << "Initialisation de la scene EcranMenuPrincipal" << std::endl;
+    
     m_menuPrincipal = new EcranMenuPrincipal(m_controleur);
-    std::cout << "Initialisation de la scene EcranEquipe" << std::endl;
+    
     m_ecranEquipe = new EcranEquipe(m_controleur);
-    std::cout << "Initialisation de la scene EcranInventaire" << std::endl;
+    
     m_ecranInventaire = new EcranInventaire(m_controleur);
-    std::cout << "Initialisation de la scene EcranChoixPersonnage" << std::endl;
+    
     m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur);
-    std::cout << "Initialisation de la scene EcranQueteJoueur" << std::endl;
+    
     m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur);
-    std::cout << "Initialisation de la scene EcranNom" << std::endl;
+    
     m_ecranNom = new EcranNom(m_controleur);
-    std::cout << "Initialisation de la scene EcranPremiereJournee" << std::endl;
+    
     m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
-    std::cout << "Initialisation de la scene EcranRecapitulatifNuit" << std::endl;
+    
     m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
-    std::cout << "Initialisation de la scene EcranAccueilCampement" << std::endl;
+
     m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
-    std::cout << "Initialisation de la scene EcranListeObjet" << std::endl;
+
     m_ecranListeObjet = new EcranListeObjet(m_controleur);
-    std::cout << "Initialisation de la scene EcranQueteCampement" << std::endl;
+
     m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
-    std::cout << "Initialisation des ecrans effectués" << std::endl;
+
 
     Modele * modele = m_controleur->obtenirModele();
     Joueur * j = modele->obtenirJoueur();
@@ -256,60 +256,38 @@ bool Vue::obtenirFermerJeu(){
 //!
 Vue::~Vue(){
 
-    if (m_menuPrincipal != nullptr){
-        delete m_menuPrincipal;
-        m_menuPrincipal = nullptr;
-    }
+    delete m_menuPrincipal;
+    m_menuPrincipal = nullptr;
+        
+    delete m_jeuPrincipal;
+    m_jeuPrincipal = nullptr;
+        
+    delete m_ecranEquipe;
+    m_ecranEquipe = nullptr;
+      
+    delete m_ecranInventaire;
+    m_ecranInventaire = nullptr;
+     
+    delete m_ecranChoixQuete;
+    m_ecranChoixQuete = nullptr;
+   
+    delete m_ecranChoixPersonnage;
+    m_ecranChoixPersonnage = nullptr;
+    
+    delete m_ecranNom;
+    m_ecranNom = nullptr;
+   
+    delete m_ecranQueteJoueur;
+    m_ecranQueteJoueur = nullptr;
 
-    if (m_jeuPrincipal != nullptr){
-        delete m_jeuPrincipal;
-        m_jeuPrincipal = nullptr;
-    }
-
-    if (m_ecranEquipe != nullptr){
-        delete m_ecranEquipe;
-        m_ecranEquipe = nullptr;
-    }
-
-    if (m_ecranInventaire != nullptr){
-        delete m_ecranInventaire;
-        m_ecranInventaire = nullptr;
-    }
-
-    if (m_ecranChoixQuete != nullptr){
-        delete m_ecranChoixQuete;
-        m_ecranChoixQuete = nullptr;
-    }
-
-    if (m_ecranChoixPersonnage != nullptr){
-        delete m_ecranChoixPersonnage;
-        m_ecranChoixPersonnage = nullptr;
-    }
-
-    if (m_ecranNom != nullptr){
-        delete m_ecranNom;
-        m_ecranNom = nullptr;
-    }
-
-    if (m_ecranQueteJoueur){
-        delete m_ecranQueteJoueur;
-        m_ecranQueteJoueur = nullptr;
-    }
-
-    if (m_ecranRecapitulatifNuit){
-        delete m_ecranRecapitulatifNuit;
-        m_ecranRecapitulatifNuit = nullptr;
-    }
-
-    if (m_ecranPremiereJournee != nullptr){
-        delete m_ecranPremiereJournee;
-        m_ecranPremiereJournee = nullptr;
-    }
-
-    if (m_ecranAccueilCampement != nullptr){
-        delete m_ecranAccueilCampement;
-        m_ecranAccueilCampement = nullptr;
-    }
+    delete m_ecranRecapitulatifNuit;
+    m_ecranRecapitulatifNuit = nullptr;
+   
+    delete m_ecranPremiereJournee;
+    m_ecranPremiereJournee = nullptr;
+    
+    delete m_ecranAccueilCampement;
+    m_ecranAccueilCampement = nullptr;
 
     SDL_FreeSurface(m_fenetrePrincipale);
     TTF_Quit();
@@ -328,5 +306,4 @@ void Vue::changerEcran(TypeEcran nouvelEcran){
 
 SDL_Surface* Vue::obtenirFenetrePrincipale(){
     return m_fenetrePrincipale;
-
 }
