@@ -47,7 +47,8 @@ void Sprite::changementSprite(const SDL_Rect position_dans_feuille_de_sprite){
 
 void Sprite::afficher(SDL_Surface* surface_affichage){
     ChargementFeuilleDeSprites * cfds =  ChargementFeuilleDeSprites::instance();
-    auto it = cfds->m_imagesDeFeuilleDeSprites.find(m_cleMapSprites);
+    
+    std::map<std::string, SDL_Surface*>::iterator it = cfds->m_imagesDeFeuilleDeSprites.find(m_cleMapSprites);
 
     if (it != cfds->m_imagesDeFeuilleDeSprites.end()){
         SDL_BlitSurface(it->second, &m_coordDansLaFeuilleDeSprite, surface_affichage, &m_rectangle);
