@@ -16,20 +16,19 @@ void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
     Controleur* controleur = (Controleur*) ctrl;
     
-    Uint32 tempsActuel = SDL_GetTicks();
+    Uint32 tempsActuel = 1000/60 + 1;
     Uint32 tempsAvant = 0;
     
-    while (!vue->obtenirFermerJeu()) {
-        tempsAvant = tempsActuel;
-        tempsActuel = SDL_GetTicks();
-
-        if(tempsActuel - tempsAvant > TEMPS_RAFRAICHISSEMENT){
+    while (!vue->obtenirFermerJeu()) {       
+        if(tempsActuel - tempsAvant >= TEMPS_RAFRAICHISSEMENT){
             vue->affichageVue();
             controleur->deroulementJournee();
         }
         else{
             //SDL_Delay(TEMPS_RAFRAICHISSEMENT + tempsAvant - tempsActuel);
         }
+        tempsAvant = tempsActuel;
+        tempsActuel = SDL_GetTicks();
     }
     ChargementFeuilleDeSprites::supprimerInstance();
 }
