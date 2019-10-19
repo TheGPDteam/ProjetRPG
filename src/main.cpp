@@ -11,12 +11,25 @@
 #include "modele/survie/equipe.h"
 #include "modele/survie/inventaire.h"
 
+const int TEMPS_RAFRAICHISSEMENT = 1000/60;
 void mainloop_func(void* c, void* ctrl){
     Vue* vue= (Vue*) c;
     Controleur* controleur = (Controleur*) ctrl;
+    
+    Uint32 tempsActuel = SDL_GetTicks();
+    Uint32 tempsAvant = 0;
+    
     while (!vue->obtenirFermerJeu()) {
-        vue->affichageVue();
-        controleur->deroulementJournee();
+        tempsAvant = tempsActuel;
+        tempsActuel = SDL_GetTicks();
+
+        if(tempsActuel - tempsAvant > TEMPS_RAFRAICHISSEMENT){
+            vue->affichageVue();
+            controleur->deroulementJournee();
+        }
+        else{
+            SDL_Delay(TEMPS_RAFRAICHISSEMENT + tempsAvant - tempsActuel);
+        }
     }
     ChargementFeuilleDeSprites::supprimerInstance();
 }
