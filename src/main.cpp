@@ -20,10 +20,11 @@ void mainloop_func(void* c, void* ctrl){
     Uint32 tempsAvant = 0;
     
     while (!vue->obtenirFermerJeu()) {
-        tempsAvant = tempsActuel;
+        
         tempsActuel = SDL_GetTicks();
 
         if(tempsActuel - tempsAvant > TEMPS_RAFRAICHISSEMENT){
+            tempsAvant = tempsActuel;
             vue->affichageVue();
             controleur->deroulementJournee();
         }
