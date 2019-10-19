@@ -28,7 +28,7 @@ void mainloop_func(void* c, void* ctrl){
             controleur->deroulementJournee();
         }
         else{
-            SDL_Delay(TEMPS_RAFRAICHISSEMENT + tempsAvant - tempsActuel);
+            //SDL_Delay(TEMPS_RAFRAICHISSEMENT + tempsAvant - tempsActuel);
         }
     }
     ChargementFeuilleDeSprites::supprimerInstance();
