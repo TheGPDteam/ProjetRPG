@@ -21,7 +21,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur) :
 
 //!
 //! \brief Destructeur écran général
-//! \author pgutierrez
+//! \author pgutierrez && aguilbaud
 //! \date 23/11/16
 //! \version 1.0
 //!
@@ -36,15 +36,17 @@ EcranGeneral::~EcranGeneral(){
 
 //!
 //! \brief Destructeur écran général
-//! \author rbourqui
+//! \author rbourqui && aguilbaud
 //! \date 15/01/18
 //! \version 1.0
 //!
 void EcranGeneral::afficherFondEcran(SDL_Surface* fenetre_affichage) {
-    if(m_fond != nullptr)
-    {
-        SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    if(m_fond != nullptr){
         SDL_Rect dest_rect = {0, 0, 0, 0};
         SDL_BlitSurface(m_fond, &fond_ecran, fenetre_affichage, &dest_rect);
+    }
+    else{
+        SDL_FillRect(fenetre_affichage, &fond_ecran, 0x000000);
     }
 }
