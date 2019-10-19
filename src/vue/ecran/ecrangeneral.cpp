@@ -14,7 +14,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur) :
 {
     //Attention on charge cette image pour chaque scene soit 8 chargements de la meme image :(
     //a supprimer
-    m_fond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
+    //m_fond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
 }
 
 
@@ -26,7 +26,11 @@ EcranGeneral::EcranGeneral(Controleur *controleur) :
 //!
 
 EcranGeneral::~EcranGeneral(){
-    SDL_FreeSurface(m_fond);
+    if(m_fond != nullptr)
+    {
+        SDL_FreeSurface(m_fond);
+    }
+        
 }
 
 //!
@@ -36,7 +40,10 @@ EcranGeneral::~EcranGeneral(){
 //! \version 1.0
 //!
 void EcranGeneral::afficherFondEcran(SDL_Surface* fenetre_affichage) {
-    SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
-    SDL_Rect dest_rect = {0, 0, 0, 0};
-    SDL_BlitSurface(m_fond, &fond_ecran, fenetre_affichage, &dest_rect);
+    if(fond_ecran != nullptr)
+    {
+        SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+        SDL_Rect dest_rect = {0, 0, 0, 0};
+        SDL_BlitSurface(m_fond, &fond_ecran, fenetre_affichage, &dest_rect);
+    }
 }
