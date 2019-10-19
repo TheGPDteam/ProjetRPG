@@ -33,7 +33,7 @@ DictionnaireDeBoutons::DictionnaireDeBoutons(Controleur * controleur) :
 //!
 
 void DictionnaireDeBoutons::ajoutBoutonDansMapDeBoutons(Bouton *bouton, std::function<TypeEcran(ActionsBoutons &)> action_bouton){
-    auto iterateurBouton = m_mapDeBoutons.find(bouton);
+    std::map<Bouton *, std::function<TypeEcran(ActionsBoutons&)>>::iterator iterateurBouton = m_mapDeBoutons.find(bouton);
 
     if (iterateurBouton == m_mapDeBoutons.end()){
         m_mapDeBoutons[bouton] = action_bouton;
