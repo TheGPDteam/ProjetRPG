@@ -41,12 +41,11 @@ EcranGeneral::~EcranGeneral(){
 //! \version 1.0
 //!
 void EcranGeneral::afficherFondEcran(SDL_Surface* fenetre_affichage) {
-    SDL_Rect fond_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
     if(m_fond != nullptr){
         SDL_Rect dest_rect = {0, 0, 0, 0};
-        SDL_BlitSurface(m_fond, &fond_ecran, fenetre_affichage, &dest_rect);
+        SDL_BlitSurface(m_fond, &m_ecran, fenetre_affichage, &dest_rect);
     }
     else{
-        SDL_FillRect(fenetre_affichage, &fond_ecran, 0x000000);
+        SDL_FillRect(fenetre_affichage, &m_ecran, 0x000000);
     }
 }
