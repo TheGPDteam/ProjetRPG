@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <map>
+
 class GestionnaireRessource
 {
 private:
