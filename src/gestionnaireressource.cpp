@@ -5,7 +5,8 @@ GestionnaireRessource::GestionnaireRessource()
     m_tabSurface = new std::map<std::string, SDL_Surface*>();
 }
 
-
+//! \brief decharge une surface
+//! \param nom de la surface a decharger
 //! \author anguilbaud
 //! \date 20/10/2019
 void GestionnaireRessource::dechargerSurface(char* nom)
@@ -19,7 +20,7 @@ void GestionnaireRessource::dechargerSurface(char* nom)
     }
 }
 
-
+//! \brief constructeur
 //! \author anguilbaud
 //! \date 20/10/2019
 GestionnaireRessource::~GestionnaireRessource()
@@ -32,7 +33,7 @@ GestionnaireRessource::~GestionnaireRessource()
     delete(m_tabSurface);
 }
 
-
+//! \brief permet de charger une surface
 //! \author anguilbaud
 //! \date 20/10/2019
 void GestionnaireRessource::chargementSurface(std::string nom, std::string extension)
@@ -47,7 +48,7 @@ void GestionnaireRessource::chargementSurface(std::string nom, std::string exten
     m_tabSurface->insert(std::pair<std::string, SDL_Surface*>(nom.c_str(), surface));
 }
 
-
+//! \brief permet de recuperer une surface
 //! \author anguilbaud
 //! \date 20/10/2019
 SDL_Surface* GestionnaireRessource::obtenirSurface(const char* nom)
