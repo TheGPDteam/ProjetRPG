@@ -1,5 +1,8 @@
 #include "gestionnaireressource.h"
 
+//! \brief constructeur
+//! \author anguilbaud
+//! \date 20/10/2019
 GestionnaireRessource::GestionnaireRessource()
 {
     m_tabSurface = new std::map<std::string, SDL_Surface*>();
@@ -20,7 +23,7 @@ void GestionnaireRessource::dechargerSurface(char* nom)
     }
 }
 
-//! \brief constructeur
+//! \brief destructeur
 //! \author anguilbaud
 //! \date 20/10/2019
 GestionnaireRessource::~GestionnaireRessource()
@@ -56,9 +59,12 @@ SDL_Surface* GestionnaireRessource::obtenirSurface(const char* nom)
     std::map<std::string, SDL_Surface*>::iterator it = m_tabSurface->find(nom);
     SDL_Surface* surface = nullptr;
 
-    if (it != m_tabSurface->end()){
+    if (it != m_tabSurface->end())
+    {
         surface = it->second;
-    } else {
+    } 
+    else 
+    {
         std::cerr << "Impossible la surface n'a pas etait chargee." << std::endl;
         exit(2);
     }
