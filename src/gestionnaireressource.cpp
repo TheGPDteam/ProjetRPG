@@ -1,4 +1,4 @@
-#include "GestionnaireRessource.h"
+#include "gestionnaireressource.h"
 
 	GestionnaireRessource::GestionnaireRessource()
 	{

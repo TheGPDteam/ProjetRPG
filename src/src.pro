@@ -74,9 +74,9 @@ SOURCES += \
     vue/interfaceutilisateur/zonedefilable.cpp \
     vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.cpp \
     vue/spriteanime.cpp \
-    vue/spritepersonnage.cpp
-
-
+    vue/spritepersonnage.cpp \
+    vue/camera.cpp \
+    gestionnaireressource.cpp
 
 
 
@@ -155,6 +155,8 @@ HEADERS += \
     vue/interfaceutilisateur/zonedefilable.h \
     vue/interfaceutilisateur/conteneur/tableau/tableaudefilable.h \
     vue/spriteanime.h \
-    vue/spritepersonnage.h
+    vue/spritepersonnage.h \
+    vue/camera.h \
+    gestionnaireressource.h
 
 
