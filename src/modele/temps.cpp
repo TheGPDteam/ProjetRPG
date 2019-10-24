@@ -10,7 +10,7 @@
 Temps::Temps()
     :
       m_duree_pause(0),
-      m_heure_fin_journee(HEURE_FIN_JOURNEE),
+      m_heure_fin_journee(+HEURE_FIN_JOURNEE),
       m_en_pause(false)
 {
 }
