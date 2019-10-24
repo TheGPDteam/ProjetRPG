@@ -25,7 +25,7 @@ private:
     unsigned int m_nbZombiesTues;
     TypeDefaite m_td;
 
-    Temps m_temps;
+    Temps* m_temps;
     Carte m_carte;
     Campement m_campement;
     Combat m_combat;
@@ -47,7 +47,7 @@ public:
     bool testChangementDeCarte(Direction dir);
     void lancerCombat();//TO-DO
 
-    Temps *obtenirTemps();
+    Temps* obtenirTemps();
     void definirTemps(Temps temps);
     Carte* obtenirCarte() ;
     void definirCarte(Carte carte);

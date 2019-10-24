@@ -184,6 +184,7 @@ TypeEcran ActionsBoutons::boutonRetourMenuPrincipal() {
 }
 
 TypeEcran ActionsBoutons::boutonCampement() {
+    m_controleur->obtenirModele()->obtenirTemps()->mettreEnPause();
     return TypeEcran::AccueilCampement;
 }
 

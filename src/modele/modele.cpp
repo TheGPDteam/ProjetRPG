@@ -23,7 +23,6 @@ Modele::Modele()
       m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}
 {
     premiereJournee();
-    this->m_temps.mettreEnPause();
 }
 
 //!
@@ -177,7 +176,7 @@ Humain* Modele::journeeSuivante()
 {
     m_nouvelArrivant = new Humain();
     ++m_nbJoursPasses;
-    m_temps.reinitialiserTemps();
+    m_temps->reinitialiserTemps();
     m_joueur.nouvelleQuete(TypeQuete::QUETERECOLTE,"Survivre","Recolter de la nouriture",
                            m_campement.obtenirConsommation(),
                            50,new Vivre());
@@ -226,11 +225,11 @@ void Modele::premiereJournee()
     }
     m_nbJoursPasses = 0;
     m_joueur.definirEquipe(m_campement.obtenirEquipeRecolte());
-
-    m_temps.reinitialiserTemps();
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
     // le calcul se fait pour plusieurs jours à l'avance.
     m_joueur.obtenirQuete()->definirValeurObjectif(m_campement.obtenirConsommation());
+    m_temps = new Temps();
+    m_temps->reinitialiserTemps();
     mettreAChange();
     notifierTous();
 }
@@ -244,20 +243,9 @@ void Modele::premiereJournee()
 
 Temps* Modele::obtenirTemps()
 {
-    return &m_temps;
+    return m_temps;
 }
 
-//!
-//! \brief Accesseur en ecriture du temps
-//! \author mleothaud
-//! \date 17/11/16
-//! \version 1.0
-//!
-
-void Modele::definirTemps(Temps temps)
-{
-    m_temps=temps;
-}
 
 //!
 //! \brief Accesseur en lecture de la carte
@@ -369,7 +357,7 @@ void Modele::charger(const std::string &donnees)
 }
 
 void Modele::reinitialiserTemps() {
-    m_temps.reinitialiserTemps();
+    m_temps->reinitialiserTemps();
 }
 
 //!
