@@ -14,8 +14,8 @@
 class Temps
 {
 private:
-    typedef std::chrono::duration<float, std::ratio<60>> heure_quete;
-    constexpr static float HEURE_FIN_JOURNEE = 8.5;
+    typedef std::chrono::duration<double, std::ratio<60>> heure_quete;
+    constexpr static float HEURE_FIN_JOURNEE = 18.0;
 
     std::chrono::system_clock::time_point m_temps_debut_journee;
     std::chrono::system_clock::time_point m_temps_debut_pause;

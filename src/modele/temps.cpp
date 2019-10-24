@@ -24,8 +24,8 @@ Temps::Temps()
 
 const std::string Temps::obtenirTempsAffichable(Temps::heure_quete temps)
 {
-    float heures;
-    float minutes = modf(temps.count(), &heures) * 60;
+    double heures;
+    double minutes = modf(temps.count(), &heures) * 60;
 
     std::string heures_affichables = std::to_string(static_cast<int>(heures));
     if (heures_affichables.size() < 2)
