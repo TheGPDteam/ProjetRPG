@@ -164,7 +164,6 @@ EcranJeuPrincipal::~EcranJeuPrincipal(){
 }
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
-
     m_spriteObjets.clear();
     Joueur * joueur = m_controleur->obtenirModele()->obtenirJoueur();
     //recupère la position du joueur sur la carte
@@ -182,7 +181,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 std::pair<int, int> temp(i,j);
                 Tuile * t = carte->obtenirTuile(i,j);
                 if (t->obtenirDirectionChangementZone() == Direction::Aucune){
-                    SDL_Rect lecture = TUILE2RECT.at(t->obtenirType()).at(t->obtenirHachageJonction());
+                    SDL_Rect lecture = SDL_Rect{0,0,64,64};
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
                 } else {
                     if (i == DECALAGE_TUILE) { //Je suis a gauche donc sprite fleche de gauche

@@ -7,10 +7,12 @@
 
 
 Tuile::Tuile(int val, bool marchable)
-    : m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType}, m_directionChangementZone{Aucune}
+    : m_type{(TypeTuile)val}, m_directionChangementZone{Aucune}
 {
     m_marchable = marchable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre);
+    //for (int i = )
 }
+
 
 //!
 //! \brief Accesseur en lecture de l'attribut estMarchable
@@ -47,10 +49,6 @@ bool Tuile::obtenirPeutApparaitre() const
 //! \version 1.0
 //!
 
-TypeTuile Tuile::obtenirType() const{
-    return m_type;
-}
-
 void Tuile::definirDirectionChangementZone(Direction dir)
 {
     m_directionChangementZone = dir;
@@ -58,39 +56,4 @@ void Tuile::definirDirectionChangementZone(Direction dir)
 
 Direction Tuile::obtenirDirectionChangementZone() const{
     return m_directionChangementZone;
-}
-
-
-//!
-//! \brief Accesseur en ecriture de l'attribut m_sous_type
-//! \return le sous type de la tuile
-//! \author rbourqui
-//! \date 15/12/2017
-//! \version 1.0
-//!
-void Tuile::definirHachageJonction(TypeTuile type_voisin, TypeJonction position_voisin)
-{
-    m_jonction = hacher(type_voisin, position_voisin);
-}
-
-//!
-//! \brief Accesseur en lecture de l'attribut m_sous_type
-//! \return le sous type de la tuile
-//! \author rbourqui
-//! \date 15/12/2017
-//! \version 1.0
-//!
-int Tuile::obtenirHachageJonction() const{
-    return m_jonction;
-}
-
-//!
-//! \brief Fonction de hachage du type et de la position de jonction
-//! \return le résultat du hachage
-//! \author rbourqui
-//! \date 20/12/2017
-//! \version 1.0
-//!
-int Tuile::hacher(TypeTuile type_voisin, TypeJonction position_voisin){
-    return type_voisin * 100 + position_voisin;
 }
