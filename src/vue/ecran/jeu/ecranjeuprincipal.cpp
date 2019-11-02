@@ -181,7 +181,9 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 std::pair<int, int> temp(i,j);
                 Tuile * t = carte->obtenirTuile(i,j);
                 if (t->obtenirDirectionChangementZone() == Direction::Aucune){
-                    SDL_Rect lecture = SDL_Rect{0,0,64,64};
+                    std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
+                    SDL_Rect lecture = SDL_Rect{(t->obtenirNumero() % 16) * 64, (t->obtenirNumero() / 16) * 64, 64, 64};
+
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
                 } else {
                     if (i == DECALAGE_TUILE) { //Je suis a gauche donc sprite fleche de gauche

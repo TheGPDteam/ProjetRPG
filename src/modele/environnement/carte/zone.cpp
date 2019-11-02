@@ -143,6 +143,10 @@ std::string Zone::obtenirNom()
     return m_nom;
 }
 
+void Zone::definirNom(std::string nom){
+    m_nom = nom;
+}
+
 std::map<Tuile *, std::pair<int, int> > Zone::obtenirTuiles() const {
     return m_tuiles;
 }
@@ -152,10 +156,8 @@ int Zone::obtenirTaille() const {
 }
 
 void Zone::initZone() {
-    for(int i = 0; i < m_hauteur; i++)
-    {
-        for(int j = 0; j < m_largeur; j++)
-        {
+    for(int i = 0; i < m_hauteur; ++i){
+        for(int j = 0; j < m_largeur; ++j){
             Tuile * t = new Tuile((TypeTuile)2);
             m_tuiles.insert(std::make_pair(t,std::make_pair(i,j)));
             m_position_to_tuile[std::make_pair(i,j)] = t;
@@ -170,7 +172,6 @@ void Zone::initZone() {
     ajouterSols(Terre, MAX_TUILES_TERRE_PER_ZONE, MAX_GROUPES_TUILES_TERRE);
 
     ajouterObjets(20);
-
 }
 
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {

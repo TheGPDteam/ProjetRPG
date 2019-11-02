@@ -9,8 +9,35 @@ enum TypeTuile {
     Eau,
     Beton,
     Terre,
-    Arbre,
-    AucunType
+    Pierre,
+    Buisson,
+    Tronc,
+    FlecheDroite,
+    FlecheGauche,
+    FlecheHaut,
+    FlecheBas,
+    HerbeDecoration1,
+    HerbeDecoration2,
+    HerbeDecoration3,
+    HerbeDecoration4,
+    /*HerbeHerbeHerbeEau,
+    HerbeHerbeEauHerbe,
+    EauEauEauHerbe,
+    EauEauHerbeEau,
+    TerreTerreTerreEau,
+    TerreTerreEauTerre,
+    EauEauEauTerreEau,
+    GoudronGoudronGoudronTerre,
+    GoudronGoudronTerreGoudron,
+    TerreTerreTerreGoudron,
+    TerreTerreGoudronTerre,
+    HerbeHerbeHerbe
+
+    AucunType*/
+};
+
+enum TypeCompose {
+    hey = Sable
 };
 
 class Tuile{
@@ -20,12 +47,14 @@ private:
     TypeTuile m_type;
     Direction m_directionChangementZone;
     bool m_marchable;
+    int m_numero;
 public:
     Direction obtenirDirectionChangementZone() const;
     void definirDirectionChangementZone(Direction dir);
     Tuile(int val, bool marchable = true);
     bool obtenirEstMarchable() const;
     bool obtenirPeutApparaitre() const;
+    int obtenirNumero() const;
 };
 
 #endif

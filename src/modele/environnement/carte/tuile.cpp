@@ -7,10 +7,17 @@
 
 
 Tuile::Tuile(int val, bool marchable)
-    : m_type{(TypeTuile)val}, m_directionChangementZone{Aucune}
-{
-    m_marchable = marchable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre);
-    //for (int i = )
+    : m_directionChangementZone{Aucune}{
+
+    m_numero = val - 1;
+
+    if ((val > 13 && val < 18) || val == 33 || val == 34){
+        m_type = Herbe;
+    }
+
+    m_type = (TypeTuile)val;
+    m_marchable = true/*archable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre)*/;
+
 }
 
 
@@ -48,6 +55,12 @@ bool Tuile::obtenirPeutApparaitre() const
 //! \date 16/11/2016
 //! \version 1.0
 //!
+
+
+int Tuile::obtenirNumero() const{
+    return m_numero;
+}
+
 
 void Tuile::definirDirectionChangementZone(Direction dir)
 {

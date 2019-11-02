@@ -14,8 +14,7 @@ const std::string SPRITES_PRINCIPAUX = "SpritesPrincipaux";
 const std::map<int, SDL_Rect> TUILE2RECT = {};
 
 
-class ChargementFeuilleDeSprites
-{
+class ChargementFeuilleDeSprites{
 protected:
     static ChargementFeuilleDeSprites *m_instance;
     static bool m_objetConstruit;

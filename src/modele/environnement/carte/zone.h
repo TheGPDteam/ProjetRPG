@@ -54,6 +54,7 @@ public:
     void supprimerObjet(Objet* obj);
     std::map<Objet*, std::pair<int, int> > obtenirObjets() const;
 	std::string obtenirNom();
+    void definirNom(std::string nom);
     std::map <Tuile*, std::pair<int,int>> obtenirTuiles() const;
     int obtenirTaille() const;
     void recharger();

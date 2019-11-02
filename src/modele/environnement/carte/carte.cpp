@@ -8,11 +8,9 @@
 Carte::Carte(){
     //m_zones.push_back(Zone(64,64));
     //m_zoneActive = m_zones.front();
-    for (int i=0;i<3;++i)
-    {
-        for (int j=0; j<3;++j)
-        {
-            std::string zone = "./../rsc/carte/zone" + std::to_string(i*3 + j) + ".txt";
+    for (int i = 0; i < 3; ++i){
+        for (int j = 0; j < 3; ++j){
+            std::string zone = "./../rsc/carte/zone" + std::to_string(i * 3 + j) + ".txt";
             chargerZone(zone,i,j);
         }
     }
@@ -27,10 +25,9 @@ Carte::Carte(){
 //! \version 1.0
 //!
 
-Carte::~Carte()
-{
-    for (int x = 0; x < TAILLE_CARTE_X;x++)
-        for (int y = 0; y < TAILLE_CARTE_Y; y++)
+Carte::~Carte(){
+    for (int x = 0; x < TAILLE_CARTE_X; ++x)
+        for (int y = 0; y < TAILLE_CARTE_Y; ++y)
             delete m_zones[x][y];
 }
 
@@ -73,24 +70,21 @@ void Carte::chargerZone(std::string nom_fichier_zone, short x, short y)
 {
     std::vector<std::string> cases;
     std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
-    if (fichier.good())
-    {
+    if (fichier.good()){
         std::string ligne;
         std::getline(fichier,ligne);
-        while(!fichier.eof())
-        {
+        while(!fichier.eof()){
             cases.push_back(ligne);
             std::getline(fichier,ligne);
         }
         fichier.close();
         Zone* zone = new Zone(cases.size(),cases.size(),cases);
+        zone->definirNom(nom_fichier_zone);
         /*m_zones.push_back(zone);
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = zone;
         m_zoneActive = m_zones[x][y];
-    }
-    else
-    {
+    } else {
         /*m_zones.push_back(Zone(64,64));
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = new Zone(64,64);

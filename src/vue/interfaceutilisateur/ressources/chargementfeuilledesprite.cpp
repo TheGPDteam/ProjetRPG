@@ -33,8 +33,8 @@ ChargementFeuilleDeSprites::ChargementFeuilleDeSprites()
 
 SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char* chemin_feuille_sprites){
     m_objetConstruit = true;
-    SDL_Surface* image;
-    SDL_Surface* imageTemporaire = IMG_Load(chemin_feuille_sprites);
+    SDL_Surface* image = IMG_Load(chemin_feuille_sprites);
+    /*SDL_Surface* imageTemporaire = IMG_Load(chemin_feuille_sprites);
 
     if (imageTemporaire != nullptr){
         image = SDL_DisplayFormat(imageTemporaire);
@@ -42,12 +42,12 @@ SDL_Surface* ChargementFeuilleDeSprites::optimisationChargementImage(const char*
     } else {
         std::cerr << SDL_GetError() << std::endl;
         exit(-1);
-    }
+    }*/
 
-    Uint32 colorkey = SDL_MapRGB( image->format, 128, 255, 255 );
+    /*Uint32 colorkey = SDL_MapRGB( image->format, 128, 255, 255 );
 
     //Set all pixels of color R 0, G 0xFF, B 0xFF to be transparent
-    SDL_SetColorKey( image, SDL_SRCCOLORKEY, colorkey);
+    SDL_SetColorKey( image, SDL_SRCCOLORKEY, colorkey);*/
 
     return image;
 }
