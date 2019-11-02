@@ -74,7 +74,7 @@ ChargementFeuilleDeSprites::~ChargementFeuilleDeSprites(){
 
 ChargementFeuilleDeSprites* ChargementFeuilleDeSprites::instance() {
    if(m_instance == nullptr)   m_instance = new ChargementFeuilleDeSprites();
-   if(!m_objetConstruit)       m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = m_instance->optimisationChargementImage("../rsc/sprites/Sprites.bmp");
+   if(!m_objetConstruit)       m_imagesDeFeuilleDeSprites[SPRITES_PRINCIPAUX] = m_instance->optimisationChargementImage("../rsc/sprites/Sprites.PNG");
 
    return m_instance;
 }

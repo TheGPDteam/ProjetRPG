@@ -4,9 +4,9 @@
 #include "direction.h"
 
 enum TypeTuile {
-    Eau=0,
-    Sable,
+    Sable = 0,
     Herbe,
+    Eau,
     Beton,
     Terre,
     Arbre,
