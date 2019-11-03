@@ -14,10 +14,12 @@ Carte::Carte(){
             chargerZone(zone,i, j);
         }
     }
+
     m_xZoneActive = 1;
     m_yZoneActive = 0;
     m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
 }
+
 
 //!
 //! \brief Destructeur de la carte
@@ -25,24 +27,24 @@ Carte::Carte(){
 //! \date 14/10/17
 //! \version 1.0
 //!
-
 Carte::~Carte(){
     for (int x = 0; x < TAILLE_CARTE_X; ++x)
         for (int y = 0; y < TAILLE_CARTE_Y; ++y)
             delete m_zones[x][y];
 }
 
+
 //!
 //! \brief Ajoute un observateur pour toutes les zones
 //! \param obs
 //! \author dolacoste
 //!
-void
-Carte::definirObservateurZones(Observateur &obs){
+void Carte::definirObservateurZones(Observateur &obs){
     for (int x = 0; x < TAILLE_CARTE_X;x++)
         for (int y = 0; y < TAILLE_CARTE_Y; y++)
             m_zones[x][y]->ajouterObservateur(obs);
 }
+
 
 //!
 //! \brief Accesseur en lecture de la zone active
@@ -51,11 +53,10 @@ Carte::definirObservateurZones(Observateur &obs){
 //! \version 1.0
 //! \return la zone active de la carte
 //!
-
-Zone *Carte::obtenirZoneActive()
-{
+Zone *Carte::obtenirZoneActive(){
     return m_zoneActive;
 }
+
 
 //!
 //! \brief Fonction de chargement de la zone dont le nom du fichier est place en parametre
@@ -66,7 +67,6 @@ Zone *Carte::obtenirZoneActive()
 //! \date 24/11/16
 //! \author mleothaud
 //!
-
 void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
     std::vector<std::string> cases;
     std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
@@ -80,12 +80,13 @@ void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
 
         fichier.close();
         Zone* zone = new Zone(cases.size(), cases.size(), cases);
-        zone->definirNom(nom_fichier_zone);
+        zone->definirNom("Zone " + (x * 3) + (y + 1));
         /*m_zones.push_back(zone);
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = zone;
         m_zoneActive = m_zones[x][y];
     } else {
+
         /*m_zones.push_back(Zone(64,64));
         m_zoneActive = m_zones.front();*/
         m_zones[x][y] = new Zone(64,64);
@@ -96,6 +97,7 @@ void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
     notifierTous();
 }
 
+
 //!
 //! \brief Fonction de changement de la zone active de la carte
 //! \param Direction : direction dans laquelle nous allons
@@ -104,31 +106,31 @@ void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
 //! \author mleothaud
 //!
 
-void Carte::changerZoneActive(Direction direction)
-{
+void Carte::changerZoneActive(Direction direction){
     switch (direction) {
-    case Nord :
-        m_yZoneActive -= 1;
-        m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
-        break;
-    case Sud :
-        m_yZoneActive += 1;
-        m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
-        break;
-    case Est :
-        m_xZoneActive += 1;
-        m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
-        break;
-    case Ouest :
-        m_xZoneActive -= 1;
-        m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
-        break;
-    default :
+        case Nord :
+            m_yZoneActive -= 1;
+            m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
+            break;
+        case Sud :
+            m_yZoneActive += 1;
+            m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
+            break;
+        case Est :
+            m_xZoneActive += 1;
+            m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
+            break;
+        case Ouest :
+            m_xZoneActive -= 1;
+            m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
+            break;
+        default :
         break;
     }
     mettreAChange();
     notifierTous();
 }
+
 
 //!
 //! \brief Fonction de rechargement des objets dans les zones de la carte
@@ -136,17 +138,14 @@ void Carte::changerZoneActive(Direction direction)
 //! \date 01/03/18
 //! \author mleothaud
 //!
-
-void Carte::recharger()
-{
-    for (int i = 0; i < TAILLE_CARTE_X ; i++)
-    {
-        for(int j = 0; j < TAILLE_CARTE_Y ; ++j)
-        {
+void Carte::recharger(){
+    for (int i = 0; i < TAILLE_CARTE_X ; ++i){
+        for(int j = 0; j < TAILLE_CARTE_Y ; ++j){
             m_zones[i][j]->recharger();
         }
     }
 }
+
 
 //!
 //! \brief Fonction pour retourner dans la zone ou est le campement
@@ -154,9 +153,7 @@ void Carte::recharger()
 //! \date 09/03/18
 //! \author mleothaud
 //!
-
-void Carte::zoneActiveCampement()
-{
+void Carte::zoneActiveCampement(){
    m_xZoneActive = 1;
    m_yZoneActive = 1;
    m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];

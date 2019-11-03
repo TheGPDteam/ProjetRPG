@@ -155,13 +155,13 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 }
 
 
-
 EcranJeuPrincipal::~EcranJeuPrincipal(){
     delete m_spriteJoueur;
     for(int i = 0; i < 10; ++i)
         for(int j = 0; j < 10; ++j)
             delete m_spritesCarte[i][j];
 }
+
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_spriteObjets.clear();
@@ -171,15 +171,19 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     int posY = joueur->obtenirPosition().second-5;
     const Zone * zone = m_carte->obtenirZoneActive();
 
-    std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
+    // Debug aficher le nom de la map en cours
+    //std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
+
     // Test si c'est un joueur
     if (dynamic_cast<Joueur*>(&obj) != nullptr){
         // on deplace la zone autour du joueur pour qu'il reste au milieu
         for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i){
             for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
+
                 // Ne pas rendre des tuiles ou des objets en dehors de la map
                 if (i > 0 && i < zone->obtenirTaille() && j > 0 && j < zone->obtenirTaille()){
-                    //on recupère le type de la tuile pour l'afficher
+
+                    // On recupère le numéro de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
                     Tuile * t = zone->obtenirTuile(i,j);
                     // On cherche la bonne tuile sur l'atlas a partir de son numéro
@@ -196,6 +200,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                 }
             }
         }
+    // Affichage des valises
     } else {
         for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
             for (int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
