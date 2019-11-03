@@ -38,7 +38,7 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
             std::stringstream temp(resultat);
             temp >> numeroTuile;
 
-            // Debug pour afficher le numéro des tuile lue
+            // Debug pour afficher le numéro des tuile lu
             //std::cout << numeroTuile << " ";
 
             tuiles.push_back(numeroTuile);
@@ -80,6 +80,7 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
     initialiserSousTypeTuile();
 }
 
+
 Zone::~Zone(){
     // Libération du dictionnaire d'objets
     for (auto &it : m_objets)
@@ -94,6 +95,7 @@ Zone::~Zone(){
     }
 }
 
+
 Tuile* Zone::obtenirTuile(int x, int y) const {
     std::pair<int,int> position;
     position.first=x;
@@ -104,12 +106,15 @@ Tuile* Zone::obtenirTuile(int x, int y) const {
     return nullptr;
 }
 
+
 Tuile* Zone::obtenirTuile(std::pair <int,int> position) const {
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
     return nullptr;
 }
+
+
 //!
 //! \brief Zone::obtenirObjet
 //! \param position
@@ -122,9 +127,11 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const {
     return nullptr;
 }
 
+
 bool Zone::objetPresent(std::pair<int, int> position) const {
     return obtenirObjet(position) != nullptr;
 }
+
 
 void Zone::supprimerObjet(Objet* obj) {
     m_objets.erase(m_objets.find(obj));
@@ -132,26 +139,32 @@ void Zone::supprimerObjet(Objet* obj) {
     notifierTous();
 }
 
+
 std::map <Objet*,std::pair <int,int>> Zone::obtenirObjets() const {
     return m_objets;
 }
+
 
 std::string Zone::obtenirNom()
 {
     return m_nom;
 }
 
+
 void Zone::definirNom(std::string nom){
     m_nom = nom;
 }
+
 
 std::map<Tuile *, std::pair<int, int> > Zone::obtenirTuiles() const {
     return m_tuiles;
 }
 
+
 int Zone::obtenirTaille() const {
     return m_largeur;
 }
+
 
 void Zone::initZone() {
     for(int i = 0; i < m_hauteur; ++i){
@@ -172,6 +185,7 @@ void Zone::initZone() {
     ajouterObjets(20);
 }
 
+
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
     int nbGroupeTuileEau = rand() % max_groupe;
 
@@ -191,19 +205,19 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
 
         std::vector<std::pair<int, int> > positionsPossiblesVecteur;
 
-        if(posX > 0) {
+        if (posX > 0) {
             positionsPossiblesVecteur.push_back({posX-1, posY});
         }
 
-        if(posX+1 < m_largeur){
+        if (posX+1 < m_largeur){
             positionsPossiblesVecteur.push_back({posX+1, posY});
         }
 
-        if(posY > 0) {
+        if (posY > 0) {
             positionsPossiblesVecteur.push_back({posX, posY-1});
         }
 
-        if(posY+1 < m_hauteur){
+        if (posY+1 < m_hauteur){
             positionsPossiblesVecteur.push_back({posX, posY+1});
         }
 
@@ -221,27 +235,27 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
             m_tuiles.insert(std::make_pair(t,std::make_pair(p.first,p.second)));
             m_position_to_tuile[std::make_pair(p.first, p.second)] = t;
 
-            if(p.first > 0){
-                positionsPossiblesVecteur.push_back({p.first-1, p.second});
+            if (p.first > 0){
+                positionsPossiblesVecteur.push_back({p.first - 1, p.second});
             }
 
-            if(p.first+1 < m_largeur){
-                positionsPossiblesVecteur.push_back({p.first+1, p.second});
+            if (p.first + 1 < m_largeur){
+                positionsPossiblesVecteur.push_back({p.first + 1, p.second});
             }
 
-            if(p.second > 0){
-                positionsPossiblesVecteur.push_back({p.first, p.second-1});
+            if (p.second > 0){
+                positionsPossiblesVecteur.push_back({p.first, p.second - 1});
             }
 
-            if(p.second + 1 < m_hauteur){
-                positionsPossiblesVecteur.push_back({p.first, p.second+1});
+            if (p.second + 1 < m_hauteur){
+                positionsPossiblesVecteur.push_back({p.first, p.second + 1});
             }
         }
     }
 }
 
-void Zone::ajouterObjets(int nombre_objets)
-{
+
+void Zone::ajouterObjets(int nombre_objets){
     if (nombre_objets > 0) {
         for (int i = 0; i < nombre_objets; ++i) {
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
@@ -255,35 +269,37 @@ void Zone::ajouterObjets(int nombre_objets)
                 posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
                 t = m_position_to_tuile.at(std::make_pair(posX,posY));
             }
+
             //int typeObj = rand()%5; //A revoir si un jour integration objets autres que arme et vivre
             int typeObj = rand()%6;
             switch (typeObj) {
-            case 0:
-                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                break;
-            case 1:
-                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                break;
-            case 2:
-                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                break;
-            case 3:
-                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                break;
-            /*case 4://A revoir pour un objet aléatoire
-                m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
-                break;*/
-            case 5:
-                m_objets.insert(std::make_pair(new PartieBus() ,std::make_pair(posX,posY)));
-                break;
-            default:
-                break;
+                case 0:
+                    m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                    break;
+                case 1:
+                    m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                    break;
+                case 2:
+                    m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                    break;
+                case 3:
+                    m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                    break;
+                /*case 4://A revoir pour un objet aléatoire
+                    m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
+                    break;*/
+                case 5:
+                    m_objets.insert(std::make_pair(new PartieBus() ,std::make_pair(posX,posY)));
+                    break;
+                default:
+                    break;
             }
         }
     }
     mettreAChange();
     notifierTous();
 }
+
 
 void Zone::initialiserSousTypeTuile(){
 
@@ -295,6 +311,7 @@ void Zone::initialiserSousTypeTuile(){
 //! \date 01/03/18
 //! \author mleothaud
 //!
+
 
 void Zone::recharger(){
     ajouterObjets(20 - m_objets.size());
