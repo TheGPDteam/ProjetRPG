@@ -54,6 +54,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
             m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
 }
 
+
 //!
 //! \brief Affiche l'écran de jeu principal
 //! \author pgutierrez, mleothaud
@@ -63,10 +64,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 //!
 //! Affiche le contenu d'un écran de jeu principal
 //!
-
 void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &fenetre_affichage->clip_rect, SDL_MapRGB(fenetre_affichage->format, 0, 0, 0));
-
 
     for(auto c : m_spritesCarte)
         for(auto x : c)
@@ -95,6 +94,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 }
 
 
+
 //!
 //! \brief Gère les évènements
 //! \author pgutierrez
@@ -110,23 +110,23 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 
 void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
-    Uint8 *keystates = SDL_GetKeyState( nullptr );
+    Uint8 *etatTouches = SDL_GetKeyState( nullptr );
     Direction direction_deplacement = Direction::Aucune;
 
-    //If up is pressed
-    if( keystates[ SDLK_UP ] ||  keystates[ SDLK_z ])
+    // Si les touches pour aller en haut sont pressées
+    if( etatTouches[ SDLK_UP ] ||  etatTouches[ SDLK_z ])
         direction_deplacement = Direction::Nord;
 
-    //If down is pressed
-    if( keystates[ SDLK_DOWN ] ||  keystates[ SDLK_s ] )
+    // Si les touches pour aller en bas sont pressées
+    if( etatTouches[ SDLK_DOWN ] ||  etatTouches[ SDLK_s ] )
         direction_deplacement = Direction::Sud;
 
-    //If left is pressed
-    if( keystates[ SDLK_LEFT ] ||  keystates[ SDLK_q ] )
+    // Si les touches pour aller à gauche sont pressées
+    if( etatTouches[ SDLK_LEFT ] ||  etatTouches[ SDLK_q ] )
         direction_deplacement = Direction::Ouest;
 
-    //If right is pressed
-    if( keystates[ SDLK_RIGHT ] ||  keystates[ SDLK_d ] )
+    // Si les touches pour aller à droite sont pressées
+    if( etatTouches[ SDLK_RIGHT ] ||  etatTouches[ SDLK_d ] )
         direction_deplacement = Direction::Est;
 
     m_spriteJoueur->deplacementJoueur(direction_deplacement);
@@ -157,15 +157,20 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 
 EcranJeuPrincipal::~EcranJeuPrincipal(){
     delete m_spriteJoueur;
-    for(int i = 0; i < 10; ++i)
-        for(int j = 0; j < 10; ++j)
-            delete m_spritesCarte[i][j];
+    delete m_carte;
+    for(auto colonne : m_spritesCarte)
+        for(auto tuile : colonne)
+            delete tuile;
+
+    for(auto spriteObjet : m_spriteObjets)
+        delete spriteObjet;
 }
 
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_spriteObjets.clear();
     Joueur * joueur = m_controleur->obtenirModele()->obtenirJoueur();
+
     //recupère la position du joueur sur la zone
     int posX = joueur->obtenirPosition().first-5;
     int posY = joueur->obtenirPosition().second-5;
@@ -176,6 +181,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
     // Test si c'est un joueur
     if (dynamic_cast<Joueur*>(&obj) != nullptr){
+        Tuile * tuile;
         // on deplace la zone autour du joueur pour qu'il reste au milieu
         for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i){
             for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
@@ -185,9 +191,9 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
                     // On recupère le numéro de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
-                    Tuile * t = zone->obtenirTuile(i,j);
+                    tuile = zone->obtenirTuile(i,j);
                     // On cherche la bonne tuile sur l'atlas a partir de son numéro
-                    SDL_Rect lecture = SDL_Rect{(t->obtenirNumero() % 16) * 64, (t->obtenirNumero() / 16) * 64, 64, 64};
+                    SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
 
                     (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
 
@@ -195,11 +201,13 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                     if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
                         int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
                         int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64),(short int)(y*64),128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
+                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
                     }
                 }
             }
         }
+
+        //delete tuile;
     // Affichage des valises
     } else {
         for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
