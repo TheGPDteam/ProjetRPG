@@ -51,7 +51,7 @@ private:
 public:
     Direction obtenirDirectionChangementZone() const;
     void definirDirectionChangementZone(Direction dir);
-    Tuile(int val, bool marchable = true);
+    Tuile(int val);
     bool obtenirEstMarchable() const;
     bool obtenirPeutApparaitre() const;
     int obtenirNumero() const;

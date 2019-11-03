@@ -6,7 +6,7 @@
 //!
 
 
-Tuile::Tuile(int val, bool marchable)
+Tuile::Tuile(int val)
     : m_directionChangementZone{Aucune}{
 
     m_numero = val - 1;
@@ -15,7 +15,7 @@ Tuile::Tuile(int val, bool marchable)
         m_type = Herbe;
     }
 
-    m_type = (TypeTuile)val;
+    m_type = (TypeTuile)(val%6);
     m_marchable = true/*archable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre)*/;
 
 }

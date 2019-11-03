@@ -3,6 +3,7 @@
 #include <set>
 #include <iostream>
 #include <climits>
+#include <sstream>
 
 //! \file fichier zone
 //! \date 17/11/16
@@ -21,14 +22,34 @@ Zone::Zone(int longueur, int largeur)
 }
 
 void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
-    for (unsigned int j = 0; /*j < (unsigned int) 129 &&*/ j < fichier[i].size(); ++j){
-        int cpt=0;
-        if (fichier[i][j]==' '){
-            ++cpt;
+    int debutNumero = 0;
+    int finNumero = 1;
+    int numeroTuile = 0;
+    // Le numero en entier sera concaténé dans la chaine de caractère
+    std::string resultat;
+
+    while(finNumero < fichier[i].size()){
+        // Si la fin du numéro est rencontré
+        if (fichier[i][finNumero] == ' '){
+            resultat =  fichier[i][debutNumero];
+            for (unsigned int k = 1; k < finNumero - debutNumero; ++k){
+                resultat +=  fichier[i][debutNumero + k];
+            }
+
+            debutNumero = finNumero + 1;
+            finNumero = debutNumero + 1;
+
+            // On transforme la chaine de caractère en  entier
+            std::stringstream temp(resultat);
+            temp >> numeroTuile;
+
+            // Debug pour afficher le numéro des tuile lue
+            //std::cout << numeroTuile << " ";
+
+            tuiles.push_back(numeroTuile);
+        // Sinon on continu de lire
         } else {
-            int type;
-            type = (int) fichier[i][j] - '0';
-            tuiles.push_back(type);
+            ++finNumero;
         }
     }
 
@@ -48,34 +69,12 @@ Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
         std::vector<int> valeursTuiles;
         ligne2Tuile(fichier, valeursTuiles, i);
         for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
-            if (valeursTuiles[j] < 6) {
+            Tuile * t = new Tuile(valeursTuiles[j]);
+            if(true){
 
-                Tuile * t = new Tuile((TypeTuile)valeursTuiles[j], (i>=DECALAGE_TUILE && j >= DECALAGE_TUILE) && (i < fichier.size()-DECALAGE_TUILE && j < valeursTuiles.size()- DECALAGE_TUILE));
-                m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
-                m_position_to_tuile[std::make_pair(j,i)] = t;
-            } else {
-
-                Tuile* t = new Tuile(Beton);
-                switch (valeursTuiles[j]) {
-                case CASE_DIRECTION_OUEST:
-                    t->definirDirectionChangementZone(Ouest);
-                    break;
-                case CASE_DIRECTION_SUD:
-                    t->definirDirectionChangementZone(Sud);
-                    break;
-                case CASE_DIRECTION_EST:
-                    t->definirDirectionChangementZone(Est);
-                    break;
-                case CASE_DIRECTION_NORD:
-                    t->definirDirectionChangementZone(Nord);
-                default:
-                    break;
-                }
-
-                m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
-                m_position_to_tuile[std::make_pair(j,i)] = t;
             }
-
+            m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
+            m_position_to_tuile[std::make_pair(j,i)] = t;
         }
     }
     ajouterObjets(20);

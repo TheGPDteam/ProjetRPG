@@ -10,11 +10,12 @@ Carte::Carte(){
     //m_zoneActive = m_zones.front();
     for (int i = 0; i < 3; ++i){
         for (int j = 0; j < 3; ++j){
-            std::string zone = "./../rsc/carte/zone" + std::to_string(i * 3 + j) + ".txt";
-            chargerZone(zone,i,j);
+            std::string zone = "./../rsc/carte/zone" + std::to_string(i * 3 + (j+1)) + ".txt";
+            chargerZone(zone,i, j);
         }
     }
-    m_xZoneActive = m_yZoneActive = 1;
+    m_xZoneActive = 1;
+    m_yZoneActive = 0;
     m_zoneActive = m_zones[m_xZoneActive][m_yZoneActive];
 }
 
@@ -66,8 +67,7 @@ Zone *Carte::obtenirZoneActive()
 //! \author mleothaud
 //!
 
-void Carte::chargerZone(std::string nom_fichier_zone, short x, short y)
-{
+void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
     std::vector<std::string> cases;
     std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
     if (fichier.good()){
@@ -77,8 +77,9 @@ void Carte::chargerZone(std::string nom_fichier_zone, short x, short y)
             cases.push_back(ligne);
             std::getline(fichier,ligne);
         }
+
         fichier.close();
-        Zone* zone = new Zone(cases.size(),cases.size(),cases);
+        Zone* zone = new Zone(cases.size(), cases.size(), cases);
         zone->definirNom(nom_fichier_zone);
         /*m_zones.push_back(zone);
         m_zoneActive = m_zones.front();*/

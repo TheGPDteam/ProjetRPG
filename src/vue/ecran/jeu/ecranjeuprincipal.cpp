@@ -51,7 +51,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < 12; ++i)
         for(int j = 0; j < 12; ++j)
-            m_spritesCarte[i][j]=new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
+            m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
 }
 
 //!
@@ -171,20 +171,20 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     int posY = joueur->obtenirPosition().second-5;
     const Zone * carte = m_carte->obtenirZoneActive();
 
+    std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
     // Test si c'est un joueur
     if (dynamic_cast<Joueur*>(&obj) != nullptr){
         //on deplace la carte autour du joueur pour qu'il reste au milieu
-        for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX+DECALAGE_CARTE_X_SUPERIEUR; ++i){
-            for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY+DECALAGE_CARTE_Y_SUPERIEUR; ++j){
+        for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i){
+            for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
 
                 //on recupère le type de la tuile pour l'afficher
                 std::pair<int, int> temp(i,j);
                 Tuile * t = carte->obtenirTuile(i,j);
-                if (t->obtenirDirectionChangementZone() == Direction::Aucune){
-                    std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
-                    SDL_Rect lecture = SDL_Rect{(t->obtenirNumero() % 16) * 64, (t->obtenirNumero() / 16) * 64, 64, 64};
+                std::cout << t->obtenirNumero() % 16 << ", " << t->obtenirNumero()/16 << "   ";
+                SDL_Rect lecture = SDL_Rect{(t->obtenirNumero() % 16) * 64, (t->obtenirNumero() / 16) * 64, 64, 64};
 
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
+                (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);/*
                 } else {
                     if (i == DECALAGE_TUILE) { //Je suis a gauche donc sprite fleche de gauche
                         SDL_Rect lecture {64 , 64*3, 64, 64};
@@ -199,7 +199,7 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
                         SDL_Rect lecture {192 , 64*3, 64, 64};
                         (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
                     }
-                }
+                }*/
 
                 if (carte->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
                     int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
