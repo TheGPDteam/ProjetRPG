@@ -23,19 +23,14 @@ Zone::Zone(int longueur, int largeur)
 
 void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
     int debutNumero = 0;
-    int finNumero = 1;
+    int finNumero = 0;
     int numeroTuile = 0;
     // Le numero en entier sera concaténé dans la chaine de caractère
-    std::string resultat;
+    std::string resultat = "";
 
     while(finNumero < fichier[i].size()){
         // Si la fin du numéro est rencontré
         if (fichier[i][finNumero] == ' '){
-            resultat =  fichier[i][debutNumero];
-            for (unsigned int k = 1; k < finNumero - debutNumero; ++k){
-                resultat +=  fichier[i][debutNumero + k];
-            }
-
             debutNumero = finNumero + 1;
             finNumero = debutNumero + 1;
 
@@ -47,8 +42,12 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
             //std::cout << numeroTuile << " ";
 
             tuiles.push_back(numeroTuile);
+            resultat = "";
+
         // Sinon on continu de lire
         } else {
+            // On ajoute le caratère du chiffre à la chaine de caractère du numéro courant
+            resultat +=  fichier[i][finNumero];
             ++finNumero;
         }
     }
