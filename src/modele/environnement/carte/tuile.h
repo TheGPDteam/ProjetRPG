@@ -7,37 +7,25 @@ enum TypeTuile {
     Sable = 0,
     Herbe,
     Eau,
-    Beton,
+    Goudron,
     Terre,
-    Pierre,
-    Buisson,
-    Tronc,
-    FlecheDroite,
-    FlecheGauche,
-    FlecheHaut,
-    FlecheBas,
-    HerbeDecoration1,
-    HerbeDecoration2,
-    HerbeDecoration3,
-    HerbeDecoration4,
-    /*HerbeHerbeHerbeEau,
-    HerbeHerbeEauHerbe,
-    EauEauEauHerbe,
-    EauEauHerbeEau,
-    TerreTerreTerreEau,
-    TerreTerreEauTerre,
-    EauEauEauTerreEau,
-    GoudronGoudronGoudronTerre,
-    GoudronGoudronTerreGoudron,
-    TerreTerreTerreGoudron,
-    TerreTerreGoudronTerre,
-    HerbeHerbeHerbe
-
-    AucunType*/
+    Obstacle,
+    SortieDroite,
+    SortieGauche,
+    SortieHaut,
+    SortieBas,
+    HerbeDecoration,
+    Jointure
 };
 
-enum TypeCompose {
-    hey = Sable
+enum ECategorieTuile {
+    NonTerreux = 0,
+    Terreux,
+    Aqueux,
+    EauTerreux,
+    ObstacleOrganique,
+    ObstacleNonOrganique,
+    Sortie
 };
 
 class Tuile{
@@ -45,6 +33,7 @@ class Tuile{
 
 private:
     TypeTuile m_type;
+    ECategorieTuile m_categorie;
     Direction m_directionChangementZone;
     bool m_marchable;
     int m_numero;

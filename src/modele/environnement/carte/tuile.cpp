@@ -11,13 +11,55 @@ Tuile::Tuile(int val)
 
     m_numero = val - 1;
 
-    if ((val > 13 && val < 18) || val == 33 || val == 34){
-        m_type = Herbe;
+    // Definition de la categorie de la tuile
+    if (m_numero == 0 || m_numero == 3 ||
+        (m_numero >= 16 && m_numero % 16 >= 8 && m_numero % 16 <= 12) ||
+            m_numero >= 16 * 4){
+        m_categorie = NonTerreux;
+    } else if (m_numero == 1 || m_numero == 4 ||
+               (m_numero >= 16 && m_numero < 16 * 4 && m_numero % 16 >= 12)){
+        m_categorie = Terreux;
+    } else if (m_numero >= 16 && m_numero < 4 * 16 && m_numero % 16 <= 7){
+        m_categorie = EauTerreux;
+    } else if (m_numero == 2){
+        m_categorie = Aqueux;
+    } else if (m_numero == 5){
+        m_categorie = ObstacleNonOrganique;
+    } else if (m_numero == 6 || m_numero == 7){
+        m_categorie = ObstacleOrganique;
+    } else if (m_numero >= 8 && m_numero <= 12){
+        m_categorie = Sortie;
     }
 
-    m_type = (TypeTuile)(val%6);
-    m_marchable = true/*archable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre)*/;
+    // Definition du type de la tuile
+    if (m_numero == 0){
+        m_type = Sable;
+    } else if (m_numero == 1){
+        m_type = Herbe;
+    } else if (m_numero == 2){
+        m_type = Eau;
+    } else if (m_numero == 3){
+        m_type = Goudron;
+    } else if (m_numero == 4){
+        m_type = Terre;
+    } else if (m_numero >= 5 && m_numero <= 8){
+        m_type = Obstacle;
+    } else if (m_numero == 9){
+        m_type = SortieDroite;
+    } else if (m_numero == 10){
+        m_type = SortieGauche;
+    } else if (m_numero == 11){
+        m_type = SortieHaut;
+    } else if (m_numero == 13){
+        m_type = SortieBas;
+    } else if (m_numero >= 14 && m_numero <= 18){
+        m_type = HerbeDecoration;
+    } else if (m_numero >= 19){
+        m_type = Jointure;
+    }
 
+    m_marchable = (m_categorie == NonTerreux || m_categorie == Terreux
+                   || m_categorie == Sortie || m_categorie == EauTerreux);
 }
 
 
