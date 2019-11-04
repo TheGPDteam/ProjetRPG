@@ -30,9 +30,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
     //* AJOUT DES BOUTONS *//
 
-
-
-    SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
+    SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, m_controleur, nullptr,
                                            true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
 
@@ -48,10 +46,6 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
                                            true,/* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
-    //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
-    for(int i = 0; i < 12; ++i)
-        for(int j = 0; j < 12; ++j)
-            m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64),0,0}, SDL_Rect{832,0,64,64}};
 }
 
 
@@ -67,12 +61,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     SDL_FillRect(fenetre_affichage, &fenetre_affichage->clip_rect, SDL_MapRGB(fenetre_affichage->format, 0, 0, 0));
 
-    for(auto c : m_spritesCarte)
-        for(auto x : c)
-            x->afficher(fenetre_affichage);
-
-    for(auto spriteObjet : m_spriteObjets)
-        spriteObjet->afficher(fenetre_affichage);
+    m_afficheurZone.afficher(fenetre_affichage);
 
     Modele * m = m_controleur->obtenirModele();
     Quete * q = m->obtenirJoueur()->obtenirQuete();
@@ -157,72 +146,11 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 
 EcranJeuPrincipal::~EcranJeuPrincipal(){
     delete m_spriteJoueur;
-    delete m_carte;
-    for(auto colonne : m_spritesCarte)
-        for(auto tuile : colonne)
-            delete tuile;
-
-    for(auto spriteObjet : m_spriteObjets)
-        delete spriteObjet;
 }
 
 
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
-    m_spriteObjets.clear();
-    Joueur * joueur = m_controleur->obtenirModele()->obtenirJoueur();
-
-    //recupère la position du joueur sur la zone
-    int posX = joueur->obtenirPosition().first-5;
-    int posY = joueur->obtenirPosition().second-5;
-    const Zone * zone = m_carte->obtenirZoneActive();
-
-    // Debug aficher le nom de la map en cours
-    //std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
-
-    // Test si c'est un joueur
-    if (dynamic_cast<Joueur*>(&obj) != nullptr){
-        Tuile * tuile;
-        // on deplace la zone autour du joueur pour qu'il reste au milieu
-        for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i){
-            for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
-
-                // Ne pas rendre des tuiles ou des objets en dehors de la map
-                if (i > 0 && i < zone->obtenirTaille() && j > 0 && j < zone->obtenirTaille()){
-
-                    // On recupère le numéro de la tuile pour l'afficher
-                    std::pair<int, int> temp(i,j);
-                    tuile = zone->obtenirTuile(i,j);
-                    // On cherche la bonne tuile sur l'atlas a partir de son numéro
-                    SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
-
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-
-                    // Affichage de la valise
-                    if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
-                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
-                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
-                    }
-                }
-            }
-        }
-
-        //delete tuile;
-    // Affichage des valises
-    } else {
-        for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
-            for (int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
-                if (j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
-                    std::pair<int, int> temp(i,j);
-                    if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
-                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
-                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 127, 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
-                    }
-                }
-            }
-        }
-    }
+    m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur(), (dynamic_cast<Joueur*>(&obj) != nullptr) );
 }
 
 

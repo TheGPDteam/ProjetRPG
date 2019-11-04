@@ -76,7 +76,8 @@ SOURCES += \
     vue/spriteanime.cpp \
     vue/spritepersonnage.cpp \
     vue/camera.cpp \
-    gestionnaireressource.cpp
+    gestionnaireressource.cpp \
+    vue/interfaceutilisateur/conteneur/afficheurzone.cpp
 
 
 
@@ -157,6 +158,7 @@ HEADERS += \
     vue/spriteanime.h \
     vue/spritepersonnage.h \
     vue/camera.h \
-    gestionnaireressource.h
+    gestionnaireressource.h \
+    vue/interfaceutilisateur/conteneur/afficheurzone.h
 
 
