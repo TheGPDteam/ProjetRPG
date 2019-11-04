@@ -83,7 +83,6 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 }
 
 
-
 //!
 //! \brief Gère les évènements
 //! \author pgutierrez
@@ -96,7 +95,6 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 //!
 //! Gère les évènements de cet écran
 //!
-
 void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
     SDL_Event evenements;
     Uint8 *etatTouches = SDL_GetKeyState( nullptr );

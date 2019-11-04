@@ -38,6 +38,7 @@ void Controleur::deroulementJournee(){
     }
 }
 
+
 void Controleur::chargerSauvegarde()
 {
     Sauvegarde::chargerModele(m_modele);

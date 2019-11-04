@@ -15,7 +15,6 @@ using namespace std;
 //!
 //! Construit un objet de la classe modele
 //!
-
 Modele::Modele()
     : m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
                      50, 50, new Vivre())},
@@ -25,6 +24,7 @@ Modele::Modele()
     premiereJournee();
 }
 
+
 //!
 //! \brief Accesseur en lecture du nom de la partie
 //! \author mleothaud
@@ -33,11 +33,10 @@ Modele::Modele()
 //!
 //! Renvoit le nom de la partie
 //!
-
-std::string Modele::obtenirNomPartie() const
-{
+std::string Modele::obtenirNomPartie() const{
     return m_nomPartie;
 }
+
 
 //!
 //! \brief Accesseur en ecriture du nom de la partie
@@ -46,18 +45,16 @@ std::string Modele::obtenirNomPartie() const
 //! \version 1.0
 //! @param nom : Nouveau nom de la partie
 //!
-
-void Modele::definirNomPartie(std::string nom)
-{
+void Modele::definirNomPartie(std::string nom){
     m_nomPartie=nom;
 }
+
 
 //!
 //! \brief Modele::testerDeplacement
 //! \param dir
 //! \return
 //!
-
 bool Modele::testerDeplacement(Direction& dir){
 
     int tailleCarte = m_carte.obtenirZoneActive()->obtenirTaille();
@@ -65,20 +62,19 @@ bool Modele::testerDeplacement(Direction& dir){
     int posY = m_joueur.obtenirPosition().second;
 
     switch(dir){
-    case Nord:
-        if (posY==1 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY))->obtenirEstMarchable())
-            return true;
-        return posY-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
-    case Sud:
-        return posY+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
-    case Ouest:
-        return posX-1>=0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
-    case Est:
-        return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
-    default :
-        return false;
+        case Nord:
+            return posY-1> 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
+        case Sud:
+            return posY+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
+        case Ouest:
+            return posX-1> 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
+        case Est:
+            return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
+        default :
+            return false;
     }
 }
+
 
 //!
 //! \brief Permet de gérer le déplacement du personnage
@@ -87,17 +83,14 @@ bool Modele::testerDeplacement(Direction& dir){
 //! \version 2.0
 //! @param dir : la direction du déplacement
 //!
-
-void Modele::deplacement(Direction dir)
-{
+void Modele::deplacement(Direction dir){
     //On teste si le déplacement est possible
     if(testerDeplacement(dir)){
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
         Zone * zoneActive = m_carte.obtenirZoneActive();
         pair<int, int> position = m_joueur.obtenirPosition();
-        if(zoneActive->objetPresent(position))
-        {
+        if(zoneActive->objetPresent(position)){
             if(!m_joueur.obtenirInventaire()->estPlein()){
                 Objet * objet = zoneActive->obtenirObjet(position);
                 m_joueur.obtenirInventaire()->ajouterObjet(objet);
@@ -106,14 +99,13 @@ void Modele::deplacement(Direction dir)
                     Quete * q = m_joueur.obtenirQuete();
                     Vivre* v = dynamic_cast<Vivre*>(objet);
                     q->augmenterValeur(v->obtenirValeurNutritive());
-                    if (q->obtenirValeurObjectif()<= q->obtenirValeurAvancement() && !q->estfini())
-                    {
+                    if (q->obtenirValeurObjectif()<= q->obtenirValeurAvancement() && !q->estfini()){
                         m_campement.ajouterObjet(q->obtenirRecompense());
                         q->finir();
                     }
                 }
                 zoneActive->supprimerObjet(objet);
-            }else{
+            } else {
                 std::cout << "Inventaire plein !" << std::endl;
             }
         }
@@ -156,11 +148,11 @@ bool Modele::testChangementDeCarte(Direction directionDep){
         changementCarte=true;
     }
 
-    if(changementCarte)
-        m_joueur.definirPosition(nouvellePosition);
+    if(changementCarte)  m_joueur.definirPosition(nouvellePosition);
 
     return changementCarte;
 }
+
 
 //!
 //! \brief Permet d'avancer sur une journee, controle les etapes d'une journee
@@ -171,9 +163,7 @@ bool Modele::testChangementDeCarte(Direction directionDep){
 //! Un survivant arrive, on choisit de le garder ou pas, on l'affecte a une quete si oui,
 //! on part ensuite en quete pendant 10 minutes
 //!
-
-Humain* Modele::journeeSuivante()
-{
+Humain* Modele::journeeSuivante(){
     m_nouvelArrivant = new Humain();
     ++m_nbJoursPasses;
     m_temps->reinitialiserTemps();
@@ -183,30 +173,28 @@ Humain* Modele::journeeSuivante()
     return m_nouvelArrivant;
 }
 
+
 //!
 //! \brief Permet de lancer un combat
 //! \author mleothaud
 //! \date 17/11/16
 //! \version 0.0.2
 //!
-
-void Modele::lancerCombat()
-{
+void Modele::lancerCombat(){
     int probabilite = 95;
-    if (rand()%100 < probabilite)
-        Combat combat(m_joueur.obtenirEquipe());
-    else
-    {
+    if (rand() % 100 < probabilite)   Combat combat(m_joueur.obtenirEquipe());
+    else {
         std::set<Personnage *> personnagesAdverses;
-        for (int i=0; i < 4; ++i)
-        {
+        for (int i = 0; i < 4; ++i){
             Humain *h = new Humain();
             personnagesAdverses.insert(h);
         }
+
         Equipe *e = new Equipe(personnagesAdverses);
         Combat combat(m_joueur.obtenirEquipe(), e);
     }
 }
+
 
 //!
 //! \brief Permet la gestion de la premiere journee, differente des autres
@@ -216,13 +204,12 @@ void Modele::lancerCombat()
 //!
 //! Création d'une équipe de sept personnages
 //!
-
-void Modele::premiereJournee()
-{
-    for(int i=0 ; i<7 ; i++) {
-        Humain *h = new Humain();
+void Modele::premiereJournee(){
+    for(int i = 0; i < 7; ++i) {
+        Humain * h = new Humain();
         m_campement.obtenirNonAttribuees().insert(h);
     }
+
     m_nbJoursPasses = 0;
     m_joueur.definirEquipe(m_campement.obtenirEquipeRecolte());
     // Calcul de la quantité de vivres à obtenir pour survivre au jour suivant. Si les vivres possédés sont supérieurs à la consommation,
@@ -234,15 +221,14 @@ void Modele::premiereJournee()
     notifierTous();
 }
 
+
 //!
 //! \brief Accesseur en lecture du temps
 //! \author mleothaud
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-Temps* Modele::obtenirTemps()
-{
+Temps* Modele::obtenirTemps(){
     return m_temps;
 }
 
@@ -253,11 +239,10 @@ Temps* Modele::obtenirTemps()
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-Carte * Modele::obtenirCarte()
-{
+Carte * Modele::obtenirCarte(){
     return &m_carte;
 }
+
 
 //!
 //! \brief Accesseur en ecriture de la carte
@@ -265,11 +250,10 @@ Carte * Modele::obtenirCarte()
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-void Modele::definirCarte(Carte carte)
-{
-    m_carte=carte;
+void Modele::definirCarte(Carte carte){
+    m_carte = carte;
 }
+
 
 //!
 //! \brief Accesseur en lecture du campement
@@ -277,11 +261,10 @@ void Modele::definirCarte(Carte carte)
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-Campement * Modele::obtenirCampement()
-{
+Campement * Modele::obtenirCampement(){
     return &m_campement;
 }
+
 
 //!
 //! \brief Accesseur en ecriture du campement
@@ -289,11 +272,10 @@ Campement * Modele::obtenirCampement()
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-void Modele::definirCampement(Campement campement)
-{
+void Modele::definirCampement(Campement campement){
     m_campement=campement;
 }
+
 
 //!
 //! \brief Accesseur en lecture du combat
@@ -301,11 +283,10 @@ void Modele::definirCampement(Campement campement)
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-Combat * Modele::obtenirCombat()
-{
-    return &m_combat;
+Combat * Modele::obtenirCombat(){
+   return &m_combat;
 }
+
 
 //!
 //! \brief Accesseur en ecriture du combat
@@ -313,11 +294,10 @@ Combat * Modele::obtenirCombat()
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-void Modele::definirCombat(Combat combat)
-{
+void Modele::definirCombat(Combat combat){
     m_combat=combat;
 }
+
 
 //!
 //! \brief Accesseur en lecture du joueur
@@ -325,11 +305,10 @@ void Modele::definirCombat(Combat combat)
 //! \date 17/11/16
 //! \version 1.0
 //!
-
-Joueur* Modele::obtenirJoueur()
-{
+Joueur* Modele::obtenirJoueur(){
     return &m_joueur;
 }
+
 
 //!
 //! \brief Serialise les attributs du modèle
@@ -338,23 +317,22 @@ Joueur* Modele::obtenirJoueur()
 //! \date 12/11/17
 //! \version 0.1
 //!
-
-std::string Modele::serialiser() const
-{
+std::string Modele::serialiser() const {
     return "<Modele><NomPartie>" + m_nomPartie + "</NomPartie>"
             + m_campement.serialiser()
             + m_joueur.serialiser()
             + "</Modele>";
 }
 
-void Modele::charger(const std::string &donnees)
-{
+
+void Modele::charger(const std::string &donnees){
     m_nomPartie = obtenirSousChaineEntre2Predicats(donnees,"<NomPartie>","</NomPartie>");
     std::string donneesCampement = obtenirSousChaineEntre2Predicats(donnees,"<Campement>","</Campement");
     m_campement = Campement();
     m_campement.charger(donneesCampement);
     m_joueur.charger(obtenirSousChaineEntre2Predicats(donnees,"<Joueur>","</Joueur>"));
 }
+
 
 void Modele::reinitialiserTemps() {
     m_temps->reinitialiserTemps();
@@ -366,20 +344,17 @@ void Modele::reinitialiserTemps() {
 //! \date 17/01/18
 //! \version 0.1
 //!
-
 void Modele::finJournee() {
     //Trouver la formule pour savoir combien de morts
-    if (m_joueur.obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE)
-    {
+    if (m_joueur.obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
         int totalChasseEquipeChasse=0;
-        for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage())
-        {
+        for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage()){
             Humain *h = (Humain*) (p);
             totalChasseEquipeChasse+=h->obtenirChasse().obtenirValeur();
         }
+
         //On affecte une valeur au nombre de zombies qui ont été tués dans la journée par l'équipe chasse
-        if (totalChasseEquipeChasse != 0)
-        {
+        if (totalChasseEquipeChasse != 0){
             m_nbZombiesTues = rand()%totalChasseEquipeChasse;
         } else {
             m_nbZombiesTues = 0;
@@ -390,26 +365,23 @@ void Modele::finJournee() {
 
     //On calcule si et combien de personnages du campement sont morts dans la nuit
     unsigned int totalChasseCampement=0;
-    for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage())
-    {
-        Humain *h = (Humain*) (p);
-        totalChasseCampement+=h->obtenirChasse().obtenirValeur();
-    }
-    for (Personnage *p : m_campement.obtenirEquipeRecolte()->obtenirListePersonnage())
-    {
-        Humain *h = (Humain*) (p);
-        totalChasseCampement+=h->obtenirChasse().obtenirValeur();
-    }
-    for (Personnage *p : m_campement.obtenirNonAttribuees())
-    {
+    for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage()){
         Humain *h = (Humain*) (p);
         totalChasseCampement+=h->obtenirChasse().obtenirValeur();
     }
 
-    if (m_nbZombiesAttaquant > totalChasseCampement)
-        m_nbPersosMorts = (m_nbZombiesAttaquant - totalChasseCampement)/25;
-    else
-        m_nbPersosMorts = 0;
+    for (Personnage *p : m_campement.obtenirEquipeRecolte()->obtenirListePersonnage()){
+        Humain *h = (Humain*) (p);
+        totalChasseCampement+=h->obtenirChasse().obtenirValeur();
+    }
+
+    for (Personnage *p : m_campement.obtenirNonAttribuees()){
+        Humain *h = (Humain*) (p);
+        totalChasseCampement+=h->obtenirChasse().obtenirValeur();
+    }
+
+    if (m_nbZombiesAttaquant > totalChasseCampement)  m_nbPersosMorts = (m_nbZombiesAttaquant - totalChasseCampement) / 25;
+    else                                              m_nbPersosMorts = 0;
 
 
     if (m_nbPersosMorts > 0) {
@@ -419,8 +391,7 @@ void Modele::finJournee() {
         nbPersosCamp+=m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirEquipeCampement()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
-        if (nbPersosCamp>m_nbPersosMorts)
-        {
+        if (nbPersosCamp>m_nbPersosMorts){
             tuerPersos();
         } else {
             m_perdu = true;
@@ -432,26 +403,22 @@ void Modele::finJournee() {
     //Consommation de vivres
 
     //Transfert de l'inventaire du joueur vers le campement
-    for (Objet* o : m_joueur.obtenirInventaire()->obtenirObjets())
-    {
+    for (Objet* o : m_joueur.obtenirInventaire()->obtenirObjets()){
         m_campement.ajouterObjet(o);
         m_joueur.obtenirInventaire()->supprimerObjet(o);
     }
 
     //On vérifie que l'on a bien plus de vivres dans le camp que de besoins
     int valeurNutritiveTotaleCamp = 0;
-    for (Vivre * v : m_campement.obtenirVivres())
-    {
+    for (Vivre * v : m_campement.obtenirVivres()){
         valeurNutritiveTotaleCamp+=v->obtenirValeurNutritive();
     }
 
-    if(valeurNutritiveTotaleCamp > m_campement.obtenirConsommation())
-    {
+    if (valeurNutritiveTotaleCamp > m_campement.obtenirConsommation()){
         //On consomme jusqu'à ce que la valeur nutritive consommee couvre les besoins du campement
         int valeurNutritiveConsommee = 0;
         m_vivresConsommesNuit = 0;
-        while (valeurNutritiveConsommee < m_campement.obtenirConsommation())
-        {
+        while (valeurNutritiveConsommee < m_campement.obtenirConsommation()){
             valeurNutritiveConsommee += m_campement.consommerVivre();
             ++m_vivresConsommesNuit;
         }
@@ -463,13 +430,11 @@ void Modele::finJournee() {
         nbPersosCamp+=m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirEquipeCampement()->obtenirListePersonnage().size();
         nbPersosCamp+=m_campement.obtenirNonAttribuees().size();
-        if (m_nbPersosMorts > nbPersosCamp)
-        {
+        if (m_nbPersosMorts > nbPersosCamp){
             m_perdu=true;
             //TODO : Mettre à 0 les valeurs de jeu (équipes, inventaires, ...)
             m_td = TypeDefaite::FAMINE;
-        } else
-        {
+        } else {
             tuerPersos();
         }
     }
@@ -481,25 +446,25 @@ void Modele::finJournee() {
 }
 
 
-unsigned int Modele::obtenirNbPersosMorts() const
-{
+unsigned int Modele::obtenirNbPersosMorts() const {
     return m_nbPersosMorts;
 }
 
-unsigned int Modele::obtenirNbZombiesAttaquants() const
-{
+
+unsigned int Modele::obtenirNbZombiesAttaquants() const{
     return m_nbZombiesAttaquant;
 }
 
-unsigned int Modele::obtenirNbZombiesTues() const
-{
+
+unsigned int Modele::obtenirNbZombiesTues() const{
     return m_nbZombiesTues;
 }
 
-unsigned int Modele::obtenirVivresConsommesNuit() const
-{
+
+unsigned int Modele::obtenirVivresConsommesNuit() const{
     return m_vivresConsommesNuit;
 }
+
 
 bool Modele::perdu() {
     return m_perdu;
@@ -510,9 +475,11 @@ TypeDefaite Modele::obtenirTypeDefaite() const {
     return m_td;
 }
 
+
 Humain * Modele::obtenirNouvelArrivant(){
     return m_nouvelArrivant;
 }
+
 
 void Modele::changerNouvelArrivant(Humain * h){
     m_nouvelArrivant = h;
@@ -520,39 +487,39 @@ void Modele::changerNouvelArrivant(Humain * h){
     notifierTous();
 }
 
+
 void Modele::tuerPersos() {
     //TODO
-    for (unsigned int i=0; i<m_nbPersosMorts;++i)
-    {
+    for (unsigned int i = 0; i < m_nbPersosMorts; ++i){
         bool persoMort = false;
-        while(!persoMort) {
+        while (!persoMort) {
             switch (rand()%3) {
-            case 0:
-                //On tue un mec de recolte
-                if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
-                {
-                    m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                    persoMort = true;
-                }
-                break;
-            case 1:
-                //On tue un mec de chasse
-                if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
-                {
-                    m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                    persoMort = true;
-                }
-                break;
-            case 2:
-                //On tue un mec non attribué
-                if (m_campement.obtenirNonAttribuees().size()>0)
-                {
-                    m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
-                    persoMort = true;
-                }
-                break;
-            default:
-                break;
+                case 0:
+                    //On tue un mec de recolte
+                    if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
+                    {
+                        m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                        persoMort = true;
+                    }
+                    break;
+                case 1:
+                    //On tue un mec de chasse
+                    if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
+                    {
+                        m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                        persoMort = true;
+                    }
+                    break;
+                case 2:
+                    //On tue un mec non attribué
+                    if (m_campement.obtenirNonAttribuees().size()>0)
+                    {
+                        m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
+                        persoMort = true;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
