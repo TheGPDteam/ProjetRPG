@@ -14,12 +14,78 @@ const int CASE_DIRECTION_SUD = 7;
 const int CASE_DIRECTION_EST = 8;
 const int CASE_DIRECTION_NORD = 9;
 
-Zone::Zone(int longueur, int largeur)
-    : m_largeur{largeur},
-      m_hauteur{longueur}
-{
-    initZone();
+
+Zone::Zone(){
+    init(64, 64);
 }
+
+
+//!
+//! \brief Zone::Zone
+//! \param longueur
+//! \param largeur
+//! \param fichier
+//! \author dolacoste
+//!
+Zone::Zone(std::string nom_fichier_zone){
+    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
+
+    if (fichier.good()){
+        init(nom_fichier_zone);
+        definirNom("Zone " + (x * 3) + (y + 1));
+    } else {
+        init(64,64);
+    }
+
+
+}
+
+
+Zone::init(string nom_fichier){
+    std::vector<std::string> cases;
+    std::string ligne;
+    std::getline(fichier, ligne);
+    while (!fichier.eof()){
+        cases.push_back(ligne);
+        std::getline(fichier,ligne);
+    }
+
+    fichier.close();
+
+    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
+    for (unsigned int i = 0; i < fichier.size(); ++i){
+        std::vector<int> valeursTuiles;
+        ligne2Tuile(fichier, valeursTuiles, i);
+        for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
+            Tuile * t = new Tuile(valeursTuiles[j]);
+            if(true){
+
+            }
+            m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
+            m_position_to_tuile[std::make_pair(j,i)] = t;
+        }
+    }
+    ajouterObjets(20);
+}
+
+Zone::init(int longueur, int largeur){
+ m_largeur = largeur;
+ m_hauteur = longueur;
+}
+
+
+Zone::~Zone(){
+    // Libération du dictionnaire d'objets
+    for (auto &it : m_objets){
+        delete it.first;
+    }
+
+    // Libération des tuiles de la zone
+    for (auto &it : m_tuiles){
+        delete it.first;
+    }
+}
+
 
 void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
     int debutNumero = 0;
@@ -52,47 +118,6 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
         }
     }
 
-}
-
-//!
-//! \brief Zone::Zone
-//! \param longueur
-//! \param largeur
-//! \param fichier
-//! \author dolacoste
-//!
-Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
-    : m_largeur{largeur},
-      m_hauteur{longueur}{
-    for (unsigned int i = 0; i < fichier.size(); ++i){
-        std::vector<int> valeursTuiles;
-        ligne2Tuile(fichier, valeursTuiles, i);
-        for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
-            Tuile * t = new Tuile(valeursTuiles[j]);
-            if(true){
-
-            }
-            m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
-            m_position_to_tuile[std::make_pair(j,i)] = t;
-        }
-    }
-    ajouterObjets(20);
-    initialiserSousTypeTuile();
-}
-
-
-Zone::~Zone(){
-    // Libération du dictionnaire d'objets
-    for (auto &it : m_objets)
-    {
-        delete it.first;
-    }
-
-    // Libération des tuiles de la zone
-    for (auto &it : m_tuiles)
-    {
-        delete it.first;
-    }
 }
 
 
