@@ -44,7 +44,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
 
     SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
-                                           true,/* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
+                                           true, /* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
 }
 
@@ -101,42 +101,47 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
     Direction direction_deplacement = Direction::Aucune;
 
     // Si les touches pour aller en haut sont pressées
-    if( etatTouches[ SDLK_UP ] ||  etatTouches[ SDLK_z ])
+    if (etatTouches[ SDLK_UP ] ||  etatTouches[ SDLK_z ])
         direction_deplacement = Direction::Nord;
 
     // Si les touches pour aller en bas sont pressées
-    if( etatTouches[ SDLK_DOWN ] ||  etatTouches[ SDLK_s ] )
+    if (etatTouches[ SDLK_DOWN ] ||  etatTouches[ SDLK_s ] )
         direction_deplacement = Direction::Sud;
 
     // Si les touches pour aller à gauche sont pressées
-    if( etatTouches[ SDLK_LEFT ] ||  etatTouches[ SDLK_q ] )
+    if (etatTouches[ SDLK_LEFT ] ||  etatTouches[ SDLK_q ] )
         direction_deplacement = Direction::Ouest;
 
     // Si les touches pour aller à droite sont pressées
-    if( etatTouches[ SDLK_RIGHT ] ||  etatTouches[ SDLK_d ] )
+    if (etatTouches[ SDLK_RIGHT ] ||  etatTouches[ SDLK_d ] )
         direction_deplacement = Direction::Est;
+
+
+    if (etatTouches[SDLK_ESCAPE]){
+        quitter_jeu = true;
+    }
 
     m_spriteJoueur->deplacementJoueur(direction_deplacement);
     controleur->deplacementJoueur(direction_deplacement);
 
     while(SDL_PollEvent(&evenements)){
         switch(evenements.type){
-        case SDL_QUIT:
-            quitter_jeu = true;
-            //SDL_Quit();
-            break;
+            case SDL_QUIT :
+                quitter_jeu = true;
+                //SDL_Quit();
+                break;
 
-        case SDL_MOUSEBUTTONUP:
-            if (evenements.button.button == SDL_BUTTON_LEFT){
-                clique_souris = true;
+            case SDL_MOUSEBUTTONUP:
+                if (evenements.button.button == SDL_BUTTON_LEFT){
+                    clique_souris = true;
+                    coord_souris.first = evenements.button.x;
+                    coord_souris.second = evenements.button.y;
+                }
+                break;
+            default:
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
-            }
-            break;
-        default:
-            coord_souris.first = evenements.button.x;
-            coord_souris.second = evenements.button.y;
-            break;
+                break;
         }
     }
 }
