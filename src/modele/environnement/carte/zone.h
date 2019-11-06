@@ -25,8 +25,7 @@ const int MAX_GROUPES_TUILES_SABLE = 15;
 const int MAX_GROUPES_TUILES_ARBRE = 10;
 
 const int TAILLE_ZONE = 76;
-class Zone : public Observable
-{
+class Zone : public Observable{
 private:
     std::map<Objet*,std::pair<int,int>> m_objets;
 	int m_largeur;
@@ -40,12 +39,13 @@ private:
     void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
     void initialiserSousTypeTuile();
+    std::string valeurDe(std::ifstream fichier, std::string valeur);
 public:
-
-    Zone()=default;
     Zone(int longueur, int largeur);
-    Zone(int longueur, int largeur, std::vector<std::string> fichier);
+    Zone(std::ifstream fichier);
     ~Zone();
+    void init(std::ifstream fichier);
+    void init(int largeur, int hauteur);
 
     Tuile* obtenirTuile(int valeurX, int valeurY) const;
     Tuile* obtenirTuile(std::pair <int,int> position) const;

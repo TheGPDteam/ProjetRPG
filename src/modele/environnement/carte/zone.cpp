@@ -27,21 +27,19 @@ Zone::Zone(){
 //! \param fichier
 //! \author dolacoste
 //!
-Zone::Zone(std::string nom_fichier_zone){
-    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
-
+Zone::Zone(std::ifstream fichier){
     if (fichier.good()){
-        init(nom_fichier_zone);
+        init(fichier);
         definirNom("Zone " + (x * 3) + (y + 1));
     } else {
         init(64,64);
     }
-
-
 }
 
 
-Zone::init(string nom_fichier){
+void Zone::init(std::ifstream fichier){
+    definirNom(valeurDe(fichier, "#nom"));
+
     std::vector<std::string> cases;
     std::string ligne;
     std::getline(fichier, ligne);
@@ -52,7 +50,6 @@ Zone::init(string nom_fichier){
 
     fichier.close();
 
-    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
     for (unsigned int i = 0; i < fichier.size(); ++i){
         std::vector<int> valeursTuiles;
         ligne2Tuile(fichier, valeursTuiles, i);
@@ -65,12 +62,32 @@ Zone::init(string nom_fichier){
             m_position_to_tuile[std::make_pair(j,i)] = t;
         }
     }
+
+
     ajouterObjets(20);
 }
 
-Zone::init(int longueur, int largeur){
- m_largeur = largeur;
- m_hauteur = longueur;
+
+std::string valeurDe(std::ifstream fichier, std::string valeur){
+    std::string ligne;
+    do{
+        std::size_t pos = ligne.find(valeur);
+        if (pos == std::string::npos){
+            pos+= valeur.size() + 1;
+            int debut = pos-1;
+            while(valeur.substr())
+
+        }
+
+        std::getline(fichier,ligne);
+    } while (!fichier.eof());
+
+    return "error";
+}
+
+void Zone::init(int largeur, int hauteur){
+     m_largeur = largeur;
+     m_hauteur = hauteur;
 }
 
 

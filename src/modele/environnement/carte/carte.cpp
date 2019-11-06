@@ -68,7 +68,8 @@ Zone *Carte::obtenirZoneActive(){
 //! \author mleothaud
 //!
 void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
-    Zone* zone = new Zone(nom_fichier_zone);
+    std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
+    Zone* zone = new Zone(fichier);
 
     m_zones[x][y] = zone;
     m_zoneActive = m_zones[x][y];
