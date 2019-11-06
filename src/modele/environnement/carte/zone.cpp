@@ -15,8 +15,8 @@ const int CASE_DIRECTION_EST = 8;
 const int CASE_DIRECTION_NORD = 9;
 
 
-Zone::Zone(){
-    init(64, 64);
+Zone::Zone(int largeur, int hauteur){
+    init(largeur, hauteur);
 }
 
 
@@ -28,17 +28,15 @@ Zone::Zone(){
 //! \author dolacoste
 //!
 Zone::Zone(std::ifstream fichier){
-    if (fichier.good()){
-        init(fichier);
-        definirNom("Zone " + (x * 3) + (y + 1));
-    } else {
-        init(64,64);
-    }
+    if (fichier.good())  init(fichier);
+    else                 init(64,64);
 }
 
 
 void Zone::init(std::ifstream fichier){
-    definirNom(valeurDe(fichier, "#nom"));
+    definirNom(valeurDe(fichier, "#Nom", "\n"));
+
+    std::string taille = valeurDe(fichier, "#Dimensions", "\n");
 
     std::vector<std::string> cases;
     std::string ligne;
@@ -63,19 +61,31 @@ void Zone::init(std::ifstream fichier){
         }
     }
 
-
     ajouterObjets(20);
 }
 
 
-std::string valeurDe(std::ifstream fichier, std::string valeur){
+std::string valeurDe(std::ifstream fichier, std::string nom_valeur, std::string fin_de_valeur){
     std::string ligne;
     do{
-        std::size_t pos = ligne.find(valeur);
+        // Test si ce la string nom_valeur
+        std::size_t pos = ligne.find(nom_valeur);
         if (pos == std::string::npos){
-            pos+= valeur.size() + 1;
-            int debut = pos-1;
-            while(valeur.substr())
+
+            int debut = valeur.size();
+            int fin;
+            // Recherche du début de la valeur
+            while(ligne.substr(debut, debut+1) == " "){
+               ++debut;
+            }
+
+            // Recherche de la fin de la valeur
+            fin = debut + 1;
+            while(ligne.substr(debut, debut+1) != fin_de_valeur){
+               ++fin;
+            }
+
+            return ligne.substr(debut, fin);
 
         }
 
@@ -220,9 +230,9 @@ void Zone::initZone() {
     m_objets.insert(std::make_pair(new Objet{"Oreille de zombie", "Ouloulou, probablement tombée par hasard d'un zombie, vous devriez courir.", 0, 640}, std::make_pair(42,42)));
 
 
-    ajouterSols(Eau, MAX_TUILES_EAU_PER_ZONE, MAX_GROUPES_TUILES_EAU);
-    ajouterSols(Sable, MAX_TUILES_SABLE_PER_ZONE, MAX_GROUPES_TUILES_SABLE);
-    ajouterSols(Terre, MAX_TUILES_TERRE_PER_ZONE, MAX_GROUPES_TUILES_TERRE);
+    ajouterSols(Eau, MAX_TUILES_EAU_PAR_ZONE, MAX_GROUPES_TUILES_EAU);
+    ajouterSols(Sable, MAX_TUILES_SABLE_PAR_ZONE, MAX_GROUPES_TUILES_SABLE);
+    ajouterSols(Terre, MAX_TUILES_TERRE_PAR_ZONE, MAX_GROUPES_TUILES_TERRE);
 
     ajouterObjets(20);
 }
