@@ -1,26 +1,7 @@
 #include "zonetexte.h"
+#include "modele/utilitaires.h"
 #include <iostream>
 #include <assert.h>
-
-void decouper(const std::string& str, std::vector<std::string>& jetons, const std::string& delimiteurs = " ") {
-    if (str.length() == 0) return;
-    std::string::size_type prevPos = 0;//str.find_first_not_of(delimiteurs, 0);
-    std::string::size_type pos     = str.find_first_of(delimiteurs, prevPos);
-    while (std::string::npos != pos || std::string::npos != prevPos) {
-        jetons.push_back(str.substr(prevPos, pos - prevPos));
-        std::string::size_type pos_tmp = str.find_first_of(delimiteurs, pos+1);
-        if (pos_tmp - pos == 1){
-            prevPos = pos_tmp;
-            pos = pos_tmp;
-        } else {
-            prevPos = str.find_first_not_of(delimiteurs, pos);
-            pos = str.find_first_of(delimiteurs, prevPos);
-        }
-    }
-
-    if (str[str.size()-1]=='\t')
-        jetons.push_back("");
-}
 
 
 ZoneTexte::ZoneTexte(const std::string chemin_police, const int taille_police, SDL_Rect r,

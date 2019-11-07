@@ -68,30 +68,11 @@ Zone *Carte::obtenirZoneActive(){
 //! \author mleothaud
 //!
 void Carte::chargerZone(std::string nom_fichier_zone, short x, short y){
-    std::vector<std::string> cases;
     std::ifstream fichier(nom_fichier_zone, std::ifstream::in);
-    if (fichier.good()){
-        std::string ligne;
-        std::getline(fichier,ligne);
-        while(!fichier.eof()){
-            cases.push_back(ligne);
-            std::getline(fichier,ligne);
-        }
+    Zone * zone = new Zone(fichier);
 
-        fichier.close();
-        Zone* zone = new Zone(cases.size(), cases.size(), cases);
-        zone->definirNom("Zone " + (x * 3) + (y + 1));
-        /*m_zones.push_back(zone);
-        m_zoneActive = m_zones.front();*/
-        m_zones[x][y] = zone;
-        m_zoneActive = m_zones[x][y];
-    } else {
-
-        /*m_zones.push_back(Zone(64,64));
-        m_zoneActive = m_zones.front();*/
-        m_zones[x][y] = new Zone(64,64);
-        m_zoneActive = m_zones[x][y];
-    }
+    m_zones[x][y] = zone;
+    m_zoneActive = m_zones[x][y];
 
     mettreAChange();
     notifierTous();

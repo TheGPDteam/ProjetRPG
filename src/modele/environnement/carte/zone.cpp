@@ -3,6 +3,7 @@
 #include <set>
 #include <iostream>
 #include <climits>
+#include <assert.h>
 #include <sstream>
 
 //! \file fichier zone
@@ -14,14 +15,26 @@ const int CASE_DIRECTION_SUD = 7;
 const int CASE_DIRECTION_EST = 8;
 const int CASE_DIRECTION_NORD = 9;
 
-Zone::Zone(int longueur, int largeur)
-    : m_largeur{largeur},
-      m_hauteur{longueur}
-{
-    initZone();
+
+Zone::Zone(int largeur, int hauteur){
+    init(largeur, hauteur);
 }
 
-void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
+
+//!
+//! \brief Zone::Zone
+//! \param longueur
+//! \param largeur
+//! \param fichier
+//! \author dolacoste
+//!
+Zone::Zone(std::ifstream &fichier){
+    if (fichier.good())  init(fichier);
+    else                 init(64,64);
+}
+
+
+/*void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
     int debutNumero = 0;
     int finNumero = 0;
     int numeroTuile = 0;
@@ -51,46 +64,70 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
             ++finNumero;
         }
     }
+}*/
 
-}
 
-//!
-//! \brief Zone::Zone
-//! \param longueur
-//! \param largeur
-//! \param fichier
-//! \author dolacoste
-//!
-Zone::Zone(int longueur, int largeur, std::vector<std::string> fichier)
-    : m_largeur{largeur},
-      m_hauteur{longueur}{
-    for (unsigned int i = 0; i < fichier.size(); ++i){
-        std::vector<int> valeursTuiles;
-        ligne2Tuile(fichier, valeursTuiles, i);
-        for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
-            Tuile * t = new Tuile(valeursTuiles[j]);
-            if(true){
+void Zone::init(std::ifstream & fichier){
+    std::string ligne;
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
 
-            }
+    std::vector<std::string> valeurs;
+
+
+    // Nom
+    decouper(ligne, valeurs, " ");
+    assert(valeurs.size() == 2);
+    definirNom(valeurs[1]);
+
+
+    // Dimensions
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+    decouper(ligne, valeurs, " ");
+
+    assert(valeurs.size() == 3);
+
+
+    m_largeur = stoi(valeurs[1]);
+    m_hauteur = stoi(valeurs[2]);
+
+    // Lecture de #sol
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+
+    // Lecture tuiles
+    for(int i = 0; i < m_hauteur; ++i){
+        std::getline(fichier,ligne);
+        std::vector<std::string> valeursTuiles;
+        decouper(ligne, valeursTuiles, " ");
+        assert(valeursTuiles.size() == m_largeur);
+        for (unsigned int j = 0; j < m_largeur; ++j){
+            Tuile * t = new Tuile(stoi(valeursTuiles[j]));
             m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
             m_position_to_tuile[std::make_pair(j,i)] = t;
         }
     }
+
+
+    fichier.close();
     ajouterObjets(20);
-    initialiserSousTypeTuile();
+}
+
+void Zone::init(int largeur, int hauteur){
+     m_largeur = largeur;
+     m_hauteur = hauteur;
 }
 
 
 Zone::~Zone(){
     // Libération du dictionnaire d'objets
-    for (auto &it : m_objets)
-    {
+    for (auto &it : m_objets){
         delete it.first;
     }
 
     // Libération des tuiles de la zone
-    for (auto &it : m_tuiles)
-    {
+    for (auto &it : m_tuiles){
         delete it.first;
     }
 }
@@ -178,16 +215,16 @@ void Zone::initZone() {
     m_objets.insert(std::make_pair(new Objet{"Oreille de zombie", "Ouloulou, probablement tombée par hasard d'un zombie, vous devriez courir.", 0, 640}, std::make_pair(42,42)));
 
 
-    ajouterSols(Eau, MAX_TUILES_EAU_PER_ZONE, MAX_GROUPES_TUILES_EAU);
-    ajouterSols(Sable, MAX_TUILES_SABLE_PER_ZONE, MAX_GROUPES_TUILES_SABLE);
-    ajouterSols(Terre, MAX_TUILES_TERRE_PER_ZONE, MAX_GROUPES_TUILES_TERRE);
+    ajouterSols(Eau, MAX_TUILES_EAU_PAR_ZONE, MAX_GROUPES_TUILES_EAU);
+    ajouterSols(Sable, MAX_TUILES_SABLE_PAR_ZONE, MAX_GROUPES_TUILES_SABLE);
+    ajouterSols(Terre, MAX_TUILES_TERRE_PAR_ZONE, MAX_GROUPES_TUILES_TERRE);
 
     ajouterObjets(20);
 }
 
 
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
-    int nbGroupeTuileEau = rand() % max_groupe;
+    /*int nbGroupeTuileEau = rand() % max_groupe;
 
     for(int j = 0 ; j < nbGroupeTuileEau; ++j){
         int posX = rand() % m_largeur;
@@ -239,6 +276,10 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first - 1, p.second});
             }
 
+
+
+
+            std::string taille = valeurDe(fichier, "#Dimensions", "\n");
             if (p.first + 1 < m_largeur){
                 positionsPossiblesVecteur.push_back({p.first + 1, p.second});
             }
@@ -251,7 +292,7 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first, p.second + 1});
             }
         }
-    }
+    }*/
 }
 
 
@@ -296,6 +337,7 @@ void Zone::ajouterObjets(int nombre_objets){
             }
         }
     }
+
     mettreAChange();
     notifierTous();
 }
