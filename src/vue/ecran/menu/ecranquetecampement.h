@@ -32,7 +32,7 @@ private:
 
     std::pair<int,int> coordBoutonCampement;
 public:
-    EcranQueteCampement(Controleur* controleur);
+    EcranQueteCampement(Controleur* controleur, GestionnaireRessource* gestionnaireRessource);
 
     void obtenirChangement(Observable &obj);
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage);
