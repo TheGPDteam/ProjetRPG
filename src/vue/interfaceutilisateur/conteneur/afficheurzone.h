@@ -7,13 +7,12 @@
 
 class AfficheurZone {
 private:
-    static int const TAILLE_CARTE_AFFICHAGE = 12;
-    int const DECALAGE_CARTE_Y_SUPERIEUR = 12;
-    int const DECALAGE_CARTE_X_INFERIEUR = 0;
-    int const DECALAGE_CARTE_Y_INFERIEUR = 0;
-    int const DECALAGE_CARTE_X_SUPERIEUR = 12;
+    static int const DECALAGE_CARTE_Y_SUPERIEUR = 11;
+    static int const DECALAGE_CARTE_X_INFERIEUR = 0;
+    static int const DECALAGE_CARTE_Y_INFERIEUR = 0;
+    static int const DECALAGE_CARTE_X_SUPERIEUR = 13;
 
-    std::array<std::array<Sprite*,TAILLE_CARTE_AFFICHAGE>,TAILLE_CARTE_AFFICHAGE> m_spritesCarte;
+    std::array<std::array<Sprite*, DECALAGE_CARTE_Y_SUPERIEUR>, DECALAGE_CARTE_X_SUPERIEUR> m_spritesCarte;
     std::set<Sprite*> m_spriteObjets;
 
 public:

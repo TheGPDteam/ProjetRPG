@@ -61,7 +61,8 @@ public:
 	std::string obtenirNom();
     void definirNom(std::string nom);
     std::map <Tuile*, std::pair<int,int>> obtenirTuiles() const;
-    int obtenirTaille() const;
+    int obtenirLargeur() const;
+    int obtenirHauteur() const;
     void recharger();
 };
 

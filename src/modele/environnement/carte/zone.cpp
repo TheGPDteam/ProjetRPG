@@ -198,7 +198,12 @@ std::map<Tuile *, std::pair<int, int> > Zone::obtenirTuiles() const {
 }
 
 
-int Zone::obtenirTaille() const {
+int Zone::obtenirLargeur() const {
+    return m_largeur;
+}
+
+
+int Zone::obtenirHauteur() const {
     return m_largeur;
 }
 

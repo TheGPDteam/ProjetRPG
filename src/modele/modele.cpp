@@ -56,20 +56,20 @@ void Modele::definirNomPartie(std::string nom){
 //! \return
 //!
 bool Modele::testerDeplacement(Direction& dir){
-
-    int tailleCarte = m_carte.obtenirZoneActive()->obtenirTaille();
+    int largeurCarte = m_carte.obtenirZoneActive()->obtenirLargeur();
+    int hauteurCarte = m_carte.obtenirZoneActive()->obtenirHauteur();
     int posX = m_joueur.obtenirPosition().first;
     int posY = m_joueur.obtenirPosition().second;
 
     switch(dir){
         case Nord:
-            return posY-1> 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
+            return posY - 1 > 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         case Sud:
-            return posY+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
+            return posY + 1 < hauteurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
         case Ouest:
-            return posX-1> 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
+            return posX - 1 > 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
         case Est:
-            return posX+1<tailleCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
+            return posX + 1 < largeurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
         default :
             return false;
     }

@@ -3,9 +3,9 @@
 
 AfficheurZone::AfficheurZone(){
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
-    for(int i = 0; i < 12; ++i)
-        for(int j = 0; j < 12; ++j)
-            m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64),static_cast<Sint16>(j*64), 0, 0}, SDL_Rect{832, 0, 64, 64}};
+    for(int i = 0; i < DECALAGE_CARTE_X_SUPERIEUR; ++i)
+        for(int j = 0; j < DECALAGE_CARTE_Y_SUPERIEUR; ++j)
+            m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64), static_cast<Sint16>(j*64), 0, 0}, SDL_Rect{0, 0, 64, 64}};
 }
 
 
@@ -23,8 +23,8 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provo
     m_spriteObjets.clear();
 
     //recupère la position du joueur sur la zone
-    int posX = joueur->obtenirPosition().first-5;
-    int posY = joueur->obtenirPosition().second-5;
+    int posX = joueur->obtenirPosition().first - 5;
+    int posY = joueur->obtenirPosition().second - 5;
     const Zone * zone = carte->obtenirZoneActive();
 
     // Debug aficher le nom de la map en cours
@@ -38,7 +38,7 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provo
             for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
 
                 // Ne pas rendre des tuiles ou des objets en dehors de la map
-                if (i > 0 && i < zone->obtenirTaille() && j > 0 && j < zone->obtenirTaille()){
+                if (i > 0 && i < zone->obtenirLargeur() && j > 0 && j < zone->obtenirHauteur()){
 
                     // On recupère le numéro de la tuile pour l'afficher
                     std::pair<int, int> temp(i,j);
@@ -68,8 +68,8 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provo
     } else {
         for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
             for (int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
-                if (j >= 0 && j <= 63 &&  i >= 0 && i <= 63) {
-                    std::pair<int, int> temp(i,j);
+                if (j >= 0 && j <= 64 &&  i >= 0 && i <= 64) {
+                    std::pair<int, int> temp(i, j);
                     if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
                         int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
                         int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
