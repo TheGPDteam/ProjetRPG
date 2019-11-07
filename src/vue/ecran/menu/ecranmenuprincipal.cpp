@@ -1,7 +1,7 @@
 #include "ecranmenuprincipal.h"
 #include "constantesbouton.h"
 #include "outilsvue.h"
-
+#include "SDL/SDL_image.h"
 //!
 //! \brief Constructeur par défaut de l'écran de menu principal
 //! \author pgutierrez
@@ -25,7 +25,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 
     rect.y += 70;
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr, true, POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
-
+    m_fond = IMG_Load("../rsc/sprites/ecran_titre.bmp");
 }
 
 
