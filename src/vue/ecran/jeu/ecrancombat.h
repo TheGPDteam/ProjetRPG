@@ -8,7 +8,7 @@ class EcranCombat : public EcranGeneral
 private:
 
 public:
-    EcranCombat(Controleur *controleur);
+    EcranCombat(Controleur *controleur, GestionnaireRessource* gestionnaireRessource);
 };
 
 #endif // ECRANCOMBAT_H

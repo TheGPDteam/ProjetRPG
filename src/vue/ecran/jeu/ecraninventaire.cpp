@@ -11,8 +11,8 @@ const int LARGEUR_TABLEAU = 0.7 * WIDTH_FENETRE_PRINCIPALE;
 const int HAUTEUR_TABLEAU = 0.7 * HEIGHT_FENETRE_PRINCIPALE;
 
 
-EcranInventaire::EcranInventaire(Controleur* controleur) :
-    EcranGeneral{controleur},
+EcranInventaire::EcranInventaire(Controleur* controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral{controleur, gestionnaireRessource},
     m_nomFenetre("Inventaire", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60)),
     m_compteurInventaire(-1),
