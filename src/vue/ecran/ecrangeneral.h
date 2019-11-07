@@ -6,6 +6,7 @@
 #include "observateur.h"
 #include "policetexte.h"
 #include "outilsvue.h"
+#include "gestionnaireressource.h"
 
 class EcranGeneral : public DictionnaireDeBoutons, public Observateur
 {
@@ -13,9 +14,10 @@ protected :
     Controleur* m_controleur;
     SDL_Surface * m_fond;
     SDL_Rect m_ecran = {0, 0, WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE};
+    GestionnaireRessource* m_gestionnaireRessource;
 
 public:
-    EcranGeneral(Controleur * controleur);
+    EcranGeneral(Controleur * controleur, GestionnaireRessource* gestionnaireRessource);
 
     void afficherFondEcran(SDL_Surface* fenetre_affichage);
     virtual void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage) = 0;
