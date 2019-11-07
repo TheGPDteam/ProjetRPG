@@ -2,6 +2,7 @@
 #include "constantesbouton.h"
 #include "outilsvue.h"
 #include "SDL/SDL_image.h"
+
 //!
 //! \brief Constructeur par défaut de l'écran de menu principal
 //! \author pgutierrez
@@ -11,8 +12,8 @@
 //! Initialise tout le contenu de l'écran principal de jeu
 //!
 
-EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
-    EcranGeneral{controleur},
+EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral{controleur, gestionnaireRessource},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBoutons)
 {
     SDL_Rect rect = {(WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),  (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};

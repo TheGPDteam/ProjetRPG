@@ -13,8 +13,8 @@
 //! \version 1.0
 //!
 
-EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur)
-    : EcranGeneral{controleur}
+EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
+    : EcranGeneral{controleur, gestionnaireRessource}
 {
     short unsigned int largeurFond, hauteurFond;
     largeurFond = WIDTH_FENETRE_PRINCIPALE - 2 * DECALAGE_FOND_RECAP_NUIT;
