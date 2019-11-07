@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include "direction.h"
 #include "zone.h"
 #include "observable.h"

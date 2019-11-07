@@ -43,12 +43,13 @@ private:
     void ajouterObjets(int nbObjets);
     void initialiserSousTypeTuile();
 
-    std::string valeurDe(std::ifstream fichier, std::string nom_valeur, std::string fin_de_valeur);
-    void init(std::ifstream fichier);
+    std::string valeurDe(std::ifstream &fichier, std::string nom_valeur, std::string fin_de_valeur);
+    void init(std::ifstream &fichier);
     void init(int largeur, int hauteur);
+
 public:
     Zone(int longueur, int largeur);
-    Zone(std::ifstream fichier);
+    Zone(std::ifstream &fichier);
     ~Zone();
 
     Tuile* obtenirTuile(int valeurX, int valeurY) const;

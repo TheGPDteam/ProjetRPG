@@ -3,6 +3,7 @@
 #include <set>
 #include <iostream>
 #include <climits>
+#include <assert.h>
 #include <sstream>
 
 //! \file fichier zone
@@ -27,94 +28,13 @@ Zone::Zone(int largeur, int hauteur){
 //! \param fichier
 //! \author dolacoste
 //!
-Zone::Zone(std::ifstream fichier){
+Zone::Zone(std::ifstream &fichier){
     if (fichier.good())  init(fichier);
     else                 init(64,64);
 }
 
 
-void Zone::init(std::ifstream fichier){
-    definirNom(valeurDe(fichier, "#Nom", "\n"));
-
-    std::string taille = valeurDe(fichier, "#Dimensions", "\n");
-
-    std::vector<std::string> cases;
-    std::string ligne;
-    std::getline(fichier, ligne);
-    while (!fichier.eof()){
-        cases.push_back(ligne);
-        std::getline(fichier,ligne);
-    }
-
-    fichier.close();
-
-    for (unsigned int i = 0; i < fichier.size(); ++i){
-        std::vector<int> valeursTuiles;
-        ligne2Tuile(fichier, valeursTuiles, i);
-        for (unsigned int j = 0; j < valeursTuiles.size(); ++j){
-            Tuile * t = new Tuile(valeursTuiles[j]);
-            if(true){
-
-            }
-            m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
-            m_position_to_tuile[std::make_pair(j,i)] = t;
-        }
-    }
-
-    ajouterObjets(20);
-}
-
-
-std::string valeurDe(std::ifstream fichier, std::string nom_valeur, std::string fin_de_valeur){
-    std::string ligne;
-    do{
-        // Test si ce la string nom_valeur
-        std::size_t pos = ligne.find(nom_valeur);
-        if (pos == std::string::npos){
-
-            int debut = valeur.size();
-            int fin;
-            // Recherche du début de la valeur
-            while(ligne.substr(debut, debut+1) == " "){
-               ++debut;
-            }
-
-            // Recherche de la fin de la valeur
-            fin = debut + 1;
-            while(ligne.substr(debut, debut+1) != fin_de_valeur){
-               ++fin;
-            }
-
-            return ligne.substr(debut, fin);
-
-        }
-
-        std::getline(fichier,ligne);
-    } while (!fichier.eof());
-
-    return "error";
-}
-
-void Zone::init(int largeur, int hauteur){
-     m_largeur = largeur;
-     m_hauteur = hauteur;
-}
-
-
-Zone::~Zone(){
-    // Libération du dictionnaire d'objets
-    for (auto &it : m_objets){
-        delete it.first;
-    }
-
-    // Libération des tuiles de la zone
-    for (auto &it : m_tuiles){
-        delete it.first;
-    }
-}
-
-
-void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
+/*void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
     int debutNumero = 0;
     int finNumero = 0;
     int numeroTuile = 0;
@@ -144,7 +64,72 @@ void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int
             ++finNumero;
         }
     }
+}*/
 
+
+void Zone::init(std::ifstream & fichier){
+    std::string ligne;
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+
+    std::vector<std::string> valeurs;
+
+
+    // Nom
+    decouper(ligne, valeurs, " ");
+    assert(valeurs.size() == 2);
+    definirNom(valeurs[1]);
+
+
+    // Dimensions
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+    decouper(ligne, valeurs, " ");
+
+    assert(valeurs.size() == 3);
+
+
+    m_largeur = stoi(valeurs[1]);
+    m_hauteur = stoi(valeurs[2]);
+
+    // Lecture de #sol
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+
+    // Lecture tuiles
+    for(int i = 0; i < m_hauteur; ++i){
+        std::getline(fichier,ligne);
+        std::vector<std::string> valeursTuiles;
+        decouper(ligne, valeursTuiles, " ");
+        assert(valeursTuiles.size() == m_largeur);
+        for (unsigned int j = 0; j < m_largeur; ++j){
+            Tuile * t = new Tuile(stoi(valeursTuiles[j]));
+            m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
+            m_position_to_tuile[std::make_pair(j,i)] = t;
+        }
+    }
+
+
+    fichier.close();
+    ajouterObjets(20);
+}
+
+void Zone::init(int largeur, int hauteur){
+     m_largeur = largeur;
+     m_hauteur = hauteur;
+}
+
+
+Zone::~Zone(){
+    // Libération du dictionnaire d'objets
+    for (auto &it : m_objets){
+        delete it.first;
+    }
+
+    // Libération des tuiles de la zone
+    for (auto &it : m_tuiles){
+        delete it.first;
+    }
 }
 
 
@@ -239,7 +224,7 @@ void Zone::initZone() {
 
 
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
-    int nbGroupeTuileEau = rand() % max_groupe;
+    /*int nbGroupeTuileEau = rand() % max_groupe;
 
     for(int j = 0 ; j < nbGroupeTuileEau; ++j){
         int posX = rand() % m_largeur;
@@ -291,6 +276,10 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first - 1, p.second});
             }
 
+
+
+
+            std::string taille = valeurDe(fichier, "#Dimensions", "\n");
             if (p.first + 1 < m_largeur){
                 positionsPossiblesVecteur.push_back({p.first + 1, p.second});
             }
@@ -303,7 +292,7 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first, p.second + 1});
             }
         }
-    }
+    }*/
 }
 
 
@@ -348,6 +337,7 @@ void Zone::ajouterObjets(int nombre_objets){
             }
         }
     }
+
     mettreAChange();
     notifierTous();
 }
