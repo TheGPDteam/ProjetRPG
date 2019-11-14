@@ -38,6 +38,7 @@ const std::string Temps::obtenirTempsAffichable(Temps::heure_quete temps)
     return heures_affichables + "H" + minutes_affichables;
 }
 
+
 Temps::heure_quete Temps::obtenirTempsRestantJournee() const
 {
     return m_heure_fin_journee - obtenirTemps();

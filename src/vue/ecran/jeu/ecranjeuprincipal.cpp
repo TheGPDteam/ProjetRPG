@@ -83,7 +83,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         m_objectif.mettreAJourTexte("Objectif atteint");
 
     m_nomJoueur.mettreAJourTexte(m->obtenirJoueur()->obtenirNom());
-    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()/60)+"min"+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()%60));
+    m_tempsRestant.mettreAJourTexte("Heure : " + Temps::obtenirTempsAffichable(m->obtenirTemps()->obtenirTemps()));
     m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
