@@ -7,8 +7,8 @@
 #include <SDL/SDL.h>
 #include "typeecran.h"
 const int LARGEUR_BARRE_LATERALE = 10;
-const SDL_Rect POSITION_BAS = initialiserRectangle(LARGEUR_BARRE_LATERALE, 256,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
-const SDL_Rect POSITION_HAUT = initialiserRectangle(0, 256,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
+const SDL_Rect POSITION_BAS = initialiserRectangle(LARGEUR_BARRE_LATERALE, 14*64,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
+const SDL_Rect POSITION_HAUT = initialiserRectangle(0, 14*64,LARGEUR_BARRE_LATERALE, LARGEUR_BARRE_LATERALE);
 
 
 ZoneDefilable::ZoneDefilable(Affichable * contenu, SDL_Color couleur, Controleur * controleur, bool actif, SDL_Rect rectangle)
