@@ -43,7 +43,7 @@ public:
     Quete* obtenirQuete();
     std::string serialiser() const;
     void charger(const std::string &donnees);
-    QuetePrincipale obtenirQuetePrincipale();
+    QuetePrincipale* obtenirQuetePrincipale();
     Direction obtenirDirection() const;
 };
 
