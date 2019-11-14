@@ -25,30 +25,31 @@ void SpritePersonnage::deplacementJoueur(Direction direction){
 SpritePersonnage* SpritePersonnage::obtenirSpritesJoueur(){
     std::vector<SpriteAnime*> sprites_animes = {
         // Haut
-        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{2 * 64, 15 * 64, 64, 64}},
-                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{3 * 64, 15 * 64, 64, 64}}},
+        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{2 * 64, 15 * 64, 64, 64}},
+                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{3 * 64, 15 * 64, 64, 64}}},
         NB_ETAPES),
 
         // Bas
-        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{2 * 64, 14 * 64, 64, 64}},
-                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{3 * 64, 14 * 64, 64, 64}}}
+        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{2 * 64, 14 * 64, 64, 64}},
+                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{3 * 64, 14 * 64, 64, 64}}}
         , NB_ETAPES),
 
         // Droite
-        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{0 * 64, 15 * 64, 64, 64}},
-                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{1 * 64, 15 * 64, 64, 64}}},
+        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{0 * 64, 15 * 64, 64, 64}},
+                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{1 * 64, 15 * 64, 64, 64}}},
         NB_ETAPES),
 
         // Gauche
-        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{0 * 64, 16 * 64, 64, 64}},
-                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{1 * 64, 16 * 64, 64, 64}}},
+        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{0 * 64, 16 * 64, 64, 64}},
+                         new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{1 * 64, 16 * 64, 64, 64}}},
         NB_ETAPES),
 
         // Immobile
-        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{320, 320, 64, 64}, SDL_Rect{4 * 64, 14 * 64, 64, 64}}},
+        new SpriteAnime({new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{0, 0, 64, 64}, SDL_Rect{4 * 64, 14 * 64, 64, 64}}},
         NB_ETAPES)
 
     };
+
     return new SpritePersonnage(sprites_animes);
 }
 

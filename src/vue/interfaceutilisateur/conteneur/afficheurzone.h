@@ -4,20 +4,27 @@
 #include "carte.h"
 #include "joueur.h"
 #include "outilsvue.h"
+#include "spritepersonnage.h"
 
 class AfficheurZone {
 private:
     static int const DECALAGE_CARTE_Y_SUPERIEUR = 11;
     static int const DECALAGE_CARTE_X_INFERIEUR = 0;
     static int const DECALAGE_CARTE_Y_INFERIEUR = 0;
-    static int const DECALAGE_CARTE_X_SUPERIEUR = 13;
+    static int const DECALAGE_CARTE_X_SUPERIEUR = 19;
+    static int const LARGEUR = 19;
+    static int const HAUTEUR = 11;
 
-    std::array<std::array<Sprite*, DECALAGE_CARTE_Y_SUPERIEUR>, DECALAGE_CARTE_X_SUPERIEUR> m_spritesCarte;
+    std::array<std::array<Sprite*, HAUTEUR>, LARGEUR> m_spritesCarte;
     std::set<Sprite*> m_spriteObjets;
+    SpritePersonnage* m_spriteJoueur;
 
+    std::vector<int> calculerDecalageBord(int positionX, int positionY, int largeur_zone, int hauteur_zone);
 public:
     AfficheurZone();
     ~AfficheurZone();
+
+    SpritePersonnage* obtenirSpritePersonnage();
     void mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provoque_changement);
     void afficher(SDL_Surface *fenetre_affichage);
 };

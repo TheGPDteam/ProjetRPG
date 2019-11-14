@@ -13,8 +13,6 @@
 class EcranJeuPrincipal : public EcranGeneral{
 private:
     int const NB_ETAPES_ANIMATION = 15;
-
-    SpritePersonnage* m_spriteJoueur;
     AfficheurZone m_afficheurZone;
     Carte* m_carte;
 
