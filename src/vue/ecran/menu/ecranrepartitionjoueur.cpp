@@ -10,8 +10,8 @@ const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_
 const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_OBJET;
 
 
-EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
-    EcranGeneral(controleur), m_etatAfficher(false)
+EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral(controleur, gestionnaireRessource), m_etatAfficher(false)
 {
     m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
 

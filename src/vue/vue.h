@@ -24,7 +24,8 @@ private:
     SDL_Surface* m_fenetrePrincipale;
 
     TypeEcran m_typeEcran;
-
+    GestionnaireRessource* m_gestionnaireRessource;
+    
     EcranMenuPrincipal* m_menuPrincipal;
     EcranJeuPrincipal* m_jeuPrincipal;
     EcranEquipe* m_ecranEquipe;

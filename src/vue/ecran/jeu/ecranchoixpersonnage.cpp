@@ -9,8 +9,8 @@ const int ESPACE_Y_RECTANGLE_PERSONNAGE = 115;
 const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_X_RECTANGLE_PERSONNAGE;
 const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_PERSONNAGE;
 
-EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur):
-    EcranGeneral{controleur},
+EcranChoixPersonnage::EcranChoixPersonnage(Controleur* controleur, GestionnaireRessource* gestionnaireRessource):
+    EcranGeneral{controleur, gestionnaireRessource},
     m_nomFenetre("Arrivee d'un survivant", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100))
 {

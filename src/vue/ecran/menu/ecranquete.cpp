@@ -5,8 +5,8 @@
 #include <vector>
 #include "tableau.h"
 
-EcranQuete::EcranQuete(Controleur *controleur) :
-    EcranGeneral{controleur},
+EcranQuete::EcranQuete(Controleur *controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral{controleur, gestionnaireRessource},
     //    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
@@ -39,7 +39,7 @@ EcranQuete::EcranQuete(Controleur *controleur) :
 
     obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur());
 
-    m_ecranRepartitionJoueur = new EcranRepartitionJoueur(m_controleur);
+    m_ecranRepartitionJoueur = new EcranRepartitionJoueur(m_controleur, m_gestionnaireRessource);
 
 }
 

@@ -31,7 +31,7 @@ private:
     TexteSDL* m_zoneQuestion;
 
 public:
-    EcranChoixPersonnage(Controleur *controleur);
+    EcranChoixPersonnage(Controleur *controleur, GestionnaireRessource* gestionnaireRessource);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
 

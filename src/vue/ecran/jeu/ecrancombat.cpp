@@ -1,7 +1,7 @@
 #include "ecrancombat.h"
 
-EcranCombat::EcranCombat(Controleur *controleur)
-    :EcranGeneral{controleur}
+EcranCombat::EcranCombat(Controleur *controleur, GestionnaireRessource* gestionnaireRessource)
+    :EcranGeneral{controleur, gestionnaireRessource}
 {
 
 }

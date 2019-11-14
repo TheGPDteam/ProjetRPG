@@ -22,6 +22,8 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
     m_cliqueSouris = false;
     m_coordSouris = {0,0};
     m_quitterJeu = false;
+    
+    m_gestionnaireRessource = new GestionnaireRessource();
 }
 
 //!
@@ -37,31 +39,31 @@ void Vue::definirControleur(Controleur *controleur){
 
     m_controleur=controleur;
     
-    m_jeuPrincipal = new EcranJeuPrincipal(m_controleur);
+    m_jeuPrincipal = new EcranJeuPrincipal(m_controleur, m_gestionnaireRessource);
     
-    m_ecranChoixQuete = new EcranQuete(m_controleur);
+    m_ecranChoixQuete = new EcranQuete(m_controleur, m_gestionnaireRessource);
     
-    m_menuPrincipal = new EcranMenuPrincipal(m_controleur);
+    m_menuPrincipal = new EcranMenuPrincipal(m_controleur, m_gestionnaireRessource);
     
-    m_ecranEquipe = new EcranEquipe(m_controleur);
+    m_ecranEquipe = new EcranEquipe(m_controleur, m_gestionnaireRessource);
     
-    m_ecranInventaire = new EcranInventaire(m_controleur);
+    m_ecranInventaire = new EcranInventaire(m_controleur, m_gestionnaireRessource);
     
-    m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur);
+    m_ecranChoixPersonnage = new EcranChoixPersonnage(m_controleur, m_gestionnaireRessource);
     
-    m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur);
+    m_ecranQueteJoueur = new EcranQueteJoueur(m_controleur, m_gestionnaireRessource);
     
-    m_ecranNom = new EcranNom(m_controleur);
+    m_ecranNom = new EcranNom(m_controleur, m_gestionnaireRessource);
     
-    m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur);
+    m_ecranPremiereJournee = new EcranPremiereJournee(m_controleur, m_gestionnaireRessource);
     
-    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur);
+    m_ecranRecapitulatifNuit = new EcranRecapitulatifNuit(m_controleur, m_gestionnaireRessource);
 
-    m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur);
+    m_ecranAccueilCampement = new EcranAccueilCampement(m_controleur, m_gestionnaireRessource);
 
-    m_ecranListeObjet = new EcranListeObjet(m_controleur);
+    m_ecranListeObjet = new EcranListeObjet(m_controleur, m_gestionnaireRessource);
 
-    m_ecranQueteCampement = new EcranQueteCampement(m_controleur);
+    m_ecranQueteCampement = new EcranQueteCampement(m_controleur, m_gestionnaireRessource);
 
 
     Modele * modele = m_controleur->obtenirModele();

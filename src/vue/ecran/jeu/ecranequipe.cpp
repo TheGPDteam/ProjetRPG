@@ -11,8 +11,8 @@ const int LARGEUR_TABLEAU = 0.7 * WIDTH_FENETRE_PRINCIPALE;
 const int HAUTEUR_TABLEAU = 0.7 * HEIGHT_FENETRE_PRINCIPALE;
 
 
-EcranEquipe::EcranEquipe(Controleur* controleur) :
-    EcranGeneral{controleur}
+EcranEquipe::EcranEquipe(Controleur* controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral{controleur, gestionnaireRessource}
    {
     SDL_Rect rect_tableau = {0.15*WIDTH_FENETRE_PRINCIPALE, 0.15*HEIGHT_FENETRE_PRINCIPALE, LARGEUR_TABLEAU,HAUTEUR_TABLEAU};
     m_tableau_equipe = TableauDefilable::tableauHumain(rect_tableau, controleur,"Equipe", false);

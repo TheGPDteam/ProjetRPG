@@ -7,8 +7,8 @@
 
 const float MARGE_RATIO = 0.15;
 
-EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur)
-    : EcranGeneral{controleur}, m_zoneTexte{POLICE_COLLEGED, 18, /*std::make_pair(m_fondRecapitulatif.x + 60, 0),*/
+EcranPremiereJournee::EcranPremiereJournee(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
+    : EcranGeneral{controleur, gestionnaireRessource}, m_zoneTexte{POLICE_COLLEGED, 18, /*std::make_pair(m_fondRecapitulatif.x + 60, 0),*/
                                             SDL_Rect {MARGE_RATIO*WIDTH_FENETRE_PRINCIPALE,MARGE_RATIO*HEIGHT_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*WIDTH_FENETRE_PRINCIPALE,(1.-2*MARGE_RATIO)*HEIGHT_FENETRE_PRINCIPALE},
                                             recupererHistoire(), SDL_Color{255,255,255,255}, COMPORTEMENT_TEXTE::SAUT_DE_LIGNE, ALIGNEMENT_TEXTE::CENTRE}
 {

@@ -8,10 +8,11 @@
 //! \version 1.0
 //!
 
-EcranGeneral::EcranGeneral(Controleur *controleur) :
+EcranGeneral::EcranGeneral(Controleur *controleur, GestionnaireRessource* gestionnaireRessource) :
     DictionnaireDeBoutons(controleur),
     m_controleur{controleur}
 {
+    m_gestionnaireRessource = gestionnaireRessource;
     //Attention on charge cette image pour chaque scene soit 8 chargements de la meme image :(
     //a supprimer
     //m_fond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
@@ -31,7 +32,6 @@ EcranGeneral::~EcranGeneral(){
     {
         SDL_FreeSurface(m_fond);
     }
-        
 }
 
 //!

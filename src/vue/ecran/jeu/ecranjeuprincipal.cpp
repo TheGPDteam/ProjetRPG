@@ -20,8 +20,8 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 //! \version 1.0
 //!
 
-EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
-    : EcranGeneral{controleur},
+EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
+    : EcranGeneral{controleur, gestionnaireRessource},
       m_spriteJoueur{SpritePersonnage::obtenirSpritesJoueur()},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
@@ -83,7 +83,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
         m_objectif.mettreAJourTexte("Objectif atteint");
 
     m_nomJoueur.mettreAJourTexte(m->obtenirJoueur()->obtenirNom());
-    m_tempsRestant.mettreAJourTexte(m->obtenirTemps()->obtenirTempsAffichable(m->obtenirTemps()->obtenirTemps()));
+    m_tempsRestant.mettreAJourTexte("Fin quete: "+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()/60)+"min"+std::to_string(m->obtenirTemps()->obtenirTempsRestantJournee()%60));
     m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);

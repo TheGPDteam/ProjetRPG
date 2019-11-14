@@ -15,8 +15,8 @@ int SDL_Rect rect_Moteur_Act = {0,0,0,0};
 int SDL_Rect rect_Essence_Act = {0,0,0,0};
 int SDL_Rect rect_Huile_Act = {0,0,0,0};
 */
-EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
-    : EcranGeneral (controleur),
+EcranQueteCampement::EcranQueteCampement(Controleur *controleur, GestionnaireRessource* gestionnaireRessource)
+    : EcranGeneral (controleur, gestionnaireRessource),
       //m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,128,128,128},SDL_Rect{0,448,128,128}}},
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{890,300,128,128},
                     RECT_HUILE_GRIS}},
