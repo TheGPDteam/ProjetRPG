@@ -7,18 +7,22 @@
 #include "tableau.h"
 
 
-const int NB_ESSENCES =  4;
-const int NB_ROUES = 4;
+
+
 class EcranQueteCampement : public EcranGeneral
-{
+{  
 private:
+    static const int NB_ESSENCES_MAX =  4;
+    static const int NB_ROUES_MAX = 4;
+    int nb_roues = 0;
+    int nb_essences = 0;
     std::vector<SDL_Rect> m_emplacementRoues;
     //Sprite* m_spriteRoue;
     Sprite* m_spriteHuile;
     Sprite* m_spriteEssence;
     Sprite* m_spriteMoteur;
-    Sprite* m_tabEssence[NB_ESSENCES];
-    Sprite* m_tabRoue[NB_ROUES];
+    Sprite* m_tabEssence[NB_ESSENCES_MAX];
+    Sprite* m_tabRoue[NB_ROUES_MAX];
     Sprite* m_bus;
 //    Tableau * m_tableauEquipe;
     TexteSDL* m_labelRoue;

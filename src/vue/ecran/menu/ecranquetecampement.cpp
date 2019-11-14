@@ -1,8 +1,8 @@
 #include "ecranquetecampement.h"
-//const SDL_Rect RECT_MOTEUR_GRIS;
-//const SDL_Rect RECT_HUILE_GRIS;
-//const SDL_Rect RECT_ESSENCE_GRIS;
-//const SDL_Rect RECT_ROUE_GRIS;
+const SDL_Rect RECT_MOTEUR_GRIS = {770,448,128,128};
+const SDL_Rect RECT_HUILE_GRIS = {912,448,128,128};
+const SDL_Rect RECT_ESSENCE_GRIS = {516,448,128,128};
+const SDL_Rect RECT_ROUE_GRIS = {642,448,128,128};
 
 const SDL_Rect RECT_ESSENCE = {0,448,128,128};
 const SDL_Rect RECT_MOTEUR= {251,448,128,128};
@@ -19,20 +19,20 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur)
     : EcranGeneral (controleur),
       //m_spriteRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{64,128,128,128},SDL_Rect{0,448,128,128}}},
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{890,300,128,128},
-                    RECT_HUILE}},
+                    RECT_HUILE_GRIS}},
       //m_spriteEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{320+20,128,128,128},
                       //SDL_Rect{256,448,128,128}}},
 
       m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{779,300,128,128},
-                    RECT_MOTEUR}},
-      m_tabEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,178,128,128},RECT_ESSENCE},
-                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{25,178+50,128,128},RECT_ESSENCE},
-                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{50,178+100,128,128},RECT_ESSENCE},
-                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{75,178+150,128,128},RECT_ESSENCE}},
-    m_tabRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{315+25,450-25,128,128},RECT_ROUE},
-                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{695+25,450-25,128,128},RECT_ROUE},
-                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{315,450,128,128},RECT_ROUE},
-                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{695,450,128,128},RECT_ROUE}},
+                    RECT_MOTEUR_GRIS}},
+      m_tabEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,178,128,128},RECT_ESSENCE_GRIS},
+                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{25,178+50,128,128},RECT_ESSENCE_GRIS},
+                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{50,178+100,128,128},RECT_ESSENCE_GRIS},
+                  new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{75,178+150,128,128},RECT_ESSENCE_GRIS}},
+    m_tabRoue{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{315+25,450-25,128,128},RECT_ROUE_GRIS},
+                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{695+25,450-25,128,128},RECT_ROUE_GRIS},
+                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{315,450,128,128},RECT_ROUE_GRIS},
+                new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{695,450,128,128},RECT_ROUE_GRIS}},
     m_bus{new Sprite(SPRITE_BUS,SDL_Rect{235,150,720,362},RECT_BUS )}
 {
     coordBoutonCampement = {WIDTH_FENETRE_PRINCIPALE - 290, HEIGHT_FENETRE_PRINCIPALE - 100};
@@ -97,6 +97,18 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
 }
 
 void EcranQueteCampement::obtenirChangement(Observable &obj){
-//    m_tableauEquipe->vider();
-//    m_tableauEquipe->ajouterLigne(m_controleur->obtenirModele()->obtenirCampement());
+    Campement * c = dynamic_cast<Campement*>(&obj);
+    if (c != nullptr){
+        // mise a jour de l'ecran
+        std::vector<Objet *> objets = c->obtenirObjets();
+        for(Objet* obj : objets){
+            if(obj->obtenirType() == TypeObjet::Partie_bus){
+                // truc a faire
+
+
+            }
+        }
+
+    }
+
 }
