@@ -22,24 +22,28 @@ Temps::Temps()
 //! \return Une chaîne contenant le temps sous format heures + H + minutes
 //!
 
-const std::string Temps::obtenirTempsAffichable(Temps::heure_quete temps)
+std::string remplirAvecZero(double temps)
+{
+    std::string temps_affichable = std::to_string(static_cast<int>(temps));
+    if (temps_affichable.size() < 2)
+        temps_affichable.insert(0, "0");
+
+    return temps_affichable;
+}
+
+const std::string Temps::obtenirTempsAffichable(Heure temps)
 {
     double heures;
     double minutes = modf(temps.count(), &heures) * 60;
 
-    std::string heures_affichables = std::to_string(static_cast<int>(heures));
-    if (heures_affichables.size() < 2)
-        heures_affichables.insert(0, "0");
-
-    std::string minutes_affichables = std::to_string(static_cast<int>(minutes));
-    if (minutes_affichables.size() < 2)
-        minutes_affichables.insert(0,"0");
+    std::string heures_affichables = remplirAvecZero(heures);
+    std::string minutes_affichables = remplirAvecZero(minutes);
 
     return heures_affichables + "H" + minutes_affichables;
 }
 
 
-Temps::heure_quete Temps::obtenirTempsRestantJournee() const
+Heure Temps::obtenirTempsRestantJournee() const
 {
     return m_heure_fin_journee - obtenirTemps();
 }
@@ -50,8 +54,8 @@ Temps::heure_quete Temps::obtenirTempsRestantJournee() const
 //! \return l'heure actuelle de la journée (entre 8h et 18h)
 //!
 
-Temps::heure_quete Temps::obtenirTemps() const{
-    return std::chrono::system_clock::now() - m_temps_debut_journee - m_duree_pause + heure_quete(8);
+Heure Temps::obtenirTemps() const{
+    return std::chrono::system_clock::now() - m_temps_debut_journee - m_duree_pause + Heure(8);
 }
 
 void Temps::mettreEnPause()

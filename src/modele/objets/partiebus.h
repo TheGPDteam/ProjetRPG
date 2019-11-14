@@ -3,7 +3,7 @@
 
 #include "objet.h"
 
-enum TypePartieBus
+enum PartieBus
 {
     ROUE,
     ESSENCE,
@@ -11,17 +11,17 @@ enum TypePartieBus
     HUILE
 };
 
-class PartieBus : public Objet
+class ObjetQuetePrincipale : public Objet
 {
 private:
-    TypePartieBus m_partie;
+    PartieBus m_partie;
 public:
-    PartieBus(std::string nom, std::string description, TypePartieBus partie);
-    PartieBus();
+    ObjetQuetePrincipale(std::string nom, std::string description, PartieBus partie);
+    ObjetQuetePrincipale();
     TypeObjet obtenirType() const;
-    TypePartieBus obtenirTypePartie() const;
-    bool operator==(PartieBus* obj);
-    bool operator>(PartieBus* obj);
+    PartieBus obtenirTypePartie() const;
+    bool operator==(ObjetQuetePrincipale* obj);
+    bool operator>(ObjetQuetePrincipale* obj);
 
 };
 

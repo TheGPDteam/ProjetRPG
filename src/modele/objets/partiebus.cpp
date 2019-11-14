@@ -1,13 +1,13 @@
 #include "partiebus.h"
 
 
-PartieBus::PartieBus(std::string nom, std::string description, TypePartieBus partie)
+ObjetQuetePrincipale::ObjetQuetePrincipale(std::string nom, std::string description, PartieBus partie)
     :
       Objet (nom,description), m_partie{partie}
 {
 }
 
-PartieBus::PartieBus() :
+ObjetQuetePrincipale::ObjetQuetePrincipale() :
     Objet ("nom","description")
 
 {
@@ -16,41 +16,41 @@ PartieBus::PartieBus() :
     switch (typePartie) {
     case 0:
         this->definirNom("Roue");
-        this->m_partie = TypePartieBus::ROUE;
+        this->m_partie = PartieBus::ROUE;
         break;
     case 1:
         this->definirNom("Essence");
-        this->m_partie = TypePartieBus::ESSENCE;
+        this->m_partie = PartieBus::ESSENCE;
         break;
     case 2:
         this->definirNom("Moteur");
-        this->m_partie = TypePartieBus::MOTEUR;
+        this->m_partie = PartieBus::MOTEUR;
         break;
     case 3:
         this->definirNom("Huile");
-        this->m_partie = TypePartieBus::HUILE;
+        this->m_partie = PartieBus::HUILE;
         break;
     }
 }
 
-TypeObjet PartieBus::obtenirType() const
+TypeObjet ObjetQuetePrincipale::obtenirType() const
 {
-    return TypeObjet::Partie_bus;
+    return TypeObjet::QuetePrincipale;
 }
 
-TypePartieBus PartieBus::obtenirTypePartie() const
+PartieBus ObjetQuetePrincipale::obtenirTypePartie() const
 {
     return m_partie;
 }
 
-bool PartieBus::operator==(PartieBus *obj)
+bool ObjetQuetePrincipale::operator==(ObjetQuetePrincipale *obj)
 {
     if (this != obj)
         return false;
     return m_partie == obj->m_partie;
 }
 
-bool PartieBus::operator>(PartieBus *obj)
+bool ObjetQuetePrincipale::operator>(ObjetQuetePrincipale *obj)
 {
     if (this < obj)
         return false;

@@ -98,12 +98,12 @@ void EcranQueteCampement::obtenirChangement(Observable &obj){
         int nbRoues = 0;
         int nbEssences = 0;
         for(Objet* objet : objets){
-            PartieBus * pb = dynamic_cast<PartieBus *>(objet);
+            ObjetQuetePrincipale * pb = dynamic_cast<ObjetQuetePrincipale *>(objet);
             if(pb != nullptr){
-                if(pb->obtenirTypePartie() == TypePartieBus::MOTEUR) aMoteur = true;
-                if(pb->obtenirTypePartie() == TypePartieBus::HUILE) aHuile = true;
-                if(pb->obtenirTypePartie() == TypePartieBus::ESSENCE) nbEssences++;
-                if(pb->obtenirTypePartie() == TypePartieBus::ROUE) nbRoues++;
+                if(pb->obtenirTypePartie() == PartieBus::MOTEUR) aMoteur = true;
+                if(pb->obtenirTypePartie() == PartieBus::HUILE) aHuile = true;
+                if(pb->obtenirTypePartie() == PartieBus::ESSENCE) nbEssences++;
+                if(pb->obtenirTypePartie() == PartieBus::ROUE) nbRoues++;
             }
         }
         if(aMoteur) m_spriteMoteur->changementSprite(RECT_MOTEUR);

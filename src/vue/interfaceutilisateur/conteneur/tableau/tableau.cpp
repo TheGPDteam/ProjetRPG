@@ -220,15 +220,15 @@ void Tableau::ajouterLigne(Objet* obj){
 
 void Tableau::ajouterLigne(Campement *c){
     std::vector<Affichable *> tmp;
-    std::map<PartieBus*, unsigned short> cpt;
+    std::map<ObjetQuetePrincipale*, unsigned short> cpt;
     //Pour chaque partie bus
     for (Objet *o : c->obtenirObjets()){
-        if (o->obtenirType()==TypeObjet::Partie_bus){
-            PartieBus *p = dynamic_cast<PartieBus *> (o);
+        if (o->obtenirType()==TypeObjet::QuetePrincipale){
+            ObjetQuetePrincipale *p = dynamic_cast<ObjetQuetePrincipale *> (o);
             bool ajoute = false;
             //Compter le nombre
             if (cpt.size() != 0){
-                for (std::map<PartieBus*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it){
+                for (std::map<ObjetQuetePrincipale*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it){
                     if (p->obtenirTypePartie()==it->first->obtenirTypePartie()){
                         ajoute=true;
                         it->second++;
@@ -243,7 +243,7 @@ void Tableau::ajouterLigne(Campement *c){
         }
     }
 
-    for (std::map<PartieBus*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it){
+    for (std::map<ObjetQuetePrincipale*, unsigned short>::iterator it = cpt.begin(); it != cpt.end(); ++it){
         //Inserer nom
         tmp.push_back(creeZoneTexte(it->first->obtenirNom()));
         //Inserer description

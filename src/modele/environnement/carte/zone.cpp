@@ -282,7 +282,7 @@ void Zone::ajouterObjets(int nombre_objets)
                 m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
                 break;*/
             case 5:
-                m_objets.insert(std::make_pair(new PartieBus() ,std::make_pair(posX,posY)));
+                m_objets.insert(std::make_pair(new ObjetQuetePrincipale() ,std::make_pair(posX,posY)));
                 break;
             default:
                 break;
