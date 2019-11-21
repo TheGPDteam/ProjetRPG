@@ -4,52 +4,46 @@
 #include "direction.h"
 
 enum TypeTuile {
-    Eau=0,
-    Sable,
+    Sable = 0,
     Herbe,
-    Beton,
+    Eau,
+    Goudron,
     Terre,
-    Arbre,
-    AucunType
+    Obstacle,
+    SortieDroite,
+    SortieGauche,
+    SortieHaut,
+    SortieBas,
+    HerbeDecoration,
+    Jointure
 };
 
-enum TypeJonction{
-    AucuneJonction,
-    HautGaucheEntrant,
-    HautDroiteSortant,
-    HautDroiteEntrant,
-    BasDroiteSortant,
-    BasDroiteEntrant,
-    BasGaucheSortant,
-    BasGaucheEntrant,
-    Haut,
-    Gauche,
-    Droite,
-    Bas,
-    HautGaucheSortant
+enum ECategorieTuile {
+    NonTerreux = 0,
+    Terreux,
+    Aqueux,
+    EauTerreux,
+    ObstacleOrganique,
+    ObstacleNonOrganique,
+    Sortie
 };
 
-class Tuile
-{
+class Tuile{
 //protected:
 
 private:
     TypeTuile m_type;
+    ECategorieTuile m_categorie;
     Direction m_directionChangementZone;
-    int m_jonction;
     bool m_marchable;
+    int m_numero;
 public:
     Direction obtenirDirectionChangementZone() const;
     void definirDirectionChangementZone(Direction dir);
-    Tuile(int val, bool marchable = true);
-    TypeTuile obtenirType() const;
+    Tuile(int val);
     bool obtenirEstMarchable() const;
     bool obtenirPeutApparaitre() const;
-
-    void definirHachageJonction(TypeTuile typeVoisin, TypeJonction positionVoisin);
-    int obtenirHachageJonction() const;
-
-    static int hacher(TypeTuile typeVoisin, TypeJonction positionVoisin);
+    int obtenirNumero() const;
 };
 
 #endif

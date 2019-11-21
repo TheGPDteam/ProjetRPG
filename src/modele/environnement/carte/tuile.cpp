@@ -6,11 +6,62 @@
 //!
 
 
-Tuile::Tuile(int val, bool marchable)
-    : m_type{(TypeTuile)val}, m_jonction{TypeTuile::AucunType}, m_directionChangementZone{Aucune}
-{
-    m_marchable = marchable && (m_type == Herbe || m_type == Sable || m_type == Beton || m_type == Terre);
+Tuile::Tuile(int val)
+    : m_directionChangementZone{Aucune}{
+
+    m_numero = val - 1;
+
+    // Definition de la categorie de la tuile
+    if (m_numero == 0 || m_numero == 3 ||
+        (m_numero >= 16 && m_numero % 16 >= 8 && m_numero % 16 <= 12) ||
+            m_numero >= 16 * 4){
+        m_categorie = NonTerreux;
+    } else if (m_numero == 1 || m_numero == 4 ||
+               (m_numero >= 16 && m_numero < 16 * 4 && m_numero % 16 >= 12)){
+        m_categorie = Terreux;
+    } else if (m_numero >= 16 && m_numero < 4 * 16 && m_numero % 16 <= 7){
+        m_categorie = EauTerreux;
+    } else if (m_numero == 2){
+        m_categorie = Aqueux;
+    } else if (m_numero == 5){
+        m_categorie = ObstacleNonOrganique;
+    } else if (m_numero == 6 || m_numero == 7){
+        m_categorie = ObstacleOrganique;
+    } else if (m_numero >= 8 && m_numero <= 12){
+        m_categorie = Sortie;
+    }
+
+    // Definition du type de la tuile
+    if (m_numero == 0){
+        m_type = Sable;
+    } else if (m_numero == 1){
+        m_type = Herbe;
+    } else if (m_numero == 2){
+        m_type = Eau;
+    } else if (m_numero == 3){
+        m_type = Goudron;
+    } else if (m_numero == 4){
+        m_type = Terre;
+    } else if (m_numero >= 5 && m_numero <= 8){
+        m_type = Obstacle;
+    } else if (m_numero == 9){
+        m_type = SortieDroite;
+    } else if (m_numero == 10){
+        m_type = SortieGauche;
+    } else if (m_numero == 11){
+        m_type = SortieHaut;
+    } else if (m_numero == 13){
+        m_type = SortieBas;
+    } else if (m_numero >= 14 && m_numero <= 18){
+        m_type = HerbeDecoration;
+    } else if (m_numero >= 19){
+        m_type = Jointure;
+    }
+
+    m_marchable = (m_categorie == NonTerreux || m_categorie == Terreux
+                   || m_categorie == Sortie || m_categorie == EauTerreux);
 }
+
 
 //!
 //! \brief Accesseur en lecture de l'attribut estMarchable
@@ -47,9 +98,11 @@ bool Tuile::obtenirPeutApparaitre() const
 //! \version 1.0
 //!
 
-TypeTuile Tuile::obtenirType() const{
-    return m_type;
+
+int Tuile::obtenirNumero() const{
+    return m_numero;
 }
+
 
 void Tuile::definirDirectionChangementZone(Direction dir)
 {
@@ -58,39 +111,4 @@ void Tuile::definirDirectionChangementZone(Direction dir)
 
 Direction Tuile::obtenirDirectionChangementZone() const{
     return m_directionChangementZone;
-}
-
-
-//!
-//! \brief Accesseur en ecriture de l'attribut m_sous_type
-//! \return le sous type de la tuile
-//! \author rbourqui
-//! \date 15/12/2017
-//! \version 1.0
-//!
-void Tuile::definirHachageJonction(TypeTuile type_voisin, TypeJonction position_voisin)
-{
-    m_jonction = hacher(type_voisin, position_voisin);
-}
-
-//!
-//! \brief Accesseur en lecture de l'attribut m_sous_type
-//! \return le sous type de la tuile
-//! \author rbourqui
-//! \date 15/12/2017
-//! \version 1.0
-//!
-int Tuile::obtenirHachageJonction() const{
-    return m_jonction;
-}
-
-//!
-//! \brief Fonction de hachage du type et de la position de jonction
-//! \return le résultat du hachage
-//! \author rbourqui
-//! \date 20/12/2017
-//! \version 1.0
-//!
-int Tuile::hacher(TypeTuile type_voisin, TypeJonction position_voisin){
-    return type_voisin * 100 + position_voisin;
 }

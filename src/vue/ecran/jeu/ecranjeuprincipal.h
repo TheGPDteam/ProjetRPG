@@ -8,20 +8,12 @@
 #include "tableaudefilable.h"
 #include "temps.h"
 #include "spritepersonnage.h"
+#include "afficheurzone.h"
 
-class EcranJeuPrincipal : public EcranGeneral
-{
+class EcranJeuPrincipal : public EcranGeneral{
 private:
-    static int const TAILLE_CARTE_AFFICHAGE=12;
-    int const DECALAGE_CARTE_Y_SUPERIEUR=12;
-    int const DECALAGE_CARTE_X_INFERIEUR=0;
-    int const DECALAGE_CARTE_Y_INFERIEUR=0;
-    int const DECALAGE_CARTE_X_SUPERIEUR=12;
     int const NB_ETAPES_ANIMATION = 15;
-
-    SpritePersonnage* m_spriteJoueur;
-    std::array<std::array<Sprite*,TAILLE_CARTE_AFFICHAGE>,TAILLE_CARTE_AFFICHAGE> m_spritesCarte;
-    std::set<Sprite*> m_spriteObjets;
+    AfficheurZone m_afficheurZone;
     Carte* m_carte;
 
     TexteSDL m_objectif;

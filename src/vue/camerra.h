@@ -1,9 +1,9 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-
 #include <SDL/SDL.h>
 #include <utility>
+
 
 #include "affichable.h"
 
@@ -37,10 +37,7 @@ public:
     void vaAffichableSuivi();
 
     static Camera* ObtenirInstance();
-
 };
 
-bool Camera::m_instancie = false;
-Camera Camera::m_instance;
 
 #endif // CAMERA_H

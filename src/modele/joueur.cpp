@@ -67,11 +67,10 @@ std::string Joueur::obtenirNom() const
 //! \version 1.0
 //! Contient une affectation de variable
 //!
-
-void Joueur::definirPosition(std::pair<int,int> nouvelle_position)
-{
+void Joueur::definirPosition(std::pair<int,int> nouvelle_position){
     m_position=nouvelle_position;
 }
+
 
 //!
 //! \brief Méthode de déplacement du joueur sur la grille de la carte
@@ -79,7 +78,6 @@ void Joueur::definirPosition(std::pair<int,int> nouvelle_position)
 //! \date 20/11/2016
 //! \version 0.1
 //!
-
 void Joueur::deplacerJoueur(Direction dir){
     switch(dir){
     case Nord:
@@ -97,11 +95,13 @@ void Joueur::deplacerJoueur(Direction dir){
     default:
         break;
     }
+
     m_direction = dir;
     mettreAChange();
     notifierTous();
     m_direction = Direction::Aucune;
 }
+
 
 //!
 //! \brief definir nom joueur
@@ -112,11 +112,11 @@ void Joueur::deplacerJoueur(Direction dir){
 //! \version 1.0
 //! Contient affectation de variable
 //!
-
 void Joueur::definirNom(std::string nom)
 {
     m_nom = nom;
 }
+
 
 //!
 //! \brief attribuer au joueur son personnage
@@ -128,10 +128,10 @@ void Joueur::definirNom(std::string nom)
 //! Contient retour du personnage du joueur
 //!
 
-Humain* Joueur::obtenirPersonnageJoueur()
-{
+Humain* Joueur::obtenirPersonnageJoueur(){
     return &m_personnageJoueur;
 }
+
 
 //!
 //! \brief Attribuer une equipe au joueur
@@ -143,10 +143,10 @@ Humain* Joueur::obtenirPersonnageJoueur()
 //! Contient retour de l'equipe du joueur
 //!
 
-Equipe* Joueur::obtenirEquipe() const
-{
+Equipe* Joueur::obtenirEquipe() const{
     return m_equipe;
 }
+
 
 //!
 //! \brief definir l'équipe du joueur
@@ -158,10 +158,10 @@ Equipe* Joueur::obtenirEquipe() const
 //! Contient affectation de variable
 //!
 
-void Joueur::definirEquipe(Equipe* equipe)
-{
-    m_equipe=equipe;
+void Joueur::definirEquipe(Equipe* equipe){
+    m_equipe = equipe;
 }
+
 
 //!
 //! \brief Joueur::nouvelleQuete
@@ -174,26 +174,27 @@ void Joueur::nouvelleQuete(TypeQuete tq, std::string nom, std::string descriptio
     m_queteJoueur = Quete(tq, nom, description, objectif, experiences, recompense);
 }
 
-Inventaire* Joueur::obtenirInventaire()
-{
+
+Inventaire* Joueur::obtenirInventaire(){
     return m_inventaireJoueur;
 }
 
-Joueur::~Joueur()
-{
-    if(m_equipe != nullptr) delete m_equipe;
+
+Joueur::~Joueur(){
+    if(m_equipe != nullptr)           delete m_equipe;
     if(m_inventaireJoueur != nullptr) delete m_inventaireJoueur;
     //if(m_camp != nullptr) delete m_camp;
 }
+
 
 //!
 //! \brief Accesseur de la Quete du joueur
 //! \return Quete* Pointeur vers la Quete du joueur
 //!
-
 Quete* Joueur::obtenirQuete() {
     return &m_queteJoueur;
 }
+
 
 //!
 //! \brief Serialise les données de la classe Joueur
@@ -202,9 +203,7 @@ Quete* Joueur::obtenirQuete() {
 //! \author nlesne
 //! \version 0.2
 //!
-
-std::string Joueur::serialiser() const
-{
+std::string Joueur::serialiser() const{
     return "<Joueur>"
            "   <NomJoueur>" + m_nom + "</NomJoueur>"
                                       "   <EquipeJoueur>"
@@ -220,8 +219,8 @@ std::string Joueur::serialiser() const
             "</Joueur>";
 }
 
-void Joueur::charger(const std::string &donnees)
-{
+
+void Joueur::charger(const std::string &donnees){
     m_nom = obtenirSousChaineEntre2Predicats(donnees,"<NomJoueur>","</NomJoueur>");
 
     std::string donneesEquipe = obtenirSousChaineEntre2Predicats(donnees,"<EquipeJoueur>","</EquipeJoueur>");
@@ -234,9 +233,11 @@ void Joueur::charger(const std::string &donnees)
     m_inventaireJoueur->charger(obtenirSousChaineEntre2Predicats(donnees,"<Inventaire>","</Inventaire>"));
 }
 
+
 QuetePrincipale *Joueur::obtenirQuetePrincipale() {
     return &m_quetePrincipale;
 }
+
 
 //!
 //! \brief returne la direction du joueur

@@ -12,6 +12,7 @@ Vivre::Vivre(string nom, string description, int valeur_nutritive)
 {
 }
 
+
 Vivre::Vivre()
     : Objet{"",""},
       m_valeurNutritive{0}
@@ -19,41 +20,39 @@ Vivre::Vivre()
     chargerVivre("./../rsc/objets/vivres/vivres.txt");
 }
 
-int Vivre::obtenirValeurNutritive() const
-{
+
+int Vivre::obtenirValeurNutritive() const {
     return m_valeurNutritive;
 }
 
-void Vivre::definirValeurNutritive(const int &valeur_nutritive)
-{
+
+void Vivre::definirValeurNutritive(const int &valeur_nutritive){
     m_valeurNutritive = valeur_nutritive;
 }
 
 
-void Vivre:: chargerVivre(std::string nomFichier)
-{
+void Vivre:: chargerVivre(std::string nomFichier){
     //Lire dans le fichier vivre.txt
     std::vector<std::string> lignesAliments;
 
     std::ifstream fichier(nomFichier.c_str(), std::ifstream::in);
-    if(fichier.good())
-    {
+    if (fichier.good()){
         std::string ligne;
         std::getline(fichier,ligne);
-        while (!fichier.eof())
-        {
+        while (!fichier.eof()){
             lignesAliments.push_back(ligne);
             std::getline(fichier,ligne);
         }
         fichier.close();
     }
+
     std::string ligneChoisie;
     ligneChoisie = lignesAliments[rand()%lignesAliments.size()];
     affecterValeurs(ligneChoisie);
 }
 
-void Vivre::affecterValeurs(string ligne)
-{
+
+void Vivre::affecterValeurs(string ligne){
     string nom="";
     string valeurNutritive="";
     string description="";
@@ -66,60 +65,42 @@ void Vivre::affecterValeurs(string ligne)
     bool separateurDescriptionPasse=false;
     bool separateurEmplacementImageX=false;
 
-    for (unsigned int i=0;i+1<=ligne.size();++i)
-    {
-        if (!separateurNomPasse)
-        {
-            if(ligne[i]=='/')
-            {
-                separateurNomPasse=true;
+    for (unsigned int i = 0; i + 1 <= ligne.size(); ++i){
+        if (!separateurNomPasse){
+            if(ligne[i] == '/'){
+                separateurNomPasse = true;
+            } else {
+                nom += ligne[i];
             }
-            else
-            {
-                nom+=ligne[i];
-            }
-        }
-        else if(!separateurNutritivePasse)
-        {
-            if (ligne[i]=='/')
-            {
-                separateurNutritivePasse=true;
-            }
-            else
-            {
+        } else if(!separateurNutritivePasse){
+            if (ligne[i]=='/'){
+                separateurNutritivePasse = true;
+            } else {
                 valeurNutritive+=ligne[i];
             }
-        }
-        else if(!separateurDescriptionPasse)
-        {
-            if (ligne[i]=='/')
-            {
+        } else if (!separateurDescriptionPasse){
+            if (ligne[i]=='/'){
                 separateurDescriptionPasse=true;
-            }
-            else {
+            } else {
                 description+=ligne[i];
             }
-        }
-        else if(!separateurEmplacementImageX){
-            if (ligne[i]=='/')
-            {
+        } else if (!separateurEmplacementImageX){
+            if (ligne[i]=='/'){
                 separateurEmplacementImageX=true;
-            }
-            else {
+            } else {
                 emplacementImageX+=ligne[i];
             }
-        }
-
-        else {
+        } else {
              emplacementImageY+=ligne[i];
         }
     }
-    m_nom=nom;
-    m_valeurNutritive=std::stoi(valeurNutritive);
-    m_description=description;
-    m_sprite->changementSprite(SDL_Rect{std::stoi(emplacementImageX)*64,std::stoi(emplacementImageY)*64,64,64});
+    m_nom = nom;
+    m_valeurNutritive = std::stoi(valeurNutritive);
+    m_description = description;
+    m_sprite->changementSprite(SDL_Rect{std::stoi(emplacementImageX) * 64, std::stoi(emplacementImageY) * 64, 64, 64});
 
 }
+
 
 //!
 //! \brief Sérialise les attributs de l'objet
@@ -128,9 +109,7 @@ void Vivre::affecterValeurs(string ligne)
 //! \date 12/11/17
 //! \version 0.2
 //!
-
-std::string Vivre::serialiser() const
-{
+std::string Vivre::serialiser() const {
     return "<Vivre>"
             "   <Nom>" + m_nom + "</Nom>"
             "   <Description>" + m_description + "</Description>"
@@ -138,12 +117,13 @@ std::string Vivre::serialiser() const
             "</Vivre>";
 }
 
+
 TypeObjet Vivre::obtenirType() const {
     return TypeObjet::Vivre;
 }
 
-void Vivre::charger(const std::string &donnees)
-{
+
+void Vivre::charger(const std::string &donnees){
     m_nom = obtenirSousChaineEntre2Predicats(donnees,"<Nom>","</Nom>");
     m_description = obtenirSousChaineEntre2Predicats(donnees,"<Description>","</Description>");
     m_valeurNutritive = std::stoi(obtenirSousChaineEntre2Predicats(donnees,"<ValeurNutritive>","</ValeurNutritive>"));

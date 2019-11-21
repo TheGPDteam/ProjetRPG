@@ -5,6 +5,7 @@
 #include <map>
 #include <utility>
 #include <string>
+#include <fstream>
 #include "../../objets/objet.h"
 #include "../../survie/vivre.h"
 #include "partiebus.h"
@@ -12,21 +13,22 @@
 #include "tuile.h"
 #include "observable.h"
 
+
 const int DECALAGE_TUILE = 6;
-const int MAX_TUILES_EAU_PER_ZONE = 50;
-const int MAX_TUILES_TERRE_PER_ZONE = 100;
-const int MAX_TUILES_SABLE_PER_ZONE = 100;
-const int MAX_TUILES_ARBRE_PER_ZONE = 50;
+const int MAX_TUILES_EAU_PAR_ZONE = 50;
+const int MAX_TUILES_TERRE_PAR_ZONE = 100;
+const int MAX_TUILES_SABLE_PAR_ZONE = 100;
+const int MAX_TUILES_ARBRE_PAR_ZONE = 50;
 
 
 const int MAX_GROUPES_TUILES_EAU = 10;
 const int MAX_GROUPES_TUILES_TERRE = 15;
 const int MAX_GROUPES_TUILES_SABLE = 15;
 const int MAX_GROUPES_TUILES_ARBRE = 10;
-
+void init(std::ifstream fichier);
+void init(int largeur, int hauteur);
 const int TAILLE_ZONE = 76;
-class Zone : public Observable
-{
+class Zone : public Observable{
 private:
     std::map<Objet*,std::pair<int,int>> m_objets;
 	int m_largeur;
@@ -40,11 +42,14 @@ private:
     void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
     void initialiserSousTypeTuile();
-public:
 
-    Zone()=default;
+    std::string valeurDe(std::ifstream &fichier, std::string nom_valeur, std::string fin_de_valeur);
+    void init(std::ifstream &fichier);
+    void init(int largeur, int hauteur);
+
+public:
     Zone(int longueur, int largeur);
-    Zone(int longueur, int largeur, std::vector<std::string> fichier);
+    Zone(std::ifstream &fichier);
     ~Zone();
 
     Tuile* obtenirTuile(int valeurX, int valeurY) const;
@@ -54,8 +59,10 @@ public:
     void supprimerObjet(Objet* obj);
     std::map<Objet*, std::pair<int, int> > obtenirObjets() const;
 	std::string obtenirNom();
+    void definirNom(std::string nom);
     std::map <Tuile*, std::pair<int,int>> obtenirTuiles() const;
-    int obtenirTaille() const;
+    int obtenirLargeur() const;
+    int obtenirHauteur() const;
     void recharger();
 };
 
