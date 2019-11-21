@@ -23,12 +23,10 @@ protected:
 
     SDL_Surface* optimisationChargementImage(const char *chemin_feuille_sprites);
 
-
     virtual ~ChargementFeuilleDeSprites();
 
 public:
     static std::map<std::string, SDL_Surface*> m_imagesDeFeuilleDeSprites;
-
     static ChargementFeuilleDeSprites* instance();
     static void supprimerInstance();
 };

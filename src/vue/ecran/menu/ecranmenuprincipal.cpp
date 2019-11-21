@@ -1,6 +1,7 @@
 #include "ecranmenuprincipal.h"
 #include "constantesbouton.h"
 #include "outilsvue.h"
+#include "SDL/SDL_image.h"
 
 //!
 //! \brief Constructeur par défaut de l'écran de menu principal
@@ -11,8 +12,8 @@
 //! Initialise tout le contenu de l'écran principal de jeu
 //!
 
-EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
-    EcranGeneral{controleur},
+EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral{controleur, gestionnaireRessource},
     m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBoutons)
 {
     SDL_Rect rect = {(WIDTH_FENETRE_PRINCIPALE/2)-(WIDTH_BOUTON_NORMAL/2),  (HEIGHT_FENETRE_PRINCIPALE/2)-(HEIGHT_BOUTON_NORMAL/2)+ 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
@@ -25,7 +26,7 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur) :
 
     rect.y += 70;
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr, true, POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
-
+    m_fond = IMG_Load("../rsc/sprites/ecran_titre.bmp");
 }
 
 

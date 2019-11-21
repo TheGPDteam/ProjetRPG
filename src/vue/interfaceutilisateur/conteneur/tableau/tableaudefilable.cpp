@@ -72,7 +72,7 @@ void TableauDefilable::ajouterEnTeteObjet(TypeObjet type_objet){
     tmp.push_back(" ");
     tmp.push_back("Nom");
     tmp.push_back("Description");
-    if(type_objet == TypeObjet::Partie_bus ) {
+    if(type_objet == TypeObjet::QuetePrincipale ) {
         tmp.push_back("Quantite");
     }
     m_tableauEntete->ajouterLigne(tmp);

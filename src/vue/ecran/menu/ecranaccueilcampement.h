@@ -19,7 +19,7 @@ private:
     TexteSDL m_consoDispo;
     TableauDefilable * m_tableau_objets;
 public:
-    EcranAccueilCampement(Controleur* controleur);
+    EcranAccueilCampement(Controleur* controleur, GestionnaireRessource* gestionnaireRessource);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

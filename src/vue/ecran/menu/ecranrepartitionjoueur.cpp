@@ -10,8 +10,8 @@ const int LARGEUR_RECTANGLE_PERSONNAGE = WIDTH_FENETRE_PRINCIPALE -  2 * ESPACE_
 const int HAUTEUR_RECTANGLE_PERSONNAGE = HEIGHT_FENETRE_PRINCIPALE - 2 * ESPACE_Y_RECTANGLE_OBJET;
 
 
-EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
-    EcranGeneral(controleur), m_etatAfficher(false)
+EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur, GestionnaireRessource* gestionnaireRessource) :
+    EcranGeneral(controleur, gestionnaireRessource), m_etatAfficher(false)
 {
     m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
 
@@ -41,7 +41,7 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur) :
     SDL_Rect rect4 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
     m_campement = new Bouton("Campement", rect4, m_controleur, nullptr,
-                             m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale().partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
+                             m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale()->partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
     ajoutBoutonDansMapDeBoutons(m_retour, nullptr);
     ajoutBoutonDansMapDeBoutons(m_recolte, nullptr);
     ajoutBoutonDansMapDeBoutons(m_chasse, nullptr);

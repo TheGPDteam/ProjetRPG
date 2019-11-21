@@ -23,7 +23,7 @@ private:
     Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
     Sprite * creerSpriteObjet(Joueur *joueur, int tuileX, int tuileY, int posDessinX, int posDessinY);
 public:
-    EcranJeuPrincipal(Controleur *controleur);
+    EcranJeuPrincipal(Controleur *controleur, GestionnaireRessource* gestionnaireRessource);
 
     void afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage) override;
     void gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris) override;

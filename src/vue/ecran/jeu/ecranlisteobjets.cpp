@@ -7,8 +7,8 @@
 const std::pair<int, int> coordB(WIDTH_FENETRE_PRINCIPALE-(WIDTH_BOUTON_NORMAL)-75, HEIGHT_FENETRE_PRINCIPALE-(HEIGHT_BOUTON_NORMAL*3)-25);
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
-EcranListeObjet::EcranListeObjet(Controleur *controleur)
-    :EcranGeneral{controleur},
+EcranListeObjet::EcranListeObjet(Controleur *controleur, GestionnaireRessource* gestionnaireRessource)
+    :EcranGeneral{controleur, gestionnaireRessource},
       m_nomFenetre("Liste des objets", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                    std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 100))
 {

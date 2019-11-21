@@ -234,8 +234,8 @@ void Joueur::charger(const std::string &donnees){
 }
 
 
-QuetePrincipale Joueur::obtenirQuetePrincipale() {
-    return m_quetePrincipale;
+QuetePrincipale *Joueur::obtenirQuetePrincipale() {
+    return &m_quetePrincipale;
 }
 
 

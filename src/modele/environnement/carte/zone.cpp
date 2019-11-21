@@ -319,26 +319,26 @@ void Zone::ajouterObjets(int nombre_objets){
             //int typeObj = rand()%5; //A revoir si un jour integration objets autres que arme et vivre
             int typeObj = rand()%6;
             switch (typeObj) {
-                case 0:
-                    m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                    break;
-                case 1:
-                    m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                    break;
-                case 2:
-                    m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                    break;
-                case 3:
-                    m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                    break;
-                /*case 4://A revoir pour un objet aléatoire
-                    m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
-                    break;*/
-                case 5:
-                    m_objets.insert(std::make_pair(new PartieBus() ,std::make_pair(posX,posY)));
-                    break;
-                default:
-                    break;
+            case 0:
+                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                break;
+            case 1:
+                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
+                break;
+            case 2:
+                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                break;
+            case 3:
+                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
+                break;
+            /*case 4://A revoir pour un objet aléatoire
+                m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
+                break;*/
+            case 5:
+                m_objets.insert(std::make_pair(new ObjetQuetePrincipale() ,std::make_pair(posX,posY)));
+                break;
+            default:
+                break;
             }
         }
     }

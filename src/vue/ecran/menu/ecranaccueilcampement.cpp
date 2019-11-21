@@ -3,8 +3,9 @@
 #include "constantesbouton.h"
 #include <utility>
 
-EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur)
-    :EcranGeneral{controleur},
+
+EcranAccueilCampement::EcranAccueilCampement(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
+    :EcranGeneral{controleur, gestionnaireRessource},
       m_nomFenetre("Campement", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20,
                    std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 50)),
       m_nombreObjets(TEXTE_NOMBRE_OBJETS+std::to_string(m_controleur->obtenirModele()->obtenirCampement()->obtenirVivres().size()+m_controleur->obtenirModele()->obtenirCampement()->obtenirObjets().size()),
