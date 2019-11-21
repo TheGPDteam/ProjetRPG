@@ -10,6 +10,7 @@
 
 
 const std::string SPRITES_PRINCIPAUX = "SpritesPrincipaux";
+const std::string SPRITE_BUS = "SpritesBus";
 
 const std::map<int, SDL_Rect> TUILE2RECT = {};
 

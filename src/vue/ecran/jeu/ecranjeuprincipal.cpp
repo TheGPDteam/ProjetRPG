@@ -22,7 +22,6 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
     : EcranGeneral{controleur, gestionnaireRessource},
-      m_spriteJoueur{SpritePersonnage::obtenirSpritesJoueur()},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
@@ -72,7 +71,6 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 
     m_nomJoueur.mettreAJourTexte(m->obtenirJoueur()->obtenirNom());
     m_tempsRestant.mettreAJourTexte("Heure : " + Temps::obtenirTempsAffichable(m->obtenirTemps()->obtenirTemps()));
-    m_spriteJoueur->afficher(fenetre_affichage);
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
     m_tempsRestant.afficher(fenetre_affichage);
