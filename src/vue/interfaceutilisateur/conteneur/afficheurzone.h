@@ -25,7 +25,7 @@ public:
     ~AfficheurZone();
 
     SpritePersonnage* obtenirSpritePersonnage();
-    void mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provoque_changement);
+    void mettreAJour(Carte* carte, Joueur * joueur);
     void afficher(SDL_Surface *fenetre_affichage);
 };
 

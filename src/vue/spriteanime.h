@@ -15,6 +15,7 @@ public:
     SpriteAnime(std::vector<Sprite *> sprites, int temps_affichable);
     void afficher(SDL_Surface* surface);
     void reinitialiser();
+    void changerPosition(int x, int y);
     ~SpriteAnime();
 };
 

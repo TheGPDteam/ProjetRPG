@@ -18,7 +18,8 @@ public:
 
     void afficher(SDL_Surface* surface);
     void deplacementJoueur(Direction direction);
-    static SpritePersonnage* obtenirSpritesJoueur();
+    static SpritePersonnage* obtenirSpritesPersonnage();
+    void changerPosition(int x, int y);
     ~SpritePersonnage();
 };
 

@@ -63,11 +63,11 @@ bool Modele::testerDeplacement(Direction& dir){
 
     switch(dir){
         case Nord:
-            return posY - 1 > 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
+            return posY - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
         case Sud:
             return posY + 1 < hauteurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
         case Ouest:
-            return posX - 1 > 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
+            return posX - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
         case Est:
             return posX + 1 < largeurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
         default :

@@ -1,8 +1,12 @@
 #include "afficheurzone.h"
 #include "utility"
 
+//! Constructeur de l'afficheur de zone
+//!
+//! \brief AfficheurZone::AfficheurZone
+//!
 AfficheurZone::AfficheurZone()
-    : m_spriteJoueur{SpritePersonnage::obtenirSpritesJoueur()}{
+    : m_spriteJoueur{SpritePersonnage::obtenirSpritesPersonnage()}{
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < DECALAGE_CARTE_X_SUPERIEUR; ++i)
         for(int j = 0; j < DECALAGE_CARTE_Y_SUPERIEUR; ++j)
@@ -10,6 +14,10 @@ AfficheurZone::AfficheurZone()
 }
 
 
+//! Destructeur de l'afficheur de zone
+//!
+//! \brief AfficheurZone::~AfficheurZone
+//!
 AfficheurZone::~AfficheurZone(){
     for(auto colonne : m_spritesCarte)
         for(auto tuile : colonne)
@@ -22,7 +30,13 @@ AfficheurZone::~AfficheurZone(){
 }
 
 
-void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provoque_changement){
+//! \brief Met a jour le tableau contenant les tuiles, la position d'affichage du personnage, et de la position d'affichage des valises
+//!
+//! \param carte Carte contenant toutes les zones. On récupère
+//! \param joueur
+//! \param joueur_provoque_changement
+//!
+void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
     m_spriteObjets.clear();
 
     //recupère la position du joueur sur la zone
@@ -30,87 +44,38 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provo
     int posY = joueur->obtenirPosition().second;
     const Zone * zone = carte->obtenirZoneActive();
 
-    // Debug aficher le nom de la map en cours
-    //std::cout << m_carte->obtenirZoneActive()->obtenirNom() << std::endl;
-
     // Test si c'est un joueur
-    if (joueur_provoque_changement){
-        Tuile * tuile;
+    Tuile * tuile;
 
-        std::vector<int> decalage = calculerDecalageBord(posX, posY, zone->obtenirLargeur(), zone->obtenirHauteur());
-        std::cout << posX << " " << posY << std::endl;
+    std::vector<int> decalage = calculerDecalageBord(posX, posY, zone->obtenirLargeur(), zone->obtenirHauteur());
+    // Sprite du personnage aux nouvelles coordonnées
+    m_spriteJoueur->changerPosition(decalage[0] * 64, decalage[1] * 64);
 
-        for (int i = 0; i < LARGEUR; i++){
-            for(int j = 0; j < HAUTEUR; j++){
-                // On recupère le numéro de la tuile pour l'afficher
-                std::pair<int, int> temp(i + posX - decalage[0], j + posY - decalage[1]);
+    for (int i = 0; i < LARGEUR; i++){
+        for(int j = 0; j < HAUTEUR; j++){
+            // On recupère le numéro de la tuile pour l'afficher
+            std::pair<int, int> temp(i + posX - decalage[0], j + posY - decalage[1]);
 
-                // Ne pas rendre des tuiles ou des objets en dehors de la map
-                if (temp.first >= 0 && temp.first < zone->obtenirLargeur() && temp.second >= 0 && temp.second < zone->obtenirHauteur()){
+            // Ne pas rendre des tuiles ou des objets en dehors de la map
+            if (temp.first >= 0 && temp.first < zone->obtenirLargeur() && temp.second >= 0 && temp.second < zone->obtenirHauteur()){
 
-                    tuile = zone->obtenirTuile(temp.first, temp.second);
-                    // On cherche la bonne tuile sur l'atlas a partir de son numéro
-                    SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
+                tuile = zone->obtenirTuile(temp.first, temp.second);
+                // On cherche la bonne tuile sur l'atlas a partir de son numéro
+                SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
 
-                    (m_spritesCarte[i][j])->changementSprite(lecture);
+                (m_spritesCarte[i][j])->changementSprite(lecture);
 
-                    // Affichage de la valise
-                    if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
-                        int x = i;
-                        int y = j;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
-                    }
-                } else  {
-                    // On met une tuile noire
-                    SDL_Rect lecture = SDL_Rect{0, 0, 0, 0};
-
-                    (m_spritesCarte[i][j])->changementSprite(lecture);
+                // Affichage de la valise
+                if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
+                    int x = i;
+                    int y = j;
+                    m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
                 }
-            }
-        }
+            } else  {
+                // On met une tuile noire
+                SDL_Rect lecture = SDL_Rect{0, 0, 0, 0};
 
-        /*// on deplace la zone autour du joueur pour qu'il reste au milieu
-        for (int i = posX-DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i){
-            for (int j = posY-DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j){
-
-                // Ne pas rendre des tuiles ou des objets en dehors de la map
-                if (i > 0 && i < zone->obtenirLargeur() && j > 0 && j < zone->obtenirHauteur()){
-
-                    // On recupère le numéro de la tuile pour l'afficher
-                    std::pair<int, int> temp(i,j);
-                    tuile = zone->obtenirTuile(i,j);
-                    // On cherche la bonne tuile sur l'atlas a partir de son numéro
-                    SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
-
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-
-                    // Affichage de la valise
-                    if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
-                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
-                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
-                    }
-                } else  {
-                    // On met une tuile noire
-                    SDL_Rect lecture = SDL_Rect{0, 0, 0, 0};
-
-                    (m_spritesCarte[i-posX-DECALAGE_CARTE_X_INFERIEUR][j-posY-DECALAGE_CARTE_Y_INFERIEUR])->changementSprite(lecture);
-                }
-            }
-        }*/
-
-    // Affichage des valises
-    } else {
-        for (int i = posX - DECALAGE_CARTE_X_INFERIEUR; i < posX + DECALAGE_CARTE_X_SUPERIEUR; ++i) {
-            for (int j = posY - DECALAGE_CARTE_Y_INFERIEUR; j < posY + DECALAGE_CARTE_Y_SUPERIEUR; ++j) {
-                if (j >= 0 && j <= 64 &&  i >= 0 && i <= 64) {
-                    std::pair<int, int> temp(i, j);
-                    if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
-                        int x = i-posX-DECALAGE_CARTE_X_INFERIEUR;
-                        int y = j-posY-DECALAGE_CARTE_Y_INFERIEUR;
-                        m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 127, 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
-                    }
-                }
+                (m_spritesCarte[i][j])->changementSprite(lecture);
             }
         }
     }
@@ -118,7 +83,8 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur, bool joueur_provo
 
 
 //!
-//! \brief Calcule le decalage
+//! \brief Calcule le decalage en fonction du la positon du personnage
+//!        Le décalage sera utilsé pour choisir la position d'affichage de la map et la position d'affichage du personnage
 //!
 //! @param positionX Position x du personnage
 //! @param positionY Position y du personnage
@@ -142,7 +108,7 @@ std::vector<int> AfficheurZone::calculerDecalageBord(int positionX, int position
 
     // Decalage si le personnage va vers le bord droite de la zone
     } else if (positionX >= largeur_zone - moitieEcranLargeur){
-        decalage[0] = largeur_zone - positionX;
+        decalage[0] = LARGEUR - largeur_zone + positionX;
     }
 
     // Decalage si le personnage va vers le bord haut de la zone
@@ -151,13 +117,18 @@ std::vector<int> AfficheurZone::calculerDecalageBord(int positionX, int position
 
     // Decalage si le personnage va vers le bord bas de la zone
     } else if (positionY >= hauteur_zone - moitieEcranHauteur){
-        decalage[1] = largeur_zone - positionY;
+        decalage[1] = HAUTEUR - hauteur_zone + positionY;
     }
 
     return decalage;
 }
 
 
+//! Afficher le tableau des tuiles, le personnage et les objets sur l'écran
+//!
+//! \brief AfficheurZone::afficher
+//! \param fenetre_affichage
+//!
 void AfficheurZone::afficher(SDL_Surface *fenetre_affichage){
     for(auto c : m_spritesCarte)
         for(auto x : c)
@@ -170,6 +141,11 @@ void AfficheurZone::afficher(SDL_Surface *fenetre_affichage){
 }
 
 
+//! Obtenir le sprite du personnage
+//!
+//! \brief AfficheurZone::obtenirSpritePersonnage
+//! \return
+//!
 SpritePersonnage* AfficheurZone::obtenirSpritePersonnage(){
     return m_spriteJoueur;
 }

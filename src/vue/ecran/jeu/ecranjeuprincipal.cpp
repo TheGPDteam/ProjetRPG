@@ -19,7 +19,6 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 //! \date 23/11/16
 //! \version 1.0
 //!
-
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur)
     : EcranGeneral{controleur},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
@@ -148,11 +147,21 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 EcranJeuPrincipal::~EcranJeuPrincipal(){}
 
 
+//! Effectue les changements sur l'écran dont afficheur zone quand il y a un changement (personnage bouge)
+//!
+//! \brief EcranJeuPrincipal::obtenirChangement
+//! \param obj Observable nous notifiant du changement
+//!
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
-    m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur(), (dynamic_cast<Joueur*>(&obj) != nullptr) );
+    m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
 }
 
 
+//! Définir l'objet carte pour l'écran de jeu
+//!
+//! \brief EcranJeuPrincipal::definirCarte
+//! \param carte Carte à définir
+//!
 void EcranJeuPrincipal::definirCarte(Carte* carte){
     m_carte = carte;
 }
