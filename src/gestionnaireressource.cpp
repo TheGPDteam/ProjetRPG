@@ -8,6 +8,7 @@ GestionnaireRessource::GestionnaireRessource()
     m_tabSurface = new std::map<std::string, SDL_Surface*>();
 }
 
+
 //! \brief decharge une surface
 //! \param nom de la surface a decharger
 //! \author anguilbaud
@@ -23,6 +24,7 @@ void GestionnaireRessource::dechargerSurface(char* nom)
     }
 }
 
+
 //! \brief destructeur
 //! \author anguilbaud
 //! \date 20/10/2019
@@ -36,12 +38,12 @@ GestionnaireRessource::~GestionnaireRessource()
     delete(m_tabSurface);
 }
 
+
 //! \brief permet de charger une surface
 //! \author anguilbaud
 //! \date 20/10/2019
 void GestionnaireRessource::chargementSurface(std::string nom)
 {
-
     std::map<std::string, SDL_Surface*>::iterator it = m_tabSurface->find(REPERTOIRE + nom + EXTENSION);
 
     if(it == m_tabSurface->end())
@@ -54,9 +56,11 @@ void GestionnaireRessource::chargementSurface(std::string nom)
             std::cerr << "Impossible de charger la surface." << std::endl;
             exit(2);
         }
+
         m_tabSurface->insert(std::pair<std::string, SDL_Surface*>(nom.c_str(), surface));
     }
 }
+
 
 //! \brief permet de recuperer une surface
 //! \author anguilbaud
@@ -65,8 +69,7 @@ SDL_Surface* GestionnaireRessource::obtenirSurface(const char* nom)
 {
     std::map<std::string, SDL_Surface*>::iterator it = m_tabSurface->find(nom);
 
-    if (it == m_tabSurface->end())
-    {
+    if (it == m_tabSurface->end()){
         chargementSurface(nom);
         it = m_tabSurface->find(nom);
     }

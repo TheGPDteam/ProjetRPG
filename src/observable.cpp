@@ -2,10 +2,15 @@
 #include "observateur.h"
 #include <iostream>
 
+//! Constrcuteur de l'observable
+//!
+//! \brief Observable::Observable
+//!
 Observable::Observable()
     : m_aChange{false}
 {
 }
+
 
 //!
 //! \brief Indique si l'objet a changé d'état
@@ -16,6 +21,7 @@ bool Observable::aChange(){
     return m_aChange;
 }
 
+
 //!
 //! \brief Met a jour l'objet pour dire qu'il a été modifié
 //! La methode aChange de l'objet retournera vrai à partir de maintenant
@@ -24,6 +30,7 @@ void Observable::mettreAChange(){
     m_aChange = true;
 }
 
+
 //!
 //! \brief Ajoute un observateur à l'objet observé
 //! \param obs Observateur à ajouter à la liste d'observateur
@@ -31,6 +38,7 @@ void Observable::mettreAChange(){
 void Observable::ajouterObservateur(Observateur& obs){
     m_listeObservateur.push_back(&obs);
 }
+
 
 //!
 //! \brief Notifie à l'observateur passé en paramètre que l'objet à changé
@@ -45,6 +53,7 @@ void Observable::notifier(Observateur &obs){
         m_aChange =false;
     }
 }
+
 
 //!
 //! \brief Notifie tout les obervateurs de l'objet qu'il a été changé
