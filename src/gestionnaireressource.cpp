@@ -39,16 +39,23 @@ GestionnaireRessource::~GestionnaireRessource()
 //! \brief permet de charger une surface
 //! \author anguilbaud
 //! \date 20/10/2019
-void GestionnaireRessource::chargementSurface(std::string nom, std::string extension)
+void GestionnaireRessource::chargementSurface(std::string nom)
 {
-    SDL_Surface* surface = IMG_Load((nom + extension).c_str());
 
-    if (surface == NULL)
+    std::map<std::string, SDL_Surface*>::iterator it = m_tabSurface->find(REPERTOIRE + nom + EXTENSION);
+
+    if(it == m_tabSurface->end())
     {
-        std::cerr << "Impossible de charger la surface." << std::endl;
-        exit(2);
+
+        SDL_Surface* surface = IMG_Load((REPERTOIRE + nom + EXTENSION).c_str());
+        if (surface == NULL)
+        {
+
+            std::cerr << "Impossible de charger la surface." << std::endl;
+            exit(2);
+        }
+        m_tabSurface->insert(std::pair<std::string, SDL_Surface*>(nom.c_str(), surface));
     }
-    m_tabSurface->insert(std::pair<std::string, SDL_Surface*>(nom.c_str(), surface));
 }
 
 //! \brief permet de recuperer une surface
@@ -57,18 +64,13 @@ void GestionnaireRessource::chargementSurface(std::string nom, std::string exten
 SDL_Surface* GestionnaireRessource::obtenirSurface(const char* nom)
 {
     std::map<std::string, SDL_Surface*>::iterator it = m_tabSurface->find(nom);
-    SDL_Surface* surface = nullptr;
 
-    if (it != m_tabSurface->end())
+    if (it == m_tabSurface->end())
     {
-        surface = it->second;
-    } 
-    else 
-    {
-        std::cerr << "Impossible la surface n'a pas etait chargee." << std::endl;
-        exit(2);
+        chargementSurface(nom);
+        it = m_tabSurface->find(nom);
     }
 
-    return surface;
+    return it->second;
 }
 
