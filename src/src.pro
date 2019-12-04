@@ -2,6 +2,7 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
+CONFIG += address_sanitizer
 
 LIBS+=`sdl-config --libs` -lSDL_image -lSDL_ttf
 
@@ -21,6 +22,7 @@ SOURCES += \
     modele/personnages/ennemis/zombie.cpp \
     modele/personnages/humain.cpp \
     modele/personnages/personnage.cpp \
+    modele/survie/combat/actioncombat.cpp \
     modele/survie/combat/combat.cpp \
     modele/survie/experience/competence.cpp \
     modele/survie/experience/niveau.cpp \
@@ -98,6 +100,7 @@ HEADERS += \
     modele/personnages/personnage.h \
     modele/survie/combat/actioncombat.h \
     modele/survie/combat/combat.h \
+    modele/survie/combat/typeactioncombat.h \
     modele/survie/experience/competence.h \
     modele/survie/experience/niveau.h \
     modele/survie/quetes/quete.h \

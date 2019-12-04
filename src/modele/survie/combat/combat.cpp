@@ -18,7 +18,11 @@ bool comparerVitesse(Personnage* p1, Personnage* p2) {
 //!
 
 Combat::Combat(Equipe *equipe_haute, Equipe *quipe_basse)
-    : m_equipeBasse(quipe_basse), m_equipeHaute{equipe_haute}, m_ordrePassage{nullptr}, m_numeroDePassage{0}
+    : m_equipeBasse(quipe_basse),
+      m_equipeHaute{equipe_haute},
+      m_ordrePassage{nullptr},
+      m_numeroDePassage{0},
+      m_actionDuTour{nullptr}
 {
     int i=0;
     for (Personnage* p : *m_equipeHaute)
@@ -54,7 +58,8 @@ Combat::Combat(Equipe *equipe_haute)
     : m_equipeBasse(Equipe::genererEquipeZombie()),
       m_equipeHaute(equipe_haute),
       m_ordrePassage{nullptr},
-      m_numeroDePassage(0)
+      m_numeroDePassage(0),
+      m_actionDuTour{nullptr}
 {
     int i=0;
     for (Personnage* p : *m_equipeHaute)
@@ -125,7 +130,7 @@ void Combat::tourSuivant()
 //! \version 1.0
 //!
 
-void Combat::effectuerAttaque(Personnage *agresseur, Personnage *cible)
+void effectuerAttaque(Personnage *agresseur, Personnage *cible)
 {
     cible->obtenirVie()->diminuer(agresseur->obtenirDegats());
 }
@@ -139,7 +144,7 @@ void Combat::effectuerAttaque(Personnage *agresseur, Personnage *cible)
 //! Ajoute l'action à faire pour le tour
 //!
 
-void Combat::ajouterAction(Personnage* cible, Personnage* source, ActionCombat action)
+void Combat::ajouterAction(Personnage* cible, Personnage* source, TypeActionCombat action)
 {
     if (!(source->obtenirVie()->obtenirValeur()==0))
     {
@@ -152,8 +157,7 @@ void Combat::ajouterAction(Personnage* cible, Personnage* source, ActionCombat a
         }
         case ATTAQUER:
         {
-            m_actionDuTour.first=std::make_pair(cible,source);
-            m_actionDuTour.second=ATTAQUER;
+            m_actionDuTour = new ActionCombat(action, source, cible);
             break;
         }
         }

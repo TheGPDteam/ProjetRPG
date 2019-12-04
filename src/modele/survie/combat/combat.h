@@ -17,7 +17,7 @@ private:
     Equipe* m_equipeHaute;
     std::array<Personnage*,8> m_ordrePassage;
     unsigned short m_numeroDePassage;
-    std::pair<std::pair<Personnage*,Personnage*>,ActionCombat>m_actionDuTour;
+    ActionCombat* m_actionDuTour;
 public:
     Combat() = default;
     Combat(Equipe* equipeHaute, Equipe* equipeBasse);
@@ -25,9 +25,8 @@ public:
     Equipe * obtenirEquipeHaute() const;
     Equipe * obtenirEquipeBasse() const;
     Personnage * prochainPersonnage();
-    void effectuerAttaque(Personnage* agresseur, Personnage* cible);
     void tourSuivant();
-    void ajouterAction(Personnage* cible, Personnage* source, ActionCombat action);
+    void ajouterAction(Personnage* cible, Personnage* source, TypeActionCombat action);
 };
 
 #endif
