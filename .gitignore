@@ -7,3 +7,4 @@ src/src
 src/Makefile
 build/
 src/vue/vue.cpp.autosave
+tools/maps/output/
