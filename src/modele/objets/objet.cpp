@@ -1,5 +1,9 @@
 #include "objet.h"
 
+
+const std::pair<int, int> POS_IMAGE_DEFAUT = {0,1280};
+
+
 //! \file fichier objet
 //! \date 17/11/16
 //! \version 1.0
@@ -38,6 +42,24 @@ Objet::Objet(std::string nom, std::string description, int image_x, int image_y)
 {
 
 }
+
+
+//!
+//! \brief Constructeur paramétré
+//! \author jsorin001
+//! \date 03/11/16
+//! \version 0.1
+//!
+//! Constructeur paramétré
+//!
+
+Objet::Objet(std::string nom, std::string description)
+    : Objet(nom, description, POS_IMAGE_DEFAUT.first, POS_IMAGE_DEFAUT.second)
+
+{
+
+}
+
 
 //!
 //! \brief Destructeur par defaut

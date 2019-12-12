@@ -5,6 +5,9 @@
 //! \date 17/11/16
 //! \version 1.0
 
+const float Combat::PROBABILITE_OBTENIR_OBJET = 0.25;
+const float Combat::PROBABILITE_OBTENIR_ARME = 0.75;
+
 bool comparerVitesse(Personnage* p1, Personnage* p2) {
     return (p1->obtenirVitesse() > p2->obtenirVitesse());
 }
@@ -95,6 +98,7 @@ Equipe* Combat::obtenirEquipeBasse() const
     return m_equipeBasse;
 }
 
+
 //!
 //! \brief Accesseur en lecture de l'equipe haute
 //! \author mleothaud
@@ -108,6 +112,19 @@ Equipe* Combat::obtenirEquipeHaute() const
     return m_equipeHaute;
 }
 
+//!
+//! \brief Combat::obtenirEquipe
+//! \param personnage
+//! \return
+//!
+Equipe* Combat::obtenirEquipe(Personnage* personnage) const
+{
+    if(m_equipeBasse->obtenirListePersonnage().find(personnage) != m_equipeBasse->end())
+        return m_equipeBasse;
+    else if (m_equipeHaute->obtenirListePersonnage().find(personnage) != m_equipeHaute->end())
+        return m_equipeHaute;
+    return nullptr;
+}
 //!
 //! \brief Permet de passer au tour suivant et d'avancer dans le combat
 //! \author mleothaud
@@ -164,6 +181,7 @@ void Combat::ajouterAction(Personnage* cible, Personnage* source, TypeActionComb
     }
 }
 
+
 //!
 //! \brief Permet de connaitre le prochain personnage à effectuer une action
 //! \author mleothaud
@@ -181,7 +199,62 @@ Personnage* Combat::prochainPersonnage()
     else
     {
         ++m_numeroDePassage;
-        m_numeroDePassage=m_numeroDePassage%8;
+        m_numeroDePassage=m_numeroDePassage%m_ordrePassage.size();
         return m_ordrePassage[m_numeroDePassage];
     }
+}
+
+//!
+//! \brief Simulation d'un combat
+//! \author nlesne
+//! \date 06/12/19
+//! \version 0.1
+//!
+
+void Combat::simulerCombat()
+{
+    Personnage* courant = m_ordrePassage[0];
+    while(!m_equipeBasse->estKO() && !m_equipeHaute->estKO())
+    {
+        Equipe* equipeCourante = obtenirEquipe(courant);
+        Personnage* cible;
+        if (equipeCourante == m_equipeBasse)
+        {
+            cible = *m_equipeHaute->begin();
+            effectuerAttaque(courant, cible);
+
+        }
+        else
+        {
+            cible = *m_equipeHaute->begin();
+            effectuerAttaque(courant, *m_equipeBasse->begin());
+        }
+
+        if (cible->obtenirVie()->obtenirValeur() <= 0)
+        {
+            equipeCourante->supprimerPersonnage(cible);
+        }
+
+        courant = prochainPersonnage();
+    }
+}
+
+Objet* Combat::obtenirRecompense() const
+{
+    Objet* recompense = nullptr;
+    srand(time(nullptr));
+    bool tirageObjet = rand() < PROBABILITE_OBTENIR_OBJET;
+    if (tirageObjet)
+    {
+        bool estArme = rand() < PROBABILITE_OBTENIR_ARME;
+        if (estArme)
+        {
+            recompense = new Arme();
+        }
+        else
+        {
+            recompense = new ObjetQuetePrincipale();
+        }
+    }
+    return recompense;
 }

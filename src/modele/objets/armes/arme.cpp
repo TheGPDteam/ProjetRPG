@@ -108,7 +108,7 @@ void Arme::affecterValeurs(std::string ligne)
     bool separateurDescriptionPasse=false;
     bool separateurEmplacementImageX=false;
 
-    for (unsigned int i=0;i+1<=ligne.size();++i)
+    for (unsigned int i = 0; i + 1 <= ligne.size(); ++i)
     {
         if (!separateurNomPasse)
         {

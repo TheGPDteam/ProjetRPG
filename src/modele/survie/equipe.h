@@ -22,6 +22,7 @@ public:
     std::set<Personnage*> obtenirListePersonnage();
     void supprimerPersonnage(Personnage *personnage);
     void ajouterPersonnage(Personnage* personnage);
+    bool estKO();
     static Equipe *genererEquipeZombie();
 
     std::set<Personnage *>::iterator begin(){

@@ -45,7 +45,7 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
       m_nombrePartiesRequises{
         {PartieBus::ROUE,4},
         {PartieBus::MOTEUR,1},
-        {PartieBus::ESSENCE,2},
+        {PartieBus::ESSENCE,4},
         {PartieBus::HUILE,1}
       },
       m_partiesBusReunies{false}, m_estLance{false}, m_tempsActuel {0}, m_faitAssemblage {false}
