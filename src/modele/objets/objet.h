@@ -20,7 +20,8 @@ protected:
 
 public:
     Objet();
-    Objet(std::string nom, std::string description, int xImg=0, int yImg=640);
+    Objet(std::string nom, std::string description, int xImg, int yImg);
+    Objet(std::string nom, std::string description);
     virtual ~Objet();
     Sprite* obtenirSprite() const;
     void definirSprite(Sprite *sprite);
