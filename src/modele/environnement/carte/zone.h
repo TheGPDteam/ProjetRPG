@@ -39,7 +39,6 @@ private:
     std::map <std::pair<int,int>, Tuile*> m_position_to_tuile;
 
     void initZone();
-    void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
     void initialiserSousTypeTuile();
 
