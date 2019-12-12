@@ -42,10 +42,10 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
         {new ObjetQuetePrincipale("Huile","",PartieBus::HUILE),0},
       },
       m_nombrePartiesRequises{
-        {PartieBus::ROUE,6},
+        {PartieBus::ROUE,4},
         {PartieBus::MOTEUR,1},
-        {PartieBus::ESSENCE,1},
-        {PartieBus::HUILE,2}
+        {PartieBus::ESSENCE,4},
+        {PartieBus::HUILE,1}
       },
       m_partiesBusReunies{false}
 
