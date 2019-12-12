@@ -11,22 +11,28 @@ ObjetQuetePrincipale::ObjetQuetePrincipale() :
     Objet ("nom","description")
 
 {
-    int typePartie = rand()%4;
+    int typePartie = rand()%10;
     this->definirDescription("Une partie du bus");
     switch (typePartie) {
     case 0:
+    case 1:
+    case 2:
+    case 3:
         this->definirNom("Roue");
         this->m_partie = PartieBus::ROUE;
         break;
-    case 1:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
         this->definirNom("Essence");
         this->m_partie = PartieBus::ESSENCE;
         break;
-    case 2:
+    case 8:
         this->definirNom("Moteur");
         this->m_partie = PartieBus::MOTEUR;
         break;
-    case 3:
+    case 9:
         this->definirNom("Huile");
         this->m_partie = PartieBus::HUILE;
         break;

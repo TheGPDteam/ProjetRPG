@@ -54,6 +54,24 @@ void Equipe::supprimerPersonnage(Personnage *personnage)
     notifierTous();
 }
 
+
+//!
+//! \brief Teste si tout les personnages sont KO
+//! \author nlesne
+//! \date 05/12/19
+//! \return Vrai si tout les personnages sont à 0 PV.
+//! \version 1.0
+//!
+bool Equipe::estKO()
+{
+    for (Personnage* membre : obtenirListePersonnage())
+    {
+        if (membre->obtenirVie()->obtenirValeur() > 0)
+            return false;
+    }
+    return true;
+}
+
 //!
 //! \brief Constructeur parametre de la classe equipe
 //! \author mleothaud
