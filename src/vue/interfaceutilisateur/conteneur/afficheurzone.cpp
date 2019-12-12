@@ -74,7 +74,6 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
 
                 if(tuile->estDecoree()){
                     SDL_Rect lectureDecoration = SDL_Rect{(tuile->obtenirDecoration() % 16) * 64, (tuile->obtenirDecoration() / 16) * 64, 64, 64};
-                    std::cout << lectureDecoration.x << " " << lectureDecoration.y << std::endl;
                     (m_spritesDecoration[i][j])->changementSprite(lectureDecoration);
                 }
                 else {
