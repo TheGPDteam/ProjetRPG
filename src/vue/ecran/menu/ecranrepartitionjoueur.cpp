@@ -40,12 +40,12 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur, Gestionn
 
     SDL_Rect rect4 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
                       WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_campement = new Bouton("Campement", rect4, m_controleur, nullptr,
-                             m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale()->partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
+    //m_campement = new Bouton("Campement", rect4, m_controleur, nullptr,
+              //               m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale()->partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
     ajoutBoutonDansMapDeBoutons(m_retour, nullptr);
     ajoutBoutonDansMapDeBoutons(m_recolte, nullptr);
     ajoutBoutonDansMapDeBoutons(m_chasse, nullptr);
-    ajoutBoutonDansMapDeBoutons(m_campement, nullptr);
+   // ajoutBoutonDansMapDeBoutons(m_campement, nullptr);
     m_zoneNomPersonnage = new TexteSDL("Nom : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
     m_zonePrenomPersonnage = new TexteSDL("Prenom : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
 

@@ -1,6 +1,7 @@
 #include "queteprincipale.h"
 
 const Heure TEMPS_ASSEMBLAGE(10);
+QuetePrincipale * QuetePrincipale::m_instance = nullptr;
 
 bool QuetePrincipale::partiesBusReunies() const
 {
@@ -42,12 +43,12 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
         {new ObjetQuetePrincipale("Huile","",PartieBus::HUILE),0},
       },
       m_nombrePartiesRequises{
-        {PartieBus::ROUE,6},
+        {PartieBus::ROUE,4},
         {PartieBus::MOTEUR,1},
-        {PartieBus::ESSENCE,1},
-        {PartieBus::HUILE,2}
+        {PartieBus::ESSENCE,2},
+        {PartieBus::HUILE,1}
       },
-      m_partiesBusReunies{false}
+      m_partiesBusReunies{false}, m_estLance{false}, m_tempsActuel {0}, m_faitAssemblage {false}
 
 {
 
@@ -62,3 +63,17 @@ void QuetePrincipale::ajouterTravail(Equipe *equipe)
 {
     //TODO
 }
+
+QuetePrincipale* QuetePrincipale::obtenirInstance(){
+    if(m_instance == nullptr)
+    {
+        m_instance = new QuetePrincipale("Quete importante", "La construction du bus");
+    }
+    return m_instance;
+}
+
+void QuetePrincipale::detruireQuetePrincipale()
+{
+    delete m_instance;
+}
+
