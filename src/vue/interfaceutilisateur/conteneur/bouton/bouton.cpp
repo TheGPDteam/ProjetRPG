@@ -98,3 +98,7 @@ void Bouton::redimensionner(SDL_Rect rectangle){
 std::string Bouton::obtenirTexte(){
     return m_texteBouton->obtenirTexte();
 }
+
+void Bouton::changerTexte(std::string texte){
+    m_texteBouton->mettreAJourTexte(texte);
+}

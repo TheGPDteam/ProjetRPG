@@ -39,10 +39,9 @@ public:
 
     void redimensionner(SDL_Rect rect) override;
 
-    //Accés variables
     std::string obtenirTexte();
 
-    //    bool estCliquable();
+    void changerTexte(std::string texte);
 
     void definirCliquable(bool actif) override;
 

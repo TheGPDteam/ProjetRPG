@@ -42,7 +42,7 @@ public:
     void lancerQuetePrincipale();
     void incrementerTempQuetePrincipale();
     bool estLance();
-    int obtenirNbJoursRestant();
+    int obtenirNbJoursRestants();
 //    void mettreAjour
 
     static QuetePrincipale* obtenirInstance();

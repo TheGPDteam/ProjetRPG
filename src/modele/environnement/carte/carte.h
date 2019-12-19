@@ -10,24 +10,20 @@
 #include "zone.h"
 #include "observable.h"
 
-const int TAILLE_CARTE_X = 3;
-const int TAILLE_CARTE_Y = 3;
-
 class Carte: public Observable
 {
 private:
     /*std::vector <Zone> m_zones;*/
-    Zone* m_zones[TAILLE_CARTE_X][TAILLE_CARTE_Y];
+    std::vector<Zone*> m_zones;
     Zone* m_zoneActive;
-    unsigned short m_xZoneActive;
-    unsigned short m_yZoneActive;
-    void chargerZone(std::string nom_fichier_zone, short x, short y);
+    unsigned short m_numZoneActive;
+    void chargerZone(std::string nom_fichier_zone);
 public :
     Carte();
     ~Carte();
     void definirObservateurZones(Observateur &obs);
     Zone *obtenirZoneActive();
-    void changerZoneActive(Direction direction);
+    void changerZoneActive(int numeroZone);
     void recharger();
     void zoneActiveCampement();
 };
