@@ -19,6 +19,8 @@ private:
     const std::string TEXTE_GAME_OVER = "Vous avez perdu";
     const std::string TEXTE_GAME_OVER_FAMINE = "Vous ne pouvez assumer la consommation de votre camp";
     const std::string TEXTE_GAME_OVER_ATTAQUE_MORTELLE = "Les zombies etaient trop forts pour vous";
+    const std::string TEXT_GAME_VICTORY = "Bravo !!! La fin d'Hitler est proche ...";
+
 
     SDL_Rect m_fondRecapitulatif;
 
