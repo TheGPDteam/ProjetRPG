@@ -98,3 +98,7 @@ bool QuetePrincipale::estLance()
 {
     m_timer->estLance();
 }
+int QuetePrincipale::obtenirNbJoursRestant()
+{
+    return m_timer->obtenirNbJoursMax() - m_timer->nbJoursPasse();
+}

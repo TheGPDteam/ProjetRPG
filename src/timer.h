@@ -15,11 +15,13 @@ public:
     bool estLance();
     void lancer();
 
-    int nbJourRestant();
+    int nbJoursPasse();
 
     void incrementerNbJour();
 
     bool estFini();
+
+    int obtenirNbJoursMax();
 };
 
 #endif // TIMER_H
