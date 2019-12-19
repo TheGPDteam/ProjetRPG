@@ -7,7 +7,7 @@
 //! \date 11/11/16
 //! \version 0.3
 //!
-//! Initialise la vue (elle démarreras toujours sur l'écran du menu princiapal)
+//! Initialise la vue (elle démarrera toujours sur l'écran du menu principal)
 //!
 Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coordSouris(0,0), m_quitterJeu(false){
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1){
@@ -15,7 +15,7 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
         SDL_Quit();
     }
 
-    m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
+    m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", nullptr);
 
     m_typeEcran = TypeEcran::MenuPrincipal;
