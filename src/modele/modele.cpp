@@ -100,7 +100,6 @@ void Modele::deplacement(Direction dir){
 
         } else if(zoneActive->objetPresent(position)){
 
-
             if(!m_joueur.obtenirInventaire()->estPlein()){
                 Objet * objet = zoneActive->obtenirObjet(position);
                 m_joueur.obtenirInventaire()->ajouterObjet(objet);

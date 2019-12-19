@@ -79,7 +79,7 @@ SOURCES += \
     vue/spritepersonnage.cpp \
     gestionnaireressource.cpp \
     vue/interfaceutilisateur/conteneur/afficheurzone.cpp \
-    modele/environnement/carte/zonechangementzone.cpp
+    modele/environnement/carte/zonechangementzone.cpp \
     timer.cpp
 
 
@@ -162,7 +162,7 @@ HEADERS += \
     vue/spritepersonnage.h \
     gestionnaireressource.h \
     vue/interfaceutilisateur/conteneur/afficheurzone.h \
-    modele/environnement/carte/zonechangementzone.h
+    modele/environnement/carte/zonechangementzone.h \
     timer.h
 
 
