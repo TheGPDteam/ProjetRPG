@@ -94,7 +94,7 @@ void Modele::deplacement(Direction dir){
         ZoneChangementZone * zoneChangement = zoneActive->obtenirChangement(&m_joueur);
         if (zoneChangement != nullptr){
 
-            m_carte.changerZoneActive(dir);
+            m_carte.changerZoneActive(zoneChangement->obtenirNumeroZone());
             std::pair<int,int> arrive = zoneChangement->obtenirPositionArrive();
             m_joueur.definirPosition(arrive);
 
