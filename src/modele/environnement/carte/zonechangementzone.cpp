@@ -15,7 +15,6 @@ bool ZoneChangementZone::estSur(Joueur * joueur){
     int x = joueur->obtenirPosition().first;
     int y = joueur->obtenirPosition().second;
 
-    std::cout << "hey" << std::endl;
     return (x >= pos1X && x <= pos2X && y >= pos1Y && y <= pos2Y);
 }
 
