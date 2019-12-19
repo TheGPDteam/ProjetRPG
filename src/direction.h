@@ -2,7 +2,7 @@
 #define DIRECTION_H
 
 enum Direction{
-    Nord=0, Est, Sud, Ouest, Aucune
+    Nord=0,Sud, Est , Ouest, Aucune
 };
 
 #endif // DIRECTION_H
