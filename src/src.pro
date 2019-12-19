@@ -80,7 +80,7 @@ SOURCES += \
     gestionnaireressource.cpp \
     vue/interfaceutilisateur/conteneur/afficheurzone.cpp \
     modele/environnement/carte/zonechangementzone.cpp
-
+    timer.cpp
 
 
 
@@ -163,5 +163,6 @@ HEADERS += \
     gestionnaireressource.h \
     vue/interfaceutilisateur/conteneur/afficheurzone.h \
     modele/environnement/carte/zonechangementzone.h
+    timer.h
 
 

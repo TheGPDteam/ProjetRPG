@@ -26,7 +26,9 @@ EcranMenuPrincipal::EcranMenuPrincipal(Controleur* controleur, GestionnaireResso
 
     rect.y += 70;
     ajoutBoutonDansMapDeBoutons(new Bouton("Quitter", rect, m_controleur, nullptr, true, POLICE_COLLEGED), &ActionsBoutons::boutonQuitter);
-    m_fond = IMG_Load("../rsc/sprites/ecran_titre.bmp");
+
+    //m_fond = IMG_Load("../rsc/sprites/ecran_titre.bmp");
+    m_fond = m_gestionnaireRessource->obtenirSurface("ecran_titre");
 }
 
 
@@ -47,7 +49,7 @@ void EcranMenuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Sur
 }
 
 
-//!
+//!m_fond = m_gestionnaireRessource->obtenirSurface("ecran_titre");
 //! \brief Gère les évènements
 //! \author pgutierrez
 //! @param controleur repésente le controleur de l'architecture MVC
