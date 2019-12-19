@@ -8,7 +8,7 @@
 Carte::Carte(){
     //m_zones.push_back(Zone(64,64));
     //m_zoneActive = m_zones.front();
-    for (int i = 0; i < 10; ++i){
+    for (int i = 0; i < 9; ++i){
        std::string zone = "./../rsc/carte/zone" + std::to_string(i+1) + ".txt";
        chargerZone(zone);
     }

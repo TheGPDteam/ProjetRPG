@@ -388,8 +388,6 @@ void Zone::initialiserSousTypeTuile(){
 //! \date 01/03/18
 //! \author mleothaud
 //!
-
-
 void Zone::recharger(){
     ajouterObjets(20 - m_objets.size());
     ajouterZombies(15 - m_zombies.size());
