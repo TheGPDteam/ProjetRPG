@@ -7,7 +7,7 @@
 #include "../../cliquable.h"
 
 #include "../../zonetexte.h"
-
+#include <iostream>
 
 class Bouton : public Affichable, public Cliquable
 {
@@ -52,6 +52,11 @@ public:
 
     void clique() override {}
 
+    std::string serialiser() const {
+        SDL_Rect rect = zone();
+        std::string res =  std::to_string(rect.x) + " " + std::to_string(rect.y) + " " + std::to_string(rect.w) + " " + std::to_string(rect.h) ;
+        return res;
+    }
 };
 
 #endif // BOUTON_H

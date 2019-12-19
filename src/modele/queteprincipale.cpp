@@ -54,6 +54,10 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
 
 }
 
+bool QuetePrincipale::obtenirEstLancer() const
+{
+    return m_estLance;
+}
 bool QuetePrincipale::obtenirFini() const
 {
     return m_fini;
