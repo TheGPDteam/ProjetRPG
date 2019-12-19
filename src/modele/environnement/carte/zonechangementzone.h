@@ -1,11 +1,23 @@
-#ifndef ZONECHANGEMENTMAP_H
-#define ZONECHANGEMENTMAP_H
+#ifndef ZONECHANGEMENTZONE_H
+#define ZONECHANGEMENTZONE_H
+#include "joueur.h"
 
-
-class ZoneChangementMap
+class ZoneChangementZone
 {
 public:
-    ZoneChangementMap();
+    ZoneChangementZone(int pos1X, int pos1Y, int pos2X, int pos2Y, Direction dir, int arriveX, int arriveY);
+    bool estSur(Joueur * joueur);
+    Direction obtenirDirection();
+    std::pair<int,int> obtenirPositionArrive();
+private:
+    int pos1X;
+    int pos1Y;
+    int pos2X;
+    int pos2Y;
+    Direction dir;
+
+    int arriveX;
+    int arriveY;
 };
 
-#endif // ZONECHANGEMENTMAP_H
+#endif // ZONECHANGEMENTZONE_H

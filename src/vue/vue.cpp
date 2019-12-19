@@ -15,7 +15,7 @@ Vue::Vue() : m_typeEcran(TypeEcran::MenuPrincipal), m_cliqueSouris(false), m_coo
         SDL_Quit();
     }
 
-    m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE | SDL_FULLSCREEN);
+    m_fenetrePrincipale = SDL_SetVideoMode(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE, BPP, SDL_HWSURFACE);
     SDL_WM_SetCaption("Projet RPG", nullptr);
 
     m_typeEcran = TypeEcran::MenuPrincipal;

@@ -78,7 +78,8 @@ SOURCES += \
     vue/spriteanime.cpp \
     vue/spritepersonnage.cpp \
     gestionnaireressource.cpp \
-    vue/interfaceutilisateur/conteneur/afficheurzone.cpp
+    vue/interfaceutilisateur/conteneur/afficheurzone.cpp \
+    modele/environnement/carte/zonechangementzone.cpp
 
 
 
@@ -160,6 +161,7 @@ HEADERS += \
     vue/spriteanime.h \
     vue/spritepersonnage.h \
     gestionnaireressource.h \
-    vue/interfaceutilisateur/conteneur/afficheurzone.h
+    vue/interfaceutilisateur/conteneur/afficheurzone.h \
+    modele/environnement/carte/zonechangementzone.h
 
 

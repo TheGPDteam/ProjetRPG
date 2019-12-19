@@ -12,6 +12,7 @@
 #include "joueur.h"
 #include "./utilitaires.h"
 #include "./survie/typedefaite.h"
+#include "zonechangementzone.h"
 
 class Modele : public Observable
 {
