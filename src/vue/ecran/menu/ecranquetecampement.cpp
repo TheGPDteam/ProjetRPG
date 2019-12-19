@@ -80,6 +80,9 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
                     QuetePrincipale * quete = QuetePrincipale::obtenirInstance();
                     quete->lancerQuetePrincipale();
                     m_bouton.definirCliquable(false);
+                    int joursRestants = quete->obtenirNbJoursRestants();
+                    std::string t = std::to_string(joursRestants) + " Jour" + (joursRestants >= 2 ? "s" : "");
+                    m_bouton.changerTexte(t);
                 }
                 else{
                     clique_souris = true;
@@ -95,7 +98,8 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
                 if (m_bouton.contient(coord_souris)) {
                     m_bouton.obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL_ACTIF);
                 }
-                else                                 m_bouton.obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
+                else
+                    m_bouton.obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
             }
             break;
         }
