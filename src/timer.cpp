@@ -15,7 +15,7 @@ void Timer::lancer()
     m_estLance = true;
 }
 
-int Timer::nbJourRestant()
+int Timer::nbJoursPasse()
 {
     return m_nbJour;
 }
@@ -26,4 +26,8 @@ void Timer::incrementerNbJour()
 bool Timer::estFini()
 {
     return m_nbJour >= m_nbJourMax && m_estLance;
+}
+int Timer::obtenirNbJoursMax()
+{
+    return m_nbJourMax;
 }
