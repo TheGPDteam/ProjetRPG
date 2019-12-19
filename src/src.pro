@@ -79,7 +79,8 @@ SOURCES += \
     vue/spritepersonnage.cpp \
     gestionnaireressource.cpp \
     vue/interfaceutilisateur/conteneur/afficheurzone.cpp \
-    modele/chrono.cpp
+    modele/chrono.cpp \
+    timer.cpp
 
 
 
@@ -162,6 +163,6 @@ HEADERS += \
     vue/spritepersonnage.h \
     gestionnaireressource.h \
     vue/interfaceutilisateur/conteneur/afficheurzone.h \
-    modele/chrono.h
-
+    modele/chrono.h \
+    timer.h
 
