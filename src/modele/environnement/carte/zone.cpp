@@ -112,11 +112,12 @@ void Zone::init(std::ifstream & fichier){
 
     fichier.close();
     ajouterObjets(20);
+    ajouterZombies(15);
 }
 
 void Zone::init(int largeur, int hauteur){
-     m_largeur = largeur;
-     m_hauteur = hauteur;
+    m_largeur = largeur;
+    m_hauteur = hauteur;
 }
 
 
@@ -126,10 +127,17 @@ Zone::~Zone(){
         delete it.first;
     }
 
+    //Libération des équipes de zombies
+    for (auto &it : m_zombies)
+    {
+        delete it.first;
+    }
+
     // Libération des tuiles de la zone
     for (auto &it : m_tuiles){
         delete it.first;
     }
+
 }
 
 
@@ -164,14 +172,33 @@ Objet* Zone::obtenirObjet(std::pair <int,int> position) const {
     return nullptr;
 }
 
+Equipe *Zone::obtenirEquipeZombie(std::pair<int, int> position) const
+{
+    for (auto it = m_zombies.begin(); it != m_zombies.end(); ++it)
+        if (it->second == position)
+            return it->first;
+    return nullptr;
+}
+
 
 bool Zone::objetPresent(std::pair<int, int> position) const {
     return obtenirObjet(position) != nullptr;
 }
 
+bool Zone::equipeZombiePresente(std::pair<int, int> position) const
+{
+    return obtenirEquipeZombie(position) != nullptr;
+}
 
 void Zone::supprimerObjet(Objet* obj) {
     m_objets.erase(m_objets.find(obj));
+    mettreAChange();
+    notifierTous();
+}
+
+void Zone::supprimerEquipeZombie(Equipe *zombies)
+{
+    m_zombies.erase(m_zombies.find(zombies));
     mettreAChange();
     notifierTous();
 }
@@ -217,19 +244,17 @@ void Zone::initZone() {
         }
     }
 
-    m_objets.insert(std::make_pair(new Objet{"Oreille de zombie", "Ouloulou, probablement tombée par hasard d'un zombie, vous devriez courir.", 0, 640}, std::make_pair(42,42)));
-
-
-    ajouterSols(Eau, MAX_TUILES_EAU_PAR_ZONE, MAX_GROUPES_TUILES_EAU);
-    ajouterSols(Sable, MAX_TUILES_SABLE_PAR_ZONE, MAX_GROUPES_TUILES_SABLE);
-    ajouterSols(Terre, MAX_TUILES_TERRE_PAR_ZONE, MAX_GROUPES_TUILES_TERRE);
+    // ajouterSols(Eau, MAX_TUILES_EAU_PAR_ZONE, MAX_GROUPES_TUILES_EAU);
+    // ajouterSols(Sable, MAX_TUILES_SABLE_PAR_ZONE, MAX_GROUPES_TUILES_SABLE);
+    // ajouterSols(Terre, MAX_TUILES_TERRE_PAR_ZONE, MAX_GROUPES_TUILES_TERRE);
 
     ajouterObjets(20);
+    ajouterZombies(15);
 }
 
 
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
-    /*int nbGroupeTuileEau = rand() % max_groupe;
+    int nbGroupeTuileEau = rand() % max_groupe;
 
     for(int j = 0 ; j < nbGroupeTuileEau; ++j){
         int posX = rand() % m_largeur;
@@ -281,10 +306,6 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first - 1, p.second});
             }
 
-
-
-
-            std::string taille = valeurDe(fichier, "#Dimensions", "\n");
             if (p.first + 1 < m_largeur){
                 positionsPossiblesVecteur.push_back({p.first + 1, p.second});
             }
@@ -297,7 +318,7 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
                 positionsPossiblesVecteur.push_back({p.first, p.second + 1});
             }
         }
-    }*/
+    }
 }
 
 
@@ -306,41 +327,42 @@ void Zone::ajouterObjets(int nombre_objets){
         for (int i = 0; i < nombre_objets; ++i) {
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
             int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
+            std::pair<int,int> posCourante = std::make_pair(posX,posY);
 
-            Tuile * t  = m_position_to_tuile.at(std::make_pair(posX,posY));
+            Tuile * t  = m_position_to_tuile.at(posCourante);
 
             // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
-            while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX,posY))) {
+            while (!t->obtenirPeutApparaitre() && !objetPresent(posCourante) && !equipeZombiePresente(posCourante)) {
                 posX = DECALAGE_TUILE + rand() % (m_largeur - 2 * DECALAGE_TUILE);
                 posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
-                t = m_position_to_tuile.at(std::make_pair(posX,posY));
+                posCourante = std::make_pair(posX,posY);
+                t = m_position_to_tuile.at(posCourante);
             }
-
-            //int typeObj = rand()%5; //A revoir si un jour integration objets autres que arme et vivre
-            int typeObj = rand()%6;
-            switch (typeObj) {
-            case 0:
-                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                break;
-            case 1:
-                m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
-                break;
-            case 2:
-                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                break;
-            case 3:
-                m_objets.insert(std::make_pair(new Arme() ,std::make_pair(posX,posY)));
-                break;
-            /*case 4://A revoir pour un objet aléatoire
-                m_objets.insert(std::make_pair(new Objet("Montre du temps","Permet de garder un oeil sur le temps"),std::make_pair(posX,posY)));
-                break;*/
-            case 5:
-                m_objets.insert(std::make_pair(new ObjetQuetePrincipale() ,std::make_pair(posX,posY)));
-                break;
-            default:
-                break;
-            }
+            m_objets.insert(std::make_pair(new Vivre(), posCourante));
         }
+    }
+
+    mettreAChange();
+    notifierTous();
+}
+
+void Zone::ajouterZombies(int nombre_zombies)
+{
+    for (int i = 0; i < nombre_zombies; ++i) {
+        int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
+        int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
+        std::pair<int,int> posCourante = std::make_pair(posX,posY);
+
+        Tuile * t  = m_position_to_tuile.at(posCourante);
+
+        // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
+        while (!t->obtenirPeutApparaitre() && !objetPresent(posCourante) && !equipeZombiePresente(posCourante)) {
+            posX = DECALAGE_TUILE + rand() % (m_largeur - 2 * DECALAGE_TUILE);
+            posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
+            posCourante = std::make_pair(posX,posY);
+            t = m_position_to_tuile.at(posCourante);
+        }
+        m_zombies.insert(std::make_pair(Equipe::genererEquipeZombie(),posCourante));
     }
 
     mettreAChange();
@@ -362,4 +384,5 @@ void Zone::initialiserSousTypeTuile(){
 
 void Zone::recharger(){
     ajouterObjets(20 - m_objets.size());
+    ajouterZombies(15 - m_zombies.size());
 }

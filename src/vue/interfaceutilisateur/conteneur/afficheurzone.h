@@ -17,6 +17,7 @@ private:
 
     std::array<std::array<Sprite*, HAUTEUR>, LARGEUR> m_spritesCarte;
     std::set<Sprite*> m_spriteObjets;
+    std::set<Sprite*> m_spriteZombies;
     SpritePersonnage* m_spriteJoueur;
 
     std::vector<int> calculerDecalageBord(int positionX, int positionY, int largeur_zone, int hauteur_zone);

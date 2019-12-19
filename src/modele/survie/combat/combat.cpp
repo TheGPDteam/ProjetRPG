@@ -5,7 +5,7 @@
 //! \date 17/11/16
 //! \version 1.0
 
-const float Combat::PROBABILITE_OBTENIR_OBJET = 0.25;
+const float Combat::PROBABILITE_OBTENIR_OBJET = 0.5;
 const float Combat::PROBABILITE_OBTENIR_ARME = 0.75;
 
 bool comparerVitesse(Personnage* p1, Personnage* p2) {
@@ -20,29 +20,23 @@ bool comparerVitesse(Personnage* p1, Personnage* p2) {
 //! \version 1.1
 //!
 
-Combat::Combat(Equipe *equipe_haute, Equipe *quipe_basse)
-    : m_equipeBasse(quipe_basse),
+Combat::Combat(Equipe *equipe_haute, Equipe *equipe_basse)
+    : m_equipeBasse(equipe_basse),
       m_equipeHaute{equipe_haute},
       m_ordrePassage{nullptr},
       m_numeroDePassage{0},
       m_actionDuTour{nullptr}
 {
-    int i=0;
+    m_ordrePassage.clear();
     for (Personnage* p : *m_equipeHaute)
     {
         if (p->obtenirVie()->obtenirValeur()!=0)
-        {
-            m_ordrePassage[i] = p;
-            ++i;
-        }
+            m_ordrePassage.push_back(p);
     }
     for (Personnage *p : *m_equipeBasse)
     {
         if (p->obtenirVie()->obtenirValeur()!=0)
-        {
-            m_ordrePassage[i] = p;
-            ++i;
-        }
+            m_ordrePassage.push_back(p);
     }
     std::sort(m_ordrePassage.begin(),m_ordrePassage.end(), comparerVitesse);
 }
@@ -64,23 +58,16 @@ Combat::Combat(Equipe *equipe_haute)
       m_numeroDePassage(0),
       m_actionDuTour{nullptr}
 {
-    int i=0;
+    m_ordrePassage.clear();
     for (Personnage* p : *m_equipeHaute)
     {
         if (p->obtenirVie()->obtenirValeur()!=0)
-        {
-            m_ordrePassage[i] = p;
-            ++i;
-        }
+            m_ordrePassage.push_back(p);
     }
-
-    for (Personnage* p : *m_equipeBasse)
+    for (Personnage *p : *m_equipeBasse)
     {
         if (p->obtenirVie()->obtenirValeur()!=0)
-        {
-            m_ordrePassage[i] = p;
-            ++i;
-        }
+            m_ordrePassage.push_back(p);
     }
     std::sort(m_ordrePassage.begin(),m_ordrePassage.end(), comparerVitesse);
 }
@@ -119,9 +106,9 @@ Equipe* Combat::obtenirEquipeHaute() const
 //!
 Equipe* Combat::obtenirEquipe(Personnage* personnage) const
 {
-    if(m_equipeBasse->obtenirListePersonnage().find(personnage) != m_equipeBasse->end())
+    if(m_equipeBasse->obtenirListePersonnage().count(personnage) == 1)
         return m_equipeBasse;
-    else if (m_equipeHaute->obtenirListePersonnage().find(personnage) != m_equipeHaute->end())
+    else if (m_equipeHaute->obtenirListePersonnage().count(personnage) == 1)
         return m_equipeHaute;
     return nullptr;
 }
@@ -194,16 +181,22 @@ Personnage* Combat::prochainPersonnage()
 {
     if (m_numeroDePassage==0)
     {
-        return m_ordrePassage[0];
+        return *m_ordrePassage.begin();
     }
     else
     {
         ++m_numeroDePassage;
         m_numeroDePassage=m_numeroDePassage%m_ordrePassage.size();
-        return m_ordrePassage[m_numeroDePassage];
+        return m_ordrePassage.at(m_numeroDePassage);
     }
 }
 
+
+void Combat::suprimmerPersonnageOrdrePassage(Personnage* personnage)
+{
+    auto it = std::find(m_ordrePassage.begin(), m_ordrePassage.end(), personnage);
+    m_ordrePassage.erase(it);
+}
 //!
 //! \brief Simulation d'un combat
 //! \author nlesne
@@ -213,8 +206,8 @@ Personnage* Combat::prochainPersonnage()
 
 void Combat::simulerCombat()
 {
-    Personnage* courant = m_ordrePassage[0];
-    while(!m_equipeBasse->estKO() && !m_equipeHaute->estKO())
+    Personnage* courant = *m_ordrePassage.begin();
+    while(!m_equipeBasse->estMorte() && !m_equipeHaute->estMorte())
     {
         Equipe* equipeCourante = obtenirEquipe(courant);
         Personnage* cible;
@@ -222,23 +215,32 @@ void Combat::simulerCombat()
         {
             cible = *m_equipeHaute->begin();
             effectuerAttaque(courant, cible);
-
+            if (cible->obtenirVie()->obtenirValeur() <= 0)
+            {
+                m_equipeHaute->supprimerPersonnage(cible);
+                suprimmerPersonnageOrdrePassage(cible);
+            }
         }
         else
         {
-            cible = *m_equipeHaute->begin();
-            effectuerAttaque(courant, *m_equipeBasse->begin());
-        }
-
-        if (cible->obtenirVie()->obtenirValeur() <= 0)
-        {
-            equipeCourante->supprimerPersonnage(cible);
+            cible = *m_equipeBasse->begin();
+            effectuerAttaque(courant, cible);
+            if (cible->obtenirVie()->obtenirValeur() <= 0)
+            {
+                m_equipeBasse->supprimerPersonnage(cible);
+                suprimmerPersonnageOrdrePassage(cible);
+            }
         }
 
         courant = prochainPersonnage();
     }
 }
 
+
+//!
+//! \brief Donne la récompense du combat
+//! \return
+//!
 Objet* Combat::obtenirRecompense() const
 {
     Objet* recompense = nullptr;

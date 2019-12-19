@@ -62,12 +62,15 @@ void Equipe::supprimerPersonnage(Personnage *personnage)
 //! \return Vrai si tout les personnages sont à 0 PV.
 //! \version 1.0
 //!
-bool Equipe::estKO()
+bool Equipe::estMorte()
 {
-    for (Personnage* membre : obtenirListePersonnage())
+    if (obtenirListePersonnage().size() > 0)
     {
-        if (membre->obtenirVie()->obtenirValeur() > 0)
-            return false;
+        for (Personnage* membre : obtenirListePersonnage())
+        {
+            if (membre->obtenirVie()->obtenirValeur() > 0)
+                return false;
+        }
     }
     return true;
 }

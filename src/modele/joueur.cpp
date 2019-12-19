@@ -23,7 +23,7 @@ Joueur::Joueur(const Quete &quete) :
     m_position.second=11;
     m_nom = "Friedrich";
 
-    m_equipe = new Equipe();
+    m_equipe = new Equipe(&m_personnageJoueur);
     m_inventaireJoueur = new Inventaire();
 }
 

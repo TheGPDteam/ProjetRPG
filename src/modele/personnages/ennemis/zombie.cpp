@@ -10,7 +10,7 @@ Zombie::Zombie(int niveau)
     m_force.augmenter(niveau);
     m_intelligence.definirValeur((rand()%m_intelligence.obtenirValeurMax()) + 1);
     m_intelligence.augmenter(niveau);
-    m_vitesse.definirValeur((rand()%m_vitesse.obtenirValeurMax()) + 1);
+    m_vitesse.definirValeur((rand()%m_vitesse.obtenirValeurMax()) / 2 + 1);
     m_vitesse.augmenter(niveau);
 }
 
@@ -24,5 +24,14 @@ Zombie::Zombie(int niveau)
 
 unsigned short Zombie::obtenirVitesse() {
     return m_vitesse.obtenirValeur() * m_MULTIPLICATEUR_VITESSE_BASE_ARME;
+}
+
+unsigned short Zombie::obtenirDegats()
+{
+    srand(time(nullptr));
+    if (rand() < m_CHANCE_DE_MANQUER)
+        return 0;
+    else
+        return this->Personnage::obtenirDegats();
 }
 

@@ -16,11 +16,12 @@ class Combat
 private:
     Equipe* m_equipeBasse;
     Equipe* m_equipeHaute;
-    std::array<Personnage*,8> m_ordrePassage;
+    std::vector<Personnage*> m_ordrePassage;
     unsigned short m_numeroDePassage;
     ActionCombat* m_actionDuTour;
     static const float PROBABILITE_OBTENIR_OBJET;
     static const float PROBABILITE_OBTENIR_ARME;
+    void suprimmerPersonnageOrdrePassage(Personnage *p);
 public:
     Combat() = default;
     Combat(Equipe* equipeHaute, Equipe* equipeBasse);

@@ -26,6 +26,9 @@ AfficheurZone::~AfficheurZone(){
     for(auto spriteObjet : m_spriteObjets)
         delete spriteObjet;
 
+    for (auto spriteZombie : m_spriteZombies)
+        delete spriteZombie;
+
     delete m_spriteJoueur;
 }
 
@@ -38,6 +41,7 @@ AfficheurZone::~AfficheurZone(){
 //!
 void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
     m_spriteObjets.clear();
+    m_spriteZombies.clear();
 
     //recupère la position du joueur sur la zone
     int posX = joueur->obtenirPosition().first;
@@ -70,6 +74,14 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
                     int x = i;
                     int y = j;
                     m_spriteObjets.insert(new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{(short int)(x*64), (short int)(y*64), 128 , 64}, SDL_Rect{4 * 64, 13 * 64, 64, 64}});
+                }
+                else if (zone->equipeZombiePresente(temp))
+                {
+                    int x = i;
+                    int y = j;
+                    m_spriteZombies.insert(new Sprite{SPRITES_PRINCIPAUX,
+                                                      SDL_Rect{(short int)(x*64), (short int)(y*64),128, 64 },
+                                                      SDL_Rect{4 * 64, 16 * 64, 64, 64}});
                 }
             } else  {
                 // On met une tuile noire
@@ -136,6 +148,9 @@ void AfficheurZone::afficher(SDL_Surface *fenetre_affichage){
 
     for(auto spriteObjet : m_spriteObjets)
         spriteObjet->afficher(fenetre_affichage);
+
+    for (auto spriteZombie : m_spriteZombies)
+        spriteZombie->afficher(fenetre_affichage);
 
     m_spriteJoueur->afficher(fenetre_affichage);
 }

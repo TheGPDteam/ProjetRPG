@@ -120,6 +120,7 @@ TypeEcran ActionsBoutons::boutonRecolteJoueur() const {
     Modele * m =  m_controleur->obtenirModele();
     m->reinitialiserTemps();
     m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeRecolte());
+    m->obtenirJoueur()->obtenirEquipe()->ajouterPersonnage(m->obtenirJoueur()->obtenirPersonnageJoueur());
     return TypeEcran::RecolteJoueur;
 }
 
@@ -127,6 +128,7 @@ TypeEcran ActionsBoutons::boutonCampementJoueur() const {
     Modele * m =  m_controleur->obtenirModele();
     m->reinitialiserTemps();
     m->obtenirJoueur()->definirEquipe(m->obtenirCampement()->obtenirEquipeCampement());
+    m->obtenirJoueur()->obtenirEquipe()->ajouterPersonnage(m->obtenirJoueur()->obtenirPersonnageJoueur());
     return TypeEcran::RecolteJoueur;
 }
 

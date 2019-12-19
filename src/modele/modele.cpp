@@ -62,16 +62,16 @@ bool Modele::testerDeplacement(Direction& dir){
     int posY = m_joueur.obtenirPosition().second;
 
     switch(dir){
-        case Nord:
-            return posY - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
-        case Sud:
-            return posY + 1 < hauteurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
-        case Ouest:
-            return posX - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
-        case Est:
-            return posX + 1 < largeurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
-        default :
-            return false;
+    case Nord:
+        return posY - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY-1))->obtenirEstMarchable();
+    case Sud:
+        return posY + 1 < hauteurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX, posY+1))->obtenirEstMarchable();
+    case Ouest:
+        return posX - 1 >= 0 && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX-1, posY))->obtenirEstMarchable();
+    case Est:
+        return posX + 1 < largeurCarte && m_carte.obtenirZoneActive()->obtenirTuile(make_pair(posX+1, posY))->obtenirEstMarchable();
+    default :
+        return false;
     }
 }
 
@@ -107,6 +107,34 @@ void Modele::deplacement(Direction dir){
                 zoneActive->supprimerObjet(objet);
             } else {
                 std::cout << "Inventaire plein !" << std::endl;
+            }
+        }
+        // Si l'on rencontre une équipe de zombie, on lance un combat
+        else if (zoneActive->equipeZombiePresente(position))
+        {
+            Equipe* equipeZombie = zoneActive->obtenirEquipeZombie(position);
+            Combat combat = Combat(m_joueur.obtenirEquipe(), equipeZombie);
+            combat.simulerCombat();
+            if (m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0 && !m_joueur.obtenirEquipe()->estMorte())
+            {
+                if (!m_joueur.obtenirInventaire()->estPlein())
+                {
+                    Objet* recompense = combat.obtenirRecompense();
+                    if (recompense != nullptr)
+                        m_joueur.obtenirInventaire()->ajouterObjet(combat.obtenirRecompense());
+                }
+                else
+                {
+                    std::cout << "Inventaire plein" << std::endl;
+                }
+                zoneActive->supprimerEquipeZombie(equipeZombie);
+            }
+            else
+            {
+                m_perdu = true;
+                m_td = TypeDefaite::ATTAQUEZOMBIES;
+                mettreAChange();
+                notifierTous();
             }
         }
     }
@@ -284,7 +312,7 @@ void Modele::definirCampement(Campement campement){
 //! \version 1.0
 //!
 Combat * Modele::obtenirCombat(){
-   return &m_combat;
+    return &m_combat;
 }
 
 
@@ -494,32 +522,32 @@ void Modele::tuerPersos() {
         bool persoMort = false;
         while (!persoMort) {
             switch (rand()%3) {
-                case 0:
-                    //On tue un mec de recolte
-                    if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
-                    {
-                        m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                        persoMort = true;
-                    }
-                    break;
-                case 1:
-                    //On tue un mec de chasse
-                    if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
-                    {
-                        m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
-                        persoMort = true;
-                    }
-                    break;
-                case 2:
-                    //On tue un mec non attribué
-                    if (m_campement.obtenirNonAttribuees().size()>0)
-                    {
-                        m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
-                        persoMort = true;
-                    }
-                    break;
-                default:
-                    break;
+            case 0:
+                //On tue un mec de recolte
+                if (m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().size()>0)
+                {
+                    m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                    persoMort = true;
+                }
+                break;
+            case 1:
+                //On tue un mec de chasse
+                if (m_campement.obtenirEquipeChasse()->obtenirListePersonnage().size()>0)
+                {
+                    m_campement.obtenirEquipeChasse()->obtenirListePersonnage().erase(m_campement.obtenirEquipeRecolte()->obtenirListePersonnage().begin());
+                    persoMort = true;
+                }
+                break;
+            case 2:
+                //On tue un mec non attribué
+                if (m_campement.obtenirNonAttribuees().size()>0)
+                {
+                    m_campement.obtenirNonAttribuees().erase(m_campement.obtenirNonAttribuees().begin());
+                    persoMort = true;
+                }
+                break;
+            default:
+                break;
             }
         }
     }
