@@ -41,7 +41,6 @@ void Zone::init(std::ifstream & fichier){
 
     std::vector<std::string> valeurs;
 
-
     // Nom
     decouper(ligne, valeurs, " ");
     assert(valeurs.size() == 2);
@@ -92,6 +91,24 @@ void Zone::init(std::ifstream & fichier){
         }
     }
 
+    // Lecture des points de téléportations
+    while(!fichier.eof()){
+        std::getline(fichier, ligne);
+        std::vector<std::string> valeurs;
+        decouper(ligne, valeurs, " ");
+
+        if (valeurs.size() == 8){
+            int pos1X = stoi(valeurs[1]);
+            int pos1Y = stoi(valeurs[2]);
+            int pos2X = stoi(valeurs[3]);
+            int pos2Y = stoi(valeurs[4]);
+            int dir = stoi(valeurs[5]);
+            int arriveX = stoi(valeurs[6]);
+            int arriveY = stoi(valeurs[7]);
+
+            m_zonesChangement.push_back(ZoneChangementZone(pos1X, pos1Y, pos2X, pos2Y, (Direction)dir, arriveX, arriveY));
+        }
+    }
 
     fichier.close();
     ajouterObjets(20);
@@ -131,6 +148,17 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const {
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
+}
+
+
+ZoneChangementZone* Zone::obtenirChangement(Joueur * joueur){
+    for (int i = 0; i < m_zonesChangement.size(); ++i){
+        if (m_zonesChangement.at(i).estSur(joueur)){
+            return &m_zonesChangement.at(i);
+        }
+    }
+
     return nullptr;
 }
 
