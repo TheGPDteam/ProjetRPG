@@ -346,6 +346,11 @@ void Modele::reinitialiserTemps() {
 //!
 void Modele::finJournee() {
     //Trouver la formule pour savoir combien de morts
+    if(QuetePrincipale::obtenirInstance()->estLance())
+    {
+        QuetePrincipale::obtenirInstance()->incrementerTempQuetePrincipale();
+    }
+
     if (m_joueur.obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
         int totalChasseEquipeChasse=0;
         for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage()){

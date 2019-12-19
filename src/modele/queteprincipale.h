@@ -6,12 +6,13 @@
 #include "objets/partiebus.h"
 #include "survie/equipe.h"
 #include "temps.h"
+#include "timer.h"
 
 class QuetePrincipale
 {
 
 private:
-    static const Heure TEMPS_ASSEMBLAGE; //TODO méthodes liées à l'assemblage du bus.
+    static const int TEMPS_ASSEMBLAGE = 4;
 
     int m_tempsActuel;
 
@@ -20,12 +21,12 @@ private:
     std::map<ObjetQuetePrincipale*,int> m_partiesBus;
     const std::map<PartieBus,int> m_nombrePartiesRequises;
     bool m_partiesBusReunies;
-    bool m_fini;
     bool m_faitAssemblage;
 
     unsigned short m_avancement;
 
-    bool m_estLance;
+
+    Timer* m_timer;
 
     void calculerPartiesBusReunies();
 
@@ -39,7 +40,8 @@ public:
     void ajouterPartieBus(ObjetQuetePrincipale* partieBus);
     void ajouterTravail(Equipe * equipe); //TODO
     void lancerQuetePrincipale();
-
+    void incrementerTempQuetePrincipale();
+    bool estLance();
 //    void mettreAjour
 
     static QuetePrincipale* obtenirInstance();

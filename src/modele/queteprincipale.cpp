@@ -48,7 +48,8 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
         {PartieBus::ESSENCE,4},
         {PartieBus::HUILE,1}
       },
-      m_partiesBusReunies{false}, m_estLance{false}, m_tempsActuel {0}, m_faitAssemblage {false}
+      m_partiesBusReunies{false}, m_tempsActuel {0}, m_faitAssemblage {false},
+      m_timer{new Timer(TEMPS_ASSEMBLAGE)}
 
 {
 
@@ -56,12 +57,24 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
 
 bool QuetePrincipale::obtenirFini() const
 {
-    return m_fini;
+    return m_timer->estFini();
 }
 
 void QuetePrincipale::ajouterTravail(Equipe *equipe)
 {
     //TODO
+}
+
+void QuetePrincipale::lancerQuetePrincipale()
+{
+    m_timer->lancer();
+}
+void QuetePrincipale::incrementerTempQuetePrincipale()
+{
+    if(m_timer->estLancer())
+    {
+         m_timer->incrementerNbJour();
+    }
 }
 
 QuetePrincipale* QuetePrincipale::obtenirInstance(){
@@ -76,4 +89,7 @@ void QuetePrincipale::detruireQuetePrincipale()
 {
     delete m_instance;
 }
-
+bool QuetePrincipale::estLance()
+{
+    m_timer->estLancer();
+}
