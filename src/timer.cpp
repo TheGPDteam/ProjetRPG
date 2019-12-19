@@ -6,7 +6,7 @@ Timer::Timer(int nbJourMax)
     m_nbJour = 0;
 }
 
-bool Timer::estLancer()
+bool Timer::estLance()
 {
     return m_estLance;
 }

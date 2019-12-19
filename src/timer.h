@@ -12,7 +12,7 @@ private:
 
 public:
     Timer(int nbJourMax);
-    bool estLancer();
+    bool estLance();
     void lancer();
 
     int nbJourRestant();

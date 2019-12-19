@@ -79,6 +79,7 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
                 if (m_bouton.estCliquable() && m_bouton.contient(coord_souris)) {
                     QuetePrincipale * quete = QuetePrincipale::obtenirInstance();
                     quete->lancerQuetePrincipale();
+                    m_bouton.definirCliquable(false);
                 }
                 else{
                     clique_souris = true;
