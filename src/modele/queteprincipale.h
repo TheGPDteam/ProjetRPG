@@ -33,7 +33,7 @@ private:
     static QuetePrincipale * m_instance;
     QuetePrincipale(std::string nom,std::string description);
 public:
-
+    bool obtenirEstLance() const;
     bool obtenirFini() const;
     bool partiesBusReunies() const;
     std::map<ObjetQuetePrincipale*, int> obtenirProgression() const;
@@ -42,6 +42,7 @@ public:
     void lancerQuetePrincipale();
     void incrementerTempQuetePrincipale();
     bool estLance();
+    int obtenirNbJoursRestant();
 //    void mettreAjour
 
     static QuetePrincipale* obtenirInstance();

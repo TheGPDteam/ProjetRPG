@@ -80,3 +80,4 @@ void Temps::reinitialiserTemps()
     m_temps_debut_pause = {};
     m_duree_pause = m_duree_pause.zero();
 }
+

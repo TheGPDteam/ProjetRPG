@@ -11,8 +11,6 @@
 class DictionnaireDeBoutons
 {
 private :
-    const SDL_Rect RECT_BOUTON_NORMAL_ACTIF;
-    const SDL_Rect RECT_BOUTON_NORMAL;
     void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);
 protected:
     ActionsBoutons* m_actionsBoutons;
@@ -30,6 +28,8 @@ public:
 //    void verificationSourisSurBouton(Bouton* bouton, std::pair<int, int> coord_souris);
 
     virtual ~DictionnaireDeBoutons();
+    const SDL_Rect RECT_BOUTON_NORMAL_ACTIF;
+    const SDL_Rect RECT_BOUTON_NORMAL;
 
 };
 

@@ -12,14 +12,16 @@ private:
 
 public:
     Timer(int nbJourMax);
-    bool estLancer();
+    bool estLance();
     void lancer();
 
-    int nbJourRestant();
+    int nbJoursPasse();
 
     void incrementerNbJour();
 
     bool estFini();
+
+    int obtenirNbJoursMax();
 };
 
 #endif // TIMER_H

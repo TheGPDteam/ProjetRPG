@@ -55,6 +55,10 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
 
 }
 
+bool QuetePrincipale::obtenirEstLance() const
+{
+    return m_timer->estLance();
+}
 bool QuetePrincipale::obtenirFini() const
 {
     return m_timer->estFini();
@@ -69,9 +73,10 @@ void QuetePrincipale::lancerQuetePrincipale()
 {
     m_timer->lancer();
 }
+
 void QuetePrincipale::incrementerTempQuetePrincipale()
 {
-    if(m_timer->estLancer())
+    if(m_timer->estLance())
     {
          m_timer->incrementerNbJour();
     }
@@ -91,5 +96,9 @@ void QuetePrincipale::detruireQuetePrincipale()
 }
 bool QuetePrincipale::estLance()
 {
-    m_timer->estLancer();
+    m_timer->estLance();
+}
+int QuetePrincipale::obtenirNbJoursRestant()
+{
+    return m_timer->obtenirNbJoursMax() - m_timer->nbJoursPasse();
 }
