@@ -40,6 +40,7 @@ public:
     void redimensionner(SDL_Rect rect) override;
 
     std::string obtenirTexte();
+
     void changerTexte(std::string texte);
 
     void definirCliquable(bool actif) override;

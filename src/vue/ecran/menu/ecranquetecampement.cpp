@@ -129,8 +129,8 @@ void EcranQueteCampement::obtenirChangement(Observable &obj){
         if (nbEssences>0) m_tabEssence[nbEssences-1]->changementSprite(RECT_ESSENCE);
         if (nbRoues>0) m_tabRoue[nbRoues-1]->changementSprite(RECT_ROUE);
         QuetePrincipale * quete = QuetePrincipale::obtenirInstance();
-        //if(quete->partiesBusReunies())
-        m_bouton.definirCliquable(true);
+        if(quete->partiesBusReunies())
+            m_bouton.definirCliquable(true);
     }
 
 }
