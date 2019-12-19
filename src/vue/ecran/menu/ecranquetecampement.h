@@ -16,6 +16,7 @@ private:
     static const int NB_ROUES_MAX = 4;
 
     std::vector<SDL_Rect> m_emplacementRoues;
+    Bouton m_bouton;
 
     Sprite* m_spriteHuile;
     Sprite* m_spriteMoteur;

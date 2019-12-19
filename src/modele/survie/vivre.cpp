@@ -94,6 +94,7 @@ void Vivre::affecterValeurs(string ligne){
              emplacementImageY+=ligne[i];
         }
     }
+
     m_nom = nom;
     m_valeurNutritive = std::stoi(valeurNutritive);
     m_description = description;

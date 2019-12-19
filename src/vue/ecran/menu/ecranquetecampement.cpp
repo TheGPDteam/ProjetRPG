@@ -17,6 +17,7 @@ int SDL_Rect rect_Huile_Act = {0,0,0,0};
 */
 EcranQueteCampement::EcranQueteCampement(Controleur *controleur, GestionnaireRessource* gestionnaireRessource)
     : EcranGeneral (controleur, gestionnaireRessource),
+      m_bouton{"Construire", SDL_Rect{100, HEIGHT_FENETRE_PRINCIPALE - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL},controleur,nullptr,false,POLICE_COLLEGED},
       m_spriteHuile{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{890,300,128,128},RECT_HUILE_GRIS}},
       m_spriteMoteur{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{779,300,128,128},RECT_MOTEUR_GRIS}},
       m_tabEssence{new Sprite{SPRITES_PRINCIPAUX,SDL_Rect{0,178,128,128},RECT_ESSENCE_GRIS},
@@ -44,6 +45,8 @@ EcranQueteCampement::EcranQueteCampement(Controleur *controleur, GestionnaireRes
 void EcranQueteCampement::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface *fenetre_affichage){
     afficherFondEcran(fenetre_affichage);
     afficherBoutons(coord_souris, fenetre_affichage);
+    m_bouton.afficher(fenetre_affichage);
+
     m_spriteMoteur->afficher(fenetre_affichage);
     for (int i = 0; i<4; i++)
     {
@@ -73,17 +76,32 @@ void EcranQueteCampement::gestionDesEvenements(Controleur *controleur, bool &qui
 
         case SDL_MOUSEBUTTONUP:
             if (evenements.button.button == SDL_BUTTON_LEFT){
-                clique_souris = true;
-                coord_souris.first = evenements.button.x;
-                coord_souris.second = evenements.button.y;
+                if (m_bouton.estCliquable() && m_bouton.contient(coord_souris)) {
+                    QuetePrincipale * quete = QuetePrincipale::obtenirInstance();
+                    quete->lancerQuetePrincipale();
+                    m_bouton.definirCliquable(false);
+                    int joursRestants = quete->obtenirNbJoursRestants();
+                    std::string t = std::to_string(joursRestants) + " Jour" + (joursRestants >= 2 ? "s" : "");
+                    m_bouton.changerTexte(t);
+                }
+                else{
+                    clique_souris = true;
+                    coord_souris.first = evenements.button.x;
+                    coord_souris.second = evenements.button.y;
+                }
             }
             break;
-
-        default:
+        case SDL_MOUSEMOTION:
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
+            if(m_bouton.estCliquable()){
+                if (m_bouton.contient(coord_souris)) {
+                    m_bouton.obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL_ACTIF);
+                }
+                else
+                    m_bouton.obtenirSpriteBouton()->changementSprite(RECT_BOUTON_NORMAL);
+            }
             break;
-
         }
     }
 }
@@ -110,6 +128,9 @@ void EcranQueteCampement::obtenirChangement(Observable &obj){
         if (aHuile) m_spriteHuile->changementSprite(RECT_HUILE);
         if (nbEssences>0) m_tabEssence[nbEssences-1]->changementSprite(RECT_ESSENCE);
         if (nbRoues>0) m_tabRoue[nbRoues-1]->changementSprite(RECT_ROUE);
+        QuetePrincipale * quete = QuetePrincipale::obtenirInstance();
+        if(quete->partiesBusReunies())
+            m_bouton.definirCliquable(true);
     }
 
 }

@@ -34,46 +34,12 @@ Zone::Zone(std::ifstream &fichier){
 }
 
 
-/*void ligne2Tuile(std::vector<std::string> fichier, std::vector<int> &tuiles, int i){
-    int debutNumero = 0;
-    int finNumero = 0;
-    int numeroTuile = 0;
-    // Le numero en entier sera concaténé dans la chaine de caractère
-    std::string resultat = "";
-
-    while(finNumero < fichier[i].size()){
-        // Si la fin du numéro est rencontré
-        if (fichier[i][finNumero] == ' '){
-            debutNumero = finNumero + 1;
-            finNumero = debutNumero + 1;
-
-            // On transforme la chaine de caractère en  entier
-            std::stringstream temp(resultat);
-            temp >> numeroTuile;
-
-            // Debug pour afficher le numéro des tuile lu
-            //std::cout << numeroTuile << " ";
-
-            tuiles.push_back(numeroTuile);
-            resultat = "";
-
-        // Sinon on continu de lire
-        } else {
-            // On ajoute le caratère du chiffre à la chaine de caractère du numéro courant
-            resultat +=  fichier[i][finNumero];
-            ++finNumero;
-        }
-    }
-}*/
-
-
 void Zone::init(std::ifstream & fichier){
     std::string ligne;
     std::getline(fichier, ligne);
     assert(!fichier.eof());
 
     std::vector<std::string> valeurs;
-
 
     // Nom
     decouper(ligne, valeurs, " ");
@@ -96,19 +62,53 @@ void Zone::init(std::ifstream & fichier){
     std::getline(fichier, ligne);
     assert(!fichier.eof());
 
-    // Lecture tuiles
+    // Lecture numéros
     for(int i = 0; i < m_hauteur; ++i){
         std::getline(fichier,ligne);
-        std::vector<std::string> valeursTuiles;
-        decouper(ligne, valeursTuiles, " ");
-        assert(valeursTuiles.size() == m_largeur);
+        std::vector<std::string> valeurs;
+        decouper(ligne, valeurs, " ");
+        assert(valeurs.size() == m_largeur);
         for (unsigned int j = 0; j < m_largeur; ++j){
-            Tuile * t = new Tuile(stoi(valeursTuiles[j]));
+            Tuile * t = new Tuile(stoi(valeurs[j]));
             m_tuiles.insert(std::make_pair(t,std::make_pair(j,i)));
             m_position_to_tuile[std::make_pair(j,i)] = t;
         }
     }
 
+
+    // Lecture de #decoration
+    std::getline(fichier, ligne);
+    assert(!fichier.eof());
+
+    // Lecture numéros
+    for(int i = 0; i < m_hauteur; ++i){
+        std::getline(fichier, ligne);
+        std::vector<std::string> valeurs;
+        decouper(ligne, valeurs, " ");
+        assert(valeurs.size() == m_largeur);
+        for (unsigned int j = 0; j < m_largeur; ++j){
+            m_position_to_tuile.at(std::make_pair(j,i))->definirDecoration(stoi(valeurs[j]));
+        }
+    }
+
+    // Lecture des points de téléportations
+    while(!fichier.eof()){
+        std::getline(fichier, ligne);
+        std::vector<std::string> valeurs;
+        decouper(ligne, valeurs, " ");
+
+        if (valeurs.size() == 8){
+            int pos1X = stoi(valeurs[1]);
+            int pos1Y = stoi(valeurs[2]);
+            int pos2X = stoi(valeurs[3]);
+            int pos2Y = stoi(valeurs[4]);
+            int dir = stoi(valeurs[5]);
+            int arriveX = stoi(valeurs[6]);
+            int arriveY = stoi(valeurs[7]);
+
+            m_zonesChangement.push_back(ZoneChangementZone(pos1X, pos1Y, pos2X, pos2Y, (Direction)dir, arriveX, arriveY));
+        }
+    }
 
     fichier.close();
     ajouterObjets(20);
@@ -156,6 +156,17 @@ Tuile* Zone::obtenirTuile(std::pair <int,int> position) const {
     for (auto it = m_tuiles.begin(); it != m_tuiles.end(); ++it )
         if (it->second == position)
             return it->first;
+    return nullptr;
+}
+
+
+ZoneChangementZone* Zone::obtenirChangement(Joueur * joueur){
+    for (int i = 0; i < m_zonesChangement.size(); ++i){
+        if (m_zonesChangement.at(i).estSur(joueur)){
+            return &m_zonesChangement.at(i);
+        }
+    }
+
     return nullptr;
 }
 
@@ -247,11 +258,9 @@ void Zone::initZone() {
     // ajouterSols(Eau, MAX_TUILES_EAU_PAR_ZONE, MAX_GROUPES_TUILES_EAU);
     // ajouterSols(Sable, MAX_TUILES_SABLE_PAR_ZONE, MAX_GROUPES_TUILES_SABLE);
     // ajouterSols(Terre, MAX_TUILES_TERRE_PAR_ZONE, MAX_GROUPES_TUILES_TERRE);
-
     ajouterObjets(20);
     ajouterZombies(15);
 }
-
 
 void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
     int nbGroupeTuileEau = rand() % max_groupe;
@@ -321,24 +330,23 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
     }
 }
 
-
 void Zone::ajouterObjets(int nombre_objets){
     if (nombre_objets > 0) {
+        std::cout << "hey" << std ::endl;
         for (int i = 0; i < nombre_objets; ++i) {
+
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
             int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
-            std::pair<int,int> posCourante = std::make_pair(posX,posY);
 
-            Tuile * t  = m_position_to_tuile.at(posCourante);
+            Tuile * t  = m_position_to_tuile.at(std::make_pair(posX, posY));
 
             // Permet de verifier que la tuile puisse contenir des objets & qu'il n'y a pas d'objet deja present
-            while (!t->obtenirPeutApparaitre() && !objetPresent(posCourante) && !equipeZombiePresente(posCourante)) {
+            while (!t->obtenirPeutApparaitre() && !objetPresent(std::make_pair(posX, posY))) {
                 posX = DECALAGE_TUILE + rand() % (m_largeur - 2 * DECALAGE_TUILE);
                 posY = DECALAGE_TUILE + rand() % (m_hauteur - 2 * DECALAGE_TUILE);
-                posCourante = std::make_pair(posX,posY);
-                t = m_position_to_tuile.at(posCourante);
+                t = m_position_to_tuile.at(std::make_pair(posX, posY));
             }
-            m_objets.insert(std::make_pair(new Vivre(), posCourante));
+            m_objets.insert(std::make_pair(new Vivre(),std::make_pair(posX,posY)));
         }
     }
 

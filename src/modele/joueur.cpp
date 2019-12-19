@@ -16,7 +16,7 @@
 //!
 
 Joueur::Joueur(const Quete &quete) :
-    m_queteJoueur{quete}, m_quetePrincipale{"Quete principale","Réunir les éléments pour retourner en Allemagne"},
+    m_queteJoueur{quete},
     m_direction{Direction::Aucune}
 {
     m_position.first=11;
@@ -233,11 +233,11 @@ void Joueur::charger(const std::string &donnees){
     m_inventaireJoueur->charger(obtenirSousChaineEntre2Predicats(donnees,"<Inventaire>","</Inventaire>"));
 }
 
-
+/*
 QuetePrincipale *Joueur::obtenirQuetePrincipale() {
     return &m_quetePrincipale;
 }
-
+*/
 
 //!
 //! \brief returne la direction du joueur

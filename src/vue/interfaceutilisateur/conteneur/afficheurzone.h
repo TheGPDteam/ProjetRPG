@@ -15,7 +15,9 @@ private:
     static int const LARGEUR = 19;
     static int const HAUTEUR = 11;
 
-    std::array<std::array<Sprite*, HAUTEUR>, LARGEUR> m_spritesCarte;
+    std::array<std::array<Sprite*, HAUTEUR>, LARGEUR> m_spritesSol;
+    std::array<std::array<Sprite*, HAUTEUR>, LARGEUR> m_spritesDecoration;
+
     std::set<Sprite*> m_spriteObjets;
     std::set<Sprite*> m_spriteZombies;
     SpritePersonnage* m_spriteJoueur;

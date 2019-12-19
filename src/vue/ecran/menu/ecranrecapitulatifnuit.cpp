@@ -103,6 +103,13 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
         m_zoneNombreZombiesTues->afficher(fenetre_affichage);
         m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
         m_zoneNombreHumainsTues->afficher(fenetre_affichage);
+
+        if(QuetePrincipale::obtenirInstance()->obtenirFini())
+        {
+            TexteSDL m_zoneGameVictoire = TexteSDL(TEXT_GAME_VICTORY, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 25, m_fondRecapitulatif.y + 100));
+            m_zoneGameVictoire.afficher(fenetre_affichage);
+        }
+
     }
 
     //A SUPPRIMER

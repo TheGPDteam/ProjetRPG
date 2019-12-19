@@ -89,11 +89,21 @@ void Modele::deplacement(Direction dir){
         m_deplacementDepuisDernierCombat++;
         m_joueur.deplacerJoueur(dir);
         Zone * zoneActive = m_carte.obtenirZoneActive();
+
         pair<int, int> position = m_joueur.obtenirPosition();
-        if(zoneActive->objetPresent(position)){
+        ZoneChangementZone * zoneChangement = zoneActive->obtenirChangement(&m_joueur);
+        if (zoneChangement != nullptr){
+
+            m_carte.changerZoneActive(zoneChangement->obtenirNumeroZone());
+            std::pair<int,int> arrive = zoneChangement->obtenirPositionArrive();
+            m_joueur.definirPosition(arrive);
+
+        } else if(zoneActive->objetPresent(position)){
+
             if(!m_joueur.obtenirInventaire()->estPlein()){
                 Objet * objet = zoneActive->obtenirObjet(position);
                 m_joueur.obtenirInventaire()->ajouterObjet(objet);
+
 
                 if(objet->obtenirType() == TypeObjet::Vivre){
                     Quete * q = m_joueur.obtenirQuete();
@@ -374,6 +384,11 @@ void Modele::reinitialiserTemps() {
 //!
 void Modele::finJournee() {
     //Trouver la formule pour savoir combien de morts
+    if(QuetePrincipale::obtenirInstance()->estLance())
+    {
+        QuetePrincipale::obtenirInstance()->incrementerTempQuetePrincipale();
+    }
+
     if (m_joueur.obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
         int totalChasseEquipeChasse=0;
         for (Personnage *p : m_campement.obtenirEquipeChasse()->obtenirListePersonnage()){

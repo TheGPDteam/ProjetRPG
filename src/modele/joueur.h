@@ -23,7 +23,7 @@ private:
     Equipe* m_equipe;
     Humain m_personnageJoueur;
     Inventaire* m_inventaireJoueur;
-    QuetePrincipale m_quetePrincipale;
+    //QuetePrincipale m_quetePrincipale;
     Direction m_direction;
 
 public:
@@ -43,7 +43,7 @@ public:
     Quete* obtenirQuete();
     std::string serialiser() const;
     void charger(const std::string &donnees);
-    QuetePrincipale* obtenirQuetePrincipale();
+    //QuetePrincipale* obtenirQuetePrincipale();
     Direction obtenirDirection() const;
 };
 

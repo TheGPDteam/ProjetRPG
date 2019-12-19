@@ -10,7 +10,11 @@ AfficheurZone::AfficheurZone()
     //* INITIALISATION DE L'AFFICHAGE DE LA CARTE *//
     for(int i = 0; i < DECALAGE_CARTE_X_SUPERIEUR; ++i)
         for(int j = 0; j < DECALAGE_CARTE_Y_SUPERIEUR; ++j)
-            m_spritesCarte[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64), static_cast<Sint16>(j*64), 0, 0}, SDL_Rect{0, 0, 64, 64}};
+            m_spritesSol[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64), static_cast<Sint16>(j*64), 0, 0}, SDL_Rect{0, 0, 64, 64}};
+
+    for(int i = 0; i < DECALAGE_CARTE_X_SUPERIEUR; ++i)
+        for(int j = 0; j < DECALAGE_CARTE_Y_SUPERIEUR; ++j)
+            m_spritesDecoration[i][j] = new Sprite{SPRITES_PRINCIPAUX, SDL_Rect{static_cast<Sint16>(i*64), static_cast<Sint16>(j*64), 0, 0}, SDL_Rect{0, 0, 64, 64}};
 }
 
 
@@ -19,9 +23,13 @@ AfficheurZone::AfficheurZone()
 //! \brief AfficheurZone::~AfficheurZone
 //!
 AfficheurZone::~AfficheurZone(){
-    for(auto colonne : m_spritesCarte)
-        for(auto tuile : colonne)
-            delete tuile;
+    for(auto colonne1 : m_spritesSol)
+        for(auto tuile1 : colonne1)
+            delete tuile1;
+
+    for(auto colonne2 : m_spritesDecoration)
+        for(auto tuile2 : colonne2)
+            delete tuile2;
 
     for(auto spriteObjet : m_spriteObjets)
         delete spriteObjet;
@@ -65,9 +73,17 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
 
                 tuile = zone->obtenirTuile(temp.first, temp.second);
                 // On cherche la bonne tuile sur l'atlas a partir de son numéro
-                SDL_Rect lecture = SDL_Rect{(tuile->obtenirNumero() % 16) * 64, (tuile->obtenirNumero() / 16) * 64, 64, 64};
+                SDL_Rect lectureSol = SDL_Rect{(tuile->obtenirSol() % 16) * 64, (tuile->obtenirSol() / 16) * 64, 64, 64};
+                (m_spritesSol[i][j])->changementSprite(lectureSol);
 
-                (m_spritesCarte[i][j])->changementSprite(lecture);
+                if(tuile->estDecoree()){
+                    SDL_Rect lectureDecoration = SDL_Rect{(tuile->obtenirDecoration() % 16) * 64, (tuile->obtenirDecoration() / 16) * 64, 64, 64};
+                    (m_spritesDecoration[i][j])->changementSprite(lectureDecoration);
+                }
+                else {
+                    SDL_Rect lecture2 = SDL_Rect{0, 0, 0, 0};
+                    (m_spritesDecoration[i][j])->changementSprite(lecture2);
+                }
 
                 // Affichage de la valise
                 if (zone->objetPresent(temp) && joueur->obtenirQuete()->obtenirType() == TypeQuete::QUETERECOLTE){
@@ -85,9 +101,11 @@ void AfficheurZone::mettreAJour(Carte* carte, Joueur * joueur){
                 }
             } else  {
                 // On met une tuile noire
-                SDL_Rect lecture = SDL_Rect{0, 0, 0, 0};
+                SDL_Rect lecture1 = SDL_Rect{0, 0, 0, 0};
+                (m_spritesSol[i][j])->changementSprite(lecture1);
 
-                (m_spritesCarte[i][j])->changementSprite(lecture);
+                SDL_Rect lecture2 = SDL_Rect{0, 0, 0, 0};
+                (m_spritesDecoration[i][j])->changementSprite(lecture2);
             }
         }
     }
@@ -142,9 +160,13 @@ std::vector<int> AfficheurZone::calculerDecalageBord(int positionX, int position
 //! \param fenetre_affichage
 //!
 void AfficheurZone::afficher(SDL_Surface *fenetre_affichage){
-    for(auto c : m_spritesCarte)
-        for(auto x : c)
-            x->afficher(fenetre_affichage);
+    for(auto c1 : m_spritesSol)
+        for(auto x1 : c1)
+            x1->afficher(fenetre_affichage);
+
+    for(auto c2 : m_spritesDecoration)
+        for(auto x2 : c2)
+            x2->afficher(fenetre_affichage);
 
     for(auto spriteObjet : m_spriteObjets)
         spriteObjet->afficher(fenetre_affichage);

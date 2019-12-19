@@ -14,6 +14,7 @@
 #include "arme.h"
 #include "tuile.h"
 #include "observable.h"
+#include "zonechangementzone.h"
 
 
 const int DECALAGE_TUILE = 6;
@@ -37,14 +38,15 @@ private:
 	int m_largeur;
     int m_hauteur;
 	std::string m_nom;
+    std::vector <ZoneChangementZone> m_zonesChangement;
 	std::vector <std::pair<std::string,std::pair<int,int>>> m_zonesVoisines;
     std::map <Tuile*, std::pair<int,int>> m_tuiles;
     std::map <std::pair<int,int>, Tuile*> m_position_to_tuile;
 
     void initZone();
-    void ajouterSols(int typeSol, int maxTypeSol, int maxGroupe);
     void ajouterObjets(int nbObjets);
     void ajouterZombies(int nombre);
+    void ajouterSols(int type_sol, int max_type_sol, int max_groupe);
     void initialiserSousTypeTuile();
 
     std::string valeurDe(std::ifstream &fichier, std::string nom_valeur, std::string fin_de_valeur);
@@ -62,6 +64,7 @@ public:
     Equipe* obtenirEquipeZombie(std::pair<int,int> position) const;
     bool objetPresent(std::pair<int,int> position) const;
     bool equipeZombiePresente(std::pair<int,int> position) const;
+    ZoneChangementZone* obtenirChangement(Joueur * joueur);
     void supprimerObjet(Objet* obj);
     void supprimerEquipeZombie(Equipe* zombies);
     std::map<Objet*, std::pair<int, int> > obtenirObjets() const;

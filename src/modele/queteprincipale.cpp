@@ -1,6 +1,7 @@
 #include "queteprincipale.h"
 
 const Heure TEMPS_ASSEMBLAGE(10);
+QuetePrincipale * QuetePrincipale::m_instance = nullptr;
 
 bool QuetePrincipale::partiesBusReunies() const
 {
@@ -42,23 +43,62 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
         {new ObjetQuetePrincipale("Huile","",PartieBus::HUILE),0},
       },
       m_nombrePartiesRequises{
-        {PartieBus::ROUE,6},
+        {PartieBus::ROUE,4},
         {PartieBus::MOTEUR,1},
-        {PartieBus::ESSENCE,1},
-        {PartieBus::HUILE,2}
+        {PartieBus::ESSENCE,4},
+        {PartieBus::HUILE,1}
       },
-      m_partiesBusReunies{false}
+      m_partiesBusReunies{false}, m_tempsActuel {0}, m_faitAssemblage {false},
+      m_timer{new Timer(TEMPS_ASSEMBLAGE)}
 
 {
 
 }
 
+bool QuetePrincipale::obtenirEstLance() const
+{
+    return m_timer->estLance();
+}
 bool QuetePrincipale::obtenirFini() const
 {
-    return m_fini;
+    return m_timer->estFini();
 }
 
 void QuetePrincipale::ajouterTravail(Equipe *equipe)
 {
     //TODO
+}
+
+void QuetePrincipale::lancerQuetePrincipale()
+{
+    m_timer->lancer();
+}
+
+void QuetePrincipale::incrementerTempQuetePrincipale()
+{
+    if(m_timer->estLance())
+    {
+         m_timer->incrementerNbJour();
+    }
+}
+
+QuetePrincipale* QuetePrincipale::obtenirInstance(){
+    if(m_instance == nullptr)
+    {
+        m_instance = new QuetePrincipale("Quete importante", "La construction du bus");
+    }
+    return m_instance;
+}
+
+void QuetePrincipale::detruireQuetePrincipale()
+{
+    delete m_instance;
+}
+bool QuetePrincipale::estLance()
+{
+    m_timer->estLance();
+}
+int QuetePrincipale::obtenirNbJoursRestants()
+{
+    return m_timer->obtenirNbJoursMax() - m_timer->nbJoursPasse();
 }

@@ -6,60 +6,78 @@
 //!
 
 
-Tuile::Tuile(int val)
+Tuile::Tuile(int num_sol)
     : m_directionChangementZone{Aucune}{
 
-    m_numero = val - 1;
+    m_numSol = num_sol - 1;
+    m_numDeco = -1;
+    m_marchable = true;
+    mettreAJourMarcheable(m_numSol);
+}
+
+
+void Tuile::definirDecoration(int num_decoration){
+    m_numDeco = num_decoration-1;
+    mettreAJourMarcheable(m_numDeco);
+}
+
+
+bool Tuile::estDecoree() const {
+    return m_numDeco != -1;
+}
+
+void Tuile::mettreAJourMarcheable(int numero){
+    if (numero == -1) return;
 
     // Definition de la categorie de la tuile
-    if (m_numero == 0 || m_numero == 3 ||
-        (m_numero >= 16 && m_numero % 16 >= 8 && m_numero % 16 <= 12) ||
-            m_numero >= 16 * 4){
+    if (numero == 0 || numero == 3 ||
+        (numero >= 16 && numero % 16 >= 8 && numero % 16 <= 12) ||
+            numero >= 16 * 4){
         m_categorie = NonTerreux;
-    } else if (m_numero == 1 || m_numero == 4 ||
-               (m_numero >= 16 && m_numero < 16 * 4 && m_numero % 16 >= 12)){
+    } else if (numero == 1 || numero == 4 ||
+               (numero >= 16 && numero < 16 * 4 && numero % 16 >= 12)){
         m_categorie = Terreux;
-    } else if (m_numero >= 16 && m_numero < 4 * 16 && m_numero % 16 <= 7){
+    } else if (numero >= 16 && numero < 4 * 16 && numero % 16 <= 7){
         m_categorie = EauTerreux;
-    } else if (m_numero == 2){
+    } else if (numero == 2){
         m_categorie = Aqueux;
-    } else if (m_numero == 5){
+    } else if (numero == 5){
         m_categorie = ObstacleNonOrganique;
-    } else if (m_numero == 6 || m_numero == 7){
+    } else if (numero == 6 || numero == 7){
         m_categorie = ObstacleOrganique;
-    } else if (m_numero >= 8 && m_numero <= 12){
+    } else if (numero >= 8 && numero <= 12){
         m_categorie = Sortie;
     }
 
     // Definition du type de la tuile
-    if (m_numero == 0){
+    if (numero == 0){
         m_type = Sable;
-    } else if (m_numero == 1){
+    } else if (numero == 1){
         m_type = Herbe;
-    } else if (m_numero == 2){
+    } else if (numero == 2){
         m_type = Eau;
-    } else if (m_numero == 3){
+    } else if (numero == 3){
         m_type = Goudron;
-    } else if (m_numero == 4){
+    } else if (numero == 4){
         m_type = Terre;
-    } else if (m_numero >= 5 && m_numero <= 8){
+    } else if (numero >= 5 && numero <= 8){
         m_type = Obstacle;
-    } else if (m_numero == 9){
+    } else if (numero == 9){
         m_type = SortieDroite;
-    } else if (m_numero == 10){
+    } else if (numero == 10){
         m_type = SortieGauche;
-    } else if (m_numero == 11){
+    } else if (numero == 11){
         m_type = SortieHaut;
-    } else if (m_numero == 13){
+    } else if (numero == 13){
         m_type = SortieBas;
-    } else if (m_numero >= 14 && m_numero <= 18){
+    } else if (numero >= 14 && numero <= 18){
         m_type = HerbeDecoration;
-    } else if (m_numero >= 19){
+    } else if (numero >= 19){
         m_type = Jointure;
     }
 
     m_marchable = (m_categorie == NonTerreux || m_categorie == Terreux
-                   || m_categorie == Sortie || m_categorie == EauTerreux);
+                   || m_categorie == Sortie || m_categorie == EauTerreux) && m_marchable;
 }
 
 
@@ -70,7 +88,6 @@ Tuile::Tuile(int val)
 //! \date 16/11/2016
 //! \version 1.0
 //!
-
 bool Tuile::obtenirEstMarchable() const
 {
     return m_marchable;
@@ -84,7 +101,6 @@ bool Tuile::obtenirEstMarchable() const
 //! \date 16/11/2016
 //! \version 1.0
 //!
-
 bool Tuile::obtenirPeutApparaitre() const
 {
     return obtenirEstMarchable();
@@ -99,9 +115,14 @@ bool Tuile::obtenirPeutApparaitre() const
 //!
 
 
-int Tuile::obtenirNumero() const{
-    return m_numero;
+int Tuile::obtenirSol() const{
+    return m_numSol;
 }
+
+int Tuile::obtenirDecoration() const{
+    return m_numDeco;
+}
+
 
 
 void Tuile::definirDirectionChangementZone(Direction dir)
