@@ -12,7 +12,7 @@ class QuetePrincipale
 {
 
 private:
-    static const int TEMPS_ASSEMBLAGE = 4;
+    static const int TEMPS_ASSEMBLAGE = 1;
 
     int m_tempsActuel;
 

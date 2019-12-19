@@ -234,7 +234,9 @@ void Zone::initZone() {
 
 void Zone::ajouterObjets(int nombre_objets){
     if (nombre_objets > 0) {
+        std::cout << "hey" << std ::endl;
         for (int i = 0; i < nombre_objets; ++i) {
+
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
             int posY = DECALAGE_TUILE + (rand() % (m_hauteur - 2 * DECALAGE_TUILE));
 
@@ -289,8 +291,6 @@ void Zone::initialiserSousTypeTuile(){
 //! \date 01/03/18
 //! \author mleothaud
 //!
-
-
 void Zone::recharger(){
     ajouterObjets(20 - m_objets.size());
 }
