@@ -17,7 +17,7 @@ private:
     Carte* m_carte;
 
     TexteSDL m_objectif;
-    TexteSDL m_nomJoueur;
+    ZoneTexte m_nomJoueur;
     TexteSDL m_tempsRestant;
     void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
     Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
