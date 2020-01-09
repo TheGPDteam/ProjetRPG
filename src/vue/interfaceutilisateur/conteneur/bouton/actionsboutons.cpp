@@ -105,8 +105,8 @@ TypeEcran ActionsBoutons::boutonQueteRefus(){
     return TypeEcran::ChoixQuete;
 }
 
-TypeEcran ActionsBoutons::boutonChoixJoueur() const {
-    return TypeEcran::PopUpJoueur;
+TypeEcran ActionsBoutons::lancerExploration() const {
+    return TypeEcran::JeuPrincipal;
 }
 
 TypeEcran ActionsBoutons::boutonChasseJoueur() const {
