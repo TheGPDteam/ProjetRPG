@@ -5,7 +5,7 @@ QuetePrincipale * QuetePrincipale::m_instance = nullptr;
 
 bool QuetePrincipale::partiesBusReunies() const
 {
-    return true;
+    //return true;
 
     return m_partiesBusReunies;
 
