@@ -20,7 +20,7 @@ private:
     TexteSDL* m_zoneIntelligencePersonnage;
     TexteSDL* m_zoneVitessePersonnage;
 
-    TexteSDL* m_zoneChassePersonnage;
+    //TexteSDL* m_zoneChassePersonnage;
     TexteSDL* m_zoneRecoltePersonnage;
     TexteSDL* m_zoneCampementPersonnage;
 
@@ -33,8 +33,8 @@ private:
     TexteSDL* m_zoneQuestion;
 
     Bouton * m_retour;
-    Bouton * m_chasse;
-    Bouton * m_recolte;
+    //Bouton * m_chasse;
+    Bouton * m_exploration;
     Bouton * m_campement;
     bool m_etatAfficher;
     void gestionRepartion(AFFECTATION affectation);

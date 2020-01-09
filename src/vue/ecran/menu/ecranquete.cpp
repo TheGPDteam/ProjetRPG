@@ -7,7 +7,6 @@
 
 EcranQuete::EcranQuete(Controleur *controleur, GestionnaireRessource* gestionnaireRessource) :
     EcranGeneral{controleur, gestionnaireRessource},
-    //    m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Repartition des membres de votre equipe", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, 60))
 {
@@ -16,26 +15,18 @@ EcranQuete::EcranQuete(Controleur *controleur, GestionnaireRessource* gestionnai
 
     //A SUPPRIMER
     SDL_Rect rect= {coordB.first, coordB.second, tailleB.first, tailleB.second};
-
-    ajoutBoutonDansMapDeBoutons(new Bouton("Votre Quete", rect, m_controleur, nullptr,
-                                           true,/* std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonChoixJoueur);
-    //ajoutBoutonDansMapDeBoutons(new Bouton(Normal, true, "Votre quete", POLICE_COLLEGED, 20, coordB, tailleB, std::make_pair(coordB.first+35,coordB.second+15)), &ActionsBoutons::boutonChoixJoueur);
+    ajoutBoutonDansMapDeBoutons(new Bouton("Exploration", rect, m_controleur, nullptr,
+                                           true, POLICE_COLLEGED), &ActionsBoutons::lancerExploration);
 
     m_fondPerso = {20,50,WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10};
-    m_fondRecolte = {MARGE_RECOLTE_CHASSE_CAMPEMENT , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
-    m_fondChasse = {WIDTH_FENETRE_PRINCIPALE/3+20-10 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
-    m_fondCampement = {m_fondChasse.x + m_fondChasse.w + 20 , HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE/3-20*2+10 , HEIGHT_FENETRE_PRINCIPALE/2-20*2-HEIGHT_BOUTON_NORMAL};
+    m_fondExploration = {20, HEIGHT_FENETRE_PRINCIPALE/2+20 , WIDTH_FENETRE_PRINCIPALE-20*2,HEIGHT_FENETRE_PRINCIPALE/2-20*2-10-HEIGHT_BOUTON_NORMAL};;
     m_fondDescriptionPerso = {30, 60, WIDTH_FENETRE_PRINCIPALE - 20* 3, 40};
 
     m_tableauNonAffectes=TableauDefilable::tableauHumain(m_fondPerso,m_controleur,"Non Affectes", false);
-    m_tableauChasse=TableauDefilable::tableauHumain(m_fondChasse,m_controleur, "Chasse", false);
-    m_tableauRecolte=TableauDefilable::tableauHumain(m_fondRecolte,m_controleur, "Recolte", false);
-    m_tableauCampement=TableauDefilable::tableauHumain(m_fondCampement,m_controleur, "Campement", false);
+    m_tableauExploration=TableauDefilable::tableauHumain(m_fondExploration,m_controleur, "Explorer", false);
     Campement * c =m_controleur->obtenirModele()->obtenirCampement();
     m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauNonAffectes, nullptr));
-    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauChasse, c->obtenirEquipeChasse()));
-    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauRecolte, c->obtenirEquipeRecolte()));
-    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauCampement, c->obtenirEquipeCampement()));
+    m_tableaux.insert(std::pair<TableauDefilable *, Equipe * >(m_tableauExploration, c->obtenirEquipeRecolte()));
 
     obtenirChangement(*m_controleur->obtenirModele()->obtenirJoueur());
 
@@ -44,14 +35,9 @@ EcranQuete::EcranQuete(Controleur *controleur, GestionnaireRessource* gestionnai
 }
 
 EcranQuete::~EcranQuete(){
-    //        delete m_tableauChasse;
-    //        delete m_tableauRecolte;
-    //        delete m_tableauCampement;
-    //    delete m_tableauNonAffectes;
     delete m_ecranRepartitionJoueur;
     for (auto itr = m_tableaux.begin(); itr != m_tableaux.end(); ++itr){
         delete itr->first;
-       // delete itr->second;
     }
     m_tableaux.clear();
 }
@@ -64,9 +50,7 @@ void EcranQuete::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fe
     afficherFondEcran(fenetre_affichage);
 
     SDL_FillRect(fenetre_affichage, &m_fondPerso, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
-    SDL_FillRect(fenetre_affichage, &m_fondRecolte, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
-    SDL_FillRect(fenetre_affichage, &m_fondChasse, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
-    SDL_FillRect(fenetre_affichage, &m_fondCampement, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
+    SDL_FillRect(fenetre_affichage, &m_fondExploration, SDL_MapRGB(fenetre_affichage->format, 100,100,100));
     SDL_FillRect(fenetre_affichage, &m_fondDescriptionPerso, SDL_MapRGB(fenetre_affichage->format, 200, 200, 200));
     m_nomFenetre.afficher(fenetre_affichage);
 
@@ -129,7 +113,7 @@ void EcranQuete::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu,
             }
             break;
         default:
-            if (DictionnaireDeBoutons::boutonValiderEntree("Votre Quete",evenements,clique_souris,coord_souris)) break;
+            if (DictionnaireDeBoutons::boutonValiderEntree("Exploration",evenements,clique_souris,coord_souris)) break;
 
             coord_souris.first = evenements.button.x;
             coord_souris.second = evenements.button.y;
