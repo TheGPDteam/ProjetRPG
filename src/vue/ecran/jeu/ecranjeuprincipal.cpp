@@ -7,10 +7,10 @@
 #include <iostream>
 
 
-const std::pair<int, int> coordB(200-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
-const std::pair<int, int> coordB2(450-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
-const std::pair<int, int> coordB3(700-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
-const std::pair<int, int> coordB4(950-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB(232-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB2(482-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB3(732-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB4(982-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -25,7 +25,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessour
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(100, 15)},
       //m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(500, 25)},
       m_nomJoueur{POLICE_COLLEGED, 20, SDL_Rect{0, 0, WIDTH_FENETRE_PRINCIPALE, 40}, controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}},
-      m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(950, 15)}
+      m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(966, 15)}
 {
 
     //* AJOUT DES BOUTONS *//
