@@ -5,7 +5,6 @@
 
 EcranQueteJoueur::EcranQueteJoueur(Controleur* controleur, GestionnaireRessource* gestionnaireRessource) :
     EcranGeneral{controleur, gestionnaireRessource},
-    //m_methodeVerificationCliqueSourisSurBouton(&DictionnaireDeBoutons::verificationCliqueSourisSurBouton),
     m_nomFenetre("Que Voulez vous faire ?", SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20,
                  std::make_pair(0,0), std::make_pair(WIDTH_FENETRE_PRINCIPALE, HEIGHT_FENETRE_PRINCIPALE-HEIGHT_BOUTON_NORMAL))
 {

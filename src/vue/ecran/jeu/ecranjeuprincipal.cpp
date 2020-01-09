@@ -157,10 +157,14 @@ EcranJeuPrincipal::~EcranJeuPrincipal(){}
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
 
-    Modele * m = dynamic_cast<Modele*>(&obj);
-    if(m != nullptr){
-        if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
+    Modele * m = m_controleur->obtenirModele();
+   // std::cout<<"test "+ m_controleur->obtenirModele()->obtenirJoueur()->obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur()<<std::endl;
 
+    if(m != nullptr){
+        if(m->perdu()){
+
+            std::cout<<"Tu es mort lol"<<std::endl;
+            //m->finJournee();
         }
     }
 

@@ -79,9 +79,7 @@ void EcranRepartitionJoueur::definirHumain(Humain * h){
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
     Equipe *equipeArriver = c->obtenirEquipePersonnage(h);
     remiseAZeroBoutons();
-   // m_chasse->definirCliquable(equipeArriver != c->obtenirEquipeChasse());
     m_exploration->definirCliquable(equipeArriver != c->obtenirEquipeRecolte());
-//    m_campement->definirCliquable(equipeArriver != c->obtenirEquipeCampement());
 }
 
 void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
@@ -105,7 +103,7 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
                 }/* else if (m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                    repartition = CHASSE;
                 }*/ else if (m_campement->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
-                    repartition = RETOUR;
+                    repartition = NON_AFFECTE;
                 }
 
                 if (repartition != RIEN){
@@ -132,9 +130,13 @@ void EcranRepartitionJoueur::gestionRepartion(AFFECTATION affectation){
         c->obtenirEquipeChasse()->ajouterPersonnage(m_humain);
     } else if (affectation == RECOLTE){
         c->obtenirEquipeRecolte()->ajouterPersonnage(m_humain);
-    } else if (affectation == CAMPEMENT){
+    } /*else if (affectation == CAMPEMENT){
         c->obtenirEquipeCampement()->ajouterPersonnage(m_humain);
+    }*/
+    else if(affectation == NON_AFFECTE){
+        c->obtenirNonAttribuees().insert(m_humain);
     }
+
 }
 
 EcranRepartitionJoueur::~EcranRepartitionJoueur(){
