@@ -7,10 +7,10 @@
 #include <iostream>
 
 
-const std::pair<int, int> coordB(890-(WIDTH_BOUTON_NORMAL/2), 200-(HEIGHT_BOUTON_NORMAL/2));
-const std::pair<int, int> coordB2(890-(WIDTH_BOUTON_NORMAL/2), 250-(HEIGHT_BOUTON_NORMAL/2)); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB3(890-(WIDTH_BOUTON_NORMAL/2), 450); // Pk pas utiliser coord bouton avant
-const std::pair<int, int> coordB4(890-(WIDTH_BOUTON_NORMAL/2), 510); // Pk pas utiliser coord bouton avant
+const std::pair<int, int> coordB(200-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB2(450-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB3(700-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
+const std::pair<int, int> coordB4(950-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
 const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 //!
@@ -22,28 +22,28 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
     : EcranGeneral{controleur, gestionnaireRessource},
-      m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,60)},
+      m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(300, 10)},
       m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,25)},
-      m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(770,620)}
+      m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(700, 10)}
 {
 
     //* AJOUT DES BOUTONS *//
 
     SDL_Rect rect = {coordB.first, coordB.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Equipe", rect, m_controleur, nullptr,
-                                           true, /*std::make_pair<float, float>(coordB.first+20,coordB.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
+                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonEquipe);
 
     const SDL_Rect rect2 = {coordB2.first, coordB2.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Inventaire", rect2, m_controleur, nullptr,
-                                           true, /*std::make_pair<float, float>(coordB2.first+20,coordB2.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
+                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonInventaire);
 
     SDL_Rect rect3 = {coordB3.first, coordB3.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Campement", rect3, m_controleur, nullptr,
-                                           true, /*std::make_pair<float, float>(coordB3.first+20,coordB3.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
+                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonCampement);
 
     SDL_Rect rect4 = {coordB4.first, coordB4.second, tailleB.first, tailleB.second};
     ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
-                                           true, /* std::make_pair<float, float>(coordB4.first+20,coordB4.second+15),*/ POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
+                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
 }
 

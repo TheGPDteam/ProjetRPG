@@ -332,7 +332,6 @@ void Zone::ajouterSols(int type_sol, int max_type_sol, int max_groupe) {
 
 void Zone::ajouterObjets(int nombre_objets){
     if (nombre_objets > 0) {
-        std::cout << "hey" << std ::endl;
         for (int i = 0; i < nombre_objets; ++i) {
 
             int posX = DECALAGE_TUILE + (rand() % (m_largeur - 2 * DECALAGE_TUILE));
