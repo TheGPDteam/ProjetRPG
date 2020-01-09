@@ -25,7 +25,7 @@ public:
 
     TypeEcran boutonInventaire() const;
 
-    TypeEcran boutonChoixJoueur() const;
+    TypeEcran lancerExploration() const;
 
     TypeEcran boutonRecolteJoueur() const;
 

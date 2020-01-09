@@ -18,16 +18,14 @@ private:
     TexteSDL m_nomFenetre;
     bool m_afficherEcranRepartition=false;
 
-    SDL_Rect m_fondChasse;
-    SDL_Rect m_fondRecolte;
-    SDL_Rect m_fondCampement;
+
+    SDL_Rect m_fondExploration;
     SDL_Rect m_fondPerso;
     SDL_Rect m_fondDescriptionPerso;
 
     TableauDefilable * m_tableauNonAffectes;
-    TableauDefilable * m_tableauRecolte;
-    TableauDefilable * m_tableauChasse;
-    TableauDefilable * m_tableauCampement;
+    TableauDefilable * m_tableauExploration;
+
     std::map<TableauDefilable *, Equipe *> m_tableaux;
     EcranRepartitionJoueur * m_ecranRepartitionJoueur;
 public:

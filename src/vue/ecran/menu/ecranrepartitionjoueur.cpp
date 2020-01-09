@@ -15,56 +15,28 @@ EcranRepartitionJoueur::EcranRepartitionJoueur(Controleur * controleur, Gestionn
 {
     m_rectangleFichePersonnage = {ESPACE_X_RECTANGLE_OBJET, ESPACE_Y_RECTANGLE_OBJET, LARGEUR_RECTANGLE_PERSONNAGE, HAUTEUR_RECTANGLE_PERSONNAGE};
 
-    //A SUPPRIMER
-
-    //    m_retour = new Bouton(Normal, true, "Retour", POLICE_COLLEGED, 20,
-    //                          std::make_pair(m_rectangleFichePersonnage.x + 60 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5),
-    //                          std::make_pair(WIDTH_BOUTON_NORMAL , HEIGHT_BOUTON_NORMAL),
-    //                          std::make_pair(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ), POLICE_COLLEGED);
-    SDL_Rect rect = {m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 , m_rectangleFichePersonnage.y + HEIGHT_BOUTON_NORMAL - 20,
-                     WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_retour = new Bouton("Retour", rect, m_controleur, nullptr,
-                          true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 130 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
-
-    SDL_Rect rect2 = {m_rectangleFichePersonnage.x + 60 + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
-                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_recolte = new Bouton("Recolte", rect2, m_controleur, nullptr,
-                           true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 60 + WIDTH_BOUTON_NORMAL + 90, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
-
-
-    SDL_Rect rect3 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 50), m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
-                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    m_chasse = new Bouton("Chasse", rect3, m_controleur, nullptr,
-                          true, /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 50 + (WIDTH_BOUTON_NORMAL + 30)*2 + 70, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
-
-
-    SDL_Rect rect4 = {m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
-                      WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    //m_campement = new Bouton("Campement", rect4, m_controleur, nullptr,
-              //               m_controleur->obtenirModele()->obtenirJoueur()->obtenirQuetePrincipale()->partiesBusReunies(), /*std::make_pair<float, float>(m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 + 50, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL + 10 ),*/ POLICE_COLLEGED);
+    m_retour = new Bouton("Retour", SDL_Rect{m_rectangleFichePersonnage.x + 40 + (WIDTH_BOUTON_NORMAL + 60)*2 , m_rectangleFichePersonnage.y + HEIGHT_BOUTON_NORMAL - 20,
+                                             WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL}, m_controleur, nullptr,true, POLICE_COLLEGED);
+    m_exploration = new Bouton("Explorer", SDL_Rect{m_rectangleFichePersonnage.x + 60 + 20 , m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                                                    WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL}, m_controleur, nullptr, true, POLICE_COLLEGED);
+    m_campement = new Bouton("Rester au camp", SDL_Rect{m_rectangleFichePersonnage.x + 60 + (WIDTH_BOUTON_NORMAL + 40)*2, m_rectangleFichePersonnage.y + m_rectangleFichePersonnage.h - HEIGHT_BOUTON_NORMAL - 5,
+                                                         WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL}, m_controleur, nullptr, true,POLICE_COLLEGED);
     ajoutBoutonDansMapDeBoutons(m_retour, nullptr);
-    ajoutBoutonDansMapDeBoutons(m_recolte, nullptr);
-    ajoutBoutonDansMapDeBoutons(m_chasse, nullptr);
-   // ajoutBoutonDansMapDeBoutons(m_campement, nullptr);
+    ajoutBoutonDansMapDeBoutons(m_exploration, nullptr);
+    ajoutBoutonDansMapDeBoutons(m_campement, nullptr);
+
     m_zoneNomPersonnage = new TexteSDL("Nom : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 20));
     m_zonePrenomPersonnage = new TexteSDL("Prenom : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 350, m_rectangleFichePersonnage.y + 20));
-
     m_zoneNiveauPersonnage = new TexteSDL("Niveau : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 70));
-
     m_zoneForcePersonnage = new TexteSDL("Force : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 100));
     m_zoneIntelligencePersonnage = new TexteSDL("Intelligence : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 130));
     m_zoneVitessePersonnage = new TexteSDL("Vitesse : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 160));
-
-    m_zoneChassePersonnage = new TexteSDL("Chasse : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 130));
     m_zoneRecoltePersonnage = new TexteSDL("Recolte : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 160));
     m_zoneCampementPersonnage = new TexteSDL("Campement : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 450, m_rectangleFichePersonnage.y + 190));
-
-
     m_zoneNomArmePersonnage = new TexteSDL("Arme : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 240));
     m_zoneDescArmePersonnage = new TexteSDL("Description : " , SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 270));
     m_zoneDegatsArmePersonnage = new TexteSDL("Degats : ", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 50, m_rectangleFichePersonnage.y + 300));
     m_zoneQuestion = new TexteSDL("Quelle tache doit-il faire ?", SDL_Color{0,0,0,255}, POLICE_COLLEGED, 20, std::make_pair(m_rectangleFichePersonnage.x + 40, m_rectangleFichePersonnage.y + 350));
-
 }
 
 void EcranRepartitionJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL_Surface* fenetre_affichage){
@@ -76,7 +48,6 @@ void EcranRepartitionJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL
 
     m_zoneNiveauPersonnage->afficher(fenetre_affichage);
     m_zoneForcePersonnage->afficher(fenetre_affichage);
-    m_zoneChassePersonnage->afficher(fenetre_affichage);
     m_zoneRecoltePersonnage->afficher(fenetre_affichage);
     m_zoneCampementPersonnage->afficher(fenetre_affichage);
     m_zoneIntelligencePersonnage->afficher(fenetre_affichage);
@@ -85,16 +56,9 @@ void EcranRepartitionJoueur::afficherEcran(std::pair<int, int> coord_souris, SDL
     m_zoneNomArmePersonnage->afficher(fenetre_affichage);
     m_zoneDegatsArmePersonnage->afficher(fenetre_affichage);
     m_zoneQuestion->afficher(fenetre_affichage);
-
-    //    m_recolte->afficher(fenetre_affichage);
-    //    m_retour->afficher(fenetre_affichage);
-    //    m_chasse->afficher(fenetre_affichage);
-    //    m_campement->afficher(fenetre_affichage);
-
     afficherBoutons(coord_souris, fenetre_affichage);
-
-
 }
+
 void EcranRepartitionJoueur::definirHumain(Humain * h){
     m_humain = h;
     m_zoneNomPersonnage->mettreAJourTexte("Nom : " + h->obtenirNom());
@@ -103,7 +67,7 @@ void EcranRepartitionJoueur::definirHumain(Humain * h){
     m_zoneForcePersonnage->mettreAJourTexte("Force : " + std::to_string(h->obtenirForce()->obtenirValeur()));
     m_zoneIntelligencePersonnage->mettreAJourTexte("Intelligence : " + std::to_string(h->obtenirIntelligence()->obtenirValeur()));
     m_zoneVitessePersonnage->mettreAJourTexte("Vitesse : " + std::to_string(h->obtenirVitesse()));
-    m_zoneChassePersonnage->mettreAJourTexte("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()));
+    //m_zoneChassePersonnage->mettreAJourTexte("Chasse : " + std::to_string(h->obtenirChasse().obtenirValeur()));
     m_zoneRecoltePersonnage->mettreAJourTexte("Recolte : " + std::to_string(h->obtenirRecolte().obtenirValeur()));
     m_zoneCampementPersonnage->mettreAJourTexte("Campement : " + std::to_string(h->obtenirCampement().obtenirValeur()));
 
@@ -115,9 +79,7 @@ void EcranRepartitionJoueur::definirHumain(Humain * h){
     Campement * c = m_controleur->obtenirModele()->obtenirCampement();
     Equipe *equipeArriver = c->obtenirEquipePersonnage(h);
     remiseAZeroBoutons();
-    m_chasse->definirCliquable(equipeArriver != c->obtenirEquipeChasse());
-    m_recolte->definirCliquable(equipeArriver != c->obtenirEquipeRecolte());
-//    m_campement->definirCliquable(equipeArriver != c->obtenirEquipeCampement());
+    m_exploration->definirCliquable(equipeArriver != c->obtenirEquipeRecolte());
 }
 
 void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, bool &clique_souris, std::pair<int, int> &coord_souris){
@@ -136,12 +98,12 @@ void EcranRepartitionJoueur::gestionDesEvenements(Controleur *controleur, bool &
 
                 if (m_retour->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RETOUR;
-                } else if (m_recolte->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                } else if (m_exploration->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
                     repartition = RECOLTE;
-                } else if (m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
-                    repartition = CHASSE;
-                } else if (m_campement->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
-                    repartition = CAMPEMENT;
+                }/* else if (m_chasse->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                   repartition = CHASSE;
+                }*/ else if (m_campement->contient(std::pair<int,int> (evenements.button.x, evenements.button.y))){
+                    repartition = NON_AFFECTE;
                 }
 
                 if (repartition != RIEN){
@@ -168,9 +130,13 @@ void EcranRepartitionJoueur::gestionRepartion(AFFECTATION affectation){
         c->obtenirEquipeChasse()->ajouterPersonnage(m_humain);
     } else if (affectation == RECOLTE){
         c->obtenirEquipeRecolte()->ajouterPersonnage(m_humain);
-    } else if (affectation == CAMPEMENT){
+    } /*else if (affectation == CAMPEMENT){
         c->obtenirEquipeCampement()->ajouterPersonnage(m_humain);
+    }*/
+    else if(affectation == NON_AFFECTE){
+        c->obtenirNonAttribuees().insert(m_humain);
     }
+
 }
 
 EcranRepartitionJoueur::~EcranRepartitionJoueur(){
@@ -185,8 +151,8 @@ EcranRepartitionJoueur::~EcranRepartitionJoueur(){
         delete m_zoneIntelligencePersonnage;
     if(m_zoneVitessePersonnage != nullptr)
         delete m_zoneVitessePersonnage;
-    if (m_zoneChassePersonnage != nullptr)
-        delete m_zoneChassePersonnage;
+//    if (m_zoneChassePersonnage != nullptr)
+//        delete m_zoneChassePersonnage;
     if (m_zoneRecoltePersonnage != nullptr)
         delete m_zoneRecoltePersonnage;
     if (m_zoneCampementPersonnage != nullptr)

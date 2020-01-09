@@ -13,7 +13,7 @@ Carte::Carte(){
        chargerZone(zone);
     }
 
-    m_numZoneActive = 3;
+    m_numZoneActive = 4;
     m_zoneActive = m_zones.at(m_numZoneActive);
 }
 
