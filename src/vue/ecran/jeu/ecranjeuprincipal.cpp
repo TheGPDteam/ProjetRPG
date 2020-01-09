@@ -155,6 +155,14 @@ EcranJeuPrincipal::~EcranJeuPrincipal(){}
 //!
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
+
+    Modele * m = dynamic_cast<Modele*>(&obj);
+    if(m != nullptr){
+        if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
+
+        }
+    }
+
 }
 
 

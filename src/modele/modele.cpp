@@ -125,13 +125,18 @@ void Modele::deplacement(Direction dir){
             Equipe* equipeZombie = zoneActive->obtenirEquipeZombie(position);
             Combat combat = Combat(m_joueur.obtenirEquipe(), equipeZombie);
             combat.simulerCombat();
-            if (m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0 && !m_joueur.obtenirEquipe()->estMorte())
+
+            if (m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0)
             {
                 if (!m_joueur.obtenirInventaire()->estPlein())
                 {
                     Objet* recompense = combat.obtenirRecompense();
                     if (recompense != nullptr)
-                        m_joueur.obtenirInventaire()->ajouterObjet(combat.obtenirRecompense());
+                        m_joueur.obtenirInventaire()->ajouterObjet(recompense);
+                    else
+                    {
+                        std::cout<< "Vous n'avez rien gagne !" << std::endl;
+                    }
                 }
                 else
                 {

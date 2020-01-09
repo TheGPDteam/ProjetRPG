@@ -16,7 +16,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur, GestionnaireRessource* gestio
     //Attention on charge cette image pour chaque scene soit 8 chargements de la meme image :(
     //a supprimer
     //m_fond = SDL_LoadBMP("../rsc/sprites/ecran_titre.bmp");
-    m_fond = nullptr;
+    m_fond = gestionnaireRessource->obtenirSurface("ecran_titre");
 }
 
 
