@@ -25,6 +25,9 @@ Joueur::Joueur(const Quete &quete) :
 
     m_equipe = new Equipe(&m_personnageJoueur);
     m_inventaireJoueur = new Inventaire();
+
+
+    m_tempsActuel = std::clock();
 }
 
 
@@ -79,27 +82,30 @@ void Joueur::definirPosition(std::pair<int,int> nouvelle_position){
 //! \version 0.1
 //!
 void Joueur::deplacerJoueur(Direction dir){
-    switch(dir){
-    case Nord:
-        m_position.second--;
-        break;
-    case Sud:
-        m_position.second++;
-        break;
-    case Ouest:
-        m_position.first--;
-        break;
-    case Est:
-        m_position.first++;
-        break;
-    default:
-        break;
-    }
+    if ((std::clock() - m_tempsActuel) / (double) CLOCKS_PER_SEC >= TEMPS_ENTRE_DEPLACEMENT){
+        switch(dir){
+            case Nord:
+                m_position.second--;
+                break;
+            case Sud:
+                m_position.second++;
+                break;
+            case Ouest:
+                m_position.first--;
+                break;
+            case Est:
+                m_position.first++;
+                break;
+            default:
+                break;
+        }
 
-    m_direction = dir;
-    mettreAChange();
-    notifierTous();
-    m_direction = Direction::Aucune;
+
+        m_direction = dir;
+        mettreAChange();
+        notifierTous();
+        m_direction = Direction::Aucune;
+    }
 }
 
 

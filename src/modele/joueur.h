@@ -16,6 +16,8 @@
 class Joueur : public Observable
 {
 private:
+    double const TEMPS_ENTRE_DEPLACEMENT = 0.5;
+
     std::pair<int,int> m_position;
     Quete m_queteJoueur;
     std::string m_nom;
@@ -25,6 +27,8 @@ private:
     Inventaire* m_inventaireJoueur;
     //QuetePrincipale m_quetePrincipale;
     Direction m_direction;
+
+    std::clock_t m_tempsActuel;
 
 public:
     Joueur(const Quete &quete);
