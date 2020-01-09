@@ -102,11 +102,11 @@ void Zone::init(std::ifstream & fichier){
             int pos1Y = stoi(valeurs[2]);
             int pos2X = stoi(valeurs[3]);
             int pos2Y = stoi(valeurs[4]);
-            int dir = stoi(valeurs[5]);
+            int idZoneArrivee = stoi(valeurs[5]);
             int arriveX = stoi(valeurs[6]);
             int arriveY = stoi(valeurs[7]);
 
-            m_zonesChangement.push_back(ZoneChangementZone(pos1X, pos1Y, pos2X, pos2Y, (Direction)dir, arriveX, arriveY));
+            m_zonesChangement.push_back(ZoneChangementZone(pos1X, pos1Y, pos2X, pos2Y, idZoneArrivee, arriveX, arriveY));
         }
     }
 
