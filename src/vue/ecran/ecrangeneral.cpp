@@ -31,6 +31,7 @@ EcranGeneral::~EcranGeneral(){
     if(m_fond != nullptr)
     {
         SDL_FreeSurface(m_fond);
+        m_fond = nullptr;
     }
 }
 
