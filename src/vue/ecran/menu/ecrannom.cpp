@@ -71,7 +71,13 @@ void EcranNom::gestionDesEvenements(Controleur *controleur, bool &quitter_jeu, b
             else if(isalpha(*SDL_GetKeyName(evenements.key.keysym.sym)) && ((std::string)(SDL_GetKeyName(evenements.key.keysym.sym))).size() == 1 ){
                 m_s->ajouterChar(SDL_GetKeyName(evenements.key.keysym.sym));
             }
-            m_controleur->obtenirModele()->obtenirJoueur()->definirNom(m_s->obtenirBuffer());
+
+            if (m_s->obtenirBuffer().size() <= 0){
+                m_controleur->obtenirModele()->obtenirJoueur()->definirNom("Friedrich");
+            } else {
+                m_controleur->obtenirModele()->obtenirJoueur()->definirNom(m_s->obtenirBuffer());
+            }
+
             break;
 
         default:
