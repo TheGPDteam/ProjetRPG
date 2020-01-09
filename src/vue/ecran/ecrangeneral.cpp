@@ -28,10 +28,7 @@ EcranGeneral::EcranGeneral(Controleur *controleur, GestionnaireRessource* gestio
 //!
 
 EcranGeneral::~EcranGeneral(){
-    if(m_fond != nullptr)
-    {
-        SDL_FreeSurface(m_fond);
-    }
+
 }
 
 //!
