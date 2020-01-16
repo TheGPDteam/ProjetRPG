@@ -6,7 +6,7 @@
 //! \version 1.0
 
 const float Combat::PROBABILITE_OBTENIR_OBJET = 0.5;
-const float Combat::PROBABILITE_OBTENIR_ARME = 0.75;
+const float Combat::PROBABILITE_OBTENIR_ARME = 0.05;
 
 bool comparerVitesse(Personnage* p1, Personnage* p2) {
     return (p1->obtenirVitesse() > p2->obtenirVitesse());
@@ -245,10 +245,10 @@ Objet* Combat::obtenirRecompense() const
 {
     Objet* recompense = nullptr;
     srand(time(nullptr));
-    bool tirageObjet = (rand()/RAND_MAX) < PROBABILITE_OBTENIR_OBJET;
+    bool tirageObjet = (rand()*1./RAND_MAX) < PROBABILITE_OBTENIR_OBJET;
     if (tirageObjet)
     {
-        bool estArme = (rand()/RAND_MAX) < PROBABILITE_OBTENIR_ARME;
+        bool estArme = (rand()*1./RAND_MAX) < PROBABILITE_OBTENIR_ARME;
         if (estArme)
         {
             recompense = new Arme();
