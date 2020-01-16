@@ -19,7 +19,7 @@ private:
     Carte* m_carte;
 
     TexteSDL m_objectif;
-    TexteSDL m_resumerCombat;
+    ZoneTexte m_resumerCombat;
     ZoneTexte m_nomJoueur;
     TexteSDL m_tempsRestant;
 
