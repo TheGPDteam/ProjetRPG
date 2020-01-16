@@ -147,6 +147,9 @@ void Modele::deplacement(Direction dir){
                     {
                        m_joueur.obtenirInventaire()->ajouterObjet(recompense);
                        m_nomObjetRecompense = recompense->obtenirNom();
+                       QuetePrincipale* qt = QuetePrincipale::obtenirInstance();
+                       ObjetQuetePrincipale * oqp = dynamic_cast<ObjetQuetePrincipale *>(recompense);
+                       if(oqp) qt->ajouterPartieBus(oqp);
                     }
 
 

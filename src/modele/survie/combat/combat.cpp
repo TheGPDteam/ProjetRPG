@@ -5,7 +5,7 @@
 //! \date 17/11/16
 //! \version 1.0
 
-const float Combat::PROBABILITE_OBTENIR_OBJET = 0.5;
+const float Combat::PROBABILITE_OBTENIR_OBJET = 0.9;
 const float Combat::PROBABILITE_OBTENIR_ARME = 0.05;
 
 bool comparerVitesse(Personnage* p1, Personnage* p2) {
