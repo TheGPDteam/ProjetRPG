@@ -19,7 +19,7 @@ Modele::Modele()
     : m_joueur{Quete(TypeQuete::QUETERECOLTE, "Survivre aujourd'hui","Récolter assez de nourriture pour pouvoir passer la nuit",
                      50, 50, new Vivre())},
       m_deplacementDepuisDernierCombat{0}, m_nouvelArrivant{nullptr}, m_perdu{false},
-      m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}
+      m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}, m_nomObjetRecompense{""}
 {
     premiereJournee();
 }
@@ -132,8 +132,14 @@ void Modele::deplacement(Direction dir){
                 if (!m_joueur.obtenirInventaire()->estPlein())
                 {
                     Objet* recompense = combat.obtenirRecompense();
+                    recompense->obtenirNom();
                     if (recompense != nullptr)
-                        m_joueur.obtenirInventaire()->ajouterObjet(recompense);
+                    {
+                       m_joueur.obtenirInventaire()->ajouterObjet(recompense);
+                       m_nomObjetRecompense = recompense->obtenirNom();
+                    }
+
+
                     else
                     {
                         std::cout<< "Vous n'avez rien gagne !" << std::endl;
@@ -322,6 +328,10 @@ void Modele::definirCampement(Campement campement){
     m_campement=campement;
 }
 
+std::string Modele::obtenirRecompense() const
+{
+    return m_nomObjetRecompense;
+}
 
 //!
 //! \brief Accesseur en lecture du combat

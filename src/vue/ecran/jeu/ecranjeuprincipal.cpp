@@ -22,6 +22,7 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
     : EcranGeneral{controleur, gestionnaireRessource},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(100, 15)},
+      m_resumerCombat{(std::string)"Recompense :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(100, 100)},
       //m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(500, 25)},
       m_nomJoueur{POLICE_COLLEGED, 20, SDL_Rect{0, 0, WIDTH_FENETRE_PRINCIPALE, 40}, controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(966, 15)}
@@ -74,7 +75,11 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_tempsRestant.mettreAJourTexte("Heure : " + Temps::obtenirTempsAffichable(m->obtenirTemps()->obtenirTemps()));
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
-    m_tempsRestant.afficher(fenetre_affichage);
+
+    m_resumerCombat.mettreAJourTexte("Recompense " + m->obtenirRecompense());
+
+    m_resumerCombat.afficher(fenetre_affichage);
+
 
 
     //A SUPPRIMER
@@ -163,7 +168,10 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
         if(m != nullptr){
             if(m->perdu()){
                 std::cout<<"Tu es mort lol"<<std::endl;
-                //m->finJournee();
+                if(m == nullptr)
+                {
+                  std::cout<<"bug"<<std::endl;
+                }
             }
         }
 

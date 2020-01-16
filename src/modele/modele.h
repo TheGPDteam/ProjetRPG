@@ -17,6 +17,8 @@
 class Modele : public Observable
 {
 private:
+    std::string m_nomObjetRecompense;
+
     Joueur m_joueur;
     int m_deplacementDepuisDernierCombat;
     Humain* m_nouvelArrivant;
@@ -40,6 +42,8 @@ private:
 
 public:
     Modele();
+
+    std::string obtenirRecompense() const;
     void premiereJournee();
     Humain *journeeSuivante();
     std::string obtenirNomPartie() const;
