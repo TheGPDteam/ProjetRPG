@@ -24,6 +24,7 @@ private:
     TexteSDL m_tempsRestant;
 
     std::clock_t m_tempsActuel;
+    std::clock_t m_tempsAffichageRecompense;
 
     void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
     Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
