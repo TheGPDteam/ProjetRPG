@@ -9,16 +9,21 @@
 #include "temps.h"
 #include "spritepersonnage.h"
 #include "afficheurzone.h"
+#include <ctime>
 
 class EcranJeuPrincipal : public EcranGeneral{
 private:
     int const NB_ETAPES_ANIMATION = 15;
+
     AfficheurZone m_afficheurZone;
     Carte* m_carte;
 
     TexteSDL m_objectif;
     ZoneTexte m_nomJoueur;
     TexteSDL m_tempsRestant;
+
+    std::clock_t m_tempsActuel;
+
     void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
     Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
     Sprite * creerSpriteObjet(Joueur *joueur, int tuileX, int tuileY, int posDessinX, int posDessinY);

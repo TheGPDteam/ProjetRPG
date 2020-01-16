@@ -6,7 +6,6 @@
 #include <string>
 #include <iostream>
 
-
 const std::pair<int, int> coordB(232-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
 const std::pair<int, int> coordB2(482-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
 const std::pair<int, int> coordB3(732-(WIDTH_BOUTON_NORMAL/2), HEIGHT_FENETRE_PRINCIPALE - HEIGHT_BOUTON_NORMAL * 1.5f);
@@ -46,6 +45,7 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessour
     ajoutBoutonDansMapDeBoutons(new Bouton("Fin journee", rect4, m_controleur, nullptr,
                                            true, POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
+    m_tempsActuel = std::clock();
 }
 
 
@@ -99,22 +99,22 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
     Uint8 *etatTouches = SDL_GetKeyState( nullptr );
     Direction direction_deplacement = Direction::Aucune;
 
-    // Si les touches pour aller en haut sont pressées
-    if (etatTouches[ SDLK_UP ] ||  etatTouches[ SDLK_z ])
-        direction_deplacement = Direction::Nord;
 
-    // Si les touches pour aller en bas sont pressées
-    if (etatTouches[ SDLK_DOWN ] ||  etatTouches[ SDLK_s ] )
-        direction_deplacement = Direction::Sud;
-
-    // Si les touches pour aller à gauche sont pressées
-    if (etatTouches[ SDLK_LEFT ] ||  etatTouches[ SDLK_q ] )
-        direction_deplacement = Direction::Ouest;
-
-    // Si les touches pour aller à droite sont pressées
-    if (etatTouches[ SDLK_RIGHT ] ||  etatTouches[ SDLK_d ] )
-        direction_deplacement = Direction::Est;
-
+        // Si les touches pour aller en haut sont pressées
+        if (etatTouches[ SDLK_UP ] ||  etatTouches[ SDLK_z ])
+            direction_deplacement = Direction::Nord;
+    
+        // Si les touches pour aller en bas sont pressées
+        if (etatTouches[ SDLK_DOWN ] ||  etatTouches[ SDLK_s ] )
+            direction_deplacement = Direction::Sud;
+    
+        // Si les touches pour aller à gauche sont pressées
+        if (etatTouches[ SDLK_LEFT ] ||  etatTouches[ SDLK_q ] )
+            direction_deplacement = Direction::Ouest;
+    
+        // Si les touches pour aller à droite sont pressées
+        if (etatTouches[ SDLK_RIGHT ] ||  etatTouches[ SDLK_d ] )
+            direction_deplacement = Direction::Est;
 
     if (etatTouches[SDLK_ESCAPE]){
         quitter_jeu = true;
@@ -159,7 +159,12 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
 
     Modele * m = m_controleur->obtenirModele();
     if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
-        std::cout << "kljmkllmklmklmklmklmkmlkmlklmklmklmlmkmlklmklmklmmklklmklmjjioioiioioio" << std::endl;
+
+    if(m != nullptr){
+        if(m->perdu()){
+            std::cout<<"Tu es mort lol"<<std::endl;
+            //m->finJournee();
+        }
     }
 
 

@@ -18,7 +18,8 @@ void mainloop_func(void* c, void* ctrl){
 
     Uint32 tempsActuel = SDL_GetTicks();
     Uint32 tempsAvant = 0;
-    
+
+
     while (!vue->obtenirFermerJeu()) {
         
         tempsActuel = SDL_GetTicks();
