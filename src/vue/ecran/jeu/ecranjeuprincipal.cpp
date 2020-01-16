@@ -47,6 +47,8 @@ EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessour
                                            true, POLICE_COLLEGED), &ActionsBoutons::boutonFinirQuete);
 
     m_tempsActuel = std::clock();
+    m_tempsDebutAffichageRecompense = std::chrono::system_clock::now();
+    m_tempsFinAffichageRecompense = std::chrono::system_clock::now();
 }
 
 
@@ -77,11 +79,24 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_objectif.afficher(fenetre_affichage);
     m_tempsRestant.afficher(fenetre_affichage);
 
+    if(m->obtenirAvoirCombat())
+    {
+       m_resumerCombat.mettreAJourTexte("Recompense : " + m->obtenirRecompense());
+        m_tempsDebutAffichageRecompense = std::chrono::system_clock::now();
+       m_tempsFinAffichageRecompense = std::chrono::system_clock::now();
+
+    }
+
+    if(std::chrono::duration_cast<std::chrono::seconds>(m_tempsFinAffichageRecompense - m_tempsDebutAffichageRecompense).count() < TEMPS_AFFICHAGE && m->obtenirRecompense() != "")
+    {
+        m_resumerCombat.mettreAJourTexte("Recompense : " + m->obtenirRecompense());
+
+        m_resumerCombat.afficher(fenetre_affichage);
+        m_tempsFinAffichageRecompense = std::chrono::system_clock::now();
+    }
 
 
-    m_resumerCombat.mettreAJourTexte("Recompense : " + m->obtenirRecompense());
 
-    m_resumerCombat.afficher(fenetre_affichage);
 
 
 
@@ -166,15 +181,14 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
 
     Modele * m = m_controleur->obtenirModele();
+
+
+
     if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
 
         if(m != nullptr){
             if(m->perdu()){
-                std::cout<<"Tu es mort lol"<<std::endl;
-                if(m == nullptr)
-                {
-                  std::cout<<"bug"<<std::endl;
-                }
+                std::cout<<"Tu es mort !"<<std::endl;
             }
         }
 
