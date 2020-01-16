@@ -18,7 +18,7 @@ class Modele : public Observable
 {
 private:
     double const TEMPS_ENTRE_DEPLACEMENT = 0.10;
-
+    bool m_avoirCombat;
     std::string m_nomObjetRecompense;
     Joueur m_joueur;
     int m_deplacementDepuisDernierCombat;
@@ -44,7 +44,7 @@ private:
     std::clock_t m_tempsActuel;
 public:
     Modele();
-
+    bool obtenirAvoirCombat() const;
     std::string obtenirRecompense() const;
     void premiereJournee();
     Humain *journeeSuivante();

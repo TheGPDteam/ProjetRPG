@@ -38,6 +38,10 @@ std::string Modele::obtenirNomPartie() const{
     return m_nomPartie;
 }
 
+bool Modele::obtenirAvoirCombat() const
+{
+    return m_avoirCombat;
+}
 
 //!
 //! \brief Accesseur en ecriture du nom de la partie
@@ -128,6 +132,7 @@ void Modele::deplacement(Direction dir){
         // Si l'on rencontre une équipe de zombie, on lance un combat
         else if (zoneActive->equipeZombiePresente(position))
         {
+            m_avoirCombat = true;
             Equipe* equipeZombie = zoneActive->obtenirEquipeZombie(position);
             Combat combat = Combat(m_joueur.obtenirEquipe(), equipeZombie);
             combat.simulerCombat();
@@ -158,13 +163,17 @@ void Modele::deplacement(Direction dir){
             }
             else
             {
-                std::cout << "mklklmklmmkllmklmkklmklmmklmklklmmklklmmkl" << std::endl;
+
                 m_perdu = true;
                 m_td = TypeDefaite::ATTAQUEZOMBIES;
             }
             mettreAChange();
             notifierTous();
 
+        }
+        else
+        {
+            m_avoirCombat = false;
         }
     }
 }

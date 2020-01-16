@@ -14,7 +14,7 @@
 class EcranJeuPrincipal : public EcranGeneral{
 private:
     int const NB_ETAPES_ANIMATION = 15;
-
+    const int TEMPS_AFFICHAGE = 1;
     AfficheurZone m_afficheurZone;
     Carte* m_carte;
 
@@ -23,8 +23,11 @@ private:
     ZoneTexte m_nomJoueur;
     TexteSDL m_tempsRestant;
 
+
     std::clock_t m_tempsActuel;
-    std::clock_t m_tempsAffichageRecompense;
+
+    std::chrono::time_point<std::chrono::system_clock> m_tempsFinAffichageRecompense;
+    std::chrono::time_point<std::chrono::system_clock> m_tempsDebutAffichageRecompense;
 
     void animerDeplacement(Joueur *joueur, SDL_Surface * ecran);
     Sprite * creerSpriteTuile(int tuileX, int tuileY, int posDessinX,  int posDessinY);
