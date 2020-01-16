@@ -22,7 +22,8 @@ const std::pair<int, int> tailleB(WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL);
 EcranJeuPrincipal::EcranJeuPrincipal(Controleur* controleur, GestionnaireRessource* gestionnaireRessource)
     : EcranGeneral{controleur, gestionnaireRessource},
       m_objectif{(std::string)"Objectif :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(100, 15)},
-      m_resumerCombat{(std::string)"Recompense :", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(540, 100)},
+      m_resumerCombat{(std::string)POLICE_COLLEGED, 14, SDL_Rect{0,HEIGHT_FENETRE_PRINCIPALE / 2, WIDTH_FENETRE_PRINCIPALE, 100},
+                      (std::string)"Vous obtenez", SDL_Color{255,255,255,255}},
       //m_nomJoueur{controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(500, 25)},
       m_nomJoueur{POLICE_COLLEGED, 20, SDL_Rect{0, 0, WIDTH_FENETRE_PRINCIPALE, 40}, controleur->obtenirModele()->obtenirJoueur()->obtenirNom(), SDL_Color{255,255,255,255}},
       m_tempsRestant{"Temps restant: ", SDL_Color{255,255,255,255}, (std::string)POLICE_COLLEGED, 18, std::make_pair(966, 15)}
@@ -81,15 +82,23 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
 
     if(m->obtenirAvoirCombat())
     {
-       m_resumerCombat.mettreAJourTexte("Recompense : " + m->obtenirRecompense());
+       m_resumerCombat.mettreAJourTexte("Vous obtenez 1 " + m->obtenirRecompense());
         m_tempsDebutAffichageRecompense = std::chrono::system_clock::now();
        m_tempsFinAffichageRecompense = std::chrono::system_clock::now();
 
     }
 
-    if(std::chrono::duration_cast<std::chrono::seconds>(m_tempsFinAffichageRecompense - m_tempsDebutAffichageRecompense).count() < TEMPS_AFFICHAGE && m->obtenirRecompense() != "")
+    if(std::chrono::duration_cast<std::chrono::seconds>(m_tempsFinAffichageRecompense - m_tempsDebutAffichageRecompense).count() < TEMPS_AFFICHAGE)
     {
-        m_resumerCombat.mettreAJourTexte("Recompense : " + m->obtenirRecompense());
+        if(m->obtenirRecompense() == "")
+        {
+            m_resumerCombat.mettreAJourTexte("Vous obtenez rien.");
+        }
+        else
+        {
+            m_resumerCombat.mettreAJourTexte("Vous obtenez 1 " + m->obtenirRecompense());
+        }
+
 
         m_resumerCombat.afficher(fenetre_affichage);
         m_tempsFinAffichageRecompense = std::chrono::system_clock::now();
