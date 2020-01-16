@@ -115,15 +115,26 @@ void EcranQueteCampement::obtenirChangement(Observable &obj){
         bool aHuile = false;
         int nbRoues = 0;
         int nbEssences = 0;
+
         for(Objet* objet : objets){
             ObjetQuetePrincipale * pb = dynamic_cast<ObjetQuetePrincipale *>(objet);
             if(pb != nullptr){
                 if(pb->obtenirTypePartie() == PartieBus::MOTEUR) aMoteur = true;
                 if(pb->obtenirTypePartie() == PartieBus::HUILE) aHuile = true;
-                if(pb->obtenirTypePartie() == PartieBus::ESSENCE) nbEssences++;
-                if(pb->obtenirTypePartie() == PartieBus::ROUE) nbRoues++;
+                if(pb->obtenirTypePartie() == PartieBus::ESSENCE){
+                    if (nbEssences < 4){
+                        nbEssences++;
+                    }
+                }
+
+                if(pb->obtenirTypePartie() == PartieBus::ROUE){
+                   if (nbRoues < 4){
+                       nbRoues++;
+                   }
+                }
             }
         }
+
         if(aMoteur) m_spriteMoteur->changementSprite(RECT_MOTEUR);
         if (aHuile) m_spriteHuile->changementSprite(RECT_HUILE);
         if (nbEssences>0) m_tabEssence[nbEssences-1]->changementSprite(RECT_ESSENCE);
@@ -132,5 +143,4 @@ void EcranQueteCampement::obtenirChangement(Observable &obj){
         if(quete->partiesBusReunies())
             m_bouton.definirCliquable(true);
     }
-
 }
