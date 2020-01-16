@@ -126,7 +126,7 @@ void Modele::deplacement(Direction dir){
             Combat combat = Combat(m_joueur.obtenirEquipe(), equipeZombie);
             combat.simulerCombat();
 
-            if (m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0)
+            if (false)//m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0)
             {
                 if (!m_joueur.obtenirInventaire()->estPlein())
                 {
@@ -146,11 +146,13 @@ void Modele::deplacement(Direction dir){
             }
             else
             {
+                std::cout << "mklklmklmmkllmklmkklmklmmklmklklmmklklmmkl" << std::endl;
                 m_perdu = true;
                 m_td = TypeDefaite::ATTAQUEZOMBIES;
-                mettreAChange();
-                notifierTous();
             }
+            mettreAChange();
+            notifierTous();
+
         }
     }
 }

@@ -125,22 +125,22 @@ void EcranJeuPrincipal::gestionDesEvenements(Controleur *controleur, bool &quitt
 
     while(SDL_PollEvent(&evenements)){
         switch(evenements.type){
-            case SDL_QUIT :
-                quitter_jeu = true;
-                //SDL_Quit();
-                break;
+        case SDL_QUIT :
+            quitter_jeu = true;
+            //SDL_Quit();
+            break;
 
-            case SDL_MOUSEBUTTONUP:
-                if (evenements.button.button == SDL_BUTTON_LEFT){
-                    clique_souris = true;
-                    coord_souris.first = evenements.button.x;
-                    coord_souris.second = evenements.button.y;
-                }
-                break;
-            default:
+        case SDL_MOUSEBUTTONUP:
+            if (evenements.button.button == SDL_BUTTON_LEFT){
+                clique_souris = true;
                 coord_souris.first = evenements.button.x;
                 coord_souris.second = evenements.button.y;
-                break;
+            }
+            break;
+        default:
+            coord_souris.first = evenements.button.x;
+            coord_souris.second = evenements.button.y;
+            break;
         }
     }
 }
@@ -157,12 +157,11 @@ EcranJeuPrincipal::~EcranJeuPrincipal(){}
 void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
 
-    Modele * m = dynamic_cast<Modele*>(&obj);
-    if(m != nullptr){
-        if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
-
-        }
+    Modele * m = m_controleur->obtenirModele();
+    if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
+        std::cout << "kljmkllmklmklmklmklmkmlkmlklmklmklmlmkmlklmklmklmmklklmklmjjioioiioioio" << std::endl;
     }
+
 
 }
 
