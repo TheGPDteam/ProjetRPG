@@ -127,12 +127,12 @@ void Modele::deplacement(Direction dir){
             Combat combat = Combat(m_joueur.obtenirEquipe(), equipeZombie);
             combat.simulerCombat();
 
-            if (false)//m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0)
+            if (m_joueur.obtenirPersonnageJoueur()->obtenirVie()->obtenirValeur() > 0)
             {
                 if (!m_joueur.obtenirInventaire()->estPlein())
                 {
                     Objet* recompense = combat.obtenirRecompense();
-                    recompense->obtenirNom();
+
                     if (recompense != nullptr)
                     {
                        m_joueur.obtenirInventaire()->ajouterObjet(recompense);
@@ -226,26 +226,26 @@ Humain* Modele::journeeSuivante(){
 }
 
 
-//!
-//! \brief Permet de lancer un combat
-//! \author mleothaud
-//! \date 17/11/16
-//! \version 0.0.2
-//!
-void Modele::lancerCombat(){
-    int probabilite = 95;
-    if (rand() % 100 < probabilite)   Combat combat(m_joueur.obtenirEquipe());
-    else {
-        std::set<Personnage *> personnagesAdverses;
-        for (int i = 0; i < 4; ++i){
-            Humain *h = new Humain();
-            personnagesAdverses.insert(h);
-        }
+////!
+////! \brief Permet de lancer un combat
+////! \author mleothaud
+////! \date 17/11/16
+////! \version 0.0.2
+////!
+//void Modele::lancerCombat(){
+//    int probabilite = 95;
+//    if (rand() % 100 < probabilite)   Combat combat(m_joueur.obtenirEquipe());
+//    else {
+//        std::set<Personnage *> personnagesAdverses;
+//        for (int i = 0; i < 4; ++i){
+//            Humain *h = new Humain();
+//            personnagesAdverses.insert(h);
+//        }
 
-        Equipe *e = new Equipe(personnagesAdverses);
-        Combat combat(m_joueur.obtenirEquipe(), e);
-    }
-}
+//        Equipe *e = new Equipe(personnagesAdverses);
+//        Combat combat(m_joueur.obtenirEquipe(), e);
+//    }
+//}
 
 
 //!
@@ -366,10 +366,30 @@ Joueur* Modele::obtenirJoueur(){
 }
 
 
-//!
-//! \brief Serialise les attributs du modèle
-//! \return Chaine contenant les attributs du modèle au format XML
-//! \author nlesne
+////!
+////! \brief Serialise les attributs du modèle
+////! \return Chaine contenant les attributs du modèle au format XML
+////! \author nlesne//!
+////! \brief Permet de lancer un combat
+////! \author mleothaud
+////! \date 17/11/16
+////! \version 0.0.2
+////!
+//void Modele::lancerCombat(){
+//    int probabilite = 95;
+//    if (rand() % 100 < probabilite)   Combat combat(m_joueur.obtenirEquipe());
+//    else {
+//        std::set<Personnage *> personnagesAdverses;
+//        for (int i = 0; i < 4; ++i){
+//            Humain *h = new Humain();
+//            personnagesAdverses.insert(h);
+//        }
+
+//        Equipe *e = new Equipe(personnagesAdverses);
+//        Combat combat(m_joueur.obtenirEquipe(), e);
+//    }
+//}
+
 //! \date 12/11/17
 //! \version 0.1
 //!

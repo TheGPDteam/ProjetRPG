@@ -50,7 +50,7 @@ public:
     void definirNomPartie(std::string nom);
     void deplacement(Direction dir);
     bool testChangementDeCarte(Direction dir);
-    void lancerCombat();//TO-DO
+//    void lancerCombat();//TO-DO
 
     Temps* obtenirTemps();
     void definirTemps(Temps temps);

@@ -76,6 +76,8 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
 
+
+
     m_resumerCombat.mettreAJourTexte("Recompense " + m->obtenirRecompense());
 
     m_resumerCombat.afficher(fenetre_affichage);

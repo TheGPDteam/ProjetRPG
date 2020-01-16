@@ -245,10 +245,10 @@ Objet* Combat::obtenirRecompense() const
 {
     Objet* recompense = nullptr;
     srand(time(nullptr));
-    bool tirageObjet = rand() < PROBABILITE_OBTENIR_OBJET;
+    bool tirageObjet = (rand()/RAND_MAX) < PROBABILITE_OBTENIR_OBJET;
     if (tirageObjet)
     {
-        bool estArme = rand() < PROBABILITE_OBTENIR_ARME;
+        bool estArme = (rand()/RAND_MAX) < PROBABILITE_OBTENIR_ARME;
         if (estArme)
         {
             recompense = new Arme();
