@@ -18,7 +18,7 @@ private:
 
     std::string m_nom;
     std::string m_description;
-    std::map<ObjetQuetePrincipale*,int> m_partiesBus;
+    std::map<PartieBus,int> m_partiesBus;
     const std::map<PartieBus,int> m_nombrePartiesRequises;
     bool m_partiesBusReunies;
     bool m_faitAssemblage;
@@ -36,7 +36,7 @@ public:
     bool obtenirEstLance() const;
     bool obtenirFini() const;
     bool partiesBusReunies() const;
-    std::map<ObjetQuetePrincipale*, int> obtenirProgression() const;
+    std::map<PartieBus, int> obtenirProgression() const;
     void ajouterPartieBus(ObjetQuetePrincipale* partieBus);
     void ajouterTravail(Equipe * equipe); //TODO
     void lancerQuetePrincipale();

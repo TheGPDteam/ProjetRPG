@@ -8,16 +8,18 @@ bool QuetePrincipale::partiesBusReunies() const
     return m_partiesBusReunies;
 }
 
-std::map<ObjetQuetePrincipale*, int> QuetePrincipale::obtenirProgression() const
+std::map<PartieBus, int> QuetePrincipale::obtenirProgression() const
 {
     return m_partiesBus;
 }
 
 void QuetePrincipale::calculerPartiesBusReunies()
 {
+    std::cout << "calcul partie bus" << std::endl;
     for (auto const &it : m_partiesBus)
     {
-        if (it.second < m_nombrePartiesRequises.find(it.first->obtenirTypePartie())->second)
+        std::cout << "partie bus : " << it.first << " nb = " << it.second << std::endl;
+        if (it.second < m_nombrePartiesRequises.find(it.first)->second)
             return;
     }
 
@@ -26,8 +28,11 @@ void QuetePrincipale::calculerPartiesBusReunies()
 
 void QuetePrincipale::ajouterPartieBus(ObjetQuetePrincipale *partie_bus)
 {
-    auto it = m_partiesBus.find(partie_bus);
-    if (it != m_partiesBus.end()){// && it->second < m_nombrePartiesRequises.find(partie_bus->obtenirTypePartie())->second )
+    std::cout << "mklkmlklmmklmklklmklmmkl" << std::endl;
+    auto it = m_partiesBus.find(partie_bus->obtenirTypePartie());
+
+    if (it != m_partiesBus.end()){
+        std::cout << "oipoipopipoipoipopoiipoiopipoopipoipioiop" << std::endl;
         it->second++;
         calculerPartiesBusReunies();
     }
@@ -37,10 +42,10 @@ QuetePrincipale::QuetePrincipale(std::string nom, std::string description)
     :
       m_nom{nom}, m_description{description},
       m_partiesBus{
-{new ObjetQuetePrincipale("Roue","",PartieBus::ROUE),0},
-{new ObjetQuetePrincipale("Moteur","",PartieBus::MOTEUR),0},
-{new ObjetQuetePrincipale("Essence","",PartieBus::ESSENCE),0},
-{new ObjetQuetePrincipale("Huile","",PartieBus::HUILE),0},
+{PartieBus::ROUE,0},
+{PartieBus::MOTEUR,0},
+{PartieBus::ESSENCE,0},
+{PartieBus::HUILE,0},
           },
       m_nombrePartiesRequises{
 {PartieBus::ROUE,4},

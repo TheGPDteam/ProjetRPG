@@ -152,7 +152,6 @@ void Modele::deplacement(Direction dir){
                        if(oqp) qt->ajouterPartieBus(oqp);
                     }
 
-
                     else
                     {
                         std::cout<< "Vous n'avez rien gagne !" << std::endl;
