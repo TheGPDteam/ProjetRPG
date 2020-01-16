@@ -21,6 +21,7 @@ Modele::Modele()
       m_deplacementDepuisDernierCombat{0}, m_nouvelArrivant{nullptr}, m_perdu{false},
       m_nbPersosMorts{0}, m_nbZombiesAttaquant{0}, m_nbZombiesTues{0}, m_td{TypeDefaite::PASDEDEFAITE}, m_nomObjetRecompense{""}
 {
+    m_tempsActuel = std::clock();
     premiereJournee();
 }
 
@@ -84,6 +85,10 @@ bool Modele::testerDeplacement(Direction& dir){
 //! @param dir : la direction du déplacement
 //!
 void Modele::deplacement(Direction dir){
+    if ((std::clock() - m_tempsActuel) / (double) CLOCKS_PER_SEC < TEMPS_ENTRE_DEPLACEMENT) return;
+
+    m_tempsActuel = std::clock();
+
     //On teste si le déplacement est possible
     if(testerDeplacement(dir)){
         m_deplacementDepuisDernierCombat++;
