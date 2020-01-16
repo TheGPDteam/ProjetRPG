@@ -75,6 +75,7 @@ void EcranJeuPrincipal::afficherEcran(std::pair<int, int> coord_souris, SDL_Surf
     m_tempsRestant.mettreAJourTexte("Heure : " + Temps::obtenirTempsAffichable(m->obtenirTemps()->obtenirTemps()));
     m_nomJoueur.afficher(fenetre_affichage);
     m_objectif.afficher(fenetre_affichage);
+    m_tempsRestant.afficher(fenetre_affichage);
 
     m_resumerCombat.mettreAJourTexte("Recompense " + m->obtenirRecompense());
 
