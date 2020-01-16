@@ -100,6 +100,7 @@ void Joueur::deplacerJoueur(Direction dir){
                 break;
         }
 
+        m_tempsActuel = std::clock();
 
         m_direction = dir;
         mettreAChange();

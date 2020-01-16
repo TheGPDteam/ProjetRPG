@@ -16,7 +16,7 @@
 class Joueur : public Observable
 {
 private:
-    double const TEMPS_ENTRE_DEPLACEMENT = 0.5;
+    double const TEMPS_ENTRE_DEPLACEMENT = 0.10;
 
     std::pair<int,int> m_position;
     Quete m_queteJoueur;
