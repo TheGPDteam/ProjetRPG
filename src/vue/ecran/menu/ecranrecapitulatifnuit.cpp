@@ -24,14 +24,10 @@ EcranRecapitulatifNuit::EcranRecapitulatifNuit(Controleur* controleur, Gestionna
     m_zoneNombreZombiesTues = new TexteSDL(TEXTE_ZOMBIES_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbZombiesTues()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 15));
     m_zoneNombreZombiesAttaquants = new TexteSDL(TEXTE_ZOMBIES_ATTAQUANT + std::to_string(m_controleur->obtenirModele()->obtenirNbZombiesAttaquants()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 165));
     m_zoneNombreHumainsTues = new TexteSDL(TEXTE_HUMAINS_TUES + std::to_string(m_controleur->obtenirModele()->obtenirNbPersosMorts()), SDL_Color{255,255,255,255}, POLICE_COLLEGED, 20, std::make_pair(m_fondRecapitulatif.x + 15, m_fondRecapitulatif.y + 315));
-    m_zoneGameOver = new TexteSDL(TEXTE_GAME_OVER, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30, std::make_pair(m_fondRecapitulatif.x + 250, m_fondRecapitulatif.y + 50));
+    m_zoneGameOver = new TexteSDL(TEXTE_GAME_OVER, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 30, std::make_pair(m_fondRecapitulatif.x + 350, m_fondRecapitulatif.y + 50));
 
     // A SUPPRIMER
     m_zoneVivresConsommes = nullptr;
-
-    SDL_Rect rect = {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + hauteurFond - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
-    ajoutBoutonDansMapDeBoutons(new Bouton("Suivant", rect, m_controleur, nullptr,
-                                           true, POLICE_COLLEGED), &ActionsBoutons::boutonChoixPersonnageCycle);
 
     // Cette ligne permet de tester la recuperation de donnée dans le fichier.
     recuperationDonneesDeLaJournee();
@@ -91,12 +87,18 @@ void EcranRecapitulatifNuit::afficherEcran(std::pair<int, int> coord_souris, SDL
             m_zoneNombreZombiesAttaquants->afficher(fenetre_affichage);
             break;
         }
+        case TypeDefaite::COMBAT:
+        {
+            TexteSDL m_zoneGameOverCombat = TexteSDL(TEXTE_GAME_OVER_COMBAT, SDL_Color{0,0,0,255}, POLICE_COLLEGED, 19, std::make_pair(m_fondRecapitulatif.x + 150, m_fondRecapitulatif.y + 250));
+            m_zoneGameOverCombat.afficher(fenetre_affichage);
+            break;
+        }
         default:
             break;
         }
 
         //Afficher un bouton pour retourner au menu
-        SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 300, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
+        SDL_Rect rect= {DECALAGE_FOND_RECAP_NUIT + 400, DECALAGE_FOND_RECAP_NUIT + HEIGHT_FENETRE_PRINCIPALE - 2*DECALAGE_FOND_RECAP_NUIT - 100, WIDTH_BOUTON_NORMAL, HEIGHT_BOUTON_NORMAL};
         ajoutBoutonDansMapDeBoutons(new Bouton("Retour menu", rect,  m_controleur, nullptr,
                                                true, POLICE_COLLEGED), &ActionsBoutons::boutonRetourMenuPrincipal);
     } else {

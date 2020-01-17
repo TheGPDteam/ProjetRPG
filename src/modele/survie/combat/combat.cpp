@@ -181,12 +181,13 @@ Personnage* Combat::prochainPersonnage()
 {
     if (m_numeroDePassage==0)
     {
+        ++m_numeroDePassage;
         return *m_ordrePassage.begin();
     }
     else
     {
         ++m_numeroDePassage;
-        m_numeroDePassage=m_numeroDePassage%m_ordrePassage.size();
+        m_numeroDePassage = m_numeroDePassage % m_ordrePassage.size();
         return m_ordrePassage.at(m_numeroDePassage);
     }
 }

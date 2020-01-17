@@ -167,7 +167,7 @@ void Modele::deplacement(Direction dir){
             {
 
                 m_perdu = true;
-                m_td = TypeDefaite::ATTAQUEZOMBIES;
+                m_td = TypeDefaite::COMBAT;
             }
             mettreAChange();
             notifierTous();

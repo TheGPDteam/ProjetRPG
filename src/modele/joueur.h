@@ -16,8 +16,7 @@
 class Joueur : public Observable
 {
 private:
-
-
+    static const std::string NOM_PAR_DEFAUT;
     std::pair<int,int> m_position;
     Quete m_queteJoueur;
     std::string m_nom;

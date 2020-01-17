@@ -2,7 +2,7 @@
 #include "joueur.h"
 #include "tuile.h"
 #include "constantesbouton.h"
-#include "utility"
+#include "vue.h"
 #include <string>
 #include <iostream>
 
@@ -190,18 +190,8 @@ void EcranJeuPrincipal::obtenirChangement(Observable& obj){
     m_afficheurZone.mettreAJour(m_carte, m_controleur->obtenirModele()->obtenirJoueur());
 
     Modele * m = m_controleur->obtenirModele();
-
-
-
-    if(m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::ATTAQUEZOMBIES){
-
-        if(m != nullptr){
-            if(m->perdu()){
-                std::cout<<"Tu es mort !"<<std::endl;
-            }
-        }
-
-
+    if(m != nullptr && m->perdu() && m->obtenirTypeDefaite() == TypeDefaite::COMBAT){
+        m_controleur->obtenirVue()->changerEcran(TypeEcran::RecapitulatifNuit);
     }
 }
 

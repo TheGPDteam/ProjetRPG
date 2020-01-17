@@ -1,6 +1,8 @@
 #include "joueur.h"
 #include <iostream>
 
+const std::string Joueur::NOM_PAR_DEFAUT = "Friedrich";
+
 
 //! \file fichier Joueur
 //! \date 17/11/16
@@ -21,7 +23,7 @@ Joueur::Joueur(const Quete &quete) :
 {
     m_position.first=11;
     m_position.second=11;
-    m_nom = "Friedrich";
+    m_nom = NOM_PAR_DEFAUT;
 
     m_equipe = new Equipe(&m_personnageJoueur);
     m_inventaireJoueur = new Inventaire();
@@ -160,6 +162,10 @@ Equipe* Joueur::obtenirEquipe() const{
 
 void Joueur::definirEquipe(Equipe* equipe){
     m_equipe = equipe;
+    if(!m_equipe->obtenirListePersonnage().count(&m_personnageJoueur))
+    {
+        m_equipe->ajouterPersonnage(&m_personnageJoueur);
+    }
 }
 
 
